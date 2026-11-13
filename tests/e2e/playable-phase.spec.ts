@@ -34,7 +34,7 @@ for (const course of courseIds) {
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(question.prompt);
       await expect(page.getByRole('radio')).toHaveCount(5);
       expect(await page.locator('body').innerText()).not.toMatch(/\bENADE\b|simulado|preparação para prova/i);
-      await expect(page).toHaveTitle(/Nexus — Jornada Digital/);
+      await expect(page).toHaveTitle(/N9 — Jornada Digital/);
       await expect(page.locator('.example-warning')).toContainText('DESAFIO FICTÍCIO');
       await expect(page.locator('.feedback')).toHaveCount(0);
       await expect(page.getByRole('button', { name: 'Confirmar resposta' })).toBeDisabled();

@@ -1,10 +1,14 @@
 /** Identidade e textos de apresentação. Não contém regras de pontuação ou persistência. */
+const shortName = 'N9';
+const subtitle = 'Jornada Digital';
+const name = shortName + ' — ' + subtitle;
+
 export const gameConfig = {
-  name: 'Nexus — Jornada Digital',
-  shortName: 'Nexus',
-  subtitle: 'Explore. Conecte. Evolua.',
+  name,
+  shortName,
+  subtitle,
   description: 'Uma experiência lúdica e permanente para desenvolver competências em tecnologia por meio de missões e desafios.',
-  noscript: 'Ative o JavaScript para abrir Nexus — Jornada Digital.',
+  noscript: 'Ative o JavaScript para abrir ' + name + '.',
   copy: {
   "startMission": "Iniciar missão",
   "backHome": "← Voltar ao início",

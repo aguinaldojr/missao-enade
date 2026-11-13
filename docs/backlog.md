@@ -1,4 +1,4 @@
-# Nexus — Jornada Digital — backlog de implementação
+# N9 — Jornada Digital — backlog de implementação
 
 Versão 1.0 • 12/11/2026 • Referência: [arquitetura.md](arquitetura.md).
 
@@ -242,3 +242,19 @@ Os itens das entregas anteriores são históricos. Nesta etapa, “questão” c
 Referências remanescentes a ENADE em fontes, normas, histórico, nome técnico do pacote, pasta do projeto e chave legada são internas. Não renomear contratos persistidos por motivo editorial.
 
 Relatório completo e arquivos alterados: [identidade-nexus.md](identidade-nexus.md). Commit solicitado: `refactor: nova identidade Nexus Jornada Digital`. Mudança restrita à identidade, sem nova funcionalidade ou publicação.
+
+## 13. Identidade provisória N9 — Jornada Digital — 13/11/2026
+
+N9 é um nome provisório sujeito à aprovação institucional. A associação conceitual com a Universidade Nove de Julho não afirma vínculo ou produto oficial. O subtítulo é Jornada Digital. A seção 12 e seu relatório são histórico da identidade anterior.
+
+- [x] Confirmar Git limpo no início, em `9274083`, sem alterações pendentes.
+- [x] Localizar as ocorrências da identidade anterior em configuração, código, testes e documentação.
+- [x] Trocar a identidade vigente por N9 — Jornada Digital a partir da configuração central.
+- [x] Manter Jornada Digital como subtítulo e usar um monograma textual próprio, sem recursos oficiais.
+- [x] Preservar referências pedagógicas internas, trilhas, desafios, mecânicas, pontuação, IDs, armazenamento e pasta do projeto.
+- [x] Registrar a aprovação institucional pendente, sem logotipo, slogan, brasão, imagens de campi ou cores oficiais.
+- [x] Validar lint, 71 testes de unidade/DOM, build e 36 testes E2E; registrar a entrega e o commit local `refactor: identidade provisoria N9 Jornada Digital`.
+
+Não havia Base Nexus, Universo Nexus ou Arena Nexus na narrativa ativa. Nexo, nome da cidade fictícia e parte do conteúdo existente, permanece. Ocorrências históricas de Nexus em relatórios anteriores, mensagem de commit e identificação de um relatório legado de teste são preservadas para rastreabilidade, sem exibição ao jogador.
+
+Relatório desta alteração: [identidade-n9.md](identidade-n9.md). Não publicar nem iniciar novas funcionalidades nesta etapa.

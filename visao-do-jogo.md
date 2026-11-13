@@ -1,12 +1,14 @@
-# Nexus — Jornada Digital — visão do jogo
+# N9 — Jornada Digital — visão do jogo
 
-Versão 0.3 • Posicionamento aprovado em 13/11/2026 • Plataforma: navegador em computador e celular.
+Versão 0.4 • Nome provisório atualizado em 13/11/2026 • Plataforma: navegador em computador e celular.
 
 > Uma experiência permanente e lúdica de desenvolvimento de competências em tecnologia, organizada em missões, desafios e descobertas na cidade digital Nexo.
 
 ## Identidade e propósito
 
-O nome apresentado ao jogador é **Nexus — Jornada Digital**. O subtítulo é **Explore. Conecte. Evolua.**
+O nome apresentado ao jogador é **N9 — Jornada Digital**. O subtítulo é **Jornada Digital**.
+
+**N9 é um nome provisório, sujeito à aprovação institucional.** A escolha busca uma associação conceitual com a Universidade Nove de Julho, sem afirmar que o jogo seja um produto oficial. Não foram adotados logotipo, slogan, brasão, imagens de campi ou cores oficiais. A paleta anterior do protótipo permanece sem qualificação institucional.
 
 A experiência é contínua: interpretar situações, experimentar decisões, compreender feedbacks e conectar conhecimentos. A identidade não depende de uma edição de exame, calendário de aplicação ou preparação para avaliação. A seleção de curso contextualiza o percurso, sem decidir elegibilidade acadêmica individual.
 

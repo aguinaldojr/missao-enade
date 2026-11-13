@@ -4,7 +4,9 @@ import { firstLearningCollection } from '../../src/config/collections';
 
 describe('identidade e origem pedagógica separadas', () => {
   it('centraliza a identidade e o vocabulário do jogador', () => {
-    expect(gameConfig.name).toBe('Nexus — Jornada Digital');
+    expect(gameConfig.name).toBe('N9 — Jornada Digital');
+    expect(gameConfig.shortName).toBe('N9');
+    expect(gameConfig.subtitle).toBe('Jornada Digital');
     expect(gameConfig.vocabulary).toEqual({
       question: 'desafio', exam: 'missão', simulation: 'missão especial',
       grade: 'pontuação', result: 'relatório da missão', errorReview: 'laboratório de treinamento',
@@ -14,7 +16,7 @@ describe('identidade e origem pedagógica separadas', () => {
   });
 
   it.each(['home', 'course-select', 'map', 'question', 'result'])('mantém o nome e evita identidade de prova no título de %s', (screen) => {
-    expect(gamePageTitle(screen, 4)).toContain('Nexus — Jornada Digital');
+    expect(gamePageTitle(screen, 4)).toContain('N9 — Jornada Digital');
     expect(gamePageTitle(screen, 4)).not.toMatch(/ENADE|simulado|prova/i);
   });
 

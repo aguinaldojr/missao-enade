@@ -1,10 +1,12 @@
-# Nexus — Jornada Digital — arquitetura do projeto
+# N9 — Jornada Digital — arquitetura do projeto
 
-Versão 1.1 • Posicionamento atualizado em 13/11/2026 • Base técnica preservada; demonstração funcional 0.2.0.
+Versão 1.2 • Posicionamento atualizado em 13/11/2026 • Base técnica preservada; demonstração funcional 0.2.0.
 
 ## 0. Identidade e origem pedagógica — atualização de 13/11/2026
 
-A identidade visível é **Nexus — Jornada Digital**, uma experiência permanente e lúdica de desenvolvimento de competências em tecnologia. Esta decisão substitui o posicionamento anterior de preparação para uma edição de avaliação. A visão vigente está em [visao-do-jogo.md](visao-do-jogo.md); as fontes históricas permanecem em `docs/fontes`.
+**N9 é um nome provisório, sujeito à aprovação institucional.** A escolha busca uma associação conceitual com a Universidade Nove de Julho, sem afirmar que o jogo seja um produto oficial. Não foram adotados logotipo, slogan, brasão, imagens de campi ou cores oficiais. A paleta anterior do protótipo permanece sem qualificação institucional. O subtítulo é Jornada Digital.
+
+A identidade visível é **N9 — Jornada Digital**, uma experiência permanente e lúdica de desenvolvimento de competências em tecnologia. Esta decisão substitui o posicionamento anterior de preparação para uma edição de avaliação. A visão vigente está em [visao-do-jogo.md](visao-do-jogo.md); as fontes históricas permanecem em `docs/fontes`.
 
 A primeira coleção pedagógica interna terá o identificador **`enade-2026`**, baseada nas competências e referências do ENADE. A origem é mantida para rastreabilidade interna, sem ENADE, preparação, prova ou simulado na interface principal. PPCs, disciplinas, nivelamento, projetos e certificações são futuras origens de coleções, ainda não implementadas.
 

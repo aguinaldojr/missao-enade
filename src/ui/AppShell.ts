@@ -29,10 +29,10 @@ export class AppShell {
     this.graphicStatus.setAttribute('role', 'status');
     const header = element('header', 'site-header');
     const brand = element('div', 'brand');
-    const mark = element('span', 'brand-mark', 'N');
+    const mark = element('span', 'brand-mark', gameConfig.shortName);
     mark.setAttribute('aria-hidden', 'true');
     const wordmark = element('span', 'wordmark');
-    wordmark.append(element('strong', '', gameConfig.name), element('span', '', gameConfig.subtitle));
+    wordmark.append(element('strong', '', gameConfig.name));
     brand.append(mark, wordmark);
     header.append(brand, element('span', 'version-tag', gameConfig.copy.version));
     const stage = element('div', 'stage');

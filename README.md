@@ -1,4 +1,6 @@
-# Nexus — Jornada Digital
+# N9 — Jornada Digital
+
+**N9 é um nome provisório, sujeito à aprovação institucional.** A escolha busca uma associação conceitual com a Universidade Nove de Julho, sem afirmar que o jogo seja um produto oficial. Não foram adotados logotipo, slogan, brasão, imagens de campi ou cores oficiais. A paleta anterior do protótipo permanece sem qualificação institucional. O subtítulo é **Jornada Digital**.
 
 Experiência permanente e lúdica de desenvolvimento de competências em tecnologia para CC, SI, TADS, TGTI e TRC, ambientada na cidade digital Nexo. A versão 0.2.0 oferece uma **fase de demonstração com dez desafios fictícios**, identificados como exemplos em todas as telas da partida.
 
