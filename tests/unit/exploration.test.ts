@@ -19,7 +19,7 @@ describe('exploração e colisões', () => {
   });
   it('bloqueia limites, parede, computador, NPC e terminal', () => {
     for (const position of [{ x: 30, y: 80 }, { x: 610, y: 80 }, { x: 100, y: 30 }, { x: 100, y: 370 },
-      { x: 300, y: 150 }, { x: 150, y: 120 }, { x: 240, y: 290 }, { x: 530, y: 130 }]) {
+      { x: 300, y: 150 }, { x: 150, y: 120 }, { x: 240, y: 290 }, { x: 376, y: 130 }]) {
       expect(isWalkable(position, BASE_N9, false)).toBe(false);
     }
     let state = initial;
@@ -51,7 +51,7 @@ describe('save independente da exploração', () => {
     expect(repository.load().status).toBe('invalid');
   });
   it('recusa dados inválidos e mantém registros corrompidos', () => {
-    for (const raw of ['{', '{}', JSON.stringify({ ...initial, position: { x: 0, y: 0 } }), JSON.stringify({ ...initial, doorUnlocked: true })]) {
+    for (const raw of ['{', '{}', JSON.stringify({ ...initial, position: { x: 0, y: 0 } }), JSON.stringify({ ...initial, missionStatus: 'completed', doorUnlocked: false })]) {
       let stored = raw;
       const repository = new LocalStorageExplorationRepository(() => ({ getItem: () => stored, setItem: (_key, value) => { stored = value; } }));
       expect(repository.load().status).toBe('invalid');
@@ -113,8 +113,9 @@ describe('missão na Base N9', () => {
     const door = sessionAt({ x: 380, y: 272 }).session;
     door.dispatch({ type: 'interact' });
     expect(door.snapshot.worldDialog?.title).toBe('Porta bloqueada');
-    const terminal = sessionAt({ x: 536, y: 200 }).session;
+    const terminal = sessionAt({ x: 376, y: 200 }).session;
     terminal.dispatch({ type: 'interact' });
-    expect(terminal.snapshot.worldDialog?.title).toBe('Terminal tecnológico');
+    expect(terminal.snapshot.screen).toBe('puzzle');
+    expect(terminal.snapshot.puzzleAttempt?.puzzleId).toBe('seq-algorithm-01');
   });
 });

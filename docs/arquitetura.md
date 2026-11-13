@@ -512,3 +512,36 @@ Esta seção registra o recorte implementado e prevalece sobre a descrição ant
 - A apresentação se adapta a telas pequenas. Sem renderer, os controles HTML, coordenadas, indicações e diálogos continuam operantes; a experiência visual depende do canvas local.
 
 N9 continua provisório e sujeito à aprovação institucional. ENADE permanece exclusivamente como referência pedagógica interna. Nenhum conteúdo pedagógico foi alterado.
+
+## 19. Quebra-cabeças tecnológicos — Sequência Lógica — 13/11/2026
+
+Esta seção atualiza a integração da Base N9. O terminal fica no lado acessível da divisória, em (352,112), e inicia a tela **Sequência Lógica** por proximidade, E/Espaço ou botão. Sua primeira interação abre o exemplo de algoritmo; três seletores permitem acessar os exemplos de algoritmo, incidente de TI e rede. Todos são fictícios, provisórios e pendentes de revisão docente, disponíveis para CC, SI, TADS, TGTI e TRC.
+
+### Dados e módulos
+
+- `src/content/puzzles/sequences.json`: exatamente três conteúdos, separados do catálogo de desafios. Cada definição tem ID, tipo, título, narrativa, coleção, origem pedagógica, cursos, área, competências, dificuldade, blocos, ordem correta, dicas, explicação, recompensa, objeto desbloqueado, fonte e status de validação.
+- Coleção de exemplos: `n9-provisional-sequences-v1`. Não constitui a coleção editorial interna planejada `enade-2026` e não contém itens oficiais.
+- `src/domain/puzzles/SequencePuzzle.ts`: tipos e regras puras de permutação, embaralhamento inicialmente incorreto, movimentação, validação, cálculo de XP e mesclagem monotônica de conclusões. Implementado somente `kind: sequence`; outros tipos dependem de nova entrega.
+- `PuzzleContentRepository` e `PuzzleProgressRepository`: contratos separados para conteúdo e progresso.
+- `JsonPuzzleRepository`: validação Ajv e relações (IDs únicos, quatro a sete blocos, ordem contendo todos os IDs uma única vez, cursos e porta existente). O build valida também o catálogo de sequências.
+- `GameSession`: comandos tipados para selecionar, reorganizar, pedir dica, validar, repetir, salvar e sair. Movimento do mapa fica suspenso nesta tela. Mantém os desafios existentes, suas regras, pontuação e relatório.
+- `SequencePuzzleView`: HTML com lista ordenada, alças por Pointer Events para mouse/toque, setas do teclado e botões Subir/Descer. Preserva foco ao mover; trata o clique compatível que pode ocorrer após um toque para impedir movimento duplicado.
+- `src/config/puzzles.ts` centraliza textos; `puzzles.css` adapta a lista à largura. O mapa Phaser permanece uma projeção da sessão; não há regras do puzzle no canvas.
+
+### Dicas, conclusão e retorno
+
+Erro não retira XP e mostra somente a primeira dica. Revalidar incorretamente não revela dicas adicionais; o botão disponibiliza as demais uma a uma. Nenhuma dica entrega a sequência completa. Não há cronômetro obrigatório.
+
+A validação correta mostra a explicação e registra a conclusão, concede 100 XP na primeira vez e libera a porta. O botão **Retornar ao mapa** permite ler a explicação antes de voltar à posição anterior. Pode-se sair sem concluir, retomando a ordem e as dicas na próxima interação. Repetir embaralha novamente e conserva o recibo de recompensa.
+
+A porta também continua abrindo pela conclusão dos dez desafios existentes. Resolver o puzzle não marca essa missão como concluída e não altera a pontuação do seu relatório. A validação do save da exploração permite porta aberta com missão de desafios disponível ou ativa; missão de desafios concluída ainda exige porta aberta. O formato e a chave de exploração continuam legíveis.
+
+### Persistência e compatibilidade
+
+Chave própria **`n9:puzzles:v1`**, schema 1: entradas por ID com ordem, quantidade de dicas, tentativas e conclusão. XP é derivado dos IDs concluídos e das recompensas do catálogo, sem incrementos acumulados: um ID rende XP uma única vez. Mesclar gravações preserva conclusões, maior contagem de dicas e tentativas, evitando duplicar XP em replay ou gravação de uma aba desatualizada. Não há sincronização de interface entre abas ou garantia de transação entre chaves.
+
+Grava em cada movimento de bloco, dica, validação, troca de exercício e saída. Recarregar abre o menu; após escolher curso e interagir com o terminal, restaura tentativas incompletas. A conclusão também restaura o desbloqueio se a gravação da exploração tiver falhado.
+
+Dados inválidos são ignorados na leitura sem apagar o registro. Uma interação explícita pode substituir dado corrompido; versões futuras desconhecidas são preservadas e impedem gravação. Falhas de quota/acesso exibem aviso e botão de tentar salvar; sem persistência, progresso e proteção contra recompensa repetida valem apenas na sessão. Limpar dados do navegador remove os recibos locais. Não há servidor ou autenticação.
+
+Com a mudança de posição do terminal, apenas um save antigo que colida com seu novo retângulo é reposicionado no ponto inicial. Missão e desbloqueio são preservados; o registro não é sobrescrito durante a leitura. As demais posições válidas permanecem intactas. A chave de relatório legado e o catálogo de desafios não foram alterados.

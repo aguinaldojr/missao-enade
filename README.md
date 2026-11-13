@@ -4,7 +4,7 @@
 
 Experiência permanente e lúdica de desenvolvimento de competências em tecnologia para CC, SI, TADS, TGTI e TRC, ambientada na cidade digital Nexo. A versão 0.2.0 oferece uma **fase de demonstração com dez desafios fictícios**, identificados como exemplos em todas as telas da partida.
 
-O fluxo disponível é **Iniciar missão → escolher curso → Central Nexo → Jogar missão de exemplo → dez desafios com feedback → relatório da missão → menu**.
+O fluxo disponível é **Iniciar missão → escolher curso → Base N9**. O computador abre dez desafios com feedback e relatório; o terminal abre os quebra-cabeças de Sequência Lógica. Ambos permitem retornar ao mapa.
 
 ## Posicionamento e origem pedagógica interna
 
@@ -84,7 +84,7 @@ Mapa de dez terminais, retomada de partida, laboratório de treinamento, conquis
 
 Após selecionar qualquer um dos cinco cursos, entre na base. Use **setas ou WASD** para mover, ou mantenha pressionados os botões direcionais na tela. Use **E**, **Espaço** ou o botão de interação quando a indicação de proximidade aparecer. No teclado, Tab também alcança os controles da interface.
 
-Converse com **Lia** para conhecer a missão. No **computador**, inicie os mesmos dez desafios fictícios. Ao concluir e visualizar o relatório, escolha **Voltar à Base N9**: o personagem retorna ao mesmo local e a porta fica liberada, independentemente da pontuação. Atravesse para conhecer o terminal; não há outra região implementada.
+Converse com **Lia** para conhecer a missão. No **computador**, inicie os mesmos dez desafios fictícios. Ao concluir e visualizar o relatório, escolha **Voltar à Base N9**: o personagem retorna ao mesmo local e a porta fica liberada, independentemente da pontuação. A passagem dá acesso ao setor tecnológico; o terminal fica antes da porta. Não há outra região implementada.
 
 Posição, estado da missão e porta são salvos separadamente em `n9:exploration:v1`, no navegador atual, inclusive após recarregar e escolher novamente um curso. Esse progresso da base é compartilhado entre os cinco cursos; respostas de fases incompletas não são retomadas. O relatório continua usando sua chave anterior. A interface avisa quando o salvamento falha. Apagar dados do navegador elimina o progresso; não existe conta ou sincronização.
 
@@ -96,3 +96,17 @@ npm.cmd run dev
 ```
 
 Abra o endereço informado pelo Vite, normalmente [localhost:5173](http://localhost:5173).
+
+## Sequência Lógica no terminal
+
+O terminal tecnológico agora fica **antes da porta**, no nordeste da área inicial. Aproxime-se e use **E**, **Espaço** ou **Interagir**. Ele abre o exemplo de algoritmo; os seletores oferecem também incidente de TI e rede. Os três conteúdos são fictícios, provisórios e pendentes de revisão docente, disponíveis para os cinco cursos.
+
+Arraste um bloco pela alça **↕** com mouse/toque; no teclado, foque a alça com Tab e use **↑/↓**. Os botões **Subir/Descer** são uma alternativa. Toque fora da alça permite rolar a página. Use **Validar sequência** e, se necessário, peça dicas progressivas. Erros não retiram XP; não existe cronômetro obrigatório.
+
+Cada primeira conclusão concede **100 XP de quebra-cabeças**, mostra a explicação e libera a porta. Esse XP é separado da pontuação dos dez desafios. **Retornar ao mapa** mantém a posição do personagem. Repetir o mesmo exemplo não concede XP adicional, inclusive após recarregar.
+
+O progresso é salvo em `n9:puzzles:v1`: ordem, dicas, tentativas e recibos de conclusão. Sair antes de resolver permite retomar pelo terminal. Os desafios do computador e o relatório anterior permanecem disponíveis; concluí-los também continua abrindo a porta.
+
+Se o salvamento falhar, há aviso e tentativa de salvar novamente; sem persistência, o progresso fica limitado à sessão. Limpar dados do navegador elimina os recibos locais. Não há sincronização com conta ou servidor.
+
+A movimentação do terminal pode afetar uma posição antiga salva em seu novo retângulo: nesse caso, o personagem volta ao ponto inicial, preservando missão e desbloqueio. As demais posições válidas são mantidas. Detalhes técnicos e limites estão na seção 19 da arquitetura.

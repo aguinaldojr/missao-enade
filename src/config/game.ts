@@ -104,6 +104,7 @@ export const gameConfig = {
 export function gamePageTitle(screen: string, index = 1): string {
   const page = screen === 'course-select' ? 'Escolha seu curso'
     : screen === 'question' ? gameConfig.format.challengeProgress(index)
+    : screen === 'puzzle' ? 'Sequência Lógica'
     : screen === 'result' ? 'Relatório da missão'
     : screen === 'map' ? 'Base N9' : '';
   return page ? page + ' · ' + gameConfig.name : gameConfig.name;

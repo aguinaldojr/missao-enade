@@ -10,6 +10,7 @@ import type { MovementControls } from './ExplorationControls';
 import { explorationCopy } from '../config/exploration';
 import { mapView, updateMapView } from './views/MapView';
 import { questionView } from './views/QuestionView';
+import { SequencePuzzleView } from './views/SequencePuzzleView';
 import { resultView } from './views/ResultView';
 import { currentQuestion } from '../domain/progression';
 
@@ -24,6 +25,7 @@ export class AppShell {
 
   private canvasHome!: HTMLElement;
   private mapElement: HTMLElement | undefined;
+  private sequenceView: SequencePuzzleView | undefined;
 
   constructor(root: HTMLElement, private readonly controls?: MovementControls) {
     const skip = element('a', 'skip-link', gameConfig.copy.skip);
@@ -61,7 +63,10 @@ export class AppShell {
   render(state: SessionState, dispatch: (command: Command) => void): void {
     this.courseTag.textContent = state.selectedCourse ? gameConfig.format.courseTag(state.selectedCourse) : gameConfig.copy.cityTag;
     if (state.screen === 'map' && this.mapElement) { updateMapView(this.mapElement, state); return; }
-    const key = [state.screen, state.attempt?.index, state.attempt?.answers.length, state.saveStatus, state.contentError].join(':');
+    if (state.screen === 'puzzle' && this.sequenceView?.puzzleId === state.puzzleAttempt?.puzzleId) {
+      this.sequenceView!.update(state); return;
+    }
+    const key = [state.puzzleAttempt?.puzzleId, state.screen, state.attempt?.index, state.attempt?.answers.length, state.saveStatus, state.contentError].join(':');
     if (this.renderKey === key) {
       if (state.screen === 'course-select') this.updateCourse(state);
       if (state.screen === 'question' && state.attempt) {
@@ -78,6 +83,7 @@ export class AppShell {
     const signal = this.listeners.signal;
     this.canvasHome.insertBefore(this.canvasHost, this.canvasHome.children[1] ?? null);
     this.mapElement = undefined;
+    this.sequenceView = undefined;
     let view: HTMLElement;
     switch (state.screen) {
       case 'home':
@@ -94,6 +100,10 @@ export class AppShell {
         view = mapView(state, dispatch, signal, this.controls);
         this.mapElement = view;
         break;
+      case 'puzzle':
+        this.sequenceView = new SequencePuzzleView(state, dispatch, signal);
+        view = this.sequenceView.element;
+        break;
       case 'question':
         if (!state.attempt) throw new Error('Partida necessária.');
         view = questionView(state.attempt, dispatch, signal);
@@ -105,6 +115,7 @@ export class AppShell {
     }
     this.renderKey = key;
     this.content.replaceChildren(view);
+    this.content.closest('.stage')?.classList.toggle('stage--puzzle', state.screen === 'puzzle');
     const exploring = state.screen === 'map';
     this.content.closest('.stage')?.classList.toggle('stage--exploring', exploring);
     this.canvasHost.classList.toggle('world-map', exploring);

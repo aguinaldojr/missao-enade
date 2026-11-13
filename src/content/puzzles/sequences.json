@@ -1,0 +1,216 @@
+[
+  {
+    "kind": "sequence",
+    "collection": "n9-provisional-sequences-v1",
+    "pedagogicalOrigin": "Exemplo autoral para demonstração de competências tecnológicas; não é conteúdo oficial nem validado.",
+    "courses": [
+      "CC",
+      "SI",
+      "TADS",
+      "TGTI",
+      "TRC"
+    ],
+    "difficulty": "introductory",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "source": {
+      "type": "fictional",
+      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+    },
+    "validationStatus": "provisional-pending-teacher-review",
+    "id": "seq-algorithm-01",
+    "title": "Sequência de um algoritmo",
+    "narrative": "O terminal da Base N9 perdeu sua sequência de inicialização. Reorganize este programa fictício de cálculo de média para recuperar o sistema e liberar a passagem.",
+    "area": "Algoritmos",
+    "competencies": [
+      "Reconhecer dependências entre etapas de um algoritmo",
+      "Organizar entrada, processamento e saída"
+    ],
+    "blocks": [
+      {
+        "id": "prepare",
+        "text": "Inicializar o programa e preparar as variáveis."
+      },
+      {
+        "id": "read",
+        "text": "Ler as duas notas informadas pelo usuário."
+      },
+      {
+        "id": "check",
+        "text": "Validar se as duas entradas são números no intervalo permitido."
+      },
+      {
+        "id": "compute",
+        "text": "Calcular a média dos valores validados."
+      },
+      {
+        "id": "display",
+        "text": "Exibir a média calculada e encerrar o programa."
+      }
+    ],
+    "correctOrder": [
+      "prepare",
+      "read",
+      "check",
+      "compute",
+      "display"
+    ],
+    "hints": [
+      "Procure as dependências entre preparação, entrada, processamento e saída.",
+      "O cálculo depende de dados já lidos e validados.",
+      "A saída usa o valor produzido pelo cálculo; preparar o programa antecede a leitura."
+    ],
+    "explanation": "Neste programa fictício, a preparação permite a leitura; a validação verifica os dados antes do cálculo, e a exibição usa a média produzida. Esse encadeamento evita processar entradas inválidas. Outros algoritmos podem exigir outras etapas."
+  },
+  {
+    "kind": "sequence",
+    "collection": "n9-provisional-sequences-v1",
+    "pedagogicalOrigin": "Exemplo autoral para demonstração de competências tecnológicas; não é conteúdo oficial nem validado.",
+    "courses": [
+      "CC",
+      "SI",
+      "TADS",
+      "TGTI",
+      "TRC"
+    ],
+    "difficulty": "introductory",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "source": {
+      "type": "fictional",
+      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+    },
+    "validationStatus": "provisional-pending-teacher-review",
+    "id": "seq-incident-01",
+    "title": "Tratamento de um incidente de TI",
+    "narrative": "O terminal perdeu o roteiro de atendimento de uma falha fictícia. Reorganize as etapas deste exercício para recuperar o sistema e liberar a passagem.",
+    "area": "Gestão de serviços de TI",
+    "competencies": [
+      "Relacionar diagnóstico e ação corretiva",
+      "Organizar o registro e a validação de um atendimento"
+    ],
+    "blocks": [
+      {
+        "id": "detect",
+        "text": "Receber o alerta de indisponibilidade do serviço."
+      },
+      {
+        "id": "record",
+        "text": "Registrar sintomas, impacto e informações do alerta."
+      },
+      {
+        "id": "diagnose",
+        "text": "Analisar os registros e identificar a causa da falha."
+      },
+      {
+        "id": "repair",
+        "text": "Aplicar a correção autorizada para a causa identificada."
+      },
+      {
+        "id": "verify",
+        "text": "Testar o serviço após a correção e confirmar a recuperação."
+      },
+      {
+        "id": "document",
+        "text": "Documentar a solução validada e encerrar o atendimento."
+      }
+    ],
+    "correctOrder": [
+      "detect",
+      "record",
+      "diagnose",
+      "repair",
+      "verify",
+      "document"
+    ],
+    "hints": [
+      "Uma ação corretiva precisa de contexto e de um diagnóstico neste exercício.",
+      "A correção autorizada trata a causa identificada; encerrar depende de testar a recuperação.",
+      "O registro dos sintomas vem do alerta e apoia a análise; documentar a solução validada fecha o atendimento."
+    ],
+    "explanation": "No cenário simplificado, o alerta gera um registro; os dados sustentam o diagnóstico e a correção autorizada. O teste confirma a recuperação antes de documentar e encerrar. Procedimentos reais variam conforme a organização e não são substituídos por este exemplo."
+  },
+  {
+    "kind": "sequence",
+    "collection": "n9-provisional-sequences-v1",
+    "pedagogicalOrigin": "Exemplo autoral para demonstração de competências tecnológicas; não é conteúdo oficial nem validado.",
+    "courses": [
+      "CC",
+      "SI",
+      "TADS",
+      "TGTI",
+      "TRC"
+    ],
+    "difficulty": "introductory",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "source": {
+      "type": "fictional",
+      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+    },
+    "validationStatus": "provisional-pending-teacher-review",
+    "id": "seq-network-01",
+    "title": "Configuração básica de uma rede",
+    "narrative": "O terminal perdeu o roteiro de uma rede de laboratório fictícia. Reorganize as etapas para recuperar o sistema e liberar a passagem.",
+    "area": "Redes de computadores",
+    "competencies": [
+      "Reconhecer dependências da conectividade local",
+      "Distinguir planejamento, configuração e verificação"
+    ],
+    "blocks": [
+      {
+        "id": "plan",
+        "text": "Planejar os endereços IPv4 e a máscara da rede de laboratório."
+      },
+      {
+        "id": "connect",
+        "text": "Conectar fisicamente os computadores ao switch do laboratório."
+      },
+      {
+        "id": "address",
+        "text": "Configurar os endereços IPv4 e a máscara planejados nos computadores."
+      },
+      {
+        "id": "local",
+        "text": "Testar a comunicação entre os computadores da mesma rede."
+      },
+      {
+        "id": "gateway",
+        "text": "Configurar o gateway planejado para acesso a outra rede do laboratório."
+      },
+      {
+        "id": "remote",
+        "text": "Testar a comunicação com a outra rede após configurar o gateway."
+      }
+    ],
+    "correctOrder": [
+      "plan",
+      "connect",
+      "address",
+      "local",
+      "gateway",
+      "remote"
+    ],
+    "hints": [
+      "Separe a preparação, a conectividade local e o acesso a outra rede.",
+      "Neste roteiro, confirme primeiro a comunicação local para depois configurar o acesso a outra rede.",
+      "A configuração usa o endereçamento planejado; o teste remoto depende do gateway já configurado."
+    ],
+    "explanation": "Este roteiro de laboratório começa pelo planejamento e pela conexão física, configura o endereçamento e testa a rede local. Depois configura o gateway e verifica o acesso à outra rede. A sequência foi delimitada para este exercício; ambientes reais podem exigir DNS, segurança e outras verificações."
+  }
+]

@@ -16,7 +16,7 @@
     "test": "vitest run",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
-    "validate:content": "vitest run tests/unit/content.test.ts"
+    "validate:content": "vitest run tests/unit/content.test.ts tests/unit/puzzle-content.test.ts"
   },
   "dependencies": {
     "ajv": "8.20.0",

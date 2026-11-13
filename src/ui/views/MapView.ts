@@ -1,3 +1,5 @@
+import { totalPuzzleXp } from '../../domain/puzzles/SequencePuzzle';
+import { puzzleCopy } from '../../config/puzzles';
 import { gameConfig } from '../../config/game';
 import { explorationCopy } from '../../config/exploration';
 import { MAPS } from '../../config/maps';
@@ -24,7 +26,7 @@ export function mapView(state: SessionState, dispatch: (command: Command) => voi
   panel.append(element('span', 'tag', gameConfig.copy.exampleTag), element('p', 'world-mission'), element('p', 'world-door'));
   const nearby = element('p', 'world-nearby');
   nearby.setAttribute('role', 'status');
-  panel.append(nearby);
+  panel.append(nearby, element('p', 'world-puzzle-xp'));
   const interact = button(explorationCopy.interact);
   interact.classList.add('world-interact');
   interact.addEventListener('click', () => dispatch({ type: 'interact' }), { signal });
@@ -93,6 +95,7 @@ export function mapView(state: SessionState, dispatch: (command: Command) => voi
 
 export function updateMapView(view: HTMLElement, state: SessionState): void {
   const world = state.exploration;
+  view.querySelector('.world-puzzle-xp')!.textContent = puzzleCopy.totalXp(totalPuzzleXp(state.puzzleProgress, state.puzzles));
   const target = nearbyObject(world, MAPS[world.mapId]!);
   const position = view.querySelector<HTMLElement>('.world-position')!;
   position.dataset.x = String(world.position.x);

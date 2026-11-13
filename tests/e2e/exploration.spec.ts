@@ -111,10 +111,11 @@ test('porta liberada permite atravessar e acessar terminal', async ({ page }) =>
   await seed(page, 390, 272, true);
   await walk(page, 'd', 600);
   expect((await position(page)).x).toBeGreaterThan(450);
-  await walk(page, 'w', 650);
-  await walk(page, 'd', 300);
+  await walk(page, 'a', 650);
+  await walk(page, 'w', 500);
   await expect(page.locator('.world-nearby')).toContainText('Terminal tecnológico');
   await page.locator('.world-interact').click();
-  await expect(page.getByRole('heading', { name: 'Terminal tecnológico' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Sequência Lógica', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Voltar ao mapa e guardar progresso' }).click();
   await expect(page.locator('.world-door')).toHaveText('Porta: liberada');
 });

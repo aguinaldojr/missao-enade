@@ -278,3 +278,26 @@ Relatório e lista completa dos arquivos: [entrega-exploracao-2d.md](entrega-exp
 A missão pode ser aceita com Lia ou iniciada diretamente pelo computador. Encerrar fase incompleta preserva apenas exploração e o relatório anterior; retomada de respostas permanece pendente. O terminal informa o limite da região implementada. Novos mapas, conteúdo aprovado, combate, salto, inventário complexo, multiplayer, servidor e banco online não foram implementados.
 
 Testes em Android/iOS físicos, outros motores e leitores de tela permanecem pendentes. Não houve publicação.
+
+## 15. Primeiro quebra-cabeça tecnológico — Sequência Lógica — 13/11/2026
+
+Início com Git limpo em `d862c80`. Escopo exclusivo: um tipo reutilizável, três exemplos provisórios, pendentes de revisão docente.
+
+- [x] Revisar arquitetura e integração; tornar o terminal acessível antes da porta.
+- [x] Criar modelo JSON com metadados completos, schema e contratos reutilizáveis.
+- [x] Adicionar somente exemplos de algoritmo, incidente de TI e configuração de rede.
+- [x] Abrir pelo terminal e oferecer os três conteúdos aos cinco cursos.
+- [x] Reorganizar quatro a sete blocos por arraste com mouse/toque, teclado e botões.
+- [x] Validar, apresentar dica após erro e disponibilizar dicas progressivas sem resposta imediata.
+- [x] Sem cronômetro obrigatório e sem perda de XP por erro.
+- [x] Explicação após acerto, 100 XP por primeira conclusão de cada ID, registro e porta liberada.
+- [x] Retornar à posição do mapa; repetir sem recompensa adicional.
+- [x] Salvar ordem/dicas/tentativas/conclusões em `n9:puzzles:v1`, sem alterar o relatório existente.
+- [x] Preservar o fluxo dos dez desafios e a liberação de porta pela missão anterior.
+- [x] Tratar salvamento bloqueado, dados inválidos, versões futuras e reposicionamento de save antigo atingido pelo terminal.
+- [x] Aprovar 100 testes de unidade/DOM, lint, TypeScript, compilação e 52 testes de navegador (computador/celular com toque emulado), incluindo regressão dos cinco cursos. Capturas revisadas.
+- [x] Registrar entrega no commit local `feat: primeiro quebra-cabeca tecnologico`, sem publicação.
+
+Relatório e lista completa dos arquivos: [entrega-sequencia-logica.md](entrega-sequencia-logica.md).
+
+Não foram implementados outros tipos de quebra-cabeça, novos mapas, servidor, publicação ou funcionalidades posteriores. Conteúdo segue provisório até revisão docente. Testes em aparelhos reais, outros motores e leitores de tela continuam pendentes.

@@ -1,0 +1,34 @@
+.stage.stage--puzzle { grid-template-columns: minmax(0, 1fr); align-items: start; }
+.stage--puzzle > .visual-panel { display: none; }
+.puzzle-view .button { touch-action: manipulation; }
+.puzzle-view .block-handle { touch-action: none; }
+.puzzle-view { max-width: 900px; width: 100%; margin: 0 auto; }
+.puzzle-view .section-title { font-size: clamp(28px, 5vw, 44px); }
+.puzzle-choices { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+.puzzle-choices button { min-width: 0; font-size: 13px; padding: 12px; }
+.puzzle-choices [aria-pressed="true"] { border: 2px solid #256d58; background: #e8f1e8; }
+.puzzle-title { font-size: 23px; margin: 20px 0 12px; }
+.puzzle-narrative { margin-bottom: 14px; }
+.puzzle-xp { font-weight: 600; margin: 12px 0; }
+.sequence-blocks { list-style: none; padding: 0; display: grid; gap: 12px; margin: 20px 0; }
+.sequence-block { display: grid; grid-template-columns: 24px 44px minmax(0, 1fr); align-items: center; gap: 10px; padding: 14px; border: 2px solid #bbc9bf; border-radius: 8px; background: #fffefa; }
+.block-position { text-align: center; font-weight: 700; color: #526468; }
+.block-handle { touch-action: none; user-select: none; cursor: grab; padding: 0; min-width: 44px; min-height: 48px; font-size: 23px; }
+.block-handle:active { cursor: grabbing; }
+.block-text { overflow-wrap: anywhere; line-height: 1.6; }
+.block-actions { display: flex; gap: 10px; grid-column: 2 / -1; }
+.block-actions button { min-height: 44px; padding: 8px 14px; font-size: 13px; }
+.sequence-block.drop-target { border-color: #256d58; background: #dcefe3; outline: 2px dashed #256d58; outline-offset: 2px; }
+.puzzle-actions { flex-wrap: wrap; }
+.puzzle-feedback:not(:empty) { border-left: 4px solid #8b4d22; padding: 14px; background: #faf0e5; margin: 18px 0; }
+.puzzle-hints { padding-left: 24px; margin: 18px 0; line-height: 1.7; }
+.puzzle-hints li + li { margin-top: 8px; }
+.puzzle-success { padding: 22px; border: 2px solid #256d58; background: #e8f1e8; border-radius: 8px; margin: 20px 0; }
+.puzzle-success[hidden], .puzzle-view [hidden] { display: none; }
+.puzzle-success p { margin: 16px 0; }
+.puzzle-success button { margin: 8px 10px 0 0; }
+.puzzle-save { font-size: 13px; color: var(--muted); margin: 18px 0; }
+@media (min-width: 720px) {
+  .sequence-block { grid-template-columns: 24px 44px minmax(0, 1fr) auto; }
+  .block-actions { grid-column: auto; }
+}

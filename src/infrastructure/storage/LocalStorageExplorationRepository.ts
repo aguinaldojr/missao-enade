@@ -10,7 +10,7 @@ const validate = new Ajv().compile<ExplorationState>(schema);
 export function isValidExploration(data: unknown): data is ExplorationState {
   if (!validate(data)) return false;
   const map = MAPS[data.mapId];
-  return !!map && data.doorUnlocked === (data.missionStatus === 'completed') &&
+  return !!map && (data.missionStatus !== 'completed' || data.doorUnlocked) &&
     isWalkable(data.position, map, data.doorUnlocked);
 }
 
@@ -22,6 +22,15 @@ export class LocalStorageExplorationRepository implements ExplorationRepository 
       const raw = this.getStorage().getItem(EXPLORATION_KEY);
       if (raw === null) return { state: null, status: 'none' };
       const data: unknown = JSON.parse(raw);
+      // A nova posição do terminal pode ocupar um ponto salvo na versão anterior.
+      // Reposiciona somente esse caso conhecido, sem perder missão ou desbloqueio.
+      if (validate(data) && data.mapId === 'base-n9' && (data.missionStatus !== 'completed' || data.doorUnlocked)) {
+        const map = MAPS[data.mapId]!;
+        const withoutTerminal = { ...map, objects: map.objects.filter((object) => object.kind !== 'terminal') };
+        if (!isWalkable(data.position, map, data.doorUnlocked) && isWalkable(data.position, withoutTerminal, data.doorUnlocked)) {
+          return { state: Object.freeze({ ...data, position: Object.freeze({ ...map.spawn }) }), status: 'saved' };
+        }
+      }
       return isValidExploration(data)
         ? { state: Object.freeze({ ...data, position: Object.freeze({ ...data.position }) }), status: 'saved' }
         : { state: null, status: 'invalid' };

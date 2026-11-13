@@ -13,7 +13,7 @@ export const BASE_N9: MapDefinition = {
     { id: 'computer', kind: 'computer', name: 'Computador', x: 128, y: 96, width: 64, height: 40 },
     { id: 'guide', kind: 'npc', name: 'Lia', x: 224, y: 272, width: 32, height: 32 },
     { id: 'door', kind: 'door', name: 'Porta do setor tecnológico', x: 416, y: 240, width: 24, height: 64 },
-    { id: 'terminal', kind: 'terminal', name: 'Terminal tecnológico', x: 512, y: 112, width: 48, height: 48 },
+    { id: 'terminal', kind: 'terminal', name: 'Terminal tecnológico', x: 352, y: 112, width: 48, height: 48 },
   ],
 };
 

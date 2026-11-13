@@ -1,3 +1,8 @@
+import puzzleCatalog from '../content/puzzles/sequences.json';
+import { JsonPuzzleRepository } from '../infrastructure/content/JsonPuzzleRepository';
+import type { PuzzleContentRepository, PuzzleProgressRepository } from '../ports/PuzzleRepository';
+import { emptyPuzzleProgress, isSequenceCorrect, moveBlock, shuffledOrder, totalPuzzleXp,
+  type PuzzleProgress, type SequenceAttempt, type SequenceProgress, type SequencePuzzle } from '../domain/puzzles/SequencePuzzle';
 import { BASE_N9, MAPS } from '../config/maps';
 import { explorationCopy } from '../config/exploration';
 import { createExploration, movePlayer, nearbyObject, type ExplorationState } from '../domain/exploration/World';
@@ -10,7 +15,7 @@ import { calculateScore } from '../domain/scoring';
 import type { ContentRepository } from '../ports/ContentRepository';
 import type { ProgressRepository, SaveStatus } from '../ports/ProgressRepository';
 
-export type Screen = 'home' | 'course-select' | 'map' | 'question' | 'result';
+export type Screen = 'home' | 'course-select' | 'map' | 'question' | 'result' | 'puzzle';
 
 export interface SessionState {
   readonly screen: Screen;
@@ -21,6 +26,10 @@ export interface SessionState {
   readonly contentError: string | null;
   readonly exploration: ExplorationState;
   readonly explorationSaveStatus: SaveStatus;
+  readonly puzzleProgress: PuzzleProgress;
+  readonly puzzleAttempt: SequenceAttempt | null;
+  readonly puzzleSaveStatus: SaveStatus;
+  readonly puzzles: readonly SequencePuzzle[];
   readonly worldDialog: { readonly title: string; readonly message: string } | null;
 }
 
@@ -40,7 +49,14 @@ export type Command =
   | { type: 'interact' }
   | { type: 'close-dialog' }
   | { type: 'return-map' }
-  | { type: 'save-exploration' };
+  | { type: 'save-exploration' }
+  | { type: 'select-puzzle'; id: string }
+  | { type: 'reorder-puzzle'; puzzleId: string; blockId: string; to: number }
+  | { type: 'hint-puzzle'; puzzleId: string }
+  | { type: 'validate-puzzle'; puzzleId: string }
+  | { type: 'replay-puzzle'; puzzleId: string }
+  | { type: 'exit-puzzle' }
+  | { type: 'save-puzzles' };
 
 export class GameSession {
   private state: SessionState;
@@ -53,13 +69,23 @@ export class GameSession {
     private readonly createId: () => string = () => globalThis.crypto?.randomUUID?.() ??
       ('example-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2)),
     private readonly explorationProgress?: ExplorationRepository,
+    private readonly puzzleStorage?: PuzzleProgressRepository,
+    private readonly puzzleContent: PuzzleContentRepository = new JsonPuzzleRepository(puzzleCatalog),
   ) {
     const world = explorationProgress?.load() ?? { state: null, status: 'none' as const };
+    const puzzleSave = puzzleStorage?.load() ?? { progress: null, status: 'none' as const };
+    const puzzleProgress = puzzleSave.progress ?? emptyPuzzleProgress();
+    let exploration = world.state ?? createExploration(BASE_N9);
+    if (puzzleContent.all().some((puzzle) => puzzleProgress.entries[puzzle.id]?.completed &&
+        puzzle.unlocks.mapId === exploration.mapId && puzzle.unlocks.objectId === 'door')) {
+      exploration = Object.freeze({ ...exploration, doorUnlocked: true });
+    }
     const loaded = progress?.loadResult() ?? { result: null, status: 'none' as const };
     this.state = Object.freeze({
       screen: 'home', selectedCourse: null, attempt: null,
       lastResult: loaded.result, saveStatus: loaded.status, contentError: null,
-      exploration: world.state ?? createExploration(BASE_N9), explorationSaveStatus: world.status, worldDialog: null,
+      exploration, explorationSaveStatus: world.status, worldDialog: null,
+      puzzleProgress, puzzleAttempt: null, puzzleSaveStatus: puzzleSave.status, puzzles: puzzleContent.all(),
     });
   }
 
@@ -77,7 +103,7 @@ export class GameSession {
         if (current.screen !== 'course-select' || !isCourseId(command.course)) {
           throw new Error('Selecione um dos cinco cursos disponíveis.');
         }
-        this.update({ selectedCourse: command.course });
+        this.update({ selectedCourse: command.course, puzzles: this.puzzleContent.forCourse(command.course) });
         break;
       case 'enter-central':
         if (current.screen !== 'course-select' || current.selectedCourse === null) {
@@ -160,11 +186,64 @@ export class GameSession {
             message: current.exploration.doorUnlocked ? explorationCopy.openMessage : explorationCopy.lockedMessage,
           }) });
         } else {
-          this.update({ worldDialog: Object.freeze({ title: explorationCopy.terminalTitle, message: explorationCopy.terminalMessage }) });
+          const first = current.puzzles[0];
+          if (first) this.beginPuzzle(first.id);
+          return this.state;
         }
         this.persistExploration();
         break;
       }
+      case 'select-puzzle':
+        if (current.screen === 'puzzle') this.beginPuzzle(command.id);
+        break;
+      case 'replay-puzzle':
+        if (current.screen === 'puzzle' && current.puzzleAttempt?.puzzleId === command.puzzleId && current.puzzleAttempt.solved) {
+          this.beginPuzzle(command.puzzleId);
+        }
+        break;
+      case 'reorder-puzzle': {
+        const active = this.activePuzzle(command.puzzleId);
+        if (!active || current.puzzleAttempt?.solved) return current;
+        const order = moveBlock(active.entry.order, command.blockId, command.to);
+        if (order === active.entry.order) return current;
+        this.updatePuzzleEntry(active.puzzle.id, { ...active.entry, order });
+        this.update({ puzzleAttempt: { ...current.puzzleAttempt!, feedback: 'none' } });
+        this.persistPuzzles();
+        break;
+      }
+      case 'hint-puzzle': {
+        const active = this.activePuzzle(command.puzzleId);
+        if (!active || current.puzzleAttempt?.solved) return current;
+        this.updatePuzzleEntry(active.puzzle.id, { ...active.entry,
+          hintsUsed: Math.min(active.puzzle.hints.length, active.entry.hintsUsed + 1) });
+        this.persistPuzzles();
+        break;
+      }
+      case 'validate-puzzle': {
+        const active = this.activePuzzle(command.puzzleId);
+        if (!active || current.puzzleAttempt?.solved) return current;
+        const correct = isSequenceCorrect(active.entry.order, active.puzzle);
+        this.updatePuzzleEntry(active.puzzle.id, { ...active.entry, attempts: active.entry.attempts + 1,
+          completed: active.entry.completed || correct,
+          hintsUsed: correct ? active.entry.hintsUsed : Math.max(1, active.entry.hintsUsed) });
+        this.update({ puzzleAttempt: { puzzleId: active.puzzle.id, solved: correct,
+          feedback: correct ? 'correct' : 'incorrect', earnedXp: correct && !active.entry.completed ? active.puzzle.reward.xp : 0 } });
+        this.persistPuzzles();
+        if (correct && active.puzzle.unlocks.mapId === current.exploration.mapId && active.puzzle.unlocks.objectId === 'door') {
+          this.update({ exploration: Object.freeze({ ...current.exploration, doorUnlocked: true }) });
+          this.persistExploration();
+        }
+        break;
+      }
+      case 'exit-puzzle':
+        if (current.screen === 'puzzle') {
+          this.persistPuzzles();
+          this.update({ screen: 'map', puzzleAttempt: null, worldDialog: null });
+        }
+        break;
+      case 'save-puzzles':
+        this.persistPuzzles();
+        break;
       case 'close-dialog':
         this.update({ worldDialog: null });
         break;
@@ -182,6 +261,37 @@ export class GameSession {
     }
     return this.state;
   }
+
+  private activePuzzle(id: string): { puzzle: SequencePuzzle; entry: SequenceProgress } | null {
+    const puzzle = this.state.puzzles.find((candidate) => candidate.id === id);
+    const entry = this.state.puzzleProgress.entries[id];
+    return this.state.screen === 'puzzle' && this.state.puzzleAttempt?.puzzleId === id && puzzle && entry
+      ? { puzzle, entry } : null;
+  }
+
+  private beginPuzzle(id: string): void {
+    const puzzle = this.state.puzzles.find((candidate) => candidate.id === id);
+    if (!puzzle || !this.state.selectedCourse || !puzzle.courses.includes(this.state.selectedCourse)) return;
+    const previous = this.state.puzzleProgress.entries[id];
+    this.updatePuzzleEntry(id, { order: previous && !previous.completed ? previous.order : shuffledOrder(puzzle),
+      completed: previous?.completed ?? false, hintsUsed: previous?.hintsUsed ?? 0, attempts: previous?.attempts ?? 0 });
+    this.update({ screen: 'puzzle', worldDialog: null,
+      puzzleAttempt: { puzzleId: id, solved: false, feedback: 'none', earnedXp: 0 } });
+    this.persistPuzzles();
+    this.persistExploration();
+  }
+
+  private updatePuzzleEntry(id: string, entry: SequenceProgress): void {
+    this.update({ puzzleProgress: { schemaVersion: 1, entries: { ...this.state.puzzleProgress.entries, [id]: entry } } });
+  }
+
+  private persistPuzzles(): void {
+    if (!this.puzzleStorage) return;
+    const saved = this.puzzleStorage.save(this.state.puzzleProgress);
+    this.update({ puzzleProgress: saved.progress, puzzleSaveStatus: saved.status });
+  }
+
+  get puzzleXp(): number { return totalPuzzleXp(this.state.puzzleProgress, this.puzzleContent.all()); }
 
   private persistExploration(): void {
     if (!this.explorationProgress) return;

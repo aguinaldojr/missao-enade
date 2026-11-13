@@ -1,0 +1,181 @@
+{
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "kind",
+      "id",
+      "title",
+      "narrative",
+      "collection",
+      "pedagogicalOrigin",
+      "courses",
+      "area",
+      "competencies",
+      "difficulty",
+      "blocks",
+      "correctOrder",
+      "hints",
+      "explanation",
+      "reward",
+      "unlocks",
+      "source",
+      "validationStatus"
+    ],
+    "properties": {
+      "kind": {
+        "const": "sequence"
+      },
+      "id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "title": {
+        "type": "string",
+        "minLength": 1
+      },
+      "narrative": {
+        "type": "string",
+        "minLength": 1
+      },
+      "collection": {
+        "type": "string",
+        "minLength": 1
+      },
+      "pedagogicalOrigin": {
+        "type": "string",
+        "minLength": 1
+      },
+      "courses": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "enum": [
+            "CC",
+            "SI",
+            "TADS",
+            "TGTI",
+            "TRC"
+          ]
+        }
+      },
+      "area": {
+        "type": "string",
+        "minLength": 1
+      },
+      "competencies": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "difficulty": {
+        "const": "introductory"
+      },
+      "blocks": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 7,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "text"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "correctOrder": {
+        "type": "array",
+        "minItems": 4,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "maxItems": 7
+      },
+      "hints": {
+        "type": "array",
+        "minItems": 3,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "explanation": {
+        "type": "string",
+        "minLength": 1
+      },
+      "reward": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "xp"
+        ],
+        "properties": {
+          "xp": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        }
+      },
+      "unlocks": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "mapId",
+          "objectId"
+        ],
+        "properties": {
+          "mapId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "objectId": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "source": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "description"
+        ],
+        "properties": {
+          "type": {
+            "const": "fictional"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "validationStatus": {
+        "const": "provisional-pending-teacher-review"
+      }
+    }
+  }
+}
