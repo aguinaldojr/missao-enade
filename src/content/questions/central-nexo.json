@@ -1,0 +1,645 @@
+{
+  "mode": "example",
+  "contentVersion": "example-1",
+  "phaseId": "FASE-EXEMPLO-01",
+  "questions": [
+    {
+      "id": "EX-COMUM-01",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "No campus fictício Nexo, 200 atendimentos foram registrados: 140 pelo portal e 60 no balcão. Cada atendimento foi contado uma vez.",
+      "prompt": "Qual conclusão é sustentada por esses dados?",
+      "options": [
+        {
+          "id": "A",
+          "text": "O balcão recebeu 70% dos atendimentos."
+        },
+        {
+          "id": "B",
+          "text": "O portal recebeu 70% dos atendimentos."
+        },
+        {
+          "id": "C",
+          "text": "Os dois canais tiveram a mesma quantidade."
+        },
+        {
+          "id": "D",
+          "text": "O portal nunca apresenta dificuldades de acesso."
+        },
+        {
+          "id": "E",
+          "text": "Todos os estudantes preferem o portal."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "140 dividido por 200 é 0,70. Portanto, o portal recebeu 70% dos atendimentos registrados; os dados não explicam os motivos dessa preferência.",
+      "feedbackByOption": {
+        "A": "O balcão recebeu 60 de 200 atendimentos, isto é, 30%.",
+        "B": "140 de 200 equivale a 70%, exatamente a proporção registrada.",
+        "C": "As quantidades são diferentes: 140 e 60.",
+        "D": "A quantidade de atendimentos não demonstra ausência de dificuldades.",
+        "E": "Os dados contam atendimentos, não a preferência de todos os estudantes."
+      }
+    },
+    {
+      "id": "EX-COMUM-02",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "A biblioteca fictícia solicita um código de empréstimo para consultar sua situação. O procedimento informado exige somente esse código; nome, endereço e documento não são necessários.",
+      "prompt": "Qual formulário segue o procedimento e reduz a coleta de dados desnecessários?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Solicitar código, endereço e documento."
+        },
+        {
+          "id": "B",
+          "text": "Publicar a lista de empréstimos de todos os usuários."
+        },
+        {
+          "id": "C",
+          "text": "Exigir uma fotografia antes da consulta."
+        },
+        {
+          "id": "D",
+          "text": "Solicitar apenas o código de empréstimo."
+        },
+        {
+          "id": "E",
+          "text": "Solicitar a senha de todos os serviços do campus."
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "Se a consulta depende somente do código de empréstimo, esse deve ser o único dado solicitado para essa finalidade fictícia.",
+      "feedbackByOption": {
+        "A": "Endereço e documento não são necessários para a finalidade descrita.",
+        "B": "A consulta individual não exige divulgar informações de outras pessoas.",
+        "C": "O procedimento não exige nem utiliza uma fotografia.",
+        "D": "Esse é o único dado necessário segundo as regras fornecidas.",
+        "E": "Senhas de outros serviços não fazem parte da consulta e não devem ser pedidas."
+      }
+    },
+    {
+      "id": "EX-COMUM-03",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Um aviso fictício informa apenas: 'O portal ficará indisponível amanhã'. A equipe sabe que a manutenção ocorrerá em 15 de março, das 9h às 10h, e que o balcão continuará aberto.",
+      "prompt": "Qual versão comunica melhor as informações disponíveis?",
+      "options": [
+        {
+          "id": "A",
+          "text": "O portal talvez pare em algum momento."
+        },
+        {
+          "id": "B",
+          "text": "Todo o campus ficará fechado no dia 15."
+        },
+        {
+          "id": "C",
+          "text": "Em 15 de março, o portal ficará indisponível das 9h às 10h; o balcão seguirá aberto."
+        },
+        {
+          "id": "D",
+          "text": "O portal estará sempre indisponível."
+        },
+        {
+          "id": "E",
+          "text": "Manutenção concluída, sem necessidade de aviso."
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "Uma data explícita, o intervalo de manutenção e a alternativa de atendimento reduzem a ambiguidade do aviso.",
+      "feedbackByOption": {
+        "A": "A equipe conhece o intervalo; omiti-lo torna o aviso menos preciso.",
+        "B": "O texto inventa um fechamento que não foi informado.",
+        "C": "A mensagem inclui data, horário e alternativa de atendimento sem inventar dados.",
+        "D": "A manutenção é limitada a uma hora, não permanente.",
+        "E": "A manutenção ainda é futura no contexto fictício."
+      }
+    },
+    {
+      "id": "EX-COMUM-04",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Em uma simulação de Nexo, a troca de luminárias reduz o consumo diário de um setor de 40 para 25 unidades de energia. O período e a área iluminada são os mesmos.",
+      "prompt": "Qual é a redução diária registrada?",
+      "options": [
+        {
+          "id": "A",
+          "text": "15 unidades de energia."
+        },
+        {
+          "id": "B",
+          "text": "25 unidades de energia."
+        },
+        {
+          "id": "C",
+          "text": "40 unidades de energia."
+        },
+        {
+          "id": "D",
+          "text": "65 unidades de energia."
+        },
+        {
+          "id": "E",
+          "text": "Não houve redução."
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "A diferença entre o consumo anterior e o novo é 40 − 25 = 15 unidades por dia. Isso não permite inferir, sozinho, outros impactos ambientais.",
+      "feedbackByOption": {
+        "A": "A subtração 40 − 25 resulta em 15 unidades.",
+        "B": "25 é o novo consumo, não a diferença entre os dois valores.",
+        "C": "40 é o consumo anterior, não a economia.",
+        "D": "65 é a soma dos consumos; a redução é calculada pela diferença.",
+        "E": "O novo consumo é menor que o anterior nas mesmas condições."
+      }
+    },
+    {
+      "id": "EX-COMUM-05",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Uma equipe fictícia deve conferir dois conjuntos independentes de registros até sexta-feira. Ana pode trabalhar na quarta-feira e Beto na quinta-feira. Uma revisão conjunta na sexta-feira está disponível.",
+      "prompt": "Qual plano usa as disponibilidades descritas e inclui uma revisão?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Exigir que ambos confiram tudo na terça-feira."
+        },
+        {
+          "id": "B",
+          "text": "Deixar os dois conjuntos sem responsável."
+        },
+        {
+          "id": "C",
+          "text": "Agendar todo o trabalho para sábado."
+        },
+        {
+          "id": "D",
+          "text": "Conferir os registros e eliminar a revisão de sexta-feira."
+        },
+        {
+          "id": "E",
+          "text": "Ana confere um conjunto na quarta, Beto outro na quinta e ambos revisam na sexta."
+        }
+      ],
+      "correctOptionId": "E",
+      "explanation": "Dividir conjuntos independentes entre as pessoas disponíveis e reservar a revisão conjunta atende às restrições fornecidas, sem exigir trabalho fora dos dias indicados.",
+      "feedbackByOption": {
+        "A": "Nenhum dos dois tem disponibilidade indicada para terça-feira.",
+        "B": "A ausência de responsáveis não organiza a execução das tarefas.",
+        "C": "Sábado é posterior ao prazo informado.",
+        "D": "O plano não inclui a revisão solicitada.",
+        "E": "O plano utiliza os dias disponíveis e prevê a revisão conjunta."
+      }
+    },
+    {
+      "id": "EX-COMUM-06",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Duas equipes fictícias querem comparar protótipos de um aplicativo. Elas podem usar o mesmo conjunto de tarefas, os mesmos critérios de medição e registrar as limitações do teste.",
+      "prompt": "Qual procedimento favorece uma comparação verificável?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Escolher o vencedor apenas pela cor da tela."
+        },
+        {
+          "id": "B",
+          "text": "Usar as mesmas tarefas e critérios e documentar resultados e limitações."
+        },
+        {
+          "id": "C",
+          "text": "Descartar resultados que contrariem a preferência da equipe."
+        },
+        {
+          "id": "D",
+          "text": "Testar somente um protótipo e concluir que ambos são iguais."
+        },
+        {
+          "id": "E",
+          "text": "Ocultar o procedimento para impedir repetição."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Critérios e tarefas comuns permitem comparar resultados sob condições descritas. Registrar limitações evita generalizar além do teste.",
+      "feedbackByOption": {
+        "A": "A cor não mede o desempenho nas tarefas propostas.",
+        "B": "As condições compartilhadas tornam a comparação rastreável.",
+        "C": "Descartar dados por preferência distorce a comparação.",
+        "D": "Sem observar o outro protótipo, essa igualdade não foi demonstrada.",
+        "E": "Sem conhecer o procedimento, outras pessoas não podem verificar a comparação."
+      }
+    },
+    {
+      "id": "EX-COMUM-07",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "No serviço fictício Nexo, uma pessoa utiliza apenas teclado e outra não distingue certas cores. O protótipo atual exige clique e sinaliza falhas somente em vermelho.",
+      "prompt": "Qual melhoria responde às duas barreiras descritas?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Aumentar apenas o volume do som."
+        },
+        {
+          "id": "B",
+          "text": "Trocar vermelho por verde, sem outra mudança."
+        },
+        {
+          "id": "C",
+          "text": "Permitir navegação por teclado e mostrar o erro também por texto."
+        },
+        {
+          "id": "D",
+          "text": "Remover todos os rótulos dos controles."
+        },
+        {
+          "id": "E",
+          "text": "Exigir um gesto de arrastar para cada ação."
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "Controles operáveis por teclado atendem à primeira barreira. Mensagens textuais de erro complementam a cor e atendem à segunda.",
+      "feedbackByOption": {
+        "A": "Isso não torna os controles acessíveis por teclado nem explica o erro por texto.",
+        "B": "A informação continuaria dependendo somente da cor.",
+        "C": "As duas medidas abordam diretamente as barreiras descritas.",
+        "D": "Remover rótulos dificulta identificar as ações disponíveis.",
+        "E": "O gesto não resolve o uso exclusivo de teclado."
+      }
+    },
+    {
+      "id": "EX-COMUM-08",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Na rede fictícia, os terminais A e B acessam o mesmo serviço. O terminal C não acessa. Um teste mostra que o cabo de C está desconectado; os outros cabos estão conectados.",
+      "prompt": "Qual é a primeira ação coerente com essa evidência?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Apagar os arquivos do serviço."
+        },
+        {
+          "id": "B",
+          "text": "Desligar A e B permanentemente."
+        },
+        {
+          "id": "C",
+          "text": "Trocar a senha de todos os usuários sem verificar o cabo."
+        },
+        {
+          "id": "D",
+          "text": "Reconectar o cabo de C e repetir o teste."
+        },
+        {
+          "id": "E",
+          "text": "Declarar que nenhum terminal funciona."
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "O cabo desconectado é uma falha observada no caminho de C. Reconectá-lo e testar novamente é uma ação direcionada à evidência, sem presumir outras causas.",
+      "feedbackByOption": {
+        "A": "Não há evidência de que os arquivos causem a desconexão de C.",
+        "B": "A e B funcionam; desligá-los não reconecta C.",
+        "C": "Essa ação não corrige a falha física observada.",
+        "D": "A ação trata a falha observada e verifica se o acesso foi restabelecido.",
+        "E": "A e B acessam o serviço, contrariando essa afirmação."
+      }
+    },
+    {
+      "id": "EX-COMUM-09",
+      "version": 1,
+      "classification": "COMUM",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Um computador fictício não consegue salvar um arquivo. O sistema informa 'espaço disponível: 0'. O arquivo precisa de 10 unidades de espaço, e existe uma área segura para mover arquivos antigos.",
+      "prompt": "Qual ação trata a restrição informada?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Mover arquivos antigos com segurança para liberar espaço e tentar salvar novamente."
+        },
+        {
+          "id": "B",
+          "text": "Aumentar apenas o brilho da tela."
+        },
+        {
+          "id": "C",
+          "text": "Alterar a cor do ícone do arquivo."
+        },
+        {
+          "id": "D",
+          "text": "Ignorar a mensagem e afirmar que o arquivo foi salvo."
+        },
+        {
+          "id": "E",
+          "text": "Desconectar o teclado como solução definitiva."
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "O recurso insuficiente é o armazenamento. Liberar ao menos 10 unidades de forma segura permite repetir a tentativa nas condições descritas.",
+      "feedbackByOption": {
+        "A": "A ação libera o recurso indicado como insuficiente.",
+        "B": "O brilho não libera armazenamento.",
+        "C": "A aparência do ícone não modifica o espaço disponível.",
+        "D": "A falha deve ser verificada; ignorar a mensagem não demonstra salvamento.",
+        "E": "O teclado não é o recurso apontado como insuficiente."
+      }
+    },
+    {
+      "id": "EX-CC-01",
+      "version": 1,
+      "classification": "CC",
+      "courses": [
+        "CC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Em um exemplo fictício do Laboratório de Modelos, um procedimento começa com 2 e multiplica o valor por 2 a cada etapa: 2, 4, 8.",
+      "prompt": "Seguindo somente essa regra, qual é o próximo valor?",
+      "options": [
+        {
+          "id": "A",
+          "text": "9."
+        },
+        {
+          "id": "B",
+          "text": "10."
+        },
+        {
+          "id": "C",
+          "text": "16."
+        },
+        {
+          "id": "D",
+          "text": "24."
+        },
+        {
+          "id": "E",
+          "text": "64."
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "O procedimento dobra o valor anterior. Depois de 8, o próximo resultado é 8 × 2 = 16.",
+      "feedbackByOption": {
+        "A": "Somar 1 não segue a regra de multiplicar por 2.",
+        "B": "Somar 2 não segue a regra descrita.",
+        "C": "16 é o dobro de 8.",
+        "D": "24 é o triplo de 8, e a regra pede o dobro.",
+        "E": "Elevar 8 ao quadrado é uma operação diferente de dobrar."
+      }
+    },
+    {
+      "id": "EX-SI-01",
+      "version": 1,
+      "classification": "SI",
+      "courses": [
+        "SI"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "No Observatório fictício, cada solicitação deve ter um único identificador. Duas equipes registram a mesma solicitação com códigos diferentes e isso duplica sua contagem no relatório.",
+      "prompt": "Qual mudança atende à regra informada?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Criar mais códigos diferentes para a mesma solicitação."
+        },
+        {
+          "id": "B",
+          "text": "Somar todas as duplicatas como solicitações novas."
+        },
+        {
+          "id": "C",
+          "text": "Excluir os relatórios sem organizar os registros."
+        },
+        {
+          "id": "D",
+          "text": "Distinguir registros apenas pela cor usada por cada equipe."
+        },
+        {
+          "id": "E",
+          "text": "Compartilhar um identificador único e conferir duplicidades antes da contagem."
+        }
+      ],
+      "correctOptionId": "E",
+      "explanation": "Um identificador compartilhado e a conferência de duplicidades permitem que a mesma solicitação seja reconhecida como um único registro.",
+      "feedbackByOption": {
+        "A": "Isso amplia a duplicidade em vez de resolvê-la.",
+        "B": "A regra exige uma contagem única por solicitação.",
+        "C": "Isso não estabelece a identificação única solicitada.",
+        "D": "A cor não identifica de forma única a solicitação compartilhada.",
+        "E": "A medida atende diretamente à regra de uma identificação por solicitação."
+      }
+    },
+    {
+      "id": "EX-TADS-01",
+      "version": 1,
+      "classification": "TADS",
+      "courses": [
+        "TADS"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Na Fábrica de Software fictícia, a regra permite retirar uma quantidade se ela for maior que zero e menor ou igual ao estoque. O estoque do teste é 5.",
+      "prompt": "Qual caso deve ser aceito por essa regra?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Retirar 5 unidades."
+        },
+        {
+          "id": "B",
+          "text": "Retirar 6 unidades."
+        },
+        {
+          "id": "C",
+          "text": "Retirar zero unidade."
+        },
+        {
+          "id": "D",
+          "text": "Retirar menos 1 unidade."
+        },
+        {
+          "id": "E",
+          "text": "Retirar 10 unidades."
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "A quantidade 5 é maior que zero e igual ao estoque. Portanto, atende às duas condições de aceitação.",
+      "feedbackByOption": {
+        "A": "5 é positivo e não excede o estoque de 5.",
+        "B": "6 excede o estoque informado.",
+        "C": "A regra exige uma quantidade maior que zero.",
+        "D": "Uma quantidade negativa não atende à primeira condição.",
+        "E": "10 excede o estoque de 5."
+      }
+    },
+    {
+      "id": "EX-TGTI-01",
+      "version": 1,
+      "classification": "TGTI",
+      "courses": [
+        "TGTI"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "A Central de Serviços fictícia dispõe de equipe para uma correção inicial. A regra definida é priorizar o incidente que afeta mais pessoas. O incidente Alfa afeta 30 pessoas e o Beta afeta 80; os demais fatores são iguais.",
+      "prompt": "Qual prioridade segue a regra fornecida?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Alfa, porque seu nome vem primeiro."
+        },
+        {
+          "id": "B",
+          "text": "Beta, porque afeta 80 pessoas."
+        },
+        {
+          "id": "C",
+          "text": "Alfa, porque afeta menos pessoas."
+        },
+        {
+          "id": "D",
+          "text": "Nenhum, pois os dois números são iguais."
+        },
+        {
+          "id": "E",
+          "text": "Sortear sem considerar os dados."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Beta afeta 80 pessoas, número maior que as 30 de Alfa. Aplicar a regra informada leva à prioridade de Beta, sem inventar outros critérios.",
+      "feedbackByOption": {
+        "A": "A ordem alfabética não é o critério definido.",
+        "B": "Beta apresenta o maior número de pessoas afetadas.",
+        "C": "Isso inverte o critério fornecido.",
+        "D": "30 e 80 não são iguais.",
+        "E": "O sorteio ignora a regra de prioridade informada."
+      }
+    },
+    {
+      "id": "EX-TRC-01",
+      "version": 1,
+      "classification": "TRC",
+      "courses": [
+        "TRC"
+      ],
+      "example": true,
+      "editorialStatus": "example",
+      "context": "Na topologia fictícia, o único caminho do terminal Alfa ao servidor Beta passa pelo equipamento R. R está desligado, e as conexões físicas estão conferidas. Não existe caminho alternativo.",
+      "prompt": "Qual ação permite testar a recuperação do caminho descrito?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Desligar também o terminal Alfa."
+        },
+        {
+          "id": "B",
+          "text": "Mudar apenas o papel de parede do servidor."
+        },
+        {
+          "id": "C",
+          "text": "Afirmar que existe um caminho alternativo sem verificá-lo."
+        },
+        {
+          "id": "D",
+          "text": "Ligar R e verificar novamente a comunicação entre Alfa e Beta."
+        },
+        {
+          "id": "E",
+          "text": "Apagar todos os arquivos do servidor Beta."
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "Como R é parte necessária do único caminho e está desligado, ligá-lo e testar a comunicação trata a indisponibilidade observada.",
+      "feedbackByOption": {
+        "A": "Isso não restabelece o equipamento necessário ao caminho.",
+        "B": "A aparência da tela não liga o equipamento R.",
+        "C": "O contexto informa explicitamente que não existe outro caminho.",
+        "D": "A ação trata o ponto necessário do caminho que está indisponível.",
+        "E": "Não há evidência de falha nos arquivos; essa ação não liga R."
+      }
+    }
+  ]
+}

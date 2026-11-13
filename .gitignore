@@ -1,0 +1,33 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.local
+
+# Caches, logs e arquivos temporários
+.cache/
+.vite/
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Configuração local e credenciais
+.env
+.env.*
+.npmrc
+.aws/
+.ssh/
+.codex/
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json

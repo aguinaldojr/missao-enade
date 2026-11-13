@@ -1,0 +1,4626 @@
+{
+  "schema_version": "1.0.0",
+  "titulo": "Missão ENADE — matriz pedagógica",
+  "data_corte_pesquisa": "2026-11-12",
+  "origem_exclusiva": [
+    "visao-do-jogo(2).md, v0.2",
+    "referencias-enade-2026-v2(1).md, v2"
+  ],
+  "natureza": "Modelo de planejamento; nenhum item completo foi criado ou validado",
+  "edicao_referencia": 2026,
+  "cursos": {
+    "CC": "Ciência da Computação",
+    "SI": "Sistemas de Informação",
+    "TADS": "Análise e Desenvolvimento de Sistemas",
+    "TGTI": "Gestão da Tecnologia da Informação",
+    "TRC": "Redes de Computadores"
+  },
+  "convencoes": {
+    "COMUM": "Recorte explicitamente sustentado para pelo menos dois cursos; não implica adequação a todos os cinco",
+    "prioridade": {
+      "P1": "Primeiras fases e seus fundamentos",
+      "P2": "Ampliação dos distritos após piloto",
+      "P3": "Reserva futura, não utilizada nesta proposta"
+    },
+    "dificuldade": {
+      "D1": "Uma evidência e aplicação direta, com dados suficientes",
+      "D2": "Comparação de alternativas e articulação de duas evidências",
+      "D3": "Integração de modelos, múltiplas restrições ou justificativa complexa"
+    },
+    "situacoes": [
+      "confirmada",
+      "baseada em edição anterior",
+      "pendente"
+    ],
+    "pre_requisitos": "Códigos de áreas como recomendações pedagógicas; nunca bloqueios por nota ou por erro",
+    "competencia": "Síntese da pesquisa de 2026, por curso; referências I/II dos componentes específicos não se aplicam à Formação Geral",
+    "habilidade": "Objetivo do jogo derivado das sínteses; não é código nem redação literal oficial"
+  },
+  "fontes": {
+    "F04": {
+      "id": "F04",
+      "descricao": "Edital Inep **61, de 14/05/2026**; prova de bacharelados/tecnólogos, habilitação, questionários, horários e regularidade",
+      "publicacao": "DOU **15/05/2026**, edição 90, seção 3, p. 49",
+      "links": [
+        {
+          "rotulo": "DOU",
+          "url": "https://www.in.gov.br/web/dou/-/edital-n-61-de-14-de-maio-de-2026-705977430"
+        },
+        {
+          "rotulo": "reprodução na Unilab em PDF",
+          "url": "https://unilab.edu.br/wp-content/uploads/2026/05/EDITAL-No-61_ENADE_2026_-BACHARELADOS-DE-14-DE-MAIO-DE-2026.pdf"
+        }
+      ]
+    },
+    "F05": {
+      "id": "F05",
+      "descricao": "Portaria Inep **154, de 14/04/2026**; Formação Geral, arts. 1º–6º",
+      "publicacao": "DOU **16/04/2026**, edição 72, seção 1, p. 90",
+      "links": [
+        {
+          "rotulo": "DOU",
+          "url": "https://www.in.gov.br/web/dou/-/portaria-n-154-de-14-de-abril-de-2026-699921720"
+        },
+        {
+          "rotulo": "reprodução na UFC em PDF",
+          "url": "https://ec.ufc.br/wp-content/uploads/2026/04/diretrizes-prova-formacao-geral.pdf"
+        }
+      ]
+    },
+    "F06": {
+      "id": "F06",
+      "descricao": "Portaria Inep **157, de 14/04/2026**; CC",
+      "publicacao": "DOU **16/04/2026**, edição 72, seção 1, p. 91",
+      "links": [
+        {
+          "rotulo": "DOU",
+          "url": "https://www.in.gov.br/web/dou/-/portaria-n-157-de-14-de-abril-de-2026-699947879"
+        },
+        {
+          "rotulo": "MEC Normas",
+          "url": "https://mecnormas.mec.gov.br/pesquisa/detalhar/9766"
+        },
+        {
+          "rotulo": "reprodução na Ufopa em PDF",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/e402e087-9a8b-4409-84da-4c0cf7533472.pdf"
+        }
+      ]
+    },
+    "F07": {
+      "id": "F07",
+      "descricao": "Portaria Inep **168, de 14/04/2026**; SI",
+      "publicacao": "DOU **16/04/2026**, edição 72, seção 1, p. 96",
+      "links": [
+        {
+          "rotulo": "DOU",
+          "url": "https://www.in.gov.br/web/dou/-/portaria-n-168-de-14-de-abril-de-2026-699946315"
+        },
+        {
+          "rotulo": "reprodução na Ufopa em PDF",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        }
+      ]
+    },
+    "F08": {
+      "id": "F08",
+      "descricao": "Portaria Inep **169, de 14/04/2026**; TADS",
+      "publicacao": "DOU **16/04/2026**, edição 72, seção 1, p. 96",
+      "links": [
+        {
+          "rotulo": "DOU",
+          "url": "https://www.in.gov.br/en/web/dou/-/portaria-n-169-de-14-de-abril-de-2026-699920629"
+        },
+        {
+          "rotulo": "reprodução do ato em PDF",
+          "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-169-2026-04-14.pdf"
+        }
+      ]
+    },
+    "F09": {
+      "id": "F09",
+      "descricao": "Portaria Inep **171, de 14/04/2026**; TGTI",
+      "publicacao": "DOU **16/04/2026**, edição 72, seção 1, p. 97",
+      "links": [
+        {
+          "rotulo": "DOU",
+          "url": "https://www.in.gov.br/web/dou/-/portaria-n-171-de-14-de-abril-de-2026-699946786"
+        },
+        {
+          "rotulo": "reprodução do ato em PDF",
+          "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-171-2026-04-14.pdf"
+        }
+      ]
+    },
+    "F10": {
+      "id": "F10",
+      "descricao": "Portaria Inep **172, de 14/04/2026**; TRC",
+      "publicacao": "DOU **16/04/2026**, edição 72, seção 1, p. 98",
+      "links": [
+        {
+          "rotulo": "DOU",
+          "url": "https://www.in.gov.br/web/dou/-/portaria-n-172-de-14-de-abril-de-2026-699944904"
+        },
+        {
+          "rotulo": "reprodução do ato em PDF",
+          "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-172-2026-04-14.pdf"
+        }
+      ]
+    },
+    "F14": {
+      "id": "F14",
+      "descricao": "Inep — provas, gabaritos e padrões de resposta de 2021 dos cinco cursos",
+      "publicacao": "Página publicada em **17/11/2021**, atualizada em **18/03/2022**; data individual dos PDFs não identificada",
+      "links": [
+        {
+          "rotulo": "Acervo 2021",
+          "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade/provas-e-gabaritos/2021"
+        }
+      ]
+    },
+    "F20": {
+      "id": "F20",
+      "descricao": "Inep — acervo de provas, gabaritos e padrões de resposta de **2014**, quatro dos cursos solicitados",
+      "publicacao": "Edição **2014**; datas individuais de publicação dos PDFs não identificadas; download em **12/11/2026**",
+      "links": [
+        {
+          "rotulo": "Índice oficial 2014",
+          "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade/provas-e-gabaritos/2014"
+        }
+      ]
+    },
+    "F21": {
+      "id": "F21",
+      "descricao": "Inep — acervo de provas, gabaritos e padrões de resposta de **2017**, cinco cursos solicitados",
+      "publicacao": "Edição **2017**; datas individuais de publicação dos PDFs não identificadas; download em **12/11/2026**",
+      "links": [
+        {
+          "rotulo": "Índice oficial 2017",
+          "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade/provas-e-gabaritos/2017"
+        }
+      ]
+    },
+    "F23": {
+      "id": "F23",
+      "descricao": "Inep — Administração **2025**, caderno 1, gabarito definitivo, mapa de questões e material da discursiva",
+      "publicacao": "Edição **2025**; datas individuais de publicação dos PDFs não identificadas; download em **12/11/2026**. A data de produção impressa na prova não foi tratada como data de publicação",
+      "links": [
+        {
+          "rotulo": "Índice oficial 2025",
+          "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade/provas-e-gabaritos/2025"
+        },
+        {
+          "rotulo": "prova",
+          "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2025_administracao_PV_1.pdf"
+        },
+        {
+          "rotulo": "gabarito definitivo",
+          "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2025_administracao_GB_1.pdf"
+        },
+        {
+          "rotulo": "mapa oficial",
+          "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2025_MP_administracao.pdf"
+        },
+        {
+          "rotulo": "discursiva",
+          "url": "https://download.inep.gov.br/enade/provas_e_gabaritos/2025_discursiva_administracao.pdf"
+        }
+      ]
+    }
+  },
+  "areas": [
+    {
+      "codigo": "COMUM-FG01",
+      "categoria": "COMUM",
+      "nome": "Ética, cidadania e trabalho",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Formação Geral"
+        }
+      ],
+      "competencia": [
+        {
+          "cursos": [
+            "CC",
+            "SI",
+            "TADS",
+            "TGTI",
+            "TRC"
+          ],
+          "sintese": "Interpretar, produzir e compartilhar conteúdos com responsabilidade; examinar situações complexas para decidir e resolver problemas",
+          "fonte_id": "F05"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Avaliar condutas e consequências de uma decisão sobre direitos e condições de trabalho"
+      },
+      "assuntos": [
+        "Ética",
+        "democracia",
+        "cidadania",
+        "direitos humanos",
+        "Estado, sociedade e trabalho"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 2,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Avaliar condutas e consequências de uma decisão sobre direitos e condições de trabalho",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F05"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ética, democracia, cidadania e direitos humanos; Estado, sociedade e trabalho"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ética, democracia, cidadania e direitos humanos; Estado, sociedade e trabalho"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ética, democracia, cidadania e direitos humanos; Estado, sociedade e trabalho"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ética, democracia, cidadania e direitos humanos; Estado, sociedade e trabalho"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ética, democracia, cidadania e direitos humanos; Estado, sociedade e trabalho"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-02"
+        },
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-05"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-FG02",
+      "categoria": "COMUM",
+      "nome": "Equidade, acessibilidade e inclusão",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Formação Geral"
+        }
+      ],
+      "competencia": [
+        {
+          "cursos": [
+            "CC",
+            "SI",
+            "TADS",
+            "TGTI",
+            "TRC"
+          ],
+          "sintese": "Interpretar, produzir e compartilhar conteúdos com responsabilidade; examinar situações complexas para decidir e resolver problemas",
+          "fonte_id": "F05"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Comparar soluções de participação social identificando barreiras e efeitos desiguais"
+      },
+      "assuntos": [
+        "Equidade étnico-racial, geracional, de classe, de gênero e de sexualidade",
+        "acessibilidade",
+        "inclusão social"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 2,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Comparar soluções de participação social identificando barreiras e efeitos desiguais",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F05"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Equidade nas relações; acessibilidade e inclusão social"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Equidade nas relações; acessibilidade e inclusão social"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Equidade nas relações; acessibilidade e inclusão social"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Equidade nas relações; acessibilidade e inclusão social"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Equidade nas relações; acessibilidade e inclusão social"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-07"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-FG03",
+      "categoria": "COMUM",
+      "nome": "Clima, territórios e qualidade de vida",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Formação Geral"
+        }
+      ],
+      "competencia": [
+        {
+          "cursos": [
+            "CC",
+            "SI",
+            "TADS",
+            "TGTI",
+            "TRC"
+          ],
+          "sintese": "Interpretar, produzir e compartilhar conteúdos com responsabilidade; examinar situações complexas para decidir e resolver problemas",
+          "fonte_id": "F05"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Selecionar uma intervenção socioambiental sustentada por dados e contexto territorial"
+      },
+      "assuntos": [
+        "Mudanças climáticas",
+        "questões socioambientais",
+        "campo e cidade",
+        "qualidade de vida",
+        "territórios e diversidade cultural"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 2,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Selecionar uma intervenção socioambiental sustentada por dados e contexto territorial",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F05"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Mudanças climáticas e questões socioambientais; campo, cidade e qualidade de vida; territórios, sociodiversidade e diversidade cultural"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Mudanças climáticas e questões socioambientais; campo, cidade e qualidade de vida; territórios, sociodiversidade e diversidade cultural"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Mudanças climáticas e questões socioambientais; campo, cidade e qualidade de vida; territórios, sociodiversidade e diversidade cultural"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Mudanças climáticas e questões socioambientais; campo, cidade e qualidade de vida; territórios, sociodiversidade e diversidade cultural"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Mudanças climáticas e questões socioambientais; campo, cidade e qualidade de vida; territórios, sociodiversidade e diversidade cultural"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-04"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-FG04",
+      "categoria": "COMUM",
+      "nome": "Educação, desenvolvimento e saúde",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Formação Geral"
+        }
+      ],
+      "competencia": [
+        {
+          "cursos": [
+            "CC",
+            "SI",
+            "TADS",
+            "TGTI",
+            "TRC"
+          ],
+          "sintese": "Interpretar, produzir e compartilhar conteúdos com responsabilidade; examinar situações complexas para decidir e resolver problemas",
+          "fonte_id": "F05"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Interpretar indicadores de acesso e escolher uma ação de desenvolvimento ou bem-estar coerente"
+      },
+      "assuntos": [
+        "Educação",
+        "desenvolvimento humano e social",
+        "saúde",
+        "bem-estar"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 2,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Interpretar indicadores de acesso e escolher uma ação de desenvolvimento ou bem-estar coerente",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F05"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Educação e desenvolvimento humano e social; saúde e bem-estar"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Educação e desenvolvimento humano e social; saúde e bem-estar"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Educação e desenvolvimento humano e social; saúde e bem-estar"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Educação e desenvolvimento humano e social; saúde e bem-estar"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Educação e desenvolvimento humano e social; saúde e bem-estar"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-01"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-FG05",
+      "categoria": "COMUM",
+      "nome": "Cultura e comunicação responsável",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Formação Geral"
+        }
+      ],
+      "competencia": [
+        {
+          "cursos": [
+            "CC",
+            "SI",
+            "TADS",
+            "TGTI",
+            "TRC"
+          ],
+          "sintese": "Interpretar, produzir e compartilhar conteúdos com responsabilidade; examinar situações complexas para decidir e resolver problemas",
+          "fonte_id": "F05"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Analisar linguagem, intenção e efeitos de uma mensagem em contexto sociocultural"
+      },
+      "assuntos": [
+        "Cultura",
+        "arte",
+        "comunicação",
+        "diálogo e troca de saberes"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 2,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Analisar linguagem, intenção e efeitos de uma mensagem em contexto sociocultural",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F05"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Cultura, arte e comunicação"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Cultura, arte e comunicação"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Cultura, arte e comunicação"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Cultura, arte e comunicação"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Cultura, arte e comunicação"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-03"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-FG06",
+      "categoria": "COMUM",
+      "nome": "Ciência, tecnologia e relações globais",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Formação Geral"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Formação Geral"
+        }
+      ],
+      "competencia": [
+        {
+          "cursos": [
+            "CC",
+            "SI",
+            "TADS",
+            "TGTI",
+            "TRC"
+          ],
+          "sintese": "Interpretar, produzir e compartilhar conteúdos com responsabilidade; examinar situações complexas para decidir e resolver problemas",
+          "fonte_id": "F05"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Avaliar argumentos sobre inovação e cooperação internacional considerando consequências sociais"
+      },
+      "assuntos": [
+        "Ciência",
+        "tecnologia",
+        "inovação",
+        "globalização",
+        "política internacional"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 2,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Avaliar argumentos sobre inovação e cooperação internacional considerando consequências sociais",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F05"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ciência, tecnologia e inovação; globalização e política internacional"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ciência, tecnologia e inovação; globalização e política internacional"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ciência, tecnologia e inovação; globalização e política internacional"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ciência, tecnologia e inovação; globalização e política internacional"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F05",
+          "localizador": "arts. 4º–6º; síntese na seção Conteúdos comuns / Formação Geral",
+          "objeto_ou_recorte": "Ciência, tecnologia e inovação; globalização e política internacional"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-06"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC01",
+      "categoria": "COMUM",
+      "nome": "Algoritmos introdutórios",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        },
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "I",
+          "sintese": "Gerir TI estrategicamente",
+          "fonte_id": "F09"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Interpretar passos de um algoritmo e selecionar o resultado em um caso curto"
+      },
+      "assuntos": [
+        "Sequência de passos",
+        "decisões em algoritmo",
+        "rastreamento"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Interpretar passos de um algoritmo e selecionar o resultado em um caso curto",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Algoritmos e estruturas de dados"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Algoritmos e estruturas de dados"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Algoritmos e programação"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Algoritmos"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-01"
+        },
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-01"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC02",
+      "categoria": "COMUM",
+      "nome": "Fundamentos de programação",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Localizar uma falha em condição ou repetição e prever o comportamento da correção"
+      },
+      "assuntos": [
+        "Condições",
+        "repetições",
+        "fundamentos de programação"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC01"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Localizar uma falha em condição ou repetição e prever o comportamento da correção",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Fundamentos e técnicas; paradigmas de programação"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Fundamentos e paradigmas de linguagens de programação"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Algoritmos e programação; orientação a objetos"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-01"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC03",
+      "categoria": "COMUM",
+      "nome": "Estruturas de dados",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Selecionar uma estrutura conforme operações e restrições do caso"
+      },
+      "assuntos": [
+        "Organização de dados",
+        "seleção de estruturas",
+        "operações e restrições"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC01"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Selecionar uma estrutura conforme operações e restrições do caso",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Algoritmos e estruturas de dados / estruturas de dados"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Algoritmos e estruturas de dados / estruturas de dados"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Algoritmos e estruturas de dados / estruturas de dados"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-02"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC04",
+      "categoria": "COMUM",
+      "nome": "Lógica matemática",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Verificar a consistência de uma condição lógica a partir de premissas explícitas"
+      },
+      "assuntos": [
+        "Lógica matemática",
+        "condições e premissas"
+      ],
+      "prioridade": "P2",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Verificar a consistência de uma condição lógica a partir de premissas explícitas",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Lógica e matemática discreta"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Lógica matemática e matemática discreta"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Lógica matemática e teoria dos conjuntos"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": []
+    },
+    {
+      "codigo": "COMUM-TEC05",
+      "categoria": "COMUM",
+      "nome": "Estatística introdutória",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Interpretar um resumo estatístico sem extrapolar as evidências disponíveis"
+      },
+      "assuntos": [
+        "Estatística",
+        "interpretação de dados"
+      ],
+      "prioridade": "P2",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Interpretar um resumo estatístico sem extrapolar as evidências disponíveis",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Probabilidade e estatística"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Probabilidade e estatística"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Princípios de estatística e análise de dados"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": []
+    },
+    {
+      "codigo": "COMUM-TEC06",
+      "categoria": "COMUM",
+      "nome": "Arquitetura e organização de computadores",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        },
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "I",
+          "sintese": "Gerir TI estrategicamente",
+          "fonte_id": "F09"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Relacionar componentes e recursos computacionais a uma necessidade apresentada"
+      },
+      "assuntos": [
+        "Arquitetura de computadores",
+        "recursos e restrições"
+      ],
+      "prioridade": "P2",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Relacionar componentes e recursos computacionais a uma necessidade apresentada",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Organização e arquitetura de computadores"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Arquitetura e organização de computadores"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Princípios de arquitetura e organização de computadores"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Arquitetura de computadores"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": []
+    },
+    {
+      "codigo": "COMUM-TEC07",
+      "categoria": "COMUM",
+      "nome": "Sistemas operacionais: fundamentos",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir recursos, projetos e sistemas",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        },
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir soluções, continuidade e proteção de ativos",
+          "fonte_id": "F09"
+        },
+        {
+          "curso": "TRC",
+          "referencia_na_sintese": "I",
+          "sintese": "Compreender e operar conectividade",
+          "fonte_id": "F10"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Relacionar uma falha de serviço a recursos administrados pelo sistema operacional"
+      },
+      "assuntos": [
+        "Funções básicas do sistema operacional",
+        "recursos e serviços"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Relacionar uma falha de serviço a recursos administrados pelo sistema operacional",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Sistemas operacionais"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Sistemas operacionais"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Princípios de sistemas operacionais"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Sistemas operacionais"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F10",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TRC",
+          "objeto_ou_recorte": "Administração de sistemas operacionais"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-09"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC08",
+      "categoria": "COMUM",
+      "nome": "Redes: fundamentos de comunicação",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        },
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir soluções, continuidade e proteção de ativos",
+          "fonte_id": "F09"
+        },
+        {
+          "curso": "TRC",
+          "referencia_na_sintese": "I",
+          "sintese": "Compreender e operar conectividade",
+          "fonte_id": "F10"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Identificar evidências de uma falha simples de comunicação sem exigir configuração especializada"
+      },
+      "assuntos": [
+        "Comunicação entre componentes",
+        "evidências básicas de conectividade"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Identificar evidências de uma falha simples de comunicação sem exigir configuração especializada",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Redes de computadores"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Redes de computadores"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Princípios de redes de computadores"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Redes de computadores"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F10",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TRC",
+          "objeto_ou_recorte": "Fundamentos, componentes e topologias; comunicação e transmissão de dados"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-08"
+        },
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-01"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC09",
+      "categoria": "COMUM",
+      "nome": "Proteção da informação: fundamentos",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir recursos, projetos e sistemas",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir dados, informação e conhecimento",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "II",
+          "sintese": "Arquitetar e implementar software",
+          "fonte_id": "F08"
+        },
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir soluções, continuidade e proteção de ativos",
+          "fonte_id": "F09"
+        },
+        {
+          "curso": "TRC",
+          "referencia_na_sintese": "II",
+          "sintese": "Projetar e avaliar redes em operação",
+          "fonte_id": "F10"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Comparar medidas de proteção em função de um incidente e dos ativos afetados"
+      },
+      "assuntos": [
+        "Proteção de ativos",
+        "incidentes",
+        "medidas básicas de segurança"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Comparar medidas de proteção em função de um incidente e dos ativos afetados",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Segurança da informação"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Segurança da informação e de sistemas de informação"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Princípios de segurança cibernética"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Segurança da informação"
+        },
+        {
+          "curso": "TRC",
+          "fonte_id": "F10",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TRC",
+          "objeto_ou_recorte": "Segurança da informação"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-COMUM-01",
+          "slot_codigo": "NEXO-10"
+        },
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-02"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC10",
+      "categoria": "COMUM",
+      "nome": "Bancos de dados",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir dados, informação e conhecimento",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "II",
+          "sintese": "Arquitetar e implementar software",
+          "fonte_id": "F08"
+        },
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "I",
+          "sintese": "Gerir TI estrategicamente",
+          "fonte_id": "F09"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Interpretar uma consulta simples e relacionar o resultado à necessidade do serviço"
+      },
+      "assuntos": [
+        "Organização de dados em banco",
+        "consulta simples",
+        "adequação à necessidade"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Interpretar uma consulta simples e relacionar o resultado à necessidade do serviço",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Bancos de dados"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Banco de dados"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Banco de dados"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Banco de dados"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-01"
+        },
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-02"
+        },
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-02"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC11",
+      "categoria": "COMUM",
+      "nome": "Engenharia e qualidade de soluções de software",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        },
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "I",
+          "sintese": "Gerir TI estrategicamente",
+          "fonte_id": "F09"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Comparar soluções de software com base em necessidade explícita e evidência de qualidade"
+      },
+      "assuntos": [
+        "Engenharia de software",
+        "adequação ao problema",
+        "qualidade da solução"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Comparar soluções de software com base em necessidade explícita e evidência de qualidade",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Engenharia de software; especificar e validar sistemas"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Engenharia de software; avaliar qualidade de processos e produtos"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Processo de software; qualidade, verificação e validação"
+        },
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Engenharia de software; seleção, planejamento e implantação de sistemas"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-02"
+        }
+      ]
+    },
+    {
+      "codigo": "COMUM-TEC12",
+      "categoria": "COMUM",
+      "nome": "Interação humano-computador",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Identificar uma barreira de interação e selecionar uma melhoria justificável"
+      },
+      "assuntos": [
+        "Interação",
+        "usabilidade",
+        "necessidades do usuário"
+      ],
+      "prioridade": "P2",
+      "dificuldade": "D1",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Identificar uma barreira de interação e selecionar uma melhoria justificável",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Interação humano-computador"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Interação humano-computador"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Interação humano-computador"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": []
+    },
+    {
+      "codigo": "COMUM-TEC13",
+      "categoria": "COMUM",
+      "nome": "Sistemas distribuídos: fundamentos",
+      "cursos_relacionados": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        },
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        },
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        },
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Analisar efeitos de distribuir um serviço entre componentes comunicantes"
+      },
+      "assuntos": [
+        "Distribuição de serviços",
+        "comunicação",
+        "restrições de operação"
+      ],
+      "prioridade": "P2",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC08"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Analisar efeitos de distribuir um serviço entre componentes comunicantes",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06",
+        "F07",
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Sistemas distribuídos"
+        },
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Redes de computadores e sistemas distribuídos"
+        },
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Princípios de redes de computadores e de sistemas distribuídos"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": []
+    },
+    {
+      "codigo": "CC-01",
+      "categoria": "CC",
+      "nome": "Teoria da computação e compiladores",
+      "cursos_relacionados": [
+        "CC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Comparar modelos ou etapas de tradução reconhecendo seus limites no caso apresentado"
+      },
+      "assuntos": [
+        "Teoria da computação",
+        "compiladores"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D3",
+      "pre_requisitos": [
+        "COMUM-TEC01",
+        "COMUM-TEC04"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Comparar modelos ou etapas de tradução reconhecendo seus limites no caso apresentado",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Teoria da computação; compiladores"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-03"
+        },
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-04"
+        }
+      ]
+    },
+    {
+      "codigo": "CC-02",
+      "categoria": "CC",
+      "nome": "Modelagem matemática, grafos e probabilidade",
+      "cursos_relacionados": [
+        "CC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Selecionar uma representação por grafo e avaliar uma propriedade ou hipótese probabilística"
+      },
+      "assuntos": [
+        "Matemática discreta",
+        "teoria dos grafos",
+        "probabilidade"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC04",
+        "COMUM-TEC05"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Selecionar uma representação por grafo e avaliar uma propriedade ou hipótese probabilística",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Lógica e matemática discreta; teoria dos grafos; probabilidade e estatística"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-05"
+        },
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-06"
+        }
+      ]
+    },
+    {
+      "codigo": "CC-03",
+      "categoria": "CC",
+      "nome": "Sistemas digitais e recursos computacionais",
+      "cursos_relacionados": [
+        "CC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir recursos, projetos e sistemas",
+          "fonte_id": "F06"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Analisar um circuito ou uma decisão de organização de recursos e seus efeitos"
+      },
+      "assuntos": [
+        "Sistemas digitais",
+        "organização de recursos",
+        "complexidade",
+        "localidade de referência",
+        "compartilhamento",
+        "concorrência",
+        "evolução"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC06",
+        "COMUM-TEC07"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Analisar um circuito ou uma decisão de organização de recursos e seus efeitos",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Sistemas digitais; organização e arquitetura; abstração, complexidade, localidade, compartilhamento, concorrência e evolução nas habilidades"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-07"
+        },
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-08"
+        }
+      ]
+    },
+    {
+      "codigo": "CC-04",
+      "categoria": "CC",
+      "nome": "Inteligência artificial, gráficos e imagens",
+      "cursos_relacionados": [
+        "CC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "CC",
+          "nome": "Ciência da Computação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "CC",
+          "referencia_na_sintese": "I",
+          "sintese": "Construir e evoluir sistemas computacionais",
+          "fonte_id": "F06"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Comparar abordagens de IA ou de processamento visual conforme o objetivo e as limitações do caso"
+      },
+      "assuntos": [
+        "Inteligência artificial",
+        "computação gráfica",
+        "processamento de imagem"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D3",
+      "pre_requisitos": [
+        "COMUM-TEC01",
+        "COMUM-TEC05"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Comparar abordagens de IA ou de processamento visual conforme o objetivo e as limitações do caso",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F06"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "CC",
+          "fonte_id": "F06",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para CC",
+          "objeto_ou_recorte": "Inteligência artificial; computação gráfica e processamento de imagem"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-09"
+        },
+        {
+          "fase_codigo": "FASE-CC-01",
+          "slot_codigo": "CC-F1-10"
+        }
+      ]
+    },
+    {
+      "codigo": "SI-01",
+      "categoria": "SI",
+      "nome": "Arquitetura corporativa, informação e governança",
+      "cursos_relacionados": [
+        "SI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Relacionar uma solução à arquitetura de negócio, à informação e aos objetivos organizacionais"
+      },
+      "assuntos": [
+        "Arquitetura corporativa",
+        "arquitetura da informação",
+        "governança de TI"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Relacionar uma solução à arquitetura de negócio, à informação e aos objetivos organizacionais",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F07"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Arquitetura corporativa e da informação; governança de TI"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-03"
+        },
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-04"
+        }
+      ]
+    },
+    {
+      "codigo": "SI-02",
+      "categoria": "SI",
+      "nome": "Sistemas de informação e processos de negócio",
+      "cursos_relacionados": [
+        "SI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Localizar um problema de processo e escolher uma mudança coerente com pessoas, informação e objetivos"
+      },
+      "assuntos": [
+        "Fundamentos de SI",
+        "teoria geral de sistemas",
+        "processos de negócio",
+        "gestão da informação"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Localizar um problema de processo e escolher uma mudança coerente com pessoas, informação e objetivos",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F07"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Fundamentos de sistemas de informação e teoria geral de sistemas; modelagem e gestão de processos de negócio e da informação"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-05"
+        },
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-06"
+        }
+      ]
+    },
+    {
+      "codigo": "SI-03",
+      "categoria": "SI",
+      "nome": "Dados para decisão e pesquisa operacional",
+      "cursos_relacionados": [
+        "SI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir dados, informação e conhecimento",
+          "fonte_id": "F07"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Interpretar uma visualização ou comparar alternativas sob restrições para apoiar decisão"
+      },
+      "assuntos": [
+        "Pesquisa operacional",
+        "visualização de dados",
+        "ciência de dados",
+        "probabilidade"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC05",
+        "COMUM-TEC10"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Interpretar uma visualização ou comparar alternativas sob restrições para apoiar decisão",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F07"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Pesquisa operacional; visualização e ciência de dados; probabilidade e estatística"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-07"
+        },
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-08"
+        }
+      ]
+    },
+    {
+      "codigo": "SI-04",
+      "categoria": "SI",
+      "nome": "Concepção e projetos de sistemas de informação",
+      "cursos_relacionados": [
+        "SI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "SI",
+          "nome": "Sistemas de Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "SI",
+          "referencia_na_sintese": "I",
+          "sintese": "Avaliar soluções de TI para problemas organizacionais e sociais",
+          "fonte_id": "F07"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Avaliar modelo, qualidade e escalabilidade de uma solução para uma demanda organizacional"
+      },
+      "assuntos": [
+        "Concepção e modelagem de SI",
+        "gerenciamento de projetos",
+        "desempenho",
+        "escalabilidade"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC11",
+        "SI-02"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Avaliar modelo, qualidade e escalabilidade de uma solução para uma demanda organizacional",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F07"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "SI",
+          "fonte_id": "F07",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para SI",
+          "objeto_ou_recorte": "Concepção e modelagem de sistemas de informação; gerenciamento de projetos; desempenho e escalabilidade nas habilidades"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-09"
+        },
+        {
+          "fase_codigo": "FASE-SI-01",
+          "slot_codigo": "SI-F1-10"
+        }
+      ]
+    },
+    {
+      "codigo": "TADS-01",
+      "categoria": "TADS",
+      "nome": "Requisitos, análise e arquitetura de software",
+      "cursos_relacionados": [
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Relacionar regra de negócio a requisito e selecionar uma decisão de arquitetura coerente"
+      },
+      "assuntos": [
+        "Engenharia de requisitos",
+        "análise de sistemas",
+        "arquitetura de sistemas"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Relacionar regra de negócio a requisito e selecionar uma decisão de arquitetura coerente",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Análise e arquitetura de sistemas computacionais; engenharia de requisitos"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-03"
+        },
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-04"
+        }
+      ]
+    },
+    {
+      "codigo": "TADS-02",
+      "categoria": "TADS",
+      "nome": "Processo, testes e validação de software",
+      "cursos_relacionados": [
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Escolher evidência de teste que confirme uma correção e satisfaça o requisito"
+      },
+      "assuntos": [
+        "Processo de software",
+        "qualidade",
+        "verificação",
+        "validação"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC11",
+        "TADS-01"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Escolher evidência de teste que confirme uma correção e satisfaça o requisito",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Processo de software; qualidade, verificação e validação de software"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-05"
+        },
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-06"
+        }
+      ]
+    },
+    {
+      "codigo": "TADS-03",
+      "categoria": "TADS",
+      "nome": "Orientação a objetos, configuração e manutenção",
+      "cursos_relacionados": [
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "II",
+          "sintese": "Arquitetar e implementar software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Diagnosticar um defeito em artefato orientado a objetos e selecionar uma mudança controlada"
+      },
+      "assuntos": [
+        "Orientação a objetos",
+        "gerência de configuração",
+        "operações",
+        "manutenção"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC02"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Diagnosticar um defeito em artefato orientado a objetos e selecionar uma mudança controlada",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Orientação a objetos; gerência de configuração; operações e manutenção de software"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-07"
+        },
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-08"
+        }
+      ]
+    },
+    {
+      "codigo": "TADS-04",
+      "categoria": "TADS",
+      "nome": "Projetos, empreendedorismo e responsabilidade",
+      "cursos_relacionados": [
+        "TADS"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TADS",
+          "nome": "Análise e Desenvolvimento de Sistemas",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TADS",
+          "referencia_na_sintese": "I",
+          "sintese": "Estruturar soluções com processos e ciclo de vida de software",
+          "fonte_id": "F08"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Comparar decisões de projeto considerando restrições, responsabilidades e impactos"
+      },
+      "assuntos": [
+        "Gerência de projetos",
+        "empreendedorismo",
+        "legislação",
+        "normas técnicas",
+        "ética",
+        "responsabilidade socioambiental"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Comparar decisões de projeto considerando restrições, responsabilidades e impactos",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F08"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TADS",
+          "fonte_id": "F08",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TADS",
+          "objeto_ou_recorte": "Gerência de projetos; empreendedorismo; legislação, normas técnicas, ética e responsabilidade socioambiental"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-09"
+        },
+        {
+          "fase_codigo": "FASE-TADS-01",
+          "slot_codigo": "TADS-F1-10"
+        }
+      ]
+    },
+    {
+      "codigo": "TGTI-01",
+      "categoria": "TGTI",
+      "nome": "Estratégia, processos e governança de TI",
+      "cursos_relacionados": [
+        "TGTI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "I",
+          "sintese": "Gerir TI estrategicamente",
+          "fonte_id": "F09"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Priorizar uma iniciativa de TI conforme estratégia, processos e conformidade apresentados"
+      },
+      "assuntos": [
+        "Estratégia organizacional",
+        "processos",
+        "governança",
+        "conformidade"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Priorizar uma iniciativa de TI conforme estratégia, processos e conformidade apresentados",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F09"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Gestão estratégica organizacional; processos organizacionais; governança de TI"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-03"
+        },
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-04"
+        }
+      ]
+    },
+    {
+      "codigo": "TGTI-02",
+      "categoria": "TGTI",
+      "nome": "Serviços, continuidade, riscos e indicadores",
+      "cursos_relacionados": [
+        "TGTI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "II",
+          "sintese": "Gerir soluções, continuidade e proteção de ativos",
+          "fonte_id": "F09"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Selecionar melhoria de serviço usando métricas, impacto, recursos e riscos"
+      },
+      "assuntos": [
+        "Gestão de serviços",
+        "continuidade",
+        "indicadores operacionais",
+        "riscos",
+        "proteção de ativos"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC09"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Selecionar melhoria de serviço usando métricas, impacto, recursos e riscos",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F09"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Gestão dos serviços de TI; métricas, continuidade, segurança e riscos nas competências/habilidades"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-05"
+        },
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-06"
+        }
+      ]
+    },
+    {
+      "codigo": "TGTI-03",
+      "categoria": "TGTI",
+      "nome": "Projetos, pessoas e recursos",
+      "cursos_relacionados": [
+        "TGTI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "I",
+          "sintese": "Gerir TI estrategicamente",
+          "fonte_id": "F09"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Comparar planos de execução considerando equipe, recursos e restrições explicitadas"
+      },
+      "assuntos": [
+        "Gerência de projetos",
+        "gestão de pessoas",
+        "alocação de recursos"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Comparar planos de execução considerando equipe, recursos e restrições explicitadas",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F09"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Gerência de projetos; gestão de pessoas"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-07"
+        },
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-08"
+        }
+      ]
+    },
+    {
+      "codigo": "TGTI-04",
+      "categoria": "TGTI",
+      "nome": "Informação gerencial e inteligência de negócio",
+      "cursos_relacionados": [
+        "TGTI"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TGTI",
+          "nome": "Gestão da Tecnologia da Informação",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TGTI",
+          "referencia_na_sintese": "I",
+          "sintese": "Gerir TI estrategicamente",
+          "fonte_id": "F09"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Selecionar informação e solução gerencial adequadas a uma decisão estratégica"
+      },
+      "assuntos": [
+        "Inteligência de negócio",
+        "sistemas de informações gerenciais"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC10"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Selecionar informação e solução gerencial adequadas a uma decisão estratégica",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F09"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TGTI",
+          "fonte_id": "F09",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TGTI",
+          "objeto_ou_recorte": "Tecnologias para inteligência de negócio; sistemas de informações gerenciais"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-09"
+        },
+        {
+          "fase_codigo": "FASE-TGTI-01",
+          "slot_codigo": "TGTI-F1-10"
+        }
+      ]
+    },
+    {
+      "codigo": "TRC-01",
+      "categoria": "TRC",
+      "nome": "Modelos, TCP/IP e roteamento",
+      "cursos_relacionados": [
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TRC",
+          "referencia_na_sintese": "I",
+          "sintese": "Compreender e operar conectividade",
+          "fonte_id": "F10"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Localizar uma falha de comunicação interpretando modelo, protocolo e rota apresentados"
+      },
+      "assuntos": [
+        "Modelos de referência",
+        "TCP/IP",
+        "protocolos",
+        "LAN e WAN",
+        "algoritmos e protocolos de roteamento"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC08"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Localizar uma falha de comunicação interpretando modelo, protocolo e rota apresentados",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F10"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TRC",
+          "fonte_id": "F10",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TRC",
+          "objeto_ou_recorte": "Modelos de referência; arquitetura TCP/IP; protocolos; tipos de algoritmos e protocolos de roteamento; LAN e WAN nas habilidades"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-03"
+        },
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-04"
+        }
+      ]
+    },
+    {
+      "codigo": "TRC-02",
+      "categoria": "TRC",
+      "nome": "Redes físicas, sem fio e cabeamento",
+      "cursos_relacionados": [
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TRC",
+          "referencia_na_sintese": "I",
+          "sintese": "Compreender e operar conectividade",
+          "fonte_id": "F10"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Comparar topologias e meios de transmissão conforme restrições do projeto"
+      },
+      "assuntos": [
+        "Componentes",
+        "topologias",
+        "transmissão",
+        "IEEE 802.x",
+        "redes sem fio",
+        "cabeamento estruturado"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC08"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Comparar topologias e meios de transmissão conforme restrições do projeto",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F10"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TRC",
+          "fonte_id": "F10",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TRC",
+          "objeto_ou_recorte": "Componentes e topologias; transmissão; IEEE 802.x; redes sem fio; normas e padrões de cabeamento estruturado"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-05"
+        },
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-06"
+        }
+      ]
+    },
+    {
+      "codigo": "TRC-03",
+      "categoria": "TRC",
+      "nome": "Administração, serviços e virtualização",
+      "cursos_relacionados": [
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TRC",
+          "referencia_na_sintese": "I",
+          "sintese": "Compreender e operar conectividade",
+          "fonte_id": "F10"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Diagnosticar indisponibilidade e selecionar uma ação sobre serviço ou recurso virtualizado"
+      },
+      "assuntos": [
+        "Administração de SO",
+        "serviços de rede",
+        "virtualização",
+        "disponibilidade",
+        "desempenho",
+        "tolerância a falhas",
+        "continuidade",
+        "qualidade de serviço"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D2",
+      "pre_requisitos": [
+        "COMUM-TEC07",
+        "TRC-01"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Diagnosticar indisponibilidade e selecionar uma ação sobre serviço ou recurso virtualizado",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F10"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TRC",
+          "fonte_id": "F10",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TRC",
+          "objeto_ou_recorte": "Administração de sistemas operacionais; serviços de redes; virtualização de redes, servidores, aplicativos e desktops"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-07"
+        },
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-08"
+        }
+      ]
+    },
+    {
+      "codigo": "TRC-04",
+      "categoria": "TRC",
+      "nome": "Projetos, automação e gestão de redes",
+      "cursos_relacionados": [
+        "TRC"
+      ],
+      "area_avaliacao_oficial": [
+        {
+          "curso": "TRC",
+          "nome": "Redes de Computadores",
+          "componente": "Componente específico"
+        }
+      ],
+      "competencia": [
+        {
+          "curso": "TRC",
+          "referencia_na_sintese": "II",
+          "sintese": "Projetar e avaliar redes em operação",
+          "fonte_id": "F10"
+        }
+      ],
+      "habilidade": {
+        "tipo": "objetivo observável do jogo, derivado da síntese fornecida; não é transcrição normativa",
+        "descricao": "Avaliar uma melhoria de rede considerando interoperabilidade, automação, segurança e impacto ambiental"
+      },
+      "assuntos": [
+        "Projeto lógico e físico",
+        "configuração",
+        "gerenciamento",
+        "programação e automação de redes",
+        "redes de longa distância",
+        "tecnologias emergentes",
+        "sustentabilidade",
+        "meio ambiente",
+        "gestão de projetos",
+        "governança corporativa"
+      ],
+      "prioridade": "P1",
+      "dificuldade": "D3",
+      "pre_requisitos": [
+        "TRC-01",
+        "TRC-02",
+        "COMUM-TEC09"
+      ],
+      "quantidade_inicial_questoes": 3,
+      "tipo_desafio_recomendado": {
+        "mvp": "Múltipla escolha contextualizada, cinco alternativas e uma correta",
+        "acao_cognitiva": "Avaliar uma melhoria de rede considerando interoperabilidade, automação, segurança e impacto ambiental",
+        "expansao": "Justificativa com evidências e comparação de soluções, após revisão docente"
+      },
+      "fonte_oficial": [
+        "F10"
+      ],
+      "evidencias_por_curso": [
+        {
+          "curso": "TRC",
+          "fonte_id": "F10",
+          "localizador": "arts. 4º–6º; síntese na seção Lista específica para TRC",
+          "objeto_ou_recorte": "Programação e automação; projeto lógico e físico; configuração; gerenciamento; longa distância; tecnologias emergentes; sustentabilidade; gestão de projetos e governança corporativa"
+        }
+      ],
+      "situacao": "confirmada",
+      "escopo_situacao": "Presença do recorte nas diretrizes de 2026, conforme pesquisa fornecida; não certifica os itens do jogo",
+      "validacao_docente": "pendente",
+      "situacao_itens": "planejados; não redigidos",
+      "fase_inicial": [
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-09"
+        },
+        {
+          "fase_codigo": "FASE-TRC-01",
+          "slot_codigo": "TRC-F1-10"
+        }
+      ]
+    }
+  ],
+  "regioes": [
+    {
+      "codigo": "R1",
+      "nome": "Central Nexo",
+      "ordem": 1,
+      "areas": [
+        "COMUM-FG01",
+        "COMUM-FG02",
+        "COMUM-FG03",
+        "COMUM-FG04",
+        "COMUM-FG05",
+        "COMUM-FG06",
+        "COMUM-TEC07",
+        "COMUM-TEC08",
+        "COMUM-TEC09"
+      ]
+    },
+    {
+      "codigo": "R2-CC",
+      "nome": "Investigar o Laboratório de Modelos",
+      "ordem": 2,
+      "cursos": [
+        "CC"
+      ],
+      "areas": [
+        "COMUM-TEC01",
+        "COMUM-TEC03",
+        "CC-01",
+        "CC-02",
+        "CC-03",
+        "CC-04"
+      ]
+    },
+    {
+      "codigo": "R2-SI",
+      "nome": "Reorganizar o Observatório de Informação",
+      "ordem": 2,
+      "cursos": [
+        "SI"
+      ],
+      "areas": [
+        "COMUM-TEC10",
+        "COMUM-TEC11",
+        "SI-01",
+        "SI-02",
+        "SI-03",
+        "SI-04"
+      ]
+    },
+    {
+      "codigo": "R2-TADS",
+      "nome": "Recuperar a Fábrica de Software",
+      "ordem": 2,
+      "cursos": [
+        "TADS"
+      ],
+      "areas": [
+        "COMUM-TEC02",
+        "COMUM-TEC10",
+        "TADS-01",
+        "TADS-02",
+        "TADS-03",
+        "TADS-04"
+      ]
+    },
+    {
+      "codigo": "R2-TGTI",
+      "nome": "Priorizar a Central de Serviços",
+      "ordem": 2,
+      "cursos": [
+        "TGTI"
+      ],
+      "areas": [
+        "COMUM-TEC01",
+        "COMUM-TEC10",
+        "TGTI-01",
+        "TGTI-02",
+        "TGTI-03",
+        "TGTI-04"
+      ]
+    },
+    {
+      "codigo": "R2-TRC",
+      "nome": "Reconectar o Centro de Redes",
+      "ordem": 2,
+      "cursos": [
+        "TRC"
+      ],
+      "areas": [
+        "COMUM-TEC08",
+        "COMUM-TEC09",
+        "TRC-01",
+        "TRC-02",
+        "TRC-03",
+        "TRC-04"
+      ]
+    },
+    {
+      "codigo": "R3",
+      "nome": "Distritos de Fundamentos",
+      "ordem": 3,
+      "areas": [
+        "COMUM-FG01",
+        "COMUM-FG02",
+        "COMUM-FG03",
+        "COMUM-FG04",
+        "COMUM-FG05",
+        "COMUM-FG06",
+        "COMUM-TEC01",
+        "COMUM-TEC02",
+        "COMUM-TEC03",
+        "COMUM-TEC04",
+        "COMUM-TEC05",
+        "COMUM-TEC06",
+        "COMUM-TEC07",
+        "COMUM-TEC08",
+        "COMUM-TEC09",
+        "COMUM-TEC10",
+        "COMUM-TEC11",
+        "COMUM-TEC12",
+        "COMUM-TEC13"
+      ]
+    },
+    {
+      "codigo": "R4",
+      "nome": "Setores de Aprofundamento",
+      "ordem": 4,
+      "areas": [
+        "CC-01",
+        "CC-02",
+        "CC-03",
+        "CC-04",
+        "SI-01",
+        "SI-02",
+        "SI-03",
+        "SI-04",
+        "TADS-01",
+        "TADS-02",
+        "TADS-03",
+        "TADS-04",
+        "TGTI-01",
+        "TGTI-02",
+        "TGTI-03",
+        "TGTI-04",
+        "TRC-01",
+        "TRC-02",
+        "TRC-03",
+        "TRC-04"
+      ]
+    },
+    {
+      "codigo": "R5",
+      "nome": "Operação Integrada",
+      "ordem": 5,
+      "areas": [],
+      "nota": "Futura fase por curso, usando apenas áreas relacionadas a esse curso; sem questões adicionais contabilizadas."
+    }
+  ],
+  "fases_iniciais": [
+    {
+      "codigo": "FASE-COMUM-01",
+      "nome": "Restaurar a Central Nexo",
+      "cursos": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
+        "TRC"
+      ],
+      "regiao": "R1",
+      "slots": [
+        {
+          "codigo": "NEXO-01",
+          "area_codigo": "COMUM-FG04",
+          "objetivo": "Interpretar tabela de acesso à educação e escolher uma conclusão sustentada.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F05"
+          ]
+        },
+        {
+          "codigo": "NEXO-02",
+          "area_codigo": "COMUM-FG01",
+          "objetivo": "Comparar condutas de uso de informação pessoal à luz de direitos e responsabilidade, sem cobrar uma lei não especificada.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F05"
+          ]
+        },
+        {
+          "codigo": "NEXO-03",
+          "area_codigo": "COMUM-FG05",
+          "objetivo": "Analisar efeitos de uma mensagem digital em um contexto cultural.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F05"
+          ]
+        },
+        {
+          "codigo": "NEXO-04",
+          "area_codigo": "COMUM-FG03",
+          "objetivo": "Comparar intervenções socioambientais usando dados de um território.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F05"
+          ]
+        },
+        {
+          "codigo": "NEXO-05",
+          "area_codigo": "COMUM-FG01",
+          "objetivo": "Avaliar decisão sobre trabalho e cidadania a partir das restrições do caso.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F05"
+          ]
+        },
+        {
+          "codigo": "NEXO-06",
+          "area_codigo": "COMUM-FG06",
+          "objetivo": "Avaliar argumento sobre cooperação científica e inovação.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F05"
+          ]
+        },
+        {
+          "codigo": "NEXO-07",
+          "area_codigo": "COMUM-FG02",
+          "objetivo": "Comparar soluções que removam barreiras de participação em serviço universitário.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F05"
+          ]
+        },
+        {
+          "codigo": "NEXO-08",
+          "area_codigo": "COMUM-TEC08",
+          "objetivo": "Diagnosticar falha básica de comunicação por evidências, sem configurar protocolo.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09",
+            "F10"
+          ]
+        },
+        {
+          "codigo": "NEXO-09",
+          "area_codigo": "COMUM-TEC07",
+          "objetivo": "Associar falha de serviço a recurso do sistema operacional, sem administração especializada.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09",
+            "F10"
+          ]
+        },
+        {
+          "codigo": "NEXO-10",
+          "area_codigo": "COMUM-TEC09",
+          "objetivo": "Escolher uma medida básica de proteção coerente com um incidente.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09",
+            "F10"
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "FASE-CC-01",
+      "nome": "Investigar o Laboratório de Modelos",
+      "cursos": [
+        "CC"
+      ],
+      "regiao": "R2-CC",
+      "slots": [
+        {
+          "codigo": "CC-F1-01",
+          "area_codigo": "COMUM-TEC01",
+          "objetivo": "Rastrear algoritmo sob uma restrição explícita.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09"
+          ]
+        },
+        {
+          "codigo": "CC-F1-02",
+          "area_codigo": "COMUM-TEC03",
+          "objetivo": "Selecionar estrutura para as operações exigidas.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08"
+          ]
+        },
+        {
+          "codigo": "CC-F1-03",
+          "area_codigo": "CC-01",
+          "objetivo": "Reconhecer limite de um modelo de computação.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F06"
+          ]
+        },
+        {
+          "codigo": "CC-F1-04",
+          "area_codigo": "CC-01",
+          "objetivo": "Interpretar uma etapa de tradução de programa.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F06"
+          ]
+        },
+        {
+          "codigo": "CC-F1-05",
+          "area_codigo": "CC-02",
+          "objetivo": "Modelar conexões por grafo.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F06"
+          ]
+        },
+        {
+          "codigo": "CC-F1-06",
+          "area_codigo": "CC-02",
+          "objetivo": "Comparar hipóteses probabilísticas com dados fornecidos.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F06"
+          ]
+        },
+        {
+          "codigo": "CC-F1-07",
+          "area_codigo": "CC-03",
+          "objetivo": "Interpretar um sistema digital simples.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F06"
+          ]
+        },
+        {
+          "codigo": "CC-F1-08",
+          "area_codigo": "CC-03",
+          "objetivo": "Comparar efeitos de uma escolha de organização de recursos.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F06"
+          ]
+        },
+        {
+          "codigo": "CC-F1-09",
+          "area_codigo": "CC-04",
+          "objetivo": "Selecionar abordagem de IA para um objetivo delimitado.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F06"
+          ]
+        },
+        {
+          "codigo": "CC-F1-10",
+          "area_codigo": "CC-04",
+          "objetivo": "Comparar transformação de imagem conforme resultado pretendido.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F06"
+          ]
+        }
+      ],
+      "nota_dificuldade": "Primeiro contato por caso guiado; áreas D3 usam recorte introdutório D2. Não pressupõe domínio do bloco."
+    },
+    {
+      "codigo": "FASE-SI-01",
+      "nome": "Reorganizar o Observatório de Informação",
+      "cursos": [
+        "SI"
+      ],
+      "regiao": "R2-SI",
+      "slots": [
+        {
+          "codigo": "SI-F1-01",
+          "area_codigo": "COMUM-TEC10",
+          "objetivo": "Interpretar consulta para uma necessidade organizacional.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09"
+          ]
+        },
+        {
+          "codigo": "SI-F1-02",
+          "area_codigo": "COMUM-TEC11",
+          "objetivo": "Comparar evidências de qualidade de uma solução.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09"
+          ]
+        },
+        {
+          "codigo": "SI-F1-03",
+          "area_codigo": "SI-01",
+          "objetivo": "Relacionar arquitetura corporativa a uma meta.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F07"
+          ]
+        },
+        {
+          "codigo": "SI-F1-04",
+          "area_codigo": "SI-01",
+          "objetivo": "Comparar decisões de governança e informação.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F07"
+          ]
+        },
+        {
+          "codigo": "SI-F1-05",
+          "area_codigo": "SI-02",
+          "objetivo": "Diagnosticar um gargalo em processo de negócio.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F07"
+          ]
+        },
+        {
+          "codigo": "SI-F1-06",
+          "area_codigo": "SI-02",
+          "objetivo": "Relacionar subsistemas, pessoas e fluxos informacionais.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F07"
+          ]
+        },
+        {
+          "codigo": "SI-F1-07",
+          "area_codigo": "SI-03",
+          "objetivo": "Interpretar visualização para apoiar decisão.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F07"
+          ]
+        },
+        {
+          "codigo": "SI-F1-08",
+          "area_codigo": "SI-03",
+          "objetivo": "Comparar alternativas de pesquisa operacional sob restrições.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F07"
+          ]
+        },
+        {
+          "codigo": "SI-F1-09",
+          "area_codigo": "SI-04",
+          "objetivo": "Selecionar modelo de SI para uma demanda.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F07"
+          ]
+        },
+        {
+          "codigo": "SI-F1-10",
+          "area_codigo": "SI-04",
+          "objetivo": "Avaliar qualidade ou escalabilidade em um projeto.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F07"
+          ]
+        }
+      ],
+      "nota_dificuldade": "Primeiro contato por caso guiado; áreas D3 usam recorte introdutório D2. Não pressupõe domínio do bloco."
+    },
+    {
+      "codigo": "FASE-TADS-01",
+      "nome": "Recuperar a Fábrica de Software",
+      "cursos": [
+        "TADS"
+      ],
+      "regiao": "R2-TADS",
+      "slots": [
+        {
+          "codigo": "TADS-F1-01",
+          "area_codigo": "COMUM-TEC02",
+          "objetivo": "Localizar defeito em condição ou repetição.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-02",
+          "area_codigo": "COMUM-TEC10",
+          "objetivo": "Interpretar resultado de consulta simples.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-03",
+          "area_codigo": "TADS-01",
+          "objetivo": "Relacionar regra de negócio e requisito.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F08"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-04",
+          "area_codigo": "TADS-01",
+          "objetivo": "Comparar opções de arquitetura de software.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F08"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-05",
+          "area_codigo": "TADS-02",
+          "objetivo": "Selecionar teste de aceitação de requisito.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F08"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-06",
+          "area_codigo": "TADS-02",
+          "objetivo": "Distinguir evidência de verificação e de validação.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F08"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-07",
+          "area_codigo": "TADS-03",
+          "objetivo": "Analisar comportamento de artefato orientado a objetos.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F08"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-08",
+          "area_codigo": "TADS-03",
+          "objetivo": "Selecionar mudança de manutenção com controle de configuração.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F08"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-09",
+          "area_codigo": "TADS-04",
+          "objetivo": "Priorizar tarefa de projeto sob restrições.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F08"
+          ]
+        },
+        {
+          "codigo": "TADS-F1-10",
+          "area_codigo": "TADS-04",
+          "objetivo": "Comparar decisão empreendedora considerando norma fornecida e impacto.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F08"
+          ]
+        }
+      ],
+      "nota_dificuldade": "Primeiro contato por caso guiado; áreas D3 usam recorte introdutório D2. Não pressupõe domínio do bloco."
+    },
+    {
+      "codigo": "FASE-TGTI-01",
+      "nome": "Priorizar a Central de Serviços",
+      "cursos": [
+        "TGTI"
+      ],
+      "regiao": "R2-TGTI",
+      "slots": [
+        {
+          "codigo": "TGTI-F1-01",
+          "area_codigo": "COMUM-TEC01",
+          "objetivo": "Rastrear sequência de decisão de um procedimento.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-02",
+          "area_codigo": "COMUM-TEC10",
+          "objetivo": "Interpretar informação extraída de banco para um serviço.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-03",
+          "area_codigo": "TGTI-01",
+          "objetivo": "Alinhar uma iniciativa à estratégia.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-04",
+          "area_codigo": "TGTI-01",
+          "objetivo": "Relacionar processo, governança e conformidade.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-05",
+          "area_codigo": "TGTI-02",
+          "objetivo": "Interpretar indicador operacional de serviço.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-06",
+          "area_codigo": "TGTI-02",
+          "objetivo": "Priorizar medida de continuidade por impacto e risco.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-07",
+          "area_codigo": "TGTI-03",
+          "objetivo": "Alocar pessoas e recursos de um projeto.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-08",
+          "area_codigo": "TGTI-03",
+          "objetivo": "Comparar planos de execução sob restrições.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-09",
+          "area_codigo": "TGTI-04",
+          "objetivo": "Selecionar informação para decisão gerencial.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F09"
+          ]
+        },
+        {
+          "codigo": "TGTI-F1-10",
+          "area_codigo": "TGTI-04",
+          "objetivo": "Comparar solução de inteligência de negócio para uma demanda.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F09"
+          ]
+        }
+      ],
+      "nota_dificuldade": "Primeiro contato por caso guiado; áreas D3 usam recorte introdutório D2. Não pressupõe domínio do bloco."
+    },
+    {
+      "codigo": "FASE-TRC-01",
+      "nome": "Reconectar o Centro de Redes",
+      "cursos": [
+        "TRC"
+      ],
+      "regiao": "R2-TRC",
+      "slots": [
+        {
+          "codigo": "TRC-F1-01",
+          "area_codigo": "COMUM-TEC08",
+          "objetivo": "Interpretar evidência básica de conectividade.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09",
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-02",
+          "area_codigo": "COMUM-TEC09",
+          "objetivo": "Escolher proteção coerente com um incidente.",
+          "dificuldade": "D1",
+          "fontes": [
+            "F06",
+            "F07",
+            "F08",
+            "F09",
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-03",
+          "area_codigo": "TRC-01",
+          "objetivo": "Localizar falha em comunicação TCP/IP.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-04",
+          "area_codigo": "TRC-01",
+          "objetivo": "Interpretar uma decisão de roteamento.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-05",
+          "area_codigo": "TRC-02",
+          "objetivo": "Comparar meios e topologias de rede.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-06",
+          "area_codigo": "TRC-02",
+          "objetivo": "Selecionar solução sem fio ou de cabeamento por restrições.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-07",
+          "area_codigo": "TRC-03",
+          "objetivo": "Diagnosticar falha em serviço de rede.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-08",
+          "area_codigo": "TRC-03",
+          "objetivo": "Comparar opções de virtualização e disponibilidade.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-09",
+          "area_codigo": "TRC-04",
+          "objetivo": "Selecionar melhoria em projeto lógico ou físico.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F10"
+          ]
+        },
+        {
+          "codigo": "TRC-F1-10",
+          "area_codigo": "TRC-04",
+          "objetivo": "Avaliar proposta de automação e seu impacto.",
+          "dificuldade": "D2",
+          "fontes": [
+            "F10"
+          ]
+        }
+      ],
+      "nota_dificuldade": "Primeiro contato por caso guiado; áreas D3 usam recorte introdutório D2. Não pressupõe domínio do bloco."
+    }
+  ],
+  "progressao": {
+    "conclusao_fase": "Responder todos os dez itens e acessar todos os dez feedbacks",
+    "nota_minima_desbloqueio": null,
+    "erros_bloqueiam": false,
+    "validacao_para_publicacao": "Revisão docente de cada item, dos cinco cursos para fase comum e do curso correspondente para a específica",
+    "escopo_mvp": [
+      "FASE-COMUM-01"
+    ],
+    "trilhas_especificas": "Planejadas; não implementadas"
+  },
+  "revisao": {
+    "mvp": "Repetir item sem exibir a solução antes da resposta; manter erro pendente e registrar acerto na revisão separado do inicial",
+    "dominio_por_repeticao": false,
+    "expansao_intervalos_dias": [
+      1,
+      7,
+      21
+    ],
+    "intervalos_sao": "Proposta do jogo, após MVP; não regra oficial nem estimativa de eficácia",
+    "sem_ia_em_partida": true
+  },
+  "totais": {
+    "questoes_planejadas": 111,
+    "slots_primeiras_fases": 60,
+    "questoes_redigidas": 0,
+    "questoes_validadas": 0
+  }
+}

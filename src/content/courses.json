@@ -1,0 +1,27 @@
+[
+  {
+    "id": "CC",
+    "name": "Ciência da Computação",
+    "region": "Laboratório de Modelos"
+  },
+  {
+    "id": "SI",
+    "name": "Sistemas de Informação",
+    "region": "Observatório de Informação"
+  },
+  {
+    "id": "TADS",
+    "name": "Tecnologia em Análise e Desenvolvimento de Sistemas",
+    "region": "Fábrica de Software"
+  },
+  {
+    "id": "TGTI",
+    "name": "Tecnologia em Gestão da Tecnologia da Informação",
+    "region": "Central de Serviços"
+  },
+  {
+    "id": "TRC",
+    "name": "Tecnologia em Redes de Computadores",
+    "region": "Centro de Redes"
+  }
+]
