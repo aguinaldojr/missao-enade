@@ -1,3 +1,4 @@
+import { gameConfig, gamePageTitle } from '../config/game';
 import type { Command, SessionState } from '../app/GameSession';
 import { getCourse } from '../app/courses';
 import { announce } from './announcements';
@@ -15,12 +16,12 @@ export class AppShell {
   private readonly content = element('main', 'content');
   private readonly status = element('p', 'sr-only');
   private readonly graphicStatus = element('p', 'graphic-status');
-  private readonly courseTag = element('span', 'panel-tag', 'CIDADE DIGITAL');
+  private readonly courseTag = element('span', 'panel-tag', gameConfig.copy.cityTag);
   private listeners = new AbortController();
   private renderKey = '';
 
   constructor(root: HTMLElement) {
-    const skip = element('a', 'skip-link', 'Pular para o conteúdo');
+    const skip = element('a', 'skip-link', gameConfig.copy.skip);
     skip.href = '#conteudo';
     this.content.id = 'conteudo';
     this.status.setAttribute('role', 'status');
@@ -31,28 +32,28 @@ export class AppShell {
     const mark = element('span', 'brand-mark', 'N');
     mark.setAttribute('aria-hidden', 'true');
     const wordmark = element('span', 'wordmark');
-    wordmark.append(element('strong', '', 'MISSÃO ENADE'), element('span', '', 'CONECTE. COMPREENDA. TRANSFORME.'));
+    wordmark.append(element('strong', '', gameConfig.name), element('span', '', gameConfig.subtitle));
     brand.append(mark, wordmark);
-    header.append(brand, element('span', 'version-tag', 'EXEMPLOS · 02'));
+    header.append(brand, element('span', 'version-tag', gameConfig.copy.version));
     const stage = element('div', 'stage');
     const visual = element('aside', 'visual-panel');
-    visual.setAttribute('aria-label', 'Ambientação da cidade digital Nexo');
+    visual.setAttribute('aria-label', gameConfig.copy.cityLabel);
     const panelHeader = element('div', 'panel-header');
-    panelHeader.append(element('span', 'panel-coordinate', 'NEXO / 001'), this.courseTag);
+    panelHeader.append(element('span', 'panel-coordinate', gameConfig.copy.cityCoordinate), this.courseTag);
     this.canvasHost.setAttribute('aria-hidden', 'true');
     const caption = element('div', 'panel-caption');
-    caption.append(element('span', 'eyebrow', 'CENTRAL DE OPERAÇÕES'), element('h2', '', 'Tudo começa com uma conexão.'), element('p', '', 'Uma cidade digital. Conhecimentos compartilhados.'));
+    caption.append(element('span', 'eyebrow', gameConfig.copy.centralCaption), element('h2', '', gameConfig.copy.cityHeadline), element('p', '', gameConfig.copy.cityDescription));
     visual.append(panelHeader, this.canvasHost, caption, this.graphicStatus);
     stage.append(this.content, visual);
     const footer = element('footer', 'site-footer');
-    footer.append(element('p', '', 'Projeto educacional independente, sem vínculo ou chancela do Inep.'), element('p', '', 'Demonstração · Questões fictícias'));
+    footer.append(element('p', '', gameConfig.copy.footerPurpose), element('p', '', gameConfig.copy.footerDemo));
     const frame = element('div', 'app-frame');
     frame.append(header, stage, footer, this.status);
     root.replaceChildren(skip, frame);
   }
 
   render(state: SessionState, dispatch: (command: Command) => void): void {
-    this.courseTag.textContent = state.selectedCourse ? 'PERCURSO / ' + state.selectedCourse : 'CIDADE DIGITAL';
+    this.courseTag.textContent = state.selectedCourse ? gameConfig.format.courseTag(state.selectedCourse) : gameConfig.copy.cityTag;
     const key = [state.screen, state.attempt?.index, state.attempt?.answers.length, state.saveStatus, state.contentError].join(':');
     if (this.renderKey === key) {
       if (state.screen === 'course-select') this.updateCourse(state);
@@ -102,12 +103,9 @@ export class AppShell {
       dispatch({ type: 'feedback-accessed', questionId: currentQuestion(state.attempt!).id });
     } else {
       focusHeading(this.content);
-      announce(this.status, state.screen === 'map' ? 'Central Nexo aberta. Curso: ' + getCourse(state.selectedCourse!).name : '');
+      announce(this.status, state.screen === 'map' ? gameConfig.format.centralAnnouncement(getCourse(state.selectedCourse!).name) : '');
     }
-    document.title = state.screen === 'home' ? 'Missão ENADE · Central Nexo'
-      : state.screen === 'course-select' ? 'Escolha seu curso · Missão ENADE'
-      : state.screen === 'question' ? 'Questão ' + (state.attempt!.index + 1) + ' de 10 · Exemplos'
-      : state.screen === 'result' ? 'Resultado de exemplo · Missão ENADE' : 'Central Nexo · Missão ENADE';
+    document.title = gamePageTitle(state.screen, (state.attempt?.index ?? 0) + 1);
   }
 
   private updateCourse(state: SessionState): void {
@@ -116,16 +114,15 @@ export class AppShell {
     for (const radio of this.content.querySelectorAll<HTMLInputElement>('input[name="course"]')) {
       radio.checked = radio.value === state.selectedCourse;
     }
-    if (state.selectedCourse) announce(this.status, 'Curso selecionado: ' + getCourse(state.selectedCourse).name);
+    if (state.selectedCourse) announce(this.status, gameConfig.format.courseAnnouncement(getCourse(state.selectedCourse).name));
   }
 
   showGraphicUnavailable(): void {
     this.canvasHost.replaceChildren();
-    this.graphicStatus.textContent = 'Ambientação indisponível. Você pode continuar pelos controles da página.';
+    this.graphicStatus.textContent = gameConfig.copy.graphicUnavailable;
   }
 
   destroy(): void {
     this.listeners.abort();
   }
 }
-

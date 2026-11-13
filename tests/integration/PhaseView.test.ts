@@ -53,11 +53,11 @@ describe('questão e feedback no HTML', () => {
     expect(root.querySelectorAll('.all-explanations li')).toHaveLength(5);
     expect(session.snapshot.attempt?.answers).toHaveLength(1);
     expect(session.snapshot.attempt?.answers[0]?.feedbackAccessed).toBe(true);
-    const next = [...root.querySelectorAll('button')].find((item) => item.textContent === 'Próxima questão')!;
+    const next = [...root.querySelectorAll('button')].find((item) => item.textContent === 'Próximo desafio')!;
     next.click();
     next.click();
     expect(session.snapshot.attempt?.index).toBe(1);
-    expect(root.querySelector('.question-toolbar')?.textContent).toContain('Questão 2 de 10');
+    expect(root.querySelector('.question-toolbar')?.textContent).toContain('Desafio 2 de 10');
     expect(root.querySelectorAll('input[name="answer"]:checked')).toHaveLength(0);
     expect(root.querySelector('.feedback')).toBeNull();
     expect(document.activeElement).toBe(root.querySelector('h1'));

@@ -1,4 +1,4 @@
-# Missão ENADE — backlog de implementação
+# Nexus — Jornada Digital — backlog de implementação
 
 Versão 1.0 • 12/11/2026 • Referência: [arquitetura.md](arquitetura.md).
 
@@ -221,3 +221,24 @@ O modelo de exemplo aceita listas de vários cursos e não interpreta COMUM como
 Somente o último resultado concluído é persistido, na chave `missao-enade:example-result:v1`. Sair ou recarregar encerra a partida incompleta; retomada permanece para outra entrega autorizada. Resultados de exemplo não são misturados ao futuro save pedagógico.
 
 Relatório, limitações e lista de arquivos: [entrega-02.md](entrega-02.md). Instruções: [README.md](../README.md). Escopo encerrado nesta entrega; nenhuma funcionalidade posterior foi iniciada.
+
+## 12. Identidade Nexus — Jornada Digital — 13/11/2026
+
+Posicionamento atualizado conforme decisão pedagógica: experiência permanente e lúdica de desenvolvimento de competências em tecnologia. ENADE passa a ser origem pedagógica interna, com primeira coleção `enade-2026`. Futuras origens: PPCs, disciplinas, nivelamento, projetos e certificações.
+
+- [x] Localizar referências ao nome anterior na apresentação e nos documentos.
+- [x] Substituir identidade visível por Nexus — Jornada Digital.
+- [x] Centralizar nome, subtítulo, textos principais, metadados e títulos em `src/config/game.ts`.
+- [x] Usar desafio, missão, pontuação e relatório da missão nos fluxos existentes.
+- [x] Registrar missão especial e laboratório de treinamento como vocabulário de capacidades futuras, sem implementá-las.
+- [x] Registrar `enade-2026` apenas nos metadados pedagógicos internos.
+- [x] Preservar trilhas CC, SI, TADS, TGTI e TRC, conteúdo demonstrativo, regras e chave do LocalStorage.
+- [x] Manter referências oficiais e fontes históricas em `docs/fontes`.
+- [x] Criar checkpoint local antes das alterações: `cd24181`.
+- [x] Validar lint, build, 71 testes de unidade/DOM e 36 testes E2E; registrar a entrega e o commit local solicitado.
+
+Os itens das entregas anteriores são históricos. Nesta etapa, “questão” corresponde ao desafio apresentado ao jogador, “resultado” ao relatório da missão e “revisão de erros” ao futuro laboratório de treinamento. Os critérios pedagógicos de validação continuam vigentes, e a missão de exemplos não foi convertida em conteúdo oficial.
+
+Referências remanescentes a ENADE em fontes, normas, histórico, nome técnico do pacote, pasta do projeto e chave legada são internas. Não renomear contratos persistidos por motivo editorial.
+
+Relatório completo e arquivos alterados: [identidade-nexus.md](identidade-nexus.md). Commit solicitado: `refactor: nova identidade Nexus Jornada Digital`. Mudança restrita à identidade, sem nova funcionalidade ou publicação.

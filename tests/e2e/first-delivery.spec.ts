@@ -45,7 +45,7 @@ for (const [id, name] of courses) {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Boas-vindas à Central Nexo.');
     await expect(page.locator('.selected-name')).toHaveText(name);
     await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
-    await expect(page.getByText('FASE DE EXEMPLO', { exact: true })).toBeVisible();
+    await expect(page.getByText('MISSÃO DE EXEMPLO', { exact: true })).toBeVisible();
     await expectReflow(page);
     if (id === 'CC') await page.screenshot({ path: info.outputPath('central.png'), fullPage: true });
     await page.getByRole('button', { name: 'Trocar curso' }).click();

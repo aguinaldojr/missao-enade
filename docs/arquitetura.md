@@ -1,6 +1,21 @@
-# Missão ENADE — arquitetura do projeto
+# Nexus — Jornada Digital — arquitetura do projeto
 
-Versão 1.0 • Planejamento em 12/11/2026 • Estado: proposta para implementação, sem código de produção.
+Versão 1.1 • Posicionamento atualizado em 13/11/2026 • Base técnica preservada; demonstração funcional 0.2.0.
+
+## 0. Identidade e origem pedagógica — atualização de 13/11/2026
+
+A identidade visível é **Nexus — Jornada Digital**, uma experiência permanente e lúdica de desenvolvimento de competências em tecnologia. Esta decisão substitui o posicionamento anterior de preparação para uma edição de avaliação. A visão vigente está em [visao-do-jogo.md](visao-do-jogo.md); as fontes históricas permanecem em `docs/fontes`.
+
+A primeira coleção pedagógica interna terá o identificador **`enade-2026`**, baseada nas competências e referências do ENADE. A origem é mantida para rastreabilidade interna, sem ENADE, preparação, prova ou simulado na interface principal. PPCs, disciplinas, nivelamento, projetos e certificações são futuras origens de coleções, ainda não implementadas.
+
+`src/config/game.ts` centraliza nome, subtítulo, metadados HTML, títulos e textos principais. Vistas e shell consomem essa configuração. O plugin de identidade em `vite.config.ts` usa os mesmos valores no HTML inicial, inclusive sem JavaScript. `src/config/collections.ts` registra a coleção interna planejada e não é importado pela interface.
+
+O vocabulário visível é desafio, missão, missão especial, pontuação, relatório da missão e laboratório de treinamento. Os nomes de capacidades futuras não criam novos fluxos nesta refatoração. Classes e componentes usam nomes genéricos, sem origem de coleção no nome; Mission, Challenge, LearningTrack, ChallengeCollection, QuestionChallenge e PuzzleChallenge são exemplos para evoluções. GameSession, QuestionScene e ResultScene continuam neutros e compatíveis.
+
+**Compatibilidade:** não mudar pontuação, filtragem, confirmação, progressão, JSON de desafios, schemas, IDs, versões ou armazenamento. O pacote e a pasta técnica `missao-enade`, bem como a chave `missao-enade:example-result:v1`, continuam internos. Relatórios gravados antes da mudança devem continuar legíveis, sem migração ou perda de dados.
+
+A missão atual continua demonstrativa e usa `FASE-EXEMPLO-01` / `example-1`; a coleção editorial `enade-2026` permanece planejada. A arquitetura de MVP abaixo conserva rastreabilidade, restrições e critérios editoriais. Referências ao exame nesse material são contexto interno, não texto a reproduzir na interface.
+
 
 ## 1. Escopo e decisões
 

@@ -43,3 +43,10 @@
   .version-tag { max-width: 67px; white-space: normal; line-height: 1.5; text-align: right; }
   .wordmark > span { max-width: 157px; line-height: 1.4; }
 }
+
+/* O nome completo se adapta à largura disponível sem cortar a identidade. */
+.brand { min-width: 0; flex: 1; }
+.brand-mark { flex-shrink: 0; }
+.wordmark { min-width: 0; }
+.wordmark strong { letter-spacing: 0.02em; line-height: 1.4; overflow-wrap: anywhere; }
+.version-tag { flex-shrink: 0; }

@@ -14,7 +14,7 @@ async function startPhase(page: Page, course: string, info: TestInfo) {
   await page.getByRole('button', { name: 'Iniciar missão' }).click();
   await page.locator('input[name="course"][value="' + course + '"]').check();
   await press(page, 'Entrar na Central Nexo', info);
-  await press(page, 'Jogar fase de exemplo', info);
+  await press(page, 'Jogar missão de exemplo', info);
 }
 
 async function reflow(page: Page) {
@@ -30,10 +30,12 @@ for (const course of courseIds) {
     const questions = catalog.questions.filter((question) => question.courses.includes(course));
     const expectedCorrect = course === 'CC' ? 10 : course === 'SI' ? 0 : 8;
     for (const [index, question] of questions.entries()) {
-      await expect(page.getByText('Questão ' + (index + 1) + ' de 10', { exact: true })).toBeVisible();
+      await expect(page.getByText('Desafio ' + (index + 1) + ' de 10', { exact: true })).toBeVisible();
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(question.prompt);
       await expect(page.getByRole('radio')).toHaveCount(5);
-      await expect(page.locator('.example-warning')).toContainText('EXEMPLO FICTÍCIO');
+      expect(await page.locator('body').innerText()).not.toMatch(/\bENADE\b|simulado|preparação para prova/i);
+      await expect(page).toHaveTitle(/Nexus — Jornada Digital/);
+      await expect(page.locator('.example-warning')).toContainText('DESAFIO FICTÍCIO');
       await expect(page.locator('.feedback')).toHaveCount(0);
       await expect(page.getByRole('button', { name: 'Confirmar resposta' })).toBeDisabled();
       if (index === 0) {
@@ -59,11 +61,11 @@ for (const course of courseIds) {
       await reflow(page);
       if (index === 0 && course === 'CC') await page.screenshot({ path: info.outputPath('feedback.png'), fullPage: true });
       expect(await page.evaluate((key) => localStorage.getItem(key), RESULT_KEY)).toBeNull();
-      await press(page, index === 9 ? 'Ver resultado final' : 'Próxima questão', info);
+      await press(page, index === 9 ? 'Ver relatório da missão' : 'Próximo desafio', info);
     }
-    await expect(page.getByRole('heading', { name: 'Uma conexão a mais.' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
     await expect(page.locator('.result-numbers')).toContainText(expectedCorrect * 100 + ' de 1.000');
-    await expect(page.getByRole('status').filter({ hasText: 'Resultado salvo neste navegador.' })).toBeVisible();
+    await expect(page.getByRole('status').filter({ hasText: 'Relatório da missão salvo neste navegador.' })).toBeVisible();
     const stored = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), RESULT_KEY);
     expect(stored).toMatchObject({ schemaVersion: 1, mode: 'example', course, total: 10, score: expectedCorrect * 100, correctCount: expectedCorrect });
     if (course === 'CC') await page.screenshot({ path: info.outputPath('resultado.png'), fullPage: true });
@@ -95,9 +97,9 @@ test('fluxo de resposta e avanço por teclado', async ({ page }, info) => {
   await page.keyboard.press('Tab');
   await expect(page.locator('details summary')).toBeFocused();
   await page.keyboard.press('Tab');
-  await expect(page.getByRole('button', { name: 'Próxima questão' })).toBeFocused();
+  await expect(page.getByRole('button', { name: 'Próximo desafio' })).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(page.getByText('Questão 2 de 10', { exact: true })).toBeVisible();
+  await expect(page.getByText('Desafio 2 de 10', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
   await press(page, 'Voltar ao menu', info);
   await page.reload();
@@ -111,21 +113,21 @@ test('LocalStorage bloqueado não impede conclusão', async ({ page }, info) => 
   for (let index = 0; index < 10; index++) {
     await page.getByRole('radio').first().check();
     await press(page, 'Confirmar resposta', info);
-    await press(page, index === 9 ? 'Ver resultado final' : 'Próxima questão', info);
+    await press(page, index === 9 ? 'Ver relatório da missão' : 'Próximo desafio', info);
   }
-  await expect(page.getByRole('heading', { name: 'Uma conexão a mais.' })).toBeVisible();
-  await expect(page.locator('.save-message')).toContainText('Resultado não salvo');
+  await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
+  await expect(page.locator('.save-message')).toContainText('Relatório da missão não salvo');
   await press(page, 'Tentar salvar novamente', info);
-  await expect(page.locator('.save-message')).toContainText('Resultado não salvo');
+  await expect(page.locator('.save-message')).toContainText('Relatório da missão não salvo');
   await press(page, 'Voltar ao menu', info);
 });
 
 test('resultado corrompido é ignorado sem travar a navegação', async ({ page }, info) => {
   await page.addInitScript((key) => { localStorage.setItem(key, '{'); }, RESULT_KEY);
   await page.goto('/');
-  await expect(page.getByText('O resultado local é inválido', { exact: false })).toBeVisible();
+  await expect(page.getByText('O relatório da missão local é inválido', { exact: false })).toBeVisible();
   await startPhase(page, 'TRC', info);
-  await expect(page.getByText('Questão 1 de 10', { exact: true })).toBeVisible();
+  await expect(page.getByText('Desafio 1 de 10', { exact: true })).toBeVisible();
   await press(page, 'Voltar ao menu', info);
 });
 
@@ -133,6 +135,6 @@ test('fase inicia mesmo sem randomUUID disponível', async ({ page }, info) => {
   await page.addInitScript(() => { Object.defineProperty(window.crypto, 'randomUUID', { value: undefined }); });
   await page.goto('/');
   await startPhase(page, 'TRC', info);
-  await expect(page.getByText('Questão 1 de 10', { exact: true })).toBeVisible();
+  await expect(page.getByText('Desafio 1 de 10', { exact: true })).toBeVisible();
   await press(page, 'Voltar ao menu', info);
 });
