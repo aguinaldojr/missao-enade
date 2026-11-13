@@ -1,3 +1,7 @@
+import { BASE_N9, MAPS } from '../config/maps';
+import { explorationCopy } from '../config/exploration';
+import { createExploration, movePlayer, nearbyObject, type ExplorationState } from '../domain/exploration/World';
+import type { ExplorationRepository } from '../ports/ExplorationRepository';
 import { isCourseId, type CourseId } from '../domain/models/Course';
 import type { Attempt, ExampleResult } from '../domain/models/Attempt';
 import type { OptionId } from '../domain/models/Question';
@@ -15,6 +19,9 @@ export interface SessionState {
   readonly lastResult: ExampleResult | null;
   readonly saveStatus: SaveStatus;
   readonly contentError: string | null;
+  readonly exploration: ExplorationState;
+  readonly explorationSaveStatus: SaveStatus;
+  readonly worldDialog: { readonly title: string; readonly message: string } | null;
 }
 
 export type Command =
@@ -28,7 +35,12 @@ export type Command =
   | { type: 'feedback-accessed'; questionId: string }
   | { type: 'next-question'; questionId: string }
   | { type: 'retry-save' }
-  | { type: 'home' };
+  | { type: 'home' }
+  | { type: 'move-player'; x: number; y: number; seconds: number }
+  | { type: 'interact' }
+  | { type: 'close-dialog' }
+  | { type: 'return-map' }
+  | { type: 'save-exploration' };
 
 export class GameSession {
   private state: SessionState;
@@ -40,11 +52,14 @@ export class GameSession {
     // O identificador é local, sem finalidade de autenticação; HTTP na rede pode não oferecer randomUUID.
     private readonly createId: () => string = () => globalThis.crypto?.randomUUID?.() ??
       ('example-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2)),
+    private readonly explorationProgress?: ExplorationRepository,
   ) {
+    const world = explorationProgress?.load() ?? { state: null, status: 'none' as const };
     const loaded = progress?.loadResult() ?? { result: null, status: 'none' as const };
     this.state = Object.freeze({
       screen: 'home', selectedCourse: null, attempt: null,
       lastResult: loaded.result, saveStatus: loaded.status, contentError: null,
+      exploration: world.state ?? createExploration(BASE_N9), explorationSaveStatus: world.status, worldDialog: null,
     });
   }
 
@@ -56,7 +71,7 @@ export class GameSession {
     switch (command.type) {
       case 'start':
       case 'change-course':
-        this.update({ screen: 'course-select', attempt: null, contentError: null });
+        this.update({ screen: 'course-select', attempt: null, contentError: null, worldDialog: null });
         break;
       case 'select-course':
         if (current.screen !== 'course-select' || !isCourseId(command.course)) {
@@ -71,12 +86,15 @@ export class GameSession {
         this.update({ screen: 'map', contentError: null });
         break;
       case 'start-phase':
-        if (current.screen !== 'map' || !current.selectedCourse) return current;
+        if (current.screen !== 'map' || !current.selectedCourse || current.worldDialog ||
+            nearbyObject(current.exploration, MAPS[current.exploration.mapId]!)?.kind !== 'computer') return current;
         try {
           if (!this.content) throw new Error('Catálogo ausente.');
           const questions = this.content.questionsForCourse(current.selectedCourse);
           this.update({ screen: 'question', contentError: null,
-            attempt: createAttempt(this.createId(), current.selectedCourse, questions) });
+            attempt: createAttempt(this.createId(), current.selectedCourse, questions),
+            exploration: Object.freeze({ ...current.exploration, missionStatus: current.exploration.missionStatus === 'completed' ? 'completed' : 'active' }) });
+          this.persistExploration();
         } catch {
           this.update({ contentError: 'Os exemplos estão indisponíveis ou inválidos. Nenhuma fase foi iniciada. Você pode tentar novamente ou voltar ao menu.' });
         }
@@ -108,7 +126,9 @@ export class GameSession {
             score, correctCount: score / 100, completedAt: this.now(),
           });
           this.update({ screen: 'result', lastResult: result,
-            saveStatus: this.progress?.saveResult(result) ? 'saved' : 'failed' });
+            saveStatus: this.progress?.saveResult(result) ? 'saved' : 'failed',
+            exploration: Object.freeze({ ...current.exploration, missionStatus: 'completed', doorUnlocked: true }) });
+          this.persistExploration();
         }
         break;
       case 'retry-save':
@@ -116,12 +136,56 @@ export class GameSession {
           this.update({ saveStatus: this.progress?.saveResult(current.lastResult) ? 'saved' : 'failed' });
         }
         break;
+      case 'move-player': {
+        if (current.screen !== 'map' || current.worldDialog) return current;
+        const map = MAPS[current.exploration.mapId]!;
+        const exploration = movePlayer(current.exploration, map, { x: command.x, y: command.y }, command.seconds);
+        if (exploration !== current.exploration) this.update({ exploration });
+        break;
+      }
+      case 'interact': {
+        if (current.screen !== 'map' || current.worldDialog) return current;
+        const target = nearbyObject(current.exploration, MAPS[current.exploration.mapId]!);
+        if (!target) return current;
+        if (target.kind === 'computer') return this.dispatch({ type: 'start-phase' });
+        if (target.kind === 'npc') {
+          this.update({
+            exploration: Object.freeze({ ...current.exploration, missionStatus: current.exploration.missionStatus === 'completed' ? 'completed' : 'active' }),
+            worldDialog: Object.freeze({ title: explorationCopy.guideTitle,
+              message: current.exploration.missionStatus === 'completed' ? explorationCopy.guideCompleted : explorationCopy.guideMission }),
+          });
+        } else if (target.kind === 'door') {
+          this.update({ worldDialog: Object.freeze({
+            title: current.exploration.doorUnlocked ? explorationCopy.openTitle : explorationCopy.lockedTitle,
+            message: current.exploration.doorUnlocked ? explorationCopy.openMessage : explorationCopy.lockedMessage,
+          }) });
+        } else {
+          this.update({ worldDialog: Object.freeze({ title: explorationCopy.terminalTitle, message: explorationCopy.terminalMessage }) });
+        }
+        this.persistExploration();
+        break;
+      }
+      case 'close-dialog':
+        this.update({ worldDialog: null });
+        break;
+      case 'return-map':
+        if (current.screen === 'result' && current.selectedCourse) this.update({ screen: 'map', attempt: null, worldDialog: null });
+        break;
+      case 'save-exploration':
+        this.persistExploration();
+        break;
       case 'home':
         // Não há retomada de partida nesta entrega; o último resumo permanece.
-        this.update({ screen: 'home', attempt: null, contentError: null });
+        this.persistExploration();
+        this.update({ screen: 'home', attempt: null, contentError: null, worldDialog: null });
         break;
     }
     return this.state;
+  }
+
+  private persistExploration(): void {
+    if (!this.explorationProgress) return;
+    this.update({ explorationSaveStatus: this.explorationProgress.save(this.state.exploration) ? 'saved' : 'failed' });
   }
 
   private update(patch: Partial<SessionState>): void {

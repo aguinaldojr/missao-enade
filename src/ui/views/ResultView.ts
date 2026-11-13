@@ -1,3 +1,4 @@
+import { explorationCopy } from '../../config/exploration';
 import { gameConfig } from '../../config/game';
 import type { Command } from '../../app/GameSession';
 import { getCourse } from '../../app/courses';
@@ -31,6 +32,8 @@ export function resultView(result: ExampleResult, status: SaveStatus, dispatch: 
   const home = button(gameConfig.copy.menu);
   home.classList.add('menu-button');
   home.addEventListener('click', () => dispatch({ type: 'home' }), { signal });
-  view.append(home, element('p', 'helper', gameConfig.copy.saveLimit));
+  const returnMap = button(explorationCopy.returnMap);
+  returnMap.addEventListener('click', () => dispatch({ type: 'return-map' }), { signal });
+  view.append(returnMap, home, element('p', 'helper', gameConfig.copy.saveLimit));
   return view;
 }

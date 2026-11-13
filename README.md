@@ -79,3 +79,20 @@ Vitest cobre regras de resposta única, 0/8/10 acertos, elegibilidade, contratos
 As referências pedagógicas e as cópias históricas em `docs/fontes` permanecem preservadas. A visão vigente está em [docs/visao-do-jogo.md](docs/visao-do-jogo.md). A [arquitetura](docs/arquitetura.md) descreve o MVP completo; o [backlog](docs/backlog.md) diferencia o que foi demonstrado nesta fase dos critérios ainda pendentes.
 
 Mapa de dez terminais, retomada de partida, laboratório de treinamento, conquistas, conteúdo aprovado, campanhas específicas, publicação e outras funções futuras permanecem pendentes. Não há login, banco de dados, ranking online, CDN, IA durante a partida ou APIs pagas. O projeto é independente, sem vínculo ou chancela do Inep.
+
+## Explorar a Base N9
+
+Após selecionar qualquer um dos cinco cursos, entre na base. Use **setas ou WASD** para mover, ou mantenha pressionados os botões direcionais na tela. Use **E**, **Espaço** ou o botão de interação quando a indicação de proximidade aparecer. No teclado, Tab também alcança os controles da interface.
+
+Converse com **Lia** para conhecer a missão. No **computador**, inicie os mesmos dez desafios fictícios. Ao concluir e visualizar o relatório, escolha **Voltar à Base N9**: o personagem retorna ao mesmo local e a porta fica liberada, independentemente da pontuação. Atravesse para conhecer o terminal; não há outra região implementada.
+
+Posição, estado da missão e porta são salvos separadamente em `n9:exploration:v1`, no navegador atual, inclusive após recarregar e escolher novamente um curso. Esse progresso da base é compartilhado entre os cinco cursos; respostas de fases incompletas não são retomadas. O relatório continua usando sua chave anterior. A interface avisa quando o salvamento falha. Apagar dados do navegador elimina o progresso; não existe conta ou sincronização.
+
+No PowerShell, execute `npm.cmd run dev` na pasta do projeto, onde está `package.json`:
+
+```powershell
+Set-Location 'C:\Users\AulaU9\Documents\Projetos\missao-enade'
+npm.cmd run dev
+```
+
+Abra o endereço informado pelo Vite, normalmente [localhost:5173](http://localhost:5173).

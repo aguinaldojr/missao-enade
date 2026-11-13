@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "mapId",
+    "position",
+    "missionStatus",
+    "doorUnlocked"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "mapId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      }
+    },
+    "missionStatus": {
+      "enum": [
+        "available",
+        "active",
+        "completed"
+      ]
+    },
+    "doorUnlocked": {
+      "type": "boolean"
+    }
+  }
+}

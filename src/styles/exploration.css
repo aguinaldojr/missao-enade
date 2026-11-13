@@ -1,0 +1,39 @@
+.stage.stage--exploring { grid-template-columns: minmax(0, 1fr); gap: 0; align-items: start; }
+.stage--exploring > .visual-panel { display: none; }
+.exploration-view { max-width: none; width: 100%; }
+.exploration-view .section-title { font-size: clamp(28px, 4vw, 42px); }
+.exploration-view .selected-name { margin: 10px 0 18px; }
+.exploration-grid { display: grid; gap: 24px; align-items: start; }
+.world-area, .exploration-panel { min-width: 0; }
+.world-slot { border: 2px solid #536c67; border-radius: 10px; overflow: hidden; background: #142630; }
+.canvas-host.world-map { height: auto; aspect-ratio: 640 / 400; min-height: 195px; color: white; }
+.world-instructions, .world-legend { font-size: 13px; margin-top: 12px; line-height: 1.6; }
+.world-legend { color: var(--muted); }
+.exploration-panel { display: grid; gap: 14px; }
+.world-mission, .world-door, .world-nearby, .world-save { font-size: 14px; line-height: 1.6; margin: 0; }
+.world-nearby { min-height: 48px; padding: 12px; background: #e8eee7; border-radius: 6px; color: #20352f; }
+.world-interact { width: 100%; }
+.direction-pad { display: grid; grid-template-columns: repeat(3, 58px); grid-template-rows: repeat(2, 52px); gap: 8px; justify-content: center; }
+.direction-pad button { touch-action: none; user-select: none; min-width: 0; padding: 0; font-size: 25px; }
+[data-direction="up"] { grid-column: 2; }
+[data-direction="left"] { grid-column: 1; grid-row: 2; }
+[data-direction="down"] { grid-column: 2; grid-row: 2; }
+[data-direction="right"] { grid-column: 3; grid-row: 2; }
+.world-dialog { border: 2px solid #536c67; border-radius: 8px; padding: 16px; background: #f1f2e8; }
+.world-dialog h2 { font-size: 20px; margin-bottom: 10px; }
+.world-dialog p { line-height: 1.6; margin-bottom: 14px; }
+.world-dialog[hidden], .world-save-retry[hidden], .content-error[hidden] { display: none; }
+.world-save { color: var(--muted); font-size: 12px; }
+.exploration-panel .actions { flex-wrap: wrap; margin-top: 0; }
+@media (min-width: 960px) {
+  .exploration-grid { grid-template-columns: minmax(0, 1.8fr) minmax(280px, 1fr); gap: 28px; }
+  .world-area { position: sticky; top: 16px; }
+}
+
+.world-area .direction-pad { margin: 12px 0; }
+@media (max-width: 959px) and (min-height: 600px) {
+  .world-area .world-instructions, .world-area .world-legend { font-size: 12px; margin-top: 6px; }
+}
+@media (max-width: 959px) and (max-height: 599px) {
+  .canvas-host.world-map { height: 42vh; min-height: 140px; aspect-ratio: auto; }
+}

@@ -258,3 +258,23 @@ N9 é um nome provisório sujeito à aprovação institucional. A associação c
 Não havia Base Nexus, Universo Nexus ou Arena Nexus na narrativa ativa. Nexo, nome da cidade fictícia e parte do conteúdo existente, permanece. Ocorrências históricas de Nexus em relatórios anteriores, mensagem de commit e identificação de um relatório legado de teste são preservadas para rastreabilidade, sem exibição ao jogador.
 
 Relatório desta alteração: [identidade-n9.md](identidade-n9.md). Não publicar nem iniciar novas funcionalidades nesta etapa.
+
+## 14. Exploração 2D — Base N9 — 13/11/2026
+
+- [x] Inspecionar Git, arquitetura, backlog e implementação antes da alteração; início limpo em `53be5bb`.
+- [x] Primeiro mapa em visão superior, personagem controlável e gráficos geométricos provisórios.
+- [x] Movimento com setas/WASD e controles virtuais; colisões com paredes, objetos e limites.
+- [x] Computador, Lia, porta bloqueada e terminal tecnológico na Base N9.
+- [x] Indicação de proximidade e interação por E, Espaço ou botão; diálogo curto de missão.
+- [x] Computador abre os dez desafios existentes; preservar filtragem nos cinco cursos, conteúdo, explicações, pontuação e relatório.
+- [x] Voltar do relatório à posição anterior do mapa; liberar porta após conclusão, sem mínimo de pontos.
+- [x] Persistir posição, missão e porta em `n9:exploration:v1`, separadamente do relatório legado.
+- [x] Dados de mapa extensíveis e lógica de exploração independente do renderer.
+- [x] Layout adaptável e navegação por teclado, mouse e toque emulado.
+- [x] Validar lint, compilação, 79 testes de unidade/DOM e 44 testes E2E. Repetir oito cenários de exploração após o ajuste de layout; registrar a entrega no commit local `feat: mapa inicial e exploracao 2D`.
+
+Relatório e lista completa dos arquivos: [entrega-exploracao-2d.md](entrega-exploracao-2d.md).
+
+A missão pode ser aceita com Lia ou iniciada diretamente pelo computador. Encerrar fase incompleta preserva apenas exploração e o relatório anterior; retomada de respostas permanece pendente. O terminal informa o limite da região implementada. Novos mapas, conteúdo aprovado, combate, salto, inventário complexo, multiplayer, servidor e banco online não foram implementados.
+
+Testes em Android/iOS físicos, outros motores e leitores de tela permanecem pendentes. Não houve publicação.

@@ -6,7 +6,9 @@ import { element } from './components/elements';
 import { focusHeading } from './focus';
 import { courseSelectView } from './views/CourseSelectView';
 import { homeView } from './views/HomeView';
-import { mapView } from './views/MapView';
+import type { MovementControls } from './ExplorationControls';
+import { explorationCopy } from '../config/exploration';
+import { mapView, updateMapView } from './views/MapView';
 import { questionView } from './views/QuestionView';
 import { resultView } from './views/ResultView';
 import { currentQuestion } from '../domain/progression';
@@ -20,7 +22,10 @@ export class AppShell {
   private listeners = new AbortController();
   private renderKey = '';
 
-  constructor(root: HTMLElement) {
+  private canvasHome!: HTMLElement;
+  private mapElement: HTMLElement | undefined;
+
+  constructor(root: HTMLElement, private readonly controls?: MovementControls) {
     const skip = element('a', 'skip-link', gameConfig.copy.skip);
     skip.href = '#conteudo';
     this.content.id = 'conteudo';
@@ -37,6 +42,7 @@ export class AppShell {
     header.append(brand, element('span', 'version-tag', gameConfig.copy.version));
     const stage = element('div', 'stage');
     const visual = element('aside', 'visual-panel');
+    this.canvasHome = visual;
     visual.setAttribute('aria-label', gameConfig.copy.cityLabel);
     const panelHeader = element('div', 'panel-header');
     panelHeader.append(element('span', 'panel-coordinate', gameConfig.copy.cityCoordinate), this.courseTag);
@@ -54,6 +60,7 @@ export class AppShell {
 
   render(state: SessionState, dispatch: (command: Command) => void): void {
     this.courseTag.textContent = state.selectedCourse ? gameConfig.format.courseTag(state.selectedCourse) : gameConfig.copy.cityTag;
+    if (state.screen === 'map' && this.mapElement) { updateMapView(this.mapElement, state); return; }
     const key = [state.screen, state.attempt?.index, state.attempt?.answers.length, state.saveStatus, state.contentError].join(':');
     if (this.renderKey === key) {
       if (state.screen === 'course-select') this.updateCourse(state);
@@ -69,6 +76,8 @@ export class AppShell {
     this.listeners.abort();
     this.listeners = new AbortController();
     const signal = this.listeners.signal;
+    this.canvasHome.insertBefore(this.canvasHost, this.canvasHome.children[1] ?? null);
+    this.mapElement = undefined;
     let view: HTMLElement;
     switch (state.screen) {
       case 'home':
@@ -82,7 +91,8 @@ export class AppShell {
         }, signal);
         break;
       case 'map':
-        view = mapView(state, dispatch, signal);
+        view = mapView(state, dispatch, signal, this.controls);
+        this.mapElement = view;
         break;
       case 'question':
         if (!state.attempt) throw new Error('Partida necessária.');
@@ -95,6 +105,20 @@ export class AppShell {
     }
     this.renderKey = key;
     this.content.replaceChildren(view);
+    const exploring = state.screen === 'map';
+    this.content.closest('.stage')?.classList.toggle('stage--exploring', exploring);
+    this.canvasHost.classList.toggle('world-map', exploring);
+    this.canvasHost.setAttribute('aria-hidden', exploring ? 'false' : 'true');
+    if (exploring) {
+      view.querySelector('.world-slot')!.append(this.canvasHost);
+      this.canvasHost.tabIndex = 0;
+      this.canvasHost.setAttribute('role', 'group');
+      this.canvasHost.setAttribute('aria-label', explorationCopy.viewportLabel);
+    } else {
+      this.canvasHost.removeAttribute('tabindex');
+      this.canvasHost.removeAttribute('role');
+      this.canvasHost.removeAttribute('aria-label');
+    }
     this.content.closest('.stage')?.classList.toggle('stage--playing', state.screen === 'question' || state.screen === 'result');
     const feedback = this.content.querySelector<HTMLElement>('.feedback-heading');
     if (feedback) {

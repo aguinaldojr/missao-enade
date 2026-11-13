@@ -42,7 +42,7 @@ for (const [id, name] of courses) {
     await expectReflow(page);
     if (id === 'CC') await page.screenshot({ path: info.outputPath('selecao.png'), fullPage: true });
     await enter.click();
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Boas-vindas à Central Nexo.');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Base N9');
     await expect(page.locator('.selected-name')).toHaveText(name);
     await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
     await expect(page.getByText('MISSÃO DE EXEMPLO', { exact: true })).toBeVisible();
@@ -84,7 +84,7 @@ test('navegação completa por teclado e foco entre telas', async ({ page }) => 
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Entrar na Central Nexo' })).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(page.getByRole('heading', { name: 'Boas-vindas à Central Nexo.' })).toBeFocused();
+  await expect(page.getByRole('heading', { name: 'Base N9' })).toBeFocused();
 });
 
 test('fluxo HTML disponível se o motor gráfico não carregar', async ({ page }) => {

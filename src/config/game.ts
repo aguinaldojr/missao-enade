@@ -97,7 +97,7 @@ export const gameConfig = {
     summary: (course: string, correct: number, score: number) => course + ' · ' + correct + ' de 10 acertos · ' + score + ' pontos.',
     courseTag: (course: string) => 'PERCURSO / ' + course,
     courseAnnouncement: (course: string) => 'Curso selecionado: ' + course,
-    centralAnnouncement: (course: string) => 'Central Nexo aberta. Curso: ' + course,
+    centralAnnouncement: (course: string) => 'Base N9 aberta. Curso: ' + course,
   },
 } as const;
 
@@ -105,6 +105,6 @@ export function gamePageTitle(screen: string, index = 1): string {
   const page = screen === 'course-select' ? 'Escolha seu curso'
     : screen === 'question' ? gameConfig.format.challengeProgress(index)
     : screen === 'result' ? 'Relatório da missão'
-    : screen === 'map' ? 'Central Nexo' : '';
+    : screen === 'map' ? 'Base N9' : '';
   return page ? page + ' · ' + gameConfig.name : gameConfig.name;
 }

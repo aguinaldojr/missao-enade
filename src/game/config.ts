@@ -40,7 +40,7 @@ export function mountGame(parent: HTMLElement, session: GameSession, unavailable
       new QuestionScene(session),
       new ResultScene(session),
     ],
-    callbacks: { postBoot: (instance) => { if (!instance.renderer) unavailable(); } },
+    callbacks: { postBoot: (instance) => { instance.canvas.setAttribute('aria-hidden', 'true'); if (!instance.renderer) unavailable(); } },
   });
   const observer = new ResizeObserver(() => game.scale.refresh());
   observer.observe(parent);

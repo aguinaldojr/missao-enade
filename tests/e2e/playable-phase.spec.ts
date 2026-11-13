@@ -69,6 +69,14 @@ for (const course of courseIds) {
     const stored = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), RESULT_KEY);
     expect(stored).toMatchObject({ schemaVersion: 1, mode: 'example', course, total: 10, score: expectedCorrect * 100, correctCount: expectedCorrect });
     if (course === 'CC') await page.screenshot({ path: info.outputPath('resultado.png'), fullPage: true });
+    await press(page, 'Voltar à Base N9', info);
+    await expect(page.getByRole('heading', { name: 'Base N9', exact: true })).toBeVisible();
+    await expect(page.locator('.world-position')).toHaveAttribute('data-x', '160');
+    await expect(page.locator('.world-position')).toHaveAttribute('data-y', '184');
+    await expect(page.locator('.world-door')).toHaveText('Porta: liberada');
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('n9:exploration:v1')!))).toMatchObject({
+      missionStatus: 'completed', doorUnlocked: true, position: { x: 160, y: 184 },
+    });
     await press(page, 'Voltar ao menu', info);
     await expect(page.locator('.last-result')).toContainText(expectedCorrect * 100 + ' pontos');
     await page.reload();

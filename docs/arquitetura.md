@@ -495,3 +495,20 @@ Consultadas em 12/11/2026. As decisões de produto acima são propostas; estas f
 - **T7 — Build, base e publicação:** [Vite: Deploying a Static Site](https://vite.dev/guide/static-deploy).
 - **T8 — Emulação:** [Playwright: Emulation](https://playwright.dev/docs/emulation).
 - **T9 — Testes:** [Vitest: Getting Started](https://vitest.dev/guide/).
+
+## 18. Entrega de exploração 2D — Base N9 — 13/11/2026
+
+Esta seção registra o recorte implementado e prevalece sobre a descrição anterior de mapa apenas selecionável. Há somente um mapa, Base N9, com computador, Lia (guia), porta e terminal. Não há dez terminais, novos desafios pedagógicos, outras regiões ou combate.
+
+- `src/config/maps.ts` registra mapas por ID: dimensões, limites, posição inicial, paredes e objetos. Para novos mapas, ampliar o registro e autorizar separadamente as transições.
+- `src/domain/exploration/World.ts` contém geometria e colisões puras: quatro direções, diagonal normalizada, passo limitado e deslizamento por eixo. Paredes, objetos e limites impedem passagem; a porta deixa de colidir após a conclusão. Nenhum motor de física adicional.
+- `GameSession` mantém a única posição e os estados de missão disponível/em andamento/concluída, porta e diálogo. As cenas apenas observam a sessão. O computador inicia o mesmo catálogo e fluxo de dez desafios, filtrado pelo curso escolhido.
+- `MapScene` renderiza formas provisórias em visão superior. `MapView` expõe missão, indicação de proximidade, diálogos e controles HTML. `ExplorationControls` converte setas/WASD e ponteiros dos controles virtuais em comandos. E, Espaço e botão interagem; campos e controles nativos dos desafios preservam seus atalhos. Diálogos pausam movimento.
+- Os textos da exploração ficam em `src/config/exploration.ts`; identidade permanece em `src/config/game.ts`.
+- Concluir os dez desafios e abrir o relatório libera a porta, mesmo com zero pontos. O relatório existente permanece; **Voltar à Base N9** restaura o mapa na mesma posição. Interromper uma fase não conclui a missão.
+- `ExplorationRepository` e o adaptador local usam a chave independente **`n9:exploration:v1`**, validada pelo schema de exploração e pela geometria. Guarda versão 1, mapa, posição, missão e desbloqueio. Grava durante movimento com intervalo de 500 ms e ao soltar, sair, interagir ou concluir. Sem salvar respostas ou retomar tentativa incompleta.
+- O progresso da base é compartilhado localmente entre CC, SI, TADS, TGTI e TRC; a escolha de curso permanece temporária. A chave legada do relatório, seu formato, catálogo e pontuação não foram alterados. Relatórios antigos não liberam automaticamente a porta.
+- Dados inválidos ou armazenamento bloqueado produzem aviso e permitem seguir na sessão. Não apagamos registros durante a leitura; versões futuras desconhecidas não são sobrescritas. Limpar dados do navegador elimina o progresso local; não há sincronização ou garantia entre abas.
+- A apresentação se adapta a telas pequenas. Sem renderer, os controles HTML, coordenadas, indicações e diálogos continuam operantes; a experiência visual depende do canvas local.
+
+N9 continua provisório e sujeito à aprovação institucional. ENADE permanece exclusivamente como referência pedagógica interna. Nenhum conteúdo pedagógico foi alterado.
