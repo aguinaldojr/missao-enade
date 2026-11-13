@@ -1,7 +1,6 @@
 [
   {
     "kind": "sequence",
-    "collection": "n9-provisional-sequences-v1",
     "pedagogicalOrigin": "Exemplo autoral para demonstração de competências tecnológicas; não é conteúdo oficial nem validado.",
     "courses": [
       "CC",
@@ -65,11 +64,11 @@
       "O cálculo depende de dados já lidos e validados.",
       "A saída usa o valor produzido pelo cálculo; preparar o programa antecede a leitura."
     ],
-    "explanation": "Neste programa fictício, a preparação permite a leitura; a validação verifica os dados antes do cálculo, e a exibição usa a média produzida. Esse encadeamento evita processar entradas inválidas. Outros algoritmos podem exigir outras etapas."
+    "explanation": "Neste programa fictício, a preparação permite a leitura; a validação verifica os dados antes do cálculo, e a exibição usa a média produzida. Esse encadeamento evita processar entradas inválidas. Outros algoritmos podem exigir outras etapas.",
+    "collectionId": "n9-provisional-sequences-v1"
   },
   {
     "kind": "sequence",
-    "collection": "n9-provisional-sequences-v1",
     "pedagogicalOrigin": "Exemplo autoral para demonstração de competências tecnológicas; não é conteúdo oficial nem validado.",
     "courses": [
       "CC",
@@ -138,11 +137,11 @@
       "A correção autorizada trata a causa identificada; encerrar depende de testar a recuperação.",
       "O registro dos sintomas vem do alerta e apoia a análise; documentar a solução validada fecha o atendimento."
     ],
-    "explanation": "No cenário simplificado, o alerta gera um registro; os dados sustentam o diagnóstico e a correção autorizada. O teste confirma a recuperação antes de documentar e encerrar. Procedimentos reais variam conforme a organização e não são substituídos por este exemplo."
+    "explanation": "No cenário simplificado, o alerta gera um registro; os dados sustentam o diagnóstico e a correção autorizada. O teste confirma a recuperação antes de documentar e encerrar. Procedimentos reais variam conforme a organização e não são substituídos por este exemplo.",
+    "collectionId": "n9-provisional-sequences-v1"
   },
   {
     "kind": "sequence",
-    "collection": "n9-provisional-sequences-v1",
     "pedagogicalOrigin": "Exemplo autoral para demonstração de competências tecnológicas; não é conteúdo oficial nem validado.",
     "courses": [
       "CC",
@@ -211,6 +210,7 @@
       "Neste roteiro, confirme primeiro a comunicação local para depois configurar o acesso a outra rede.",
       "A configuração usa o endereçamento planejado; o teste remoto depende do gateway já configurado."
     ],
-    "explanation": "Este roteiro de laboratório começa pelo planejamento e pela conexão física, configura o endereçamento e testa a rede local. Depois configura o gateway e verifica o acesso à outra rede. A sequência foi delimitada para este exercício; ambientes reais podem exigir DNS, segurança e outras verificações."
+    "explanation": "Este roteiro de laboratório começa pelo planejamento e pela conexão física, configura o endereçamento e testa a rede local. Depois configura o gateway e verifica o acesso à outra rede. A sequência foi delimitada para este exercício; ambientes reais podem exigir DNS, segurança e outras verificações.",
+    "collectionId": "n9-provisional-sequences-v1"
   }
 ]

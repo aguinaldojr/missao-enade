@@ -43,8 +43,8 @@ describe('catálogo local de exemplos', () => {
     ['sem explicação', (data: typeof catalog) => { data.questions[0]!.explanation = ' '; }],
     ['sem feedback E', (data: typeof catalog) => { data.questions[0]!.feedbackByOption.E = ''; }],
     ['ID duplicado', (data: typeof catalog) => { data.questions[1]!.id = data.questions[0]!.id; }],
-    ['não identificado como exemplo', (data: typeof catalog) => { data.questions[0]!.example = false; }],
-    ['marcado como aprovado', (data: typeof catalog) => { data.questions[0]!.editorialStatus = 'approved'; }],
+    ['competência vazia', (data: typeof catalog) => { data.questions[0]!.competencies = [' ']; }],
+    ['status editorial desconhecido', (data: typeof catalog) => { data.questions[0]!.editorialStatus = 'INVALID'; }],
   ])('rejeita %s', (_label, change) => {
     const data = structuredClone(catalog);
     change(data);

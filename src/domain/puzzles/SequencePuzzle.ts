@@ -1,25 +1,24 @@
-import type { CourseId } from '../models/Course';
+import type { EditorialMetadata } from '../models/EditorialMetadata';
 
-export interface SequencePuzzle {
+export interface SequencePuzzle extends EditorialMetadata {
   readonly kind: 'sequence';
   readonly id: string;
   readonly title: string;
   readonly narrative: string;
-  readonly collection: string;
-  readonly pedagogicalOrigin: string;
-  readonly courses: readonly CourseId[];
-  readonly area: string;
-  readonly competencies: readonly string[];
-  readonly difficulty: 'introductory';
   readonly blocks: readonly { readonly id: string; readonly text: string }[];
   readonly correctOrder: readonly string[];
   readonly hints: readonly string[];
   readonly explanation: string;
   readonly reward: { readonly xp: number };
   readonly unlocks: { readonly mapId: string; readonly objectId: string };
+}
+/** Entrada do formato anterior: somente exemplos provisórios. */
+export type LegacySequencePuzzle = Omit<SequencePuzzle, 'collectionId' | 'difficulty' | 'source' | 'validationStatus'> & {
+  readonly collection: string;
+  readonly difficulty: 'introductory';
   readonly source: { readonly type: 'fictional'; readonly description: string };
   readonly validationStatus: 'provisional-pending-teacher-review';
-}
+};
 export interface SequenceProgress {
   readonly order: readonly string[];
   readonly hintsUsed: number;

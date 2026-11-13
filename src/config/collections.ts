@@ -1,15 +1,5 @@
-/** Metadados pedagógicos internos; não são rótulos nem objetivos de prova na interface. */
-export interface LearningCollection {
-  readonly id: string;
-  readonly pedagogicalOrigin: string;
-  readonly status: 'planned';
-}
+import { learningCollections } from '../infrastructure/content/JsonCollectionRepository';
+export type { LearningCollection } from '../domain/models/EditorialMetadata';
 
-export const firstLearningCollection: LearningCollection = {
-  id: 'enade-2026',
-  pedagogicalOrigin: 'Competências e referências do ENADE 2026',
-  status: 'planned',
-};
-
-// Os exemplos fictícios atuais mantêm FASE-EXEMPLO-01 e example-1.
-// Coleções futuras poderão vir de PPCs, disciplinas, nivelamento, projetos e certificações.
+/** Origem interna planejada; não muda os textos nem ativa conteúdos no jogo. */
+export const firstLearningCollection = learningCollections.get('enade-2026')!;

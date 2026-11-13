@@ -1,0 +1,136 @@
+{
+  "$id": "urn:n9:editorial",
+  "definitions": {
+    "collectionId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "pedagogicalOrigin": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "courses": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "CC",
+          "SI",
+          "TADS",
+          "TGTI",
+          "TRC"
+        ]
+      }
+    },
+    "area": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "competencies": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      }
+    },
+    "difficulty": {
+      "enum": [
+        "introductory",
+        "intermediate",
+        "advanced"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "description"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "official-reference",
+            "institutional",
+            "authorial",
+            "fictional"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "url": {
+          "type": "string",
+          "format": "http-url"
+        },
+        "year": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "documentId": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "validationStatus": {
+      "enum": [
+        "provisional-pending-teacher-review",
+        "needs-revision",
+        "approved-teacher",
+        "rejected"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "collectionId",
+        "pedagogicalOrigin",
+        "courses",
+        "area",
+        "competencies",
+        "difficulty",
+        "source",
+        "validationStatus"
+      ],
+      "properties": {
+        "collectionId": {
+          "$ref": "#/definitions/collectionId"
+        },
+        "pedagogicalOrigin": {
+          "$ref": "#/definitions/pedagogicalOrigin"
+        },
+        "courses": {
+          "$ref": "#/definitions/courses"
+        },
+        "area": {
+          "$ref": "#/definitions/area"
+        },
+        "competencies": {
+          "$ref": "#/definitions/competencies"
+        },
+        "difficulty": {
+          "$ref": "#/definitions/difficulty"
+        },
+        "source": {
+          "$ref": "#/definitions/source"
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/validationStatus"
+        }
+      }
+    }
+  }
+}

@@ -301,3 +301,26 @@ Início com Git limpo em `d862c80`. Escopo exclusivo: um tipo reutilizável, tr�
 Relatório e lista completa dos arquivos: [entrega-sequencia-logica.md](entrega-sequencia-logica.md).
 
 Não foram implementados outros tipos de quebra-cabeça, novos mapas, servidor, publicação ou funcionalidades posteriores. Conteúdo segue provisório até revisão docente. Testes em aparelhos reais, outros motores e leitores de tela continuam pendentes.
+
+## 16. Contratos editoriais generalizados — 13/11/2026
+
+Base de código em e19b44a; os dois documentos da etapa de levantamento estavam sem commit e foram incorporados nesta entrega autorizada.
+
+- [x] Revisar estrutura-dados-desafios, JSON documental, arquitetura, backlog, tipos, schemas, repositórios e testes.
+- [x] Criar EditorialMetadata comum, três dificuldades, quatro fontes e quatro estados editoriais.
+- [x] Permitir URL HTTP/HTTPS, ano e identificação documental opcionais, com validação estrita.
+- [x] Generalizar mode, versão, fase e marcadores de compatibilidade das questões.
+- [x] Generalizar dificuldade/fonte/status/coleção das sequências, sem outros tipos de puzzle.
+- [x] Evoluir LearningCollection e registrar catálogo com planned/pilot/active/archived; rejeitar collectionId inexistente.
+- [x] Normalizar formatos históricos sem mutar entrada; rejeitar metadados canônicos incompletos e campos desconhecidos.
+- [x] Migrar somente metadados dos 14 exemplos de questões e três sequências, preservando conteúdo e recompensas.
+- [x] Preservar IDs e todos os formatos/chaves/adaptadores de progresso; validar recibos e relatório anteriores sem escrita.
+- [x] Manter additionalProperties: false em objetos editoriais.
+- [x] Atualizar [estrutura de dados](estrutura-dados-desafios.md), [JSON canônico](exemplo-desafios.json) e [especificação documental de missão mista](especificacao-missao-mista.md).
+- [x] Documentar integração de areas.json como futura; não importar nem conectar missão mista ao runtime.
+- [x] Aprovar 143 testes Vitest/DOM, lint, TypeScript e compilação; build inclui 71 testes de contrato.
+- [x] Aprovar 52 testes de navegador (computador/celular) e conferência de exemplos documentais; registrar o commit local refactor: generaliza contratos editoriais dos desafios, sem publicação.
+
+Nenhum conteúdo aprovado real foi inserido. Exemplos distribuídos continuam fictícios/pendentes; aprovação nos testes é somente fixture técnico. Nenhuma mudança de interface, mapa, mecânicas, pontuação, GameSession ou armazenamento. Nenhuma publicação.
+
+Pendências futuras: política de importação/publicação por revisão docente/coleção; integração revisada de áreas/competências; execução e relatório de novas fases; implementação de missão mista e versionamento de recompensas. Nenhuma dessas pendências foi implementada.

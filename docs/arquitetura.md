@@ -545,3 +545,22 @@ Grava em cada movimento de bloco, dica, validação, troca de exercício e saíd
 Dados inválidos são ignorados na leitura sem apagar o registro. Uma interação explícita pode substituir dado corrompido; versões futuras desconhecidas são preservadas e impedem gravação. Falhas de quota/acesso exibem aviso e botão de tentar salvar; sem persistência, progresso e proteção contra recompensa repetida valem apenas na sessão. Limpar dados do navegador remove os recibos locais. Não há servidor ou autenticação.
 
 Com a mudança de posição do terminal, apenas um save antigo que colida com seu novo retângulo é reposicionado no ponto inicial. Missão e desbloqueio são preservados; o registro não é sobrescrito durante a leitura. As demais posições válidas permanecem intactas. A chave de relatório legado e o catálogo de desafios não foram alterados.
+
+## 20. Generalização dos contratos editoriais — 13/11/2026
+
+Esta seção substitui as restrições editoriais descritas nas entregas anteriores; não substitui as regras de execução ou os saves da demonstração.
+
+- Question e SequencePuzzle herdam EditorialMetadata: collectionId, pedagogicalOrigin, courses, area, competencies, difficulty, source e validationStatus.
+- Dificuldades: introductory/intermediate/advanced. Fonte: official-reference/institutional/authorial/fictional, com description obrigatória e url/year/documentId opcionais. Estados: provisional-pending-teacher-review/needs-revision/approved-teacher/rejected.
+- LearningCollection foi movida ao domínio e continua reexportada na configuração; estados planned/pilot/active/archived. Catálogo local estrito em src/content/collections.json; JsonCollectionRepository valida schema e unicidade. Repositórios de conteúdo validam collectionId existente.
+- QuestionCatalog aceita mode example/provisional/pilot/approved e versões/fases textuais não brancas. Question.example e editorialStatus são opcionais de compatibilidade, sem literais fixos de exemplo. validationStatus é a revisão canônica.
+- O schema editorial de questões aceita ao menos um item. A fase jogável atual exige exatamente dez elegíveis para o curso solicitado. Isso permite validar fases específicas sem exigir conteúdo de outros cursos, sem alterar a demonstração atual.
+- Schemas usam definições editoriais compartilhadas por $ref. Objetos permanecem estritos (additionalProperties: false). createEditorialAjv registra o schema comum e o formato HTTP/HTTPS de URL; referências não são buscadas na rede.
+- legacyEditorial reconhece formatos históricos com schemas próprios estritos e produz cópias canônicas. Questões antigas recebem somente metadados provisórios; collection de puzzles vira collectionId. Conteúdo parcialmente canônico ou com campo desconhecido é rejeitado.
+- A migração dos exemplos preserva IDs, versões, textos, gabaritos, explicações, blocos, dicas e recompensas. Todos permanecem fictional e provisional-pending-teacher-review. Nenhum conteúdo real foi introduzido.
+- Schemas/adaptadores de armazenamento, GameSession, interface, mapa, cenas e mecânicas não mudaram. ExampleResult continua representando a demonstração antiga; generalizar execução e relatórios de novas fases é futuro.
+- Status de coleção/revisão são dados para autoria e validação, não ativação automática de conteúdo ou política nova de publicação. Os fixtures aprovados são fictícios e exclusivos de testes.
+- A integração de areas.json permanece futura, com revisão de mapeamentos de área/competências e transformação explícita. Não há importação desse arquivo por src.
+- Missão mista tem somente [especificação documental](especificacao-missao-mista.md), sem tipo/schema executável, importação ou carregamento pelo jogo.
+
+Campos, fontes, compatibilidade e exemplos atualizados em [estrutura-dados-desafios.md](estrutura-dados-desafios.md). O [JSON documental](exemplo-desafios.json) usa o formato canônico do puzzle existente.

@@ -1,0 +1,70 @@
+[
+  {
+    "kind": "sequence",
+    "pedagogicalOrigin": "Exemplo autoral para demonstração de competências tecnológicas; não é conteúdo oficial nem validado.",
+    "courses": [
+      "CC",
+      "SI",
+      "TADS",
+      "TGTI",
+      "TRC"
+    ],
+    "difficulty": "introductory",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "source": {
+      "type": "fictional",
+      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+    },
+    "validationStatus": "provisional-pending-teacher-review",
+    "id": "seq-algorithm-01",
+    "title": "Sequência de um algoritmo",
+    "narrative": "O terminal da Base N9 perdeu sua sequência de inicialização. Reorganize este programa fictício de cálculo de média para recuperar o sistema e liberar a passagem.",
+    "area": "Algoritmos",
+    "competencies": [
+      "Reconhecer dependências entre etapas de um algoritmo",
+      "Organizar entrada, processamento e saída"
+    ],
+    "blocks": [
+      {
+        "id": "prepare",
+        "text": "Inicializar o programa e preparar as variáveis."
+      },
+      {
+        "id": "read",
+        "text": "Ler as duas notas informadas pelo usuário."
+      },
+      {
+        "id": "check",
+        "text": "Validar se as duas entradas são números no intervalo permitido."
+      },
+      {
+        "id": "compute",
+        "text": "Calcular a média dos valores validados."
+      },
+      {
+        "id": "display",
+        "text": "Exibir a média calculada e encerrar o programa."
+      }
+    ],
+    "correctOrder": [
+      "prepare",
+      "read",
+      "check",
+      "compute",
+      "display"
+    ],
+    "hints": [
+      "Procure as dependências entre preparação, entrada, processamento e saída.",
+      "O cálculo depende de dados já lidos e validados.",
+      "A saída usa o valor produzido pelo cálculo; preparar o programa antecede a leitura."
+    ],
+    "explanation": "Neste programa fictício, a preparação permite a leitura; a validação verifica os dados antes do cálculo, e a exibição usa a média produzida. Esse encadeamento evita processar entradas inválidas. Outros algoritmos podem exigir outras etapas.",
+    "collectionId": "n9-provisional-sequences-v1"
+  }
+]
