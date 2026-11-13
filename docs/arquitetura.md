@@ -564,3 +564,21 @@ Esta seção substitui as restrições editoriais descritas nas entregas anterio
 - Missão mista tem somente [especificação documental](especificacao-missao-mista.md), sem tipo/schema executável, importação ou carregamento pelo jogo.
 
 Campos, fontes, compatibilidade e exemplos atualizados em [estrutura-dados-desafios.md](estrutura-dados-desafios.md). O [JSON documental](exemplo-desafios.json) usa o formato canônico do puzzle existente.
+
+## 21. Banco elegível e quantidade configurável por missão — 13/11/2026
+
+Esta seção substitui o acoplamento anterior entre banco e fase de dez. O banco editorial é separado da seleção de uma missão e da distribuição entre questões comuns/específicas. Não muda o conteúdo planejado, a interface ou o formato de relatório da demonstração.
+
+- `ContentRepository.questionsForCourse` retorna todo o banco elegível do curso, inclusive zero, nove, vinte ou mais questões. `JsonContentRepository` continua validando schemas/referências, sem completar nem truncar o banco.
+- `QuestionMissionConfig` tem id, internalTitle, questionCount, commonQuestionCount e specificQuestionCount. Quantidades inteiras seguras, total positivo e cotas não negativas somando o total. Schema estrito `question-mission.schema.json`; `validateMissionConfig` e `assertMissionConfig` verificam também a soma.
+- `MissionSelectionRequest` exige curso, coleção e configuração; excludedQuestionIds é opcional, para exclusões explícitas futuras. Nenhum histórico é lido ou salvo.
+- `selectMissionQuestions` e `getMissionAvailability` são funções puras e testáveis. Comuns exigem classificação COMUM e elegibilidade explícita; específicas exigem classificação igual ao curso e presença em courses. Uma única coleção por missão.
+- A disponibilidade é calculada por cotas, não só pelo total. Se faltar conteúdo, lança `InsufficientMissionContentError` com necessárias/disponíveis por categoria. Não repete itens, não usa outros cursos/coleções e não conta puzzles.
+- A ordenação padrão é estável, com comuns antes das específicas. Uma estratégia pura pode ser injetada; deve preservar exatamente os objetos/IDs do pool, sem introduzir repetição ou substituição. Não há aleatoriedade implícita nem recomendação adaptativa.
+- `Attempt.mission` captura a configuração. `createAttempt` valida quantidade, distribuição, curso e coleção; `isComplete` usa questionCount e exige os feedbacks. A pontuação por resposta permanece inalterada.
+- Configurações técnicas: rápida 3=1+2, normal 5=2+3, especial 10=5+5 e Arena 20=10+10. Não foram adicionadas opções à interface. Com os nove comuns e uma específica atuais, nenhum desses quatro modos possui conteúdo suficiente.
+- Compatibilidade: o computador usa exclusivamente `LEGACY_EXAMPLE_MISSION`, dez=9+1, da coleção de exemplos. Mantém os mesmos IDs e ordem, controles, relatório, chave de save, pontuação e desbloqueio. A mensagem de insuficiência usa o alerta HTML já existente.
+- Os quatro modos podem ser selecionados e percorridos no domínio com fixtures/banco suficiente; ativação visual, contadores/relatórios de outros tamanhos e persistência de novas fases ainda requerem entrega futura. Arena não é liberada apenas por existir uma constante de configuração.
+- O plano pedagógico, questões provisórias, seis slots de puzzle, XP de puzzles e missão mista documental foram preservados. Não há login, servidor de aplicação ou banco online.
+
+Contratos completos, erros, estratégia e disponibilidade atual: [estrutura-dados-desafios.md §13](estrutura-dados-desafios.md#13-quantidade-configurável-de-questões-por-missão--13112026). Verificações e arquivos desta entrega no backlog.

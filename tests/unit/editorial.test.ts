@@ -36,7 +36,7 @@ describe('contratos editoriais compartilhados — exemplos exclusivamente fictí
     expect(result.questions[0]).toMatchObject({ example: false, editorialStatus: 'approved', validationStatus: 'approved-teacher' });
     const ten = { ...newCatalog(), questions: Array.from({ length: 10 }, (_, i) => ({ ...newQuestion(), id: 'FICT-' + i, courses: ['CC'] })) };
     expect(new JsonContentRepository(ten, customCollections).questionsForCourse('CC')).toHaveLength(10);
-    expect(() => new JsonContentRepository(ten, customCollections).questionsForCourse('SI')).toThrow('exatamente dez');
+    expect(new JsonContentRepository(ten, customCollections).questionsForCourse('SI')).toHaveLength(0);
   });
   it('aceita questão pendente e marcadores de compatibilidade opcionais', () => {
     const data = newCatalog();

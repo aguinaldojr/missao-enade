@@ -59,7 +59,7 @@ A lista inclui implementação e documentos de planejamento, cujos campos não v
 | `src/ports/PuzzleRepository.ts` | Interfaces `PuzzleContentRepository`, `PuzzleProgressRepository`. |
 | `src/ports/ExplorationRepository.ts` | Interface `ExplorationRepository`. |
 | `src/infrastructure/content/validateContent.ts` | `validateContent`: Ajv e relações de questões. |
-| `src/infrastructure/content/JsonContentRepository.ts` | Classe `JsonContentRepository`: filtro, cache e dez questões por curso. |
+| `src/infrastructure/content/JsonContentRepository.ts` | Classe `JsonContentRepository`: validação, cache e retorno do banco completo elegível por curso. |
 | `src/infrastructure/content/JsonPuzzleRepository.ts` | Classe `JsonPuzzleRepository`: schema e relações de puzzles. |
 | `src/infrastructure/storage/LocalStorageProgressRepository.ts` | Classe homônima; `isValidResult`, `RESULT_KEY`. |
 | `src/infrastructure/storage/LocalStorageExplorationRepository.ts` | Classe homônima; `isValidExploration`, `EXPLORATION_KEY`; reposicionamento de save atingido pelo terminal. |
@@ -188,7 +188,7 @@ Courses em questões e puzzles é lista explícita de elegibilidade. COMUM nunca
 | `mode` | ContentMode | Sim | example, provisional, pilot ou approved; preservado como dado editorial. | example |
 | `contentVersion` | string | Sim | Identificador de versão não branco; sem literal fixo. | example-1 ou fixture-2.0 |
 | `phaseId` | string | Sim | Identificador de fase não branco; sem literal fixo. | FASE-EXEMPLO-01 ou FASE-FICTICIA-02 |
-| `questions` | Question[] | Sim | Ao menos uma questão; IDs únicos no catálogo. A contagem jogável é tratada pelo repositório. | 14 exemplos atuais |
+| `questions` | Question[] | Sim | Ao menos uma questão; IDs únicos no catálogo. O repositório retorna o banco; o serviço de missão faz a seleção. | 14 exemplos atuais |
 
 
 Uma fase/catálogo pode ser de uma coleção ou reunir itens de diferentes coleções, desde que cada `collectionId` exista. Não foi acrescentada coleção redundante ao envelope.
@@ -215,7 +215,7 @@ Uma fase/catálogo pode ser de uma coleção ou reunir itens de diferentes cole�
 
 `validateContent` normaliza entradas antigas reconhecidas, aplica schema canônico, exige coleção existente, IDs únicos, cinco IDs distintos e gabarito presente. Não descarta campos desconhecidos e não completa metadados parcialmente ausentes de um conteúdo já canônico.
 
-`JsonContentRepository.questionsForCourse` retorna as questões elegíveis na ordem original e exige exatamente **dez para o curso solicitado**, preservando o limite da fase jogável. O contrato editorial aceita catálogos menores para autoria/validação. Uma fase específica de CC não precisa conter itens para os outros quatro cursos; pedir um curso sem dez itens continua falhando. O catálogo atual conserva os mesmos nove compartilhados e um específico por curso.
+`JsonContentRepository.questionsForCourse` retorna **todo o banco elegível**, na ordem original, inclusive vazio, menor ou maior que uma missão. Não impõe dez itens. `selectMissionQuestions` aplica quantidade, distribuição e coleção. Uma coleção pode ter conteúdo para um único curso; não se completa com outro curso. O catálogo atual conserva os mesmos nove compartilhados e um específico por curso. A configuração ligada ao computador continua exigindo dez, na proporção 9+1.
 
 As novas coleções, fases, versões e estados são suportados no contrato. A GameSession, a UI e o relatório persistido continuam associados à demonstração atual, com seus valores antigos; não foram ligados a uma nova fase nesta etapa.
 
@@ -280,7 +280,7 @@ O relatório `ExampleResult` continua com mode example, contentVersion example-1
 | Estrutura | Campos obrigatórios e valores atuais | Persistência |
 | --- | --- | --- |
 | Answer | questionId:string; questionVersion:number; selectedOptionId:A–E; isCorrect:boolean; feedbackAccessed:boolean. | Em memória. |
-| Attempt | id:string; courseAtStart:CourseId; questions:dez Question; answers:Answer[]; index:0–9; selectedOptionId:A–E ou null. | Em memória; não retoma questões incompletas. |
+| Attempt | id:string; courseAtStart:CourseId; mission:QuestionMissionConfig; questions:Question[] com tamanho da configuração; answers:Answer[]; index:0..questionCount−1; selectedOptionId:A–E ou null. | Em memória; não retoma questões incompletas. |
 | ExampleResult | schemaVersion:1; contentVersion:example-1; mode:example; phaseId:FASE-EXEMPLO-01; attemptId:string; course:CourseId; total:10; correctCount:0–10; score:0–1000 múltiplo de 100 e igual a acertos×100; completedAt:UTC. | missao-enade:example-result:v1. |
 | ExplorationState | schemaVersion:1; mapId:string; position:{x:number,y:number}; missionStatus:available/active/completed; doorUnlocked:boolean. | n9:exploration:v1. |
 | PuzzleProgress | schemaVersion:1; entries:Record&lt;ID,SequenceProgress&gt;. | n9:puzzles:v1. |
@@ -465,13 +465,13 @@ Próxima integração, mediante autorização: revisar os vínculos pedagógicos
 - Não há transação entre os saves nem recompensa versionada. As garantias desta migração dependem de preservar IDs e recompensas, o que foi verificado.
 - Dados legados reconhecidos são normalizados na leitura de conteúdo, não regravados como progresso. Versões futuras desconhecidas de save continuam protegidas pelos adaptadores existentes.
 
-## 12. Verificação e escopo
+## 12. Histórico de verificação — generalização editorial
 
 A suíte cobre questões aprovadas/pendentes, puzzles aprovados, três dificuldades, quatro tipos de fonte e estados, opcionais de fonte, URL oficial fictícia, coleção inexistente, competências vazias/brancas, cursos/status inválidos, IDs duplicados e campos desconhecidos. Também compara hashes dos campos pedagógicos com a base anterior e restaura recibos/relatório sem escrita.
 
-O build executa TypeScript e os testes de contrato (incluindo editorial.test.ts) antes do bundle Vite. Toda a suíte Vitest/DOM, lint e os testes de navegador são executados nesta entrega. Os resultados finais são registrados no backlog.
+O build executa TypeScript e os testes de contrato (incluindo editorial.test.ts) antes do bundle Vite. Na entrega de generalização editorial, toda a suíte Vitest/DOM, lint e os testes de navegador foram executados. A atualização de quantidade configurável está registrada na seção 13 e no backlog.
 
-Interface, estilos, cenas, mapa, GameSession, regras puras de progressão/pontuação e todos os adaptadores/schemas de armazenamento ficam sem alterações. Nenhuma publicação ou envio ao GitHub.
+Na entrega editorial, interface, estilos, cenas, mapa, GameSession, regras puras e armazenamento ficaram sem alterações. Na atualização da seção 13, GameSession e progressão passaram a consumir a configuração da missão; interface, conteúdo, puzzles, pontuação e armazenamento continuam preservados. Nenhuma publicação ou envio ao GitHub.
 
 ### Resultado final das verificações
 
@@ -483,3 +483,78 @@ Interface, estilos, cenas, mapa, GameSession, regras puras de progressão/pontua
 - Referências do exemplo de missão mista foram conferidas como documentação, sem carregamento pelo jogo.
 - Comparação de Git confirmou ausência de alterações em UI, estilos, cenas, mapa, GameSession, regras puras de pontuação/progressão, adaptadores/schemas de armazenamento, areas.json e docs/fontes.
 - Commit local solicitado: `refactor: generaliza contratos editoriais dos desafios`. Nada publicado ou enviado ao GitHub.
+
+## 13. Quantidade configurável de questões por missão — 13/11/2026
+
+Esta seção prevalece sobre o limite de banco descrito no levantamento e na entrega editorial anterior. Código-base limpo em `57d62a2`. A fase existente continua com dez exemplos; nenhum conteúdo ou slot pedagógico foi alterado.
+
+### Separação entre banco, configuração e seleção
+
+1. `ContentRepository.questionsForCourse(course)` retorna o banco completo explicitamente elegível, sem impor tamanho de missão. `JsonContentRepository` mantém validação editorial e cache, sem truncamento ou preenchimento.
+2. `QuestionMissionConfig` descreve tamanho e cotas; não é uma missão mista.
+3. `selectMissionQuestions(bank, request, strategy?)` seleciona apenas questões de uma coleção e do curso solicitado, sem repetição. `getMissionAvailability` permite consultar a capacidade sem iniciar tentativa.
+4. `createAttempt` captura uma cópia imutável da configuração em `Attempt.mission`, valida tamanho, unicidade, elegibilidade, coleção única e cotas. Confirmações e feedbacks passam a usar `questionCount` para concluir.
+
+### Contratos novos
+
+| Campo de QuestionMissionConfig | Tipo | Obrigatório | Finalidade e regra |
+| --- | --- | --- | --- |
+| id | string | Sim | Identificador técnico não branco. |
+| internalTitle | string | Sim | Título interno não branco, também usado no erro de capacidade. |
+| questionCount | integer | Sim | Total de questões, maior que zero e inteiro seguro. |
+| commonQuestionCount | integer | Sim | Cota comum, inteira segura ≥ 0. |
+| specificQuestionCount | integer | Sim | Cota específica, inteira segura ≥ 0. |
+
+A soma das duas cotas deve ser questionCount. `question-mission.schema.json` rejeita campos desconhecidos (additionalProperties: false) e formatos inválidos; `validateMissionConfig` e `assertMissionConfig` verificam a relação entre os campos. Cota individual zero é permitida, total zero não.
+
+| Campo de MissionSelectionRequest | Tipo | Obrigatório | Finalidade |
+| --- | --- | --- | --- |
+| course | CourseId | Sim | CC/SI/TADS/TGTI/TRC; desconhecido é erro. |
+| collectionId | string | Sim | Escopo explícito; nenhuma outra coleção completa a seleção. |
+| mission | QuestionMissionConfig | Sim | Tamanho e distribuição. |
+| excludedQuestionIds | readonly string[] | Não | Exclusões explícitas para futura origem de histórico. Não há rastreamento automático nem recomendação adaptativa. |
+
+Comuns são questões classification COMUM com course presente em courses; específicas exigem classification igual ao curso **e** elegibilidade explícita. Um item classificado CC que admita SI não conta como específico de SI. Os demais itens não preenchem cota alguma nessa seleção.
+
+### Configurações e disponibilidade atual
+
+Configurações técnicas em `src/config/missions.ts`. A coleção provisória atual oferece nove comuns e uma específica para cada curso:
+
+| Configuração | id | questionCount | comuns | específicas | Catálogo atual |
+| --- | --- | ---: | ---: | ---: | --- |
+| Missão rápida | quick | 3 | 1 | 2 | Indisponível: falta uma específica. |
+| Missão normal | normal | 5 | 2 | 3 | Indisponível: faltam duas específicas. |
+| Missão especial | special | 10 | 5 | 5 | Indisponível: faltam quatro específicas. |
+| Arena N9 | arena | 20 | 10 | 10 | Indisponível: faltam uma comum e nove específicas. |
+| Compatibilidade da fase atual | FASE-EXEMPLO-01 | 10 | 9 | 1 | Disponível; única ligada ao computador e à interface atuais. |
+
+Os modos 3/5/10/20 podem selecionar e progredir no domínio com banco suficiente, validado por fixtures; não foram adicionados seletores, botões, novas partidas ou relatórios à interface. Vinte elegíveis só tornam Arena disponível se houver dez comuns e dez específicas na mesma coleção. Um banco com 15 comuns e cinco específicas não atende a essa configuração.
+
+### Ordenação, erros e preparação para histórico
+
+A estratégia padrão é determinística: preserva ordem dentro de cada grupo e concatena comuns antes das específicas. A fase atual já tinha essa ordem, que foi preservada integralmente. Não há sorteio implícito.
+
+`QuestionOrderingStrategy` pode ser injetada como função pura por chamada, inclusive com gerador controlado pelo chamador em evolução futura. Ela deve devolver uma permutação dos mesmos objetos recebidos, sem omissões, substituições ou repetição. Uma estratégia inválida é rejeitada.
+
+`MissionAvailability` contém:
+
+- available: boolean;
+- required: MissionQuestionCounts, com questionCount/commonQuestionCount/specificQuestionCount;
+- availableCounts: contagens selecionáveis após curso, coleção, classificação e exclusões;
+- missing: déficit de cada cota, com questionCount igual à soma desses déficits.
+
+`InsufficientMissionContentError` expõe essas contagens e uma mensagem compreensível. Se houver dez elegíveis mas somente uma específica para uma missão 1+2, a missão continua indisponível: total suficiente não substitui a distribuição. Não se repete, não se cruza coleção e não se busca outro curso. A mensagem é renderizada no alerta de conteúdo já existente do mapa, sem mudança de layout.
+
+As exclusões por ID são rígidas: se faltarem itens após excluir, a operação falha com as quantidades resultantes, sem reintroduzir os excluídos. Nenhum resultado recente é lido ou salvo nesta etapa.
+
+### Compatibilidade, limites e arquivos
+
+`createAttempt(id, course, questions)` mantém a configuração padrão 10/9/1. Para tamanhos diferentes, o chamador fornece explicitamente a quarta opção de configuração. A tentativa em memória ganha mission; o save não muda. `GameSession` usa a seleção do modo legado e o comprimento selecionado para avançar, mas continua gerando o mesmo ExampleResult de dez questões.
+
+A pontuação continua 100 por acerto, sem desconto. O serviço de domínio suporta outras quantidades; os contadores, relatório e controles visíveis seguem associados à fase atual, sem ativação de outro tamanho nesta entrega. Generalizar a apresentação/relatório de novos modos será etapa futura autorizada.
+
+Não houve alteração em src/content, plano dos 60 slots question/seis sequence, puzzles, recompensas, XP, identidade, mapa, personagem, estilos, componentes visuais ou persistência. O schema editorial de questões já aceitava bancos gerais e não precisou mudar. A missão mista segue somente documental.
+
+Arquivos novos: src/config/missions.ts; src/domain/QuestionSelection.ts; src/domain/models/QuestionMission.ts; src/infrastructure/content/validateMissionConfig.ts; src/schemas/question-mission.schema.json; tests/fixtures/questionBanks.ts; tests/unit/missions.test.ts; tests/integration/MissionAvailability.test.ts. Repositório, porta de conteúdo, tentativa, progressão, GameSession e testes anteriores foram ajustados para a separação.
+
+Fixtures de teste usam IDs FIX-* e conteúdos fictícios já existentes como molde, sem integrar o banco distribuído nem criar conteúdo pedagógico. Os resultados finais e a lista completa de arquivos estão no backlog desta entrega.

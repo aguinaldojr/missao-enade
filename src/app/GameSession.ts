@@ -1,3 +1,5 @@
+import { EXAMPLE_QUESTION_COLLECTION, LEGACY_EXAMPLE_MISSION } from '../config/missions';
+import { selectMissionQuestions, InsufficientMissionContentError } from '../domain/QuestionSelection';
 import puzzleCatalog from '../content/puzzles/sequences.json';
 import { JsonPuzzleRepository } from '../infrastructure/content/JsonPuzzleRepository';
 import type { PuzzleContentRepository, PuzzleProgressRepository } from '../ports/PuzzleRepository';
@@ -116,13 +118,16 @@ export class GameSession {
             nearbyObject(current.exploration, MAPS[current.exploration.mapId]!)?.kind !== 'computer') return current;
         try {
           if (!this.content) throw new Error('Catálogo ausente.');
-          const questions = this.content.questionsForCourse(current.selectedCourse);
+          const bank = this.content.questionsForCourse(current.selectedCourse);
+          const questions = selectMissionQuestions(bank, { course: current.selectedCourse,
+            collectionId: EXAMPLE_QUESTION_COLLECTION, mission: LEGACY_EXAMPLE_MISSION });
           this.update({ screen: 'question', contentError: null,
-            attempt: createAttempt(this.createId(), current.selectedCourse, questions),
+            attempt: createAttempt(this.createId(), current.selectedCourse, questions, LEGACY_EXAMPLE_MISSION),
             exploration: Object.freeze({ ...current.exploration, missionStatus: current.exploration.missionStatus === 'completed' ? 'completed' : 'active' }) });
           this.persistExploration();
-        } catch {
-          this.update({ contentError: 'Os exemplos estão indisponíveis ou inválidos. Nenhuma fase foi iniciada. Você pode tentar novamente ou voltar ao menu.' });
+        } catch (error) {
+          this.update({ contentError: error instanceof InsufficientMissionContentError ? error.message
+            : 'Os exemplos estão indisponíveis ou inválidos. Nenhuma fase foi iniciada. Você pode tentar novamente ou voltar ao menu.' });
         }
         break;
       case 'select-option':
@@ -142,7 +147,7 @@ export class GameSession {
         break;
       case 'next-question':
         if (current.screen !== 'question' || !attempt || !canAdvance(attempt, command.questionId)) return current;
-        if (attempt.index < 9) {
+        if (attempt.index < attempt.questions.length - 1) {
           this.update({ attempt: Object.freeze({ ...attempt, index: attempt.index + 1, selectedOptionId: null }) });
         } else if (isComplete(attempt)) {
           const score = calculateScore(attempt.answers);

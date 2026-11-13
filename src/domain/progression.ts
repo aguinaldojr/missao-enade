@@ -1,15 +1,15 @@
-import { isEligible } from './eligibility';
+import { LEGACY_EXAMPLE_MISSION } from '../config/missions';
+import { assertMissionQuestionSet } from './QuestionSelection';
+import type { QuestionMissionConfig } from './models/QuestionMission';
 import type { Attempt } from './models/Attempt';
 import type { CourseId } from './models/Course';
 import type { OptionId, Question } from './models/Question';
 
-export function createAttempt(id: string, course: CourseId, questions: readonly Question[]): Attempt {
-  if (questions.length !== 10 || new Set(questions.map((question) => question.id)).size !== 10 ||
-      questions.some((question) => !isEligible(question, course))) {
-    throw new Error('A fase de exemplo precisa de dez questões distintas e compatíveis com o curso.');
-  }
+export function createAttempt(id: string, course: CourseId, questions: readonly Question[],
+  mission: QuestionMissionConfig = LEGACY_EXAMPLE_MISSION): Attempt {
+  assertMissionQuestionSet(questions, course, mission);
   return Object.freeze({
-    id, courseAtStart: course, questions: Object.freeze([...questions]),
+    id, courseAtStart: course, mission: Object.freeze({ ...mission }), questions: Object.freeze([...questions]),
     answers: Object.freeze([]), index: 0, selectedOptionId: null,
   });
 }
@@ -53,5 +53,6 @@ export function canAdvance(attempt: Attempt, questionId: string): boolean {
 }
 
 export function isComplete(attempt: Attempt): boolean {
-  return attempt.answers.length === 10 && attempt.answers.every((answer) => answer.feedbackAccessed);
+  return attempt.questions.length === attempt.mission.questionCount &&
+    attempt.answers.length === attempt.mission.questionCount && attempt.answers.every((answer) => answer.feedbackAccessed);
 }

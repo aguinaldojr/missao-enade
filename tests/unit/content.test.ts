@@ -51,12 +51,12 @@ describe('catálogo local de exemplos', () => {
     expect(() => validateContent(data)).toThrow();
   });
 
-  it.each([9, 11])('não inicia fases de %i questões nem completa com outro curso', (size) => {
+  it.each([9, 11])('retorna banco elegível de %i questões sem impor tamanho de missão', (size) => {
     const data: QuestionCatalog = validateContent(catalog);
     const questions = size === 9
       ? data.questions.filter((question) => question.id !== 'EX-CC-01')
       : [...data.questions, { ...data.questions[9]!, id: 'EX-CC-EXTRA' }];
     const repository = new JsonContentRepository({ ...data, questions });
-    expect(() => repository.questionsForCourse('CC')).toThrow('exatamente dez');
+    expect(repository.questionsForCourse('CC')).toHaveLength(size);
   });
 });

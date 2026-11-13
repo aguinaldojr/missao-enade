@@ -324,3 +324,55 @@ Base de código em e19b44a; os dois documentos da etapa de levantamento estavam 
 Nenhum conteúdo aprovado real foi inserido. Exemplos distribuídos continuam fictícios/pendentes; aprovação nos testes é somente fixture técnico. Nenhuma mudança de interface, mapa, mecânicas, pontuação, GameSession ou armazenamento. Nenhuma publicação.
 
 Pendências futuras: política de importação/publicação por revisão docente/coleção; integração revisada de áreas/competências; execução e relatório de novas fases; implementação de missão mista e versionamento de recompensas. Nenhuma dessas pendências foi implementada.
+
+## 17. Quantidade configurável de questões por missão — 13/11/2026
+
+Git inicialmente limpo em `57d62a2`. Escopo: separar banco elegível, configuração e seleção de questões; sem alteração do banco pedagógico, interface, mapa ou puzzles.
+
+- [x] Revisar plano de 66 desafios, estrutura de dados, especificação de missão mista, arquitetura e backlog.
+- [x] Repositório aceita banco maior que a missão e retorna todos os elegíveis, sem exigir dez.
+- [x] Criar configuração estrita com id/título interno/total/comuns/específicas; validar soma, inteiros e total positivo.
+- [x] Configurar rápida 3=1+2, normal 5=2+3, especial 10=5+5 e Arena 20=10+10.
+- [x] Respeitar curso, classificação e coleção; não repetir IDs nem usar puzzles como questões.
+- [x] Disponibilidade e erros com quantidades necessárias/disponíveis; nunca completar com conteúdo incompatível.
+- [x] Seleção determinística e estratégia injetável, sem testes dependentes de sorte.
+- [x] Entrada de exclusões por ID para futura fonte de histórico, sem tracking ou recomendação adaptativa.
+- [x] Generalizar tentativa/progressão no domínio e preservar a configuração de compatibilidade dez=9+1 ligada ao computador.
+- [x] Fixtures sintéticos comprovam bancos de sessenta, vinte por curso, seleção e progressão de 3/5/10/20.
+- [x] Validar falta por categoria mesmo com total suficiente; Arena indisponível com 19 e disponível com vinte na proporção 10+10.
+- [x] Preservar fontes de conteúdo, slots planejados, identidade, mapa, personagem, UI, regras/XP de puzzles e todos os saves.
+- [x] Aprovar lint, TypeScript, 186 testes de unidade/DOM e compilação, incluindo 113 testes de contrato.
+- [x] Aprovar 52 testes de navegador (computador/celular) e registrar commit local `refactor: quantidade configuravel de questoes por missao`, sem publicação.
+
+### Disponibilidade com o catálogo provisório
+
+Para CC, SI, TADS, TGTI e TRC: nove comuns + uma específica. A fase antiga de dez (9+1) continua disponível no computador. Rápida (1+2), normal (2+3), especial (5+5) e Arena (10+10) ficam indisponíveis, com déficit explícito. Não há novos botões ou ativação desses modos na interface. Não se exigem nem se criam agora as sessenta questões planejadas.
+
+A seleção e progressão dos novos tamanhos estão disponíveis tecnicamente no domínio com conteúdo suficiente; orquestração visual e relatórios de outros tamanhos são futuros. Missão mista, integração pedagógica de áreas, recomendação adaptativa, login, serviços online e publicação permanecem fora de escopo.
+
+### Arquivos modificados (11)
+
+- [docs/arquitetura.md](arquitetura.md)
+- [docs/estrutura-dados-desafios.md](estrutura-dados-desafios.md)
+- [docs/backlog.md](backlog.md)
+- [package.json](../package.json)
+- [src/app/GameSession.ts](../src/app/GameSession.ts)
+- [src/domain/models/Attempt.ts](../src/domain/models/Attempt.ts)
+- [src/domain/progression.ts](../src/domain/progression.ts)
+- [src/infrastructure/content/JsonContentRepository.ts](../src/infrastructure/content/JsonContentRepository.ts)
+- [src/ports/ContentRepository.ts](../src/ports/ContentRepository.ts)
+- [tests/unit/content.test.ts](../tests/unit/content.test.ts)
+- [tests/unit/editorial.test.ts](../tests/unit/editorial.test.ts)
+
+### Arquivos criados (8)
+
+- [src/config/missions.ts](../src/config/missions.ts)
+- [src/domain/QuestionSelection.ts](../src/domain/QuestionSelection.ts)
+- [src/domain/models/QuestionMission.ts](../src/domain/models/QuestionMission.ts)
+- [src/infrastructure/content/validateMissionConfig.ts](../src/infrastructure/content/validateMissionConfig.ts)
+- [src/schemas/question-mission.schema.json](../src/schemas/question-mission.schema.json)
+- [tests/fixtures/questionBanks.ts](../tests/fixtures/questionBanks.ts)
+- [tests/unit/missions.test.ts](../tests/unit/missions.test.ts)
+- [tests/integration/MissionAvailability.test.ts](../tests/integration/MissionAvailability.test.ts)
+
+Nenhuma alteração em src/content, plano-colecao-enade-2026.md, especificacao-missao-mista.md, UI/estilos/cenas/mapa, lógica de puzzles/XP ou schemas/adaptadores de armazenamento. Nenhum conteúdo pedagógico criado; fixtures são exclusivos dos testes. Não houve publicação ou envio ao GitHub.

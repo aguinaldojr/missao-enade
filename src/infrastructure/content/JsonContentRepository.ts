@@ -22,8 +22,6 @@ export class JsonContentRepository implements ContentRepository {
       })));
     }
     const questions = this.questions.filter((question) => isEligible(question, course));
-    // O contrato editorial é geral; a fase jogável atual continua exigindo dez.
-    if (questions.length !== 10) throw new Error('O catálogo precisa fornecer exatamente dez questões para ' + course + '.');
     return Object.freeze(questions);
   }
 }

@@ -1,3 +1,4 @@
+import type { QuestionMissionConfig } from './QuestionMission';
 import type { CourseId } from './Course';
 import type { OptionId, Question } from './Question';
 
@@ -12,6 +13,7 @@ export interface Answer {
 export interface Attempt {
   readonly id: string;
   readonly courseAtStart: CourseId;
+  readonly mission: QuestionMissionConfig;
   readonly questions: readonly Question[];
   readonly answers: readonly Answer[];
   readonly index: number;
