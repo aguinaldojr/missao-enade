@@ -2,6 +2,7 @@ import type { Command, SessionState } from '../../app/GameSession';
 import { puzzleCopy } from '../../config/puzzles';
 import { totalPuzzleXp, type SequencePuzzle } from '../../domain/puzzles/SequencePuzzle';
 import { button, element } from '../components/elements';
+import { puzzleFamilyFromId, puzzleFamilyVisuals } from '../../config/visual';
 
 export class SequencePuzzleView {
   readonly element = element('section', 'view puzzle-view');
@@ -24,11 +25,14 @@ export class SequencePuzzleView {
   private previousOrder = '';
   private lastTouchMove = -Infinity;
   private wasSolved = false;
-  private drag: { id: string; y: number; to: number; moved: boolean; handle: HTMLButtonElement } | null = null;
+  private drag: { id: string; y: number; currentY: number; to: number; moved: boolean; handle: HTMLButtonElement } | null = null;
 
   constructor(state: SessionState, private readonly dispatch: (command: Command) => void, signal: AbortSignal) {
     this.puzzleId = state.puzzleAttempt!.puzzleId;
     this.puzzle = state.puzzles.find((puzzle) => puzzle.id === this.puzzleId)!;
+    const family = puzzleFamilyFromId(this.puzzle.id);
+    const familyVisual = puzzleFamilyVisuals[family];
+    this.element.dataset.puzzleFamily = familyVisual.className;
     const heading = element('h1', 'section-title', puzzleCopy.title);
     heading.tabIndex = -1;
     const choices = element('div', 'puzzle-choices');
@@ -40,7 +44,11 @@ export class SequencePuzzleView {
       choose.addEventListener('click', () => dispatch({ type: 'select-puzzle', id: puzzle.id }), { signal });
       choices.append(choose);
     }
-    this.element.append(element('p', 'eyebrow', 'TERMINAL TECNOLÓGICO'), heading,
+    const familyBadge = element('p', 'puzzle-family');
+    const familySymbol = element('span', 'puzzle-family-symbol', familyVisual.symbol);
+    familySymbol.setAttribute('aria-hidden', 'true');
+    familyBadge.append(familySymbol, document.createTextNode(familyVisual.name));
+    this.element.append(element('p', 'eyebrow', 'TERMINAL TECNOLÓGICO'), familyBadge, heading,
       element('p', 'example-warning', puzzleCopy.provisional), element('p', 'intro intro--small', puzzleCopy.intro),
       choices, element('h2', 'puzzle-title', this.puzzle.title), element('p', 'puzzle-narrative', this.puzzle.narrative),
       this.xp, this.replayNotice, element('p', 'helper', puzzleCopy.controls));
@@ -63,11 +71,15 @@ export class SequencePuzzleView {
       }, { signal });
       handle.addEventListener('pointerdown', (event) => {
         if (event.button !== 0 || handle.disabled) return;
+        event.preventDefault();
         handle.setPointerCapture(event.pointerId);
-        this.drag = { id: block.id, y: event.clientY, to: [...this.list.children].indexOf(row), moved: false, handle };
+        this.drag = { id: block.id, y: event.clientY, currentY: event.clientY,
+          to: [...this.list.children].indexOf(row), moved: false, handle };
       }, { signal });
       handle.addEventListener('pointermove', (event) => {
         if (!this.drag || this.drag.id !== block.id) return;
+        event.preventDefault();
+        this.drag.currentY = event.clientY;
         if (Math.abs(event.clientY - this.drag.y) < 8 && !this.drag.moved) return;
         this.drag.moved = true;
         let closest = Infinity;
@@ -84,6 +96,14 @@ export class SequencePuzzleView {
       };
       handle.addEventListener('pointerup', (event) => {
         const drag = this.drag;
+        if (drag?.moved) {
+          let closest = Infinity;
+          for (const [index, child] of [...this.list.children].entries()) {
+            const box = child.getBoundingClientRect();
+            const distance = Math.abs(drag.currentY - (box.top + box.height / 2));
+            if (distance < closest) { closest = distance; drag.to = index; }
+          }
+        }
         cancel();
         if (drag?.moved) {
           if (event.pointerType === 'touch') this.lastTouchMove = performance.now();

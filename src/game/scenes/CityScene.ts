@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import type { GameSession } from '../../app/GameSession';
+import { visualTheme } from '../../config/visual';
 
-/** Cenário puramente decorativo; toda informação e navegação existem no DOM. */
+/** Campus superior decorativo; a navegação e todas as informações permanecem no DOM. */
 export abstract class CityScene extends Phaser.Scene {
   private drawing?: Phaser.GameObjects.Graphics;
 
@@ -11,69 +12,54 @@ export abstract class CityScene extends Phaser.Scene {
 
   create(): void {
     this.drawing = this.add.graphics();
-    this.drawCity();
-    this.scale.on(Phaser.Scale.Events.RESIZE, this.drawCity, this);
+    this.drawCampus();
+    this.scale.on(Phaser.Scale.Events.RESIZE, this.drawCampus, this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      this.scale.off(Phaser.Scale.Events.RESIZE, this.drawCity, this);
+      this.scale.off(Phaser.Scale.Events.RESIZE, this.drawCampus, this);
       this.drawing = undefined;
     });
   }
 
-  private drawCity(): void {
+  private drawCampus(): void {
     const g = this.drawing;
     if (!g) return;
+    const c = visualTheme.colors;
     const { width, height } = this.scale;
-    g.clear();
-    g.fillStyle(0x142630, 1);
-    g.fillRect(0, 0, width, height);
-    g.fillStyle(0x567776, 0.28);
-    for (let x = 18; x < width; x += 28) {
-      for (let y = 16; y < height; y += 28) g.fillCircle(x, y, 1);
-    }
-    const unit = Math.min(width / 470, height / 360);
+    const unit = Math.min(width / 520, height / 350);
     const cx = width / 2;
-    const cy = height / 2 + 5 * unit;
-    const point = (x: number, y: number) => ({ x: cx + x * unit, y: cy + y * unit });
-    const polygon = (coords: number[][], color: number, alpha = 1) => {
-      g.fillStyle(color, alpha);
-      g.fillPoints(coords.map(([x = 0, y = 0]) => point(x, y)), true);
-    };
+    const cy = height / 2;
+    const sx = (value: number) => cx + value * unit;
+    const sy = (value: number) => cy + value * unit;
+    g.clear();
+    g.fillStyle(c.canvas).fillRect(0, 0, width, height);
+    g.fillStyle(c.floor, 0.96).fillRoundedRect(sx(-220), sy(-130), 440 * unit, 260 * unit, 18 * unit);
+    g.lineStyle(Math.max(1, unit), c.grid, 0.7);
+    for (let x = -200; x <= 200; x += 40) g.lineBetween(sx(x), sy(-120), sx(x), sy(120));
+    for (let y = -120; y <= 120; y += 40) g.lineBetween(sx(-210), sy(y), sx(210), sy(y));
 
-    // Plataforma isométrica e caminhos conectando os serviços de Nexo.
-    polygon([[0, -130], [202, -18], [0, 108], [-202, -18]], 0x233e43, 0.65);
-    g.lineStyle(1, 0x638780, 0.4);
-    g.strokePoints([point(0, -130), point(202, -18), point(0, 108), point(-202, -18)], true);
-    g.lineStyle(2, this.accent, 0.55);
-    for (const [x, y] of [[-125, -15], [110, -37], [-50, 65], [115, 55]]) {
-      g.strokePoints([point(0, -10), point(x!, -10), point(x!, y!)]);
-      const node = point(x!, y!);
-      g.fillStyle(this.accent, 1);
-      g.fillCircle(node.x, node.y, 4 * unit);
+    const room = (x: number, y: number, w: number, h: number, active = false) => {
+      g.fillStyle(active ? c.inkSoft : c.floorAlt).fillRoundedRect(sx(x), sy(y), w * unit, h * unit, 8 * unit);
+      g.lineStyle(2 * unit, active ? this.accent : c.wall).strokeRoundedRect(sx(x), sy(y), w * unit, h * unit, 8 * unit);
+      g.fillStyle(active ? this.accent : c.wallEdge, active ? 0.22 : 0.12)
+        .fillRoundedRect(sx(x + 10), sy(y + 10), (w - 20) * unit, (h - 20) * unit, 4 * unit);
+    };
+    room(-185, -88, 92, 70);
+    room(92, -88, 92, 70);
+    room(-185, 22, 92, 70);
+    room(92, 22, 92, 70);
+    room(-52, -58, 104, 116, true);
+
+    g.lineStyle(8 * unit, this.accent, 0.55);
+    for (const [x, y] of [[-93, -53], [92, -53], [-93, 57], [92, 57]] as const) {
+      g.lineBetween(sx(x), sy(y), sx(x > 0 ? 52 : -52), sy(y));
     }
-
-    const building = (x: number, y: number, w: number, h: number, central = false) => {
-      const depth = w * 0.56;
-      polygon([[x - w, y], [x, y + depth], [x, y + depth - h], [x - w, y - h]], central ? 0x376a65 : 0x2c4d51);
-      polygon([[x, y + depth], [x + w, y], [x + w, y - h], [x, y + depth - h]], central ? 0x4d8a7b : 0x3c6463);
-      polygon([[x - w, y - h], [x, y - depth - h], [x + w, y - h], [x, y + depth - h]], central ? this.accent : 0x7fa397);
-      for (let row = 0; row < Math.floor(h / 17); row++) {
-        const py = y - 10 - row * 16;
-        g.lineStyle(2 * unit, central ? this.accent : 0x85aaa0, 0.65);
-        g.lineBetween(point(x + 8, py).x, point(x + 8, py).y, point(x + w - 8, py - depth + 10).x, point(x + w - 8, py - depth + 10).y);
-      }
-    };
-    building(-112, -20, 29, 40);
-    building(94, -52, 32, 55);
-    building(8, 1, 48, 80, true);
-    building(-65, 71, 23, 27);
-    building(115, 64, 25, 35);
-    const tower = point(8, -106);
-    g.lineStyle(2, this.accent, 0.85);
-    g.lineBetween(tower.x, tower.y + 21 * unit, tower.x, tower.y);
-    g.fillStyle(this.accent);
-    g.fillCircle(tower.x, tower.y, (this.session.snapshot.screen === 'map' ? 6 : 4) * unit);
-    g.lineStyle(1, this.accent, 0.25);
-    g.strokeCircle(tower.x, tower.y, 13 * unit);
-    // Nenhuma animação contínua: respeita redução de movimento por padrão.
+    g.fillStyle(c.cyan).fillCircle(sx(0), sy(0), 9 * unit);
+    g.lineStyle(2 * unit, c.cyan, 0.45).strokeCircle(sx(0), sy(0), 18 * unit);
+    g.fillStyle(this.accent, 0.9).fillRoundedRect(sx(-24), sy(-12), 48 * unit, 25 * unit, 4 * unit);
+    g.fillStyle(c.canvas).fillRect(sx(-18), sy(-7), 36 * unit, 13 * unit);
+    g.fillStyle(c.cyan).fillRect(sx(-14), sy(-3), 18 * unit, 3 * unit);
+    const status = this.session.snapshot.screen === 'result' ? c.success : this.accent;
+    g.fillStyle(status).fillCircle(sx(0), sy(-92), 5 * unit);
+    g.lineStyle(2 * unit, status, 0.45).strokeCircle(sx(0), sy(-92), 12 * unit);
   }
 }

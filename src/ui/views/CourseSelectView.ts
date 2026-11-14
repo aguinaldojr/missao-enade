@@ -3,6 +3,7 @@ import { courses } from '../../app/courses';
 import type { CourseId } from '../../domain/models/Course';
 import type { QuestionMissionConfig } from '../../domain/models/QuestionMission';
 import { button, element } from '../components/elements';
+import { puzzleFamilyVisuals } from '../../config/visual';
 
 export interface CourseActions {
   select: (id: CourseId) => void;
@@ -33,6 +34,7 @@ export function courseSelectView(selected: CourseId | null, selectedMissionId: s
   group.append(legend);
   for (const course of courses) {
     const label = element('label', 'course-card');
+    label.dataset.course = course.id.toLowerCase();
     const radio = element('input', 'course-radio');
     radio.type = 'radio';
     radio.name = 'course';
@@ -42,7 +44,9 @@ export function courseSelectView(selected: CourseId | null, selectedMissionId: s
     radio.addEventListener('change', () => actions.select(course.id), { signal });
     const copy = element('span', 'course-copy');
     copy.append(element('strong', 'course-code', course.id), element('span', 'course-name', course.name));
-    label.append(radio, copy);
+    const symbol = element('span', 'course-symbol', puzzleFamilyVisuals[course.id].symbol);
+    symbol.setAttribute('aria-hidden', 'true');
+    label.append(radio, symbol, copy);
     group.append(label);
   }
   const missionTitle = element('h2', 'mission-select-title', gameConfig.copy.missionTitle);

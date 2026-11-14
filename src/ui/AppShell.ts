@@ -34,6 +34,7 @@ export class AppShell {
     const skip = element('a', 'skip-link', gameConfig.copy.skip);
     skip.href = '#conteudo';
     this.content.id = 'conteudo';
+    this.content.tabIndex = -1;
     this.status.setAttribute('role', 'status');
     this.status.setAttribute('aria-live', 'polite');
     this.graphicStatus.setAttribute('role', 'status');

@@ -11,7 +11,16 @@ export function questionView(attempt: Attempt, dispatch: (command: Command) => v
   const view = element('section', 'view question-view');
   const toolbar = element('div', 'question-toolbar');
   toolbar.append(element('p', 'eyebrow', gameConfig.format.challengeProgress(attempt.index + 1, attempt.mission.questionCount)), element('p', 'score', gameConfig.format.score(calculateScore(attempt.answers))));
-  view.append(toolbar, element('p', 'example-warning', gameConfig.copy.challengeExample));
+  const progress = element('div', 'mission-progress');
+  progress.setAttribute('role', 'progressbar');
+  progress.setAttribute('aria-label', 'Progresso da missão');
+  progress.setAttribute('aria-valuemin', '0');
+  progress.setAttribute('aria-valuemax', String(attempt.mission.questionCount));
+  progress.setAttribute('aria-valuenow', String(attempt.index + 1));
+  const progressFill = element('span', 'mission-progress-fill');
+  progressFill.style.width = ((attempt.index + 1) / attempt.mission.questionCount * 100) + '%';
+  progress.append(progressFill);
+  view.append(toolbar, progress, element('p', 'example-warning', gameConfig.copy.challengeExample));
   const title = element('h1', 'question-title', question.prompt);
   title.tabIndex = -1;
   const context = element('p', 'question-context', question.context);
