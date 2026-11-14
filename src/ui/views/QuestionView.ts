@@ -17,6 +17,7 @@ export function questionView(attempt: Attempt, dispatch: (command: Command) => v
   progress.setAttribute('aria-valuemin', '0');
   progress.setAttribute('aria-valuemax', String(attempt.mission.questionCount));
   progress.setAttribute('aria-valuenow', String(attempt.index + 1));
+  progress.setAttribute('aria-valuetext', gameConfig.format.challengeProgress(attempt.index + 1, attempt.mission.questionCount));
   const progressFill = element('span', 'mission-progress-fill');
   progressFill.style.width = ((attempt.index + 1) / attempt.mission.questionCount * 100) + '%';
   progress.append(progressFill);
@@ -25,6 +26,9 @@ export function questionView(attempt: Attempt, dispatch: (command: Command) => v
   title.tabIndex = -1;
   const context = element('p', 'question-context', question.context);
   context.id = 'question-context';
+  context.tabIndex = 0;
+  context.setAttribute('role', 'region');
+  context.setAttribute('aria-label', 'Contexto do desafio');
   view.append(element('p', 'question-category', gameConfig.format.category(question.classification, attempt.courseAtStart)), context, title);
   const form = element('form', 'answer-form');
   const fieldset = element('fieldset', 'answer-options');

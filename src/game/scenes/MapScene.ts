@@ -141,10 +141,10 @@ export class MapScene extends Phaser.Scene {
     this.labels = map.objects.map((object) => this.add.text(
       ox + (object.x + object.width / 2) * scale, oy + (object.y + object.height + 10) * scale,
       object.kind === 'door' ? (this.session.snapshot.exploration.doorUnlocked ? '✓ Liberada' : '▣ Bloqueada')
-        : (object.kind === 'computer' ? '▰ ' : object.kind === 'terminal' ? '◇ ' : '● ') + object.name,
-      { fontFamily: 'Segoe UI, sans-serif', fontSize: Math.max(9, 11 * scale), fontStyle: '600',
+        : object.kind === 'computer' ? '▰ Computador' : object.kind === 'terminal' ? '◇ Terminal' : '● Lia',
+      { fontFamily: 'Segoe UI, sans-serif', fontSize: Math.max(11, 12 * scale), fontStyle: '700',
         color: '#e8f5f0', backgroundColor: '#071f2b',
         padding: { x: 4, y: 2 } },
-    ).setOrigin(0.5, 0));
+    ).setOrigin(0.5, 0).setResolution(Math.min(2, window.devicePixelRatio || 1)));
   }
 }

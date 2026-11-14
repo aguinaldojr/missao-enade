@@ -58,6 +58,9 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   await press(page, 'Ranking', info);
   await page.getByLabel('Tamanho da missão').selectOption('3');
   await expect(page.getByRole('table')).toContainText('Nina Byte (você)');
+  const rankingRegion = page.getByRole('region', { name: 'Tabela do ranking com rolagem horizontal' });
+  await rankingRegion.focus();
+  await expect(rankingRegion).toBeFocused();
   await press(page, '← Voltar', info);
   await press(page, 'Trocar jogador', info);
   await page.getByLabel('Apelido').fill('Caio');

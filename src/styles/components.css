@@ -211,7 +211,8 @@
   .course-symbol { flex-basis: 38px; min-height: 38px; }
   .mission-card::after { display: none; }
   .question-toolbar { position: sticky; z-index: 3; top: 0; }
-  .question-context { font-size: 16px; line-height: 1.65; }
+  .question-context { max-height: 48vh; padding: 16px 18px 22px; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; font-size: 16px; line-height: 1.65; }
+  .question-context::after { content: ""; display: block; height: 1px; }
   .question-title { font-size: 25px; }
   .answer-card { padding: 13px 12px; }
   .answer-copy { font-size: 15px; }

@@ -12,6 +12,9 @@ export function leaderboardTable(entries: readonly LeaderboardEntry[], currentPl
     return empty;
   }
   const wrapper = element('div', 'ranking-table-wrap');
+  wrapper.tabIndex = 0;
+  wrapper.setAttribute('role', 'region');
+  wrapper.setAttribute('aria-label', 'Tabela do ranking com rolagem horizontal');
   const table = element('table', 'ranking-table');
   table.append(element('caption', 'sr-only', gameConfig.copy.rankingTableCaption));
   const head = element('thead', '');
