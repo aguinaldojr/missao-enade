@@ -49,7 +49,7 @@
           "area",
           "competencies",
           "difficulty",
-          "source",
+          "sources",
           "validationStatus"
         ],
         "properties": {
@@ -192,8 +192,11 @@
           "difficulty": {
             "$ref": "urn:n9:editorial#/definitions/difficulty"
           },
-          "source": {
-            "$ref": "urn:n9:editorial#/definitions/source"
+          "sources": {
+            "$ref": "urn:n9:editorial#/definitions/sources"
+          },
+          "traceability": {
+            "$ref": "urn:n9:editorial#/definitions/traceability"
           },
           "validationStatus": {
             "$ref": "urn:n9:editorial#/definitions/validationStatus"

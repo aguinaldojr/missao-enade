@@ -1,6 +1,6 @@
 # N9 — Jornada Digital: padrão editorial do lote-piloto
 
-Consolidação documental — 13/11/2026, horário de Brasília. Versão documental 1.0. Derivada da leitura integral de [lote-comum-01.md](lote-comum-01.md), sem recriar o lote. Este padrão orienta a autoria posterior; não constitui aprovação docente, novo contrato de software ou autorização de publicação.
+Consolidação documental — 13/11/2026, horário de Brasília. Versão documental 1.1. Derivada da leitura integral de [lote-comum-01.md](lote-comum-01.md), sem recriar o lote. Este padrão orienta a autoria posterior; não constitui aprovação docente ou autorização de publicação. A revisão 1.1 registra a estrutura de rastreabilidade e o limite de extensão definidos após a auditoria dos 66 desafios.
 
 **Estado obrigatório deste estágio: provisional-pending-teacher-review.** N9 permanece nome provisório sujeito à aprovação institucional. Os cenários são fictícios; não há chancela do Inep nem afirmação de produto oficial. A consolidação não realizou nova pesquisa normativa ou cotejo independente de originalidade.
 
@@ -8,7 +8,7 @@ Consolidação documental — 13/11/2026, horário de Brasília. Versão documen
 
 Referências do padrão:
 
-- [Plano da coleção](../plano-colecao-enade-2026.md), versão 2.0: IDs, cursos, áreas, competências em síntese, objetivos, dificuldades e cotas.
+- [Plano da coleção](../plano-colecao-enade-2026.md), versão 2.1: IDs, cursos, áreas, competências em síntese, objetivos, dificuldades, cotas e representação de rastreabilidade.
 - [Lote comum 01](lote-comum-01.md): cinco questões já redigidas e uma sequência; modelo de contextualização, feedback e rastreabilidade.
 - [Estrutura de dados](../estrutura-dados-desafios.md) e [especificação documental da missão mista](../especificacao-missao-mista.md): limites entre conteúdo editorial, formato executável e experiência futura.
 - Contratos atuais Question, SequencePuzzle e EditorialMetadata; schemas question, puzzles e editorial, em src. Nenhum deles é alterado por este documento.
@@ -59,14 +59,15 @@ O puzzle usa a mesma base documental, com narrativa, blocos, ordem correta justi
 | area | Nome descritivo previsto no slot; o código da área fica na rastreabilidade documental. |
 | competencies | Preservar as sínteses pertinentes aos cursos e ao slot; não inventar código oficial nem declarar domínio medido. |
 | difficulty | introductory, intermediate ou advanced conforme o plano. Mudança depende de decisão registrada, não ajuste silencioso. |
-| source | Uma fonte principal com type e description; url, year e documentId quando disponíveis e conferidos. Referências complementares ficam na ficha. |
+| sources | Lista com exatamente uma principal e fontes normativas complementares ou técnicas quando aplicáveis; type, description e opcionais url, year e documentId. |
+| traceability | Título editorial, objetivo e localizadores; obrigatório na futura conversão dos 66 desafios. |
 | validationStatus | provisional-pending-teacher-review em todo material desta etapa. |
 
 Question não tem campo kind. Seus campos próprios são id, version, classification, context, prompt, options, correctOptionId, explanation e feedbackByOption; example/editorialStatus são marcadores opcionais de compatibilidade, não aprovação.
 
 SequencePuzzle usa kind sequence, id, title, narrative, blocks, correctOrder, hints, explanation, reward e unlocks, além dos metadados comuns. O contrato atual não possui version do puzzle; a revisão do documento deve ser identificada no Markdown.
 
-Título editorial de questão, objetivo, códigos de rastreabilidade, fontes complementares, autoria, riscos e pareceres não devem ser inseridos como propriedades extras do objeto estrito. Preservar additionalProperties: false nos contratos existentes, sem alterá-los nesta fase.
+Título editorial, objetivo e localizadores cabem no bloco estrito e opcional `traceability`. A fonte principal e as fontes normativas complementares ou técnicas cabem na lista `sources`, cada uma com papel explícito. Autoria, riscos, checklist e pareceres permanecem na ficha documental. Não criar propriedades soltas; preservar `additionalProperties: false`.
 
 ## 4. Contextualização e comando da questão
 
@@ -78,6 +79,7 @@ Título editorial de questão, objetivo, códigos de rastreabilidade, fontes com
 - Fixar unidade de contagem, intervalo, população e denominador. Se identidade individual importa, fornecer cruzamento ou declarar a limitação.
 - Explicar termos técnicos necessários no recorte comum. O contexto não deve acrescentar profundidade exclusiva de um curso.
 - Evitar complexidade por extensão de texto. Dificuldade deve vir da comparação ou integração de evidências previstas no slot.
+- Manter contexto, enunciado e cinco alternativas em até **250 palavras**; buscar até 220 quando houver tabela. Exceder esse limite exige justificativa editorial e teste específico de leitura em tela pequena.
 
 No lote-piloto, Q01 exige descrição sem inferência causal; Q02 aplica finalidade explícita; Q03 trata recepção e clareza; Q04 compara barreiras distintas; Q05 distingue exposição, cobertura e efeitos. Não reutilizar essas situações por simples troca de nomes ou números.
 
@@ -146,7 +148,7 @@ O registro do lote comum 01 informa consulta em 13/11/2026, falha de recuperaç�
 
 No lote, F05 sustenta o recorte comum de Formação Geral das cinco questões; F06 é principal do puzzle, com corroboração documental F07/SI, F08/TADS, F09/TGTI e F10/TRC. Esse vínculo não prova a ordem do procedimento fictício nem dispensa conferência por curso.
 
-Source.type official-reference descreve a natureza da referência principal, sem transformar narrativa autoral em questão oficial. Fonte histórica deve ter edição/caderno/questão/página identificados e limite de leitura registrado. Não apresentar síntese indireta como leitura direta.
+Em `sources`, usar exatamente um papel `primary`; usar `normative-complementary` para corroborar matriz ou curso e `technical` para RFC, norma técnica ou fonte acadêmica. `type: official-reference` descreve a natureza da referência, sem transformar narrativa autoral em questão oficial. Fonte histórica deve ter edição/caderno/questão/página identificados e limite de leitura registrado. Não apresentar síntese indireta como leitura direta. Entradas antigas com `source` singular são normalizadas em memória para uma fonte `primary`.
 
 Dúvida grave de fonte, resposta, elegibilidade ou ordem deve ser registrada e suspender avanço até resolução. O status deste lote permanece provisional-pending-teacher-review conforme a etapa atual; mudança posterior para needs-revision/approved-teacher/rejected exige decisão explícita registrada, não inferência de schema ou teste aprovado.
 

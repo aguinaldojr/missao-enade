@@ -1,6 +1,6 @@
 # Estrutura dos dados de desafios — contratos editoriais generalizados
 
-Atualização de 13/11/2026 para o Prompt 7.1. O levantamento anterior identificou contratos assimétricos; esta versão descreve a migração autorizada. Código-base: `e19b44a`. A entrega altera tipos, schemas, validadores, repositórios de conteúdo, metadados dos exemplos e testes. **Não altera interface, mapa, mecânicas, experiência do jogador ou formatos de progresso.**
+Atualização de 13/11/2026 para o Prompt 7.1, complementada pela correção da auditoria dos 66 desafios. O levantamento anterior identificou contratos assimétricos; esta versão descreve a migração autorizada e a preservação de múltiplas fontes e rastreabilidade. A entrega altera tipos, schemas, normalizadores, repositórios de conteúdo, exemplos e testes. **Não altera interface, mapa, mecânicas, experiência do jogador ou formatos de progresso.**
 
 N9 continua provisório e sujeito à aprovação institucional. ENADE permanece apenas como referência pedagógica interna. Todo conteúdo distribuído continua fictício e pendente de revisão docente. Casos “aprovados” existem apenas como fixtures técnicas fictícias dos testes; nenhuma aprovação pedagógica real foi concedida.
 
@@ -8,7 +8,7 @@ N9 continua provisório e sujeito à aprovação institucional. ENADE permanece 
 
 | Conceito | Contrato atual | Limite desta entrega |
 | --- | --- | --- |
-| Metadados compartilhados | EditorialMetadata | Questões e sequências usam os mesmos oito grupos de campos; source tem estrutura própria. |
+| Metadados compartilhados | EditorialMetadata | Questões e sequências usam os mesmos campos; `sources` diferencia papéis e `traceability` preserva título, objetivo e localizadores. |
 | Questão contextualizada | Question extends EditorialMetadata | Cinco alternativas e gabarito único; sem mudança da interação existente. |
 | Catálogo de questões | QuestionCatalog | mode, versão e fase generalizados; editoriais podem ter uma ou mais questões. A fase jogável atual exige dez para o curso solicitado. |
 | Sequência Lógica | SequencePuzzle extends EditorialMetadata | Único tipo de puzzle implementado; blocos, dicas e recompensa preservados. |
@@ -17,7 +17,7 @@ N9 continua provisório e sujeito à aprovação institucional. ENADE permanece 
 | Cursos/trilhas | Course / CourseId | Cinco cursos; sem LearningTrack, campanhas novas ou importação de areas.json. |
 | Progresso | ExampleResult, ExplorationState, PuzzleProgress | Sem migração nem exclusão das três chaves existentes. |
 
-O conjunto de metadados é `collectionId`, `pedagogicalOrigin`, `courses`, `area`, `competencies`, `difficulty`, `source`, `validationStatus` — oito campos, todos obrigatórios no formato canônico. Não há aliases adicionais obrigatórios.
+O conjunto obrigatório é `collectionId`, `pedagogicalOrigin`, `courses`, `area`, `competencies`, `difficulty`, `sources`, `validationStatus`. `traceability` é opcional para compatibilidade geral e obrigatório por política editorial na futura conversão da coleção de 66 desafios. O antigo `source` singular é aceito somente como entrada e normalizado em memória.
 
 ## 2. Fontes, declarações e validadores
 
@@ -25,7 +25,7 @@ O conjunto de metadados é `collectionId`, `pedagogicalOrigin`, `courses`, `area
 
 | Arquivo | Estruturas/finalidade |
 | --- | --- |
-| `src/domain/models/EditorialMetadata.ts` | EditorialMetadata, EditorialSource, Difficulty, SourceType, ValidationStatus, ContentMode, LearningCollection, CollectionStatus e suas constantes. |
+| `src/domain/models/EditorialMetadata.ts` | EditorialMetadata, EditorialSource, EditorialTraceability, SourceRole, Difficulty, SourceType, ValidationStatus, ContentMode, LearningCollection, CollectionStatus e suas constantes. |
 | `src/domain/models/Question.ts` | Question herda EditorialMetadata; QuestionCatalog generalizado; LegacyQuestion para compatibilidade. |
 | `src/domain/puzzles/SequencePuzzle.ts` | SequencePuzzle herda EditorialMetadata; LegacySequencePuzzle e progresso inalterado. |
 | `src/content/collections.json` | Catálogo de três coleções: uma planejada e duas de exemplos piloto. |
@@ -34,7 +34,7 @@ O conjunto de metadados é `collectionId`, `pedagogicalOrigin`, `courses`, `area
 | `src/infrastructure/content/JsonCollectionRepository.ts` | Valida formato e IDs únicos; resolve referências das questões e puzzles. |
 | `src/infrastructure/content/editorialValidation.ts` | Ajv compartilhado, referências de coleção e formato http-url, sem acesso à rede. |
 | `src/infrastructure/content/legacyEditorial.ts` | Normaliza entradas históricas estritas, sem mutação ou escrita de progresso. |
-| `src/schemas/editorial.schema.json` | Definições comuns e source estrita; refs por urn:n9:editorial. |
+| `src/schemas/editorial.schema.json` | Definições comuns, `sources` e `traceability` estritas; refs por urn:n9:editorial. |
 | `src/schemas/collections.schema.json` | Coleções estritas e estados planned/pilot/active/archived. |
 | `src/schemas/question.schema.json` | Catálogo canônico generalizado de questões, com refs aos metadados comuns. |
 | `src/schemas/puzzles.schema.json` | Array canônico de sequências, com collectionId e os mesmos metadados. |
@@ -118,7 +118,8 @@ A lista inclui implementação e documentos de planejamento, cujos campos não v
 | `area` | string | Sim | Nome descritivo não branco; ainda não é chave de areas.json. | Algoritmos |
 | `competencies` | string[] | Sim | Ao menos um texto não branco, sem duplicação; sem comprovação automática de domínio. | ["Interpretar dados e restrições em situações fictícias."] |
 | `difficulty` | Difficulty | Sim | introductory, intermediate ou advanced. | introductory |
-| `source` | EditorialSource | Sim | Objeto estrito da tabela seguinte. | {"type":"fictional","description":"Exemplo fictício."} |
+| `sources` | EditorialSource[] | Sim | Uma ou mais fontes estritas; exatamente uma com papel `primary`. | [{"role":"primary","type":"fictional","description":"Exemplo fictício."}] |
+| `traceability` | EditorialTraceability | Não no contrato geral; sim na conversão dos 66 | Título editorial, objetivo e localizadores não vazios. | {"title":"Exemplo","objective":"Interpretar dados.","locators":["SLOT-01"]} |
 | `validationStatus` | ValidationStatus | Sim | provisional-pending-teacher-review, needs-revision, approved-teacher ou rejected. | provisional-pending-teacher-review |
 
 
@@ -126,6 +127,7 @@ A lista inclui implementação e documentos de planejamento, cujos campos não v
 
 | Campo | Tipo | Obrigatório | Finalidade e valores | Exemplo |
 | --- | --- | --- | --- | --- |
+| `role` | SourceRole | Sim | primary, normative-complementary ou technical; deve existir exatamente uma principal. | primary |
 | `type` | SourceType | Sim | official-reference, institutional, authorial ou fictional. | fictional |
 | `description` | string | Sim | Texto não vazio/não branco; descreve a fonte. | Conteúdo fictício do protótipo; pendente de revisão docente. |
 | `url` | string | Não | URL absoluta HTTP/HTTPS válida, sem espaços; formato local http-url. Não é buscada na rede. | https://example.invalid/referencia-ficticia |
@@ -141,6 +143,7 @@ Os opcionais podem estar ausentes. Se estiverem presentes, devem ser válidos; `
 | --- | --- | --- |
 | Difficulty / DIFFICULTIES | introductory, intermediate, advanced | Dificuldade editorial reutilizável; não códigos D1/D2/D3 da matriz externa. |
 | SourceType / SOURCE_TYPES | official-reference, institutional, authorial, fictional | Natureza da referência. |
+| SourceRole / SOURCE_ROLES | primary, normative-complementary, technical | Papel da fonte na rastreabilidade. |
 | ValidationStatus / VALIDATION_STATUSES | provisional-pending-teacher-review, needs-revision, approved-teacher, rejected | Situação da revisão docente. |
 | ContentMode / CONTENT_MODES | example, provisional, pilot, approved | Contexto do catálogo e marcador legado editorialStatus. Não substitui validationStatus. |
 | CollectionStatus / COLLECTION_STATUSES | planned, pilot, active, archived | Ciclo de vida da coleção. Não é política automática de publicação. |
@@ -148,7 +151,7 @@ Os opcionais podem estar ausentes. Se estiverem presentes, devem ser válidos; `
 | Classification / CLASSIFICATIONS | COMUM, CC, SI, TADS, TGTI, TRC | Rótulo de classificação das questões. |
 | OptionId / OPTION_IDS | A, B, C, D, E | Alternativa única. |
 
-`validationStatus` é o campo canônico de revisão. Não inferir aprovação a partir de `mode`, `editorialStatus`, `source.type`, `example: false` ou status da coleção. Os validadores aceitam esses estados como dados; **não implementam seleção de conteúdo para publicação**. Isso é necessário para importar material pendente/rejeitado para revisão, sem escondê-lo ou transformá-lo.
+`validationStatus` é o campo canônico de revisão. Não inferir aprovação a partir de `mode`, `editorialStatus`, `sources[].type`, `example: false` ou status da coleção. Os validadores aceitam esses estados como dados; **não implementam seleção de conteúdo para publicação**. Isso é necessário para importar material pendente/rejeitado para revisão, sem escondê-lo ou transformá-lo.
 
 ## 4. Coleções e cursos
 
@@ -252,6 +255,7 @@ A dificuldade aceita introductory/intermediate/advanced; fonte aceita os quatro 
 | --- | --- | --- |
 | Questão antiga sem metadados | LegacyQuestion é reconhecida por schema histórico estrito; adiciona metadados de exemplo em memória. | Nunca promovida a aprovada, sem alterar entrada nem respostas. |
 | Puzzle antigo com collection | LegacySequencePuzzle é reconhecido; renomeia collection → collectionId em nova cópia. | IDs, blocos, ordens, dicas, fonte e recompensa preservados. |
+| Questão ou puzzle com `source` singular | O normalizador cria `sources:[{role:"primary",...source}]` e remove o alias somente da cópia em memória. | Compatibilidade sem regravar arquivo ou progresso; nenhuma fonte é descartada. |
 | Entrada canônica incompleta | Rejeitada pelo schema; não recebe defaults silenciosos. | Erro de importação não é mascarado como legado. |
 | Campos desconhecidos ou aliases misturados | Rejeitados; schemas de ambas as formas são estritos. | Não há remoção silenciosa de atributos nem prioridade ambígua entre collection/collectionId. |
 | Catálogo com itens antigos e novos | Cada item é normalizado se reconhecer integralmente o legado; envelope canônico é validado no final. | Permite migração gradual sem ampliar a enumeração de campos. |
@@ -268,7 +272,7 @@ Os schemas `legacy-*.schema.json` preservam os literais **de reconhecimento hist
 - area: Raciocínio e competências digitais (exemplos).
 - competencies: Interpretar dados e restrições em situações fictícias.
 - difficulty: introductory.
-- source: fictional, com descrição de exemplo pendente.
+- sources: uma fonte primary/fictional, com descrição de exemplo pendente.
 - validationStatus: provisional-pending-teacher-review.
 
 Esses descritores genéricos não são códigos oficiais nem mapeamento de competências da matriz. A aplicação de áreas e competências pedagógicas específicas depende de revisão futura. Puzzles mantêm seus metadados descritivos e trocam somente o nome da chave de coleção.
@@ -354,9 +358,17 @@ Cópia do exemplo atual, com os novos metadados. Não é uma questão oficial ap
     "Interpretar dados e restrições em situações fictícias."
   ],
   "difficulty": "introductory",
-  "source": {
-    "type": "fictional",
-    "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+  "sources": [
+    {
+      "role": "primary",
+      "type": "fictional",
+      "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+    }
+  ],
+  "traceability": {
+    "title": "Exemplo de interpretação de dados",
+    "objective": "Interpretar a proporção registrada sem extrapolar a evidência.",
+    "locators": ["EXEMPLO-QUESTION-01"]
   },
   "validationStatus": "provisional-pending-teacher-review"
 }
@@ -387,9 +399,17 @@ O arquivo [exemplo-desafios.json](exemplo-desafios.json) é um array com a cópi
     "mapId": "base-n9",
     "objectId": "door"
   },
-  "source": {
-    "type": "fictional",
-    "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+  "sources": [
+    {
+      "role": "primary",
+      "type": "fictional",
+      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+    }
+  ],
+  "traceability": {
+    "title": "Sequência de um algoritmo",
+    "objective": "Ordenar entrada, validação, processamento e saída pelas dependências declaradas.",
+    "locators": ["EXEMPLO-SEQUENCE-01"]
   },
   "validationStatus": "provisional-pending-teacher-review",
   "id": "seq-algorithm-01",

@@ -1,6 +1,6 @@
 # N9 — Jornada Digital: plano da primeira coleção pedagógica
 
-Versão de planejamento: 2.0 — 13/11/2026, horário de Brasília. Identificador interno: `enade-2026`.
+Versão de planejamento: 2.1 — 13/11/2026, horário de Brasília. Identificador interno: `enade-2026`. A revisão 2.1 preserva os 66 slots e atualiza somente a futura representação de fontes e rastreabilidade após a auditoria geral.
 
 **Estado de todo conteúdo proposto: `provisional-pending-teacher-review`.** Este documento não contém questões completas, JSON definitivo, aprovação pedagógica nem implementação. N9 é uma identidade provisória, sujeita à aprovação institucional.
 
@@ -47,10 +47,11 @@ Essas situações pertencem ao registro documental de evidências; **não são v
 | `area` | Nome descritivo da área principal. Os IDs deste plano são referências editoriais, sem importar `areas.json` ou criar campo adicional no objeto. |
 | `competencies` | Textos não vazios; transpor a síntese pertinente ao curso e o objetivo revisado. IDs internos do mapa servem apenas à rastreabilidade documental. |
 | `difficulty` | Apenas `introductory`, `intermediate`, `advanced`. Na matriz legada, D1/D2/D3 são convertidos respectivamente a esses valores como estimativa inicial. |
-| `source` | Objeto estrito: `type`, `description`; opcionais `url`, `year`, `documentId`. Não acrescentar arrays de fontes ou campos de parecer ao objeto. |
+| `sources` | Lista estrita com exatamente uma fonte `primary`; admite `normative-complementary` e `technical`. Cada fonte contém `type`, `description` e, opcionalmente, `url`, `year`, `documentId`. |
+| `traceability` | Bloco estrito com título editorial, objetivo e localizadores. Opcional no contrato geral por compatibilidade, mas obrigatório na conversão desta coleção. |
 | `validationStatus` | `provisional-pending-teacher-review` em todas as propostas desta entrega. |
 
-Tipos de fonte permitidos: `official-reference`, `institutional`, `authorial`, `fictional`. Nos slots, a fonte primária prevista é `official-reference`: `description` esclarecerá que a referência normativa orienta uma criação autoral, sem autoria ou chancela do Inep. A narrativa pode ser fictícia sem converter a portaria em fonte fictícia. Fontes complementares e justificativas ficam na ficha editorial documental; o contrato comporta uma fonte principal. PPC futuro poderá fundamentar fonte `institutional`; criação sem referência externa poderá usar `authorial`; exemplos de demonstração fictícios preservam `fictional`.
+Tipos de fonte permitidos: `official-reference`, `institutional`, `authorial`, `fictional`. Nos slots, a fonte primária prevista é `official-reference`: `description` esclarecerá que a referência normativa orienta uma criação autoral, sem autoria ou chancela do Inep. A narrativa pode ser fictícia sem converter a portaria em fonte fictícia. Corroborações normativas e fontes técnicas são preservadas em `sources` com seus papéis; justificativas, riscos e pareceres continuam na ficha editorial. PPC futuro poderá fundamentar fonte `institutional`; criação sem referência externa poderá usar `authorial`; exemplos de demonstração fictícios preservam `fictional`.
 
 Os outros estados aceitos pelo contrato são `needs-revision`, `approved-teacher` e `rejected`; nenhum deles é atribuído nesta etapa. O ciclo `planned` da coleção e eventual `mode: pilot` de catálogo não aprovam nem publicam conteúdo automaticamente.
 
@@ -923,7 +924,7 @@ As quantidades e distribuições são decisões pedagógicas propostas, sem peso
 
 São **60 questões únicas question e seis puzzles sequence**, contados separadamente. As dez questões COM admitem CC, SI, TADS, TGTI e TRC; cada grupo específico admite somente o curso indicado. Cada curso tem vinte questões e dois puzzles elegíveis. Compatível/executável, nesta seção, significa formato já suportado pelo contrato; não significa item escrito, registrado, aprovado ou ativado no jogo.
 
-**Metadados herdados por cada um dos 66 slots:** collectionId enade-2026; pedagogicalOrigin conforme 2.3; courses explícitos na ficha; area como nome descritivo indicado pelo ID de planejamento; competencies como textos das sínteses referenciadas; difficulty individual; source do tipo official-reference, com descrição de criação autoral orientada pela fonte; validationStatus **provisional-pending-teacher-review**. IDs de área, evidência, parecer, missão possível e evolução de interação são informações documentais; não acrescentam propriedades ao objeto estrito.
+**Metadados herdados por cada um dos 66 slots:** collectionId enade-2026; pedagogicalOrigin conforme 2.3; courses explícitos na ficha; area como nome descritivo indicado pelo ID de planejamento; competencies como textos das sínteses referenciadas; difficulty individual; sources com principal official-reference e complementos aplicáveis; traceability com título, objetivo e localizadores; validationStatus **provisional-pending-teacher-review**. Evidência, parecer, missão possível e evolução de interação continuam informações documentais, sem propriedades soltas.
 
 Cada question terá futuramente cinco alternativas A–E, uma correta, explicação geral e feedback por alternativa. Seus objetivos são identificar, interpretar, comparar ou selecionar soluções a partir de materiais fornecidos: não alegam medir execução prática de configuração, depuração ou modelagem. Cada sequence terá cinco blocos neste planejamento, permutação completa, ao menos três dicas diferentes e explicação; 4–7 é o intervalo permitido pelo contrato. Não há enunciados, alternativas, blocos completos ou ordens de resposta escritos nesta etapa.
 
@@ -1871,7 +1872,7 @@ Todas as fichas de 11.2–11.8 registram fonte principal, situação de evidênc
 | C01–C03 e PPCs futuros | Conferência curricular dos percursos | Conferência curricular | Alinhamento proposto; adequação aos PPCs pendente; não sustentar novo objeto técnico só em leitura ainda não concluída. |
 | L03/L05 | Contrato das 60 questions e seleção futura | Contrato das seis sequences e missão mista documental | Sustentação de formato, não comprovação pedagógica ou implementação dos modos. |
 
-Nas faixas de IDs da tabela, 01–10 significa dez IDs distintos com o prefixo completo da respectiva família. O quadro não multiplica contagens por fonte complementar. Uma fonte principal no objeto source não dispensa registrar as demais evidências na ficha de curadoria, especialmente para comuns técnicos.
+Nas faixas de IDs da tabela, 01–10 significa dez IDs distintos com o prefixo completo da respectiva família. O quadro não multiplica contagens por fonte complementar. `sources` preserva referências estruturadas; a ficha de curadoria continua necessária para evidências, limites de acesso e pareceres, especialmente nos comuns técnicos.
 
 Antes da elaboração final, localizar em cada ato a habilidade e o objeto pertinente, registrando curso, grau, edição, componente, título/órgão, data identificada ou não identificação, URL, artigo/página e justificativa. Se analisar item histórico, registrar questão, caderno, página, gabarito/padrão e propriedades abstratas estudadas. Campos não admitidos no objeto estrito ficam na ficha documental.
 

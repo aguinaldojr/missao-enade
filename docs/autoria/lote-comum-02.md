@@ -1,8 +1,8 @@
 # N9 — Jornada Digital: lote comum 02
 
-Proposta editorial — 13/11/2026, horário de Brasília. Versão documental 1.0. **Todos os cinco itens permanecem provisional-pending-teacher-review.** Cenários e dados fictícios; autoria assistida por IA, com responsável humano pela consolidação a designar. N9 é nome provisório sujeito à aprovação institucional. Este material não é oficial nem tem chancela do Inep.
+Proposta editorial — 13/11/2026, horário de Brasília. Versão documental 1.1. **Todos os cinco itens permanecem provisional-pending-teacher-review.** Cenários e dados fictícios; autoria assistida por IA, com responsável humano pela consolidação a designar. N9 é nome provisório sujeito à aprovação institucional. Este material não é oficial nem tem chancela do Inep.
 
-Escopo: exclusivamente E26-Q-COM-06 a E26-Q-COM-10, versão 1 de cada questão. Nenhum puzzle ou item específico é produzido aqui. Autoria em Markdown, sem JSON, importação, publicação ou mudança do jogo e de seu progresso.
+Escopo: exclusivamente E26-Q-COM-06 a E26-Q-COM-10. Q06–Q08 permanecem na versão 1; Q09–Q10 passam à versão 2 após redução editorial controlada. Nenhum puzzle ou item específico é produzido aqui. Autoria em Markdown, sem JSON, importação, publicação ou mudança do jogo e de seu progresso.
 
 ## 1. Referências, conferência prévia e convenções
 
@@ -127,6 +127,7 @@ O objetivo acordado é que as duas equipes compreendam as modificações e consi
 | source.type / year / documentId | official-reference / 2026 / Portaria Inep 157/2026 |
 | source.url | https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/e402e087-9a8b-4409-84da-4c0cf7533472.pdf |
 | source.description | Referência normativa para criação autoral de redes: fundamentos de comunicação; cenário e solução fictícios, sem autoria ou chancela do Inep. Corroboração por curso registrada na ficha documental. |
+| Papéis das fontes na conversão futura | primary: F06; normative-complementary: F07/SI, F08/TADS, F09/TGTI e F10/TRC, com localizadores na seção 8 |
 | Status editorial / validationStatus | provisional-pending-teacher-review |
 
 **Competências / competencies — textos propostos, vinculados às sínteses do plano:**
@@ -207,6 +208,7 @@ Uma terceira tentativa é executada diretamente no computador do serviço, sem p
 | source.type / year / documentId | official-reference / 2026 / Portaria Inep 157/2026 |
 | source.url | https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/e402e087-9a8b-4409-84da-4c0cf7533472.pdf |
 | source.description | Referência normativa para criação autoral de sistemas operacionais: fundamentos; cenário e solução fictícios, sem autoria ou chancela do Inep. Corroboração por curso registrada na ficha documental. |
+| Papéis das fontes na conversão futura | primary: F06; normative-complementary: F07/SI, F08/TADS, F09/TGTI e F10/TRC, com localizadores na seção 8 |
 | Status editorial / validationStatus | provisional-pending-teacher-review |
 
 **Competências / competencies — textos propostos, vinculados às sínteses do plano:**
@@ -273,7 +275,7 @@ Há 12 unidades livres no computador, mas elas não são transferidas automatica
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-COM-09 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / COMUM |
 | Título editorial | Drenar sem transferir o problema |
 | collectionId | enade-2026 |
@@ -296,21 +298,21 @@ Há 12 unidades livres no computador, mas elas não são transferidas automatica
 
 ### Texto ao jogador
 
-**Contexto.** Uma comunidade fictícia próxima à Base N9 avalia intervenções de drenagem para um cenário de chuva definido. A água que sai do setor Alto chega ao setor Baixo. O setor Baixo já tem menos infraestrutura e mais moradias expostas. Para não transferir o problema, o acordo comunitário exige simultaneamente:
+**Contexto.** Uma comunidade fictícia avalia a drenagem entre os setores Alto e Baixo. A água do Alto chega ao Baixo, que tem menos infraestrutura e mais moradias expostas. Para não transferir o problema, o acordo exige:
 
 1. proteger pelo menos 30 moradias do setor Baixo;
 2. não aumentar a vazão de pico que sai do Alto em direção ao Baixo;
 3. preservar pelo menos 90 metros quadrados de solo permeável no Alto.
 
-Vazão de pico é o maior volume de água por segundo no cenário; antes da intervenção, são 12 litros por segundo. Solo permeável permite infiltração. As alternativas apresentam projeções fictícias para a mesma chuva, todas de mesmo custo e viáveis neste exercício. Considere as projeções para a escolha; não há critério adicional de desempate.
+Antes da intervenção, a vazão de pico do Alto para o Baixo é 12 litros por segundo. As projeções usam a mesma chuva, têm igual custo e são viáveis no exercício. Não há outro critério de desempate.
 
 **Enunciado.** Qual proposta cumpre o acordo sem trocar o atendimento de uma exigência pelo descumprimento de outra?
 
-- **A.** Proteger 32 moradias no Baixo, projetar vazão de 11 litros por segundo e preservar 95 metros quadrados permeáveis no Alto.
-- **B.** Proteger 44 moradias no Baixo, projetar vazão de 14 litros por segundo e preservar 110 metros quadrados permeáveis no Alto.
-- **C.** Proteger 38 moradias no Baixo, projetar vazão de 10 litros por segundo e preservar 80 metros quadrados permeáveis no Alto.
-- **D.** Proteger 26 moradias no Baixo, projetar vazão de 9 litros por segundo e preservar 105 metros quadrados permeáveis no Alto.
-- **E.** Proteger 29 moradias no Baixo, projetar vazão de 12 litros por segundo e preservar 90 metros quadrados permeáveis no Alto.
+- **A.** Proteger 32 moradias; vazão de 11 litros por segundo; preservar 95 metros quadrados permeáveis.
+- **B.** Proteger 44 moradias; vazão de 14 litros por segundo; preservar 110 metros quadrados permeáveis.
+- **C.** Proteger 38 moradias; vazão de 10 litros por segundo; preservar 80 metros quadrados permeáveis.
+- **D.** Proteger 26 moradias; vazão de 9 litros por segundo; preservar 105 metros quadrados permeáveis.
+- **E.** Proteger 29 moradias; vazão de 12 litros por segundo; preservar 90 metros quadrados permeáveis.
 
 ### Resposta, explicação e feedbacks
 
@@ -354,7 +356,7 @@ Vazão de pico é o maior volume de água por segundo no cenário; antes da inte
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-COM-10 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / COMUM |
 | Título editorial | Troca de equipe sem liberar o controle |
 | collectionId | enade-2026 |
@@ -368,6 +370,7 @@ Vazão de pico é o maior volume de água por segundo no cenário; antes da inte
 | source.type / year / documentId | official-reference / 2026 / Portaria Inep 157/2026 |
 | source.url | https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/e402e087-9a8b-4409-84da-4c0cf7533472.pdf |
 | source.description | Referência normativa para criação autoral de proteção da informação: fundamentos; cenário e solução fictícios, sem autoria ou chancela do Inep. Corroboração por curso registrada na ficha documental. |
+| Papéis das fontes na conversão futura | primary: F06; normative-complementary: F07/SI, F08/TADS, F09/TGTI e F10/TRC, com localizadores na seção 8 |
 | Status editorial / validationStatus | provisional-pending-teacher-review |
 
 **Competências / competencies — textos propostos, vinculados às sínteses do plano:**
@@ -380,19 +383,19 @@ Vazão de pico é o maior volume de água por segundo no cenário; antes da inte
 
 ### Texto ao jogador
 
-**Contexto.** O painel de rotas de carrinhos da Base N9 fictícia é atualizado por uma equipe de manutenção e consultado pela equipe de circulação. O ativo a proteger é a configuração das rotas: uma alteração indevida pode exibir um trajeto errado. Uma pessoa encerrou seu vínculo com a manutenção e ainda conhece a credencial compartilhada usada para editar. Não há evidência de comprometimento do computador ou de acesso por outra via.
+**Contexto.** A manutenção edita o painel fictício de rotas da Base N9; a equipe de circulação apenas o consulta. Uma pessoa desligada da manutenção ainda conhece a credencial compartilhada de edição. Não há evidência de outra via de acesso.
 
-Para a troca de equipe, devem valer três condições: a pessoa desligada perder acesso de edição; cada edição futura ficar associada a quem a realizou; a circulação permanecer com permissão somente de consulta, sem depender da presença de alguém da manutenção.
+O plano deve revogar esse acesso, identificar quem realiza cada edição e manter a circulação com consulta independente da manutenção.
 
-O sistema permite criar contas individuais, desativar credenciais, separar permissão de consulta e edição e registrar edições pela conta utilizada. Neste exercício, as contas individuais não são compartilhadas e a troca pode ocorrer sem interrupção da consulta. Não há outra função ou proteção implícita.
+O sistema permite contas individuais não compartilhadas, desativação de credenciais, permissões separadas e registro da conta usada. A troca não interrompe a consulta.
 
 **Enunciado.** Qual plano atende às três condições para esse risco, com os recursos informados?
 
-- **A.** Trocar a senha de edição e entregá-la à manutenção atual; manter a consulta separada e registrar as edições pela credencial coletiva.
-- **B.** Criar contas individuais de edição e desativar a credencial antiga; condicionar cada consulta à autorização de alguém da manutenção.
-- **C.** Desativar a credencial antiga e usar contas individuais de edição com registro; manter para circulação uma permissão separada de consulta.
-- **D.** Criar contas individuais de edição com registro e consulta separada; manter a credencial antiga disponível como acesso alternativo da manutenção.
-- **E.** Desativar a credencial antiga e criar contas individuais com registro; conceder à circulação a mesma permissão de edição usada pela manutenção.
+- **A.** Trocar a senha coletiva de edição; manter consulta separada e registrar edições pela credencial coletiva.
+- **B.** Desativar a credencial antiga e criar contas individuais; exigir autorização da manutenção para cada consulta.
+- **C.** Desativar a credencial antiga, usar contas individuais registradas e manter uma permissão separada de consulta.
+- **D.** Criar contas individuais registradas e consulta separada, mas manter a credencial antiga como acesso alternativo.
+- **E.** Desativar a credencial antiga e criar contas individuais, mas conceder edição à equipe de circulação.
 
 ### Resposta, explicação e feedbacks
 
@@ -596,7 +599,7 @@ Para cada registro, anexar resolução sem gabarito, eventuais respostas alterna
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-COM-09 — versão 1
+### E26-Q-COM-09 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências verificadas | Resolução independente / objeções | Parecer fundamentado / ajustes |
 |---|---|---|---|---|
@@ -614,7 +617,7 @@ Para cada registro, anexar resolução sem gabarito, eventuais respostas alterna
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-COM-10 — versão 1
+### E26-Q-COM-10 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências verificadas | Resolução independente / objeções | Parecer fundamentado / ajustes |
 |---|---|---|---|---|

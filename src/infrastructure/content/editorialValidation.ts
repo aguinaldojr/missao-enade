@@ -18,4 +18,7 @@ export function createEditorialAjv(): Ajv {
 }
 export function validateEditorialReferences(metadata: EditorialMetadata, collections: CollectionRepository): void {
   if (!collections.get(metadata.collectionId)) throw new Error('Coleção inexistente: ' + metadata.collectionId);
+  if (metadata.sources.filter((source) => source.role === 'primary').length !== 1) {
+    throw new Error('Metadados editoriais devem possuir exatamente uma fonte principal.');
+  }
 }

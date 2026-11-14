@@ -1,4 +1,4 @@
-import type { EditorialMetadata } from '../models/EditorialMetadata';
+import type { EditorialMetadata, LegacyEditorialSource } from '../models/EditorialMetadata';
 
 export interface SequencePuzzle extends EditorialMetadata {
   readonly kind: 'sequence';
@@ -13,10 +13,10 @@ export interface SequencePuzzle extends EditorialMetadata {
   readonly unlocks: { readonly mapId: string; readonly objectId: string };
 }
 /** Entrada do formato anterior: somente exemplos provisórios. */
-export type LegacySequencePuzzle = Omit<SequencePuzzle, 'collectionId' | 'difficulty' | 'source' | 'validationStatus'> & {
+export type LegacySequencePuzzle = Omit<SequencePuzzle, 'collectionId' | 'difficulty' | 'sources' | 'validationStatus'> & {
   readonly collection: string;
   readonly difficulty: 'introductory';
-  readonly source: { readonly type: 'fictional'; readonly description: string };
+  readonly source: LegacyEditorialSource & { readonly type: 'fictional' };
   readonly validationStatus: 'provisional-pending-teacher-review';
 };
 export interface SequenceProgress {

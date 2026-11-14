@@ -362,6 +362,7 @@ Em uma observação sintética de 30 minutos, cada pessoa foi contada uma vez. T
 | source.type / year / documentId | official-reference / 2026 / Portaria Inep 157/2026 |
 | source.url | https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/e402e087-9a8b-4409-84da-4c0cf7533472.pdf |
 | source.description | Referência normativa de riscos e segurança para procedimento fictício; corroboração dos demais cursos na ficha. A portaria não prescreve esta sequência. |
+| Papéis das fontes na conversão futura | primary: F06; normative-complementary: F07/SI, F08/TADS, F09/TGTI e F10/TRC, com localizadores na seção 9 |
 | Status editorial / validationStatus | provisional-pending-teacher-review |
 
 **Competências / competencies — textos propostos:**
@@ -470,7 +471,7 @@ C/A/E/B/D não segue ciclo alfabético ou alternância simples. Cada posição a
 | F07 — Portaria nº 168: diretrizes do componente específico de Bacharelado em Sistemas de Informação | p. 96; art. 5º II, b.3–b.4; art. 6º XVII; reprodução Ufopa, p. 2 | Corrobora gestão da informação, decisão por evidências e segurança de SI. |
 | F08 — Portaria Inep nº 169: diretrizes do componente específico de Tecnologia em Análise e Desenvolvimento de Sistemas | p. 96; art. 5º II, b.1; art. 6º XVII; reprodução ABMES, pp. 2–3 | Corrobora segurança de produtos e princípios de segurança cibernética em recorte de reconhecimento. |
 | F09 — Portaria Inep nº 171: diretrizes do componente específico de Tecnologia em Gestão da Tecnologia da Informação | p. 97; art. 5º II, b.5; art. 6º XIV; reprodução ABMES, pp. 2–3 | Corrobora ativos, riscos e continuidade. |
-| F10 — Portaria Inep nº 172: diretrizes do componente específico de Tecnologia em Redes de Computadores | p. 98; art. 5º II, b.2; art. 6º XI; reprodução ABMES, pp. 2–3 | Corrobora integridade, disponibilidade e segurança do recurso em rede. |
+| F10 — Portaria Inep nº 172: diretrizes do componente específico de Tecnologia em Redes de Computadores | p. 98; art. 5º II, b.2; art. 6º XIII; reprodução ABMES, pp. 2–3 | Corrobora integridade, disponibilidade e segurança do recurso em rede. |
 
 ### URLs diretos e resultados
 

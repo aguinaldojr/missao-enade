@@ -17,9 +17,19 @@
       "mapId": "base-n9",
       "objectId": "door"
     },
-    "source": {
-      "type": "fictional",
-      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+    "sources": [
+      {
+        "role": "primary",
+        "type": "fictional",
+        "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+      }
+    ],
+    "traceability": {
+      "title": "Sequência de um algoritmo",
+      "objective": "Ordenar entrada, validação, processamento e saída pelas dependências declaradas.",
+      "locators": [
+        "EXEMPLO-SEQUENCE-01"
+      ]
     },
     "validationStatus": "provisional-pending-teacher-review",
     "id": "seq-algorithm-01",

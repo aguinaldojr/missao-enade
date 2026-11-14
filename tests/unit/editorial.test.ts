@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import questions from '../../src/content/questions/central-nexo.json';
 import puzzles from '../../src/content/puzzles/sequences.json';
 import collections from '../../src/content/collections.json';
-import { CONTENT_MODES, DIFFICULTIES, SOURCE_TYPES, VALIDATION_STATUSES, COLLECTION_STATUSES } from '../../src/domain/models/EditorialMetadata';
+import { CONTENT_MODES, DIFFICULTIES, SOURCE_ROLES, SOURCE_TYPES, VALIDATION_STATUSES, COLLECTION_STATUSES } from '../../src/domain/models/EditorialMetadata';
 import { validateContent } from '../../src/infrastructure/content/validateContent';
 import { JsonContentRepository } from '../../src/infrastructure/content/JsonContentRepository';
 import { JsonPuzzleRepository } from '../../src/infrastructure/content/JsonPuzzleRepository';
@@ -66,8 +66,47 @@ describe('contratos editoriais compartilhados — exemplos exclusivamente fictí
     const source = { type, description: 'Referência inteiramente fictícia para teste; não é documento oficial real.',
       url: 'https://example.invalid/referencia-ficticia', year: 2026, documentId: 'DOC-FICTICIO-01' };
     const q = newCatalog(); q.questions[0]!.source = source;
-    expect(validateContent(q, customCollections).questions[0]?.source).toEqual(source);
-    expect(new JsonPuzzleRepository([{ ...newPuzzle(), source }], customCollections).all()[0]?.source).toEqual(source);
+    expect(validateContent(q, customCollections).questions[0]?.sources).toEqual([{ role: 'primary', ...source }]);
+    expect(new JsonPuzzleRepository([{ ...newPuzzle(), source }], customCollections).all()[0]?.sources).toEqual([{ role: 'primary', ...source }]);
+  });
+  it('preserva fonte principal, corroboração normativa, fonte técnica e rastreabilidade', () => {
+    const sources = SOURCE_ROLES.map((role) => ({ role, type: 'official-reference' as const,
+      description: 'Fonte fictícia de teste para ' + role, documentId: 'DOC-' + role }));
+    const traceability = { title: 'Título editorial fictício', objective: 'Verificar preservação dos metadados.',
+      locators: ['SLOT-01', 'art. 5º, I'] };
+    const { source: oldQuestionSource, ...question } = newQuestion();
+    const { source: oldPuzzleSource, ...puzzle } = newPuzzle();
+    expect(oldQuestionSource).toBeDefined();
+    expect(oldPuzzleSource).toBeDefined();
+    const validatedQuestion = validateContent({ ...newCatalog(), questions: [{ ...question, sources, traceability }] }, customCollections).questions[0]!;
+    const validatedPuzzle = new JsonPuzzleRepository([{ ...puzzle, sources, traceability }], customCollections).all()[0]!;
+    expect(validatedQuestion).toMatchObject({ sources, traceability });
+    expect(validatedPuzzle).toMatchObject({ sources, traceability });
+  });
+  it('exige exatamente uma fonte principal', () => {
+    const { source, ...question } = newQuestion();
+    const { source: puzzleSource, ...puzzle } = newPuzzle();
+    const base = { type: 'fictional' as const, description: 'Fonte fictícia para teste.' };
+    expect(source).toBeDefined();
+    expect(puzzleSource).toBeDefined();
+    expect(() => validateContent({ ...newCatalog(), questions: [{ ...question,
+      sources: [{ role: 'technical', ...base }] }] }, customCollections)).toThrow('exatamente uma fonte principal');
+    expect(() => validateContent({ ...newCatalog(), questions: [{ ...question,
+      sources: [{ role: 'primary', ...base }, { role: 'primary', ...base, description: 'Outra fonte.' }] }] }, customCollections))
+      .toThrow('exatamente uma fonte principal');
+    expect(() => new JsonPuzzleRepository([{ ...puzzle,
+      sources: [{ role: 'technical', ...base }] }], customCollections)).toThrow('exatamente uma fonte principal');
+  });
+  it('rejeita papel de fonte e rastreabilidade desconhecidos ou vazios', () => {
+    const { source, ...question } = newQuestion();
+    const primary = { role: 'primary', type: 'fictional', description: 'Fonte fictícia para teste.' };
+    expect(source).toBeDefined();
+    expect(() => validateContent({ ...newCatalog(), questions: [{ ...question,
+      sources: [{ ...primary, role: 'secondary' }] }] }, customCollections)).toThrow();
+    expect(() => validateContent({ ...newCatalog(), questions: [{ ...question, sources: [primary],
+      traceability: { title: ' ', objective: 'Objetivo', locators: ['SLOT-01'] } }] }, customCollections)).toThrow();
+    expect(() => validateContent({ ...newCatalog(), questions: [{ ...question, sources: [primary],
+      traceability: { title: 'Título', objective: 'Objetivo', locators: ['SLOT-01'], unknown: true } }] }, customCollections)).toThrow();
   });
   it.each(VALIDATION_STATUSES)('compartilha status %s', (validationStatus) => {
     const q = newCatalog(); q.questions[0]!.validationStatus = validationStatus;
@@ -132,8 +171,8 @@ describe('migração e compatibilidade sem escrita de progresso', () => {
   });
   it('não promove legado a aprovado e mantém todo conteúdo do jogo provisório', () => {
     expect(validateContent({ ...oldQuestions(), mode: 'approved' }).questions.every((q) => q.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
-    expect(validateContent(questions).questions.every((q) => q.source.type === 'fictional' && q.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
-    expect(new JsonPuzzleRepository(puzzles).all().every((p) => p.source.type === 'fictional' && p.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
+    expect(validateContent(questions).questions.every((q) => q.sources[0]?.type === 'fictional' && q.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
+    expect(new JsonPuzzleRepository(puzzles).all().every((p) => p.sources[0]?.type === 'fictional' && p.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
   });
   it('preserva conteúdo pedagógico e recompensas byte a byte na projeção original', () => {
     const fields = ['id', 'version', 'classification', 'courses', 'example', 'editorialStatus', 'context', 'prompt', 'options', 'correctOptionId', 'explanation', 'feedbackByOption'];

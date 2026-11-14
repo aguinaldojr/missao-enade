@@ -16,7 +16,10 @@ export class JsonContentRepository implements ContentRepository {
       const catalog = validateContent(this.data, this.collections);
       this.questions = Object.freeze(catalog.questions.map((question) => Object.freeze({
         ...question, courses: Object.freeze([...question.courses]),
-        competencies: Object.freeze([...question.competencies]), source: Object.freeze({ ...question.source }),
+        competencies: Object.freeze([...question.competencies]),
+        sources: Object.freeze(question.sources.map((source) => Object.freeze({ ...source }))),
+        ...(question.traceability ? { traceability: Object.freeze({ ...question.traceability,
+          locators: Object.freeze([...question.traceability.locators]) }) } : {}),
         options: Object.freeze(question.options.map((option) => Object.freeze({ ...option }))),
         feedbackByOption: Object.freeze({ ...question.feedbackByOption }),
       })));

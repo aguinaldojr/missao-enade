@@ -1,6 +1,6 @@
 # N9 — Jornada Digital: lote específico de Tecnologia em Gestão da Tecnologia da Informação
 
-Autoria editorial — 13/11/2026, horário de Brasília. Versão documental 1.0. **Todos os onze itens permanecem provisional-pending-teacher-review.** Autoria assistida por IA; responsável humano pela consolidação a designar. Instituições, pessoas, registros, políticas, estimativas e custos dos casos são fictícios. N9 é nome provisório sujeito à aprovação institucional; não há chancela do Inep nem afirmação de produto oficial.
+Autoria editorial — 13/11/2026, horário de Brasília. Versão documental 1.1. **Todos os onze itens permanecem provisional-pending-teacher-review.** Autoria assistida por IA; responsável humano pela consolidação a designar. Instituições, pessoas, registros, políticas, estimativas e custos dos casos são fictícios. N9 é nome provisório sujeito à aprovação institucional; não há chancela do Inep nem afirmação de produto oficial.
 
 Escopo exclusivo: E26-Q-TGTI-01–10 e E26-P-TGTI-01. Este documento é uma proposta editorial; não disponibiliza itens no jogo. Somente este Markdown é criado, sem alteração dos lotes anteriores, contratos, schemas, código, catálogos, interface, mapa, mecânicas, recompensas existentes ou progresso salvo. Não há arquivo JSON gerado.
 
@@ -675,7 +675,7 @@ A equipe tem duas horas de trabalho disponíveis neste ciclo. Renovação preven
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-TGTI-09 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / TGTI |
 | Título editorial | Uma iniciativa depende da outra |
 | collectionId | enade-2026 |
@@ -698,7 +698,7 @@ A equipe tem duas horas de trabalho disponíveis neste ciclo. Renovação preven
 
 ### Texto ao jogador
 
-**Contexto.** Uma cooperativa fictícia de tradução quer rastrear pedidos entre seus três polos neste ciclo. A direção reservou oito unidades de orçamento para implantação e uso no ciclo. Todas as alternativas devem respeitar uma política interna: só podem ser usados componentes cujo direito de uso já tenha sido verificado. Não se presume uma lei específica; essa é a regra fornecida para a decisão.
+**Contexto.** Uma cooperativa fictícia quer rastrear pedidos entre três polos neste ciclo. Há oito unidades de orçamento. Só podem ser usados componentes cujo direito de uso já foi verificado; essa é uma regra interna do caso.
 
 | Iniciativa | Custo no ciclo | Entrega e condição |
 |---|---:|---|
@@ -708,15 +708,15 @@ A equipe tem duas horas de trabalho disponíveis neste ciclo. Renovação preven
 | T — Solução completa externa | 7 unidades | Entrega o rastreamento, mas usa componente com direito de uso ainda não verificado. |
 | S — Análise adicional | 4 unidades | Acrescenta análises; não substitui I nem C. |
 
-I, C, V e S possuem direitos de uso verificados. Não há soluções ou custos ocultos. Os custos se somam; não há descontos. O objetivo obrigatório é entregar o rastreamento, não maximizar funções adicionais.
+I, C, V e S têm uso verificado. Os custos se somam, sem descontos ou soluções ocultas. O objetivo é entregar o rastreamento, não maximizar funções.
 
 **Enunciado.** Qual pacote atende conjuntamente à meta, às dependências, à política e ao orçamento?
 
-- **A.** Contratar apenas I, por cinco unidades, deixando o cadastro compartilhado para o próximo ciclo.
-- **B.** Contratar I e C, por sete unidades, incluindo a dependência necessária e apenas componentes verificados.
-- **C.** Contratar V e C, por quatro unidades, aproveitando o cadastro e a divulgação com menor gasto.
-- **D.** Contratar T, por sete unidades, deixando a verificação do direito de uso para depois da implantação.
-- **E.** Contratar I, C e S, por onze unidades, ampliando as entregas sem reduzir o escopo proposto.
+- **A.** Apenas I, por cinco unidades, deixando C para o próximo ciclo.
+- **B.** I e C, por sete unidades, com a dependência necessária e componentes verificados.
+- **C.** V e C, por quatro unidades, combinando cadastro e divulgação.
+- **D.** T, por sete unidades, verificando o direito de uso somente após a implantação.
+- **E.** I, C e S, por onze unidades, ampliando as entregas.
 
 ### Resposta, explicação e feedbacks
 
@@ -758,7 +758,7 @@ I, C, V e S possuem direitos de uso verificados. Não há soluções ou custos o
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-TGTI-10 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / TGTI |
 | Título editorial | Recuperar sem abandonar a proteção |
 | collectionId | enade-2026 |
@@ -781,9 +781,9 @@ I, C, V e S possuem direitos de uso verificados. Não há soluções ou custos o
 
 ### Texto ao jogador
 
-**Contexto.** Um serviço fictício de troca de arquivos de projetos precisa se recuperar se o local principal parar. O plano aceitável deve atender simultaneamente a quatro condições: voltar a operar em até quarenta minutos; perder no máximo dez minutos dos registros mais recentes; usar ambiente protegido, com acesso somente às pessoas autorizadas; e exigir no máximo sessenta pessoa-minutos de trabalho da equipe disponível.
+**Contexto.** Se o local principal de um serviço fictício parar, o plano deve: recuperar em até 40 minutos; perder no máximo 10 minutos de registros; usar ambiente protegido e autorizado; e consumir até 60 pessoa-minutos da equipe.
 
-Pessoa-minutos representam esforço somado da equipe, enquanto tempo de recuperação é duração no relógio. Recursos, execução paralela e acesso aos ambientes já foram verificados para os planos; além dos limites da tabela, não há outra restrição de agendamento. Os valores são projeções de ensaios nas mesmas condições, não garantias.
+Pessoa-minutos somam o esforço da equipe; recuperação mede duração no relógio. Recursos, paralelismo e acesso já foram verificados. Os valores são projeções de ensaios comparáveis, não garantias.
 
 | Plano | Recuperação no relógio | Perda de registros | Ambiente protegido e autorizado? | Esforço total |
 |---|---:|---:|---|---:|
@@ -793,15 +793,13 @@ Pessoa-minutos representam esforço somado da equipe, enquanto tempo de recupera
 | D | 45 minutos | 5 minutos | Sim | 40 pessoa-minutos |
 | E | 30 minutos | 18 minutos | Sim | 40 pessoa-minutos |
 
-Na leitura linear, cada plano informa duração, perda, proteção e esforço, nessa ordem. Por exemplo, C prevê recuperar em 35 minutos, perder oito minutos de registros, manter proteção e consumir sessenta pessoa-minutos.
-
 **Enunciado.** Qual plano atende às quatro condições, sem confundir rapidez com suficiência de capacidade ou proteção?
 
-- **A.** Plano A: aceita-se o ambiente sem proteção porque os menores tempos compensam essa condição.
-- **B.** Plano B: aceita-se o esforço de noventa pessoa-minutos porque a recuperação dura menos de quarenta minutos.
-- **C.** Plano C: duração, perda, proteção e esforço permanecem dentro dos limites definidos.
-- **D.** Plano D: aceita-se recuperar em quarenta e cinco minutos porque a perda e o esforço estão abaixo dos limites.
-- **E.** Plano E: aceita-se perder dezoito minutos de registros porque a recuperação e o esforço atendem aos limites.
+- **A.** Plano A, compensando a falta de proteção pelos menores tempos.
+- **B.** Plano B, aceitando 90 pessoa-minutos porque recupera em menos de 40 minutos.
+- **C.** Plano C, com duração, perda, proteção e esforço dentro dos limites.
+- **D.** Plano D, aceitando 45 minutos porque perda e esforço atendem aos limites.
+- **E.** Plano E, aceitando perder 18 minutos porque recuperação e esforço atendem aos limites.
 
 ### Resposta, explicação e feedbacks
 
@@ -1212,7 +1210,7 @@ Para cada registro: docente, data, PPC/versão, fontes e localizadores conferido
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-TGTI-09 — versão 1
+### E26-Q-TGTI-09 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências | Resolução independente / alternativas defensáveis | Parecer fundamentado / ajustes |
 |---|---|---|---|---|
@@ -1225,7 +1223,7 @@ Para cada registro: docente, data, PPC/versão, fontes e localizadores conferido
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-TGTI-10 — versão 1
+### E26-Q-TGTI-10 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências | Resolução independente / alternativas defensáveis | Parecer fundamentado / ajustes |
 |---|---|---|---|---|

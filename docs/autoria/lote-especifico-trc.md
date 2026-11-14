@@ -1,6 +1,6 @@
 # N9 — Jornada Digital: lote específico de Tecnologia em Redes de Computadores
 
-Autoria editorial — 13/11/2026, horário de Brasília. Versão documental 1.0. **Todos os onze itens permanecem provisional-pending-teacher-review.** Autoria assistida por IA; responsável humano pela consolidação a designar. Contextos, instituições, topologias, endereços, registros, estimativas e políticas são fictícios. N9 é nome provisório sujeito à aprovação institucional. Não há chancela do Inep nem afirmação de produto oficial.
+Autoria editorial — 13/11/2026, horário de Brasília. Versão documental 1.1. **Todos os onze itens permanecem provisional-pending-teacher-review.** Autoria assistida por IA; responsável humano pela consolidação a designar. Contextos, instituições, topologias, endereços, registros, estimativas e políticas são fictícios. N9 é nome provisório sujeito à aprovação institucional. Não há chancela do Inep nem afirmação de produto oficial.
 
 Escopo exclusivo: E26-Q-TRC-01–10 e E26-P-TRC-01. Somente este Markdown é criado; não há JSON, importação, configuração de equipamento ou alteração de software, catálogo, interface, mapa, mecânica, recompensa existente ou progresso. Os lotes anteriores permanecem intactos.
 
@@ -292,7 +292,7 @@ Um ensaio controlado com início manual pelo supervisor fez o serviço responder
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-TRC-04 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / TRC |
 | Título editorial | Uma rota mais específica desvia o destino |
 | collectionId | enade-2026 |
@@ -315,9 +315,9 @@ Um ensaio controlado com início manual pelo supervisor fez o serviço responder
 
 ### Texto ao jogador
 
-**Contexto.** Num laboratório fictício, o roteador R recebe tráfego do cliente 198.51.100.10. R possui um enlace com S: R usa 192.0.2.1/30 e S usa 192.0.2.2/30. Outro enlace liga R a T: R usa 192.0.2.5/30 e T usa 192.0.2.6/30. S alcança toda a rede 203.0.113.0/24 e tem retorno ao cliente. T não alcança essa rede. Enlaces, endereços e filtros foram conferidos.
+**Contexto.** Num laboratório fictício, o roteador R encaminha tráfego por S (`192.0.2.2`) ou T (`192.0.2.6`). S alcança toda a rede `203.0.113.0/24` e tem retorno ao cliente; T não. Enlaces e filtros foram conferidos.
 
-No modelo, R escolhe primeiro o prefixo de destino mais longo; métrica só desempata prefixos de mesmo comprimento. /24 abrange os finais 0–255; /25 começando em 128 abrange 128–255. As rotas relevantes instaladas são:
+R escolhe primeiro o prefixo mais longo; a métrica só desempata prefixos de igual comprimento. `/24` abrange finais 0–255 e `/25` iniciado em 128 abrange 128–255.
 
 | Destino | Próximo salto | Métrica |
 |---|---|---:|
@@ -325,15 +325,15 @@ No modelo, R escolhe primeiro o prefixo de destino mais longo; métrica só dese
 | 203.0.113.128/25 | 192.0.2.6 — T | 20 |
 | 0.0.0.0/0 | 192.0.2.6 — T | 1 |
 
-O destino 203.0.113.40 é alcançado; 203.0.113.150 segue de R para T e falha. Rotas conectadas dos enlaces existem e não competem com esses destinos. Não há política adicional de roteamento.
+O destino `.40` funciona; `.150` segue para T e falha. Não há outra rota ou política relevante.
 
 **Enunciado.** Qual ajuste corrige o desvio de 203.0.113.150 preservando os outros destinos da rede pelo caminho conhecido?
 
-- **A.** Trocar o próximo salto da rota 203.0.113.0/24 para T, mantendo a rota /25 como está.
-- **B.** Reduzir a métrica da rota 203.0.113.0/24 de 10 para 1, mantendo a rota /25 como está.
-- **C.** Trocar o próximo salto de 203.0.113.128/25 para 192.0.2.2, mantendo o restante da tabela.
-- **D.** Trocar somente o próximo salto da rota padrão para S, mantendo a rota /25 como está.
-- **E.** Mudar apenas o endereço do cliente para outro da mesma rede, mantendo a tabela de R.
+- **A.** Mudar a rota `/24` para T e manter a `/25`.
+- **B.** Reduzir a métrica da `/24` para 1 e manter a `/25`.
+- **C.** Mudar o próximo salto da `/25` para `192.0.2.2` e manter o restante.
+- **D.** Mudar somente a rota padrão para S e manter a `/25`.
+- **E.** Mudar apenas o endereço do cliente e manter a tabela.
 
 ### Resposta, explicação e feedbacks
 
@@ -600,7 +600,7 @@ A política permite apenas que Laboratório inicie conexão TCP para a porta 443
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-TRC-08 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / TRC |
 | Título editorial | O contador mudou de referência |
 | collectionId | enade-2026 |
@@ -623,7 +623,7 @@ A política permite apenas que Laboratório inicie conexão TCP para a porta 443
 
 ### Texto ao jogador
 
-**Contexto.** Um coletor fictício lê o contador acumulado de bytes recebidos de uma mesma interface a cada sessenta segundos. Para obter bytes por segundo, deve dividir a diferença entre contadores comparáveis pelo intervalo de coleta. O registro do equipamento confirma um reinício entre as coletas 0 e 1, que zerou o contador; não houve novo reinício ou estouro do contador entre 1 e 2.
+**Contexto.** Um coletor fictício lê a cada 60 segundos o contador acumulado de bytes de uma interface. A taxa é a diferença entre contadores comparáveis dividida pelo intervalo. O equipamento reiniciou entre as coletas 0 e 1; não reiniciou nem sofreu estouro entre 1 e 2.
 
 | Coleta | Tempo no relógio do coletor | Tempo desde o início do equipamento | Contador de bytes |
 |---|---:|---:|---:|
@@ -631,15 +631,15 @@ A política permite apenas que Laboratório inicie conexão TCP para a porta 443
 | 1 | 60 segundos | 20 segundos | 100 |
 | 2 | 120 segundos | 80 segundos | 700 |
 
-O coletor deve manter histórico e distinguir medida indisponível de taxa zero. Tem autorização somente de leitura e alerta; não pode reiniciar interfaces nem mudar rotas automaticamente. Os tempos desde o início estão convertidos para segundos; não é preciso conhecer unidade de protocolo.
+O coletor deve preservar o histórico e distinguir medida indisponível de taxa zero. Só pode ler e alertar.
 
 **Enunciado.** Qual proposta evita um alerta de ausência de tráfego sem evidência e volta a calcular uma taxa válida quando possível?
 
-- **A.** Calcular 1,67 byte por segundo no intervalo 0–1, dividindo o contador 100 pelos sessenta segundos completos desse intervalo.
-- **B.** Calcular 148,33 bytes por segundo no intervalo 0–1, usando o valor absoluto da diferença entre 100 e 9000.
-- **C.** Registrar taxa zero no intervalo 0–1 por a diferença ser negativa e tratar esse zero como ausência confirmada de tráfego.
-- **D.** Registrar a descontinuidade e taxa indisponível em 0–1, usar a coleta 1 como nova referência e obter 10 bytes por segundo em 1–2.
-- **E.** Apagar todas as coletas anteriores ao reinício e manter o monitoramento sem novas taxas até um operador zerar manualmente o contador.
+- **A.** Calcular 1,67 byte/s em 0–1, dividindo 100 por 60.
+- **B.** Calcular 148,33 bytes/s em 0–1, usando o valor absoluto de 100 − 9000.
+- **C.** Registrar zero em 0–1 e tratá-lo como ausência confirmada de tráfego.
+- **D.** Registrar taxa indisponível em 0–1, usar a coleta 1 como referência e calcular 10 bytes/s em 1–2.
+- **E.** Apagar coletas anteriores e não calcular novas taxas até um operador zerar o contador.
 
 ### Resposta, explicação e feedbacks
 
@@ -681,7 +681,7 @@ O coletor deve manter histórico e distinguir medida indisponível de taxa zero.
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-TRC-09 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / TRC |
 | Título editorial | Reutilizar sem criar um gargalo |
 | collectionId | enade-2026 |
@@ -704,27 +704,27 @@ O coletor deve manter histórico e distinguir medida indisponível de taxa zero.
 
 ### Texto ao jogador
 
-**Contexto.** Um espaço fictício de produção audiovisual tem duas salas. Em cada sala, duas estações enviam simultaneamente 60 Mb/s cada para o arquivo central, totalizando 120 Mb/s por sala e 240 Mb/s no centro. Os valores já incluem a sobrecarga considerada no ensaio; a capacidade indicada é útil e atende nesse sentido. O tráfego segue das estações ao acesso da sala e daí ao centro; não há caminho paralelo.
+**Contexto.** Cada uma de duas salas envia 2 × 60 Mb/s ao arquivo central: 120 Mb/s por sala e 240 Mb/s no centro. As capacidades úteis incluem a sobrecarga; não há caminho paralelo.
 
-Os dois comutadores de acesso existentes funcionam, aceitam retorno de 1 Gb/s e suportam a marcação de redes lógicas testada com o centro. Uma rede de gestão deve ficar isolada dos usuários por configuração verificada. O projeto deve reutilizar esses dois comutadores, pois atendem aos requisitos, e manter consumo operacional total de até 45 W na carga ensaiada. Esse é um critério ambiental parcial, não uma análise completa de ciclo de vida.
+Os dois acessos existentes suportam 1 Gb/s e marcação compatível. O projeto deve reutilizá-los, isolar a gestão e consumir até 45 W. O consumo é um critério parcial.
 
-| Projeto | Retorno de cada sala | Recepção útil no centro | Isolamento da gestão | Reutiliza ambos os acessos? | Consumo total |
+| Projeto | Retorno/sala | Centro | Gestão isolada | Reusa acessos | Consumo |
 |---|---:|---:|---|---|---:|
-| A | 100 Mb/s | 1 Gb/s | Verificado | Sim | 30 W |
-| B | 1 Gb/s | 1 Gb/s | Não previsto | Sim | 38 W |
-| C | 1 Gb/s | 1 Gb/s | Verificado | Não | 65 W |
-| D | 1 Gb/s nominal | 1 Gb/s nominal | Previsto com marcação incompatível com os acessos | Sim | 35 W |
-| E | 1 Gb/s | 1 Gb/s | Verificado com marcação compatível | Sim | 40 W |
+| A | 100 Mb/s | 1 Gb/s | Sim | Sim | 30 W |
+| B | 1 Gb/s | 1 Gb/s | Não | Sim | 38 W |
+| C | 1 Gb/s | 1 Gb/s | Sim | Não | 65 W |
+| D | 1 Gb/s | 1 Gb/s | Marcação incompatível | Sim | 35 W |
+| E | 1 Gb/s | 1 Gb/s | Sim, compatível | Sim | 40 W |
 
-Um Gb/s equivale a mil Mb/s neste exercício. A incompatibilidade de D impede o retorno integrado das salas; não há adaptador ou conversão adicional no projeto. As demais compatibilidades, portas e enlaces necessários foram ensaiados e estão incluídos.
+Neste exercício, 1 Gb/s = 1.000 Mb/s. D não integra as salas e não há adaptador. As demais condições foram ensaiadas.
 
 **Enunciado.** Qual projeto atende aos fluxos simultâneos e às condições lógicas e ambientais informadas?
 
-- **A.** Projeto A, pois a recepção de 1 Gb/s no centro compensa os retornos de 100 Mb/s de cada sala.
-- **B.** Projeto B, pois a capacidade de 1 Gb/s dispensa o isolamento lógico entre usuários e gestão.
-- **C.** Projeto C, pois substituir todos os acessos atende ao desempenho mesmo excedendo consumo e reutilização definidos.
-- **D.** Projeto D, pois a velocidade nominal de 1 Gb/s basta mesmo com a incompatibilidade de marcação.
-- **E.** Projeto E, pois os caminhos têm capacidade, o isolamento é compatível e a reutilização mantém o consumo no limite.
+- **A.** A, pois 1 Gb/s no centro compensaria os retornos de 100 Mb/s.
+- **B.** B, pois 1 Gb/s dispensaria o isolamento da gestão.
+- **C.** C, pois o desempenho compensaria consumo e falta de reutilização.
+- **D.** D, pois 1 Gb/s nominal bastaria apesar da marcação incompatível.
+- **E.** E, pois capacidade, isolamento, compatibilidade, reutilização e consumo atendem aos limites.
 
 ### Resposta, explicação e feedbacks
 
@@ -766,7 +766,7 @@ Um Gb/s equivale a mil Mb/s neste exercício. A incompatibilidade de D impede o 
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-TRC-10 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / TRC |
 | Título editorial | O enlace reserva também tem limite |
 | collectionId | enade-2026 |
@@ -789,19 +789,19 @@ Um Gb/s equivale a mil Mb/s neste exercício. A incompatibilidade de D impede o 
 
 ### Texto ao jogador
 
-**Contexto.** A rede fictícia de uma estação de acompanhamento possui dois enlaces: principal de 20 Mb/s e reserva de 12 Mb/s. Apenas um fica ativo por vez. A continuidade exigida cobre a perda de um enlace por vez, com equipamentos locais, alimentação e caminho restante funcionando. A detecção de perda e a troca automática foram ensaiadas em todas as propostas que as mencionam; não há soma de capacidades após uma falha.
+**Contexto.** Uma rede fictícia tem enlace principal de 20 Mb/s e reserva de 12 Mb/s; apenas um fica ativo. O cenário cobre a perda de um enlace, com recursos locais e caminho restante funcionando. Detecção e troca automática foram ensaiadas; capacidades não se somam após a falha.
 
-Na carga ensaiada, voz essencial precisa de 4 Mb/s e atraso de até 30 ms; telemetria essencial precisa de 6 Mb/s. Transferências não essenciais pedem até 8 Mb/s, mas podem ser limitadas. Capacidades e demandas já incluem as sobrecargas consideradas. O mecanismo disponível reserva taxas por classe e limita a classe não essencial.
+Voz essencial exige 4 Mb/s e atraso de até 30 ms; telemetria, 6 Mb/s. Transferências não essenciais pedem até 8 Mb/s, mas podem ser limitadas. As taxas já incluem sobrecarga.
 
-O ensaio com reserva de 4 Mb/s para voz e 6 para telemetria, limitando transferências a 2 Mb/s no enlace reserva, mediu atraso de voz de 25 ms. Compartilhar igualmente sem essas reservas mediu 65 ms na mesma carga. Não se deduz atraso apenas da soma de taxas: esses valores são evidência de ensaio restrita ao perfil descrito.
+Reservar 4 Mb/s para voz, 6 para telemetria e limitar transferências a 2 mediu 25 ms de atraso. Compartilhamento igual mediu 65 ms. Esses ensaios valem apenas para a carga descrita.
 
 **Enunciado.** Qual estratégia satisfaz a continuidade e os dois serviços essenciais no enlace reserva, dentro das evidências disponíveis?
 
-- **A.** Trocar automaticamente para a reserva e manter as três classes sem limite, tratando a demanda total de 18 Mb/s como compatível com os 12 Mb/s.
-- **B.** Trocar automaticamente para a reserva, reservar 4 Mb/s para voz e apenas 2 para telemetria, liberando 6 para transferências.
-- **C.** Trocar automaticamente para a reserva, reservar 4 Mb/s para voz e 6 para telemetria e limitar transferências a 2, usando a política de atraso ensaiada.
-- **D.** Planejar o atendimento pela soma de 20 e 12 Mb/s, mantendo as demandas integrais mesmo quando um enlace tiver parado.
-- **E.** Trocar automaticamente para a reserva com compartilhamento igual, aceitando os 65 ms medidos para voz como suficientes ao requisito.
+- **A.** Trocar para a reserva e manter 18 Mb/s de demanda sem limite.
+- **B.** Reservar 4 Mb/s para voz, 2 para telemetria e 6 para transferências.
+- **C.** Reservar 4 Mb/s para voz, 6 para telemetria e limitar transferências a 2, conforme o ensaio.
+- **D.** Somar 20 e 12 Mb/s mesmo quando um enlace estiver parado.
+- **E.** Usar compartilhamento igual e aceitar os 65 ms medidos para voz.
 
 ### Resposta, explicação e feedbacks
 
@@ -1153,7 +1153,7 @@ Preencher por ID/versão: docente/data; PPC/versão; fontes/localizadores confer
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-TRC-04 — versão 1
+### E26-Q-TRC-04 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências | Resolução independente / alternativas defensáveis | Parecer fundamentado / ajustes |
 |---|---|---|---|---|
@@ -1205,7 +1205,7 @@ Preencher por ID/versão: docente/data; PPC/versão; fontes/localizadores confer
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-TRC-08 — versão 1
+### E26-Q-TRC-08 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências | Resolução independente / alternativas defensáveis | Parecer fundamentado / ajustes |
 |---|---|---|---|---|
@@ -1218,7 +1218,7 @@ Preencher por ID/versão: docente/data; PPC/versão; fontes/localizadores confer
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-TRC-09 — versão 1
+### E26-Q-TRC-09 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências | Resolução independente / alternativas defensáveis | Parecer fundamentado / ajustes |
 |---|---|---|---|---|
@@ -1231,7 +1231,7 @@ Preencher por ID/versão: docente/data; PPC/versão; fontes/localizadores confer
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-TRC-10 — versão 1
+### E26-Q-TRC-10 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências | Resolução independente / alternativas defensáveis | Parecer fundamentado / ajustes |
 |---|---|---|---|---|

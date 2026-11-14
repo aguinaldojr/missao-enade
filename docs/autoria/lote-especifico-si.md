@@ -1,6 +1,6 @@
 # N9 — Jornada Digital: lote específico de Sistemas de Informação
 
-Autoria editorial — 13/11/2026, horário de Brasília. Versão documental 1.0. **Todos os onze itens permanecem provisional-pending-teacher-review.** Autoria assistida por IA; responsável humano pela consolidação a designar. Situações, organizações, registros, valores e capacidades são fictícios. N9 é nome provisório sujeito à aprovação institucional. Não há chancela do Inep nem declaração de produto oficial.
+Autoria editorial — 13/11/2026, horário de Brasília. Versão documental 1.1. **Todos os onze itens permanecem provisional-pending-teacher-review.** Autoria assistida por IA; responsável humano pela consolidação a designar. Situações, organizações, registros, valores e capacidades são fictícios. N9 é nome provisório sujeito à aprovação institucional. Não há chancela do Inep nem declaração de produto oficial.
 
 Escopo: E26-Q-SI-01–10 e E26-P-SI-01. Somente este Markdown é criado. Não se produz JSON, importação, implementação, conteúdo executável ou alteração de progresso. Os lotes comuns e de CC permanecem intactos.
 
@@ -769,7 +769,7 @@ Na rodada há dez unidades de captura e oito de catalogação. Não há outro re
 | Campo | Valor |
 |---|---|
 | ID | E26-Q-SI-10 |
-| Versão | 1 |
+| Versão | 2 |
 | Contrato / classification | question / SI |
 | Título editorial | Escalar sem informar uma versão antiga |
 | collectionId | enade-2026 |
@@ -792,21 +792,19 @@ Na rodada há dez unidades de captura e oito de catalogação. Não há outro re
 
 ### Texto ao jogador
 
-**Contexto.** Um portal fictício da Base N9 informa quais pontos comunitários de distribuição de água estão funcionando, para evitar deslocamentos a locais fechados. O público usa navegador simples, sem possibilidade de instalar aplicativo. O pico previsto é de 600 consultas por segundo.
+**Contexto.** Um portal fictício informa quais pontos comunitários de água estão funcionando. O público usa navegador, sem instalar aplicativo, e o pico é de 600 consultas por segundo.
 
-Mudanças de funcionamento recebem versões confirmadas por uma autoridade central. Toda consulta iniciada depois de uma confirmação deve retornar aquela versão ou uma posterior; se não puder verificar isso, pode informar indisponibilidade, mas não apresentar uma versão anterior como atual.
+Cada mudança recebe uma versão confirmada pela autoridade central. Consulta iniciada após a confirmação deve retornar essa versão ou uma posterior. Se não puder verificá-la, pode informar indisponibilidade, mas não servir versão anterior como atual.
 
-Na operação normal projetada, a autoridade está disponível; indisponibilidade só é resposta admissível quando verificar a versão for impossível.
-
-As capacidades abaixo são projeções fictícias sob a mesma carga de atualizações e já incluem as verificações descritas. Não há custo ou capacidade adicional omitido. Nenhuma proposta pode contar com uma fila que atenda o pico mais tarde para alegar atendimento às 600 consultas por segundo.
+As capacidades projetadas usam a mesma carga e incluem as verificações. A autoridade está normalmente disponível; não há capacidade oculta nem atendimento posterior por fila.
 
 **Enunciado.** Qual proposta atende conjuntamente a carga, a regra de versão e a condição de acesso do público?
 
-- **A.** Usar um único servidor autoritativo acessível por navegador, com versões atuais e capacidade total de 400 consultas por segundo.
-- **B.** Usar servidores consultáveis por navegador, que verificam a versão central por pedido e recusam versões antigas, com capacidade de 700 consultas por segundo.
-- **C.** Usar réplicas assíncronas acessíveis por navegador, com 1.000 consultas por segundo e permissão para servir a versão anterior durante dez segundos.
-- **D.** Usar clientes instaláveis que verificam a versão antes de responder, com 900 consultas por segundo e instalação obrigatória em todos os dispositivos.
-- **E.** Distribuir um arquivo diário por navegador, com 800 consultas por segundo e atualização das versões somente na geração do próximo arquivo.
+- **A.** Servidor por navegador, versões atuais e capacidade de 400 consultas por segundo.
+- **B.** Servidores por navegador que verificam cada pedido, recusam versão antiga e suportam 700 consultas por segundo.
+- **C.** Réplicas por navegador, 1.000 consultas por segundo, podendo servir a versão anterior por dez segundos.
+- **D.** Clientes instaláveis que verificam a versão, com 900 consultas por segundo e instalação obrigatória.
+- **E.** Arquivo diário por navegador, com 800 consultas por segundo e versão atualizada apenas na próxima geração.
 
 ### Resposta, explicação e feedbacks
 
@@ -1230,7 +1228,7 @@ Preencher docente, data, PPC/versão, fontes/localizadores, resolução sem gaba
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-Q-SI-10 — versão 1
+### E26-Q-SI-10 — versão 2
 
 | Curso | Docente / data | PPC / versão e evidências | Resolução independente / alternativas defensáveis | Parecer fundamentado / ajustes |
 |---|---|---|---|---|

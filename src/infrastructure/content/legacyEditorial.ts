@@ -17,15 +17,23 @@ export function legacyQuestionMetadata(): Omit<EditorialMetadata, 'courses'> {
     area: 'Raciocínio e competências digitais (exemplos)',
     competencies: ['Interpretar dados e restrições em situações fictícias.'],
     difficulty: 'introductory',
-    source: { type: 'fictional', description: 'Conteúdo fictício do protótipo N9; pendente de revisão docente.' },
+    sources: [{ role: 'primary', type: 'fictional', description: 'Conteúdo fictício do protótipo N9; pendente de revisão docente.' }],
     validationStatus: 'provisional-pending-teacher-review',
   };
 }
 export function normalizeQuestionInput(value: unknown): unknown {
-  return legacyQuestion(value) ? { ...value, ...legacyQuestionMetadata() } : value;
+  const candidate = legacyQuestion(value) ? { ...value, ...legacyQuestionMetadata() } : value;
+  return normalizeEditorialSources(candidate);
 }
 export function normalizePuzzleInput(value: unknown): unknown {
-  if (!legacyPuzzle(value)) return value;
+  if (!legacyPuzzle(value)) return normalizeEditorialSources(value);
   const { collection, ...rest } = value;
-  return { ...rest, collectionId: collection };
+  return normalizeEditorialSources({ ...rest, collectionId: collection });
+}
+
+/** Converte a fonte singular histórica sem modificar o objeto recebido. */
+function normalizeEditorialSources(value: unknown): unknown {
+  if (typeof value !== 'object' || value === null || Array.isArray(value) || 'sources' in value || !('source' in value)) return value;
+  const { source, ...rest } = value as Record<string, unknown>;
+  return { ...rest, sources: [{ role: 'primary', ...(source as Record<string, unknown>) }] };
 }

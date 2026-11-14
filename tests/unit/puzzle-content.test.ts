@@ -12,7 +12,8 @@ describe('catálogo provisório de Sequência Lógica', () => {
       expect(puzzle.blocks.length).toBeGreaterThanOrEqual(4);
       expect(puzzle.blocks.length).toBeLessThanOrEqual(7);
       expect(puzzle.validationStatus).toBe('provisional-pending-teacher-review');
-      expect(puzzle.source.type).toBe('fictional');
+      expect(puzzle.sources[0]?.type).toBe('fictional');
+      expect(puzzle.sources[0]?.role).toBe('primary');
       expect(puzzle.hints.length).toBeGreaterThanOrEqual(3);
       expect(puzzle.correctOrder).toHaveLength(puzzle.blocks.length);
     }

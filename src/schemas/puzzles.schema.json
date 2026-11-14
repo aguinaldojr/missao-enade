@@ -21,7 +21,7 @@
       "explanation",
       "reward",
       "unlocks",
-      "source",
+      "sources",
       "validationStatus"
     ],
     "properties": {
@@ -133,8 +133,11 @@
           }
         }
       },
-      "source": {
-        "$ref": "urn:n9:editorial#/definitions/source"
+      "sources": {
+        "$ref": "urn:n9:editorial#/definitions/sources"
+      },
+      "traceability": {
+        "$ref": "urn:n9:editorial#/definitions/traceability"
       },
       "validationStatus": {
         "$ref": "urn:n9:editorial#/definitions/validationStatus"
