@@ -16,7 +16,8 @@
     "test": "vitest run",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
-    "validate:content": "vitest run tests/unit/content.test.ts tests/unit/puzzle-content.test.ts tests/unit/editorial.test.ts tests/unit/editorial-docs.test.ts tests/unit/missions.test.ts"
+    "convert:editorial": "node scripts/convert-editorial-content.ts",
+    "validate:content": "vitest run tests/unit/content.test.ts tests/unit/puzzle-content.test.ts tests/unit/editorial.test.ts tests/unit/editorial-docs.test.ts tests/unit/editorial-json.test.ts tests/unit/missions.test.ts"
   },
   "dependencies": {
     "ajv": "8.20.0",

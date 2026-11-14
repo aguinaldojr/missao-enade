@@ -1,0 +1,530 @@
+[
+  {
+    "kind": "sequence",
+    "id": "E26-P-COM-01",
+    "title": "Recuperar a cópia de consulta",
+    "narrative": "Na Base N9 fictícia, uma falha interrompeu o catálogo público de horários do Ponto de Apoio. A equipe já preservou os registros da falha, isolou o recurso afetado e preparou um ambiente de teste separado da rede pública. Essas ações estão concluídas e não fazem parte da sequência. Você vai organizar a recuperação de uma cópia de consulta, sem dados pessoais. Existe uma cópia de segurança aprovada e um resumo de integridade guardado em registro confiável. Esse resumo é um valor de comparação para verificar se o arquivo recuperado corresponde à cópia aprovada; sozinho, não demonstra ausência de código malicioso. Neste ambiente, montar significa abrir o conteúdo da cópia recuperada. A montagem usa esse arquivo e fica bloqueada enquanto a comparação de integridade não tiver sido aprovada. O teste de consulta precisa do conteúdo montado. O atendimento público permanece desligado até o teste terminar com sucesso. Considere que todas as verificações terão resultado satisfatório. Se alguma falhasse, a equipe deveria interromper o procedimento e investigar. Organize os cinco blocos conforme essas dependências. Não é um protocolo universal de resposta a incidentes.",
+    "blocks": [
+      {
+        "id": "testar-consulta",
+        "text": "Executar uma consulta de teste no conteúdo montado e registrar o resultado satisfatório."
+      },
+      {
+        "id": "recuperar-arquivo",
+        "text": "Recuperar o arquivo da cópia de segurança aprovada para o ambiente de teste isolado."
+      },
+      {
+        "id": "publicar-consulta",
+        "text": "Ativar a consulta pública do catálogo usando o resultado satisfatório registrado no teste."
+      },
+      {
+        "id": "montar-conteudo",
+        "text": "Montar o conteúdo do arquivo cuja comparação de integridade foi aprovada, no ambiente de teste."
+      },
+      {
+        "id": "conferir-integridade",
+        "text": "Calcular o resumo do arquivo recuperado e compará-lo com o registro confiável, confirmando a correspondência."
+      }
+    ],
+    "correctOrder": [
+      "recuperar-arquivo",
+      "conferir-integridade",
+      "montar-conteudo",
+      "testar-consulta",
+      "publicar-consulta"
+    ],
+    "hints": [
+      "Procure o que cada bloco precisa receber pronto. Arquivo disponível, conteúdo montado e consulta funcionando são estados diferentes.",
+      "Para comparar os resumos, você precisa do arquivo recuperado. A existência do registro confiável, sozinha, não comprova a correspondência dessa cópia.",
+      "Observe a condição final: a consulta pública só pode ser ativada com um teste satisfatório já registrado. Confira qual estado permite executar esse teste."
+    ],
+    "explanation": "Você recuperou o arquivo, conferiu a correspondência com o registro confiável, montou o conteúdo, testou a consulta e ativou o serviço. A comparação verifica integridade da cópia; o teste verifica a função de consulta. Uma evidência não substitui a outra. Neste cenário, ambas precedem a liberação ao público. Outras recuperações podem exigir ações diferentes, paralelas ou adicionais. Se uma verificação falhar, não se deve avançar como se tivesse sido aprovada.",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "collectionId": "enade-2026",
+    "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; procedimento fictício autoral para N9 — Jornada Digital, sujeito à revisão docente.",
+    "courses": [
+      "CC",
+      "SI",
+      "TADS",
+      "TGTI",
+      "TRC"
+    ],
+    "area": "Proteção da informação: fundamentos",
+    "competencies": [
+      "CC: relacionar riscos e proteção de recursos às dependências de recuperação controlada.",
+      "SI: usar evidências de integridade e acesso para orientar recuperação de informação de um serviço.",
+      "TADS: reconhecer pré-condições de segurança e validação antes de disponibilizar recurso de software.",
+      "TGTI: relacionar proteção de ativos e continuidade às evidências necessárias para retomar serviço.",
+      "TRC: relacionar integridade e disponibilidade de recurso de rede à verificação anterior à exposição pública.",
+      "Comum: ordenar operações pelos estados que produzem e consomem, sem comandos ou ferramentas especializadas."
+    ],
+    "difficulty": "introductory",
+    "sources": [
+      {
+        "role": "primary",
+        "type": "official-reference",
+        "description": "Referência normativa de riscos e segurança para procedimento fictício; corroboração dos demais cursos na ficha. A portaria não prescreve esta sequência.",
+        "year": 2026,
+        "documentId": "Portaria Inep 157/2026",
+        "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/e402e087-9a8b-4409-84da-4c0cf7533472.pdf"
+      },
+      {
+        "role": "normative-complementary",
+        "type": "official-reference",
+        "year": 2026,
+        "documentId": "Portaria Inep 168/2026",
+        "description": "Corroboração normativa da matriz específica de Sistemas de Informação.",
+        "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+      },
+      {
+        "role": "normative-complementary",
+        "type": "official-reference",
+        "year": 2026,
+        "documentId": "Portaria Inep 169/2026",
+        "description": "Corroboração normativa da matriz específica de Tecnologia em Análise e Desenvolvimento de Sistemas.",
+        "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-169-2026-04-14.pdf"
+      },
+      {
+        "role": "normative-complementary",
+        "type": "official-reference",
+        "year": 2026,
+        "documentId": "Portaria Inep 171/2026",
+        "description": "Corroboração normativa da matriz específica de Tecnologia em Gestão da Tecnologia da Informação.",
+        "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-171-2026-04-14.pdf"
+      },
+      {
+        "role": "normative-complementary",
+        "type": "official-reference",
+        "year": 2026,
+        "documentId": "Portaria Inep 172/2026",
+        "description": "Corroboração normativa da matriz específica de Tecnologia em Redes de Computadores.",
+        "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-172-2026-04-14.pdf"
+      }
+    ],
+    "traceability": {
+      "title": "Recuperar a cópia de consulta",
+      "objective": "Ordenar etapas de recuperação usando evidências de proteção e continuidade.",
+      "locators": [
+        "COMUM-TEC09; CC-II, SI-II, TADS-II, TGTI-II, TRC-II — sínteses, não códigos novos oficiais"
+      ]
+    },
+    "validationStatus": "provisional-pending-teacher-review"
+  },
+  {
+    "kind": "sequence",
+    "id": "E26-P-CC-01",
+    "title": "Uma escrita que não chega à saída",
+    "narrative": "No laboratório fictício da Base N9, você organizará cinco passes de um tradutor para gerar uma representação intermediária sem uma escrita inútil. O programa-fonte e sua lista de tokens estão disponíveis; nomes, tipos e validade do programa já foram conferidos neste exercício. Não se está construindo um compilador completo. O programa é descrito em texto: 1. atribuir 1 a v; 2. se seletor for verdadeiro, atribuir entrada a v; caso contrário, atribuir 2 a v; 3. emitir v. Entrada é um inteiro de 0 a 3 e seletor é verdadeiro ou falso. A única saída observável é o valor emitido. Atribuições são puras, sem acesso externo ou efeito colateral; não há exceções, saltos adicionais ou usos ocultos de v. Uma árvore sintática representa a estrutura do programa. A representação intermediária deste tradutor usa instruções e rótulos explícitos. O grafo de fluxo relaciona os caminhos possíveis entre essas instruções. Um valor está vivo num ponto se puder ser lido em alguma continuação antes de ser sobrescrito. A análise de vivacidade deve considerar os dois ramos, não apenas um teste escolhido. Reorganize os cartões pelas entradas que consomem e pelos artefatos que produzem. Ao validar, o tradutor deve poder justificar a remoção de uma escrita sem mudar o valor emitido em nenhum dos oito pares possíveis de entrada e seletor. São dados e regras fictícios do exercício, não uma sequência universal de passes.",
+    "blocks": [
+      {
+        "id": "propagar-vivos",
+        "text": "Usar o grafo de fluxo e suas instruções para calcular, em cada ponto, quais valores podem ser lidos antes de nova escrita, considerando todos os sucessores."
+      },
+      {
+        "id": "eliminar-escrita",
+        "text": "Usar o mapa de vivacidade e a representação intermediária para retirar apenas atribuição pura cujo valor não será lido, preservando as instruções que produzem a saída."
+      },
+      {
+        "id": "emitir-intermediario",
+        "text": "Percorrer a árvore sintática e gerar a representação intermediária com instruções, rótulos e destinos dos desvios do condicional."
+      },
+      {
+        "id": "formar-arvore",
+        "text": "Usar os tokens disponíveis para construir a árvore que distingue a atribuição inicial, o condicional com seus dois ramos e a emissão final."
+      },
+      {
+        "id": "ligar-blocos",
+        "text": "Usar rótulos, instruções e desvios da representação intermediária para construir o grafo, ligando a decisão aos dois ramos e ambos à emissão."
+      }
+    ],
+    "correctOrder": [
+      "formar-arvore",
+      "emitir-intermediario",
+      "ligar-blocos",
+      "propagar-vivos",
+      "eliminar-escrita"
+    ],
+    "hints": [
+      "Separe estrutura de expressão, caminhos de execução e informação sobre usos futuros. Que evidência cada cartão precisa receber pronta?",
+      "Os dois ramos chegam à emissão, mas escrevem v antes disso. Considere ambos ao perguntar se o valor inicial de v ainda pode ser lido.",
+      "Retirar uma escrita exige uma conclusão sobre usos futuros. Procure o artefato que responde isso e qual informação ele precisa sobre as continuações."
+    ],
+    "explanation": "A árvore dá estrutura à geração das instruções e dos rótulos. Eles permitem montar o grafo com os dois ramos e sua junção. A vivacidade propaga usos possíveis por esse grafo; a transformação usa essa evidência para remover a atribuição inicial v ← 1. Esse valor é sobrescrito em ambos os ramos antes de emitir v: a saída continua entrada quando seletor é verdadeiro, e 2 quando é falso. As atribuições dos ramos são mantidas porque seus valores chegam à emissão. A análise não autoriza apagar operações com efeitos observáveis. Outros compiladores podem combinar, repetir ou reorganizar passes; aqui a ordem decorre dos artefatos exigidos por este tradutor.",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "collectionId": "enade-2026",
+    "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; procedimento autoral de tradução para N9 — Jornada Digital, sujeito à revisão docente de CC.",
+    "courses": [
+      "CC"
+    ],
+    "area": "Teoria da computação e compiladores",
+    "competencies": [
+      "Relacionar representações e dependências de análise de um compilador didático para justificar uma transformação que preserva a saída."
+    ],
+    "difficulty": "intermediate",
+    "sources": [
+      {
+        "role": "primary",
+        "type": "official-reference",
+        "description": "Referência normativa de compiladores para procedimento autoral de transformação; a portaria não prescreve estes passes ou sua ordem.",
+        "year": 2026,
+        "documentId": "Portaria Inep 157/2026",
+        "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/e402e087-9a8b-4409-84da-4c0cf7533472.pdf"
+      },
+      {
+        "role": "technical",
+        "type": "official-reference",
+        "description": "CC-T01 | MIT OpenCourseWare, 6.004 Computation Structures, Spring 2017, “11.1 Annotated Slides” | Página institucional, seções Frontend Stages: Semantic Analysis; Intermediate Representation; Common IR: Control Flow Graph; IR Optimization | Q03 e puzzle: distinção de etapas/representações. Não se reutilizam seus programas, figuras ou exemplos como desafio; publicação individual da página não identificada.",
+        "documentId": "CC-T01",
+        "url": "https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c11/c11s1/",
+        "year": 2017
+      },
+      {
+        "role": "technical",
+        "type": "official-reference",
+        "description": "CC-T02 | Saman Amarasinghe / MIT, 6.035 Computer Language Engineering, Spring 2010, Lecture 10: Introduction to Dataflow Analysis; slides contêm créditos de 1998/2006 | PDF institucional, 67 páginas, p. 4 e pp. 53–55: liveness/dead code/efeitos visíveis | Puzzle: fundamenta vivacidade e cuidado com efeitos observáveis. Leitura dirigida desses trechos, não auditoria integral do curso; extração apresenta quebras e símbolos degradados. Nenhuma imagem incorporada.",
+        "documentId": "CC-T02",
+        "url": "https://ocw.mit.edu/courses/6-035-computer-language-engineering-spring-2010/be85c47286095ba746869450318469a7_MIT6_035S10_lec10.pdf",
+        "year": 2010
+      }
+    ],
+    "traceability": {
+      "title": "Uma escrita que não chega à saída",
+      "objective": "Relacionar artefatos e dependências de etapas no modelo de tradução fornecido.",
+      "locators": [
+        "CC-01 / CC-I; F06, art. 5º, I, a.1/a.4; art. 6º, XIX"
+      ]
+    },
+    "validationStatus": "provisional-pending-teacher-review"
+  },
+  {
+    "kind": "sequence",
+    "id": "E26-P-SI-01",
+    "title": "Do trajeto realizado ao registro autorizado",
+    "narrative": "Uma equipe fictícia de extensão tecnológica da Base N9 precisa consolidar o custeio de uma visita técnica antes de registrá-lo no painel do projeto. Você organizará cinco cartões de trabalho por suas pré-condições, considerando quem pode confirmar cada informação. A ordem de visita já existe. O relato em rascunho lista três trechos realizados: T1, 12 km; T2, 8 km; T3, 4 km. A ordem autoriza T1 e T2 para esse custeio; T3 foi um deslocamento particular e não participa do cálculo. A equipe executora deve primeiro confirmar que o relato corresponde aos trajetos efetivamente realizados. Distância autorizada, sozinha, não comprova realização. As notas de trabalho abaixo não estão na ordem de execução: - O painel só aceita o registro com referência à autorização correspondente; um cálculo isolado não é autorização. - O cálculo usa a distância elegível conciliada e a regra interna fictícia de R$ 2 por quilômetro. - A conciliação da secretaria cruza a ordem com a versão do relato confirmada pela equipe executora. - A coordenação só pode autorizar um demonstrativo identificado e calculado, dentro do saldo reservado de R$ 50. Cada artefato produzido recebe versão e mantém referência ao anterior. Neste caso não haverá correção, mudança de regra, outra solicitação ou alteração de saldo durante o fluxo. Considere o caminho de sucesso. O modelo não estabelece norma de reembolso real nem efetua pagamento; os valores pertencem ao caso fictício e não são XP. Reordene os cartões para chegar a um registro cujo valor, evidência e autorização possam ser explicados. Não se pede apenas colocar cargos numa hierarquia: observe qual informação cada ação precisa receber.",
+    "blocks": [
+      {
+        "id": "calcular-demonstrativo",
+        "text": "Sistema: usar a distância elegível da conciliação para calcular o demonstrativo identificado, mantendo referências ao relato e à regra de custeio."
+      },
+      {
+        "id": "registrar-custeio",
+        "text": "Operador: usar a autorização da coordenação para registrar no painel o valor autorizado, mantendo vínculo ao demonstrativo e à autorização."
+      },
+      {
+        "id": "confirmar-relato",
+        "text": "Equipe executora: conferir os trechos realizados e confirmar a versão do relato que descreve o ocorrido, ainda sem concluir elegibilidade para custeio."
+      },
+      {
+        "id": "autorizar-demonstrativo",
+        "text": "Coordenação: conferir o demonstrativo calculado e identificado contra o saldo reservado, emitindo a autorização correspondente."
+      },
+      {
+        "id": "conciliar-trechos",
+        "text": "Secretaria: comparar a versão confirmada do relato com a ordem de visita, identificar trechos elegíveis realizados e registrar a distância conciliada."
+      }
+    ],
+    "correctOrder": [
+      "confirmar-relato",
+      "conciliar-trechos",
+      "calcular-demonstrativo",
+      "autorizar-demonstrativo",
+      "registrar-custeio"
+    ],
+    "hints": [
+      "Diferencie um relato do que ocorreu, uma informação conciliada e uma decisão de autorização. Cargo e velocidade não substituem a evidência que falta.",
+      "O trecho particular pode ter sido realizado sem ser elegível. Qual artefato precisa combinar a realização confirmada com a ordem de visita?",
+      "O valor calculado ainda não é uma decisão de custeio. Observe o que a coordenação precisa conferir e qual registro depende dessa decisão."
+    ],
+    "explanation": "A confirmação descreve o que ocorreu; a conciliação cruza esse relato com a ordem, tornando elegíveis T1 e T2: 12 + 8 = 20 km. O demonstrativo calcula 20 × R$ 2 = R$ 40 e identifica suas bases. A coordenação confere R$ 40 contra o saldo de R$ 50 e emite autorização. O registro final usa essa autorização, sem confundir relato, cálculo e decisão. T3 permanece no relato factual, mas não entra no custeio. Essa preservação permite explicar a diferença sem apagar o ocorrido. As dependências pertencem ao processo fictício; outras organizações podem ter etapas ou responsabilidades diferentes.",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "collectionId": "enade-2026",
+    "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; processo informacional autoral para N9 — Jornada Digital, sujeito à revisão docente de SI.",
+    "courses": [
+      "SI"
+    ],
+    "area": "Sistemas de informação e processos de negócio",
+    "competencies": [
+      "Relacionar pessoas responsáveis, estados do processo, evidências de deslocamento e registros tecnológicos para ordenar um fluxo informacional rastreável."
+    ],
+    "difficulty": "intermediate",
+    "sources": [
+      {
+        "role": "primary",
+        "type": "official-reference",
+        "description": "Referência normativa de SI e processos de negócio para fluxo fictício autoral; a portaria não prescreve estes valores, papéis ou sequência.",
+        "year": 2026,
+        "documentId": "Portaria Inep 168/2026",
+        "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+      }
+    ],
+    "traceability": {
+      "title": "Do trajeto realizado ao registro autorizado",
+      "objective": "Ordenar responsabilidades e circulação de informação por pré-condições explícitas.",
+      "locators": [
+        "SI-02 / SI-I; F07, art. 5º, I, a.3/a.5; art. 6º, VI e XV"
+      ]
+    },
+    "validationStatus": "provisional-pending-teacher-review"
+  },
+  {
+    "kind": "sequence",
+    "id": "E26-P-TADS-01",
+    "title": "Paginar sem aceitar uma legenda vazia",
+    "narrative": "Uma ferramenta fictícia de demonstração da Base N9 prepara páginas de legendas para uma apresentação. A entrada já foi recebida como um único texto: “ Lira ; Nimbo ; Orla ; Prisma ”. Ponto e vírgula separa as legendas; esse caractere não pode fazer parte de uma legenda. Os dados deste exercício usam apenas caracteres ASCII imprimíveis; espaço significa o caractere comum de código 32. A regra de negócio permite de 1 a 12 caracteres ASCII por legenda depois de retirar somente os espaços externos. Espaços internos permanecem. Se qualquer legenda ficar vazia ou ultrapassar o limite, o processamento deve parar com mensagem de erro; não se permite descartá-la silenciosamente. Outras notas do ambiente, sem ordem de execução: - A prévia recebe páginas prontas e mostra seus números e legendas. - O normalizador trabalha sobre uma lista de trechos, não sobre o texto único. - O agrupador só recebe a lista liberada pela validação e coloca no máximo duas legendas por página, sem mudar a ordem. - O validador exige a lista já normalizada, pois verifica o tamanho relevante ao negócio. Organize os cinco cartões pelas entradas e saídas que cada um utiliza. Neste caso a entrada é válida, mas a lógica deve respeitar a interrupção para outras entradas inválidas. Não há gravação de arquivo ou envio real nesta atividade documental.",
+    "blocks": [
+      {
+        "id": "agrupar-paginas",
+        "text": "Receber a lista liberada pela validação e agrupá-la em páginas com até duas legendas, preservando sua ordem."
+      },
+      {
+        "id": "normalizar-legendas",
+        "text": "Receber a lista de trechos separados e retirar apenas espaços externos de cada trecho, preservando espaços internos e ordem."
+      },
+      {
+        "id": "gerar-previa",
+        "text": "Receber as páginas agrupadas e gerar a prévia textual numerada, mantendo todas as legendas e sua distribuição."
+      },
+      {
+        "id": "separar-legendas",
+        "text": "Receber o texto único e separá-lo a cada ponto e vírgula, produzindo a lista de trechos ainda não normalizados."
+      },
+      {
+        "id": "validar-legendas",
+        "text": "Receber a lista normalizada, verificar de 1 a 12 caracteres por legenda e liberá-la inteira somente se todas forem válidas; caso contrário, interromper com erro."
+      }
+    ],
+    "correctOrder": [
+      "separar-legendas",
+      "normalizar-legendas",
+      "validar-legendas",
+      "agrupar-paginas",
+      "gerar-previa"
+    ],
+    "hints": [
+      "Observe o formato dos dados: um texto único, uma lista de legendas e uma lista de páginas não são a mesma entrada.",
+      "Uma legenda feita só de espaços parece ter tamanho antes da normalização, mas fica vazia depois. Em qual estado a regra de tamanho deve ser verificada?",
+      "Para mostrar uma página não basta ter trechos: o agrupador exige a lista liberada. Se houver legenda inválida, o algoritmo não deve produzir uma prévia parcial."
+    ],
+    "explanation": "A separação produz os quatro trechos; a normalização os transforma em Lira, Nimbo, Orla e Prisma, sem espaços externos. A validação aceita os tamanhos 4, 5, 4 e 6 e libera a lista inteira. O agrupamento forma página 1 com Lira/Nimbo e página 2 com Orla/Prisma. A prévia usa essas páginas numeradas. Se um trecho normalizado fosse vazio ou longo demais, não haveria liberação, agrupamento ou prévia. Essa ordem decorre dos formatos e pré-condições destes cartões, não de uma sequência obrigatória para toda ferramenta de texto.",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "collectionId": "enade-2026",
+    "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; algoritmo autoral para N9 — Jornada Digital, sujeito à revisão docente de TADS.",
+    "courses": [
+      "TADS"
+    ],
+    "area": "Requisitos, análise e arquitetura de software",
+    "competencies": [
+      "Relacionar regra de preparação de legendas a transformações e pré-condições de um algoritmo linear, preservando dados e ordem."
+    ],
+    "difficulty": "introductory",
+    "sources": [
+      {
+        "role": "primary",
+        "type": "official-reference",
+        "description": "Referência normativa de requisitos e algoritmos para fluxo autoral de preparação de legendas; não prescreve estes dados ou sua sequência.",
+        "year": 2026,
+        "documentId": "Portaria Inep 169/2026",
+        "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-169-2026-04-14.pdf"
+      }
+    ],
+    "traceability": {
+      "title": "Paginar sem aceitar uma legenda vazia",
+      "objective": "Relacionar regra de negócio a dependências de algoritmo delimitado.",
+      "locators": [
+        "TADS-01 / TADS-I e TADS-II; F08, art. 5º, I, a.4 e II, b.2/b.4; art. 6º, I e V"
+      ]
+    },
+    "validationStatus": "provisional-pending-teacher-review"
+  },
+  {
+    "kind": "sequence",
+    "id": "E26-P-TGTI-01",
+    "title": "O indicador ainda não está pronto",
+    "narrative": "Cenário fictício e provisório. O terminal da Base N9 tem registros de encerramento de solicitações, mas o indicador de acompanhamento ainda precisa ser apurado e verificado. Sua missão é organizar os cartões para fundamentar a próxima decisão de melhoria, sem contar observações incompletas como sucesso. O retrato dos dados foi extraído na hora 36. A política seleciona encerramentos entre as horas 0 e 24, inclusive, e só admite no indicador os que já puderam ser acompanhados por 24 horas completas. Para cada encerramento elegível, considera-se sucesso não haver reabertura depois dele e até 24 horas depois, incluindo esse limite. Os registros são completos até a hora 36; cada solicitação da tabela tem apenas um encerramento e, quando indicada, uma reabertura. | Solicitação | Hora do encerramento | Hora da reabertura | |---|---:|---| | S1 | 2 | Não houve até a hora 36 | | S2 | 6 | 20 | | S3 | 10 | 35 | | S4 | 12 | Não houve até a hora 36 | | S5 | 18 | Não houve até a hora 36 | | S6 | 30 | Não houve até a hora 36 | Leitura linear: S1 encerrou na hora 2 e não reabriu; S2 encerrou na 6 e reabriu na 20; S3 encerrou na 10 e reabriu na 35; S4 encerrou na 12, S5 na 18 e S6 na 30, sem reabertura até o retrato. A taxa é o número de sucessos elegíveis dividido pelo total elegível, multiplicado por cem. Se não houver elegíveis, não se calcula taxa nem se decide pela meta: é preciso obter acompanhamento completo. A política exige uma taxa conferida antes do encaminhamento. Abaixo de 80%, analisar as reaberturas ocorridas dentro do acompanhamento elegível e planejar uma experiência controlada de melhoria; a partir de 80%, manter acompanhamento. Não se atribui causa ou culpa só pelo percentual. Cada cartão descreve um artefato que deve estar pronto para o próximo. Preparar uma conta paralela é possível, mas conferir um cálculo exige que a conta documentada exista. As horas são dados do caso, não cronômetro ou espera do jogador.",
+    "blocks": [
+      {
+        "id": "escolher-encaminhamento",
+        "text": "Receber a taxa conferida e aplicar a meta de 80% para registrar o encaminhamento previsto pela política."
+      },
+      {
+        "id": "qualificar-desfechos",
+        "text": "Receber a lista elegível e classificar cada encerramento quanto à reabertura dentro das 24 horas, produzindo a lista de sucessos e não sucessos."
+      },
+      {
+        "id": "conferir-calculo",
+        "text": "Receber a conta documentada e suas listas de suporte; confrontá-las com os registros e refazer a conta para emitir a taxa conferida, ou devolver divergência sem decidir."
+      },
+      {
+        "id": "delimitar-coorte",
+        "text": "Receber os registros e a política; selecionar os encerramentos da janela que já têm 24 horas completas de acompanhamento, produzindo a lista elegível."
+      },
+      {
+        "id": "apurar-taxa",
+        "text": "Receber os desfechos classificados; documentar o numerador, o denominador e a taxa, vinculados às solicitações usadas."
+      }
+    ],
+    "correctOrder": [
+      "delimitar-coorte",
+      "qualificar-desfechos",
+      "apurar-taxa",
+      "conferir-calculo",
+      "escolher-encaminhamento"
+    ],
+    "hints": [
+      "Observe o que cada cartão recebe e produz. Sem o tempo completo de acompanhamento, uma ausência de reabertura ainda pode ser apenas observação incompleta.",
+      "Compare a hora do encerramento com a hora 36 e com as 24 horas exigidas. Pertencer à janela de encerramentos não basta para entrar no denominador.",
+      "A conferência precisa confrontar uma conta já documentada com os registros. Um percentual calculado ainda não é a taxa conferida exigida para decidir."
+    ],
+    "explanation": "A lista elegível contém S1, S2, S3 e S4: todos encerraram entre 0 e 24 e completaram 24 horas de acompanhamento até a hora 36. S5 tem só dezoito horas de acompanhamento; S6 está fora da janela e também não completou o acompanhamento. S2 reabriu catorze horas depois, portanto não é sucesso. S3 reabriu após 25 horas: não falhou no critério específico de 24 horas, embora mereça análise em outro recorte. S1, S3 e S4 são três sucessos entre quatro elegíveis: 3/4 × 100 = 75%. Depois de documentar e conferir essa conta, a política leva à análise da reabertura elegível e a uma experiência controlada de melhoria, pois 75% está abaixo de 80%. Isso não identifica causa, culpa ou qualidade integral do serviço.",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "collectionId": "enade-2026",
+    "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; elaboração autoral inédita para N9 — Jornada Digital, sujeita à revisão docente de TGTI.",
+    "courses": [
+      "TGTI"
+    ],
+    "area": "Serviços, continuidade, riscos e indicadores",
+    "competencies": [
+      "Apurar e verificar um indicador de serviço com recorte e acompanhamento completos antes de escolher uma ação de melhoria."
+    ],
+    "difficulty": "intermediate",
+    "sources": [
+      {
+        "role": "primary",
+        "type": "official-reference",
+        "description": "Referência normativa específica de TGTI para criação autoral no recorte indicado; cenário e solução didáticos, sem autoria ou chancela do Inep.",
+        "year": 2026,
+        "documentId": "Portaria Inep 171/2026",
+        "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-171-2026-04-14.pdf"
+      },
+      {
+        "role": "technical",
+        "type": "official-reference",
+        "description": "T1 — Google, The Site Reliability Workbook, capítulo “Implementing SLOs”, Steven Thurgood e David Ferguson, com Alex Hidalgo e Betsy Beyer | Página oficial, seções “What to Measure: Using SLIs”, “Choosing an Appropriate Time Window” e introdução sobre decisões de confiabilidade; HTML recuperado | Q02: unidade e janela; Q08: acompanhar melhoria; puzzle: explicitar numerador, denominador, janela e decisão | Não fornece os registros ou a política de 24 horas/80%. Não se transpõe garantia de disponibilidade ou modelo de causalidade. Leitura dirigida ao capítulo, sem alegar leitura integral do livro.",
+        "documentId": "T1",
+        "url": "https://sre.google/workbook/implementing-slos/"
+      }
+    ],
+    "traceability": {
+      "title": "O indicador ainda não está pronto",
+      "objective": "Ordenar dependências de obtenção de evidência para decisão de melhoria.",
+      "locators": [
+        "TGTI-02 / TGTI-II; F09, art. 5º, II, b.2/b.4; art. 6º, VIII e XV"
+      ]
+    },
+    "validationStatus": "provisional-pending-teacher-review"
+  },
+  {
+    "kind": "sequence",
+    "id": "E26-P-TRC-01",
+    "title": "Mudar a gestão sem perder a telemetria",
+    "narrative": "Cenário fictício e provisório. O terminal da Base N9 acompanha a mudança da rede de gestão de um comutador de laboratório. A mudança está autorizada e há console local independente, com operador responsável, para recuperação. Não execute comandos reais: organize as entregas do procedimento simulado. No estado inicial, gestão usa rede lógica 10 e endereço 10.60.10.1; sensores usam rede lógica 30. O retorno ao distribuidor permite as redes 10 e 30. A gestão nova deve usar rede 20 e endereço 10.60.20.1. O caminho externo da equipe autorizada até a rede 20 já está preparado e ensaiado. É preciso permitir também a rede 20 no retorno antes de assumir a gestão nova; a rede 30 dos sensores deve permanecer permitida. A rede 10 continuará permitida neste exercício, até desativação futura separadamente autorizada. A referência inicial deve conter a revisão efetivamente lida, sua configuração e testes de gestão antiga e telemetria. A candidata é um conjunto fechado de alterações calculado sobre essa revisão; se ela mudar antes da aplicação, a candidata não pode ser usada sem nova conferência. Não há mudança concorrente no caminho de sucesso deste caso. O simulador oferece aplicação provisória reversível: produz um recibo da candidata instalada, mas ainda exige decisão posterior. Sua console independente pode restaurar a referência. Verificar não é apenas receber uma mensagem de aplicação aceita. A política exige testar, no estado provisório instalado: acesso autorizado à gestão em 10.60.20.1, entrega da telemetria dos sensores na rede 30 e bloqueio de uma tentativa de gestão originada da rede de visitantes. Bloqueio nessa última tentativa é o resultado esperado, não falha do teste. No caminho de sucesso, os três resultados observados são: gestão autorizada responde; telemetria é entregue; tentativa dos visitantes é bloqueada. Se todos atenderem aos resultados esperados, confirmar e persistir a candidata. Se algum não atender, cancelar e restaurar a referência pela console, verificar a recuperação e registrar o desvio, sem declarar sucesso da mudança. Esses critérios são do laboratório delimitado, não garantia universal de rede. Cada cartão deve receber a entrega concluída exigida por seu texto. Não há cronômetro para o jogador, espera real ou conexão com equipamento. Preparar um modelo genérico antes da leitura é possível; finalizar esta candidata depende da revisão real recebida.",
+    "blocks": [
+      {
+        "id": "verificar-fluxos",
+        "text": "Receber o recibo de aplicação provisória e executar os três testes nesse estado, classificando cada resultado como atende ou não atende à política e produzindo o relatório."
+      },
+      {
+        "id": "registrar-referencia",
+        "text": "Receber a autorização e o acesso independente já disponíveis; ler a revisão atual, registrar a configuração e testar gestão antiga e telemetria, produzindo a referência recuperável."
+      },
+      {
+        "id": "decidir-destino",
+        "text": "Receber o relatório dos três testes: se todos atendem, confirmar e persistir a candidata; caso contrário, cancelar e restaurar a referência pela console, verificar recuperação e registrar o desvio."
+      },
+      {
+        "id": "aplicar-provisoriamente",
+        "text": "Receber a candidata conferida para a revisão lida e aplicá-la em modo provisório reversível, produzindo o recibo da configuração instalada sem ainda confirmar."
+      },
+      {
+        "id": "preparar-candidata",
+        "text": "Receber a referência recuperável; finalizar e conferir a candidata dessa revisão, incluindo rede 20 no retorno e gestão nova, preservando redes 10 e 30 e os controles existentes."
+      }
+    ],
+    "correctOrder": [
+      "registrar-referencia",
+      "preparar-candidata",
+      "aplicar-provisoriamente",
+      "verificar-fluxos",
+      "decidir-destino"
+    ],
+    "hints": [
+      "Procure qual evidência permite recuperar o estado anterior e qual cartão produz a revisão usada pela candidata. Um plano genérico não substitui a referência real.",
+      "Uma confirmação de aplicação não demonstra que gestão, sensores e bloqueio dos visitantes se comportaram como esperado. Os testes precisam observar o estado provisório já instalado.",
+      "Compare cada observação ao resultado esperado: bloquear visitantes pode significar teste atendido. O destino da mudança depende do relatório, sem obrigar retorno quando tudo atende."
+    ],
+    "explanation": "Primeiro se registra uma referência recuperável da revisão atual. Ela fundamenta a candidata que inclui a rede 20 no retorno e muda a gestão, mantendo a telemetria da rede 30, a rede 10 temporariamente e os controles. A candidata conferida é aplicada provisoriamente; só então os testes observam o estado realmente instalado. No relatório de sucesso, a gestão autorizada responde, a telemetria chega e os visitantes são bloqueados: os três critérios foram atendidos. O último cartão confirma e persiste essa mudança. Se qualquer critério não fosse atendido, o mesmo cartão mandaria cancelar, restaurar e verificar a referência pela console. Não se faz retorno automático depois de uma mudança bem-sucedida, nem se confirma apenas porque o equipamento aceitou uma configuração.",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "collectionId": "enade-2026",
+    "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; elaboração autoral inédita para N9 — Jornada Digital, sujeita à revisão docente de TRC.",
+    "courses": [
+      "TRC"
+    ],
+    "area": "Projetos, automação e gestão de redes",
+    "competencies": [
+      "Ordenar uma mudança de rede por artefatos verificados, preservando tráfego essencial e condicionando confirmação ou retorno às evidências do ensaio."
+    ],
+    "difficulty": "intermediate",
+    "sources": [
+      {
+        "role": "primary",
+        "type": "official-reference",
+        "description": "Referência normativa específica de TRC para criação autoral no recorte indicado; cenário e solução didáticos, sem autoria ou chancela do Inep.",
+        "year": 2026,
+        "documentId": "Portaria Inep 172/2026",
+        "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-172-2026-04-14.pdf"
+      },
+      {
+        "role": "technical",
+        "type": "official-reference",
+        "description": "T7 — RFC Editor, RFC 6241, Network Configuration Protocol, R. Enns e demais editores, junho de 2011 | Documento oficial, seção 8.4, Confirmed Commit Capability, e vínculo com candidata | Puzzle: inspiração para estado provisório, confirmação e possibilidade de retorno | Não é uma transcrição do protocolo: capacidades, sessões, persistência e temporizadores reais não são implementados. O simulador documental não tem cronômetro de jogador. Leitura dirigida, não conformidade integral.",
+        "documentId": "T7",
+        "url": "https://www.rfc-editor.org/rfc/rfc6241",
+        "year": 2011
+      }
+    ],
+    "traceability": {
+      "title": "Mudar a gestão sem perder a telemetria",
+      "objective": "Ordenar dependências de uma mudança de rede com critérios de continuidade declarados.",
+      "locators": [
+        "TRC-04 / TRC-II; F10, art. 5º, II, b.1/b.2/b.4; art. 6º, XIII, XV e XVI"
+      ]
+    },
+    "validationStatus": "provisional-pending-teacher-review"
+  }
+]
