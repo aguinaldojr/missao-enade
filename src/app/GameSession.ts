@@ -1,4 +1,5 @@
-import { EXAMPLE_QUESTION_COLLECTION, LEGACY_EXAMPLE_MISSION } from '../config/missions';
+import { LEGACY_EXAMPLE_MISSION } from '../config/missions';
+import { LEGACY_PLAYABLE_COLLECTION, type PlayableCollectionConfig } from '../config/collections';
 import { selectMissionQuestions, InsufficientMissionContentError } from '../domain/QuestionSelection';
 import puzzleCatalog from '../content/puzzles/sequences.json';
 import { JsonPuzzleRepository } from '../infrastructure/content/JsonPuzzleRepository';
@@ -10,7 +11,8 @@ import { explorationCopy } from '../config/exploration';
 import { createExploration, movePlayer, nearbyObject, type ExplorationState } from '../domain/exploration/World';
 import type { ExplorationRepository } from '../ports/ExplorationRepository';
 import { isCourseId, type CourseId } from '../domain/models/Course';
-import type { Attempt, ExampleResult } from '../domain/models/Attempt';
+import type { Attempt, ExampleResult, MissionResult, SavedResult } from '../domain/models/Attempt';
+import type { QuestionMissionConfig } from '../domain/models/QuestionMission';
 import type { OptionId } from '../domain/models/Question';
 import { accessFeedback, canAdvance, confirmAnswer, createAttempt, currentQuestion, isComplete, selectOption } from '../domain/progression';
 import { calculateScore } from '../domain/scoring';
@@ -22,8 +24,12 @@ export type Screen = 'home' | 'course-select' | 'map' | 'question' | 'result' | 
 export interface SessionState {
   readonly screen: Screen;
   readonly selectedCourse: CourseId | null;
+  readonly selectedMissionId: string;
+  readonly missions: readonly QuestionMissionConfig[];
+  readonly collectionName: string;
+  readonly validationNotice: string;
   readonly attempt: Attempt | null;
-  readonly lastResult: ExampleResult | null;
+  readonly lastResult: SavedResult | null;
   readonly saveStatus: SaveStatus;
   readonly contentError: string | null;
   readonly exploration: ExplorationState;
@@ -38,6 +44,7 @@ export interface SessionState {
 export type Command =
   | { type: 'start' }
   | { type: 'select-course'; course: unknown }
+  | { type: 'select-mission'; missionId: unknown }
   | { type: 'enter-central' }
   | { type: 'change-course' }
   | { type: 'start-phase' }
@@ -73,6 +80,7 @@ export class GameSession {
     private readonly explorationProgress?: ExplorationRepository,
     private readonly puzzleStorage?: PuzzleProgressRepository,
     private readonly puzzleContent: PuzzleContentRepository = new JsonPuzzleRepository(puzzleCatalog),
+    private readonly playableCollection: PlayableCollectionConfig = LEGACY_PLAYABLE_COLLECTION,
   ) {
     const world = explorationProgress?.load() ?? { state: null, status: 'none' as const };
     const puzzleSave = puzzleStorage?.load() ?? { progress: null, status: 'none' as const };
@@ -83,11 +91,15 @@ export class GameSession {
       exploration = Object.freeze({ ...exploration, doorUnlocked: true });
     }
     const loaded = progress?.loadResult() ?? { result: null, status: 'none' as const };
+    const collectionPuzzles = puzzleContent.all().filter((puzzle) => playableCollection.mode === 'example' ||
+      puzzle.collectionId === playableCollection.collectionId);
     this.state = Object.freeze({
-      screen: 'home', selectedCourse: null, attempt: null,
+      screen: 'home', selectedCourse: null, selectedMissionId: playableCollection.defaultMissionId,
+      missions: playableCollection.missions, collectionName: playableCollection.displayName,
+      validationNotice: playableCollection.validationNotice, attempt: null,
       lastResult: loaded.result, saveStatus: loaded.status, contentError: null,
       exploration, explorationSaveStatus: world.status, worldDialog: null,
-      puzzleProgress, puzzleAttempt: null, puzzleSaveStatus: puzzleSave.status, puzzles: puzzleContent.all(),
+      puzzleProgress, puzzleAttempt: null, puzzleSaveStatus: puzzleSave.status, puzzles: Object.freeze(collectionPuzzles),
     });
   }
 
@@ -105,7 +117,16 @@ export class GameSession {
         if (current.screen !== 'course-select' || !isCourseId(command.course)) {
           throw new Error('Selecione um dos cinco cursos disponíveis.');
         }
-        this.update({ selectedCourse: command.course, puzzles: this.puzzleContent.forCourse(command.course) });
+        this.update({ selectedCourse: command.course, puzzles: Object.freeze(this.puzzleContent.forCourse(command.course)
+          .filter((puzzle) => this.playableCollection.mode === 'example' ||
+            puzzle.collectionId === this.playableCollection.collectionId)) });
+        break;
+      case 'select-mission':
+        if (current.screen !== 'course-select' || typeof command.missionId !== 'string' ||
+            !current.missions.some((mission) => mission.id === command.missionId)) {
+          throw new Error('Selecione um dos tamanhos de missão disponíveis.');
+        }
+        this.update({ selectedMissionId: command.missionId });
         break;
       case 'enter-central':
         if (current.screen !== 'course-select' || current.selectedCourse === null) {
@@ -118,16 +139,18 @@ export class GameSession {
             nearbyObject(current.exploration, MAPS[current.exploration.mapId]!)?.kind !== 'computer') return current;
         try {
           if (!this.content) throw new Error('Catálogo ausente.');
+          const mission = current.missions.find((candidate) => candidate.id === current.selectedMissionId);
+          if (!mission) throw new Error('Configuração de missão ausente.');
           const bank = this.content.questionsForCourse(current.selectedCourse);
           const questions = selectMissionQuestions(bank, { course: current.selectedCourse,
-            collectionId: EXAMPLE_QUESTION_COLLECTION, mission: LEGACY_EXAMPLE_MISSION });
+            collectionId: this.playableCollection.collectionId, mission });
           this.update({ screen: 'question', contentError: null,
-            attempt: createAttempt(this.createId(), current.selectedCourse, questions, LEGACY_EXAMPLE_MISSION),
+            attempt: createAttempt(this.createId(), current.selectedCourse, questions, mission),
             exploration: Object.freeze({ ...current.exploration, missionStatus: current.exploration.missionStatus === 'completed' ? 'completed' : 'active' }) });
           this.persistExploration();
         } catch (error) {
           this.update({ contentError: error instanceof InsufficientMissionContentError ? error.message
-            : 'Os exemplos estão indisponíveis ou inválidos. Nenhuma fase foi iniciada. Você pode tentar novamente ou voltar ao menu.' });
+            : 'Os conteúdos estão indisponíveis ou inválidos. Nenhuma missão foi iniciada. Você pode tentar novamente ou voltar ao menu.' });
         }
         break;
       case 'select-option':
@@ -151,11 +174,18 @@ export class GameSession {
           this.update({ attempt: Object.freeze({ ...attempt, index: attempt.index + 1, selectedOptionId: null }) });
         } else if (isComplete(attempt)) {
           const score = calculateScore(attempt.answers);
-          const result: ExampleResult = Object.freeze({
-            schemaVersion: 1, contentVersion: 'example-1', mode: 'example', phaseId: 'FASE-EXEMPLO-01',
-            attemptId: attempt.id, course: attempt.courseAtStart, total: 10,
-            score, correctCount: score / 100, completedAt: this.now(),
-          });
+          const result: SavedResult = this.playableCollection.mode === 'example' && attempt.mission.id === LEGACY_EXAMPLE_MISSION.id
+            ? Object.freeze<ExampleResult>({
+              schemaVersion: 1, contentVersion: 'example-1', mode: 'example', phaseId: 'FASE-EXEMPLO-01',
+              attemptId: attempt.id, course: attempt.courseAtStart, total: 10,
+              score, correctCount: score / 100, completedAt: this.now(),
+            })
+            : Object.freeze<MissionResult>({
+              schemaVersion: 1, contentVersion: this.playableCollection.contentVersion, mode: 'provisional',
+              phaseId: this.playableCollection.phaseId, missionId: attempt.mission.id,
+              attemptId: attempt.id, course: attempt.courseAtStart, total: attempt.mission.questionCount,
+              score, correctCount: score / 100, completedAt: this.now(),
+            });
           this.update({ screen: 'result', lastResult: result,
             saveStatus: this.progress?.saveResult(result) ? 'saved' : 'failed',
             exploration: Object.freeze({ ...current.exploration, missionStatus: 'completed', doorUnlocked: true }) });

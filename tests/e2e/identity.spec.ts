@@ -17,7 +17,7 @@ test('nova identidade preserva relatório salvo na chave anterior', async ({ pag
   await expect(page.locator('.brand-mark')).toHaveText('N9');
   expect(await page.locator('body').innerText()).not.toMatch(/Nexus|produto oficial|slogan oficial/i);
   await expect(page).toHaveTitle('N9 — Jornada Digital');
-  await expect(page.locator('.last-result h2')).toHaveText('Último relatório da missão salvo · Exemplo');
+  await expect(page.locator('.last-result h2')).toHaveText('Último relatório da missão salvo');
   await expect(page.locator('.last-result')).toContainText('8 de 10 acertos · 800 pontos');
   expect(await page.locator('body').innerText()).not.toMatch(/ENADE|simulado|preparação para prova/i);
   expect(await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), legacyKey)).toEqual(savedReport);

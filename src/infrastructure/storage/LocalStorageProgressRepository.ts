@@ -1,13 +1,21 @@
 import Ajv from 'ajv';
-import schema from '../../schemas/result.schema.json';
-import type { ExampleResult } from '../../domain/models/Attempt';
+import legacySchema from '../../schemas/result.schema.json';
+import missionSchema from '../../schemas/mission-result.schema.json';
+import type { ExampleResult, MissionResult, SavedResult } from '../../domain/models/Attempt';
 import type { ProgressRepository, ResultLoad } from '../../ports/ProgressRepository';
 
 export const RESULT_KEY = 'missao-enade:example-result:v1';
-const validate = new Ajv().compile<ExampleResult>(schema);
+export const MISSION_RESULT_KEY = 'n9:mission-result:v1';
+const ajv = new Ajv();
+const validateLegacy = ajv.compile<ExampleResult>(legacySchema);
+const validateMission = ajv.compile<MissionResult>(missionSchema);
 
 export function isValidResult(value: unknown): value is ExampleResult {
-  return validate(value) && value.score === value.correctCount * 100 &&
+  return validateLegacy(value) && value.score === value.correctCount * 100 &&
+    Number.isFinite(Date.parse(value.completedAt));
+}
+export function isValidMissionResult(value: unknown): value is MissionResult {
+  return validateMission(value) && value.correctCount <= value.total && value.score === value.correctCount * 100 &&
     Number.isFinite(Date.parse(value.completedAt));
 }
 
@@ -16,22 +24,35 @@ export class LocalStorageProgressRepository implements ProgressRepository {
 
   loadResult(): ResultLoad {
     try {
-      const raw = this.getStorage().getItem(RESULT_KEY);
-      if (raw === null) return { result: null, status: 'none' };
-      const data: unknown = JSON.parse(raw);
-      return isValidResult(data)
-        ? { result: Object.freeze({ ...data }), status: 'saved' }
-        : { result: null, status: 'invalid' };
+      const storage = this.getStorage();
+      const currentRaw = storage.getItem(MISSION_RESULT_KEY);
+      let invalid = false;
+      if (currentRaw !== null) {
+        try {
+          const current: unknown = JSON.parse(currentRaw);
+          if (isValidMissionResult(current)) return { result: Object.freeze({ ...current }), status: 'saved' };
+          invalid = true;
+        } catch { invalid = true; }
+      }
+      const legacyRaw = storage.getItem(RESULT_KEY);
+      if (legacyRaw === null) return { result: null, status: invalid ? 'invalid' : 'none' };
+      try {
+        const legacy: unknown = JSON.parse(legacyRaw);
+        return isValidResult(legacy) ? { result: Object.freeze({ ...legacy }), status: 'saved' }
+          : { result: null, status: 'invalid' };
+      } catch { return { result: null, status: 'invalid' }; }
     } catch (error) {
       return { result: null, status: error instanceof SyntaxError ? 'invalid' : 'unavailable' };
     }
   }
 
-  saveResult(result: ExampleResult): boolean {
+  saveResult(result: SavedResult): boolean {
     try {
-      if (!isValidResult(result)) return false;
+      const current = isValidMissionResult(result);
+      if (!current && !isValidResult(result)) return false;
       const storage = this.getStorage();
-      const raw = storage.getItem(RESULT_KEY);
+      const key = current ? MISSION_RESULT_KEY : RESULT_KEY;
+      const raw = storage.getItem(key);
       if (raw) {
         try {
           const previous: unknown = JSON.parse(raw);
@@ -39,7 +60,7 @@ export class LocalStorageProgressRepository implements ProgressRepository {
               typeof previous.schemaVersion === 'number' && previous.schemaVersion > 1) return false;
         } catch { /* Uma conclusão explícita pode substituir um resumo corrompido. */ }
       }
-      storage.setItem(RESULT_KEY, JSON.stringify(result));
+      storage.setItem(key, JSON.stringify(result));
       return true;
     } catch {
       return false;

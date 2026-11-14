@@ -23,7 +23,7 @@ describe('identidade e origem pedagógica separadas', () => {
   it('preserva a coleção interna sem incluí-la nos textos da interface', () => {
     expect(firstLearningCollection.id).toBe('enade-2026');
     expect(firstLearningCollection.pedagogicalOrigin).toContain('ENADE');
-    expect(firstLearningCollection.status).toBe('planned');
+    expect(firstLearningCollection.status).toBe('pilot');
     expect(JSON.stringify(gameConfig)).not.toMatch(/enade|simulado|preparação para prova/i);
   });
 });

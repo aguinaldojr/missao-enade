@@ -36,7 +36,7 @@ describe('controles HTML e foco', () => {
     expect(session.snapshot.screen).toBe('map');
     expect(root.querySelector('.selected-name')?.textContent).toBe('Tecnologia em Análise e Desenvolvimento de Sistemas');
     expect(document.activeElement).toBe(root.querySelector('h1'));
-    expect(root.textContent).toContain('MISSÃO DE EXEMPLO');
+    expect(root.textContent).toContain('COLEÇÃO PROVISÓRIA');
   });
 
   it('limpa listeners de telas desmontadas, permite trocar curso e mantém o fluxo sem canvas', () => {

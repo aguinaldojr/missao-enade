@@ -2,18 +2,20 @@ import { explorationCopy } from '../../config/exploration';
 import { gameConfig } from '../../config/game';
 import type { Command } from '../../app/GameSession';
 import { getCourse } from '../../app/courses';
-import type { ExampleResult } from '../../domain/models/Attempt';
+import type { SavedResult } from '../../domain/models/Attempt';
 import type { SaveStatus } from '../../ports/ProgressRepository';
 import { button, element } from '../components/elements';
 
-export function resultView(result: ExampleResult, status: SaveStatus, dispatch: (command: Command) => void, signal: AbortSignal): HTMLElement {
+export function resultView(result: SavedResult, status: SaveStatus, dispatch: (command: Command) => void, signal: AbortSignal): HTMLElement {
   const view = element('section', 'view result-view');
   view.append(element('p', 'eyebrow', gameConfig.copy.reportEyebrow));
   const title = element('h1', 'section-title', gameConfig.copy.reportTitle);
   title.tabIndex = -1;
   view.append(title, element('p', 'example-warning', gameConfig.copy.reportExample), element('p', 'intro intro--small', getCourse(result.course).name));
   const scores = element('dl', 'result-numbers');
-  for (const [label, value] of [[gameConfig.copy.correctCountLabel, result.correctCount + ' de 10'], [gameConfig.copy.scoreLabel, result.score + ' de 1.000'], [gameConfig.copy.completedLabel, '10 de 10']]) {
+  for (const [label, value] of [[gameConfig.copy.correctCountLabel, result.correctCount + ' de ' + result.total],
+    [gameConfig.copy.scoreLabel, result.score + ' de ' + result.total * 100],
+    [gameConfig.copy.completedLabel, result.total + ' de ' + result.total]]) {
     const group = element('div', '');
     group.append(element('dt', '', label), element('dd', '', value));
     scores.append(group);

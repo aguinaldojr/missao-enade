@@ -1,10 +1,10 @@
 import { gameConfig } from '../../config/game';
-import type { ExampleResult } from '../../domain/models/Attempt';
+import type { SavedResult } from '../../domain/models/Attempt';
 import type { SaveStatus } from '../../ports/ProgressRepository';
 import { getCourse } from '../../app/courses';
 import { button, element } from '../components/elements';
 
-export function homeView(onStart: () => void, signal: AbortSignal, lastResult: ExampleResult | null = null, saveStatus: SaveStatus = 'none'): HTMLElement {
+export function homeView(onStart: () => void, signal: AbortSignal, lastResult: SavedResult | null = null, saveStatus: SaveStatus = 'none'): HTMLElement {
   const view = element('section', 'view home-view');
   view.append(element('p', 'eyebrow', gameConfig.copy.homeEyebrow));
   const title = element('h1', 'hero-title');
@@ -30,7 +30,7 @@ export function homeView(onStart: () => void, signal: AbortSignal, lastResult: E
   if (lastResult) {
     const summary = element('section', 'last-result');
     summary.append(element('h2', '', saveStatus === 'saved' ? gameConfig.copy.lastSaved : gameConfig.copy.lastUnsaved),
-      element('p', '', gameConfig.format.summary(getCourse(lastResult.course).name, lastResult.correctCount, lastResult.score)));
+      element('p', '', gameConfig.format.summary(getCourse(lastResult.course).name, lastResult.correctCount, lastResult.total, lastResult.score)));
     view.append(summary);
   } else if (saveStatus === 'invalid' || saveStatus === 'unavailable') {
     view.append(element('p', 'helper', saveStatus === 'invalid'

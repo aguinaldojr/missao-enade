@@ -1,7 +1,7 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test';
-import catalog from '../../src/content/questions/central-nexo.json' with { type: 'json' };
+import catalog from '../../src/content/questions/enade-2026-provisional.json' with { type: 'json' };
 
-const RESULT_KEY = 'missao-enade:example-result:v1';
+const RESULT_KEY = 'n9:mission-result:v1';
 const courseIds = ['CC', 'SI', 'TADS', 'TGTI', 'TRC'] as const;
 
 async function press(page: Page, name: string, info: TestInfo) {
@@ -10,11 +10,12 @@ async function press(page: Page, name: string, info: TestInfo) {
   else await control.click();
 }
 
-async function startPhase(page: Page, course: string, info: TestInfo) {
+async function startPhase(page: Page, course: string, info: TestInfo, mission = 'special') {
   await page.getByRole('button', { name: 'Iniciar missão' }).click();
   await page.locator('input[name="course"][value="' + course + '"]').check();
+  await page.locator('input[name="mission"][value="' + mission + '"]').check();
   await press(page, 'Entrar na Central Nexo', info);
-  await press(page, 'Jogar missão de exemplo', info);
+  await press(page, 'Iniciar missão selecionada', info);
 }
 
 async function reflow(page: Page) {
@@ -22,20 +23,24 @@ async function reflow(page: Page) {
 }
 
 for (const course of courseIds) {
-  test('dez exemplos filtrados e resultado persistido: ' + course, async ({ page }, info) => {
+  test('missão padrão filtrada e resultado persistido: ' + course, async ({ page }, info) => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('/');
     await startPhase(page, course, info);
-    const questions = catalog.questions.filter((question) => question.courses.includes(course));
-    const expectedCorrect = course === 'CC' ? 10 : course === 'SI' ? 0 : 8;
+    const eligible = catalog.questions.filter((question) => question.courses.includes(course));
+    const questions = [
+      ...eligible.filter((question) => question.classification === 'COMUM').slice(0, 5),
+      ...eligible.filter((question) => question.classification === course).slice(0, 5),
+    ];
+    const expectedCorrect = 10;
     for (const [index, question] of questions.entries()) {
       await expect(page.getByText('Desafio ' + (index + 1) + ' de 10', { exact: true })).toBeVisible();
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(question.prompt);
       await expect(page.getByRole('radio')).toHaveCount(5);
       expect(await page.locator('body').innerText()).not.toMatch(/\bENADE\b|simulado|preparação para prova/i);
       await expect(page).toHaveTitle(/N9 — Jornada Digital/);
-      await expect(page.locator('.example-warning')).toContainText('DESAFIO FICTÍCIO');
+      await expect(page.locator('.example-warning')).toContainText('CONTEÚDO EM VALIDAÇÃO PEDAGÓGICA');
       await expect(page.locator('.feedback')).toHaveCount(0);
       await expect(page.getByRole('button', { name: 'Confirmar resposta' })).toBeDisabled();
       if (index === 0) {
@@ -45,7 +50,7 @@ for (const course of courseIds) {
         await reflow(page);
         await page.setViewportSize(viewport);
       }
-      const option = index < expectedCorrect ? question.correctOptionId : question.options.find((entry) => entry.id !== question.correctOptionId)!.id;
+      const option = question.correctOptionId;
       const label = page.locator('.answer-card').filter({ has: page.locator('input[value="' + option + '"]') });
       if (info.project.name === 'mobile') await label.tap(); else await label.click();
       await expect(page.getByRole('radio', { checked: true })).toHaveCount(1);
@@ -64,10 +69,11 @@ for (const course of courseIds) {
       await press(page, index === 9 ? 'Ver relatório da missão' : 'Próximo desafio', info);
     }
     await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
-    await expect(page.locator('.result-numbers')).toContainText(expectedCorrect * 100 + ' de 1.000');
+    await expect(page.locator('.result-numbers')).toContainText(expectedCorrect * 100 + ' de 1000');
     await expect(page.getByRole('status').filter({ hasText: 'Relatório da missão salvo neste navegador.' })).toBeVisible();
     const stored = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), RESULT_KEY);
-    expect(stored).toMatchObject({ schemaVersion: 1, mode: 'example', course, total: 10, score: expectedCorrect * 100, correctCount: expectedCorrect });
+    expect(stored).toMatchObject({ schemaVersion: 1, mode: 'provisional', missionId: 'special', course, total: 10,
+      score: expectedCorrect * 100, correctCount: expectedCorrect });
     if (course === 'CC') await page.screenshot({ path: info.outputPath('resultado.png'), fullPage: true });
     await press(page, 'Voltar à Base N9', info);
     await expect(page.getByRole('heading', { name: 'Base N9', exact: true })).toBeVisible();

@@ -45,7 +45,7 @@ for (const [id, name] of courses) {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Base N9');
     await expect(page.locator('.selected-name')).toHaveText(name);
     await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
-    await expect(page.getByText('MISSÃO DE EXEMPLO', { exact: true })).toBeVisible();
+    await expect(page.getByText('COLEÇÃO PROVISÓRIA', { exact: true })).toBeVisible();
     await expectReflow(page);
     if (id === 'CC') await page.screenshot({ path: info.outputPath('central.png'), fullPage: true });
     await page.getByRole('button', { name: 'Trocar curso' }).click();
@@ -62,7 +62,8 @@ for (const [id, name] of courses) {
     expect(stored).toEqual({ local: [], session: [] });
     await page.reload();
     await page.getByRole('button', { name: 'Iniciar missão' }).click();
-    await expect(page.getByRole('radio', { checked: true })).toHaveCount(0);
+    await expect(page.locator('input[name="course"]:checked')).toHaveCount(0);
+    await expect(page.locator('input[name="mission"]:checked')).toHaveValue('special');
     await expect(page.getByRole('button', { name: 'Entrar na Central Nexo' })).toBeDisabled();
     expect(errors).toEqual([]);
     expect(external).toEqual([]);
@@ -81,6 +82,10 @@ test('navegação completa por teclado e foco entre telas', async ({ page }) => 
   await page.keyboard.press('Space');
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('radio', { name: 'SI Sistemas de Informação', exact: true })).toBeChecked();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('input[name="mission"][value="special"]')).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.locator('input[name="mission"][value="arena"]')).toBeChecked();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Entrar na Central Nexo' })).toBeFocused();
   await page.keyboard.press('Enter');

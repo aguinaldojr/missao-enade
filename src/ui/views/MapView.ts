@@ -16,7 +16,9 @@ export function mapView(state: SessionState, dispatch: (command: Command) => voi
   title.tabIndex = -1;
   view.append(title, element('p', 'helper', explorationCopy.intro));
   const course = element('p', 'selected-name', getCourse(state.selectedCourse).name);
-  view.append(course);
+  const mission = state.missions.find((candidate) => candidate.id === state.selectedMissionId)!;
+  view.append(course, element('p', 'selected-mission', mission.internalTitle + ' · ' + mission.questionCount + ' desafios'),
+    element('p', 'example-warning', state.validationNotice));
   const grid = element('div', 'exploration-grid');
   const area = element('div', 'world-area');
   area.append(element('div', 'world-slot'), element('p', 'world-instructions', explorationCopy.controls), element('p', 'world-legend', explorationCopy.legend));
@@ -108,7 +110,7 @@ export function updateMapView(view: HTMLElement, state: SessionState): void {
   if (hint.textContent !== hintText) hint.textContent = hintText;
   const interact = view.querySelector<HTMLButtonElement>('.world-interact')!;
   interact.disabled = !target || state.worldDialog !== null;
-  interact.textContent = target?.kind === 'computer' ? gameConfig.copy.playExample
+  interact.textContent = target?.kind === 'computer' ? gameConfig.copy.playMission
     : target?.kind === 'npc' ? 'Conversar com Lia' : explorationCopy.interact;
   for (const control of view.querySelectorAll<HTMLButtonElement>('[data-direction]')) control.disabled = state.worldDialog !== null;
   const dialog = view.querySelector<HTMLElement>('.world-dialog')!;

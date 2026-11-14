@@ -26,6 +26,17 @@
 .course-copy { display: grid; gap: 5px; min-width: 0; }
 .course-code { font-size: 15px; letter-spacing: 0.03em; }
 .course-name { font-size: 14px; line-height: 1.4; color: #435952; }
+.mission-select-title { font-size: 21px; line-height: 1.35; margin: 28px 0 14px; }
+.mission-options { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.mission-card { display: flex; align-items: center; gap: 12px; min-height: 68px; border: 1px solid #b7c3ba; background: #fbfcf7; padding: 12px 14px; border-radius: 5px; cursor: pointer; }
+.mission-card:hover { border-color: var(--accent); }
+.mission-card:has(:checked) { border: 2px solid var(--accent); padding: 11px 13px; background: #e8f1e8; }
+.mission-card:has(:focus-visible) { outline: 3px solid #9a5c16; outline-offset: 3px; }
+.mission-radio { accent-color: var(--accent); width: 18px; height: 18px; flex-shrink: 0; margin: 0; }
+.mission-radio:focus-visible { outline: none; }
+.mission-copy { display: grid; gap: 4px; font-size: 14px; line-height: 1.4; }
+.mission-copy span { color: #435952; font-size: 13px; }
+.selected-mission { color: var(--muted); font-size: 13px; margin-top: 5px; }
 .planned-note { color: var(--muted); font-size: 12px; margin-top: 22px; border-top: 1px solid var(--line); padding-top: 16px; }
 .selected-course { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 7px 16px; margin: 28px 0; padding: 19px; border: 1px solid #b9cfc0; background: #e8f1e8; border-radius: 5px; }
 .course-emblem { grid-row: span 2; align-self: center; font-size: 22px; font-weight: 700; color: var(--accent); }
@@ -39,6 +50,7 @@
 @media (min-width: 600px) {
   .course-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .course-card:last-child { grid-column: 1 / -1; }
+  .mission-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 380px) {
   .wordmark strong { font-size: 12px; }
@@ -47,6 +59,7 @@
 }
 @media (forced-colors: active) {
   .course-card:has(:checked) { border-color: Highlight; }
+  .mission-card:has(:checked) { border-color: Highlight; }
   .button { border: 1px solid ButtonText; }
 }
 

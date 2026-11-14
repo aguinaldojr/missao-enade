@@ -1,9 +1,11 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test';
-import catalog from '../../src/content/puzzles/sequences.json' with { type: 'json' };
+import allPuzzles from '../../src/content/puzzles/enade-2026-provisional-sequences.json' with { type: 'json' };
+
+const catalog = allPuzzles.filter((puzzle) => puzzle.courses.includes('SI'));
 
 const WORLD_KEY = 'n9:exploration:v1';
 const PUZZLE_KEY = 'n9:puzzles:v1';
-const RESULT_KEY = 'missao-enade:example-result:v1';
+const RESULT_KEY = 'n9:mission-result:v1';
 async function enter(page: Page) {
   await page.getByRole('button', { name: 'Iniciar missão' }).click();
   await page.locator('input[name="course"][value="SI"]').check();
@@ -85,7 +87,7 @@ test('teclado, dicas graduais, conclusão, retorno e replay sem XP adicional', a
   expect(errors).toEqual([]);
 });
 
-test('arraste com mouse/toque, botões e três conteúdos com XP único por ID', async ({ page }, info) => {
+test('arraste com mouse/toque, botões e dois conteúdos elegíveis com XP único por ID', async ({ page }, info) => {
   await start(page);
   const before = await order(page);
   await page.locator('.sequence-block').first().evaluate((node) => node.scrollIntoView({ block: 'start' }));
@@ -116,10 +118,10 @@ test('arraste com mouse/toque, botões e três conteúdos com XP único por ID',
     await expect(page.locator('.puzzle-xp')).toHaveText('XP de quebra-cabeças: ' + (index + 1) * 100);
   }
   const saved = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), PUZZLE_KEY);
-  expect(Object.values(saved.entries).filter((entry) => (entry as { completed: boolean }).completed)).toHaveLength(3);
+  expect(Object.values(saved.entries).filter((entry) => (entry as { completed: boolean }).completed)).toHaveLength(2);
   await page.reload();
   await enter(page);
-  await expect(page.locator('.puzzle-xp')).toHaveText('XP de quebra-cabeças: 300');
+  await expect(page.locator('.puzzle-xp')).toHaveText('XP de quebra-cabeças: 200');
 });
 
 test('guarda ordem e dicas sem concluir; restaura após recarga', async ({ page }, info) => {

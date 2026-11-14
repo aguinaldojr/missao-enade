@@ -33,3 +33,20 @@ export interface ExampleResult {
   readonly score: number;
   readonly completedAt: string;
 }
+
+/** Resumo local das missões da coleção provisória; não certifica aprendizagem. */
+export interface MissionResult {
+  readonly schemaVersion: 1;
+  readonly contentVersion: string;
+  readonly mode: 'provisional';
+  readonly phaseId: string;
+  readonly missionId: string;
+  readonly attemptId: string;
+  readonly course: CourseId;
+  readonly total: number;
+  readonly correctCount: number;
+  readonly score: number;
+  readonly completedAt: string;
+}
+
+export type SavedResult = ExampleResult | MissionResult;

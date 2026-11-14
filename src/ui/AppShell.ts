@@ -90,8 +90,10 @@ export class AppShell {
         view = homeView(() => dispatch({ type: 'start' }), signal, state.lastResult, state.saveStatus);
         break;
       case 'course-select':
-        view = courseSelectView(state.selectedCourse, {
+        view = courseSelectView(state.selectedCourse, state.selectedMissionId, state.missions,
+          state.collectionName, state.validationNotice, {
           select: (course) => dispatch({ type: 'select-course', course }),
+          selectMission: (missionId) => dispatch({ type: 'select-mission', missionId }),
           confirm: () => dispatch({ type: 'enter-central' }),
           back: () => dispatch({ type: 'home' }),
         }, signal);
@@ -140,7 +142,8 @@ export class AppShell {
       focusHeading(this.content);
       announce(this.status, state.screen === 'map' ? gameConfig.format.centralAnnouncement(getCourse(state.selectedCourse!).name) : '');
     }
-    document.title = gamePageTitle(state.screen, (state.attempt?.index ?? 0) + 1);
+    document.title = gamePageTitle(state.screen, (state.attempt?.index ?? 0) + 1,
+      state.attempt?.mission.questionCount ?? 10);
   }
 
   private updateCourse(state: SessionState): void {
@@ -148,6 +151,9 @@ export class AppShell {
     if (confirm) confirm.disabled = state.selectedCourse === null;
     for (const radio of this.content.querySelectorAll<HTMLInputElement>('input[name="course"]')) {
       radio.checked = radio.value === state.selectedCourse;
+    }
+    for (const radio of this.content.querySelectorAll<HTMLInputElement>('input[name="mission"]')) {
+      radio.checked = radio.value === state.selectedMissionId;
     }
     if (state.selectedCourse) announce(this.status, gameConfig.format.courseAnnouncement(getCourse(state.selectedCourse).name));
   }

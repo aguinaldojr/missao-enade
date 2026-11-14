@@ -1,10 +1,15 @@
 import { describe, expect, it, vi } from 'vitest';
-import type { ExampleResult } from '../../src/domain/models/Attempt';
-import { LocalStorageProgressRepository, RESULT_KEY } from '../../src/infrastructure/storage/LocalStorageProgressRepository';
+import type { ExampleResult, MissionResult } from '../../src/domain/models/Attempt';
+import { LocalStorageProgressRepository, MISSION_RESULT_KEY, RESULT_KEY } from '../../src/infrastructure/storage/LocalStorageProgressRepository';
 
 const result: ExampleResult = {
   schemaVersion: 1, contentVersion: 'example-1', mode: 'example', phaseId: 'FASE-EXEMPLO-01',
   attemptId: 'attempt-1', course: 'TRC', total: 10, correctCount: 8, score: 800, completedAt: '2026-11-13T12:00:00.000Z',
+};
+const missionResult: MissionResult = {
+  schemaVersion: 1, contentVersion: 'enade-2026-provisional-1', mode: 'provisional',
+  phaseId: 'N9-COLLECTION-PROVISIONAL', missionId: 'quick', attemptId: 'mission-1',
+  course: 'SI', total: 3, correctCount: 2, score: 200, completedAt: '2026-11-14T12:00:00.000Z',
 };
 
 function setup(raw: string | null = null) {
@@ -24,6 +29,15 @@ describe('último resultado no LocalStorage', () => {
     expect(repository.loadResult().result?.score).toBe(0);
     expect(data.get('other-app')).toBe('preservar');
     expect(data.size).toBe(2);
+  });
+
+  it('salva a coleção integrada separadamente e mantém o resultado antigo intacto', () => {
+    const { repository, data } = setup(JSON.stringify(result));
+    expect(repository.loadResult().result).toEqual(result);
+    expect(repository.saveResult(missionResult)).toBe(true);
+    expect(data.get(RESULT_KEY)).toBe(JSON.stringify(result));
+    expect(JSON.parse(data.get(MISSION_RESULT_KEY)!)).toEqual(missionResult);
+    expect(repository.loadResult().result).toEqual(missionResult);
   });
 
   it.each([

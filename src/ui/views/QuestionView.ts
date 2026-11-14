@@ -10,7 +10,7 @@ export function questionView(attempt: Attempt, dispatch: (command: Command) => v
   const answer = attempt.answers[attempt.index];
   const view = element('section', 'view question-view');
   const toolbar = element('div', 'question-toolbar');
-  toolbar.append(element('p', 'eyebrow', gameConfig.format.challengeProgress(attempt.index + 1)), element('p', 'score', gameConfig.format.score(calculateScore(attempt.answers))));
+  toolbar.append(element('p', 'eyebrow', gameConfig.format.challengeProgress(attempt.index + 1, attempt.mission.questionCount)), element('p', 'score', gameConfig.format.score(calculateScore(attempt.answers))));
   view.append(toolbar, element('p', 'example-warning', gameConfig.copy.challengeExample));
   const title = element('h1', 'question-title', question.prompt);
   title.tabIndex = -1;
@@ -76,7 +76,7 @@ export function questionView(attempt: Attempt, dispatch: (command: Command) => v
     details.append(list);
     feedback.append(details);
     view.append(feedback);
-    const next = button(attempt.index === 9 ? gameConfig.copy.finish : gameConfig.copy.next);
+    const next = button(attempt.index === attempt.mission.questionCount - 1 ? gameConfig.copy.finish : gameConfig.copy.next);
     next.addEventListener('click', () => dispatch({ type: 'next-question', questionId: question.id }), { signal });
     view.append(next);
   } else {

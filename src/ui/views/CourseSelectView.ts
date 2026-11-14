@@ -1,15 +1,19 @@
 import { gameConfig } from '../../config/game';
 import { courses } from '../../app/courses';
 import type { CourseId } from '../../domain/models/Course';
+import type { QuestionMissionConfig } from '../../domain/models/QuestionMission';
 import { button, element } from '../components/elements';
 
 export interface CourseActions {
   select: (id: CourseId) => void;
+  selectMission: (id: string) => void;
   confirm: () => void;
   back: () => void;
 }
 
-export function courseSelectView(selected: CourseId | null, actions: CourseActions, signal: AbortSignal): HTMLElement {
+export function courseSelectView(selected: CourseId | null, selectedMissionId: string,
+  missions: readonly QuestionMissionConfig[], collectionName: string, validationNotice: string,
+  actions: CourseActions, signal: AbortSignal): HTMLElement {
   const view = element('section', 'view');
   const back = button(gameConfig.copy.backHome, true);
   back.classList.add('back-button');
@@ -36,12 +40,32 @@ export function courseSelectView(selected: CourseId | null, actions: CourseActio
     label.append(radio, copy);
     group.append(label);
   }
+  const missionTitle = element('h2', 'mission-select-title', gameConfig.copy.missionTitle);
+  const missionGroup = element('fieldset', 'mission-options');
+  missionGroup.append(element('legend', 'sr-only', gameConfig.copy.missionLegend));
+  for (const mission of missions) {
+    const label = element('label', 'mission-card');
+    const radio = element('input', 'mission-radio');
+    radio.type = 'radio';
+    radio.name = 'mission';
+    radio.value = mission.id;
+    radio.checked = selectedMissionId === mission.id;
+    radio.required = true;
+    radio.addEventListener('change', () => actions.selectMission(mission.id), { signal });
+    const copy = element('span', 'mission-copy');
+    copy.append(element('strong', '', mission.internalTitle),
+      element('span', '', mission.questionCount + ' desafios · ' + mission.commonQuestionCount + ' comuns + ' +
+        mission.specificQuestionCount + ' específicos'));
+    label.append(radio, copy);
+    missionGroup.append(label);
+  }
   const confirm = button(gameConfig.copy.enterCentral);
   confirm.type = 'submit';
   confirm.dataset.action = 'confirm-course';
-  confirm.disabled = selected === null;
-  form.append(group, confirm, element('p', 'helper', gameConfig.copy.courseTemporary));
+  confirm.disabled = selected === null || !missions.some((mission) => mission.id === selectedMissionId);
+  form.append(group, missionTitle, missionGroup, element('p', 'helper', gameConfig.copy.arenaCapacity), confirm,
+    element('p', 'helper', gameConfig.copy.courseTemporary));
   form.addEventListener('submit', (event) => { event.preventDefault(); actions.confirm(); }, { signal });
-  view.append(form, element('p', 'planned-note', gameConfig.copy.coursePlanned));
+  view.append(form, element('p', 'planned-note', collectionName + ' · ' + validationNotice));
   return view;
 }
