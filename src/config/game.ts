@@ -16,6 +16,30 @@ export const gameConfig = {
   "changeCourse": "Trocar curso",
   "enterCentral": "Entrar na Central Nexo",
   "playMission": "Iniciar missão selecionada",
+  "profileEyebrow": "PERFIL LOCAL",
+  "profileTitle": "Quem está jogando?",
+  "profileIntro": "Crie um apelido ou escolha um jogador deste navegador.",
+  "localDataNotice": "Os dados deste perfil ficam somente neste navegador.",
+  "nicknameLabel": "Apelido",
+  "nicknameHelp": "Use de 3 a 20 caracteres. Espaços excedentes serão removidos.",
+  "createPlayer": "Criar jogador",
+  "existingPlayers": "Jogadores deste navegador",
+  "currentPlayer": "Jogador atual",
+  "choosePlayer": "Escolher jogador",
+  "changePlayer": "Trocar jogador",
+  "continueWithPlayer": "Continuar com este jogador",
+  "profileSaveFailed": "Não foi possível salvar o perfil neste navegador.",
+  "rankingEyebrow": "RESULTADOS LOCAIS",
+  "rankingTitle": "Ranking",
+  "rankingPrivacy": "Ranking salvo somente neste dispositivo. Ele não representa toda a turma.",
+  "rankingTableCaption": "Classificação local por curso e tamanho de missão",
+  "emptyRanking": "Ainda não há resultados concluídos para este curso e tamanho de missão.",
+  "missionRanking": "Ranking desta missão",
+  "deleteRanking": "Excluir dados locais do ranking",
+  "deleteRankingTitle": "Excluir todo o ranking local?",
+  "deleteRankingMessage": "Esta ação remove os resultados do ranking deste dispositivo. Perfis, progresso, puzzles e relatórios de missão serão preservados.",
+  "confirmDeleteRanking": "Sim, excluir ranking",
+  "rankingStorageFailed": "Não foi possível atualizar o ranking neste navegador.",
   "homeEyebrow": "UMA CIDADE. CINCO PERCURSOS.",
   "heroStart": "Conhecimento que ",
   "heroAccent": "conecta.",
@@ -105,7 +129,9 @@ export const gameConfig = {
 } as const;
 
 export function gamePageTitle(screen: string, index = 1, total = 10): string {
-  const page = screen === 'course-select' ? 'Escolha seu curso'
+  const page = screen === 'profile' ? 'Perfil local'
+    : screen === 'leaderboard' ? 'Ranking local'
+    : screen === 'course-select' ? 'Escolha seu curso'
     : screen === 'question' ? gameConfig.format.challengeProgress(index, total)
     : screen === 'puzzle' ? 'Sequência Lógica'
     : screen === 'result' ? 'Relatório da missão'

@@ -18,8 +18,14 @@ import { accessFeedback, canAdvance, confirmAnswer, createAttempt, currentQuesti
 import { calculateScore } from '../domain/scoring';
 import type { ContentRepository } from '../ports/ContentRepository';
 import type { ProgressRepository, SaveStatus } from '../ports/ProgressRepository';
+import { activePlayer, createPlayer, emptyPlayerProfiles, selectPlayer,
+  type PlayerProfile, type PlayerProfiles } from '../domain/models/PlayerProfile';
+import { emptyLeaderboard, entryFromResult, isRankingQuestionCount, recordBestResult,
+  type Leaderboard, type RankingQuestionCount } from '../domain/models/Leaderboard';
+import type { PlayerProfileRepository } from '../ports/PlayerProfileRepository';
+import type { LeaderboardRepository } from '../ports/LeaderboardRepository';
 
-export type Screen = 'home' | 'course-select' | 'map' | 'question' | 'result' | 'puzzle';
+export type Screen = 'home' | 'profile' | 'leaderboard' | 'course-select' | 'map' | 'question' | 'result' | 'puzzle';
 
 export interface SessionState {
   readonly screen: Screen;
@@ -39,10 +45,31 @@ export interface SessionState {
   readonly puzzleSaveStatus: SaveStatus;
   readonly puzzles: readonly SequencePuzzle[];
   readonly worldDialog: { readonly title: string; readonly message: string } | null;
+  readonly profiles: PlayerProfiles;
+  readonly profileSaveStatus: SaveStatus;
+  readonly profileError: string | null;
+  readonly profileNextScreen: 'home' | 'course-select';
+  readonly leaderboard: Leaderboard;
+  readonly leaderboardSaveStatus: SaveStatus;
+  readonly rankingCourse: CourseId;
+  readonly rankingQuestionCount: RankingQuestionCount;
+  readonly rankingReturnScreen: 'home' | 'result';
+  readonly rankingDeletePending: boolean;
 }
 
 export type Command =
   | { type: 'start' }
+  | { type: 'open-profile' }
+  | { type: 'create-player'; nickname: string }
+  | { type: 'select-player'; playerId: string }
+  | { type: 'continue-profile' }
+  | { type: 'open-ranking' }
+  | { type: 'select-ranking-course'; course: unknown }
+  | { type: 'select-ranking-size'; questionCount: number }
+  | { type: 'request-ranking-delete' }
+  | { type: 'cancel-ranking-delete' }
+  | { type: 'confirm-ranking-delete' }
+  | { type: 'close-ranking' }
   | { type: 'select-course'; course: unknown }
   | { type: 'select-mission'; missionId: unknown }
   | { type: 'enter-central' }
@@ -81,6 +108,8 @@ export class GameSession {
     private readonly puzzleStorage?: PuzzleProgressRepository,
     private readonly puzzleContent: PuzzleContentRepository = new JsonPuzzleRepository(puzzleCatalog),
     private readonly playableCollection: PlayableCollectionConfig = LEGACY_PLAYABLE_COLLECTION,
+    private readonly profileStorage?: PlayerProfileRepository,
+    private readonly leaderboardStorage?: LeaderboardRepository,
   ) {
     const world = explorationProgress?.load() ?? { state: null, status: 'none' as const };
     const puzzleSave = puzzleStorage?.load() ?? { progress: null, status: 'none' as const };
@@ -91,6 +120,15 @@ export class GameSession {
       exploration = Object.freeze({ ...exploration, doorUnlocked: true });
     }
     const loaded = progress?.loadResult() ?? { result: null, status: 'none' as const };
+    const profileLoad = profileStorage?.load() ?? { profiles: null, status: 'none' as const };
+    const leaderboardLoad = leaderboardStorage?.load() ?? { leaderboard: null, status: 'none' as const };
+    let profiles = profileLoad.profiles ?? emptyPlayerProfiles();
+    let profileSaveStatus = profileLoad.status;
+    const loadedPlayer = activePlayer(profiles);
+    if (loadedPlayer && profileStorage) {
+      profiles = selectPlayer(profiles, loadedPlayer.id, this.now());
+      profileSaveStatus = profileStorage.save(profiles) ? 'saved' : 'failed';
+    }
     const collectionPuzzles = puzzleContent.all().filter((puzzle) => playableCollection.mode === 'example' ||
       puzzle.collectionId === playableCollection.collectionId);
     this.state = Object.freeze({
@@ -100,6 +138,10 @@ export class GameSession {
       lastResult: loaded.result, saveStatus: loaded.status, contentError: null,
       exploration, explorationSaveStatus: world.status, worldDialog: null,
       puzzleProgress, puzzleAttempt: null, puzzleSaveStatus: puzzleSave.status, puzzles: Object.freeze(collectionPuzzles),
+      profiles, profileSaveStatus,
+      profileError: null, profileNextScreen: 'course-select',
+      leaderboard: leaderboardLoad.leaderboard ?? emptyLeaderboard(), leaderboardSaveStatus: leaderboardLoad.status,
+      rankingCourse: 'CC', rankingQuestionCount: 10, rankingReturnScreen: 'home', rankingDeletePending: false,
     });
   }
 
@@ -110,8 +152,76 @@ export class GameSession {
     const attempt = current.attempt;
     switch (command.type) {
       case 'start':
+        if (this.profileStorage && !activePlayer(current.profiles)) {
+          this.update({ screen: 'profile', profileNextScreen: 'course-select', profileError: null });
+        } else {
+          this.update({ screen: 'course-select', attempt: null, contentError: null, worldDialog: null });
+        }
+        break;
       case 'change-course':
         this.update({ screen: 'course-select', attempt: null, contentError: null, worldDialog: null });
+        break;
+      case 'open-profile':
+        if (current.screen !== 'home' && current.screen !== 'course-select') return current;
+        this.update({ screen: 'profile', profileNextScreen: current.screen, profileError: null });
+        break;
+      case 'create-player':
+        if (current.screen !== 'profile') return current;
+        try {
+          const profiles = createPlayer(current.profiles, command.nickname, 'player-' + this.createId(), this.now());
+          this.update({ profiles, profileError: null,
+            profileSaveStatus: this.profileStorage?.save(profiles) ? 'saved' : 'failed' });
+        } catch (error) {
+          this.update({ profileError: error instanceof Error ? error.message : 'Não foi possível criar o jogador.' });
+        }
+        break;
+      case 'select-player':
+        if (current.screen !== 'profile') return current;
+        try {
+          const profiles = selectPlayer(current.profiles, command.playerId, this.now());
+          this.update({ profiles, profileError: null,
+            profileSaveStatus: this.profileStorage?.save(profiles) ? 'saved' : 'failed' });
+        } catch (error) {
+          this.update({ profileError: error instanceof Error ? error.message : 'Não foi possível selecionar o jogador.' });
+        }
+        break;
+      case 'continue-profile':
+        if (current.screen === 'profile' && activePlayer(current.profiles)) {
+          this.update({ screen: current.profileNextScreen, profileError: null });
+        }
+        break;
+      case 'open-ranking': {
+        if (current.screen !== 'home' && current.screen !== 'result') return current;
+        const result = current.screen === 'result' ? current.lastResult : null;
+        this.update({ screen: 'leaderboard', rankingReturnScreen: current.screen,
+          rankingCourse: result?.course ?? current.rankingCourse,
+          rankingQuestionCount: result && isRankingQuestionCount(result.total) ? result.total : current.rankingQuestionCount,
+          rankingDeletePending: false });
+        break;
+      }
+      case 'select-ranking-course':
+        if (current.screen === 'leaderboard' && isCourseId(command.course)) this.update({ rankingCourse: command.course });
+        break;
+      case 'select-ranking-size':
+        if (current.screen === 'leaderboard' && isRankingQuestionCount(command.questionCount)) {
+          this.update({ rankingQuestionCount: command.questionCount });
+        }
+        break;
+      case 'request-ranking-delete':
+        if (current.screen === 'leaderboard') this.update({ rankingDeletePending: true });
+        break;
+      case 'cancel-ranking-delete':
+        if (current.screen === 'leaderboard') this.update({ rankingDeletePending: false });
+        break;
+      case 'confirm-ranking-delete':
+        if (current.screen === 'leaderboard' && current.rankingDeletePending) {
+          const cleared = this.leaderboardStorage?.clear() ?? false;
+          this.update({ leaderboard: cleared ? emptyLeaderboard() : current.leaderboard,
+            leaderboardSaveStatus: cleared ? 'saved' : 'failed', rankingDeletePending: false });
+        }
+        break;
+      case 'close-ranking':
+        if (current.screen === 'leaderboard') this.update({ screen: current.rankingReturnScreen, rankingDeletePending: false });
         break;
       case 'select-course':
         if (current.screen !== 'course-select' || !isCourseId(command.course)) {
@@ -186,8 +296,18 @@ export class GameSession {
               attemptId: attempt.id, course: attempt.courseAtStart, total: attempt.mission.questionCount,
               score, correctCount: score / 100, completedAt: this.now(),
             });
+          let leaderboard = current.leaderboard;
+          let leaderboardSaveStatus = current.leaderboardSaveStatus;
+          const player = activePlayer(current.profiles);
+          if (result.mode === 'provisional' && player && this.leaderboardStorage) {
+            leaderboard = recordBestResult(leaderboard,
+              entryFromResult(result, player, this.playableCollection.collectionId));
+            leaderboardSaveStatus = this.leaderboardStorage.save(leaderboard) ? 'saved' : 'failed';
+          }
           this.update({ screen: 'result', lastResult: result,
             saveStatus: this.progress?.saveResult(result) ? 'saved' : 'failed',
+            leaderboard, leaderboardSaveStatus, rankingCourse: result.course,
+            rankingQuestionCount: isRankingQuestionCount(result.total) ? result.total : current.rankingQuestionCount,
             exploration: Object.freeze({ ...current.exploration, missionStatus: 'completed', doorUnlocked: true }) });
           this.persistExploration();
         }
@@ -327,6 +447,8 @@ export class GameSession {
   }
 
   get puzzleXp(): number { return totalPuzzleXp(this.state.puzzleProgress, this.puzzleContent.all()); }
+
+  get currentPlayer(): PlayerProfile | null { return activePlayer(this.state.profiles); }
 
   private persistExploration(): void {
     if (!this.explorationProgress) return;

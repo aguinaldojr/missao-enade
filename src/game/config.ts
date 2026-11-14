@@ -9,7 +9,9 @@ import { QuestionScene } from './scenes/QuestionScene';
 import { ResultScene } from './scenes/ResultScene';
 
 export function mountGame(parent: HTMLElement, session: GameSession, unavailable: () => void): { sync: () => void; destroy: () => void } {
-  const scenes = { home: 'HomeScene', 'course-select': 'CourseSelectScene', map: 'MapScene', question: 'QuestionScene', result: 'ResultScene', puzzle: 'MapScene' } as const;
+  const scenes = { home: 'HomeScene', profile: 'HomeScene', leaderboard: 'ResultScene',
+    'course-select': 'CourseSelectScene', map: 'MapScene', question: 'QuestionScene',
+    result: 'ResultScene', puzzle: 'MapScene' } as const;
   let ready = false;
   let current: string | undefined;
   const sync = () => {

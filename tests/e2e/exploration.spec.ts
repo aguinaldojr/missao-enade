@@ -1,8 +1,16 @@
 import { expect, test, type Page } from '@playwright/test';
 
 const KEY = 'n9:exploration:v1';
-async function enter(page: Page) {
+async function startWithPlayer(page: Page) {
   await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
+    await page.getByLabel('Apelido').fill('Explorador');
+    await page.getByRole('button', { name: 'Criar jogador' }).click();
+    await page.getByRole('button', { name: 'Continuar com este jogador' }).click();
+  }
+}
+async function enter(page: Page) {
+  await startWithPlayer(page);
   await page.locator('input[name="course"][value="TRC"]').check();
   await page.getByRole('button', { name: 'Entrar na Central Nexo' }).click();
   await expect(page.getByRole('heading', { name: 'Base N9', exact: true })).toBeVisible();

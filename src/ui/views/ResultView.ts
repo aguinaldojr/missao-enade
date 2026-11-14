@@ -5,8 +5,13 @@ import { getCourse } from '../../app/courses';
 import type { SavedResult } from '../../domain/models/Attempt';
 import type { SaveStatus } from '../../ports/ProgressRepository';
 import { button, element } from '../components/elements';
+import type { Leaderboard } from '../../domain/models/Leaderboard';
+import { rankingFor, isRankingQuestionCount } from '../../domain/models/Leaderboard';
+import type { PlayerProfile } from '../../domain/models/PlayerProfile';
+import { leaderboardTable } from './LeaderboardView';
 
-export function resultView(result: SavedResult, status: SaveStatus, dispatch: (command: Command) => void, signal: AbortSignal): HTMLElement {
+export function resultView(result: SavedResult, status: SaveStatus, leaderboard: Leaderboard,
+  player: PlayerProfile | null, dispatch: (command: Command) => void, signal: AbortSignal): HTMLElement {
   const view = element('section', 'view result-view');
   view.append(element('p', 'eyebrow', gameConfig.copy.reportEyebrow));
   const title = element('h1', 'section-title', gameConfig.copy.reportTitle);
@@ -31,11 +36,18 @@ export function resultView(result: SavedResult, status: SaveStatus, dispatch: (c
     retry.addEventListener('click', () => dispatch({ type: 'retry-save' }), { signal });
     view.append(retry);
   }
+  if (isRankingQuestionCount(result.total)) {
+    const rankingTitle = element('h2', 'subsection-title', gameConfig.copy.missionRanking);
+    view.append(rankingTitle, element('p', 'helper', gameConfig.copy.rankingPrivacy),
+      leaderboardTable(rankingFor(leaderboard, result.course, result.total), player?.id ?? null));
+  }
+  const openRanking = button(gameConfig.copy.rankingTitle, true);
+  openRanking.addEventListener('click', () => dispatch({ type: 'open-ranking' }), { signal });
   const home = button(gameConfig.copy.menu);
   home.classList.add('menu-button');
   home.addEventListener('click', () => dispatch({ type: 'home' }), { signal });
   const returnMap = button(explorationCopy.returnMap);
   returnMap.addEventListener('click', () => dispatch({ type: 'return-map' }), { signal });
-  view.append(returnMap, home, element('p', 'helper', gameConfig.copy.saveLimit));
+  view.append(openRanking, returnMap, home, element('p', 'helper', gameConfig.copy.saveLimit));
   return view;
 }

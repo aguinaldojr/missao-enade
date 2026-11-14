@@ -6,8 +6,16 @@ const catalog = allPuzzles.filter((puzzle) => puzzle.courses.includes('SI'));
 const WORLD_KEY = 'n9:exploration:v1';
 const PUZZLE_KEY = 'n9:puzzles:v1';
 const RESULT_KEY = 'n9:mission-result:v1';
-async function enter(page: Page) {
+async function startWithPlayer(page: Page) {
   await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
+    await page.getByLabel('Apelido').fill('Sequenciador');
+    await page.getByRole('button', { name: 'Criar jogador' }).click();
+    await page.getByRole('button', { name: 'Continuar com este jogador' }).click();
+  }
+}
+async function enter(page: Page) {
+  await startWithPlayer(page);
   await page.locator('input[name="course"][value="SI"]').check();
   await page.getByRole('button', { name: 'Entrar na Central Nexo' }).click();
   await page.locator('.world-interact').click();

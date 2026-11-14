@@ -13,6 +13,9 @@ import { questionView } from './views/QuestionView';
 import { SequencePuzzleView } from './views/SequencePuzzleView';
 import { resultView } from './views/ResultView';
 import { currentQuestion } from '../domain/progression';
+import { activePlayer } from '../domain/models/PlayerProfile';
+import { playerProfileView } from './views/PlayerProfileView';
+import { leaderboardView } from './views/LeaderboardView';
 
 export class AppShell {
   readonly canvasHost = element('div', 'canvas-host');
@@ -66,7 +69,10 @@ export class AppShell {
     if (state.screen === 'puzzle' && this.sequenceView?.puzzleId === state.puzzleAttempt?.puzzleId) {
       this.sequenceView!.update(state); return;
     }
-    const key = [state.puzzleAttempt?.puzzleId, state.screen, state.attempt?.index, state.attempt?.answers.length, state.saveStatus, state.contentError].join(':');
+    const key = [state.puzzleAttempt?.puzzleId, state.screen, state.attempt?.index, state.attempt?.answers.length,
+      state.saveStatus, state.contentError, state.profiles.activePlayerId, state.profiles.players.length,
+      state.profileError, state.profileSaveStatus, state.leaderboard.entries.length, state.leaderboardSaveStatus,
+      state.rankingCourse, state.rankingQuestionCount, state.rankingDeletePending].join(':');
     if (this.renderKey === key) {
       if (state.screen === 'course-select') this.updateCourse(state);
       if (state.screen === 'question' && state.attempt) {
@@ -87,7 +93,17 @@ export class AppShell {
     let view: HTMLElement;
     switch (state.screen) {
       case 'home':
-        view = homeView(() => dispatch({ type: 'start' }), signal, state.lastResult, state.saveStatus);
+        view = homeView({
+          start: () => dispatch({ type: 'start' }),
+          profile: () => dispatch({ type: 'open-profile' }),
+          ranking: () => dispatch({ type: 'open-ranking' }),
+        }, signal, state.lastResult, state.saveStatus, activePlayer(state.profiles));
+        break;
+      case 'profile':
+        view = playerProfileView(state, dispatch, signal);
+        break;
+      case 'leaderboard':
+        view = leaderboardView(state, dispatch, signal);
         break;
       case 'course-select':
         view = courseSelectView(state.selectedCourse, state.selectedMissionId, state.missions,
@@ -96,6 +112,7 @@ export class AppShell {
           selectMission: (missionId) => dispatch({ type: 'select-mission', missionId }),
           confirm: () => dispatch({ type: 'enter-central' }),
           back: () => dispatch({ type: 'home' }),
+          changePlayer: () => dispatch({ type: 'open-profile' }),
         }, signal);
         break;
       case 'map':
@@ -112,8 +129,13 @@ export class AppShell {
         break;
       case 'result':
         if (!state.lastResult) throw new Error('Resultado necessário.');
-        view = resultView(state.lastResult, state.saveStatus, dispatch, signal);
+        view = resultView(state.lastResult, state.saveStatus, state.leaderboard,
+          activePlayer(state.profiles), dispatch, signal);
         break;
+    }
+    const player = activePlayer(state.profiles);
+    if (player && state.screen !== 'profile') {
+      view.prepend(element('p', 'player-indicator', gameConfig.copy.currentPlayer + ': ' + player.nickname));
     }
     this.renderKey = key;
     this.content.replaceChildren(view);
@@ -133,8 +155,12 @@ export class AppShell {
       this.canvasHost.removeAttribute('aria-label');
     }
     this.content.closest('.stage')?.classList.toggle('stage--playing', state.screen === 'question' || state.screen === 'result');
+    const confirmation = this.content.querySelector<HTMLElement>('[role="alertdialog"] h2');
     const feedback = this.content.querySelector<HTMLElement>('.feedback-heading');
-    if (feedback) {
+    if (confirmation) {
+      confirmation.focus();
+      announce(this.status, confirmation.textContent ?? '');
+    } else if (feedback) {
       feedback.focus();
       announce(this.status, feedback.textContent ?? '');
       dispatch({ type: 'feedback-accessed', questionId: currentQuestion(state.attempt!).id });

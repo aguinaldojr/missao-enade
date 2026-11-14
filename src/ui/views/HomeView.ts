@@ -3,8 +3,16 @@ import type { SavedResult } from '../../domain/models/Attempt';
 import type { SaveStatus } from '../../ports/ProgressRepository';
 import { getCourse } from '../../app/courses';
 import { button, element } from '../components/elements';
+import type { PlayerProfile } from '../../domain/models/PlayerProfile';
 
-export function homeView(onStart: () => void, signal: AbortSignal, lastResult: SavedResult | null = null, saveStatus: SaveStatus = 'none'): HTMLElement {
+export interface HomeActions {
+  readonly start: () => void;
+  readonly profile: () => void;
+  readonly ranking: () => void;
+}
+
+export function homeView(actions: HomeActions, signal: AbortSignal, lastResult: SavedResult | null = null,
+  saveStatus: SaveStatus = 'none', player: PlayerProfile | null = null): HTMLElement {
   const view = element('section', 'view home-view');
   view.append(element('p', 'eyebrow', gameConfig.copy.homeEyebrow));
   const title = element('h1', 'hero-title');
@@ -13,8 +21,14 @@ export function homeView(onStart: () => void, signal: AbortSignal, lastResult: S
   view.append(title, element('p', 'intro', gameConfig.copy.homeIntro));
   const start = button(gameConfig.copy.startMission);
   start.append(element('span', 'button-arrow', '↗'));
-  start.addEventListener('click', onStart, { signal });
-  view.append(start, element('p', 'helper', gameConfig.copy.homeHint));
+  start.addEventListener('click', actions.start, { signal });
+  const secondaryActions = element('div', 'actions home-actions');
+  const profile = button(player ? gameConfig.copy.changePlayer : gameConfig.copy.choosePlayer, true);
+  profile.addEventListener('click', actions.profile, { signal });
+  const ranking = button(gameConfig.copy.rankingTitle, true);
+  ranking.addEventListener('click', actions.ranking, { signal });
+  secondaryActions.append(profile, ranking);
+  view.append(start, secondaryActions, element('p', 'helper', gameConfig.copy.homeHint));
   const steps = element('ol', 'journey');
   for (const [number, name, detail] of [
     ['01', gameConfig.copy.stepChoose, gameConfig.copy.stepCourse],

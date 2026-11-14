@@ -9,6 +9,7 @@ export interface CourseActions {
   selectMission: (id: string) => void;
   confirm: () => void;
   back: () => void;
+  changePlayer: () => void;
 }
 
 export function courseSelectView(selected: CourseId | null, selectedMissionId: string,
@@ -19,6 +20,10 @@ export function courseSelectView(selected: CourseId | null, selectedMissionId: s
   back.classList.add('back-button');
   back.addEventListener('click', actions.back, { signal });
   view.append(back, element('p', 'eyebrow', gameConfig.copy.courseEyebrow));
+  const changePlayer = button(gameConfig.copy.changePlayer, true);
+  changePlayer.classList.add('change-player-button');
+  changePlayer.addEventListener('click', actions.changePlayer, { signal });
+  view.append(changePlayer);
   const title = element('h1', 'section-title', gameConfig.copy.courseTitle);
   title.tabIndex = -1;
   view.append(title, element('p', 'intro intro--small', gameConfig.copy.courseIntro));

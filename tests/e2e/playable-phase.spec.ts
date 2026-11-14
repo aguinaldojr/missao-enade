@@ -12,6 +12,11 @@ async function press(page: Page, name: string, info: TestInfo) {
 
 async function startPhase(page: Page, course: string, info: TestInfo, mission = 'special') {
   await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
+    await page.getByLabel('Apelido').fill('Jogador ' + course);
+    await page.getByRole('button', { name: 'Criar jogador' }).click();
+    await page.getByRole('button', { name: 'Continuar com este jogador' }).click();
+  }
   await page.locator('input[name="course"][value="' + course + '"]').check();
   await page.locator('input[name="mission"][value="' + mission + '"]').check();
   await press(page, 'Entrar na Central Nexo', info);

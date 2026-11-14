@@ -12,6 +12,15 @@ async function expectReflow(page: Page): Promise<void> {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 }
 
+async function startWithPlayer(page: Page, nickname: string): Promise<void> {
+  await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
+    await page.getByLabel('Apelido').fill(nickname);
+    await page.getByRole('button', { name: 'Criar jogador' }).click();
+    await page.getByRole('button', { name: 'Continuar com este jogador' }).click();
+  }
+}
+
 for (const [id, name] of courses) {
   test('jornada com ' + id, async ({ page }, info) => {
     const errors: string[] = [];
@@ -34,7 +43,7 @@ for (const [id, name] of courses) {
     })).toBeGreaterThan(5);
     await expectReflow(page);
     if (id === 'CC') await page.screenshot({ path: info.outputPath('inicio.png'), fullPage: true });
-    await page.getByRole('button', { name: 'Iniciar missão' }).click();
+    await startWithPlayer(page, 'Jogador ' + id);
     const enter = page.getByRole('button', { name: 'Entrar na Central Nexo' });
     await expect(enter).toBeDisabled();
     await page.getByRole('radio', { name: id + ' ' + name, exact: true }).check();
@@ -59,9 +68,9 @@ for (const [id, name] of courses) {
     await expectReflow(page);
     await expect(page.locator('.selected-name')).toHaveText('Sistemas de Informação');
     const stored = await page.evaluate(() => ({ local: Object.keys(localStorage), session: Object.keys(sessionStorage) }));
-    expect(stored).toEqual({ local: [], session: [] });
+    expect(stored).toEqual({ local: ['n9:player-profile:v1'], session: [] });
     await page.reload();
-    await page.getByRole('button', { name: 'Iniciar missão' }).click();
+    await startWithPlayer(page, 'Jogador ' + id);
     await expect(page.locator('input[name="course"]:checked')).toHaveCount(0);
     await expect(page.locator('input[name="mission"]:checked')).toHaveValue('special');
     await expect(page.getByRole('button', { name: 'Entrar na Central Nexo' })).toBeDisabled();
@@ -71,6 +80,10 @@ for (const [id, name] of courses) {
 }
 
 test('navegação completa por teclado e foco entre telas', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('n9:player-profile:v1', JSON.stringify({
+    schemaVersion: 1, activePlayerId: 'player-keyboard', players: [{ id: 'player-keyboard', nickname: 'Tecladista',
+      createdAt: '2026-11-14T12:00:00.000Z', lastUsedAt: '2026-11-14T12:00:00.000Z' }],
+  })));
   await page.goto('/');
   await page.getByRole('heading', { level: 1 }).focus();
   await page.keyboard.press('Tab');
@@ -96,7 +109,7 @@ test('fluxo HTML disponível se o motor gráfico não carregar', async ({ page }
   await page.route('**/assets/phaser-*.js', (route) => route.abort());
   await page.goto('/');
   await expect(page.getByText('Ambientação indisponível.', { exact: false })).toBeVisible();
-  await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  await startWithPlayer(page, 'Jogador TRC');
   await page.getByRole('radio', { name: 'TRC Tecnologia em Redes de Computadores', exact: true }).check();
   await page.getByRole('button', { name: 'Entrar na Central Nexo' }).click();
   await expect(page.locator('.selected-name')).toHaveText('Tecnologia em Redes de Computadores');

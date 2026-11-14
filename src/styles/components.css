@@ -47,10 +47,37 @@
 .notice h2 { font-size: 20px; line-height: 1.4; margin-bottom: 10px; }
 .notice p { font-size: 14px; color: var(--muted); }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.home-actions { margin-top: 12px; }
+.player-indicator, .current-player, .privacy-notice { margin-bottom: 18px; padding: 10px 12px; border-left: 3px solid var(--accent); background: #e8f1e8; font-size: 14px; }
+.privacy-notice { color: #435952; border-left-color: #6e5424; background: #f8f1df; }
+.profile-form { display: grid; gap: 8px; margin: 24px 0 12px; max-width: 480px; }
+.field-label { font-weight: 600; font-size: 14px; }
+.text-input, .select-input { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid #82948a; border-radius: 5px; background: #fff; color: var(--ink); }
+.profile-error { margin: 12px 0; padding: 12px; border: 1px solid #8b4d22; background: #faf0e5; color: #6b3517; }
+.subsection-title { margin: 28px 0 14px; font-size: 22px; line-height: 1.35; }
+.player-options { display: grid; gap: 8px; border: 0; margin: 0 0 18px; padding: 0; }
+.player-card { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 12px; border: 1px solid #b7c3ba; border-radius: 5px; cursor: pointer; }
+.player-card:has(:checked) { border: 2px solid var(--accent); padding: 9px 11px; background: #e8f1e8; }
+.player-card:has(:focus-visible) { outline: 3px solid #9a5c16; outline-offset: 3px; }
+.player-radio { width: 18px; height: 18px; accent-color: var(--accent); }
+.change-player-button { margin-bottom: 16px; }
+.ranking-filters { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin: 24px 0; }
+.ranking-table-wrap { max-width: 100%; overflow-x: auto; margin: 18px 0; }
+.ranking-table { width: 100%; min-width: 560px; border-collapse: collapse; text-align: left; }
+.ranking-table th, .ranking-table td { padding: 11px 9px; border-bottom: 1px solid var(--line); }
+.ranking-table th { font-size: 12px; letter-spacing: .04em; }
+.ranking-table td { font-size: 14px; }
+.current-ranking-player { font-weight: 700; outline: 2px solid var(--accent); outline-offset: -2px; }
+.current-marker { font-size: 12px; }
+.empty-ranking { margin: 18px 0; padding: 18px; border: 1px dashed #82948a; border-radius: 5px; color: var(--muted); }
+.delete-confirmation { margin-top: 18px; padding: 18px; border: 2px solid #8b4d22; border-radius: 5px; background: #faf0e5; }
+.delete-confirmation .subsection-title { margin-top: 0; }
+.delete-confirmation .actions { margin-top: 16px; }
 @media (min-width: 600px) {
   .course-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .course-card:last-child { grid-column: 1 / -1; }
   .mission-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ranking-filters { grid-template-columns: auto minmax(170px, 1fr) auto minmax(150px, 1fr); align-items: center; }
 }
 @media (max-width: 380px) {
   .wordmark strong { font-size: 12px; }
