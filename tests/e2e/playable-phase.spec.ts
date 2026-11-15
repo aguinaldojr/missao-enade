@@ -31,7 +31,7 @@ for (const course of courseIds) {
   test('missão padrão filtrada e resultado persistido: ' + course, async ({ page }, info) => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
-    await page.goto('/');
+    await page.goto('./');
     await startPhase(page, course, info);
     const eligible = catalog.questions.filter((question) => question.courses.includes(course));
     const questions = [
@@ -101,7 +101,7 @@ for (const course of courseIds) {
 }
 
 test('fluxo de resposta e avanço por teclado', async ({ page }, info) => {
-  await page.goto('/');
+  await page.goto('./');
   await startPhase(page, 'CC', info);
   await page.getByRole('heading', { level: 1 }).focus();
   await page.keyboard.press('Tab');
@@ -127,7 +127,7 @@ test('fluxo de resposta e avanço por teclado', async ({ page }, info) => {
 
 test('LocalStorage bloqueado não impede conclusão', async ({ page }, info) => {
   await page.addInitScript(() => { Storage.prototype.setItem = () => { throw new Error('QuotaExceededError'); }; });
-  await page.goto('/');
+  await page.goto('./');
   await startPhase(page, 'CC', info);
   for (let index = 0; index < 10; index++) {
     await page.getByRole('radio').first().check();
@@ -143,7 +143,7 @@ test('LocalStorage bloqueado não impede conclusão', async ({ page }, info) => 
 
 test('resultado corrompido é ignorado sem travar a navegação', async ({ page }, info) => {
   await page.addInitScript((key) => { localStorage.setItem(key, '{'); }, RESULT_KEY);
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByText('O relatório da missão local é inválido', { exact: false })).toBeVisible();
   await startPhase(page, 'TRC', info);
   await expect(page.getByText('Desafio 1 de 10', { exact: true })).toBeVisible();
@@ -152,7 +152,7 @@ test('resultado corrompido é ignorado sem travar a navegação', async ({ page 
 
 test('fase inicia mesmo sem randomUUID disponível', async ({ page }, info) => {
   await page.addInitScript(() => { Object.defineProperty(window.crypto, 'randomUUID', { value: undefined }); });
-  await page.goto('/');
+  await page.goto('./');
   await startPhase(page, 'TRC', info);
   await expect(page.getByText('Desafio 1 de 10', { exact: true })).toBeVisible();
   await press(page, 'Voltar ao menu', info);

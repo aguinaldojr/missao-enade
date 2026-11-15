@@ -22,7 +22,7 @@ async function enter(page: Page) {
   await expect(page.getByRole('heading', { name: 'Sequência Lógica', exact: true })).toBeVisible();
 }
 async function start(page: Page) {
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate((key) => localStorage.setItem(key, JSON.stringify({
     schemaVersion: 1, mapId: 'base-n9', position: { x: 376, y: 200 }, missionStatus: 'available', doorUnlocked: false,
   })), WORLD_KEY);

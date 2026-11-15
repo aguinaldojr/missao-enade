@@ -13,7 +13,7 @@ const familyNames: Record<(typeof courses)[number], string> = {
 };
 
 async function seedPlayer(page: Page, position?: { x: number; y: number }): Promise<void> {
-  await page.goto('/');
+  await page.goto('./');
   await page.evaluate(({ profileKey, worldKey, position }) => {
     localStorage.clear();
     const now = '2026-11-14T12:00:00.000Z';

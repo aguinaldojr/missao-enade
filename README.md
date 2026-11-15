@@ -1,112 +1,101 @@
 # N9 — Jornada Digital
 
-**N9 é um nome provisório, sujeito à aprovação institucional.** A escolha busca uma associação conceitual com a Universidade Nove de Julho, sem afirmar que o jogo seja um produto oficial. Não foram adotados logotipo, slogan, brasão, imagens de campi ou cores oficiais. A paleta anterior do protótipo permanece sem qualificação institucional. O subtítulo é **Jornada Digital**.
+**N9 é um nome provisório, sujeito à aprovação institucional.** O projeto não utiliza logotipo, slogan, brasão ou imagens oficiais e não afirma ser um produto oficial da Universidade Nove de Julho.
 
-Experiência permanente e lúdica de desenvolvimento de competências em tecnologia para CC, SI, TADS, TGTI e TRC, ambientada na cidade digital Nexo. A versão 0.2.0 oferece uma **fase de demonstração com dez desafios fictícios**, identificados como exemplos em todas as telas da partida.
+N9 — Jornada Digital é uma experiência educacional 2D para desenvolvimento de competências em tecnologia. O MVP atende às trilhas CC, SI, TADS, TGTI e TRC e combina exploração em visão superior, missões de múltipla escolha, quebra-cabeças de sequência lógica, perfil e ranking local.
 
-O fluxo disponível é **Iniciar missão → escolher curso → Base N9**. O computador abre dez desafios com feedback e relatório; o terminal abre os quebra-cabeças de Sequência Lógica. Ambos permitem retornar ao mapa.
+Todo o conteúdo da coleção inicial permanece como `provisional-pending-teacher-review`. O aviso **Conteúdo em validação pedagógica** é apresentado ao jogador.
 
-## Posicionamento e origem pedagógica interna
+## Estado do MVP
 
-A identidade e os textos principais ficam em `src/config/game.ts`, incluindo subtítulo, títulos da aba e HTML inicial. O jogador encontra missões, desafios, pontuação e relatórios da missão, em uma experiência contínua de aprendizagem.
+- mapa Base N9 com personagem, Lia, computador, terminal, porta e progresso local;
+- 60 desafios de questão e seis puzzles provisórios;
+- missões de 3, 5, 10 e 20 questões, sem repetição e com cotas comuns/específicas;
+- cinco cursos: CC, SI, TADS, TGTI e TRC;
+- perfil por apelido e ranking separado por curso e tamanho;
+- controles por teclado, mouse e toque;
+- interface responsiva para desktop e celular;
+- funcionamento inteiramente no navegador, sem servidor de aplicação ou banco de dados online.
 
-Na primeira versão editorial, a coleção interna **`enade-2026`** terá como base as competências e referências do ENADE. Essa origem é apenas metadado pedagógico, registrado em `src/config/collections.ts`; não aparece como finalidade de preparação, prova ou simulado na interface principal. A demonstração fictícia atual mantém seus IDs e não se torna uma coleção aprovada.
+Os JSON, metadados e gabaritos fazem parte da aplicação cliente e podem ser inspecionados por quem acessar uma versão publicada. Perfis, progresso, resultados e ranking permanecem no LocalStorage do navegador e não são enviados pela rede.
 
-PPCs, disciplinas, nivelamento, projetos e certificações são futuras origens de coleções. Missão especial e laboratório de treinamento são termos reservados, sem implementação nesta refatoração.
+## Requisitos
 
-Nome técnico da pasta/pacote, IDs, versões e a chave `missao-enade:example-result:v1` permanecem por compatibilidade. As regras de filtragem, confirmação, pontuação e armazenamento são as mesmas do checkpoint.
+- Node.js 26.x, conforme `.nvmrc`;
+- npm 11 ou 12;
+- Git para versionamento local;
+- Chromium instalado pelo Playwright para os testes de navegador.
 
-## Iniciar localmente
+## Instalação e execução local
 
-Use Node.js **26.x** (validado com **26.13.1**, indicado em `.nvmrc`) e npm **11 ou 12**.
+No PowerShell, entre na pasta que contém `package.json`:
 
 ```powershell
+Set-Location 'C:\Users\AulaU9\Documents\Projetos\missao-enade'
 npm.cmd ci
 npm.cmd run dev
 ```
 
-Abra o endereço exibido pelo Vite, normalmente [localhost:5173](http://localhost:5173). Nesta máquina, as dependências já estão instaladas; basta `npm.cmd run dev`. No PowerShell, `npm.cmd` evita depender da política de scripts `.ps1`. Em outros terminais pode usar `npm`.
+Abra o endereço informado pelo Vite, normalmente [http://localhost:5173](http://localhost:5173). Em outros terminais, `npm` pode ser usado no lugar de `npm.cmd`.
 
-No celular conectado à mesma rede, abra `http://IP-DO-COMPUTADOR:5173`. O servidor de desenvolvimento escuta na rede local. Não há servidor de aplicação ou cadastro.
-
-## Como funciona a missão
-
-- O arquivo [central-nexo.json](src/content/questions/central-nexo.json) contém 14 exemplos: nove compartilhados e um específico de cada curso. Cada curso recebe exatamente dez desafios, em ordem fixa.
-- `classification` aceita COMUM, CC, SI, TADS, TGTI e TRC. `courses` é uma lista explícita e permite vários cursos por desafio. A filtragem usa essa lista: a classificação COMUM não libera um desafio automaticamente para todos.
-- Escolha uma das cinco alternativas e pressione **Confirmar resposta**. Antes de confirmar, pode mudar a seleção; depois, a resposta fica bloqueada.
-- O feedback mostra acerto ou erro, alternativa correta, explicação geral, explicação da escolha e justificativas das cinco alternativas. A solução só é renderizada após confirmar.
-- Cada acerto vale 100 pontos; erros valem zero, sem desconto, cronômetro ou exigência mínima de pontuação. A pontuação de cada partida começa em zero e pode chegar a 1.000.
-- **Próximo desafio** avança após a apresentação do feedback. Após o décimo desafio, **Ver relatório da missão** conclui a fase e salva seu resumo.
-- **Voltar ao menu** está disponível durante a partida e no relatório da missão. Sair ou recarregar encerra uma partida incompleta; não há retomada nesta entrega.
-
-Os desafios foram criados exclusivamente para demonstrar o funcionamento; são fictícios, ainda sem validação docente, e não substituem o conteúdo pedagógico planejado. A fase usa o identificador separado `FASE-EXEMPLO-01`; não é a fase comum aprovada prevista no MVP.
-
-## Relatório da missão local
-
-Somente o **último relatório da missão concluído** é salvo no LocalStorage, na chave `missao-enade:example-result:v1`. O resumo tem versão de formato e conteúdo, identificador local da tentativa, curso, dez desafios, acertos, pontuação e data de conclusão. O menu o apresenta novamente após recarregar.
-
-Uma nova conclusão substitui o resumo anterior; não existe ranking ou histórico acumulado. A escolha de curso e as respostas da partida ficam somente em memória. O código não apaga chaves de outros aplicativos.
-
-JSON inválido é ignorado sem travar o jogo. Um registro corrompido pode ser substituído quando o usuário conclui outra fase; versões futuras desconhecidas são preservadas. Se o armazenamento estiver bloqueado ou sem quota, o relatório da missão continua visível na sessão com aviso e botão para tentar salvar novamente. Navegador, origem ou dispositivo diferentes não compartilham o relatório da missão.
-
-## Verificar e compilar
+## Validações
 
 ```powershell
 npm.cmd run lint
+npm.cmd run typecheck
 npm.cmd test
 npm.cmd run validate:content
 npm.cmd run build
 npm.cmd exec -- playwright install chromium
 npm.cmd run test:e2e
+```
+
+O build normal usa a raiz `/` e gera os arquivos estáticos em `dist/`. Esse diretório é temporário e não é versionado.
+
+## Build para subdiretório
+
+O Vite lê `VITE_BASE_PATH`. Sem essa variável, desenvolvimento, build e testes continuam usando `/`. Para simular um site de projeto do GitHub Pages:
+
+```powershell
+$env:VITE_BASE_PATH = '/n9-jornada-digital/'
+npm.cmd run build
 npm.cmd run preview
 ```
 
-O build executa TypeScript e os testes de contrato do catálogo antes de gerar `dist/`. O preview serve o pacote em [localhost:4173](http://localhost:4173); não abra o HTML por `file://`.
-
-Vitest cobre regras de resposta única, 0/8/10 acertos, elegibilidade, contratos JSON, DOM e falhas de armazenamento. Playwright verifica a navegação e partidas completas nos cinco cursos, computador/celular, teclado/toque, reflow, recarga e LocalStorage indisponível. Os testes iniciam seu próprio preview na porta 4173. Emulação não substitui Android/iOS reais ou leitores de tela.
-
-## Organização e limites
-
-- `src/domain/`: desafios, tentativas e resumos, elegibilidade, pontuação e progressão sem DOM ou Phaser.
-- `src/app/`: comandos e única sessão de jogo; injeta contratos de conteúdo e relatório da missão.
-- `src/ports/`: contratos usados pela aplicação.
-- `src/infrastructure/`: validação Ajv, carregamento JSON e LocalStorage com tratamento de falhas.
-- `src/schemas/`: schemas do catálogo fictício e do resumo de relatório da missão.
-- `src/game/`: ambientação local em Phaser 3 e cenas de início, central, questão e relatório da missão.
-- `src/ui/` e `src/styles/`: HTML semântico, foco, anúncios, alternativas, feedback e layout responsivo.
-- `tests/`: unidade, integração DOM e testes de navegador.
-
-As referências pedagógicas e as cópias históricas em `docs/fontes` permanecem preservadas. A visão vigente está em [docs/visao-do-jogo.md](docs/visao-do-jogo.md). A [arquitetura](docs/arquitetura.md) descreve o MVP completo; o [backlog](docs/backlog.md) diferencia o que foi demonstrado nesta fase dos critérios ainda pendentes.
-
-Mapa de dez terminais, retomada de partida, laboratório de treinamento, conquistas, conteúdo aprovado, campanhas específicas, publicação e outras funções futuras permanecem pendentes. Não há login, banco de dados, ranking online, CDN, IA durante a partida ou APIs pagas. O projeto é independente, sem vínculo ou chancela do Inep.
-
-## Explorar a Base N9
-
-Após selecionar qualquer um dos cinco cursos, entre na base. Use **setas ou WASD** para mover, ou mantenha pressionados os botões direcionais na tela. Use **E**, **Espaço** ou o botão de interação quando a indicação de proximidade aparecer. No teclado, Tab também alcança os controles da interface.
-
-Converse com **Lia** para conhecer a missão. No **computador**, inicie os mesmos dez desafios fictícios. Ao concluir e visualizar o relatório, escolha **Voltar à Base N9**: o personagem retorna ao mesmo local e a porta fica liberada, independentemente da pontuação. A passagem dá acesso ao setor tecnológico; o terminal fica antes da porta. Não há outra região implementada.
-
-Posição, estado da missão e porta são salvos separadamente em `n9:exploration:v1`, no navegador atual, inclusive após recarregar e escolher novamente um curso. Esse progresso da base é compartilhado entre os cinco cursos; respostas de fases incompletas não são retomadas. O relatório continua usando sua chave anterior. A interface avisa quando o salvamento falha. Apagar dados do navegador elimina o progresso; não existe conta ou sincronização.
-
-No PowerShell, execute `npm.cmd run dev` na pasta do projeto, onde está `package.json`:
+Ao terminar:
 
 ```powershell
-Set-Location 'C:\Users\AulaU9\Documents\Projetos\missao-enade'
-npm.cmd run dev
+Remove-Item Env:VITE_BASE_PATH
 ```
 
-Abra o endereço informado pelo Vite, normalmente [localhost:5173](http://localhost:5173).
+O nome acima é apenas um exemplo local. O workflow manual calcula o caminho a partir do nome real do futuro repositório, sem fixar conta ou repositório no código.
 
-## Sequência Lógica no terminal
+## Armazenamento e privacidade
 
-O terminal tecnológico agora fica **antes da porta**, no nordeste da área inicial. Aproxime-se e use **E**, **Espaço** ou **Interagir**. Ele abre o exemplo de algoritmo; os seletores oferecem também incidente de TI e rede. Os três conteúdos são fictícios, provisórios e pendentes de revisão docente, disponíveis para os cinco cursos.
+As chaves versionadas do jogo armazenam somente dados locais, incluindo:
 
-Arraste um bloco pela alça **↕** com mouse/toque; no teclado, foque a alça com Tab e use **↑/↓**. Os botões **Subir/Descer** são uma alternativa. Toque fora da alça permite rolar a página. Use **Validar sequência** e, se necessário, peça dicas progressivas. Erros não retiram XP; não existe cronômetro obrigatório.
+- perfil por apelido;
+- progresso de exploração e puzzles;
+- último relatório de missão;
+- melhores resultados do ranking local.
 
-Cada primeira conclusão concede **100 XP de quebra-cabeças**, mostra a explicação e libera a porta. Esse XP é separado da pontuação dos dez desafios. **Retornar ao mapa** mantém a posição do personagem. Repetir o mesmo exemplo não concede XP adicional, inclusive após recarregar.
+Não são solicitados nome completo, RA, e-mail, CPF ou telefone. Não há autenticação, telemetria, sincronização entre dispositivos ou envio de resultados. Limpar os dados do site no navegador remove os dados locais.
 
-O progresso é salvo em `n9:puzzles:v1`: ordem, dicas, tentativas e recibos de conclusão. Sair antes de resolver permite retomar pelo terminal. Os desafios do computador e o relatório anterior permanecem disponíveis; concluí-los também continua abrindo a porta.
+## Organização
 
-Se o salvamento falhar, há aviso e tentativa de salvar novamente; sem persistência, o progresso fica limitado à sessão. Limpar dados do navegador elimina os recibos locais. Não há sincronização com conta ou servidor.
+- `src/domain/`: regras de seleção, elegibilidade, pontuação e progresso;
+- `src/app/`: sessão e comandos da aplicação;
+- `src/infrastructure/`: validação dos catálogos e persistência local;
+- `src/content/`: coleções provisórias em JSON;
+- `src/game/`: mapa e renderização Phaser 3;
+- `src/ui/` e `src/styles/`: interface semântica e responsiva;
+- `tests/`: unidade, contratos, integração DOM e navegador;
+- `docs/`: arquitetura, autoria, auditorias e guias do projeto.
 
-A movimentação do terminal pode afetar uma posição antiga salva em seu novo retângulo: nesse caso, o personagem volta ao ponto inicial, preservando missão e desbloqueio. As demais posições válidas são mantidas. Detalhes técnicos e limites estão na seção 19 da arquitetura.
+A origem pedagógica histórica pode aparecer em identificadores e documentação técnica interna, como a coleção `enade-2026`, mas não compõe o nome público nem a finalidade apresentada ao jogador.
+
+## Preparação para publicação
+
+O projeto está preparado para uma futura publicação manual e gratuita no GitHub Pages, mas nenhum remote, repositório público ou site foi criado nesta etapa. Consulte [docs/preparacao-publicacao.md](docs/preparacao-publicacao.md) antes de qualquer exposição pública.
+
+O guia registra os alertas de conteúdo provisório, segurança, privacidade, operação do workflow manual, atualização, despublicação e reversão.

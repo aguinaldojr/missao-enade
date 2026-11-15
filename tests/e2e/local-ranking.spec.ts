@@ -25,7 +25,7 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   page.on('request', (request) => {
     if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('data:')) external.push(request.url());
   });
-  await page.goto('/');
+  await page.goto('./');
   await press(page, 'Iniciar missão', info);
   await expect(page.getByRole('heading', { name: 'Quem está jogando?' })).toBeFocused();
   await expect(page.getByText('Os dados deste perfil ficam somente neste navegador.')).toBeVisible();
@@ -86,7 +86,7 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
 });
 
 test('criação e início funcionam somente com teclado e semântica nativa', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByRole('heading', { level: 1 }).focus();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Iniciar missão' })).toBeFocused();

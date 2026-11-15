@@ -29,7 +29,7 @@ for (const [id, name] of courses) {
     page.on('request', (request) => {
       if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('data:')) external.push(request.url());
     });
-    await page.goto('/');
+    await page.goto('./');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Conhecimento que conecta.');
     await expect(page.locator('canvas')).toBeVisible();
     // Mais de uma cor comprova que o cenário foi desenhado, além do fundo.
@@ -84,7 +84,7 @@ test('navegação completa por teclado e foco entre telas', async ({ page }) => 
     schemaVersion: 1, activePlayerId: 'player-keyboard', players: [{ id: 'player-keyboard', nickname: 'Tecladista',
       createdAt: '2026-11-14T12:00:00.000Z', lastUsedAt: '2026-11-14T12:00:00.000Z' }],
   })));
-  await page.goto('/');
+  await page.goto('./');
   await page.getByRole('heading', { level: 1 }).focus();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Iniciar missão' })).toBeFocused();
@@ -107,7 +107,7 @@ test('navegação completa por teclado e foco entre telas', async ({ page }) => 
 
 test('fluxo HTML disponível se o motor gráfico não carregar', async ({ page }) => {
   await page.route('**/assets/phaser-*.js', (route) => route.abort());
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByText('Ambientação indisponível.', { exact: false })).toBeVisible();
   await startWithPlayer(page, 'Jogador TRC');
   await page.getByRole('radio', { name: 'TRC Tecnologia em Redes de Computadores', exact: true }).check();

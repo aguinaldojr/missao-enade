@@ -12,7 +12,7 @@ test('nova identidade preserva relatório salvo na chave anterior', async ({ pag
     localStorage.setItem(key, JSON.stringify(report));
     localStorage.setItem('outro-aplicativo', 'preservar');
   }, { key: legacyKey, report: savedReport });
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.locator('.wordmark strong')).toHaveText('N9 — Jornada Digital');
   await expect(page.locator('.brand-mark')).toHaveText('N9');
   expect(await page.locator('body').innerText()).not.toMatch(/Nexus|produto oficial|slogan oficial/i);
@@ -28,7 +28,7 @@ test('nova identidade preserva relatório salvo na chave anterior', async ({ pag
 test.describe('HTML inicial sem JavaScript', () => {
   test.use({ javaScriptEnabled: false });
   test('usa a identidade centralizada no título, descrição e aviso', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('./');
     await expect(page).toHaveTitle('N9 — Jornada Digital');
     expect(await page.locator('noscript').evaluate((node) => node.textContent)).toContain('N9 — Jornada Digital');
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /competências em tecnologia/);
