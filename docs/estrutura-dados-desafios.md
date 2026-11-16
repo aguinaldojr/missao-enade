@@ -1,8 +1,8 @@
 # Estrutura dos dados de desafios — contratos editoriais generalizados
 
-Atualização de 13/11/2026 para o Prompt 7.1, complementada pela correção da auditoria dos 66 desafios. O levantamento anterior identificou contratos assimétricos; esta versão descreve a migração autorizada e a preservação de múltiplas fontes e rastreabilidade. A entrega altera tipos, schemas, normalizadores, repositórios de conteúdo, exemplos e testes. **Não altera interface, mapa, mecânicas, experiência do jogador ou formatos de progresso.**
+Atualização de 13/11/2026 para o Prompt 7.1, complementada pela correção da auditoria e, em 16/11/2026, pela [governança editorial assistida por IA](governanca-editorial-ia.md). A entrega altera tipos, schemas, normalizadores, conteúdo editorial, exemplos e testes. **Não altera mapa, mecânicas ou formatos de progresso.**
 
-N9 continua provisório e sujeito à aprovação institucional. ENADE permanece apenas como referência pedagógica interna. Todo conteúdo distribuído continua fictício e pendente de revisão docente. Casos “aprovados” existem apenas como fixtures técnicas fictícias dos testes; nenhuma aprovação pedagógica real foi concedida.
+N9 continua provisório e sujeito à aprovação institucional. ENADE permanece apenas como referência pedagógica interna. Todo conteúdo distribuído continua experimental e em revisão editorial assistida por IA. Estados de liberação usados em fixtures não representam homologação pedagógica ou institucional.
 
 ## 1. Visão dos contratos
 
@@ -120,7 +120,7 @@ A lista inclui implementação e documentos de planejamento, cujos campos não v
 | `difficulty` | Difficulty | Sim | introductory, intermediate ou advanced. | introductory |
 | `sources` | EditorialSource[] | Sim | Uma ou mais fontes estritas; exatamente uma com papel `primary`. | [{"role":"primary","type":"fictional","description":"Exemplo fictício."}] |
 | `traceability` | EditorialTraceability | Não no contrato geral; sim na conversão dos 66 | Título editorial, objetivo e localizadores não vazios. | {"title":"Exemplo","objective":"Interpretar dados.","locators":["SLOT-01"]} |
-| `validationStatus` | ValidationStatus | Sim | provisional-pending-teacher-review, needs-revision, approved-teacher ou rejected. | provisional-pending-teacher-review |
+| `validationStatus` | ValidationStatus | Sim | draft, under-ai-review, needs-revision, ready-for-pilot, ready-for-release ou rejected. | under-ai-review |
 
 
 ### EditorialSource
@@ -129,13 +129,13 @@ A lista inclui implementação e documentos de planejamento, cujos campos não v
 | --- | --- | --- | --- | --- |
 | `role` | SourceRole | Sim | primary, normative-complementary ou technical; deve existir exatamente uma principal. | primary |
 | `type` | SourceType | Sim | official-reference, institutional, authorial ou fictional. | fictional |
-| `description` | string | Sim | Texto não vazio/não branco; descreve a fonte. | Conteúdo fictício do protótipo; pendente de revisão docente. |
+| `description` | string | Sim | Texto não vazio/não branco; descreve a fonte. | Conteúdo fictício do protótipo; em revisão editorial assistida por IA. |
 | `url` | string | Não | URL absoluta HTTP/HTTPS válida, sem espaços; formato local http-url. Não é buscada na rede. | https://example.invalid/referencia-ficticia |
 | `year` | integer | Não | Ano de 1 a 9999; frações e null são rejeitados. | 2026 |
 | `documentId` | string | Não | Identificação não branca de documento; não prova autenticidade ou aprovação. | DOC-FICTICIO-01 |
 
 
-Os opcionais podem estar ausentes. Se estiverem presentes, devem ser válidos; `null` não é aceito. Uma fonte oficial pode omitir URL, ano e identificação: o contrato não obriga um campo declarado opcional. Tipo de fonte não equivale a status de revisão docente.
+Os opcionais podem estar ausentes. Se estiverem presentes, devem ser válidos; `null` não é aceito. Uma fonte oficial pode omitir URL, ano e identificação: o contrato não obriga um campo declarado opcional. Tipo de fonte não equivale a estado editorial.
 
 ### Enums compartilhados
 
@@ -144,14 +144,14 @@ Os opcionais podem estar ausentes. Se estiverem presentes, devem ser válidos; `
 | Difficulty / DIFFICULTIES | introductory, intermediate, advanced | Dificuldade editorial reutilizável; não códigos D1/D2/D3 da matriz externa. |
 | SourceType / SOURCE_TYPES | official-reference, institutional, authorial, fictional | Natureza da referência. |
 | SourceRole / SOURCE_ROLES | primary, normative-complementary, technical | Papel da fonte na rastreabilidade. |
-| ValidationStatus / VALIDATION_STATUSES | provisional-pending-teacher-review, needs-revision, approved-teacher, rejected | Situação da revisão docente. |
+| ValidationStatus / VALIDATION_STATUSES | draft, under-ai-review, needs-revision, ready-for-pilot, ready-for-release, rejected | Situação da governança editorial assistida por IA. |
 | ContentMode / CONTENT_MODES | example, provisional, pilot, approved | Contexto do catálogo e marcador legado editorialStatus. Não substitui validationStatus. |
 | CollectionStatus / COLLECTION_STATUSES | planned, pilot, active, archived | Ciclo de vida da coleção. Não é política automática de publicação. |
 | CourseId / COURSE_IDS | CC, SI, TADS, TGTI, TRC | Elegibilidade explícita. |
 | Classification / CLASSIFICATIONS | COMUM, CC, SI, TADS, TGTI, TRC | Rótulo de classificação das questões. |
 | OptionId / OPTION_IDS | A, B, C, D, E | Alternativa única. |
 
-`validationStatus` é o campo canônico de revisão. Não inferir aprovação a partir de `mode`, `editorialStatus`, `sources[].type`, `example: false` ou status da coleção. Os validadores aceitam esses estados como dados; **não implementam seleção de conteúdo para publicação**. Isso é necessário para importar material pendente/rejeitado para revisão, sem escondê-lo ou transformá-lo.
+`validationStatus` é o campo canônico de revisão. Não inferir liberação a partir de `mode`, `editorialStatus`, `sources[].type`, `example: false` ou status da coleção. Os validadores aceitam esses estados como dados; **não implementam seleção de conteúdo para publicação**. `ready-for-pilot` significa somente aptidão para teste controlado.
 
 ## 4. Coleções e cursos
 
@@ -253,27 +253,28 @@ A dificuldade aceita introductory/intermediate/advanced; fonte aceita os quatro 
 
 | Entrada/artefato | Estratégia | Garantia |
 | --- | --- | --- |
-| Questão antiga sem metadados | LegacyQuestion é reconhecida por schema histórico estrito; adiciona metadados de exemplo em memória. | Nunca promovida a aprovada, sem alterar entrada nem respostas. |
+| Questão antiga sem metadados | LegacyQuestion é reconhecida por schema histórico estrito; adiciona metadados de exemplo em memória. | Entra em `under-ai-review`, sem alterar entrada nem respostas. |
 | Puzzle antigo com collection | LegacySequencePuzzle é reconhecido; renomeia collection → collectionId em nova cópia. | IDs, blocos, ordens, dicas, fonte e recompensa preservados. |
 | Questão ou puzzle com `source` singular | O normalizador cria `sources:[{role:"primary",...source}]` e remove o alias somente da cópia em memória. | Compatibilidade sem regravar arquivo ou progresso; nenhuma fonte é descartada. |
 | Entrada canônica incompleta | Rejeitada pelo schema; não recebe defaults silenciosos. | Erro de importação não é mascarado como legado. |
 | Campos desconhecidos ou aliases misturados | Rejeitados; schemas de ambas as formas são estritos. | Não há remoção silenciosa de atributos nem prioridade ambígua entre collection/collectionId. |
 | Catálogo com itens antigos e novos | Cada item é normalizado se reconhecer integralmente o legado; envelope canônico é validado no final. | Permite migração gradual sem ampliar a enumeração de campos. |
+| Estado legado | `provisional-pending-teacher-review` vira `under-ai-review`; `approved-teacher` vira `ready-for-pilot`; os demais permanecem iguais. | Normalização em memória, sem promoção adicional nem regravação. |
 | Arquivos provisórios atuais | Questões recebem metadados explicitamente provisórios; puzzles mudam collection para collectionId. | IDs/versões/textos/alternativas/gabaritos/feedbacks/blocos/ordens/dicas/XP/desbloqueios inalterados. |
 | Saves locais existentes | Nenhum schema, chave ou adaptador de armazenamento foi alterado. | Sem exclusão, reescrita em leitura, migração destrutiva ou novo XP. |
 | Documentos da etapa anterior | estrutura-dados-desafios.md e exemplo-desafios.json foram atualizados e incluídos nesta entrega autorizada. | Não havia commit anterior desses dois arquivos. |
 
-Os schemas `legacy-*.schema.json` preservam os literais **de reconhecimento histórico**. Eles não limitam os contratos canônicos novos. Um legado mantém `example: true` e `editorialStatus: "example"`; a normalização nunca usa o mode do envelope para conceder approved-teacher.
+Os schemas `legacy-*.schema.json` preservam os literais **de reconhecimento histórico**. Eles não limitam os contratos canônicos novos. Um legado mantém `example: true` e `editorialStatus: "example"`; a normalização nunca usa o mode do envelope para conceder `ready-for-pilot` ou `ready-for-release`.
 
 ### Metadados acrescentados às questões provisórias
 
 - collectionId: n9-provisional-questions-v1.
-- pedagogicalOrigin: exemplos autorais fictícios do protótipo, pendentes de revisão docente.
+- pedagogicalOrigin: exemplos autorais fictícios do protótipo, em revisão editorial assistida por IA.
 - area: Raciocínio e competências digitais (exemplos).
 - competencies: Interpretar dados e restrições em situações fictícias.
 - difficulty: introductory.
 - sources: uma fonte primary/fictional, com descrição de exemplo pendente.
-- validationStatus: provisional-pending-teacher-review.
+- validationStatus: under-ai-review.
 
 Esses descritores genéricos não são códigos oficiais nem mapeamento de competências da matriz. A aplicação de áreas e competências pedagógicas específicas depende de revisão futura. Puzzles mantêm seus metadados descritivos e trocam somente o nome da chave de coleção.
 
@@ -352,7 +353,7 @@ Cópia do exemplo atual, com os novos metadados. Não é uma questão oficial ap
     "E": "Os dados contam atendimentos, não a preferência de todos os estudantes."
   },
   "collectionId": "n9-provisional-questions-v1",
-  "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+  "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
   "area": "Raciocínio e competências digitais (exemplos)",
   "competencies": [
     "Interpretar dados e restrições em situações fictícias."
@@ -362,7 +363,7 @@ Cópia do exemplo atual, com os novos metadados. Não é uma questão oficial ap
     {
       "role": "primary",
       "type": "fictional",
-      "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+      "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
     }
   ],
   "traceability": {
@@ -370,7 +371,7 @@ Cópia do exemplo atual, com os novos metadados. Não é uma questão oficial ap
     "objective": "Interpretar a proporção registrada sem extrapolar a evidência.",
     "locators": ["EXEMPLO-QUESTION-01"]
   },
-  "validationStatus": "provisional-pending-teacher-review"
+  "validationStatus": "under-ai-review"
 }
 ```
 
@@ -403,7 +404,7 @@ O arquivo [exemplo-desafios.json](exemplo-desafios.json) é um array com a cópi
     {
       "role": "primary",
       "type": "fictional",
-      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+      "description": "Conteúdo fictício produzido para o protótipo N9; em revisão editorial assistida por IA."
     }
   ],
   "traceability": {
@@ -411,7 +412,7 @@ O arquivo [exemplo-desafios.json](exemplo-desafios.json) é um array com a cópi
     "objective": "Ordenar entrada, validação, processamento e saída pelas dependências declaradas.",
     "locators": ["EXEMPLO-SEQUENCE-01"]
   },
-  "validationStatus": "provisional-pending-teacher-review",
+  "validationStatus": "under-ai-review",
   "id": "seq-algorithm-01",
   "title": "Sequência de um algoritmo",
   "narrative": "O terminal da Base N9 perdeu sua sequência de inicialização. Reorganize este programa fictício de cálculo de média para recuperar o sistema e liberar a passagem.",
@@ -476,8 +477,8 @@ Próxima integração, mediante autorização: revisar os vínculos pedagógicos
 ## 11. Limites que permanecem
 
 - Mission, LearningTrack e catálogo de missão mista não existem no runtime.
-- Novos estados e fontes aceitos pelo schema não são aprovação docente real nem autorização para publicação.
-- Não há parecer por docente/curso/versão, autenticação de documento oficial ou consulta remota de fonte.
+- Novos estados e fontes aceitos pelo schema não são homologação institucional nem autorização automática para publicação.
+- Não há autenticação de documento oficial, consulta remota de fonte ou validação humana em contexto real de uso.
 - O ciclo de vida da coleção não implementa filtragem de publicação. Não há gate novo que altere os conteúdos mostrados atualmente.
 - Área e competências são descrições, sem integridade com areas.json nem prova de domínio.
 - A GameSession ainda usa identificadores e relatório fixos da demonstração; a execução de outras fases não foi implementada.

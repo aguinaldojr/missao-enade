@@ -45,7 +45,7 @@ for (const course of courseIds) {
       await expect(page.getByRole('radio')).toHaveCount(5);
       expect(await page.locator('body').innerText()).not.toMatch(/\bENADE\b|simulado|preparação para prova/i);
       await expect(page).toHaveTitle(/N9 — Jornada Digital/);
-      await expect(page.locator('.example-warning')).toContainText('CONTEÚDO EM VALIDAÇÃO PEDAGÓGICA');
+      await expect(page.locator('.example-warning')).toContainText('CONTEÚDO EXPERIMENTAL EM REVISÃO EDITORIAL');
       await expect(page.locator('.feedback')).toHaveCount(0);
       await expect(page.getByRole('button', { name: 'Confirmar resposta' })).toBeDisabled();
       if (index === 0) {

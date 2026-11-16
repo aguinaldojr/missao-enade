@@ -26,7 +26,7 @@ export const PROVISIONAL_PLAYABLE_COLLECTION: PlayableCollectionConfig = Object.
   phaseId: 'N9-COLLECTION-PROVISIONAL',
   missions: QUESTION_MISSION_LIST,
   defaultMissionId: QUESTION_MISSIONS.special.id,
-  validationNotice: 'Conteúdo em validação pedagógica.',
+  validationNotice: 'Conteúdo experimental em revisão editorial.',
 });
 
 /** Configuração padrão dos testes e consumidores antigos. */

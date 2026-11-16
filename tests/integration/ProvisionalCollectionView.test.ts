@@ -31,7 +31,8 @@ describe('escolha integrada de curso e missão', () => {
     dispatch({ type: 'start' });
     expect(root.querySelectorAll('input[name="course"]')).toHaveLength(5);
     expect(root.querySelectorAll('input[name="mission"]')).toHaveLength(4);
-    expect(root.textContent).toContain('N9 Jornada Digital · Conteúdo em validação pedagógica.');
+    expect(root.textContent).toContain('N9 Jornada Digital · Conteúdo experimental em revisão editorial.');
+    expect(root.textContent).not.toMatch(/aprova(?:do|ção) por docente|revisão docente|validação pedagógica/i);
     expect(root.textContent).not.toMatch(/enade/i);
     const course = root.querySelector<HTMLInputElement>('input[name="course"][value="SI"]')!;
     const mission = root.querySelector<HTMLInputElement>('input[name="mission"][value="quick"]')!;

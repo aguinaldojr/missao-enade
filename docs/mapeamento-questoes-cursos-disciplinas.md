@@ -4,7 +4,7 @@ Data do levantamento: 15 de novembro de 2026. Revisão de planejamento de SI: 16
 
 Este documento relaciona as 60 questões provisórias atuais do N9 — Jornada Digital às áreas normativas, aos cursos que possuem sustentação explícita para o recorte, às disciplinas sugeridas e aos conteúdos cobrados. Ele não altera o catálogo executável.
 
-Os itens executáveis ainda conservam `provisional-pending-teacher-review`, pois a migração de governança não pertence a esta entrega documental. O fluxo futuro assistido por IA está especificado em [plano-revisao-si.md](autoria/plano-revisao-si.md); nenhum item foi promovido. “Disciplina sugerida” não equivale a componente curricular oficial da UNINOVE: o vínculo definitivo depende de confrontação futura com o PPC e a matriz curricular vigente.
+Os itens executáveis usam `under-ai-review` conforme a [governança editorial assistida por IA](governanca-editorial-ia.md); nenhum item foi promovido para piloto ou liberação. “Disciplina sugerida” não equivale a componente curricular oficial da UNINOVE: o vínculo definitivo depende de confrontação futura com o PPC e a matriz curricular vigente.
 
 ## Regra de elegibilidade
 
@@ -146,7 +146,7 @@ Novos itens devem registrar separadamente:
 | Conteúdos | Lista do que efetivamente é exigido no enunciado, não toda a abrangência da área |
 | Profundidade | Deve ser compatível com todos os cursos elegíveis |
 | Fontes e rastreabilidade | Uma fonte principal e complementares necessárias, sem transportar incisos entre cursos |
-| Revisão | A futura governança assistida por IA deve registrar pertinência, dificuldade, resolução independente, testes e limitações por curso; não declarar homologação institucional |
+| Revisão | A governança assistida por IA deve registrar pertinência, dificuldade, resolução independente, testes e limitações por curso; não declarar homologação institucional |
 
 ## Pendências antes da migração executável
 

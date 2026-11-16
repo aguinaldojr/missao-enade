@@ -10,7 +10,7 @@ export interface Question extends EditorialMetadata {
   readonly id: string;
   readonly version: number;
   readonly classification: Classification;
-  /** Marcadores de compatibilidade; a revisão docente é validationStatus. */
+  /** Marcadores históricos de compatibilidade; a governança ativa é validationStatus. */
   readonly example?: boolean;
   readonly editorialStatus?: ContentMode;
   readonly context: string;

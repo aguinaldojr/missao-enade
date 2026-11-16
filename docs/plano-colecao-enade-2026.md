@@ -1,5 +1,7 @@
 # N9 — Jornada Digital: plano da primeira coleção pedagógica
 
+> **Registro da governança anterior.** Este plano preserva os estados e formulários vigentes quando os 66 slots foram planejados. Desde 16/11/2026, `provisional-pending-teacher-review` é lido como `under-ai-review` e `approved-teacher` como `ready-for-pilot`, conforme [governanca-editorial-ia.md](governanca-editorial-ia.md). Os localizadores, objetivos, dificuldades, cotas e IDs abaixo não foram reescritos.
+
 Versão de planejamento: 2.1 — 13/11/2026, horário de Brasília. Identificador interno: `enade-2026`. A revisão 2.1 preserva os 66 slots e atualiza somente a futura representação de fontes e rastreabilidade após a auditoria geral.
 
 **Estado de todo conteúdo proposto: `provisional-pending-teacher-review`.** Este documento não contém questões completas, JSON definitivo, aprovação pedagógica nem implementação. N9 é uma identidade provisória, sujeita à aprovação institucional.

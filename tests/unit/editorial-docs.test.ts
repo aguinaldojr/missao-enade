@@ -165,7 +165,7 @@ describe('documentos editoriais da coleção de 66 desafios', () => {
     expect(catalog.questions).toHaveLength(60);
     expect(puzzleCatalog).toHaveLength(6);
     expect(new Set([...catalog.questions, ...puzzleCatalog].map((item) => item.id)).size).toBe(66);
-    expect([...catalog.questions, ...puzzleCatalog].every((item) => item.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
+    expect([...catalog.questions, ...puzzleCatalog].every((item) => item.validationStatus === 'under-ai-review')).toBe(true);
   });
 
   it('preserva elegibilidade, cotas e distribuição 7/9/4 em cada curso', () => {

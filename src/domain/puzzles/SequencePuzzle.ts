@@ -17,7 +17,7 @@ export type LegacySequencePuzzle = Omit<SequencePuzzle, 'collectionId' | 'diffic
   readonly collection: string;
   readonly difficulty: 'introductory';
   readonly source: LegacyEditorialSource & { readonly type: 'fictional' };
-  readonly validationStatus: 'provisional-pending-teacher-review';
+  readonly validationStatus: 'provisional-pending-teacher-review' | 'approved-teacher' | 'needs-revision' | 'rejected';
 };
 export interface SequenceProgress {
   readonly order: readonly string[];

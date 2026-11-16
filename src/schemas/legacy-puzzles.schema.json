@@ -174,7 +174,12 @@
         }
       },
       "validationStatus": {
-        "const": "provisional-pending-teacher-review"
+        "enum": [
+          "provisional-pending-teacher-review",
+          "approved-teacher",
+          "needs-revision",
+          "rejected"
+        ]
       }
     }
   }

@@ -376,3 +376,20 @@ A seleção e progressão dos novos tamanhos estão disponíveis tecnicamente no
 - [tests/integration/MissionAvailability.test.ts](../tests/integration/MissionAvailability.test.ts)
 
 Nenhuma alteração em src/content, plano-colecao-enade-2026.md, especificacao-missao-mista.md, UI/estilos/cenas/mapa, lógica de puzzles/XP ou schemas/adaptadores de armazenamento. Nenhum conteúdo pedagógico criado; fixtures são exclusivos dos testes. Não houve publicação ou envio ao GitHub.
+
+## 18. Governança editorial assistida por IA — 16/11/2026
+
+As referências a revisão docente nas entregas 11–17 permanecem como histórico do estado do projeto naquelas datas e não definem a política ativa.
+
+- [x] Substituir os quatro estados ativos anteriores por seis estados editoriais independentes de aprovação docente.
+- [x] Normalizar os dois estados legados em memória, sem regravar conteúdo antigo ou LocalStorage.
+- [x] Migrar as 60 questões e os seis puzzles executáveis para `under-ai-review`.
+- [x] Preservar IDs, versões, alternativas, gabaritos, explicações, feedbacks, cursos, dificuldades, fontes, rastreabilidade, recompensas e soluções.
+- [x] Atualizar o aviso visível para **Conteúdo experimental em revisão editorial.**
+- [x] Registrar critérios, transições, responsabilidade e limitações em [governanca-editorial-ia.md](governanca-editorial-ia.md).
+- [x] Manter documentos anteriores como registros da governança vigente quando foram produzidos.
+- [x] Não implementar jornada de 25, novas questões, publicação, serviços externos ou mudanças de progresso.
+- [x] Aprovar 262 testes Vitest de unidade/DOM/integração, 132 verificações de conteúdo/contrato, lint, TypeScript e build de produção.
+- [x] Aprovar 67 testes Playwright em desktop e celular; um caso móvel extenso permaneceu explicitamente ignorado pela configuração existente, sem falha nem travamento no encerramento.
+
+Próxima etapa autorizável: criar as candidatas SI-02 e SI-05, submetê-las ao processo registrado e comparar versões sem substituir silenciosamente os originais.

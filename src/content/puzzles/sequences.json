@@ -19,9 +19,9 @@
     },
     "source": {
       "type": "fictional",
-      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+      "description": "Conteúdo fictício produzido para o protótipo N9; em revisão editorial assistida por IA."
     },
-    "validationStatus": "provisional-pending-teacher-review",
+    "validationStatus": "under-ai-review",
     "id": "seq-algorithm-01",
     "title": "Sequência de um algoritmo",
     "narrative": "O terminal da Base N9 perdeu sua sequência de inicialização. Reorganize este programa fictício de cálculo de média para recuperar o sistema e liberar a passagem.",
@@ -87,9 +87,9 @@
     },
     "source": {
       "type": "fictional",
-      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+      "description": "Conteúdo fictício produzido para o protótipo N9; em revisão editorial assistida por IA."
     },
-    "validationStatus": "provisional-pending-teacher-review",
+    "validationStatus": "under-ai-review",
     "id": "seq-incident-01",
     "title": "Tratamento de um incidente de TI",
     "narrative": "O terminal perdeu o roteiro de atendimento de uma falha fictícia. Reorganize as etapas deste exercício para recuperar o sistema e liberar a passagem.",
@@ -160,9 +160,9 @@
     },
     "source": {
       "type": "fictional",
-      "description": "Conteúdo fictício produzido para o protótipo N9; pendente de revisão docente."
+      "description": "Conteúdo fictício produzido para o protótipo N9; em revisão editorial assistida por IA."
     },
-    "validationStatus": "provisional-pending-teacher-review",
+    "validationStatus": "under-ai-review",
     "id": "seq-network-01",
     "title": "Configuração básica de uma rede",
     "narrative": "O terminal perdeu o roteiro de uma rede de laboratório fictícia. Reorganize as etapas para recuperar o sistema e liberar a passagem.",

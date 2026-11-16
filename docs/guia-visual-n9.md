@@ -28,7 +28,7 @@ A identidade visual do N9 representa um campus-laboratório tecnológico 2D: con
 | Ciano | `#147B8A` | informação e computadores |
 | Violeta | `#6756BC` | Lia, terminais e CC |
 | Sucesso | `#176B4E` | acerto, conclusão e passagem liberada |
-| Atenção | `#8A5314` | validação pedagógica, capacidade e avisos |
+| Atenção | `#8A5314` | revisão editorial, capacidade e avisos |
 | Erro | `#963B36` | resposta incorreta, falha e exclusão |
 | Foco | `#F2B544` | contorno de foco visível |
 

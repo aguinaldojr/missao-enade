@@ -11,7 +11,7 @@ describe('catálogo provisório de Sequência Lógica', () => {
     for (const puzzle of repository.all()) {
       expect(puzzle.blocks.length).toBeGreaterThanOrEqual(4);
       expect(puzzle.blocks.length).toBeLessThanOrEqual(7);
-      expect(puzzle.validationStatus).toBe('provisional-pending-teacher-review');
+      expect(puzzle.validationStatus).toBe('under-ai-review');
       expect(puzzle.sources[0]?.type).toBe('fictional');
       expect(puzzle.sources[0]?.role).toBe('primary');
       expect(puzzle.hints.length).toBeGreaterThanOrEqual(3);

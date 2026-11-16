@@ -13,7 +13,7 @@ Esta etapa somente planeja a capacidade. Ela:
 - não cria enunciados, alternativas nem IDs definitivos;
 - distingue elegibilidade já registrada, compartilhamento proposto e não elegibilidade;
 - usa códigos de slot editorial, nunca IDs executáveis, para conteúdo inexistente;
-- registra a substituição futura da aprovação docente por governança editorial assistida por IA, sem migrar os contratos nesta entrega.
+- registra a substituição da aprovação docente por governança editorial assistida por IA; a migração técnica foi concluída na entrega específica de 16/11/2026.
 
 As disciplinas sugeridas são rótulos de organização. Não representam componentes oficiais da UNINOVE enquanto não forem confrontadas com os PPCs e matrizes curriculares vigentes.
 
@@ -272,7 +272,7 @@ O histórico recomendado é por perfil, curso e questão, com contagem e data da
 
 ## 7. Governança editorial assistida por IA
 
-A decisão vigente retira aprovação docente como requisito do projeto. A migração técnica será executada em outra entrega. O fluxo proposto é:
+A decisão vigente retira aprovação docente como requisito do projeto. A migração técnica foi concluída em entrega própria. O fluxo ativo é:
 
 ```text
 draft
@@ -283,9 +283,9 @@ under-ai-review
   └─→ ready-for-pilot ─→ ready-for-release
 ```
 
-Nesta etapa, enums, schemas e os 66 conteúdos conservam os estados antigos para não quebrar contratos. Nenhum item é promovido. Documentos históricos não serão apagados; receberão, quando afetados, nota de que pertencem à governança anterior.
+Enums, schemas e os 66 conteúdos usam os estados novos; os 66 itens permanecem `under-ai-review`. Estados antigos são aceitos apenas por normalização em memória. Nenhum item foi promovido. Documentos históricos não são apagados e pertencem à governança anterior.
 
-Uma revisão por IA deverá registrar versão, data, critérios, resolução independente, correções, testes objetivos, limitações e decisão. `ready-for-pilot` significa somente aptidão para teste controlado. Não significa aprovação docente, homologação institucional, conteúdo oficial ou eficácia pedagógica demonstrada.
+Uma revisão por IA deverá registrar versão, data, critérios, resolução independente, correções, testes objetivos, limitações e decisão. `ready-for-pilot` significa somente aptidão para teste controlado. Não significa homologação institucional, conteúdo oficial ou eficácia pedagógica demonstrada.
 
 ## 8. Padrão para as próximas questões de SI
 
@@ -312,7 +312,7 @@ Uma revisão por IA deverá registrar versão, data, critérios, resolução ind
 3. O contrato não possui campos próprios para código, mídia, descrição longa ou formato de apresentação. Os pilotos devem decidir a menor extensão compatível antes da conversão.
 4. Os vinte compartilhamentos propostos estão concentrados: nove pertencem a SI-M06 e nenhum atende SI-M03 ou SI-M10. Contar candidatos sem balancear áreas produziria capacidade aparente, mas não três jornadas completas.
 5. Os atuais 7/9/4 descrevem vinte elegíveis no catálogo antigo. Este plano redefine 9/11/5 como cota de cada jornada de 25; a migração ainda não foi implementada.
-6. A governança ativa ainda contém `provisional-pending-teacher-review` e `approved-teacher`. A substituição por estados assistidos por IA permanece separada desta entrega documental.
+6. A governança ativa usa os seis estados assistidos por IA. `provisional-pending-teacher-review` e `approved-teacher` permanecem somente como entradas legadas normalizadas.
 7. O texto certificado do DOU não foi recuperado nos documentos locais. A reprodução F07 e a síntese registrada sustentam o planejamento, mas os localizadores não usados pelos itens atuais devem ser reconferidos antes de se tornarem dados executáveis.
 8. A equivalência de disciplinas depende dos PPCs; nenhum nome sugerido deve ser apresentado como disciplina oficial.
 
@@ -322,7 +322,7 @@ Antes de produzir SI-02 e SI-05 revisadas:
 
 - aprovar este agrupamento de dez macroáreas;
 - decidir se o núcleo técnico de 60 é meta exata ou se reservas poderão ampliar o catálogo;
-- executar a migração da governança editorial em entrega própria;
+- aplicar a governança editorial ativa e registrar a rodada de revisão das candidatas;
 - confirmar os formatos piloto: SQL funcional para SI-02 e diagrama de dados acessível para SI-05;
 - preservar os originais até a aprovação das candidatas;
 - manter o JSON executável inalterado durante a comparação.

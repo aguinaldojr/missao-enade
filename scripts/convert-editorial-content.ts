@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { normalizeValidationStatus, type LegacyValidationStatus, type ValidationStatus } from '../src/domain/models/EditorialMetadata.ts';
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -68,6 +69,11 @@ const normativeSources: Readonly<Record<string, NormativeSource>> = {
 
 export function plain(text = ''): string {
   return text.replace(/\[([^\]]+)]\([^)]+\)/g, '$1').replace(/[*_`]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function normalizeGovernanceText(text: string): string {
+  return text.replace(/sujeit[ao] à revisão docente(?: de ([A-Z]+))?/gi,
+    (_match, course: string | undefined) => 'em revisão editorial assistida por IA' + (course ? ' para ' + course : ''));
 }
 
 function tableFields(text: string): Readonly<Record<string, string>> {
@@ -155,7 +161,7 @@ function parseSources(section: Section, fields: Readonly<Record<string, string>>
 function sharedMetadata(section: Section, fields: Readonly<Record<string, string>>): Record<string, unknown> {
   return {
     collectionId: plain(findField(fields, 'collectionId')),
-    pedagogicalOrigin: plain(findField(fields, 'pedagogicalOrigin')),
+    pedagogicalOrigin: normalizeGovernanceText(plain(findField(fields, 'pedagogicalOrigin'))),
     courses: parseCourses(findField(fields, 'Cursos / courses')),
     area: plain(findField(fields, 'Área / area')),
     competencies: parseCompetencies(section, fields),
@@ -167,7 +173,8 @@ function sharedMetadata(section: Section, fields: Readonly<Record<string, string
       objective: plain(findField(fields, 'Objetivo pedagógico')),
       locators: [plain(findField(fields, 'Rastreabilidade'))],
     },
-    validationStatus: plain(findField(fields, 'Status editorial / validationStatus')),
+    validationStatus: normalizeValidationStatus(plain(findField(fields, 'Status editorial / validationStatus')) as
+      ValidationStatus | LegacyValidationStatus),
   };
 }
 

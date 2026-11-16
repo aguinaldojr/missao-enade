@@ -50,7 +50,7 @@
         "E": "Os dados contam atendimentos, não a preferência de todos os estudantes."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -58,9 +58,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-COMUM-02",
@@ -109,7 +109,7 @@
         "E": "Senhas de outros serviços não fazem parte da consulta e não devem ser pedidas."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -117,9 +117,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-COMUM-03",
@@ -168,7 +168,7 @@
         "E": "A manutenção ainda é futura no contexto fictício."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -176,9 +176,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-COMUM-04",
@@ -227,7 +227,7 @@
         "E": "O novo consumo é menor que o anterior nas mesmas condições."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -235,9 +235,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-COMUM-05",
@@ -286,7 +286,7 @@
         "E": "O plano utiliza os dias disponíveis e prevê a revisão conjunta."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -294,9 +294,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-COMUM-06",
@@ -345,7 +345,7 @@
         "E": "Sem conhecer o procedimento, outras pessoas não podem verificar a comparação."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -353,9 +353,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-COMUM-07",
@@ -404,7 +404,7 @@
         "E": "O gesto não resolve o uso exclusivo de teclado."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -412,9 +412,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-COMUM-08",
@@ -463,7 +463,7 @@
         "E": "A e B acessam o serviço, contrariando essa afirmação."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -471,9 +471,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-COMUM-09",
@@ -522,7 +522,7 @@
         "E": "O teclado não é o recurso apontado como insuficiente."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -530,9 +530,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-CC-01",
@@ -577,7 +577,7 @@
         "E": "Elevar 8 ao quadrado é uma operação diferente de dobrar."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -585,9 +585,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-SI-01",
@@ -632,7 +632,7 @@
         "E": "A medida atende diretamente à regra de uma identificação por solicitação."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -640,9 +640,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-TADS-01",
@@ -687,7 +687,7 @@
         "E": "10 excede o estoque de 5."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -695,9 +695,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-TGTI-01",
@@ -742,7 +742,7 @@
         "E": "O sorteio ignora a regra de prioridade informada."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -750,9 +750,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "EX-TRC-01",
@@ -797,7 +797,7 @@
         "E": "Não há evidência de falha nos arquivos; essa ação não liga R."
       },
       "collectionId": "n9-provisional-questions-v1",
-      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; pendentes de revisão docente.",
+      "pedagogicalOrigin": "Exemplos autorais fictícios do protótipo; em revisão editorial assistida por IA.",
       "area": "Raciocínio e competências digitais (exemplos)",
       "competencies": [
         "Interpretar dados e restrições em situações fictícias."
@@ -805,9 +805,9 @@
       "difficulty": "introductory",
       "source": {
         "type": "fictional",
-        "description": "Conteúdo fictício do protótipo N9; pendente de revisão docente."
+        "description": "Conteúdo fictício do protótipo N9; em revisão editorial assistida por IA."
       },
-      "validationStatus": "provisional-pending-teacher-review"
+      "validationStatus": "under-ai-review"
     }
   ]
 }

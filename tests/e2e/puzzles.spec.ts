@@ -61,7 +61,7 @@ test('teclado, dicas graduais, conclusão, retorno e replay sem XP adicional', a
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await start(page);
-  await expect(page.locator('.example-warning')).toContainText('PENDENTE DE REVISÃO DOCENTE');
+  await expect(page.locator('.example-warning')).toContainText('EM REVISÃO EDITORIAL');
   await expect(page.locator('.puzzle-explanation')).toBeEmpty();
   await expect(page.locator('.puzzle-hints li')).toHaveCount(0);
   await expect(page.locator('.puzzle-xp')).toHaveText('XP de quebra-cabeças: 0');

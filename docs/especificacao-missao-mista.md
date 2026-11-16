@@ -1,6 +1,6 @@
 # Especificação documental de missão mista — proposta para etapa futura
 
-13/11/2026. **Não implementada, não importada pelo jogo e sem efeito sobre progresso ou recompensas.** Esta especificação não cria interface TypeScript, JSON Schema ou carregador executável. Os exemplos são fictícios/provisórios e dependem de revisão docente.
+13/11/2026, com governança atualizada em 16/11/2026. **Não implementada, não importada pelo jogo e sem efeito sobre progresso ou recompensas.** Esta especificação não cria interface TypeScript, JSON Schema ou carregador executável. Os exemplos são fictícios e permanecem em revisão editorial assistida por IA.
 
 Uma missão mista agrupará referências a desafios já definidos, sem duplicar seu conteúdo. A coleção identifica a origem editorial da missão; cada desafio conserva sua própria coleção validada. Não é obrigatório que todos os desafios tenham a mesma collectionId da missão.
 
@@ -19,7 +19,7 @@ Uma missão mista agrupará referências a desafios já definidos, sem duplicar 
 | prerequisites | string[] | Sim | IDs de outras missões; pode estar vazio. Referências existentes, sem autorreferência ou ciclos. Não bloqueio por nota ou erro. |
 | rewards | objeto com xp | Sim | Bônus próprio de missão; xp inteiro ≥ 0. O exemplo usa zero: não propõe bônus novo nem soma automática de pontos de questões. |
 | unlocks | array de objetos mapId/objectId | Sim | Pode estar vazio. Identificar objetos existentes no mapa, sem regras de código arbitrário. |
-| validationStatus | ValidationStatus | Sim | provisional-pending-teacher-review, needs-revision, approved-teacher ou rejected. |
+| validationStatus | ValidationStatus | Sim | draft, under-ai-review, needs-revision, ready-for-pilot, ready-for-release ou rejected. |
 
 Objetos futuros deverão ser estritos com additionalProperties: false. Campos desconhecidos não deverão ser descartados silenciosamente. As regras acima são especificação, **não validação já executada**.
 
@@ -43,7 +43,7 @@ Os IDs de coleção, questão, sequência, mapa e porta abaixo existem no projet
   "unlocks": [
     { "mapId": "base-n9", "objectId": "door" }
   ],
-  "validationStatus": "provisional-pending-teacher-review"
+  "validationStatus": "under-ai-review"
 }
 ```
 
@@ -53,7 +53,7 @@ Os IDs de coleção, questão, sequência, mapa e porta abaixo existem no projet
 2. Como persistir tentativa de missão e referências de versão dos desafios sem alterar recibos atuais.
 3. Como conceder bônus idempotentes por missão, separados do XP já pago por puzzle e da pontuação de questões; não pagar duas vezes pela mesma conclusão.
 4. Como permitir retomar, cancelar e repetir, preservando respostas e recompensas anteriores.
-5. Como aplicar a revisão docente por conteúdo/curso/versão e o status da coleção para publicação, sem confundir schema válido com aprovação real.
+5. Como registrar a revisão assistida por IA por conteúdo/curso/versão e a decisão explícita da pessoa responsável, sem confundir schema válido com homologação institucional.
 6. Como validar pré-requisitos, ciclos, referências, elegibilidade e desbloqueios na futura camada de domínio.
 7. Como integrar áreas/competências revisadas de areas.json por transformação explícita. Esse arquivo não deve ser importado diretamente.
 

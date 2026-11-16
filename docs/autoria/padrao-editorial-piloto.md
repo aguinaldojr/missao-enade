@@ -1,8 +1,8 @@
 # N9 — Jornada Digital: padrão editorial do lote-piloto
 
-Consolidação documental — 13/11/2026, horário de Brasília. Versão documental 1.1. Derivada da leitura integral de [lote-comum-01.md](lote-comum-01.md), sem recriar o lote. Este padrão orienta a autoria posterior; não constitui aprovação docente ou autorização de publicação. A revisão 1.1 registra a estrutura de rastreabilidade e o limite de extensão definidos após a auditoria dos 66 desafios.
+Consolidação documental — 13/11/2026, horário de Brasília. Versão documental 1.2, atualizada em 16/11/2026 para a [governança editorial assistida por IA](../governanca-editorial-ia.md). Derivada da leitura integral de [lote-comum-01.md](lote-comum-01.md), sem recriar o lote. Este padrão orienta a autoria posterior; não constitui homologação institucional ou autorização de publicação.
 
-**Estado obrigatório deste estágio: provisional-pending-teacher-review.** N9 permanece nome provisório sujeito à aprovação institucional. Os cenários são fictícios; não há chancela do Inep nem afirmação de produto oficial. A consolidação não realizou nova pesquisa normativa ou cotejo independente de originalidade.
+**Estado obrigatório deste estágio: under-ai-review.** N9 permanece nome provisório sujeito à aprovação institucional. Os cenários são fictícios; não há chancela do Inep nem afirmação de produto oficial. A consolidação não realizou nova pesquisa normativa ou cotejo independente de originalidade.
 
 ## 1. Escopo e precedência
 
@@ -14,7 +14,7 @@ Referências do padrão:
 - Contratos atuais Question, SequencePuzzle e EditorialMetadata; schemas question, puzzles e editorial, em src. Nenhum deles é alterado por este documento.
 - Fontes oficiais e reproduções já registradas na seção 9 do lote-piloto. O registro de consulta anterior não equivale a nova consulta nesta consolidação.
 
-O plano governa os slots. O contrato governa os campos que poderão ser importados em outra entrega. A fonte sustenta o recorte, não o cenário inventado ou seu gabarito. Revisão docente decide a adequação pedagógica. Divergência entre essas camadas deve ser registrada antes de ampliar a autoria.
+O plano governa os slots. O contrato governa os campos que poderão ser importados em outra entrega. A fonte sustenta o recorte, não o cenário inventado ou seu gabarito. A revisão assistida por IA produz evidência; a pessoa responsável pelo projeto decide piloto e liberação. Divergência entre essas camadas deve ser registrada antes de ampliar a autoria.
 
 Esta etapa produz somente Markdown. Não gerar arquivo JSON, substituir exemplos do jogo, importar a coleção, implementar missão, ativar porta ou atribuir parecer favorável. Não iniciar o lote comum 02 nem lotes específicos sem autorização posterior.
 
@@ -61,7 +61,7 @@ O puzzle usa a mesma base documental, com narrativa, blocos, ordem correta justi
 | difficulty | introductory, intermediate ou advanced conforme o plano. Mudança depende de decisão registrada, não ajuste silencioso. |
 | sources | Lista com exatamente uma principal e fontes normativas complementares ou técnicas quando aplicáveis; type, description e opcionais url, year e documentId. |
 | traceability | Título editorial, objetivo e localizadores; obrigatório na futura conversão dos 66 desafios. |
-| validationStatus | provisional-pending-teacher-review em todo material desta etapa. |
+| validationStatus | under-ai-review em todo material ativo desta etapa. Registros antigos são normalizados em memória. |
 
 Question não tem campo kind. Seus campos próprios são id, version, classification, context, prompt, options, correctOptionId, explanation e feedbackByOption; example/editorialStatus são marcadores opcionais de compatibilidade, não aprovação.
 
@@ -144,13 +144,13 @@ Manter quatro camadas explícitas: referência oficial; análise histórica; inf
 
 Na ficha registrar título, órgão emissor, data do ato, publicação quando identificada, URL, localizador por artigo/página, modo de acesso e limite da leitura. Não confundir data de captura ou consulta com publicação. Identificar reprodução e instituição hospedeira; não chamá-la de órgão emissor.
 
-O registro do lote comum 01 informa consulta em 13/11/2026, falha de recuperação dos links individuais do DOU e uso de reproduções identificadas. **Este padrão conserva esse registro; não atesta nova consulta nem confirmação de vigência.** Na revisão docente, conferir originais e retificações.
+O registro do lote comum 01 informa consulta em 13/11/2026, falha de recuperação dos links individuais do DOU e uso de reproduções identificadas. **Este padrão conserva esse registro; não atesta nova consulta nem confirmação de vigência.** Na revisão assistida por IA, registrar a limitação; antes da liberação, a pessoa responsável deve conferir originais e retificações.
 
 No lote, F05 sustenta o recorte comum de Formação Geral das cinco questões; F06 é principal do puzzle, com corroboração documental F07/SI, F08/TADS, F09/TGTI e F10/TRC. Esse vínculo não prova a ordem do procedimento fictício nem dispensa conferência por curso.
 
 Em `sources`, usar exatamente um papel `primary`; usar `normative-complementary` para corroborar matriz ou curso e `technical` para RFC, norma técnica ou fonte acadêmica. `type: official-reference` descreve a natureza da referência, sem transformar narrativa autoral em questão oficial. Fonte histórica deve ter edição/caderno/questão/página identificados e limite de leitura registrado. Não apresentar síntese indireta como leitura direta. Entradas antigas com `source` singular são normalizadas em memória para uma fonte `primary`.
 
-Dúvida grave de fonte, resposta, elegibilidade ou ordem deve ser registrada e suspender avanço até resolução. O status deste lote permanece provisional-pending-teacher-review conforme a etapa atual; mudança posterior para needs-revision/approved-teacher/rejected exige decisão explícita registrada, não inferência de schema ou teste aprovado.
+Dúvida grave de fonte, resposta, elegibilidade ou ordem deve ser registrada e suspender avanço até resolução. O estado ativo é `under-ai-review`; mudança para `needs-revision`, `ready-for-pilot` ou `rejected` exige decisão explícita registrada, não inferência de schema ou teste aprovado. `ready-for-release` depende de decisão posterior ao piloto.
 
 ## 9. Originalidade e não repetição
 
@@ -178,15 +178,15 @@ A autoria assistida por IA deve ser declarada e consolidada por responsável hum
 
 Markdown legível não homologa leitor de tela, teclado ou toque da interface futura. Registrar essas verificações como pendentes até a integração e o teste efetivos.
 
-## 11. Fluxo de revisão docente
+## 11. Fluxo de revisão assistida por IA
 
-Ficha por ID, versão e curso elegível, com docente, data, PPC/versão, evidências, resolução sem gabarito, objeções, alternativas defensáveis, originalidade, acessibilidade e decisão fundamentada.
+Ficha por ID, versão e curso elegível, com data, versão do procedimento/modelo, PPC/versão quando disponível, evidências, resolução sem gabarito, objeções, alternativas defensáveis, originalidade, acessibilidade, testes e decisão fundamentada.
 
-Os seis itens comuns do piloto exigem cinco cursos: **30 registros de revisão por item/curso**, ainda não preenchidos. Não são trinta itens novos. Uma recomendação isolada não muda validationStatus, não ativa coleção e não autoriza publicação.
+Os seis itens comuns do piloto exigem análise em cinco contextos de curso: **30 registros por item/curso**, ainda não preenchidos. Não são trinta itens novos. Uma recomendação isolada não muda `validationStatus`, não ativa coleção e não autoriza publicação.
 
-Resolver independentemente as questões; para o puzzle, tentar construir ordem alternativa e avaliar a plausibilidade da barreira de montagem. Registrar o motivo de cada rejeição. Não marcar “conferido” como sinônimo de “aprovado por docente”.
+Resolver independentemente as questões; para o puzzle, tentar construir ordem alternativa e avaliar a plausibilidade da barreira de montagem. Registrar o motivo de cada rejeição. Não usar “conferido” como sinônimo de homologação institucional.
 
-Permanecem pendentes: adequação a PPC/oferta e momento formativo; originais e retificações; cotejo independente de similaridade; calibragem de dificuldade; leitura com estudantes; acessibilidade na experiência; responsável humano pela consolidação; política de liberação e missão mista.
+Permanecem pendentes: adequação a PPC/oferta e momento formativo; originais e retificações; cotejo independente de similaridade; calibragem de dificuldade; observação com estudantes; acessibilidade na experiência; responsável pela consolidação; política de liberação e missão mista.
 
 ## 12. Auditoria documental antes de encerrar uma etapa
 
@@ -200,7 +200,7 @@ Permanecem pendentes: adequação a PPC/oferta e momento formativo; originais e 
 - [ ] Preservar recompensa e desbloqueios propostos; não ativá-los.
 - [ ] Conferir referências e seus limites; não inventar consulta recente ou parecer.
 - [ ] Separar metadados/gabaritos dos textos ao jogador; procurar referências à avaliação externa nesses textos.
-- [ ] Manter todos os validationStatus como provisional-pending-teacher-review.
+- [ ] Manter os itens ainda não revisados como `under-ai-review`; não promover automaticamente.
 - [ ] Registrar pendências de revisão independente e homologação.
 - [ ] Verificar que código, schemas, conteúdo executável e progresso não mudaram.
 - [ ] Executar auditoria documental e os testes de contrato aplicáveis, sem gerar arquivo JSON nem integrar conteúdo.
@@ -219,7 +219,7 @@ Apenas lote-comum-01.md e este documento integram a etapa. Nenhum lote comum 02,
 - Auditoria documental: seis IDs planejados e únicos; gabaritos C/A/E/B/D; cinco alternativas e cinco feedbacks por questão; cursos, status e dificuldades preservados.
 - Cálculos do lote conferidos; blocos/ordem/recompensa/desbloqueios preservados; 120 permutações examinadas sob as quatro dependências declaradas, com uma única ordem válida nesse modelo.
 - Três dicas presentes; a ajuda final não enumera mais a solução inteira.
-- Trinta registros de revisão por item/curso continuam a preencher; nenhuma aprovação docente atribuída.
+- Trinta registros de revisão por item/curso continuam a preencher; nenhuma homologação institucional atribuída.
 - Textos destinados ao jogador sem o nome da avaliação externa.
 - Testes de contrato aplicáveis: **113 aprovados**, em quatro arquivos, com npm.cmd run validate:content.
 - Comparação do Git antes de versionar: nenhum arquivo previamente versionado alterado; somente os dois documentos em docs/autoria. O lote comum 01 já existia sem versionamento ao início e foi ajustado pontualmente.

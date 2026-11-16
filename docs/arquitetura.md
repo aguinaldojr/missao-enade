@@ -582,3 +582,18 @@ Esta seção substitui o acoplamento anterior entre banco e fase de dez. O banco
 - O plano pedagógico, questões provisórias, seis slots de puzzle, XP de puzzles e missão mista documental foram preservados. Não há login, servidor de aplicação ou banco online.
 
 Contratos completos, erros, estratégia e disponibilidade atual: [estrutura-dados-desafios.md §13](estrutura-dados-desafios.md#13-quantidade-configurável-de-questões-por-missão--13112026). Verificações e arquivos desta entrega no backlog.
+
+## 22. Governança editorial assistida por IA — 16/11/2026
+
+As referências a revisão docente e aos estados anteriores nas seções históricas registram a arquitetura vigente quando foram escritas. Não são requisitos ativos.
+
+- `ValidationStatus` aceita `draft`, `under-ai-review`, `needs-revision`, `ready-for-pilot`, `ready-for-release` e `rejected`.
+- Os schemas canônicos aceitam somente os seis estados ativos e continuam estritos com `additionalProperties: false`.
+- O normalizador converte `provisional-pending-teacher-review` em `under-ai-review` e `approved-teacher` em `ready-for-pilot`; `needs-revision` e `rejected` são preservados. A conversão ocorre em memória, sem escrever conteúdo ou progresso.
+- As 60 questões e os seis puzzles da coleção integrada estão em `under-ai-review`. Nenhum item foi promovido automaticamente.
+- `ready-for-pilot` indica apenas aptidão para teste controlado. `ready-for-release` exige decisão explícita da pessoa responsável depois do piloto; não existe publicação automática.
+- O carregamento, os repositórios, a seleção, pontuação, puzzles, mapa, ranking, perfis e chaves de LocalStorage permanecem inalterados.
+- A interface apenas substitui o aviso editorial por **Conteúdo experimental em revisão editorial.**
+- O conversor documental normaliza os estados e textos de governança anteriores sem mudar campos pedagógicos. Documentos de autoria anteriores permanecem registros históricos.
+
+Política, critérios, transições, evidências e limitações: [governanca-editorial-ia.md](governanca-editorial-ia.md).

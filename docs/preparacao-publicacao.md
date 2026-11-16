@@ -7,7 +7,7 @@ Este documento descreve uma possibilidade futura de publicação gratuita do **N
 Uma publicação no GitHub Pages torna o site e seus arquivos acessíveis publicamente na internet.
 
 - Os JSON, textos, metadados e gabaritos fazem parte da aplicação cliente e poderão ser inspecionados pelo navegador. Eles **não estão protegidos** por estarem empacotados pelo Vite.
-- Os 66 conteúdos permanecem provisórios e dependem de revisão docente. O site deve continuar exibindo **Conteúdo em validação pedagógica**.
+- Os 66 conteúdos permanecem experimentais e em revisão editorial assistida por IA. O site deve continuar exibindo **Conteúdo experimental em revisão editorial**.
 - O ranking permanece somente no dispositivo e não representa toda a turma.
 - Não existe autenticação, conta online, servidor de aplicação ou banco de dados online.
 - Perfis, progresso, resultados e ranking ficam no LocalStorage do navegador atual. Eles não são sincronizados entre dispositivos.
@@ -33,7 +33,7 @@ A aplicação não possui rotas no servidor. A navegação entre telas ocorre no
 - Node.js 26.x e npm 11 ou 12 para validação local;
 - revisão dos alertas de conteúdo, privacidade e propriedade intelectual;
 - decisão institucional sobre o nome provisório N9;
-- revisão docente e decisão explícita sobre a exposição dos gabaritos;
+- revisão editorial assistida por IA e decisão explícita da pessoa responsável sobre a exposição dos gabaritos;
 - suíte local aprovada e árvore Git limpa.
 
 ## Validar localmente antes de criar o repositório
@@ -213,7 +213,7 @@ Uma repetição posterior na raiz ficou temporariamente degradada por lentidão 
 ## Pendências antes de qualquer publicação
 
 - autorização institucional para o nome provisório N9 e para a exposição pública do projeto;
-- revisão docente dos conteúdos marcados como provisórios;
+- revisão editorial dos conteúdos marcados como experimentais;
 - decisão consciente sobre a publicação dos gabaritos e metadados editoriais;
 - homologação humana com NVDA e VoiceOver;
 - teste em dispositivos físicos e navegadores adicionais;

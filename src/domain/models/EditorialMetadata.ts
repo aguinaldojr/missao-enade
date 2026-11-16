@@ -6,8 +6,24 @@ export const SOURCE_TYPES = ['official-reference', 'institutional', 'authorial',
 export type SourceType = (typeof SOURCE_TYPES)[number];
 export const SOURCE_ROLES = ['primary', 'normative-complementary', 'technical'] as const;
 export type SourceRole = (typeof SOURCE_ROLES)[number];
-export const VALIDATION_STATUSES = ['provisional-pending-teacher-review', 'needs-revision', 'approved-teacher', 'rejected'] as const;
+export const VALIDATION_STATUSES = [
+  'draft',
+  'under-ai-review',
+  'needs-revision',
+  'ready-for-pilot',
+  'ready-for-release',
+  'rejected',
+] as const;
 export type ValidationStatus = (typeof VALIDATION_STATUSES)[number];
+export const LEGACY_VALIDATION_STATUSES = ['provisional-pending-teacher-review', 'approved-teacher'] as const;
+export type LegacyValidationStatus = (typeof LEGACY_VALIDATION_STATUSES)[number];
+
+/** Compatibilidade somente de leitura: estados antigos nunca promovem conteúdo automaticamente. */
+export function normalizeValidationStatus(status: ValidationStatus | LegacyValidationStatus): ValidationStatus {
+  if (status === 'provisional-pending-teacher-review') return 'under-ai-review';
+  if (status === 'approved-teacher') return 'ready-for-pilot';
+  return status;
+}
 export const CONTENT_MODES = ['example', 'provisional', 'pilot', 'approved'] as const;
 export type ContentMode = (typeof CONTENT_MODES)[number];
 

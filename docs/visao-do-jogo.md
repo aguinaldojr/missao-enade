@@ -18,7 +18,7 @@ O conteúdo pode apoiar atividades de aprendizagem, disciplinas e projetos. Pont
 
 Na primeira versão editorial, o conteúdo terá como base competências e referências do ENADE, tratadas **somente como origem pedagógica interna**. A primeira coleção terá o identificador **`enade-2026`**.
 
-Esse identificador e as referências não são a marca do jogo, o nome de uma campanha visível ou um convite à preparação de prova. A interface principal não apresenta ENADE, simulado, prova ou preparação como finalidade do produto. A rastreabilidade normativa continua na documentação interna, sem inventar alinhamento ou aprovação docente.
+Esse identificador e as referências não são a marca do jogo, o nome de uma campanha visível ou um convite à preparação de prova. A interface principal não apresenta ENADE, simulado, prova ou preparação como finalidade do produto. A rastreabilidade normativa continua na documentação interna, sem inventar alinhamento ou homologação institucional.
 
 A demonstração atual mantém seus desafios fictícios, marcados como exemplos, com `FASE-EXEMPLO-01` e `example-1`. Ela não foi transformada em conteúdo oficial nem declarada uma coleção validada. `enade-2026` está registrada nos metadados internos como planejada.
 
@@ -79,7 +79,7 @@ Somente o último relatório concluído é salvo no mesmo navegador e origem. Sa
 
 ## Limites e validação
 
-Conteúdo real depende de autoria e revisão docente. A mudança de marca não valida desafios fictícios nem substitui o mapeamento pedagógico.
+Conteúdo real depende de autoria e revisão editorial assistida por IA, com decisão explícita da pessoa responsável. A mudança de marca não valida desafios fictícios nem substitui o mapeamento pedagógico.
 
 Mapa de terminais, retomada, laboratório de treinamento, conquistas, campanhas específicas, novas coleções e publicação permanecem para entregas autorizadas. Login, servidor, banco remoto, ranking online, IA em tempo real e APIs pagas não foram acrescentados.
 

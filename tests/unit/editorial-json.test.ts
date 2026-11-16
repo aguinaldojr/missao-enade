@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { COURSE_IDS } from '../../src/domain/models/Course';
 import { isSequenceCorrect, type SequencePuzzle } from '../../src/domain/puzzles/SequencePuzzle';
@@ -84,9 +85,9 @@ describe('conversão controlada dos 66 desafios para JSON', () => {
     }
   });
 
-  it('preserva fontes, papéis e rastreabilidade sem aprovar conteúdo', () => {
+  it('preserva fontes, papéis e rastreabilidade sem liberar conteúdo', () => {
     const items = [...questions, ...puzzles];
-    expect(items.every((item) => item.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
+    expect(items.every((item) => item.validationStatus === 'under-ai-review')).toBe(true);
     expect(items.every((item) => item.sources.filter((source) => source.role === 'primary').length === 1)).toBe(true);
     expect(items.every((item) => item.traceability && item.traceability.title && item.traceability.objective &&
       item.traceability.locators.length > 0)).toBe(true);
@@ -96,6 +97,16 @@ describe('conversão controlada dos 66 desafios para JSON', () => {
       const item = items.find((candidate) => candidate.id === id)!;
       expect(item.sources.filter((source) => source.role === 'normative-complementary')).toHaveLength(4);
     }
+  });
+
+  it('altera somente a governança nos 66 objetos convertidos', () => {
+    const pedagogicalProjectionHash = (items: readonly Record<string, unknown>[]) => createHash('sha256')
+      .update(JSON.stringify(items.map((item) => Object.fromEntries(Object.entries(item)
+        .filter(([key]) => !['validationStatus', 'pedagogicalOrigin'].includes(key)))))).digest('hex');
+    const rawQuestions = (questionJson as { questions: Record<string, unknown>[] }).questions;
+    const rawPuzzles = puzzleJson as Record<string, unknown>[];
+    expect(pedagogicalProjectionHash(rawQuestions)).toBe('9699289faa3b8408c5b66c4b11600f1181444b8bfac506119f1a4aef47f38519');
+    expect(pedagogicalProjectionHash(rawPuzzles)).toBe('dfbb77c169563400ca5bf63e72c5b370dca66a27a27f13842b9c9e45657865a7');
   });
 
   it('mantém uma única solução estrutural para cada puzzle', () => {

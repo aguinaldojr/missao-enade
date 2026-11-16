@@ -2,7 +2,7 @@
 
 ## Escopo
 
-Esta entrega habilita no jogo os 60 desafios de questões e os seis quebra-cabeças de sequência da coleção interna `enade-2026`. O nome apresentado ao jogador é **N9 Jornada Digital**, acompanhado do aviso **Conteúdo em validação pedagógica.** Todos os itens continuam com `validationStatus` igual a `provisional-pending-teacher-review`.
+Esta entrega habilita no jogo os 60 desafios de questões e os seis quebra-cabeças de sequência da coleção interna `enade-2026`. Desde 16/11/2026, o nome apresentado ao jogador é acompanhado do aviso **Conteúdo experimental em revisão editorial.** Todos os itens usam `validationStatus` igual a `under-ai-review`, conforme a [governança editorial assistida por IA](governanca-editorial-ia.md).
 
 Não foi criada uma missão mista. Questões continuam no computador da Base N9 e quebra-cabeças continuam no terminal tecnológico.
 
@@ -72,7 +72,7 @@ As mudanças visíveis ficaram limitadas a:
 
 - escolha do tamanho da missão junto da escolha do curso;
 - identificação de **N9 Jornada Digital**;
-- aviso discreto **Conteúdo em validação pedagógica.**;
+- aviso discreto **Conteúdo experimental em revisão editorial.**;
 - exibição dinâmica de `Desafio X de N`, totais e pontuação máxima;
 - identificação da missão selecionada no mapa;
 - mensagem detalhada de capacidade insuficiente.

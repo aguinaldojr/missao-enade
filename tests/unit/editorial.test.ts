@@ -3,7 +3,14 @@ import { createHash } from 'node:crypto';
 import questions from '../../src/content/questions/central-nexo.json';
 import puzzles from '../../src/content/puzzles/sequences.json';
 import collections from '../../src/content/collections.json';
-import { CONTENT_MODES, DIFFICULTIES, SOURCE_ROLES, SOURCE_TYPES, VALIDATION_STATUSES, COLLECTION_STATUSES } from '../../src/domain/models/EditorialMetadata';
+import {
+  COLLECTION_STATUSES,
+  CONTENT_MODES,
+  DIFFICULTIES,
+  SOURCE_ROLES,
+  SOURCE_TYPES,
+  VALIDATION_STATUSES,
+} from '../../src/domain/models/EditorialMetadata';
 import { validateContent } from '../../src/infrastructure/content/validateContent';
 import { JsonContentRepository } from '../../src/infrastructure/content/JsonContentRepository';
 import { JsonPuzzleRepository } from '../../src/infrastructure/content/JsonPuzzleRepository';
@@ -16,9 +23,9 @@ const customCollections = new JsonCollectionRepository([...collections, {
   id: 'fictional-fixture-v2', pedagogicalOrigin: 'Exclusivamente fictícia, para testes técnicos.', status: 'active',
 }]);
 const newQuestion = () => ({ ...structuredClone(questions.questions[0]!), example: false, editorialStatus: 'approved',
-  collectionId: 'fictional-fixture-v2', validationStatus: 'approved-teacher' });
+  collectionId: 'fictional-fixture-v2', validationStatus: 'ready-for-pilot' });
 const newCatalog = () => ({ mode: 'approved', contentVersion: 'fixture-2.0', phaseId: 'FASE-FICTICIA-02', questions: [newQuestion()] });
-const newPuzzle = () => ({ ...structuredClone(puzzles[0]!), collectionId: 'fictional-fixture-v2', validationStatus: 'approved-teacher' });
+const newPuzzle = () => ({ ...structuredClone(puzzles[0]!), collectionId: 'fictional-fixture-v2', validationStatus: 'ready-for-pilot' });
 
 function oldQuestions() {
   const removed = new Set(['collectionId', 'pedagogicalOrigin', 'area', 'competencies', 'difficulty', 'source', 'validationStatus']);
@@ -26,14 +33,15 @@ function oldQuestions() {
     Object.fromEntries(Object.entries(question).filter(([key]) => !removed.has(key)))) };
 }
 function oldPuzzles() {
-  return puzzles.map(({ collectionId, ...rest }) => ({ ...rest, collection: collectionId }));
+  return puzzles.map(({ collectionId, ...rest }) => ({ ...rest, collection: collectionId,
+    validationStatus: 'provisional-pending-teacher-review' }));
 }
 
 describe('contratos editoriais compartilhados — exemplos exclusivamente fictícios', () => {
-  it('aceita questão aprovada e novas coleção/versão/fase sem os antigos literais', () => {
+  it('aceita questão pronta para piloto e novas coleção/versão/fase sem os antigos literais', () => {
     const result = validateContent(newCatalog(), customCollections);
     expect(result).toMatchObject({ mode: 'approved', contentVersion: 'fixture-2.0', phaseId: 'FASE-FICTICIA-02' });
-    expect(result.questions[0]).toMatchObject({ example: false, editorialStatus: 'approved', validationStatus: 'approved-teacher' });
+    expect(result.questions[0]).toMatchObject({ example: false, editorialStatus: 'approved', validationStatus: 'ready-for-pilot' });
     const ten = { ...newCatalog(), questions: Array.from({ length: 10 }, (_, i) => ({ ...newQuestion(), id: 'FICT-' + i, courses: ['CC'] })) };
     expect(new JsonContentRepository(ten, customCollections).questionsForCourse('CC')).toHaveLength(10);
     expect(new JsonContentRepository(ten, customCollections).questionsForCourse('SI')).toHaveLength(0);
@@ -41,19 +49,19 @@ describe('contratos editoriais compartilhados — exemplos exclusivamente fictí
   it('aceita questão pendente e marcadores de compatibilidade opcionais', () => {
     const data = newCatalog();
     data.mode = 'provisional';
-    data.questions[0]!.validationStatus = 'provisional-pending-teacher-review';
+    data.questions[0]!.validationStatus = 'under-ai-review';
     const { example: omittedExample, editorialStatus: omittedStatus, ...withoutMarkers } = data.questions[0]!;
     expect(omittedExample).toBe(false);
     expect(omittedStatus).toBe('approved');
     expect(validateContent({ ...data, questions: [withoutMarkers] }, customCollections).questions[0]?.validationStatus)
-      .toBe('provisional-pending-teacher-review');
+      .toBe('under-ai-review');
   });
   it.each(CONTENT_MODES)('aceita mode %s no contrato editorial', (mode) => {
     expect(validateContent({ ...newCatalog(), mode }, customCollections).mode).toBe(mode);
   });
-  it('aceita puzzle aprovado em coleção diferente sem alterar blocos ou recompensa', () => {
+  it('aceita puzzle pronto para piloto em coleção diferente sem alterar blocos ou recompensa', () => {
     const result = new JsonPuzzleRepository([newPuzzle()], customCollections).all()[0]!;
-    expect(result.validationStatus).toBe('approved-teacher');
+    expect(result.validationStatus).toBe('ready-for-pilot');
     expect(result.blocks).toEqual(puzzles[0]!.blocks);
     expect(result.reward.xp).toBe(100);
   });
@@ -151,6 +159,26 @@ describe('contratos editoriais compartilhados — exemplos exclusivamente fictí
 });
 
 describe('migração e compatibilidade sem escrita de progresso', () => {
+  it('normaliza os dois estados históricos sem promoção adicional', () => {
+    const pendingQuestion = { ...newQuestion(), validationStatus: 'provisional-pending-teacher-review' };
+    const approvedQuestion = { ...newQuestion(), validationStatus: 'approved-teacher' };
+    expect(validateContent({ ...newCatalog(), questions: [pendingQuestion] }, customCollections)
+      .questions[0]?.validationStatus).toBe('under-ai-review');
+    expect(validateContent({ ...newCatalog(), questions: [approvedQuestion] }, customCollections)
+      .questions[0]?.validationStatus).toBe('ready-for-pilot');
+    expect(new JsonPuzzleRepository([{ ...newPuzzle(), validationStatus: 'provisional-pending-teacher-review' }], customCollections)
+      .all()[0]?.validationStatus).toBe('under-ai-review');
+    expect(new JsonPuzzleRepository([{ ...newPuzzle(), validationStatus: 'approved-teacher' }], customCollections)
+      .all()[0]?.validationStatus).toBe('ready-for-pilot');
+    expect(new JsonPuzzleRepository([{ ...oldPuzzles()[0], validationStatus: 'approved-teacher' }])
+      .all()[0]?.validationStatus).toBe('ready-for-pilot');
+    for (const validationStatus of ['needs-revision', 'rejected'] as const) {
+      expect(validateContent({ ...newCatalog(), questions: [{ ...newQuestion(), validationStatus }] }, customCollections)
+        .questions[0]?.validationStatus).toBe(validationStatus);
+      expect(new JsonPuzzleRepository([{ ...oldPuzzles()[0], validationStatus }]).all()[0]?.validationStatus)
+        .toBe(validationStatus);
+    }
+  });
   it('normaliza formatos históricos e permite misturar entradas antigas e canônicas', () => {
     const oldQ = oldQuestions();
     const snapshot = structuredClone(oldQ);
@@ -169,18 +197,21 @@ describe('migração e compatibilidade sem escrita de progresso', () => {
     expect(() => validateContent({ ...oldQuestions(), questions: [{ ...oldQuestions().questions[0], extra: true }] })).toThrow();
     expect(() => new JsonPuzzleRepository([{ ...oldPuzzles()[0], collectionId: 'missing' }])).toThrow();
   });
-  it('não promove legado a aprovado e mantém todo conteúdo do jogo provisório', () => {
-    expect(validateContent({ ...oldQuestions(), mode: 'approved' }).questions.every((q) => q.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
-    expect(validateContent(questions).questions.every((q) => q.sources[0]?.type === 'fictional' && q.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
-    expect(new JsonPuzzleRepository(puzzles).all().every((p) => p.sources[0]?.type === 'fictional' && p.validationStatus === 'provisional-pending-teacher-review')).toBe(true);
+  it('não promove legado nem conteúdo em revisão por causa do mode do catálogo', () => {
+    expect(validateContent({ ...oldQuestions(), mode: 'approved' }).questions.every((q) => q.validationStatus === 'under-ai-review')).toBe(true);
+    expect(validateContent(questions).questions.every((q) => q.sources[0]?.type === 'fictional' && q.validationStatus === 'under-ai-review')).toBe(true);
+    expect(new JsonPuzzleRepository(puzzles).all().every((p) => p.sources[0]?.type === 'fictional' && p.validationStatus === 'under-ai-review')).toBe(true);
   });
   it('preserva conteúdo pedagógico e recompensas byte a byte na projeção original', () => {
     const fields = ['id', 'version', 'classification', 'courses', 'example', 'editorialStatus', 'context', 'prompt', 'options', 'correctOptionId', 'explanation', 'feedbackByOption'];
     const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
     const questionProjection = questions.questions.map((q) => Object.fromEntries(fields.map((key) => [key, q[key as keyof typeof q]])));
-    const puzzleProjection = puzzles.map(({ collectionId, ...rest }) => { expect(collectionId).toBe('n9-provisional-sequences-v1'); return rest; });
+    const puzzleFields = ['kind', 'id', 'title', 'narrative', 'courses', 'area', 'competencies', 'difficulty',
+      'blocks', 'correctOrder', 'hints', 'explanation', 'reward', 'unlocks'];
+    const puzzleProjection = puzzles.map((puzzle) => Object.fromEntries(puzzleFields.map((key) =>
+      [key, puzzle[key as keyof typeof puzzle]])));
     expect(hash(questionProjection)).toBe('e2048cd6c74a1ac3744d262cc254bf286a814ccf71a8dc692983cf88b5661cc4');
-    expect(hash(puzzleProjection)).toBe('75054994352f036ae9dd00c761052bdc72bd2a15c6baf72484ca357c4098e4cf');
+    expect(hash(puzzleProjection)).toBe('29ee0cfdb5d0fbd81104ebc03cf398e02cf39d13e5f6bb9e80cfd8f2fe2e1994');
   });
   it('restaura recibos de XP e relatório anteriores sem alterar nenhuma chave', () => {
     const receipt = { schemaVersion: 1, entries: { [puzzles[0]!.id]: {

@@ -133,9 +133,11 @@
     },
     "validationStatus": {
       "enum": [
-        "provisional-pending-teacher-review",
+        "draft",
+        "under-ai-review",
         "needs-revision",
-        "approved-teacher",
+        "ready-for-pilot",
+        "ready-for-release",
         "rejected"
       ]
     },
