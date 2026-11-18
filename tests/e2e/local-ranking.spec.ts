@@ -1,5 +1,6 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test';
 import catalog from '../../src/content/questions/enade-2026-provisional.json' with { type: 'json' };
+import routes from '../../src/content/mission-routes.json' with { type: 'json' };
 
 const PROFILE_KEY = 'n9:player-profile:v1';
 const RANKING_KEY = 'n9:leaderboard:v1';
@@ -9,14 +10,12 @@ async function press(page: Page, name: string, info: TestInfo) {
   if (info.project.name === 'mobile') await control.tap(); else await control.click();
 }
 
-async function finishQuickMission(page: Page, info: TestInfo) {
-  const eligible = catalog.questions.filter((question) => question.courses.includes('CC'));
-  const questions = [eligible.find((question) => question.classification === 'COMUM')!,
-    ...eligible.filter((question) => question.classification === 'CC').slice(0, 2)];
+async function finishMission(page: Page, info: TestInfo) {
+  const questions = routes.CC[0]!.map((id) => catalog.questions.find((question) => question.id === id)!);
   for (const [index, question] of questions.entries()) {
     await page.locator('input[name="answer"][value="' + question.correctOptionId + '"]').check();
     await press(page, 'Confirmar resposta', info);
-    await press(page, index === 2 ? 'Ver relatório da missão' : 'Próximo desafio', info);
+    await press(page, index === 24 ? 'Ver relatório da missão' : 'Próximo desafio', info);
   }
 }
 
@@ -39,24 +38,24 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   await expect(page.getByText('Jogador atual: Nina Byte', { exact: true })).toBeVisible();
   await press(page, 'Continuar com este jogador', info);
   await page.locator('input[name="course"][value="CC"]').check();
-  await page.locator('input[name="mission"][value="quick"]').check();
+  await page.locator('input[name="mission"][value="journey-25"]').check();
   await press(page, 'Entrar na Central Nexo', info);
   await press(page, 'Iniciar missão selecionada', info);
   expect(await page.evaluate((key) => localStorage.getItem(key), RANKING_KEY)).toBeNull();
-  await finishQuickMission(page, info);
+  await finishMission(page, info);
   await expect(page.getByRole('heading', { name: 'Ranking desta missão' })).toBeVisible();
   await expect(page.locator('tr[aria-current="true"]')).toContainText('Nina Byte (você)');
   await expect(page.locator('tr[aria-current="true"]')).toContainText('1000 / 1000');
   const saved = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), RANKING_KEY);
   expect(saved.entries).toHaveLength(1);
-  expect(saved.entries[0]).toMatchObject({ nickname: 'Nina Byte', course: 'CC', questionCount: 3,
-    correctCount: 3, score: 300, maxScore: 300, rankingScore: 1000, collectionId: 'enade-2026' });
+  expect(saved.entries[0]).toMatchObject({ nickname: 'Nina Byte', course: 'CC', questionCount: 25,
+    correctCount: 25, score: 2500, maxScore: 2500, rankingScore: 1000, collectionId: 'enade-2026' });
 
   await press(page, 'Voltar ao menu', info);
   await page.reload();
   await expect(page.getByText('Jogador atual: Nina Byte', { exact: true })).toBeVisible();
   await press(page, 'Ranking', info);
-  await page.getByLabel('Tamanho da missão').selectOption('3');
+  await page.getByLabel('Tamanho da missão').selectOption('25');
   await expect(page.getByRole('table')).toContainText('Nina Byte (você)');
   const rankingRegion = page.getByRole('region', { name: 'Tabela do ranking com rolagem horizontal' });
   await rankingRegion.focus();
@@ -69,7 +68,7 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   await expect(page.getByText('Jogador atual: Caio', { exact: true })).toBeVisible();
 
   await press(page, 'Ranking', info);
-  await page.getByLabel('Tamanho da missão').selectOption('3');
+  await page.getByLabel('Tamanho da missão').selectOption('25');
   await press(page, 'Excluir dados locais do ranking', info);
   const dialog = page.getByRole('alertdialog');
   await expect(dialog).toBeVisible();
@@ -103,6 +102,6 @@ test('criação e início funcionam somente com teclado e semântica nativa', as
   await page.getByRole('button', { name: 'Continuar com este jogador' }).focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'Qual é o seu curso?' })).toBeFocused();
-  await expect(page.getByRole('radio')).toHaveCount(9);
+  await expect(page.getByRole('radio')).toHaveCount(6);
   await expect(page.locator('fieldset legend')).toHaveCount(2);
 });

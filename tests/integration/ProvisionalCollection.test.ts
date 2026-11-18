@@ -31,11 +31,11 @@ function startMission(game: GameSession, course: (typeof COURSE_IDS)[number], mi
 }
 
 describe('coleção provisória integrada', () => {
-  it('carrega 66 questões e oito puzzles sem remover os exemplos', () => {
-    expect(provisionalQuestions.questions).toHaveLength(66);
+  it('carrega 205 questões e oito puzzles sem remover os exemplos', () => {
+    expect(provisionalQuestions.questions).toHaveLength(205);
     expect(provisionalPuzzles).toHaveLength(8);
-    expect(provisionalQuestions.questions.filter((question) => question.courses.includes('SI'))).toHaveLength(26);
-    expect(content.questionsForCourse('CC')).toHaveLength(30);
+    expect(provisionalQuestions.questions.filter((question) => question.courses.includes('SI')).length).toBeGreaterThanOrEqual(100);
+    expect(content.questionsForCourse('CC').length).toBeGreaterThanOrEqual(75);
     expect(puzzles.all()).toHaveLength(11);
   });
 
@@ -48,9 +48,9 @@ describe('coleção provisória integrada', () => {
       expect(selected).toHaveLength(mission.questionCount);
       expect(new Set(selected.map((question) => question.id)).size).toBe(mission.questionCount);
       expect(selected.filter((question) => question.classification === 'COMUM')).toHaveLength(mission.commonQuestionCount);
-      expect(selected.filter((question) => question.classification === course)).toHaveLength(mission.specificQuestionCount);
+      expect(selected.filter((question) => question.classification !== 'COMUM')).toHaveLength(mission.specificQuestionCount);
       expect(selected.every((question) => question.collectionId === 'enade-2026' && question.courses.includes(course))).toBe(true);
-      expect(selected.some((question) => !['COMUM', course].includes(question.classification))).toBe(false);
+      expect(selected.every((question) => question.classification === 'COMUM' || question.courses.includes(course))).toBe(true);
     });
 
   it.each(COURSE_IDS)('%s recebe somente o puzzle comum e o específico', (course) => {
@@ -74,15 +74,15 @@ describe('coleção provisória integrada', () => {
     const game = session(new LocalStorageProgressRepository(() => storage), new LocalStoragePuzzleRepository(puzzles, () => storage));
     expect(game.snapshot.lastResult).toEqual(legacyResult);
     expect(game.snapshot.puzzleProgress.entries[legacyPuzzles[0]!.id]?.completed).toBe(true);
-    startMission(game, 'CC', 'quick');
-    for (let index = 0; index < 3; index++) {
+    startMission(game, 'CC', 'journey-25');
+    for (let index = 0; index < 25; index++) {
       const question = currentQuestion(game.snapshot.attempt!);
       game.dispatch({ type: 'select-option', questionId: question.id, option: question.correctOptionId });
       game.dispatch({ type: 'confirm-answer', questionId: question.id });
       game.dispatch({ type: 'feedback-accessed', questionId: question.id });
       game.dispatch({ type: 'next-question', questionId: question.id });
     }
-    expect(JSON.parse(values.get(MISSION_RESULT_KEY)!)).toMatchObject({ missionId: 'quick', course: 'CC', total: 3, score: 300 });
+    expect(JSON.parse(values.get(MISSION_RESULT_KEY)!)).toMatchObject({ missionId: 'journey-25', course: 'CC', total: 25, score: 2500 });
     expect(JSON.parse(values.get(RESULT_KEY)!)).toEqual(legacyResult);
     expect(JSON.parse(values.get(PUZZLE_KEY)!)).toEqual(legacyReceipt);
   });

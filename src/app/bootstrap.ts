@@ -13,6 +13,7 @@ import { LocalStorageExplorationRepository } from '../infrastructure/storage/Loc
 import { PROVISIONAL_PLAYABLE_COLLECTION } from '../config/collections';
 import { LocalStoragePlayerProfileRepository } from '../infrastructure/storage/LocalStoragePlayerProfileRepository';
 import { LocalStorageLeaderboardRepository } from '../infrastructure/storage/LocalStorageLeaderboardRepository';
+import { LocalStorageMissionRouteRepository } from '../infrastructure/storage/LocalStorageMissionRouteRepository';
 
 export function bootstrap(root: HTMLElement): () => void {
   const puzzles = new JsonPuzzleRepository([...legacyPuzzleCatalog, ...provisionalPuzzleCatalog]);
@@ -20,7 +21,8 @@ export function bootstrap(root: HTMLElement): () => void {
     questions: [...legacyQuestionCatalog.questions, ...provisionalQuestionCatalog.questions] };
   const session = new GameSession(new JsonContentRepository(questions), new LocalStorageProgressRepository(),
     undefined, undefined, new LocalStorageExplorationRepository(), new LocalStoragePuzzleRepository(puzzles), puzzles,
-    PROVISIONAL_PLAYABLE_COLLECTION, new LocalStoragePlayerProfileRepository(), new LocalStorageLeaderboardRepository());
+    PROVISIONAL_PLAYABLE_COLLECTION, new LocalStoragePlayerProfileRepository(), new LocalStorageLeaderboardRepository(),
+    new LocalStorageMissionRouteRepository());
   let sceneDriver: { sync: () => void; destroy: () => void } | undefined;
   let disposed = false;
   const dispatch = (command: Command): void => {

@@ -72,7 +72,7 @@ for (const [id, name] of courses) {
     await page.reload();
     await startWithPlayer(page, 'Jogador ' + id);
     await expect(page.locator('input[name="course"]:checked')).toHaveCount(0);
-    await expect(page.locator('input[name="mission"]:checked')).toHaveValue('special');
+    await expect(page.locator('input[name="mission"]:checked')).toHaveValue('journey-25');
     await expect(page.getByRole('button', { name: 'Entrar na Central Nexo' })).toBeDisabled();
     expect(errors).toEqual([]);
     expect(external).toEqual([]);
@@ -96,9 +96,7 @@ test('navegação completa por teclado e foco entre telas', async ({ page }) => 
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('radio', { name: 'SI Sistemas de Informação', exact: true })).toBeChecked();
   await page.keyboard.press('Tab');
-  await expect(page.locator('input[name="mission"][value="special"]')).toBeFocused();
-  await page.keyboard.press('ArrowRight');
-  await expect(page.locator('input[name="mission"][value="arena"]')).toBeChecked();
+  await expect(page.locator('input[name="mission"][value="journey-25"]')).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Entrar na Central Nexo' })).toBeFocused();
   await page.keyboard.press('Enter');

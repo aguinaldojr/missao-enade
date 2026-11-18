@@ -28,7 +28,7 @@ function setup() {
   return { game, values, adapter };
 }
 
-function createAndStart(game: GameSession, nickname = 'Nina', course = 'CC' as const, missionId = 'quick'): void {
+function createAndStart(game: GameSession, nickname = 'Nina', course = 'CC' as const, missionId = 'journey-25'): void {
   game.dispatch({ type: 'start' });
   if (game.snapshot.screen === 'profile') {
     game.dispatch({ type: 'create-player', nickname });
@@ -40,8 +40,8 @@ function createAndStart(game: GameSession, nickname = 'Nina', course = 'CC' as c
   game.dispatch({ type: 'start-phase' });
 }
 
-function finish(game: GameSession, correct = 3): void {
-  for (let index = 0; index < 3; index++) {
+function finish(game: GameSession, correct = 25): void {
+  for (let index = 0; index < 25; index++) {
     const question = currentQuestion(game.snapshot.attempt!);
     const option = index < correct ? question.correctOptionId
       : question.options.find((candidate) => candidate.id !== question.correctOptionId)!.id;
@@ -61,10 +61,10 @@ describe('perfil e ranking integrados à sessão', () => {
     expect(values.has(LEADERBOARD_KEY)).toBe(false);
     const reloadedProfiles = new LocalStoragePlayerProfileRepository(() => adapter).load().profiles;
     expect(reloadedProfiles?.activePlayerId).toBe(game.currentPlayer?.id);
-    finish(game, 2);
+    finish(game, 20);
     expect(game.snapshot.leaderboard.entries).toHaveLength(1);
     expect(game.snapshot.leaderboard.entries[0]).toMatchObject({ nickname: 'Nina Byte', course: 'CC',
-      questionCount: 3, correctCount: 2, score: 200, maxScore: 300, rankingScore: 667,
+      questionCount: 25, correctCount: 20, score: 2000, maxScore: 2500, rankingScore: 800,
       collectionId: 'enade-2026' });
     expect(values.has(LEADERBOARD_KEY)).toBe(true);
   });
@@ -72,13 +72,13 @@ describe('perfil e ranking integrados à sessão', () => {
   it('troca jogador e mantém uma posição por jogador e combinação', () => {
     const { game } = setup();
     createAndStart(game, 'Nina');
-    finish(game, 3);
+    finish(game, 25);
     game.dispatch({ type: 'home' });
     game.dispatch({ type: 'open-profile' });
     game.dispatch({ type: 'create-player', nickname: 'Caio' });
     game.dispatch({ type: 'continue-profile' });
     createAndStart(game, 'Caio');
-    finish(game, 1);
+    finish(game, 10);
     expect(game.snapshot.leaderboard.entries).toHaveLength(2);
     expect(game.snapshot.leaderboard.entries.map((entry) => entry.nickname).sort()).toEqual(['Caio', 'Nina']);
   });

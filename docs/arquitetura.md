@@ -610,3 +610,16 @@ Política, critérios, transições, evidências e limitações: [governanca-edi
 - `E26-P-SI-02` reutiliza o contrato `sequence` para ordenar cinco trechos de uma função C17. Quebras de linha, `_` e `*` são preservados pelo conversor; a interface usa fonte monoespaçada e tabela de casos. O item é complementar, não entra na cota de questões e eleva o catálogo executável para 60 questões e sete puzzles.
 - `E26-P-SI-03` usa o mesmo contrato e os mesmos controles para ordenar cinco trechos de um programa C17 completo. Os cartões cobrem biblioteca, protótipo, `main`, repetição, decisão, procedimento e ponteiro; a tabela acessível explicita as cinco medições. Ele não entra nas cotas de questões e eleva o catálogo a 60 questões e oito puzzles.
 - `E26-Q-SI-11` a `E26-Q-SI-16` ampliam o banco para 66 questões sem mudar contratos, cotas ou seleção. O conversor editorial aplica apresentações estruturadas de diagrama, tabela e código; a interface existente as renderiza com equivalentes textuais. Como o lote precede as dez questões específicas originais no repositório, as missões determinísticas de SI exercitam o novo material e a Arena utiliza seis questões novas mais quatro anteriores.
+
+## 24. Catálogo ampliado e jornadas fixas de 25 — 18/11/2026
+
+Esta seção substitui, para o fluxo jogável atual, as quantidades descritas historicamente nas seções anteriores.
+
+- O conversor editorial reúne 205 questões documentadas no catálogo `enade-2026-provisional-2`; os oito puzzles continuam separados e não entram na cota.
+- `courses` define elegibilidade explícita. `classification` preserva a origem editorial; por isso uma técnica de outro prefixo pode ser selecionada quando possui o curso atual em `courses` e sua corroboração normativa em `sources` e `traceability`.
+- A única configuração apresentada ao jogador é `journey-25`: cinco comuns e vinte técnicas. As antigas configurações 3/5/10/20 permanecem apenas como contratos de compatibilidade e testes históricos.
+- `mission-routes.json` é gerado da matriz canônica: três roteiros para CC, TADS, TGTI e TRC e quatro para SI. Cada roteiro tem 25 IDs únicos, cobertura de áreas e no máximo três itens avançados.
+- `MissionRouteRepository` mantém apenas o número de conclusões por curso em `n9:mission-route-progress:v1`. A conclusão avança o roteiro; ao esgotar os roteiros-base, a sequência reinicia de modo determinístico. Dados anteriores não são alterados.
+- Ranking e relatório aceitam 25 questões sem modificar as chaves versionadas existentes.
+
+Detalhes e limitações: [integracao-partidas-25.md](integracao-partidas-25.md).

@@ -25,7 +25,7 @@ async function seedPlayer(page: Page, position?: { x: number; y: number }): Prom
   await page.reload();
 }
 
-async function enterCentral(page: Page, course: string, mission = 'quick'): Promise<void> {
+async function enterCentral(page: Page, course: string, mission = 'journey-25'): Promise<void> {
   await page.getByRole('button', { name: 'Iniciar missão' }).click();
   await page.locator('input[name="course"][value="' + course + '"]').check();
   await page.locator('input[name="mission"][value="' + mission + '"]').check();
@@ -54,7 +54,7 @@ test('textos longos preservam conteúdo, foco, toque e rolagem responsiva', asyn
   await page.getByRole('button', { name: 'Iniciar missão selecionada' }).click();
 
   const progress = page.getByRole('progressbar');
-  await expect(progress).toHaveAttribute('aria-valuetext', 'Desafio 1 de 3');
+  await expect(progress).toHaveAttribute('aria-valuetext', 'Desafio 1 de 25');
   const context = page.getByRole('region', { name: 'Contexto do desafio' });
   await expect(context).not.toBeEmpty();
   await context.focus();

@@ -18,7 +18,7 @@ const request = (mission: QuestionMissionConfig = QUESTION_MISSIONS.quick, cours
 
 describe('missões configuráveis — banco e seleção separados', () => {
   it.each(Object.values(QUESTION_MISSIONS))('seleciona $questionCount com a distribuição configurada', (mission) => {
-    const bank = makeQuestionBank();
+    const bank = makeQuestionBank(20, 30);
     const selected = selectMissionQuestions(bank, request(mission));
     expect(selected).toHaveLength(mission.questionCount);
     expect(selected.filter((q) => q.classification === 'COMUM')).toHaveLength(mission.commonQuestionCount);
@@ -51,13 +51,14 @@ describe('missões configuráveis — banco e seleção separados', () => {
     expect(selected.every((q) => q.courses.includes(course))).toBe(true);
     expect(selected.every((q) => q.classification === 'COMUM' || q.classification === course)).toBe(true);
   });
-  it('não interpreta COMUM como elegibilidade universal nem usa específica de outro curso', () => {
+  it('não interpreta COMUM como elegibilidade universal e aceita técnica compartilhada explicitamente', () => {
     const bank = makeQuestionBank(1, 2).map((q) => q.classification === 'COMUM' ? { ...q, courses: ['CC'] as CourseId[] } : q);
     expect(getMissionAvailability(bank, request(QUESTION_MISSIONS.quick, 'SI')).available).toBe(false);
     expect(() => selectMissionQuestions(bank, request(QUESTION_MISSIONS.quick, 'SI'))).toThrow('0 comuns');
     const wrongSpecific = makeQuestionBank(1, 0).concat(
       makeQuestionBank(0, 2).filter((q) => q.classification === 'CC').map((q) => ({ ...q, courses: ['SI'] as CourseId[] })));
-    expect(() => selectMissionQuestions(wrongSpecific, request(QUESTION_MISSIONS.quick, 'SI'))).toThrow('0 específicas');
+    expect(selectMissionQuestions(wrongSpecific, request(QUESTION_MISSIONS.quick, 'SI'))
+      .filter((question) => question.classification !== 'COMUM')).toHaveLength(2);
   });
   it('banco insuficiente informa quantidades sem repetir nem completar com outro curso', () => {
     const bank = new JsonContentRepository(catalog).questionsForCourse('CC');
@@ -144,7 +145,7 @@ describe('missões configuráveis — banco e seleção separados', () => {
 
 describe('progressão com quantidade configurada e integração de compatibilidade', () => {
   it.each(Object.values(QUESTION_MISSIONS))('só conclui após $questionCount confirmações e feedbacks', (mission) => {
-    const selected = selectMissionQuestions(makeQuestionBank(), request(mission));
+    const selected = selectMissionQuestions(makeQuestionBank(20, 30), request(mission));
     let attempt = createAttempt('fixture-attempt', 'CC', selected, mission);
     expect(attempt.mission.questionCount).toBe(mission.questionCount);
     for (let i = 0; i < mission.questionCount; i++) {

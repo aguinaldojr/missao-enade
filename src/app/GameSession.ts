@@ -24,6 +24,8 @@ import { emptyLeaderboard, entryFromResult, isRankingQuestionCount, recordBestRe
   type Leaderboard, type RankingQuestionCount } from '../domain/models/Leaderboard';
 import type { PlayerProfileRepository } from '../ports/PlayerProfileRepository';
 import type { LeaderboardRepository } from '../ports/LeaderboardRepository';
+import type { MissionRouteRepository } from '../ports/MissionRouteRepository';
+import { missionRoute, routeOrdering } from '../config/missionRoutes';
 
 export type Screen = 'home' | 'profile' | 'leaderboard' | 'course-select' | 'map' | 'question' | 'result' | 'puzzle';
 
@@ -110,6 +112,7 @@ export class GameSession {
     private readonly playableCollection: PlayableCollectionConfig = LEGACY_PLAYABLE_COLLECTION,
     private readonly profileStorage?: PlayerProfileRepository,
     private readonly leaderboardStorage?: LeaderboardRepository,
+    private readonly missionRouteStorage?: MissionRouteRepository,
   ) {
     const world = explorationProgress?.load() ?? { state: null, status: 'none' as const };
     const puzzleSave = puzzleStorage?.load() ?? { progress: null, status: 'none' as const };
@@ -252,8 +255,11 @@ export class GameSession {
           const mission = current.missions.find((candidate) => candidate.id === current.selectedMissionId);
           if (!mission) throw new Error('Configuração de missão ausente.');
           const bank = this.content.questionsForCourse(current.selectedCourse);
+          const completedCount = this.missionRouteStorage?.completedCount(current.selectedCourse) ?? 0;
+          const ordering = mission.id === 'journey-25'
+            ? routeOrdering(missionRoute(current.selectedCourse, completedCount)) : undefined;
           const questions = selectMissionQuestions(bank, { course: current.selectedCourse,
-            collectionId: this.playableCollection.collectionId, mission });
+            collectionId: this.playableCollection.collectionId, mission }, ordering);
           this.update({ screen: 'question', contentError: null,
             attempt: createAttempt(this.createId(), current.selectedCourse, questions, mission),
             exploration: Object.freeze({ ...current.exploration, missionStatus: current.exploration.missionStatus === 'completed' ? 'completed' : 'active' }) });
@@ -309,6 +315,9 @@ export class GameSession {
             leaderboard, leaderboardSaveStatus, rankingCourse: result.course,
             rankingQuestionCount: isRankingQuestionCount(result.total) ? result.total : current.rankingQuestionCount,
             exploration: Object.freeze({ ...current.exploration, missionStatus: 'completed', doorUnlocked: true }) });
+          if (result.mode === 'provisional' && attempt.mission.id === 'journey-25') {
+            this.missionRouteStorage?.recordCompletion(result.course);
+          }
           this.persistExploration();
         }
         break;

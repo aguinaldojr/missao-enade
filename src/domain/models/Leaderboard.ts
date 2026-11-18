@@ -2,7 +2,7 @@ import type { CourseId } from './Course';
 import type { MissionResult } from './Attempt';
 import type { PlayerProfile } from './PlayerProfile';
 
-export const RANKING_QUESTION_COUNTS = [3, 5, 10, 20] as const;
+export const RANKING_QUESTION_COUNTS = [3, 5, 10, 20, 25] as const;
 export type RankingQuestionCount = (typeof RANKING_QUESTION_COUNTS)[number];
 
 export interface LeaderboardEntry {

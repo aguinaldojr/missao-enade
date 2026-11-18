@@ -25,7 +25,8 @@ function pools(bank: readonly Question[], request: MissionSelectionRequest) {
     question.courses.includes(request.course) && !excluded.has(question.id));
   return {
     common: eligible.filter((question) => question.classification === 'COMUM'),
-    specific: eligible.filter((question) => question.classification === request.course),
+    // O prefixo editorial registra a origem; a elegibilidade multcurso vive em `courses`.
+    specific: eligible.filter((question) => question.classification !== 'COMUM'),
   };
 }
 function availability(common: readonly Question[], specific: readonly Question[], mission: QuestionMissionConfig): MissionAvailability {
@@ -86,7 +87,7 @@ export function assertMissionQuestionSet(questions: readonly Question[], course:
   if (questions.length !== mission.questionCount || new Set(questions.map((question) => question.collectionId)).size !== 1 ||
       questions.some((question) => !question.courses.includes(course)) ||
       questions.filter((question) => question.classification === 'COMUM').length !== mission.commonQuestionCount ||
-      questions.filter((question) => question.classification === course).length !== mission.specificQuestionCount) {
+      questions.filter((question) => question.classification !== 'COMUM').length !== mission.specificQuestionCount) {
     throw new Error('A missão requer ' + mission.questionCount + ' questões distintas da mesma coleção, com ' +
       mission.commonQuestionCount + ' comuns e ' + mission.specificQuestionCount + ' específicas elegíveis para ' + course + '.');
   }

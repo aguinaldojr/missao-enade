@@ -4,13 +4,14 @@
 
 N9 — Jornada Digital é uma experiência educacional 2D para desenvolvimento de competências em tecnologia. O MVP atende às trilhas CC, SI, TADS, TGTI e TRC e combina exploração em visão superior, missões de múltipla escolha, quebra-cabeças de sequência lógica, perfil e ranking local.
 
-Todo o conteúdo da coleção inicial permanece como `provisional-pending-teacher-review`. O aviso **Conteúdo em validação pedagógica** é apresentado ao jogador.
+O conteúdo permanece em governança editorial assistida por IA. O aviso **Conteúdo experimental em revisão editorial** é apresentado ao jogador.
 
 ## Estado do MVP
 
 - mapa Base N9 com personagem, Lia, computador, terminal, porta e progresso local;
-- 60 desafios de questão e seis puzzles provisórios;
-- missões de 3, 5, 10 e 20 questões, sem repetição e com cotas comuns/específicas;
+- 205 desafios de questão e oito puzzles provisórios;
+- jornada fixa de 25 questões, com cinco comuns e vinte técnicas elegíveis para o curso;
+- três roteiros-base para CC, TADS, TGTI e TRC e quatro para SI;
 - cinco cursos: CC, SI, TADS, TGTI e TRC;
 - perfil por apelido e ranking separado por curso e tamanho;
 - controles por teclado, mouse e toque;

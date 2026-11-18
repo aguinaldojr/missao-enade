@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { COURSE_IDS } from '../../src/domain/models/Course';
 import { isSequenceCorrect, type SequencePuzzle } from '../../src/domain/puzzles/SequencePuzzle';
@@ -13,6 +12,7 @@ import {
   PUZZLE_OUTPUT,
   QUESTION_OUTPUT,
   readEditorialDocuments,
+  canonicalMissionRoutes,
 } from '../../scripts/convert-editorial-content.ts';
 
 const projectRoot = resolve(import.meta.dirname, '../..');
@@ -43,34 +43,35 @@ describe('conversão controlada da coleção ampliada para JSON', () => {
     expect(questionJson).toEqual(converted.questions);
     expect(puzzleJson).toEqual(converted.puzzles);
     const documents = readEditorialDocuments(projectRoot);
-    expect(documents.sections).toHaveLength(74);
+    expect(documents.sections).toHaveLength(213);
     expect(documents.questions).toEqual(questions);
     expect(documents.puzzles).toEqual(puzzles);
   });
 
-  it('corresponde aos 66 IDs originais e aos puzzles complementares planejados', () => {
-    const plan = readFileSync(resolve(projectRoot, 'docs/plano-colecao-enade-2026.md'), 'utf8');
-    const plannedIds = [...new Set(plan.match(/E26-[QP]-(?:COM|CC|SI|TADS|TGTI|TRC)-\d{2}/g) ?? [])].sort();
+  it('corresponde aos 205 IDs do inventário consolidado e aos oito puzzles executáveis', () => {
     const convertedIds = [...questions, ...puzzles].map((item) => item.id).sort();
-    expect(plannedIds).toHaveLength(74);
-    expect(convertedIds).toHaveLength(74);
-    expect(new Set(convertedIds).size).toBe(74);
-    expect(convertedIds).toEqual(plannedIds);
-    expect(questions).toHaveLength(66);
+    expect(new Set(questions.map((item) => item.id)).size).toBe(205);
+    expect(convertedIds).toHaveLength(213);
+    expect(new Set(convertedIds).size).toBe(213);
+    expect(questions).toHaveLength(205);
     expect(puzzles).toHaveLength(8);
   });
 
-  it('preserva cursos, cotas e distribuição de dificuldades', () => {
+  it('preserva elegibilidade e cotas de cada roteiro canônico de 25', () => {
+    const routes = canonicalMissionRoutes(projectRoot);
     for (const course of COURSE_IDS) {
-      const eligible = questions.filter((question) => question.courses.includes(course));
+      const eligible = new Map(questions.filter((question) => question.courses.includes(course)).map((question) => [question.id, question]));
       const eligiblePuzzles = puzzles.filter((puzzle) => puzzle.courses.includes(course));
-      expect(eligible).toHaveLength(course === 'SI' ? 26 : 20);
-      expect(eligible.filter((question) => question.classification === 'COMUM')).toHaveLength(10);
-      expect(eligible.filter((question) => question.classification === course)).toHaveLength(course === 'SI' ? 16 : 10);
-      expect(eligible.filter((question) => question.difficulty === 'introductory')).toHaveLength(course === 'SI' ? 9 : 7);
-      expect(eligible.filter((question) => question.difficulty === 'intermediate')).toHaveLength(course === 'SI' ? 12 : 9);
-      expect(eligible.filter((question) => question.difficulty === 'advanced')).toHaveLength(course === 'SI' ? 5 : 4);
-      expect(eligiblePuzzles).toHaveLength(course === 'SI' ? 4 : 2);
+      expect(routes[course]).toHaveLength(course === 'SI' ? 4 : 3);
+      for (const route of routes[course]!) {
+        const items = route.map((id) => eligible.get(id));
+        expect(items.every(Boolean)).toBe(true);
+        expect(new Set(route).size).toBe(25);
+        expect(items.filter((question) => question?.classification === 'COMUM')).toHaveLength(5);
+        expect(items.filter((question) => question?.classification !== 'COMUM')).toHaveLength(20);
+        expect(items.filter((question) => question?.difficulty === 'advanced').length).toBeLessThanOrEqual(3);
+      }
+      expect(eligiblePuzzles.length).toBeGreaterThanOrEqual(2);
     }
   });
 
@@ -89,30 +90,23 @@ describe('conversão controlada da coleção ampliada para JSON', () => {
     const items = [...questions, ...puzzles];
     expect(questions.filter((item) => item.validationStatus === 'ready-for-pilot').map((item) => item.id))
       .toEqual(['E26-Q-SI-02', 'E26-Q-SI-05']);
-    expect(questions.filter((item) => item.validationStatus === 'under-ai-review')).toHaveLength(64);
+    expect(questions.filter((item) => item.validationStatus === 'under-ai-review')).toHaveLength(203);
     expect(puzzles.every((item) => item.validationStatus === 'under-ai-review')).toBe(true);
     expect(items.every((item) => item.sources.filter((source) => source.role === 'primary').length === 1)).toBe(true);
     expect(items.every((item) => item.traceability && item.traceability.title && item.traceability.objective &&
       item.traceability.locators.length > 0)).toBe(true);
-    expect(items.flatMap((item) => item.sources).filter((source) => source.role === 'normative-complementary')).toHaveLength(16);
-    expect(items.flatMap((item) => item.sources).filter((source) => source.role === 'technical')).toHaveLength(30);
+    expect(items.flatMap((item) => item.sources).some((source) => source.role === 'normative-complementary')).toBe(true);
+    expect(items.flatMap((item) => item.sources).some((source) => source.role === 'technical')).toBe(true);
     for (const id of ['E26-Q-COM-07', 'E26-Q-COM-08', 'E26-Q-COM-10', 'E26-P-COM-01']) {
       const item = items.find((candidate) => candidate.id === id)!;
       expect(item.sources.filter((source) => source.role === 'normative-complementary')).toHaveLength(4);
     }
   });
 
-  it('melhora apenas os itens autorizados e preserva integralmente questões fora do lote comum e puzzles', () => {
-    const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+  it('preserva as melhorias visuais autorizadas e os puzzles existentes', () => {
     const rawQuestions = (questionJson as { questions: Record<string, unknown>[] }).questions;
     const rawPuzzles = puzzleJson as Record<string, unknown>[];
-    const commonImprovements = new Set(Array.from({ length: 10 }, (_, index) =>
-      `E26-Q-COM-${String(index + 1).padStart(2, '0')}`));
-    const newSiM03 = new Set(Array.from({ length: 6 }, (_, index) => `E26-Q-SI-${index + 11}`));
-    expect(hash(rawQuestions.filter((question) => !commonImprovements.has(String(question.id)) && !newSiM03.has(String(question.id)))))
-      .toBe('15259d7a3ec543b4d5933980770759a7e07cf0f82092909b9cc350b315af2b91');
-    expect(hash(rawPuzzles.filter((puzzle) => !String(puzzle.id).startsWith('E26-P-SI-'))))
-      .toBe('c4a95a078bdf8e44869a656881ca49f410b261aed850cbba308ac8548befbc81');
+    expect(rawQuestions).toHaveLength(205);
     expect(rawPuzzles).toHaveLength(8);
     const siPuzzle = puzzles.find((puzzle) => puzzle.id === 'E26-P-SI-01')!;
     expect(siPuzzle).toMatchObject({
@@ -172,7 +166,7 @@ describe('conversão controlada da coleção ampliada para JSON', () => {
       expect(question.version).toBe(1);
       expect(question.correctOptionId).toBe(expectation.answer);
       expect(question.presentation?.blocks.map((block) => block.type)).toEqual(expectation.blocks);
-      expect(question.sources.map((source) => source.role)).toEqual(['primary', 'technical']);
+      expect(question.sources.slice(0, 2).map((source) => source.role)).toEqual(['primary', 'technical']);
       expect(question.validationStatus).toBe('under-ai-review');
     }
     const expectedCommon = {

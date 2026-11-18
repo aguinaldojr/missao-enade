@@ -21,11 +21,11 @@ export const firstLearningCollection = learningCollections.get('enade-2026')!;
 export const PROVISIONAL_PLAYABLE_COLLECTION: PlayableCollectionConfig = Object.freeze({
   collectionId: firstLearningCollection.id,
   displayName: 'N9 Jornada Digital',
-  contentVersion: 'enade-2026-provisional-1',
+  contentVersion: 'enade-2026-provisional-2',
   mode: 'provisional',
   phaseId: 'N9-COLLECTION-PROVISIONAL',
   missions: QUESTION_MISSION_LIST,
-  defaultMissionId: QUESTION_MISSIONS.special.id,
+  defaultMissionId: QUESTION_MISSIONS.journey25.id,
   validationNotice: 'Conteúdo experimental em revisão editorial.',
 });
 

@@ -1,5 +1,6 @@
 import { expect, test, type Page, type TestInfo } from '@playwright/test';
 import catalog from '../../src/content/questions/enade-2026-provisional.json' with { type: 'json' };
+import routes from '../../src/content/mission-routes.json' with { type: 'json' };
 
 const RESULT_KEY = 'n9:mission-result:v1';
 const courseIds = ['CC', 'SI', 'TADS', 'TGTI', 'TRC'] as const;
@@ -10,7 +11,7 @@ async function press(page: Page, name: string, info: TestInfo) {
   else await control.click();
 }
 
-async function startPhase(page: Page, course: string, info: TestInfo, mission = 'special') {
+async function startPhase(page: Page, course: string, info: TestInfo, mission = 'journey-25') {
   await page.getByRole('button', { name: 'Iniciar missão' }).click();
   if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
     await page.getByLabel('Apelido').fill('Jogador ' + course);
@@ -33,14 +34,10 @@ for (const course of courseIds) {
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('./');
     await startPhase(page, course, info);
-    const eligible = catalog.questions.filter((question) => question.courses.includes(course));
-    const questions = [
-      ...eligible.filter((question) => question.classification === 'COMUM').slice(0, 5),
-      ...eligible.filter((question) => question.classification === course).slice(0, 5),
-    ];
-    const expectedCorrect = 10;
+    const questions = routes[course as keyof typeof routes][0]!.map((id) => catalog.questions.find((question) => question.id === id)!);
+    const expectedCorrect = 25;
     for (const [index, question] of questions.entries()) {
-      await expect(page.getByText('Desafio ' + (index + 1) + ' de 10', { exact: true })).toBeVisible();
+      await expect(page.getByText('Desafio ' + (index + 1) + ' de 25', { exact: true })).toBeVisible();
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(question.prompt);
       await expect(page.getByRole('radio')).toHaveCount(5);
       await expect(page.locator('.question-view')).toHaveAttribute('data-question-id', question.id);
@@ -87,13 +84,13 @@ for (const course of courseIds) {
       await reflow(page);
       if (index === 0 && course === 'CC') await page.screenshot({ path: info.outputPath('feedback.png'), fullPage: true });
       expect(await page.evaluate((key) => localStorage.getItem(key), RESULT_KEY)).toBeNull();
-      await press(page, index === 9 ? 'Ver relatório da missão' : 'Próximo desafio', info);
+      await press(page, index === 24 ? 'Ver relatório da missão' : 'Próximo desafio', info);
     }
     await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
-    await expect(page.locator('.result-numbers')).toContainText(expectedCorrect * 100 + ' de 1000');
+    await expect(page.locator('.result-numbers')).toContainText(expectedCorrect * 100 + ' de 2500');
     await expect(page.getByRole('status').filter({ hasText: 'Relatório da missão salvo neste navegador.' })).toBeVisible();
     const stored = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), RESULT_KEY);
-    expect(stored).toMatchObject({ schemaVersion: 1, mode: 'provisional', missionId: 'special', course, total: 10,
+    expect(stored).toMatchObject({ schemaVersion: 1, mode: 'provisional', missionId: 'journey-25', course, total: 25,
       score: expectedCorrect * 100, correctCount: expectedCorrect });
     if (course === 'CC') await page.screenshot({ path: info.outputPath('resultado.png'), fullPage: true });
     await press(page, 'Voltar à Base N9', info);
@@ -107,7 +104,7 @@ for (const course of courseIds) {
     await press(page, 'Voltar ao menu', info);
     await expect(page.locator('.last-result')).toContainText(expectedCorrect * 100 + ' pontos');
     await page.reload();
-    await expect(page.locator('.last-result')).toContainText(expectedCorrect + ' de 10 acertos');
+    await expect(page.locator('.last-result')).toContainText(expectedCorrect + ' de 25 acertos');
     await startPhase(page, course, info);
     await expect(page.locator('.score')).toHaveText('Pontuação: 0');
     await press(page, 'Voltar ao menu', info);
@@ -134,7 +131,7 @@ test('fluxo de resposta e avanço por teclado', async ({ page }, info) => {
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Próximo desafio' })).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(page.getByText('Desafio 2 de 10', { exact: true })).toBeVisible();
+  await expect(page.getByText('Desafio 2 de 25', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
   await press(page, 'Voltar ao menu', info);
   await page.reload();
@@ -145,10 +142,10 @@ test('LocalStorage bloqueado não impede conclusão', async ({ page }, info) => 
   await page.addInitScript(() => { Storage.prototype.setItem = () => { throw new Error('QuotaExceededError'); }; });
   await page.goto('./');
   await startPhase(page, 'CC', info);
-  for (let index = 0; index < 10; index++) {
+  for (let index = 0; index < 25; index++) {
     await page.getByRole('radio').first().check();
     await press(page, 'Confirmar resposta', info);
-    await press(page, index === 9 ? 'Ver relatório da missão' : 'Próximo desafio', info);
+    await press(page, index === 24 ? 'Ver relatório da missão' : 'Próximo desafio', info);
   }
   await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
   await expect(page.locator('.save-message')).toContainText('Relatório da missão não salvo');
@@ -162,7 +159,7 @@ test('resultado corrompido é ignorado sem travar a navegação', async ({ page 
   await page.goto('./');
   await expect(page.getByText('O relatório da missão local é inválido', { exact: false })).toBeVisible();
   await startPhase(page, 'TRC', info);
-  await expect(page.getByText('Desafio 1 de 10', { exact: true })).toBeVisible();
+  await expect(page.getByText('Desafio 1 de 25', { exact: true })).toBeVisible();
   await press(page, 'Voltar ao menu', info);
 });
 
@@ -170,13 +167,13 @@ test('fase inicia mesmo sem randomUUID disponível', async ({ page }, info) => {
   await page.addInitScript(() => { Object.defineProperty(window.crypto, 'randomUUID', { value: undefined }); });
   await page.goto('./');
   await startPhase(page, 'TRC', info);
-  await expect(page.getByText('Desafio 1 de 10', { exact: true })).toBeVisible();
+  await expect(page.getByText('Desafio 1 de 25', { exact: true })).toBeVisible();
   await press(page, 'Voltar ao menu', info);
 });
 
-test('as questões ajustadas exibem seus artefatos visuais na Arena de SI', async ({ page }, info) => {
+test('as questões ajustadas exibem seus artefatos visuais na jornada de SI', async ({ page }, info) => {
   await page.goto('./');
-  await startPhase(page, 'SI', info, 'arena');
+  await startPhase(page, 'SI', info);
   const expected = new Map([
     ['E26-Q-COM-01', ['image']], ['E26-Q-COM-02', ['diagram']],
     ['E26-Q-COM-03', ['image']], ['E26-Q-COM-04', ['diagram']],
@@ -189,7 +186,7 @@ test('as questões ajustadas exibem seus artefatos visuais na Arena de SI', asyn
     ['E26-Q-SI-01', ['diagram']], ['E26-Q-SI-02', ['code', 'table', 'code']],
     ['E26-Q-SI-03', ['table', 'diagram']], ['E26-Q-SI-04', ['diagram']],
   ]);
-  for (let index = 0; index < 20; index++) {
+  for (let index = 0; index < 25; index++) {
     const view = page.locator('.question-view');
     const id = await view.getAttribute('data-question-id');
     if (id && expected.has(id)) {
@@ -218,7 +215,7 @@ test('as questões ajustadas exibem seus artefatos visuais na Arena de SI', asyn
     }
     await page.getByRole('radio').first().check();
     await press(page, 'Confirmar resposta', info);
-    await press(page, index === 19 ? 'Ver relatório da missão' : 'Próximo desafio', info);
+    await press(page, index === 24 ? 'Ver relatório da missão' : 'Próximo desafio', info);
   }
   await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
 });

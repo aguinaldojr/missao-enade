@@ -486,3 +486,15 @@ Próxima etapa: criar novas questões de SI em entrega separada, seguindo a matr
 - [x] Preservar as cotas de questões e as chaves atuais de LocalStorage.
 - [ ] Compilar o fonte com GCC, Clang ou MSVC quando um compilador C estiver disponível no ambiente.
 - [ ] Realizar piloto humano de clareza, dificuldade e entendimento de ponteiros.
+
+## 27. Integração do catálogo ampliado e partidas de 25 — 18/11/2026
+
+- [x] Converter as 205 questões documentadas sem reescrever alternativas ou gabaritos.
+- [x] Formalizar elegibilidades multcurso com fonte normativa complementar e rastreabilidade.
+- [x] Gerar os 16 roteiros canônicos diretamente da matriz editorial.
+- [x] Disponibilizar somente a jornada de 25: cinco comuns e vinte técnicas.
+- [x] Alternar três roteiros-base por curso e quatro para SI, preservando progresso anterior.
+- [x] Estender relatório e ranking local para 25 questões.
+- [x] Preservar os oito puzzles fora da contagem.
+- [ ] Substituir a repetição cíclica posterior aos roteiros-base por sorteio balanceado por área e histórico recente.
+- [ ] Executar piloto com professores e estudantes antes de promover itens para `ready-for-release`.

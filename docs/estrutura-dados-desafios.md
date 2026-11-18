@@ -585,6 +585,10 @@ As exclusões por ID são rígidas: se faltarem itens após excluir, a operaçã
 
 `createAttempt(id, course, questions)` mantém a configuração padrão 10/9/1. Para tamanhos diferentes, o chamador fornece explicitamente a quarta opção de configuração. A tentativa em memória ganha mission; o save não muda. `GameSession` usa a seleção do modo legado e o comprimento selecionado para avançar, mas continua gerando o mesmo ExampleResult de dez questões.
 
+### 13.1 Fluxo jogável vigente — 18/11/2026
+
+A descrição acima permanece histórica para compatibilidade. O fluxo atual apresenta somente `journey-25`, com `questionCount: 25`, `commonQuestionCount: 5` e `specificQuestionCount: 20`. `classification` identifica a origem editorial; uma técnica compartilhada é válida quando o curso consta explicitamente em `courses`. Os roteiros canônicos são gerados em `src/content/mission-routes.json`, e puzzles continuam fora da cota.
+
 A pontuação continua 100 por acerto, sem desconto. O serviço de domínio suporta outras quantidades; os contadores, relatório e controles visíveis seguem associados à fase atual, sem ativação de outro tamanho nesta entrega. Generalizar a apresentação/relatório de novos modos será etapa futura autorizada.
 
 Não houve alteração em src/content, plano dos 60 slots question/seis sequence, puzzles, recompensas, XP, identidade, mapa, personagem, estilos, componentes visuais ou persistência. O schema editorial de questões já aceitava bancos gerais e não precisou mudar. A missão mista segue somente documental.

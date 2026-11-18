@@ -112,7 +112,7 @@ test('controle virtual responde ao toque e para ao soltar', async ({ page }, inf
   await walk(page, 'ArrowLeft', 250);
   const interact = page.locator('.world-interact');
   if (info.project.name === 'mobile') await interact.tap(); else await interact.click();
-  await expect(page.getByText('Desafio 1 de 10', { exact: true })).toBeVisible();
+  await expect(page.getByText('Desafio 1 de 25', { exact: true })).toBeVisible();
 });
 
 test('porta liberada permite atravessar e acessar terminal', async ({ page }) => {

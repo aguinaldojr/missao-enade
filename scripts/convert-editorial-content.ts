@@ -18,8 +18,41 @@ export const LOT_PATHS = [
   'docs/autoria/puzzle-c-si-monitor-alertas.md',
 ] as const;
 
+export const EXTRA_QUESTION_LOT_PATHS = [
+  'docs/autoria/lote-si-comum-adicional.md',
+  'docs/autoria/lote-compartilhado-01-arquitetura-fundamentos.md',
+  'docs/autoria/lote-compartilhado-02-redes-distribuidos.md',
+  'docs/autoria/lote-compartilhado-03-projetos-responsabilidade.md',
+  'docs/autoria/lote-especifico-cc-ampliacao-01-sistemas-grafos.md',
+  'docs/autoria/lote-especifico-cc-ampliacao-02-teoria-compiladores-visual.md',
+  'docs/autoria/lote-especifico-cc-ampliacao-03-lacunas.md',
+  'docs/autoria/lote-si-m01-raciocinio-quantitativo.md',
+  'docs/autoria/lote-si-m02-algoritmos-programacao.md',
+  'docs/autoria/lote-si-m04-arquitetura-governanca.md',
+  'docs/autoria/lote-si-m05-infraestrutura-distribuidos.md',
+  'docs/autoria/lote-si-m07-processos-informacao.md',
+  'docs/autoria/lote-si-m08-ihc-seguranca.md',
+  'docs/autoria/lote-si-m09-dados.md',
+  'docs/autoria/lote-si-m10-informatica-sociedade.md',
+  'docs/autoria/lote-si-ampliacao-cobertura-parcial.md',
+  'docs/autoria/lote-si-ampliacao-lacunas-classicas.md',
+  'docs/autoria/lote-si-lacunas-prioritarias-01-dados-privacidade.md',
+  'docs/autoria/lote-si-lacunas-prioritarias-02-engenharia-bancos.md',
+  'docs/autoria/lote-si-lacunas-prioritarias-03-algoritmos-seguranca.md',
+  'docs/autoria/lote-si-complemento-quarta-partida-m01.md',
+  'docs/autoria/lote-especifico-tads-ampliacao-01-empreendedorismo-processo.md',
+  'docs/autoria/lote-especifico-tgti-ampliacao-01-gestao-pessoas.md',
+  'docs/autoria/lote-especifico-trc-ampliacao-01-fundamentos-modelos.md',
+  'docs/autoria/lote-especifico-trc-ampliacao-02-acesso-projeto-automacao.md',
+  'docs/autoria/lote-especifico-trc-ampliacao-03-modelos-comutacao-servicos.md',
+  'docs/autoria/lote-especifico-trc-ampliacao-04-wan-emergentes-sustentabilidade.md',
+] as const;
+
+export const CANONICAL_MATRIX_PATH = 'docs/autoria/matriz-canonica-partidas-25.md';
+
 export const QUESTION_OUTPUT = 'src/content/questions/enade-2026-provisional.json';
 export const PUZZLE_OUTPUT = 'src/content/puzzles/enade-2026-provisional-sequences.json';
+export const MISSION_ROUTES_OUTPUT = 'src/content/mission-routes.json';
 export const CANDIDATE_PATH = 'docs/autoria/candidatas-piloto-si-02-si-05.md';
 
 interface Section {
@@ -70,6 +103,23 @@ const normativeSources: Readonly<Record<string, NormativeSource>> = {
     url: 'https://abmes.org.br/arquivos/legislacoes/Portaria-inep-172-2026-04-14.pdf',
   },
 };
+
+const primarySources = {
+  COM: {
+    role: 'primary', type: 'official-reference', year: 2026, documentId: 'Portaria Inep 154/2026',
+    description: 'Referência normativa de Formação Geral para conteúdo autoral do N9 Jornada Digital.',
+    url: 'https://www.in.gov.br/web/dou/-/portaria-n-154-de-14-de-abril-de-2026-699921720',
+  },
+  CC: {
+    role: 'primary', type: 'official-reference', year: 2026, documentId: 'Portaria Inep 157/2026',
+    description: 'Referência normativa da matriz específica de Ciência da Computação para conteúdo autoral.',
+    url: 'https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/e402e087-9a8b-4409-84da-4c0cf7533472.pdf',
+  },
+  SI: { ...normativeSources.F07, role: 'primary', description: 'Referência normativa da matriz específica de Sistemas de Informação para conteúdo autoral.' },
+  TADS: { ...normativeSources.F08, role: 'primary', description: 'Referência normativa da matriz específica de Tecnologia em Análise e Desenvolvimento de Sistemas para conteúdo autoral.' },
+  TGTI: { ...normativeSources.F09, role: 'primary', description: 'Referência normativa da matriz específica de Tecnologia em Gestão da Tecnologia da Informação para conteúdo autoral.' },
+  TRC: { ...normativeSources.F10, role: 'primary', description: 'Referência normativa da matriz específica de Tecnologia em Redes de Computadores para conteúdo autoral.' },
+} as const;
 
 export function plain(text = ''): string {
   return text.replace(/\[([^\]]+)]\([^)]+\)/g, '$1').replace(/[*_`]/g, '').replace(/\s+/g, ' ').trim();
@@ -711,6 +761,276 @@ function parsePuzzle(section: Section): Record<string, unknown> {
   };
 }
 
+function normalizeQuestionId(value: string): string | undefined {
+  const clean = plain(value);
+  if (/^E26-Q-(?:COM|CC|SI|TADS|TGTI|TRC)-\d{2}$/.test(clean)) return clean;
+  if (/^(?:COM|CC|SI|TADS|TGTI|TRC)-\d{2}$/.test(clean)) return 'E26-Q-' + clean;
+  return undefined;
+}
+
+function inventoryRows(documentText: string): ReadonlyMap<string, Readonly<Record<string, string>>> {
+  const result = new Map<string, Readonly<Record<string, string>>>();
+  const lines = documentText.split(/\r?\n/);
+  for (let index = 0; index < lines.length - 2; index += 1) {
+    if (!lines[index]!.startsWith('|') || !lines[index + 1]!.startsWith('|') || !/---/.test(lines[index + 1]!)) continue;
+    const headers = lines[index]!.slice(1, -1).split('|').map(plain);
+    const idColumn = headers.findIndex((header) => /^(?:ID|ID candidato)$/i.test(header));
+    if (idColumn < 0) continue;
+    for (let rowIndex = index + 2; rowIndex < lines.length && lines[rowIndex]!.startsWith('|'); rowIndex += 1) {
+      const cells = lines[rowIndex]!.slice(1, -1).split('|').map(plain);
+      const id = normalizeQuestionId(cells[idColumn] ?? '');
+      if (!id || result.has(id)) continue;
+      result.set(id, Object.fromEntries(headers.map((header, cellIndex) => [header, cells[cellIndex] ?? ''])));
+    }
+  }
+  return result;
+}
+
+function firstInventoryValue(row: Readonly<Record<string, string>> | undefined, patterns: readonly RegExp[]): string {
+  if (!row) return '';
+  const entry = Object.entries(row).find(([key]) => patterns.some((pattern) => pattern.test(key)));
+  return entry?.[1] ?? '';
+}
+
+function genericSections(documentText: string): readonly Section[] {
+  const unique = new Map<string, { readonly match: RegExpMatchArray; readonly index: number }>();
+  for (const match of documentText.matchAll(/^##+\s+[^\n]*?(E26-Q-(?:COM|CC|SI|TADS|TGTI|TRC)-\d{2})\s*(?:—|-)?\s*([^\n]*)/gm)) {
+    if (!unique.has(match[1]!)) unique.set(match[1]!, { match, index: match.index });
+  }
+  const headings = [...unique.values()].sort((a, b) => a.index - b.index);
+  return headings.map((heading, index) => ({
+    id: heading.match[1]!,
+    title: plain(heading.match[2]),
+    text: documentText.slice(heading.index, headings[index + 1]?.index ?? documentText.length),
+    documentText,
+  }));
+}
+
+function markdownTables(text: string): readonly Record<string, unknown>[] {
+  const blocks: Record<string, unknown>[] = [];
+  const lines = text.split(/\r?\n/);
+  for (let index = 0; index < lines.length - 2; index += 1) {
+    if (!lines[index]!.startsWith('|') || !lines[index + 1]!.startsWith('|') || !/---/.test(lines[index + 1]!)) continue;
+    const headers = lines[index]!.slice(1, -1).split('|').map(plain);
+    const rows: string[][] = [];
+    let rowIndex = index + 2;
+    while (rowIndex < lines.length && lines[rowIndex]!.startsWith('|')) {
+      const cells = lines[rowIndex]!.slice(1, -1).split('|').map(plain);
+      if (cells.length === headers.length) rows.push(cells);
+      rowIndex += 1;
+    }
+    if (!headers.length || !rows.length) continue;
+    const previousHeading = lines.slice(0, index).reverse().find((line) => /^###\s+/.test(line));
+    blocks.push({
+      type: 'table', caption: plain(previousHeading?.replace(/^###\s+/, '') || 'Dados apresentados'),
+      columns: headers.map((label, columnIndex) => ({ key: 'c' + (columnIndex + 1), label })), rows,
+    });
+    index = rowIndex - 1;
+  }
+  return blocks;
+}
+
+function genericPresentation(text: string): Record<string, unknown> | undefined {
+  const blocks: Record<string, unknown>[] = [...markdownTables(text)];
+  for (const match of text.matchAll(/```([a-zA-Z0-9_-]*)\s*\n([\s\S]*?)```/g)) {
+    const requested = match[1]!.toLowerCase();
+    const language = ['sql', 'c', 'python'].includes(requested) ? requested : 'text';
+    blocks.push({ type: 'code', language, caption: 'Recurso apresentado no desafio', code: match[2]!.trim() });
+  }
+  return blocks.length ? { blocks: blocks.slice(0, 8) } : undefined;
+}
+
+function contextSegment(section: Section, promptIndex: number): string {
+  const beforePrompt = section.text.slice(0, promptIndex);
+  const playerHeading = [...beforePrompt.matchAll(/^###\s+(?!Ficha)(.+)$/gm)].at(-1);
+  const explicit = beforePrompt.lastIndexOf('### Texto ao jogador');
+  const start = explicit >= 0 ? explicit + '### Texto ao jogador'.length :
+    playerHeading ? playerHeading.index + playerHeading[0].length : beforePrompt.indexOf('\n') + 1;
+  return beforePrompt.slice(start).replace(/^\s*\*\*Contexto\.\*\*\s*/i, '').trim();
+}
+
+function playerPlain(text: string): string {
+  return plain(text
+    .replace(/```[a-zA-Z0-9_-]*\s*\n[\s\S]*?```/g, ' ')
+    .replace(/^\|.*\|\s*$/gm, ' ')
+    .replace(/^###\s+.*$/gm, ' '));
+}
+
+function sourceDefinitions(documentText: string): Readonly<Record<string, string>> {
+  const result: Record<string, string> = {};
+  for (const line of documentText.split(/\r?\n/)) {
+    const table = line.match(/^\|\s*((?:[A-Z]+-)?T\d+)\s*\|(.+)\|$/);
+    const bullet = line.match(/^-\s+\*\*((?:[A-Z]+-)?T\d+)(?:\s+—[^*]*)?\*\*:?\s*(.+)$/);
+    if (table) result[table[1]!] = plain(table[2]);
+    if (bullet) result[bullet[1]!] = plain(bullet[2]);
+  }
+  return result;
+}
+
+function genericSources(section: Section, origin: keyof typeof primarySources): readonly Record<string, unknown>[] {
+  const result: Record<string, unknown>[] = [{ ...primarySources[origin] }];
+  const catalog = sourceDefinitions(section.documentText);
+  const codes = [...new Set([...section.text.matchAll(/\b((?:[A-Z]+-)?T\d+)\b/g)].map((match) => match[1]!))];
+  for (const code of codes) {
+    result.push({ role: 'technical', type: 'official-reference', documentId: code,
+      description: catalog[code] || 'Referência técnica ' + code + ' registrada no lote de autoria.' });
+  }
+  return result;
+}
+
+function genericQuestion(section: Section, inventory: Readonly<Record<string, string>> | undefined): Record<string, unknown> {
+  const origin = section.id.split('-')[2] as keyof typeof primarySources;
+  const promptMatch = section.text.match(/\*\*Enunciado\.\*\*\s*([^\n]+)/i);
+  const answerMatch = section.text.match(/\*\*(?:Gabarito|Única alternativa correta|Resposta correta)\s*:?\s*([A-E])(?:\.|\*\*)/i);
+  if (!promptMatch?.index || !answerMatch?.index) throw new Error('Questão documental sem enunciado ou gabarito: ' + section.id);
+  const rawContext = contextSegment(section, promptMatch.index);
+  const options = [...section.text.matchAll(/^-\s+\*\*([A-E])[.)]\*\*\s+(.+)$/gm)].slice(0, 5)
+    .map((match) => ({ id: match[1], text: plain(match[2]) }));
+  const feedbackByOption: Record<string, string> = {};
+  for (const match of section.text.matchAll(/^\|\s*([A-E])\s*\|\s*(.+?)\s*\|$/gm)) {
+    if (!(match[1]! in feedbackByOption)) feedbackByOption[match[1]!] = plain(match[2]);
+  }
+  const explanationEnd = section.text.indexOf('\n| Alternativa |', answerMatch.index);
+  const explanation = plain(section.text.slice(answerMatch.index + answerMatch[0].length,
+    explanationEnd >= 0 ? explanationEnd : section.text.length).split(/\n###/)[0]);
+  const difficulty = (section.text.match(/\b(introductory|intermediate|advanced)\b/i)?.[1] ||
+    firstInventoryValue(inventory, [/dificuldade/i])) as string;
+  const area = plain(section.text.match(/(?:área|area)\s+[“"]([^”"]+)[”"]/i)?.[1] ||
+    firstInventoryValue(inventory, [/^área$/i, /macroárea/i, /objeto da portaria/i, /conteúdo central/i, /objeto principal/i])
+      .replace(/^[IVX]+\s+—\s+/, '') || 'Área técnica do curso ' + origin);
+  const objective = plain(section.text.match(/Objetivo(?: pedagógico)?:\s*([^\n]+)/i)?.[1] ||
+    firstInventoryValue(inventory, [/conteúdo central/i, /objeto principal/i]) || section.title);
+  const sectionCourses = section.text.match(/courses:\s*\[([^\]]+)\]/i)?.[1] ||
+    section.text.match(/\|\s*(?:Cursos\s*\/\s*courses|Cursos elegíveis)\s*\|\s*([^|\n]+)\|/i)?.[1] || '';
+  const courses = origin === 'COM' ? ['CC', 'SI', 'TADS', 'TGTI', 'TRC'] :
+    parseCourses(sectionCourses).length ? parseCourses(sectionCourses) : [origin];
+  const presentation = genericPresentation(rawContext);
+  const context = playerPlain(rawContext) || 'Analise os dados e o recurso apresentados para tomar a decisão solicitada.';
+  if (options.length !== 5 || Object.keys(feedbackByOption).length !== 5 || !explanation ||
+      !['introductory', 'intermediate', 'advanced'].includes(difficulty)) {
+    throw new Error('Questão documental incompleta: ' + section.id);
+  }
+  return {
+    id: section.id, version: 1, classification: origin === 'COM' ? 'COMUM' : origin,
+    context, ...(presentation ? { presentation } : {}), prompt: plain(promptMatch[1]), options,
+    correctOptionId: answerMatch[1], explanation, feedbackByOption,
+    collectionId: 'enade-2026',
+    pedagogicalOrigin: 'Referenciais oficiais de 2026; conteúdo autoral experimental do N9 Jornada Digital, em revisão editorial assistida por IA.',
+    courses, area, competencies: [objective], difficulty, sources: genericSources(section, origin),
+    traceability: { title: section.title, objective, locators: [primarySources[origin].documentId + '; ' + area] },
+    validationStatus: 'under-ai-review',
+  };
+}
+
+function extraQuestions(projectRoot: string): { readonly sections: readonly Section[]; readonly questions: readonly Record<string, unknown>[] } {
+  const sections: Section[] = [];
+  const questions: Record<string, unknown>[] = [];
+  for (const relativePath of EXTRA_QUESTION_LOT_PATHS) {
+    const documentText = readFileSync(resolve(projectRoot, relativePath), 'utf8');
+    const inventory = inventoryRows(documentText);
+    for (const section of genericSections(documentText)) {
+      sections.push(section);
+      questions.push(genericQuestion(section, inventory.get(section.id)));
+    }
+  }
+  return { sections, questions };
+}
+
+function canonicalEligibility(projectRoot: string): ReadonlyMap<string, ReadonlySet<string>> {
+  const documentText = readFileSync(resolve(projectRoot, CANONICAL_MATRIX_PATH), 'utf8');
+  const result = new Map<string, Set<string>>();
+  const markers = [
+    ['CC', '## 3.', '## 4.'], ['SI', '## 4.', '## 5.'], ['TADS', '## 5.', '## 6.'],
+    ['TGTI', '## 6.', '## 7.'], ['TRC', '## 7.', '## 8.'],
+  ] as const;
+  for (const [course, startMarker, endMarker] of markers) {
+    const section = documentText.slice(documentText.indexOf(startMarker), documentText.indexOf(endMarker));
+    for (const match of section.matchAll(/\b(?:COM|CC|SI|TADS|TGTI|TRC)-\d{2}\b/g)) {
+      const id = 'E26-Q-' + match[0];
+      const courses = result.get(id) ?? new Set<string>();
+      courses.add(course);
+      result.set(id, courses);
+    }
+  }
+  return result;
+}
+
+function complementarySource(course: string): Record<string, unknown> {
+  const source = primarySources[course as keyof typeof primarySources];
+  if (!source) throw new Error('Curso sem referência normativa: ' + course);
+  return { ...source, role: 'normative-complementary',
+    description: 'Corroboração normativa da elegibilidade para ' + course + ' conforme a matriz canônica de partidas.' };
+}
+
+function idsFromCell(cell: string): readonly string[] {
+  return [...cell.matchAll(/\b(?:COM|CC|SI|TADS|TGTI|TRC)-\d{2}\b/g)].map((match) => 'E26-Q-' + match[0]);
+}
+
+function routeColumns(section: string): Readonly<Record<string, readonly string[]>> {
+  const lines = section.split(/\r?\n/);
+  const headerIndex = lines.findIndex((line) => /^\|.*Roteiro A.*\|/.test(line));
+  if (headerIndex < 0) throw new Error('Tabela de roteiros ausente na matriz canônica.');
+  const headers = lines[headerIndex]!.slice(1, -1).split('|').map(plain);
+  const result: Record<string, string[]> = {};
+  headers.forEach((header) => {
+    const route = header.match(/^Roteiro ([A-D])/i)?.[1]?.toUpperCase();
+    if (route) result[route] = [];
+  });
+  for (let index = headerIndex + 2; index < lines.length && lines[index]!.startsWith('|'); index += 1) {
+    const cells = lines[index]!.slice(1, -1).split('|');
+    headers.forEach((header, column) => {
+      const route = header.match(/^Roteiro ([A-D])/i)?.[1]?.toUpperCase();
+      if (route) result[route]!.push(...idsFromCell(cells[column] ?? ''));
+    });
+  }
+  return result;
+}
+
+export function canonicalMissionRoutes(projectRoot = PROJECT_ROOT): Readonly<Record<string, readonly (readonly string[])[]>> {
+  const text = readFileSync(resolve(projectRoot, CANONICAL_MATRIX_PATH), 'utf8');
+  const commonSection = text.slice(text.indexOf('## 2.'), text.indexOf('## 3.'));
+  const common: Record<string, readonly string[]> = {};
+  for (const line of commonSection.split(/\r?\n/)) {
+    const cells = line.startsWith('|') ? line.slice(1, -1).split('|').map(plain) : [];
+    const route = cells[0]?.match(/^([A-D])(?:,|$)/)?.[1];
+    if (route) common[route] = idsFromCell(cells[1] ?? '');
+  }
+  const markers = [
+    ['CC', '## 3.', '## 4.'], ['SI', '## 4.', '## 5.'], ['TADS', '## 5.', '## 6.'],
+    ['TGTI', '## 6.', '## 7.'], ['TRC', '## 7.', '## 8.'],
+  ] as const;
+  return Object.fromEntries(markers.map(([course, start, end]) => {
+    const technical = routeColumns(text.slice(text.indexOf(start), text.indexOf(end)));
+    const routeNames = course === 'SI' ? ['A', 'B', 'C', 'D'] : ['A', 'B', 'C'];
+    const routes = routeNames.map((route) => {
+      const ids = [...(common[route] ?? []), ...(technical[route] ?? [])];
+      if (ids.length !== 25 || new Set(ids).size !== 25) {
+        throw new Error('Roteiro ' + course + '-' + route + ' não contém 25 IDs únicos.');
+      }
+      return Object.freeze(ids);
+    });
+    return [course, Object.freeze(routes)];
+  }));
+}
+
+function applyCanonicalEligibility(projectRoot: string, questions: readonly Record<string, unknown>[]): readonly Record<string, unknown>[] {
+  const eligibility = canonicalEligibility(projectRoot);
+  const order = ['CC', 'SI', 'TADS', 'TGTI', 'TRC'];
+  return questions.map((question) => {
+    const existingCourses = (question.courses as string[]) ?? [];
+    const courses = [...new Set([...existingCourses, ...(eligibility.get(String(question.id)) ?? [])])]
+      .sort((a, b) => order.indexOf(a) - order.indexOf(b));
+    const sources = [...(question.sources as Record<string, unknown>[])];
+    for (const course of courses) {
+      if (sources.some((source) => source.documentId === primarySources[course as keyof typeof primarySources]?.documentId)) continue;
+      sources.push(complementarySource(course));
+    }
+    const traceability = question.traceability as { readonly title: string; readonly objective: string; readonly locators: readonly string[] };
+    return { ...question, courses, sources, traceability: { ...traceability,
+      locators: [...new Set([...traceability.locators, ...courses.map((course) => 'Matriz canônica de partidas de 25: ' + course)])] } };
+  });
+}
+
 export function readEditorialDocuments(projectRoot = PROJECT_ROOT): EditorialDocuments {
   const sections: Section[] = [];
   for (const relativePath of LOT_PATHS) {
@@ -724,9 +1044,15 @@ export function readEditorialDocuments(projectRoot = PROJECT_ROOT): EditorialDoc
     }));
   }
   const questions = sections.filter((section) => section.id.includes('-Q-')).map(parseQuestion);
+  const extras = extraQuestions(projectRoot);
+  sections.push(...extras.sections);
+  const convertedQuestions = [
+    ...applyCommonVisualImprovements(applySiM03Visuals(applySiVisualImprovements(applyApprovedCandidates(projectRoot, questions)))),
+    ...extras.questions,
+  ];
   return {
     sections,
-    questions: applyCommonVisualImprovements(applySiM03Visuals(applySiVisualImprovements(applyApprovedCandidates(projectRoot, questions)))),
+    questions: applyCanonicalEligibility(projectRoot, convertedQuestions),
     puzzles: sections.filter((section) => section.id.includes('-P-')).map(parsePuzzle),
   };
 }
@@ -739,7 +1065,7 @@ export function convertedCatalogs(projectRoot = PROJECT_ROOT): {
   return {
     questions: {
       mode: 'provisional',
-      contentVersion: 'enade-2026-provisional-1',
+      contentVersion: 'enade-2026-provisional-2',
       phaseId: 'ENADE-2026-PROVISIONAL',
       questions: documents.questions,
     },
@@ -751,6 +1077,7 @@ export function writeConvertedCatalogs(projectRoot = PROJECT_ROOT): void {
   const converted = convertedCatalogs(projectRoot);
   writeFileSync(resolve(projectRoot, QUESTION_OUTPUT), JSON.stringify(converted.questions, null, 2) + '\n', 'utf8');
   writeFileSync(resolve(projectRoot, PUZZLE_OUTPUT), JSON.stringify(converted.puzzles, null, 2) + '\n', 'utf8');
+  writeFileSync(resolve(projectRoot, MISSION_ROUTES_OUTPUT), JSON.stringify(canonicalMissionRoutes(projectRoot), null, 2) + '\n', 'utf8');
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) writeConvertedCatalogs();

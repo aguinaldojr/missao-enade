@@ -20,12 +20,12 @@
     "contentVersion": { "type": "string", "minLength": 1 },
     "mode": { "const": "provisional" },
     "phaseId": { "type": "string", "minLength": 1 },
-    "missionId": { "enum": ["quick", "normal", "special", "arena"] },
+    "missionId": { "enum": ["quick", "normal", "special", "arena", "journey-25"] },
     "attemptId": { "type": "string", "minLength": 1 },
     "course": { "enum": ["CC", "SI", "TADS", "TGTI", "TRC"] },
-    "total": { "enum": [3, 5, 10, 20] },
-    "correctCount": { "type": "integer", "minimum": 0, "maximum": 20 },
-    "score": { "type": "integer", "minimum": 0, "maximum": 2000, "multipleOf": 100 },
+    "total": { "enum": [3, 5, 10, 20, 25] },
+    "correctCount": { "type": "integer", "minimum": 0, "maximum": 25 },
+    "score": { "type": "integer", "minimum": 0, "maximum": 2500, "multipleOf": 100 },
     "completedAt": { "type": "string", "minLength": 1 }
   }
 }

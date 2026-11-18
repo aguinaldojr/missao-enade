@@ -26,24 +26,24 @@ function setup(questionData: unknown = { ...provisionalQuestions,
 }
 
 describe('escolha integrada de curso e missão', () => {
-  it('renderiza cinco cursos, quatro modos e inicia a missão escolhida por controles nativos', () => {
+  it('renderiza cinco cursos, a jornada fixa e inicia por controles nativos', () => {
     const { root, session, dispatch } = setup();
     dispatch({ type: 'start' });
     expect(root.querySelectorAll('input[name="course"]')).toHaveLength(5);
-    expect(root.querySelectorAll('input[name="mission"]')).toHaveLength(4);
+    expect(root.querySelectorAll('input[name="mission"]')).toHaveLength(1);
     expect(root.textContent).toContain('N9 Jornada Digital · Conteúdo experimental em revisão editorial.');
     expect(root.textContent).not.toMatch(/aprova(?:do|ção) por docente|revisão docente|validação pedagógica/i);
     expect(root.textContent).not.toMatch(/enade/i);
     const course = root.querySelector<HTMLInputElement>('input[name="course"][value="SI"]')!;
-    const mission = root.querySelector<HTMLInputElement>('input[name="mission"][value="quick"]')!;
+    const mission = root.querySelector<HTMLInputElement>('input[name="mission"][value="journey-25"]')!;
     course.focus(); course.click(); mission.focus(); mission.click();
     expect(document.activeElement).toBe(mission);
     root.querySelector<HTMLButtonElement>('[data-action="confirm-course"]')!.click();
-    expect(session.snapshot).toMatchObject({ screen: 'map', selectedCourse: 'SI', selectedMissionId: 'quick' });
-    expect(root.querySelector('.selected-mission')?.textContent).toBe('Missão rápida · 3 desafios');
+    expect(session.snapshot).toMatchObject({ screen: 'map', selectedCourse: 'SI', selectedMissionId: 'journey-25' });
+    expect(root.querySelector('.selected-mission')?.textContent).toBe('Jornada N9 · 25 desafios');
     root.querySelector<HTMLButtonElement>('.world-interact')!.click();
-    expect(session.snapshot.attempt?.questions).toHaveLength(3);
-    expect(root.querySelector('.question-toolbar')?.textContent).toContain('Desafio 1 de 3');
+    expect(session.snapshot.attempt?.questions).toHaveLength(25);
+    expect(root.querySelector('.question-toolbar')?.textContent).toContain('Desafio 1 de 25');
     expect(root.textContent).not.toMatch(/enade/i);
   });
 
@@ -53,12 +53,12 @@ describe('escolha integrada de curso e missão', () => {
     const { root, session, dispatch } = setup(limited);
     dispatch({ type: 'start' });
     dispatch({ type: 'select-course', course: 'CC' });
-    dispatch({ type: 'select-mission', missionId: 'arena' });
+    dispatch({ type: 'select-mission', missionId: 'journey-25' });
     dispatch({ type: 'enter-central' });
     root.querySelector<HTMLButtonElement>('.world-interact')!.click();
     expect(session.snapshot.attempt).toBeNull();
-    expect(root.querySelector('.content-error')?.textContent).toContain('necessárias 20 questões');
-    expect(root.querySelector('.content-error')?.textContent).toContain('10 comuns e 1 específica');
+    expect(root.querySelector('.content-error')?.textContent).toContain('necessárias 25 questões');
+    expect(root.querySelector('.content-error')?.textContent).toContain('15 comuns e 1 específica');
     expect(root.querySelector('.content-error')?.textContent).toContain('Nenhuma questão foi repetida');
   });
 });
