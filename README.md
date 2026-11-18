@@ -12,6 +12,7 @@ O conteúdo permanece em governança editorial assistida por IA. O aviso **Conte
 - 205 desafios de questão e oito puzzles provisórios;
 - jornada fixa de 25 questões, com cinco comuns e vinte técnicas elegíveis para o curso;
 - três roteiros-base para CC, TADS, TGTI e TRC e quatro para SI;
+- sorteio determinístico por área depois dos roteiros-base, evitando a partida anterior;
 - cinco cursos: CC, SI, TADS, TGTI e TRC;
 - perfil por apelido e ranking separado por curso e tamanho;
 - controles por teclado, mouse e toque;

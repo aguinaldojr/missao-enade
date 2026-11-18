@@ -496,5 +496,6 @@ Próxima etapa: criar novas questões de SI em entrega separada, seguindo a matr
 - [x] Alternar três roteiros-base por curso e quatro para SI, preservando progresso anterior.
 - [x] Estender relatório e ranking local para 25 questões.
 - [x] Preservar os oito puzzles fora da contagem.
-- [ ] Substituir a repetição cíclica posterior aos roteiros-base por sorteio balanceado por área e histórico recente.
+- [x] Substituir a repetição cíclica posterior aos roteiros-base por sorteio determinístico balanceado por área e histórico recente.
+- [ ] Avaliar no piloto se a exclusão de apenas uma partida anterior oferece variedade suficiente no longo prazo.
 - [ ] Executar piloto com professores e estudantes antes de promover itens para `ready-for-release`.

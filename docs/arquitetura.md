@@ -619,7 +619,8 @@ Esta seção substitui, para o fluxo jogável atual, as quantidades descritas hi
 - `courses` define elegibilidade explícita. `classification` preserva a origem editorial; por isso uma técnica de outro prefixo pode ser selecionada quando possui o curso atual em `courses` e sua corroboração normativa em `sources` e `traceability`.
 - A única configuração apresentada ao jogador é `journey-25`: cinco comuns e vinte técnicas. As antigas configurações 3/5/10/20 permanecem apenas como contratos de compatibilidade e testes históricos.
 - `mission-routes.json` é gerado da matriz canônica: três roteiros para CC, TADS, TGTI e TRC e quatro para SI. Cada roteiro tem 25 IDs únicos, cobertura de áreas e no máximo três itens avançados.
-- `MissionRouteRepository` mantém apenas o número de conclusões por curso em `n9:mission-route-progress:v1`. A conclusão avança o roteiro; ao esgotar os roteiros-base, a sequência reinicia de modo determinístico. Dados anteriores não são alterados.
+- `MissionRouteRepository` mantém o número de conclusões em `n9:mission-route-progress:v1` e somente os 25 IDs da última partida em `n9:mission-recent-questions:v1`. Dados anteriores não são alterados.
+- Depois dos roteiros-base, `missionRouteForAttempt` seleciona deterministicamente um candidato de cada uma das vinte posições/áreas técnicas da matriz. A busca considera a composição inteira, evita todos os IDs da partida anterior, mantém cinco comuns, vinte técnicas e no máximo três avançadas. Não usa `Math.random` nem recomendação adaptativa.
 - Ranking e relatório aceitam 25 questões sem modificar as chaves versionadas existentes.
 
 Detalhes e limitações: [integracao-partidas-25.md](integracao-partidas-25.md).

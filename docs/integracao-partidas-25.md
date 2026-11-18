@@ -32,9 +32,9 @@ Nos compartilhamentos, o conversor acrescenta a norma do curso como `normative-c
 | TGTI | 3 | 25 | 5 | 20 |
 | TRC | 3 | 25 | 5 | 20 |
 
-Cada roteiro contém IDs únicos e no máximo três dificuldades avançadas. A chave `n9:mission-route-progress:v1` guarda somente a quantidade de jornadas concluídas por curso. As demais chaves de perfil, exploração, puzzles, resultados e ranking são preservadas.
+Cada roteiro contém IDs únicos e no máximo três dificuldades avançadas. A chave `n9:mission-route-progress:v1` guarda a quantidade de jornadas concluídas por curso. A chave `n9:mission-recent-questions:v1` guarda somente os 25 IDs da última partida de cada curso. As demais chaves de perfil, exploração, puzzles, resultados e ranking são preservadas.
 
-Depois do último roteiro-base, a versão atual reinicia o ciclo daquele curso. O sorteio balanceado por área, evitando questões recentes, permanece como evolução posterior; não foi improvisado nesta integração.
+Depois do último roteiro-base, o jogo monta uma nova combinação determinística. Para cada uma das vinte posições/áreas técnicas, escolhe um candidato registrado na matriz; os cinco comuns vêm do banco comum dos roteiros. A busca considera a composição completa, exclui a partida imediatamente anterior, impede duplicação e limita o total a três itens avançados. A mesma entrada sempre produz a mesma seleção, permitindo reprodução de erros e testes estáveis, sem `Math.random`.
 
 ## Compatibilidade
 

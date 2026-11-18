@@ -25,7 +25,7 @@ import { emptyLeaderboard, entryFromResult, isRankingQuestionCount, recordBestRe
 import type { PlayerProfileRepository } from '../ports/PlayerProfileRepository';
 import type { LeaderboardRepository } from '../ports/LeaderboardRepository';
 import type { MissionRouteRepository } from '../ports/MissionRouteRepository';
-import { missionRoute, routeOrdering } from '../config/missionRoutes';
+import { missionRouteForAttempt, routeOrdering } from '../config/missionRoutes';
 
 export type Screen = 'home' | 'profile' | 'leaderboard' | 'course-select' | 'map' | 'question' | 'result' | 'puzzle';
 
@@ -257,7 +257,8 @@ export class GameSession {
           const bank = this.content.questionsForCourse(current.selectedCourse);
           const completedCount = this.missionRouteStorage?.completedCount(current.selectedCourse) ?? 0;
           const ordering = mission.id === 'journey-25'
-            ? routeOrdering(missionRoute(current.selectedCourse, completedCount)) : undefined;
+            ? routeOrdering(missionRouteForAttempt(current.selectedCourse, completedCount, bank,
+              this.missionRouteStorage?.recentQuestionIds(current.selectedCourse) ?? [])) : undefined;
           const questions = selectMissionQuestions(bank, { course: current.selectedCourse,
             collectionId: this.playableCollection.collectionId, mission }, ordering);
           this.update({ screen: 'question', contentError: null,
@@ -316,7 +317,7 @@ export class GameSession {
             rankingQuestionCount: isRankingQuestionCount(result.total) ? result.total : current.rankingQuestionCount,
             exploration: Object.freeze({ ...current.exploration, missionStatus: 'completed', doorUnlocked: true }) });
           if (result.mode === 'provisional' && attempt.mission.id === 'journey-25') {
-            this.missionRouteStorage?.recordCompletion(result.course);
+            this.missionRouteStorage?.recordCompletion(result.course, attempt.questions.map((question) => question.id));
           }
           this.persistExploration();
         }
