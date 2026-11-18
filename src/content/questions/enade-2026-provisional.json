@@ -5,9 +5,9 @@
   "questions": [
     {
       "id": "E26-Q-COM-01",
-      "version": 1,
+      "version": 2,
       "classification": "COMUM",
-      "context": "Na Base N9 fictícia, uma oficina de organização dos estudos passou a oferecer um horário à noite. O registro acompanha as mesmas 40 pessoas convidadas em duas semanas. Todas responderam em ambas. “Conseguiu participar” significa ter comparecido a pelo menos um encontro naquela semana; cada pessoa foi contada uma vez por semana. Dados inteiramente fictícios para o jogo. | Período | Pessoas convidadas | Pessoas que conseguiram participar | |---|---:|---:| | Semana anterior ao novo horário | 40 | 16 | | Semana com o novo horário | 40 | 24 | O registro não informa motivos de participação nem mede bem-estar. Não houve grupo de comparação.",
+      "context": "Na Base N9 fictícia, uma oficina de organização dos estudos passou a oferecer um horário à noite. O registro acompanha as mesmas 40 pessoas convidadas em duas semanas; todas responderam em ambas. “Conseguiu participar” significa ter comparecido a pelo menos um encontro naquela semana, e cada pessoa foi contada uma vez por semana. O registro não informa motivos de participação, não mede bem-estar e não possui grupo de comparação. Os dados são inteiramente fictícios.",
       "prompt": "Qual conclusão a equipe pode registrar com base nessas informações?",
       "options": [
         {
@@ -72,11 +72,21 @@
           "COMUM-FG04 / FG-II; F05, art. 5º, II, b.2; art. 6º, III e XII"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "image",
+            "src": "images/questions/com-01-participacao.svg",
+            "alt": "Gráfico de barras. Entre 40 pessoas convidadas, 16 conseguiram participar na semana anterior e 24 na semana com o novo horário. O aumento observado foi de oito pessoas, sem demonstrar sua causa.",
+            "caption": "Participação registrada nas duas semanas"
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-02",
-      "version": 1,
+      "version": 2,
       "classification": "COMUM",
       "context": "No Ponto de Apoio N9 fictício, pessoas solicitaram ajuda para acessar materiais de estudo. Elas informaram nome, contato e uma descrição de sua dificuldade. O acordo de atendimento garante privacidade e limita esses dados ao retorno individual pela equipe de apoio. Uma equipe de divulgação quer convidar o público para uma nova oficina. Precisa divulgar a atividade, mas não precisa conhecer quem pediu ajuda. O Ponto de Apoio dispõe de um mural público de avisos.",
       "prompt": "Qual encaminhamento atende à divulgação e respeita o acordo de atendimento descrito?",
@@ -143,11 +153,54 @@
           "COMUM-FG01 / FG-II; F05, art. 5º, II, b.3; art. 6º, I"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Canais e finalidades disponíveis",
+            "description": "Os registros de atendimento foram fornecidos para o retorno individual da equipe de apoio. O mural público permite divulgar a oficina sem transferir nomes, contatos ou descrições de dificuldades.",
+            "nodes": [
+              {
+                "id": "registros",
+                "label": "REGISTROS DO ATENDIMENTO",
+                "details": "nome · contato · dificuldade"
+              },
+              {
+                "id": "apoio",
+                "label": "EQUIPE DE APOIO",
+                "details": "finalidade: retorno individual"
+              },
+              {
+                "id": "convite",
+                "label": "CONVITE DA OFICINA",
+                "details": "não precisa identificar solicitantes"
+              },
+              {
+                "id": "mural",
+                "label": "MURAL PÚBLICO",
+                "details": "canal disponível para divulgação"
+              }
+            ],
+            "edges": [
+              {
+                "from": "registros",
+                "to": "apoio",
+                "label": "uso combinado"
+              },
+              {
+                "from": "convite",
+                "to": "mural",
+                "label": "divulgação pública"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-03",
-      "version": 1,
+      "version": 2,
       "classification": "COMUM",
       "context": "A Base N9 fictícia organiza uma roda de troca de saberes aberta a participantes de diferentes regiões e experiências. O aviso diz: “Chegue junto para virar a chave no Ponto!” Algumas pessoas entenderam que haveria uma conversa; outras perguntaram se deveriam consertar uma fechadura. O aviso ainda não informa atividade, local completo nem horário. A equipe quer manter um tom acolhedor e tornar essas informações compreensíveis, sem exigir domínio de uma expressão do grupo organizador.",
       "prompt": "Qual revisão da comunicação responde melhor ao desencontro relatado?",
@@ -214,11 +267,21 @@
           "COMUM-FG05 / FG-I; F05, art. 5º, I, a.1–a.2; art. 6º, VI e X"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "image",
+            "src": "images/questions/com-03-convite.svg",
+            "alt": "Cartaz com a frase “Chegue junto para virar a chave no Ponto!”. Três campos aparecem sem informação: qual é a atividade, onde será e em qual horário. Duas interpretações registradas são conversa e conserto de fechadura.",
+            "caption": "Aviso recebido por públicos com repertórios diferentes"
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-04",
-      "version": 1,
+      "version": 2,
       "classification": "COMUM",
       "context": "O Ponto de Apoio N9 fictício prepara sua reabertura. A reserva de atendimento disponível funciona por teclado e com leitor de tela, mas exige que a pessoa use seu próprio celular com internet. Algumas pessoas não dispõem desse recurso. A equipe pode manter o formulário e oferecer, no mesmo horário, atendimento assistido em balcão acessível, com a mesma disponibilidade de vagas. Precisa preservar o acesso de quem usa tecnologia assistiva e incluir quem não tem celular conectado.",
       "prompt": "Qual estratégia enfrenta as duas barreiras descritas?",
@@ -285,13 +348,51 @@
           "COMUM-FG02 / FG-II; F05, art. 5º, II, b.1–b.3; art. 6º, XI"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Rotas de reserva consideradas",
+            "description": "As duas rotas consultam a mesma disponibilidade de vagas. O formulário preserva o uso por teclado e leitor de tela; o balcão oferece atendimento assistido sem exigir celular próprio conectado.",
+            "nodes": [
+              {
+                "id": "formulario",
+                "label": "FORMULÁRIO ACESSÍVEL",
+                "details": "teclado e leitor de tela · requer celular e internet"
+              },
+              {
+                "id": "vagas",
+                "label": "MESMAS VAGAS",
+                "details": "disponibilidade compartilhada pelos canais"
+              },
+              {
+                "id": "balcao",
+                "label": "BALCÃO ACESSÍVEL",
+                "details": "reserva assistida · sem celular próprio"
+              }
+            ],
+            "edges": [
+              {
+                "from": "formulario",
+                "to": "vagas",
+                "label": "consulta"
+              },
+              {
+                "from": "vagas",
+                "to": "balcao",
+                "label": "também disponível no"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-05",
-      "version": 1,
+      "version": 2,
       "classification": "COMUM",
-      "context": "No entorno fictício da Base N9, a equipe propõe um piloto de sombra em locais de espera durante o calor. O objetivo é reduzir a exposição ao sol de quem já espera nesses locais. Há recurso para testar uma intervenção de mesmo custo em um dos dois pontos. Ambos permitem instalação sem bloquear a circulação. Em uma observação sintética de 30 minutos, cada pessoa foi contada uma vez. Todas permaneceram no mesmo local, com a mesma condição de sombra ou sol, durante o intervalo. A estimativa indica quantas dessas pessoas ao sol caberiam na nova sombra. Não prevê redução de temperatura, adoecimento ou comportamento futuro. Dados e estimativas inteiramente fictícios para o jogo. | Local de espera | Pessoas observadas | Pessoas ao sol | Pessoas ao sol que caberiam na nova sombra | |---|---:|---:|---:| | Ponto da praça | 20 | 15 | 10 | | Ponto da alameda | 40 | 8 | 6 |",
+      "context": "No entorno fictício da Base N9, a equipe propõe um piloto de sombra em locais de espera durante o calor. O objetivo é reduzir a exposição ao sol de quem já espera nesses locais. Há recurso para uma intervenção de mesmo custo em um dos dois pontos, e ambos permitem instalação sem bloquear a circulação. Em uma observação sintética de 30 minutos, cada pessoa foi contada uma vez e permaneceu no mesmo local. A estimativa indica quantas pessoas ao sol caberiam na nova sombra; não prevê temperatura, adoecimento ou comportamento futuro.",
       "prompt": "Considerando o objetivo do piloto e os limites desse registro, qual proposta é mais bem sustentada?",
       "options": [
         {
@@ -356,11 +457,54 @@
           "COMUM-FG03 / FG-II; F05, art. 5º, II, b.1–b.2; art. 6º, IV e IX"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Observação dos locais de espera",
+            "columns": [
+              {
+                "key": "local",
+                "label": "Local"
+              },
+              {
+                "key": "observadas",
+                "label": "Pessoas observadas",
+                "align": "right"
+              },
+              {
+                "key": "sol",
+                "label": "Pessoas ao sol",
+                "align": "right"
+              },
+              {
+                "key": "cobertura",
+                "label": "Caberiam na nova sombra",
+                "align": "right"
+              }
+            ],
+            "rows": [
+              [
+                "Ponto da praça",
+                "20",
+                "15",
+                "10"
+              ],
+              [
+                "Ponto da alameda",
+                "40",
+                "8",
+                "6"
+              ]
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-06",
-      "version": 1,
+      "version": 2,
       "classification": "COMUM",
       "context": "Em uma cooperação internacional fictícia da Base N9, dois laboratórios pesquisam um sensor de desgaste para oficinas comunitárias. O laboratório Vento criou um encaixe que funciona bem em peças metálicas, mas não nas cerâmicas. O laboratório Maré modificou esse encaixe: passou a medir cerâmica, porém ficou mais lento ao medir metal. Ambos conseguem construir e testar as duas versões. O objetivo acordado é que as duas equipes compreendam as modificações e consigam adaptar o sensor às necessidades das oficinas de seus territórios. Precisam explicar em quais condições cada versão é útil; não precisam eleger uma versão universal. Uma proposta de cooperação ainda será escolhida. Todos os fatos e nomes são fictícios.",
       "prompt": "Qual proposta favorece a circulação recíproca de saberes e o objetivo acordado?",
@@ -427,11 +571,85 @@
           "COMUM-FG06 / FG-I e FG-II; F05, art. 5º, I, a.2 e II, b.2–b.3; art. 6º, VII–VIII"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Comportamento informado das duas versões do sensor",
+            "columns": [
+              {
+                "key": "versao",
+                "label": "Versão"
+              },
+              {
+                "key": "metal",
+                "label": "Peças metálicas"
+              },
+              {
+                "key": "ceramica",
+                "label": "Peças cerâmicas"
+              },
+              {
+                "key": "capacidade",
+                "label": "Capacidade das equipes"
+              }
+            ],
+            "rows": [
+              [
+                "Vento",
+                "Funciona bem",
+                "Não funciona",
+                "Ambas constroem e testam"
+              ],
+              [
+                "Maré",
+                "Funciona, mas ficou mais lenta",
+                "Passou a medir",
+                "Ambas constroem e testam"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "title": "Objetivo da cooperação",
+            "description": "O acordo busca compreensão recíproca das modificações e adaptação às oficinas locais. Não exige escolher uma versão universal.",
+            "nodes": [
+              {
+                "id": "vento",
+                "label": "LABORATÓRIO VENTO",
+                "details": "projeto original e razões técnicas"
+              },
+              {
+                "id": "troca",
+                "label": "INTERCÂMBIO",
+                "details": "projetos · mudanças · testes · condições de uso"
+              },
+              {
+                "id": "mare",
+                "label": "LABORATÓRIO MARÉ",
+                "details": "modificação e razões técnicas"
+              }
+            ],
+            "edges": [
+              {
+                "from": "vento",
+                "to": "troca",
+                "label": "compartilha e reproduz"
+              },
+              {
+                "from": "troca",
+                "to": "mare",
+                "label": "compartilha e reproduz"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-07",
-      "version": 1,
+      "version": 2,
       "classification": "COMUM",
       "context": "Dois terminais da Base N9 fictícia solicitam ao serviço de empréstimos a reserva do equipamento Lume. Cada tentativa recebe um código único. O registro do serviço mostra que recebeu as duas solicitações e enviou a resposta “Equipamento não cadastrado”. Cada terminal exibiu essa mesma resposta associada ao código de sua tentativa. Uma terceira tentativa é executada diretamente no computador do serviço, sem passar pela rede entre os terminais e esse computador. Ela produz a mesma resposta. O manual deste ambiente explica que a aplicação consulta um cadastro antes de aceitar uma reserva. Não há outros testes ou informações sobre a causa do problema. Os registros são fictícios.",
       "prompt": "Qual hipótese deve orientar a próxima investigação, considerando essas três tentativas?",
@@ -533,11 +751,27 @@
           "COMUM-TEC08 / CC-I; SI-I; TADS-I; TGTI-II; TRC-I; F06, art. 5º, I, a.1/a.4; art. 6º, XI; corroboração por curso na seção 8"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Registro das tentativas remotas",
+            "code": "[SOL-7A] Terminal 1 -> serviço: reserva Lume\n[SOL-7A] Serviço -> Terminal 1: Equipamento não cadastrado\n\n[SOL-7B] Terminal 2 -> serviço: reserva Lume\n[SOL-7B] Serviço -> Terminal 2: Equipamento não cadastrado"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Teste executado diretamente no computador do serviço",
+            "code": "[TESTE-LOCAL] Aplicação -> cadastro: consulta Lume\n[TESTE-LOCAL] Aplicação: Equipamento não cadastrado"
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-08",
-      "version": 1,
+      "version": 2,
       "classification": "COMUM",
       "context": "Na Base N9 fictícia, um sistema operacional distribui memória entre processos, isto é, programas em execução. O serviço de miniaturas é um desses processos. Seu limite é de 8 unidades de memória. Ele já ocupa 6 unidades, usadas por uma tarefa ativa que não pode ser interrompida. A próxima tarefa precisa reservar mais 3 unidades antes de começar. Há 12 unidades livres no computador, mas elas não são transferidas automaticamente a um processo que atingiria seu limite. O painel informa que a próxima tarefa espera pela reserva de memória; processador, armazenamento e conexão não impedem sua execução. Ao terminar, a tarefa ativa devolverá suas 6 unidades ao serviço. Não há prazo obrigatório para iniciar a próxima. Valores e regras são simplificados e fictícios.",
       "prompt": "Qual interpretação relaciona corretamente a espera ao recurso e permite prosseguir sem mudar limites ou interromper a tarefa ativa?",
@@ -639,11 +873,21 @@
           "COMUM-TEC07 / CC-II; SI-I; TADS-I; TGTI-II; TRC-I; F06, art. 5º, II, b.3–b.4; art. 6º, VII; corroboração por curso na seção 8"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "image",
+            "src": "images/questions/com-08-memoria.svg",
+            "alt": "Diagrama de memória. O serviço possui limite de oito unidades, seis estão ocupadas e apenas duas permanecem disponíveis. A próxima tarefa precisa de três unidades. O computador ainda possui doze unidades livres fora do limite do serviço.",
+            "caption": "Memória do serviço e necessidade da próxima tarefa"
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-09",
-      "version": 2,
+      "version": 3,
       "classification": "COMUM",
       "context": "Uma comunidade fictícia avalia a drenagem entre os setores Alto e Baixo. A água do Alto chega ao Baixo, que tem menos infraestrutura e mais moradias expostas. Para não transferir o problema, o acordo exige: 1. proteger pelo menos 30 moradias do setor Baixo; 2. não aumentar a vazão de pico que sai do Alto em direção ao Baixo; 3. preservar pelo menos 90 metros quadrados de solo permeável no Alto. Antes da intervenção, a vazão de pico do Alto para o Baixo é 12 litros por segundo. As projeções usam a mesma chuva, têm igual custo e são viáveis no exercício. Não há outro critério de desempate.",
       "prompt": "Qual proposta cumpre o acordo sem trocar o atendimento de uma exigência pelo descumprimento de outra?",
@@ -710,11 +954,74 @@
           "COMUM-FG03 / FG-II; F05, art. 5º, II, b.1–b.3; art. 6º, IV, IX–X"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Relação territorial considerada",
+            "description": "A água do setor Alto segue para o setor Baixo. O acordo precisa proteger o Baixo sem aumentar a vazão enviada e sem reduzir excessivamente o solo permeável no Alto.",
+            "nodes": [
+              {
+                "id": "alto",
+                "label": "SETOR ALTO",
+                "details": "origem da vazão · solo permeável"
+              },
+              {
+                "id": "baixo",
+                "label": "SETOR BAIXO",
+                "details": "moradias expostas · menos infraestrutura"
+              }
+            ],
+            "edges": [
+              {
+                "from": "alto",
+                "to": "baixo",
+                "label": "vazão de pico atual: 12 L/s"
+              }
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Exigências que devem ser cumpridas simultaneamente",
+            "columns": [
+              {
+                "key": "criterio",
+                "label": "Critério"
+              },
+              {
+                "key": "limite",
+                "label": "Limite obrigatório"
+              },
+              {
+                "key": "sentido",
+                "label": "Como avaliar"
+              }
+            ],
+            "rows": [
+              [
+                "Moradias protegidas no Baixo",
+                "Pelo menos 30",
+                "Valor igual ou maior que 30"
+              ],
+              [
+                "Vazão do Alto para o Baixo",
+                "No máximo 12 L/s",
+                "Valor igual ou menor que 12"
+              ],
+              [
+                "Solo permeável preservado no Alto",
+                "Pelo menos 90 m²",
+                "Valor igual ou maior que 90"
+              ]
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-COM-10",
-      "version": 2,
+      "version": 3,
       "classification": "COMUM",
       "context": "A manutenção edita o painel fictício de rotas da Base N9; a equipe de circulação apenas o consulta. Uma pessoa desligada da manutenção ainda conhece a credencial compartilhada de edição. Não há evidência de outra via de acesso. O plano deve revogar esse acesso, identificar quem realiza cada edição e manter a circulação com consulta independente da manutenção. O sistema permite contas individuais não compartilhadas, desativação de credenciais, permissões separadas e registro da conta usada. A troca não interrompe a consulta.",
       "prompt": "Qual plano atende às três condições para esse risco, com os recursos informados?",
@@ -816,7 +1123,53 @@
           "COMUM-TEC09 / CC-II; SI-II; TADS-II; TGTI-II; TRC-II; F06, art. 5º, II, b.1/b.3; art. 6º, XX; corroboração por curso na seção 8"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Papéis e controles necessários",
+            "columns": [
+              {
+                "key": "papel",
+                "label": "Papel ou situação"
+              },
+              {
+                "key": "editar",
+                "label": "Editar rotas"
+              },
+              {
+                "key": "consultar",
+                "label": "Consultar painel"
+              },
+              {
+                "key": "controle",
+                "label": "Controle necessário"
+              }
+            ],
+            "rows": [
+              [
+                "Manutenção ativa",
+                "Sim",
+                "Sim",
+                "Conta individual e edição registrada"
+              ],
+              [
+                "Equipe de circulação",
+                "Não",
+                "Sim",
+                "Permissão própria de consulta"
+              ],
+              [
+                "Pessoa desligada",
+                "Não",
+                "Não",
+                "Credencial antiga desativada"
+              ]
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-CC-01",
@@ -1495,8 +1848,767 @@
       "validationStatus": "under-ai-review"
     },
     {
-      "id": "E26-Q-SI-01",
+      "id": "E26-Q-SI-11",
       "version": 1,
+      "classification": "SI",
+      "context": "A Base N9 lançou um portal fictício de apoio estudantil. O envio funciona e cada pedido recebe protocolo. Entretanto, a equipe continua distribuindo trabalho por uma planilha paralela, duas pessoas podem assumir o mesmo pedido e estudantes telefonam porque não entendem os estados “recebido” e “em análise”. O servidor permanece estável.",
+      "prompt": "Qual ação trata o problema como um sistema de informação orientado ao propósito de concluir pedidos com clareza?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Aumentar a memória do servidor, pois todo problema do portal deve ser resolvido pela infraestrutura."
+        },
+        {
+          "id": "B",
+          "text": "Acrescentar mais campos obrigatórios ao formulário, sem mudar a distribuição do trabalho ou os estados."
+        },
+        {
+          "id": "C",
+          "text": "Alinhar portal, dados, responsabilidades da equipe e significado dos estados, eliminando o controle paralelo necessário ao mesmo fluxo."
+        },
+        {
+          "id": "D",
+          "text": "Automatizar todas as decisões e impedir que a equipe analise situações excepcionais."
+        },
+        {
+          "id": "E",
+          "text": "Retirar o acompanhamento do estudante e manter somente o número do protocolo."
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "O caso não apresenta falta de capacidade do servidor. O propósito depende da combinação entre tecnologia, informação, pessoas e processo. C atua justamente nas relações que produzem duplicidade e falta de compreensão, sem supor que toda decisão deva ser automática.",
+      "feedbackByOption": {
+        "A": "Estabilidade e ausência de evidência de saturação não sustentam uma ampliação de memória como resposta ao problema observado.",
+        "B": "Mais campos podem aumentar trabalho, mas não resolvem a planilha paralela, a responsabilidade duplicada nem o significado dos estados.",
+        "C": "Correta: integra os componentes sociotécnicos ao propósito e trata as relações que aparecem no mapa.",
+        "D": "Exceções ainda exigem análise; retirar pessoas do sistema não decorre das evidências apresentadas.",
+        "E": "Ocultar o estado reduz informação para o estudante e não corrige o fluxo interno."
+      },
+      "collectionId": "enade-2026",
+      "pedagogicalOrigin": "Referência normativa de SI e autoria experimental N9, sob governança editorial assistida por IA.",
+      "courses": [
+        "SI"
+      ],
+      "area": "Fundamentos de sistemas de informação e teoria geral de sistemas",
+      "competencies": [
+        "Relacionar pessoas, processos, dados e tecnologia ao propósito de uma solução de informação."
+      ],
+      "difficulty": "introductory",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Referência normativa específica de SI para criação autoral no recorte de fundamentos de sistemas; cenário e resposta são fictícios, sem autoria ou chancela do Inep.",
+          "year": 2026,
+          "documentId": "Portaria Inep 168/2026",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "documentId": "T8",
+          "description": "NASA Systems Engineering Handbook, Rev. 2; fundamentos, fronteiras e interfaces usados somente como apoio conceitual geral.",
+          "url": "https://science.nasa.gov/wp-content/uploads/2023/04/nasa_systems_engineering_handbook_0.pdf"
+        }
+      ],
+      "traceability": {
+        "title": "O portal não trabalha sozinho",
+        "objective": "Reconhecer um sistema de informação como arranjo sociotécnico orientado a um propósito.",
+        "locators": [
+          "SI-M03 / SI-I; F07, art. 5º, I; art. 6º, VI"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Mapa sociotécnico do atendimento",
+            "description": "O estudante envia e acompanha uma solicitação no portal. O portal cria o registro para a fila da equipe. A equipe também usa uma planilha paralela, enquanto o estudante precisa compreender o estado do pedido.",
+            "nodes": [
+              {
+                "id": "estudante",
+                "label": "ESTUDANTE",
+                "details": "envia e acompanha"
+              },
+              {
+                "id": "portal",
+                "label": "PORTAL",
+                "details": "protocolo e estado"
+              },
+              {
+                "id": "equipe",
+                "label": "FILA DA EQUIPE",
+                "details": "distribui pedidos"
+              },
+              {
+                "id": "planilha",
+                "label": "PLANILHA PARALELA",
+                "details": "controle adicional"
+              }
+            ],
+            "edges": [
+              {
+                "from": "estudante",
+                "to": "portal",
+                "label": "envia"
+              },
+              {
+                "from": "portal",
+                "to": "equipe",
+                "label": "cria registro"
+              },
+              {
+                "from": "equipe",
+                "to": "planilha",
+                "label": "também controla"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "E26-Q-SI-12",
+      "version": 1,
+      "classification": "SI",
+      "context": "Um laboratório fictício abre quarenta reservas semanais. O sistema registra reservas e presenças, mas repete a mesma configuração sem utilizar os resultados. A equipe quer introduzir retroalimentação sem cancelar vagas automaticamente nem punir ausências.",
+      "prompt": "Qual mudança fecha um ciclo de informação adequado ao objetivo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Comparar previsão e presença, apresentar a diferença à equipe e usar critérios explícitos para decidir a configuração da semana seguinte."
+        },
+        {
+          "id": "B",
+          "text": "Guardar as presenças em outro arquivo, mantendo a regra isolada desse histórico."
+        },
+        {
+          "id": "C",
+          "text": "Enviar mais confirmações de reserva, sem observar se alteraram presenças ou cancelamentos."
+        },
+        {
+          "id": "D",
+          "text": "Exibir somente o total de quarenta vagas, ocultando previsão e resultado."
+        },
+        {
+          "id": "E",
+          "text": "Reduzir automaticamente para 24 vagas porque esse foi o resultado da primeira semana."
+        }
+      ],
+      "correctOptionId": "A",
+      "explanation": "Retroalimentação exige que o resultado observado retorne ao processo decisório. A mantém responsabilidade humana, critérios explícitos e observação continuada; não transforma três semanas em regra definitiva.",
+      "feedbackByOption": {
+        "A": "Correta: o resultado volta à decisão futura com critérios e acompanhamento.",
+        "B": "Armazenar é necessário, mas um arquivo que não influencia análise ou decisão não fecha o ciclo.",
+        "C": "A ação adiciona comunicação, porém não define comparação de efeito nem uso do resultado.",
+        "D": "Ocultar a diferença elimina justamente a informação necessária à retroalimentação.",
+        "E": "Uma observação isolada não justifica fixar capacidade em 24 nem automatizar a decisão."
+      },
+      "collectionId": "enade-2026",
+      "pedagogicalOrigin": "Referência normativa de SI e autoria experimental N9, sob governança editorial assistida por IA.",
+      "courses": [
+        "SI"
+      ],
+      "area": "Fundamentos de sistemas de informação e teoria geral de sistemas",
+      "competencies": [
+        "Distinguir registro, saída e retroalimentação em um sistema informacional."
+      ],
+      "difficulty": "intermediate",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Referência normativa específica de SI para criação autoral no recorte de fundamentos de sistemas; cenário e resposta são fictícios, sem autoria ou chancela do Inep.",
+          "year": 2026,
+          "documentId": "Portaria Inep 168/2026",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "documentId": "T8",
+          "description": "NASA Systems Engineering Handbook, Rev. 2; fundamentos, fronteiras e interfaces usados somente como apoio conceitual geral.",
+          "url": "https://science.nasa.gov/wp-content/uploads/2023/04/nasa_systems_engineering_handbook_0.pdf"
+        }
+      ],
+      "traceability": {
+        "title": "A previsão precisa voltar para o sistema",
+        "objective": "Identificar retroalimentação que modifica uma decisão futura com base no resultado observado.",
+        "locators": [
+          "SI-M03 / SI-I; F07, art. 5º, I; art. 6º, VI"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Reservas, presenças e regra usada na semana seguinte",
+            "columns": [
+              {
+                "key": "semana",
+                "label": "Semana"
+              },
+              {
+                "key": "reservas",
+                "label": "Reservas previstas",
+                "align": "right"
+              },
+              {
+                "key": "presencas",
+                "label": "Presenças observadas",
+                "align": "right"
+              },
+              {
+                "key": "regra",
+                "label": "Regra seguinte"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "40",
+                "24",
+                "manter 40 vagas"
+              ],
+              [
+                "2",
+                "40",
+                "22",
+                "manter 40 vagas"
+              ],
+              [
+                "3",
+                "40",
+                "25",
+                "manter 40 vagas"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "E26-Q-SI-13",
+      "version": 1,
+      "classification": "SI",
+      "context": "O portal de bolsas da Base N9 chama um serviço financeiro externo. Após um timeout, o portal reenviou R81. A equipe controla o portal e sua política de reenvio, mas não controla o processamento interno do serviço financeiro.",
+      "prompt": "Qual investigação respeita essa fronteira e produz evidência útil antes de atribuir a falha?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Declarar que o banco interno está defeituoso, embora o log não mostre operação de banco."
+        },
+        {
+          "id": "B",
+          "text": "Considerar o serviço externo parte totalmente controlada pela equipe e alterar sua implementação diretamente."
+        },
+        {
+          "id": "C",
+          "text": "Desativar os identificadores das solicitações para que os dois sistemas fiquem menos dependentes."
+        },
+        {
+          "id": "D",
+          "text": "Ignorar o timeout, pois eventos externos não pertencem à análise de um sistema de informação."
+        },
+        {
+          "id": "E",
+          "text": "Correlacionar pedidos e respostas pelo requestId, verificar a política interna de reenvio e confrontar o comportamento observado com o contrato da interface externa."
+        }
+      ],
+      "correctOptionId": "E",
+      "explanation": "Delimitar a fronteira não significa ignorar o ambiente. A equipe investiga aquilo que controla e usa contrato e evidências da interface para analisar a interação com o elemento externo, sem alegar acesso ao processamento interno dele.",
+      "feedbackByOption": {
+        "A": "O log não apresenta evidência de banco; a conclusão escolhe uma causa sem ligação com os registros.",
+        "B": "O mapa declara o serviço como externo e fora do controle direto da equipe.",
+        "C": "Retirar correlação reduz a capacidade de distinguir envio, reenvio e resposta.",
+        "D": "Elementos externos podem influenciar e ser influenciados pelo sistema por meio das interfaces.",
+        "E": "Correta: combina fronteira de controle, contrato e rastreabilidade dos eventos."
+      },
+      "collectionId": "enade-2026",
+      "pedagogicalOrigin": "Referência normativa de SI e autoria experimental N9, sob governança editorial assistida por IA.",
+      "courses": [
+        "SI"
+      ],
+      "area": "Fundamentos de sistemas de informação e teoria geral de sistemas",
+      "competencies": [
+        "Diferenciar elementos controlados pela equipe de influências externas conectadas por uma interface."
+      ],
+      "difficulty": "introductory",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Referência normativa específica de SI para criação autoral no recorte de fundamentos de sistemas; cenário e resposta são fictícios, sem autoria ou chancela do Inep.",
+          "year": 2026,
+          "documentId": "Portaria Inep 168/2026",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "documentId": "T8",
+          "description": "NASA Systems Engineering Handbook, Rev. 2; fundamentos, fronteiras e interfaces usados somente como apoio conceitual geral.",
+          "url": "https://science.nasa.gov/wp-content/uploads/2023/04/nasa_systems_engineering_handbook_0.pdf"
+        }
+      ],
+      "traceability": {
+        "title": "Onde termina o sistema da equipe?",
+        "objective": "Delimitar fronteira, elementos externos e evidências de uma interface.",
+        "locators": [
+          "SI-M03 / SI-I; F07, art. 5º, I; art. 6º, VI"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Fronteira de controle e interface",
+            "description": "O portal de bolsas e sua política de reenvio são controlados pela equipe. O serviço financeiro é externo. Solicitações e respostas atravessam a interface identificadas por requestId.",
+            "nodes": [
+              {
+                "id": "portal",
+                "label": "PORTAL DE BOLSAS",
+                "details": "controlado · política de reenvio"
+              },
+              {
+                "id": "servico",
+                "label": "SERVIÇO FINANCEIRO",
+                "details": "externo · processamento próprio"
+              }
+            ],
+            "edges": [
+              {
+                "from": "portal",
+                "to": "servico",
+                "label": "interface com requestId"
+              }
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Log sintético da interface",
+            "code": "10:03 requestId=R81 envio=1 resposta=timeout\n10:04 requestId=R81 envio=2 resposta=aceito\n10:05 requestId=R92 envio=1 resposta=aceito"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E26-Q-SI-14",
+      "version": 1,
+      "classification": "SI",
+      "context": "Uma biblioteca fictícia simplificou seu quiosque de empréstimo. A etapa no quiosque ficou mais rápida, mas mais casos passaram ao balcão e muitos chegaram sem o motivo da exceção. O objetivo do sistema é concluir o empréstimo, não apenas liberar o quiosque.",
+      "prompt": "Qual interpretação e próxima ação são sustentadas pelo painel?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A mudança foi bem-sucedida porque o único indicador relevante caiu de quatro para dois minutos."
+        },
+        {
+          "id": "B",
+          "text": "Houve otimização local com piora do resultado global; é preciso medir o percurso completo e preservar o contexto na passagem ao balcão."
+        },
+        {
+          "id": "C",
+          "text": "O balcão deve ser removido, pois todo subsistema que recebe exceções reduz a eficiência."
+        },
+        {
+          "id": "D",
+          "text": "O aumento de quatorze minutos prova que o quiosque ficou tecnicamente mais lento."
+        },
+        {
+          "id": "E",
+          "text": "Deve-se manter o fluxo e ocultar o tempo total para evitar interpretações divergentes."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "O quiosque melhorou isoladamente, mas transferiu trabalho e perdeu informação na interface. B usa o propósito global e propõe observar e corrigir a relação entre os subsistemas.",
+      "feedbackByOption": {
+        "A": "O objetivo declarado é concluir o empréstimo; o tempo total piorou mesmo com o quiosque mais rápido.",
+        "B": "Correta: distingue desempenho local do global e trata a interface que perdeu contexto.",
+        "C": "Exceções continuam existindo; remover o balcão não resolve como serão analisadas.",
+        "D": "O dado do quiosque caiu para dois minutos; a piora ocorreu no percurso completo.",
+        "E": "Ocultar o indicador não melhora o sistema nem a qualidade da decisão."
+      },
+      "collectionId": "enade-2026",
+      "pedagogicalOrigin": "Referência normativa de SI e autoria experimental N9, sob governança editorial assistida por IA.",
+      "courses": [
+        "SI"
+      ],
+      "area": "Fundamentos de sistemas de informação e teoria geral de sistemas",
+      "competencies": [
+        "Avaliar efeitos de uma mudança nas relações entre subsistemas e no propósito global."
+      ],
+      "difficulty": "intermediate",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Referência normativa específica de SI para criação autoral no recorte de fundamentos de sistemas; cenário e resposta são fictícios, sem autoria ou chancela do Inep.",
+          "year": 2026,
+          "documentId": "Portaria Inep 168/2026",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "documentId": "T8",
+          "description": "NASA Systems Engineering Handbook, Rev. 2; fundamentos, fronteiras e interfaces usados somente como apoio conceitual geral.",
+          "url": "https://science.nasa.gov/wp-content/uploads/2023/04/nasa_systems_engineering_handbook_0.pdf"
+        }
+      ],
+      "traceability": {
+        "title": "Dois minutos no quiosque, quatorze no percurso",
+        "objective": "Distinguir melhoria local de desempenho do sistema completo.",
+        "locators": [
+          "SI-M03 / SI-I; F07, art. 5º, I; art. 6º, VI"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Indicadores do percurso de empréstimo antes e depois da mudança",
+            "columns": [
+              {
+                "key": "indicador",
+                "label": "Indicador"
+              },
+              {
+                "key": "antes",
+                "label": "Antes"
+              },
+              {
+                "key": "depois",
+                "label": "Depois"
+              }
+            ],
+            "rows": [
+              [
+                "Tempo no quiosque",
+                "4 min",
+                "2 min"
+              ],
+              [
+                "Casos enviados ao balcão",
+                "12%",
+                "35%"
+              ],
+              [
+                "Chegam ao balcão com contexto completo",
+                "90%",
+                "40%"
+              ],
+              [
+                "Tempo total até concluir",
+                "9 min",
+                "14 min"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "E26-Q-SI-15",
+      "version": 1,
+      "classification": "SI",
+      "context": "Um sistema fictício recomenda abertura de listas adicionais de matrícula usando apenas a procura do período anterior. Neste período mudaram oferta de turmas, capacidade física e solicitações de acessibilidade. A coordenação continua responsável pela decisão final.",
+      "prompt": "Qual evolução é coerente com um sistema aberto e adaptável, sem entregar uma decisão institucional a uma regra automática?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ignorar os sinais externos para manter sempre o mesmo comportamento."
+        },
+        {
+          "id": "B",
+          "text": "Abrir listas automaticamente para toda procura acima de trinta, sem registrar capacidade ou decisão."
+        },
+        {
+          "id": "C",
+          "text": "Usar somente a capacidade das salas e descartar procura e solicitações de acessibilidade."
+        },
+        {
+          "id": "D",
+          "text": "Integrar sinais definidos, mostrar origem e limites dos dados, apoiar a decisão da coordenação e acompanhar os resultados para revisar a regra."
+        },
+        {
+          "id": "E",
+          "text": "Substituir a regra por uma escolha aleatória, evitando influência do período anterior."
+        }
+      ],
+      "correctOptionId": "D",
+      "explanation": "Um sistema aberto troca informações com o ambiente. Adaptar-se não exige autonomia irrestrita: D combina sinais relevantes, transparência, responsabilidade e observação posterior.",
+      "feedbackByOption": {
+        "A": "Uma regra isolada do ambiente não responde às mudanças explicitadas.",
+        "B": "Automatizar sem capacidade, rastreabilidade ou responsabilidade pode produzir decisão inviável.",
+        "C": "Um único sinal não representa as restrições e necessidades descritas.",
+        "D": "Correta: usa intercâmbio com o ambiente e mantém decisão e revisão controladas.",
+        "E": "Aleatoriedade não constitui adaptação fundamentada aos sinais disponíveis."
+      },
+      "collectionId": "enade-2026",
+      "pedagogicalOrigin": "Referência normativa de SI e autoria experimental N9, sob governança editorial assistida por IA.",
+      "courses": [
+        "SI"
+      ],
+      "area": "Fundamentos de sistemas de informação e teoria geral de sistemas",
+      "competencies": [
+        "Reconhecer um sistema aberto e planejar adaptação com sinais, responsabilidade e observação de resultados."
+      ],
+      "difficulty": "intermediate",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Referência normativa específica de SI para criação autoral no recorte de fundamentos de sistemas; cenário e resposta são fictícios, sem autoria ou chancela do Inep.",
+          "year": 2026,
+          "documentId": "Portaria Inep 168/2026",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "documentId": "T8",
+          "description": "NASA Systems Engineering Handbook, Rev. 2; fundamentos, fronteiras e interfaces usados somente como apoio conceitual geral.",
+          "url": "https://science.nasa.gov/wp-content/uploads/2023/04/nasa_systems_engineering_handbook_0.pdf"
+        }
+      ],
+      "traceability": {
+        "title": "Uma regra fixa em um ambiente que mudou",
+        "objective": "Selecionar uma adaptação controlada diante de mudanças no ambiente do sistema.",
+        "locators": [
+          "SI-M03 / SI-I; F07, art. 5º, I; art. 6º, VI"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Sinais recebidos e situação considerada pela regra",
+            "columns": [
+              {
+                "key": "sinal",
+                "label": "Sinal recebido"
+              },
+              {
+                "key": "situacao",
+                "label": "Situação atual"
+              }
+            ],
+            "rows": [
+              [
+                "Oferta de turmas",
+                "muda a cada período"
+              ],
+              [
+                "Capacidade das salas",
+                "atualizada pela infraestrutura"
+              ],
+              [
+                "Solicitações de acessibilidade",
+                "analisadas individualmente"
+              ],
+              [
+                "Regra do sistema",
+                "copiada do período anterior"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Pseudocódigo explicativo da regra atual; não executável",
+            "code": "se procura_anterior > 30: abrir_lista_extra()\nfonte usada: somente o período anterior"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E26-Q-SI-16",
+      "version": 1,
+      "classification": "SI",
+      "context": "A Base N9 simulou o fluxo acima. O painel mostra associação crescente e a premissa explica como um reenvio entra novamente na fila. A equipe quer testar uma intervenção sem apagar documentos nem concluir que todo atraso possui uma única causa.",
+      "prompt": "Qual experimento ataca o ciclo descrito e permite verificar o efeito?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Aumentar os lembretes para dez por solicitação e medir somente quantas mensagens foram enviadas."
+        },
+        {
+          "id": "B",
+          "text": "Criar um segundo canal que também abra uma nova análise para cada reenvio."
+        },
+        {
+          "id": "C",
+          "text": "Mostrar um estado rastreável, vincular reenvios ao protocolo existente e comparar duplicações, fila e tempo de resposta antes e depois."
+        },
+        {
+          "id": "D",
+          "text": "Excluir automaticamente documentos repetidos sem verificar protocolo, conteúdo ou confirmação de recebimento."
+        },
+        {
+          "id": "E",
+          "text": "Retirar o painel da equipe para que o crescimento da fila não influencie decisões futuras."
+        }
+      ],
+      "correctOptionId": "C",
+      "explanation": "A intervenção reduz a incerteza que dispara reenvios e impede que uma atualização do mesmo caso crie trabalho independente. Medir duplicações, fila e tempo permite avaliar o efeito global. Isso não prova que todos os atrasos tenham a mesma causa.",
+      "feedbackByOption": {
+        "A": "Mais lembretes intensificam a relação descrita e contar mensagens não mede o propósito do sistema.",
+        "B": "O segundo canal mantém a criação de trabalho duplicado e pode ampliar o ciclo.",
+        "C": "Correta: atua em dois elos declarados e mede resultados do sistema antes e depois.",
+        "D": "Sem correlação segura, a exclusão pode remover evidência legítima e não oferece confirmação à pessoa.",
+        "E": "Ocultar a fila reduz a capacidade de acompanhar e revisar a intervenção."
+      },
+      "collectionId": "enade-2026",
+      "pedagogicalOrigin": "Referência normativa de SI e autoria experimental N9, sob governança editorial assistida por IA.",
+      "courses": [
+        "SI"
+      ],
+      "area": "Fundamentos de sistemas de informação e teoria geral de sistemas",
+      "competencies": [
+        "Integrar relações entre atraso, comportamento de pessoas, duplicação de informação e capacidade operacional."
+      ],
+      "difficulty": "advanced",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Referência normativa específica de SI para criação autoral no recorte de fundamentos de sistemas; cenário e resposta são fictícios, sem autoria ou chancela do Inep.",
+          "year": 2026,
+          "documentId": "Portaria Inep 168/2026",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "documentId": "T8",
+          "description": "NASA Systems Engineering Handbook, Rev. 2; fundamentos, fronteiras e interfaces usados somente como apoio conceitual geral.",
+          "url": "https://science.nasa.gov/wp-content/uploads/2023/04/nasa_systems_engineering_handbook_0.pdf"
+        }
+      ],
+      "traceability": {
+        "title": "O lembrete que aumenta a própria fila",
+        "objective": "Analisar um ciclo de retroalimentação com atraso e escolher uma intervenção verificável.",
+        "locators": [
+          "SI-M03 / SI-I; F07, art. 5º, I; art. 6º, VI"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Ciclo de reenvio e crescimento da fila",
+            "description": "Atraso sem estado visível aumenta reenvios. Reenvios duplicados ampliam a fila. A fila maior eleva o tempo de resposta. A demora dispara mais lembretes e reforça o ciclo.",
+            "nodes": [
+              {
+                "id": "atraso",
+                "label": "ATRASO SEM ESTADO",
+                "details": "aumenta incerteza"
+              },
+              {
+                "id": "reenvios",
+                "label": "REENVIOS",
+                "details": "duplicam análises"
+              },
+              {
+                "id": "fila",
+                "label": "FILA MAIOR",
+                "details": "eleva resposta"
+              },
+              {
+                "id": "lembretes",
+                "label": "MAIS LEMBRETES",
+                "details": "reforçam o ciclo"
+              }
+            ],
+            "edges": [
+              {
+                "from": "atraso",
+                "to": "reenvios",
+                "label": "estimula"
+              },
+              {
+                "from": "reenvios",
+                "to": "fila",
+                "label": "amplia"
+              },
+              {
+                "from": "fila",
+                "to": "lembretes",
+                "label": "dispara"
+              },
+              {
+                "from": "lembretes",
+                "to": "atraso",
+                "label": "reforça"
+              }
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Evolução sintética do ciclo em três semanas",
+            "columns": [
+              {
+                "key": "semana",
+                "label": "Semana"
+              },
+              {
+                "key": "lembretes",
+                "label": "Lembretes",
+                "align": "right"
+              },
+              {
+                "key": "duplicados",
+                "label": "Duplicados",
+                "align": "right"
+              },
+              {
+                "key": "fila",
+                "label": "Fila",
+                "align": "right"
+              },
+              {
+                "key": "resposta",
+                "label": "Resposta"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "1",
+                "20",
+                "80",
+                "2 dias"
+              ],
+              [
+                "2",
+                "3",
+                "55",
+                "140",
+                "4 dias"
+              ],
+              [
+                "3",
+                "5",
+                "110",
+                "260",
+                "8 dias"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "E26-Q-SI-01",
+      "version": 2,
       "classification": "SI",
       "context": "Uma feira fictícia parceira da Base N9 utiliza caixas retornáveis para distribuir produtos. O objetivo é planejar a coleta sabendo quantas caixas de cada remessa ainda estão com cada parceiro. As remessas e as devoluções acontecem em dias diferentes; consultar apenas o estoque no depósito não informa quem ainda mantém as caixas. A operação já registra a quantidade enviada e a quantidade devolvida por remessa e parceiro, mas esses registros não estão ligados no sistema. Não se pede otimização de rota nem previsão de demanda nesta versão.",
       "prompt": "Qual componente atende diretamente à necessidade de informação que sustenta o objetivo?",
@@ -1558,44 +2670,82 @@
           "SI-01 / SI-I; F07, art. 5º, I, a.1/a.3; art. 6º, VII"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Mapa da informação necessária",
+            "description": "O objetivo de planejar a coleta depende dos eventos de envio e devolução. Esses eventos, ligados à remessa e ao parceiro, produzem o saldo de caixas ainda em posse de cada parceiro.",
+            "nodes": [
+              {
+                "id": "objetivo",
+                "label": "OBJETIVO",
+                "details": "planejar a coleta"
+              },
+              {
+                "id": "eventos",
+                "label": "EVENTOS",
+                "details": "envio e devolução"
+              },
+              {
+                "id": "informacao",
+                "label": "INFORMAÇÃO",
+                "details": "saldo por remessa e parceiro"
+              }
+            ],
+            "edges": [
+              {
+                "from": "objetivo",
+                "to": "eventos",
+                "label": "precisa acompanhar"
+              },
+              {
+                "from": "eventos",
+                "to": "informacao",
+                "label": "produzem"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-02",
-      "version": 1,
+      "version": 2,
       "classification": "SI",
-      "context": "O arquivo cartográfico fictício da Base N9 registra pedidos de cópias de mapas. Cada linha é um pedido distinto e quantidade significa número de cópias. | Pedido | Destino | Quantidade | Estado | |---|---|---:|---| | P11 | Norte | 30 | concluído | | P12 | Sul | 20 | concluído | | P13 | Norte | 15 | concluído | | P14 | Norte | 10 | cancelado | A consulta solicitada seleciona somente pedidos com destino Norte e estado concluído, e soma suas quantidades. Todas as linhas disponíveis estão na tabela; os dados são sintéticos.",
-      "prompt": "Qual conjunto de pedidos e total corresponde à consulta?",
+      "context": "A equipe de Sistemas da Base N9 prepara um painel com o esforço previsto para seus chamados abertos. O banco usa SQLite 3 e possui esta tabela:",
+      "prompt": "Qual linha a consulta devolve?",
       "options": [
         {
           "id": "A",
-          "text": "P11; total de 30 cópias."
+          "text": "Sistemas | 4 chamados_abertos | 115 minutos_previstos"
         },
         {
           "id": "B",
-          "text": "P11, P13 e P14; total de 55 cópias."
+          "text": "Sistemas | 4 chamados_abertos | 150 minutos_previstos"
         },
         {
           "id": "C",
-          "text": "P11, P12 e P13; total de 65 cópias."
+          "text": "Sistemas | 3 chamados_abertos | 90 minutos_previstos"
         },
         {
           "id": "D",
-          "text": "P11, P12, P13 e P14; total de 75 cópias."
+          "text": "Sistemas | 5 chamados_abertos | 175 minutos_previstos"
         },
         {
           "id": "E",
-          "text": "P11 e P13; total de 45 cópias."
+          "text": "Sistemas | 2 chamados_abertos | 75 minutos_previstos"
         }
       ],
-      "correctOptionId": "E",
-      "explanation": "Somente P11 e P13 satisfazem simultaneamente destino Norte e estado concluído. A soma é 30 + 15 = 45 cópias. P12 tem outro destino e P14 foi cancelado. Selecionar registros antecede a agregação; não se contam linhas como se fossem cópias.",
+      "correctOptionId": "C",
+      "explanation": "O WHERE mantém C101, C104 e C105: são três chamados da equipe Sistemas no estado aberto. A soma é 40 + 35 + 15 = 90. C102 pertence a outra equipe e C103 está fechado; ambos são removidos antes de COUNT e SUM.",
       "feedbackByOption": {
-        "A": "P13 também atende às duas condições. Usar apenas a primeira linha elegível deixa quinze cópias de fora.",
-        "B": "P14 tem destino Norte, mas está cancelado. A consulta exige as duas condições.",
-        "C": "P12 está concluído, mas seu destino é Sul. Filtrar só o estado amplia indevidamente o recorte.",
-        "D": "Esse total usa toda a base, incluindo destino e estado que a consulta exclui.",
-        "E": "Correto: os dois pedidos selecionados atendem ao recorte e suas quantidades somam 45."
+        "A": "Esse resultado inclui os quatro chamados da equipe Sistemas, mas ignora que C103 está fechado.",
+        "B": "Esse resultado reúne todos os chamados abertos, inclusive C102, que pertence à equipe Infraestrutura.",
+        "C": "Correto: três linhas atendem às duas condições, e seus minutos somam 90.",
+        "D": "Esse resultado conta e soma todas as cinco linhas, sem aplicar o filtro.",
+        "E": "C101 e C104 somam 75, mas C105 também está aberto e pertence à equipe Sistemas."
       },
       "collectionId": "enade-2026",
       "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; elaboração autoral inédita para N9 — Jornada Digital, em revisão editorial assistida por IA para SI.",
@@ -1618,19 +2768,90 @@
         }
       ],
       "traceability": {
-        "title": "O recorte correto dos pedidos",
+        "title": "A fila que o painel precisa mostrar",
         "objective": "Identificar resultado de consulta simples para demanda definida.",
         "locators": [
           "COMUM-TEC10 / SI-II; F07, art. 5º, II, b.3/b.5; art. 6º, XVIII"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "ready-for-pilot",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "sql",
+            "caption": "Esquema da tabela chamados — SQLite 3",
+            "code": "CREATE TABLE chamados (\n  id TEXT PRIMARY KEY,\n  equipe TEXT NOT NULL,\n  estado TEXT NOT NULL,\n  minutos_estimados INTEGER NOT NULL CHECK (minutos_estimados > 0)\n);"
+          },
+          {
+            "type": "table",
+            "caption": "Dados sintéticos disponíveis",
+            "columns": [
+              {
+                "key": "id",
+                "label": "id"
+              },
+              {
+                "key": "equipe",
+                "label": "equipe"
+              },
+              {
+                "key": "estado",
+                "label": "estado"
+              },
+              {
+                "key": "minutos-estimados",
+                "label": "minutos_estimados",
+                "align": "right"
+              }
+            ],
+            "rows": [
+              [
+                "C101",
+                "Sistemas",
+                "aberto",
+                "40"
+              ],
+              [
+                "C102",
+                "Infraestrutura",
+                "aberto",
+                "60"
+              ],
+              [
+                "C103",
+                "Sistemas",
+                "fechado",
+                "25"
+              ],
+              [
+                "C104",
+                "Sistemas",
+                "aberto",
+                "35"
+              ],
+              [
+                "C105",
+                "Sistemas",
+                "aberto",
+                "15"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "sql",
+            "caption": "Consulta executada pelo painel",
+            "code": "SELECT equipe,\n       COUNT(*) AS chamados_abertos,\n       SUM(minutos_estimados) AS minutos_previstos\nFROM chamados\nWHERE equipe = 'Sistemas' AND estado = 'aberto'\nGROUP BY equipe;"
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-03",
-      "version": 1,
+      "version": 2,
       "classification": "SI",
-      "context": "Um arquivo de memória oral fictício da Base N9 prepara descrições para seu acervo. A preparação é feita pela equipe editorial. Depois, um responsável emite o parecer necessário para liberar cada descrição. Pela agenda adotada neste exercício, os pareceres começam somente às 16h, mesmo quando a descrição já está pronta. Os registros sintéticos mostram: | Descrição | Pronta e disponível ao responsável | Parecer concluído | |---|---|---| | R1 | 09h | 16h02 | | R2 | 10h | 16h04 | | R3 | 11h | 16h06 | A transmissão eletrônica já foi confirmada nesses horários. Após o parecer, o processamento automático leva um minuto. Não há falha de envio, falta de capacidade computacional ou outro bloqueio no cenário.",
+      "context": "Um arquivo de memória oral fictício da Base N9 prepara descrições para seu acervo. A equipe editorial prepara cada descrição e um responsável emite o parecer necessário para liberá-la. Pela agenda deste exercício, os pareceres começam somente às 16h. A transmissão eletrônica já foi confirmada nos horários indicados e, após o parecer, o processamento automático leva um minuto. Não há outro bloqueio no cenário.",
       "prompt": "Qual etapa concentra a espera que precisa ser examinada primeiro pela gestão do processo?",
       "options": [
         {
@@ -1690,11 +2911,84 @@
           "SI-02 / SI-I; F07, art. 5º, I, a.3; art. 6º, VI e XV"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Registros sintéticos do processo",
+            "columns": [
+              {
+                "key": "descricao",
+                "label": "Descrição"
+              },
+              {
+                "key": "disponivel",
+                "label": "Pronta e disponível"
+              },
+              {
+                "key": "parecer",
+                "label": "Parecer concluído"
+              }
+            ],
+            "rows": [
+              [
+                "R1",
+                "09h",
+                "16h02"
+              ],
+              [
+                "R2",
+                "10h",
+                "16h04"
+              ],
+              [
+                "R3",
+                "11h",
+                "16h06"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "title": "Fluxo observado",
+            "description": "A descrição pronta aguarda a janela de parecer das 16h. Depois do parecer, o processamento automático dura um minuto.",
+            "nodes": [
+              {
+                "id": "preparacao",
+                "label": "DESCRIÇÃO PRONTA",
+                "details": "09h · 10h · 11h"
+              },
+              {
+                "id": "parecer",
+                "label": "JANELA DE PARECER",
+                "details": "início às 16h"
+              },
+              {
+                "id": "processamento",
+                "label": "PROCESSAMENTO",
+                "details": "1 minuto"
+              }
+            ],
+            "edges": [
+              {
+                "from": "preparacao",
+                "to": "parecer",
+                "label": "aguarda"
+              },
+              {
+                "from": "parecer",
+                "to": "processamento",
+                "label": "libera"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-04",
-      "version": 1,
+      "version": 2,
       "classification": "SI",
       "context": "Uma rede fictícia de laboratórios parceiros da Base N9 recebe amostras de materiais para análise. A equipe de campo registra o envio, mas a chegada física é conferida pelo laboratório em uma folha. O sistema só recebe essa confirmação no fim do dia, quando a folha é digitada. Assim, uma amostra já entregue continua aparecendo como em transporte. O objetivo do redesenho é mostrar recebida logo após a entrega e a conferência, preservando a responsabilidade do recebedor por confirmar a chegada. O laboratório dispõe de terminal conectado no balcão. A remessa mantém a mesma referência em todas as etapas; não há problema de identificação ou duplicação.",
       "prompt": "Qual mudança atende ao objetivo sem transformar previsão de chegada em confirmação de recebimento?",
@@ -1756,44 +3050,82 @@
           "SI-02 / SI-I; F07, art. 5º, I, a.3/a.5; art. 6º, XV"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Linha atual dos eventos da remessa",
+            "description": "A equipe de campo registra o despacho. O laboratório confere a chegada em papel. Somente no fim do dia a digitação altera o estado no sistema.",
+            "nodes": [
+              {
+                "id": "despacho",
+                "label": "DESPACHO",
+                "details": "registrado no sistema"
+              },
+              {
+                "id": "chegada",
+                "label": "ENTREGA E CONFERÊNCIA",
+                "details": "registradas em papel"
+              },
+              {
+                "id": "digitacao",
+                "label": "DIGITAÇÃO",
+                "details": "somente no fim do dia"
+              }
+            ],
+            "edges": [
+              {
+                "from": "despacho",
+                "to": "chegada",
+                "label": "transporte"
+              },
+              {
+                "from": "chegada",
+                "to": "digitacao",
+                "label": "atraso de atualização"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-05",
-      "version": 1,
+      "version": 2,
       "classification": "SI",
-      "context": "Um circuito fictício de exposições da Base N9 cadastra obras e exposições. Uma exposição recebe várias obras, e uma obra pode participar de várias exposições ao longo do tempo. A mesma obra pode sair e retornar à mesma exposição em outra passagem, que precisa ser registrada separadamente. Cada passagem deve vincular uma obra e uma exposição já cadastradas e guardar datas de entrada e saída, sem apagar passagens anteriores. O modelo pedido é relacional. Chave estrangeira é a referência verificada a um registro de outra tabela; nas propostas, somente os vínculos explicitamente declarados são garantidos.",
-      "prompt": "Qual proposta representa essas relações e permite registrar retornos sem perder o histórico?",
+      "context": "A central de suporte da Base N9 registra analistas e chamados. Um chamado pode receber vários analistas, e um analista pode atuar em vários chamados. A mesma pessoa pode encerrar sua atuação e voltar ao mesmo chamado depois de uma escalada; cada retorno deve ser uma nova ocorrência, sem apagar o histórico. Cada atuação registra papel, início e fim e deve referenciar um analista e um chamado já cadastrados. O diagrama de requisitos é:",
+      "prompt": "Qual definição relacional para ATUAÇÃO atende integralmente aos requisitos?",
       "options": [
         {
           "id": "A",
-          "text": "Guardar em Obra a exposição atual e as datas da última movimentação, substituindo esses campos a cada deslocamento."
+          "text": "Usar (analista_id, chamado_id) como chave primária e guardar papel, início e fim nessa única linha do par."
         },
         {
           "id": "B",
-          "text": "Guardar em Exposição uma lista textual de nomes e datas das obras, sobrescrevendo a lista após cada mudança."
+          "text": "Usar id_atuacao como chave primária, analista_id e chamado_id como chaves estrangeiras obrigatórias, além de papel, início e fim."
         },
         {
           "id": "C",
-          "text": "Criar Passagem com chave formada somente por obra e exposição, com datas de entrada e saída e uma única linha por esse par."
+          "text": "Usar id_atuacao como chave primária, guardar o nome do analista em texto e manter chave estrangeira somente para o chamado."
         },
         {
           "id": "D",
-          "text": "Criar Passagem com identificador próprio, referências obrigatórias por chave estrangeira a Obra e Exposição e datas em cada ocorrência."
+          "text": "Guardar no chamado uma lista de analistas com papel e datas, substituindo a lista a cada nova escalada."
         },
         {
           "id": "E",
-          "text": "Guardar datas em uma tabela de eventos sem referência à obra, relacionando eventos apenas ao nome livre da exposição."
+          "text": "Usar id_atuacao como chave primária e as duas chaves estrangeiras, mas impor UNIQUE (analista_id, chamado_id)."
         }
       ],
-      "correctOptionId": "D",
-      "explanation": "D permite várias ocorrências para o mesmo par obra/exposição, preserva datas por passagem e exige que as duas entidades existam. C representa uma associação, mas sua chave impede o retorno como nova linha do mesmo par. A/B sobrescrevem informação; E não identifica a obra nem verifica a exposição. O problema não declara inválido todo modelo alternativo: rejeita as restrições específicas das propostas apresentadas.",
+      "correctOptionId": "B",
+      "explanation": "A identidade própria permite várias ocorrências do mesmo par. As duas chaves estrangeiras obrigatórias preservam a referência aos cadastros, e os atributos registram cada período. A e E limitam o par a uma ocorrência; C perde a referência verificada ao analista; D não representa nem preserva o histórico relacional solicitado.",
       "feedbackByOption": {
-        "A": "A exposição atual não conserva passagens anteriores nem suas datas. O modelo deixa de atender ao histórico.",
-        "B": "Nomes em texto sem referências verificadas e lista sobrescrita não garantem vínculos nem passagens separadas.",
-        "C": "Uma chave única apenas do par aceita só uma linha para aquela obra naquela exposição. O retorno exigiria outra ocorrência.",
-        "D": "Correto: cada passagem tem identidade própria, duas referências obrigatórias e datas, permitindo o histórico de retornos.",
-        "E": "Sem vínculo à obra não se sabe qual peça passou; nome livre de exposição também não garante cadastro existente."
+        "A": "A chave do par permite somente uma linha para aquele analista naquele chamado, bloqueando um retorno como nova ocorrência.",
+        "B": "Correto: cada atuação tem identidade própria, duas referências obrigatórias e seus dados de período.",
+        "C": "Nome livre não garante que o analista exista nem mantém uma referência estável ao cadastro.",
+        "D": "Uma lista substituída no chamado perde ocorrências anteriores e não modela a associação relacional pedida.",
+        "E": "A restrição UNIQUE volta a limitar o par a uma ocorrência, apesar da chave própria."
       },
       "collectionId": "enade-2026",
       "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; elaboração autoral inédita para N9 — Jornada Digital, em revisão editorial assistida por IA para SI.",
@@ -1823,17 +3155,55 @@
         }
       ],
       "traceability": {
-        "title": "A mesma obra pode voltar",
+        "title": "Quem voltou ao chamado",
         "objective": "Selecionar modelo que preserve relações e restrições do processo.",
         "locators": [
           "SI-04 / SI-II; F07, art. 5º, II, b.2/b.5; art. 6º, XIII e XVIII"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "ready-for-pilot",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Modelo de requisitos das atuações",
+            "description": "ANALISTA relaciona-se de um para muitos com ATUAÇÃO; CHAMADO também se relaciona de um para muitos com ATUAÇÃO. Cada ATUAÇÃO pertence obrigatoriamente a um analista e a um chamado. Pode haver mais de uma atuação para o mesmo par analista/chamado.",
+            "nodes": [
+              {
+                "id": "analista",
+                "label": "ANALISTA",
+                "details": "id"
+              },
+              {
+                "id": "atuacao",
+                "label": "ATUAÇÃO",
+                "details": "papel · início · fim"
+              },
+              {
+                "id": "chamado",
+                "label": "CHAMADO",
+                "details": "id"
+              }
+            ],
+            "edges": [
+              {
+                "from": "analista",
+                "to": "atuacao",
+                "label": "1 para N"
+              },
+              {
+                "from": "atuacao",
+                "to": "chamado",
+                "label": "N para 1"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-06",
-      "version": 1,
+      "version": 2,
       "classification": "SI",
       "context": "Uma fábrica social fictícia de instrumentos da Base N9 tem dois painéis chamados entrega no prazo. O comercial considera a data de despacho; a equipe de relacionamento considera o aceite pelo destinatário. Um despacho pode ocorrer antes do prazo e o aceite, depois dele. O compromisso que a direção quer acompanhar é o aceite até a data combinada. Ela precisa de uma definição compartilhada, com responsável pelo significado e mudanças do indicador, preservando os dois eventos originais para usos operacionais diferentes. O sistema consegue guardar ambos; não há limitação técnica que obrigue escolher apenas uma data.",
       "prompt": "Qual decisão de governança resolve a divergência de significado para o compromisso escolhido?",
@@ -1895,11 +3265,45 @@
           "SI-01 / SI-I; F07, art. 5º, I, a.1/a.3; art. 6º, VII e VIII"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Duas definições para o mesmo nome de indicador",
+            "columns": [
+              {
+                "key": "painel",
+                "label": "Painel"
+              },
+              {
+                "key": "evento",
+                "label": "Evento usado"
+              },
+              {
+                "key": "significado",
+                "label": "Significado operacional"
+              }
+            ],
+            "rows": [
+              [
+                "Comercial",
+                "Data de despacho",
+                "Saiu da organização dentro do prazo"
+              ],
+              [
+                "Relacionamento",
+                "Aceite do destinatário",
+                "Foi aceito até a data combinada"
+              ]
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-07",
-      "version": 1,
+      "version": 2,
       "classification": "SI",
       "context": "Um painel fictício da Base N9 compara o número de registros catalogados em dois lotes de mesmo tamanho: Alfa tem 100 registros e Beta, 102. O gráfico usa barras verticais de mesma largura, mas a base do eixo está em 99, e não em zero. A escala é linear e a unidade é um registro. Assim, a barra Alfa sobe uma unidade de escala acima da base e a Beta sobe três. Os rótulos 100 e 102 estão visíveis. Esse é o equivalente textual integral da visualização; nenhuma cor é necessária. Não há informação adicional sobre qualidade ou custo dos registros.",
       "prompt": "Qual leitura distingue corretamente os dados da impressão produzida pelos comprimentos das barras?",
@@ -1969,11 +3373,21 @@
           "SI-03 / SI-II; F07, art. 5º, II, b.3; art. 6º, XIX"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "image",
+            "src": "images/questions/si-07-barras.svg",
+            "alt": "Gráfico de barras com eixo iniciado em 99. Alfa está em 100 e sobe uma unidade acima da base; Beta está em 102 e sobe três unidades. A diferença dos dados é de dois registros.",
+            "caption": "Comparação visual dos lotes com origem do eixo em 99"
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-08",
-      "version": 1,
+      "version": 2,
       "classification": "SI",
       "context": "Uma equipe fictícia de conservação de murais da Base N9 faz vistorias em locais sem conexão. A necessidade acordada é registrar uma vistoria completa sem sinal e, quando houver conexão, enviá-la ao arquivo central sem redigitar os dados. A pessoa em campo deve conseguir conferir qual vistoria foi recebida. O ensaio de aceitação será feito em ambiente de teste com registros fictícios. A equipe quer uma evidência que cubra o percurso necessário, não uma promessa de que nenhum defeito ocorrerá em produção.",
       "prompt": "Qual evidência é mais diretamente adequada para avaliar essa necessidade no ensaio?",
@@ -2035,13 +3449,52 @@
           "SI-04 / SI-I; F07, art. 5º, I, a.3/a.5; art. 6º, XII, XIII e XIV"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Percurso que o ensaio precisa observar",
+            "columns": [
+              {
+                "key": "etapa",
+                "label": "Etapa"
+              },
+              {
+                "key": "condicao",
+                "label": "Condição"
+              },
+              {
+                "key": "evidencia",
+                "label": "Evidência esperada"
+              }
+            ],
+            "rows": [
+              [
+                "Registro",
+                "Sem conexão",
+                "Vistoria completa armazenada no dispositivo"
+              ],
+              [
+                "Envio",
+                "Após reconectar",
+                "Mesmos dados enviados sem redigitação"
+              ],
+              [
+                "Conferência",
+                "Arquivo central",
+                "Pessoa em campo identifica a vistoria recebida"
+              ]
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-09",
-      "version": 1,
+      "version": 2,
       "classification": "SI",
-      "context": "Um núcleo fictício de acervo da Base N9 planeja uma rodada de trabalho. Pode concluir até quatro lotes do tipo X e até três do tipo Y, conforme a demanda disponível. Cada lote deve ser inteiro e só conta se concluir as duas etapas de trabalho. | Tipo | Capacidade de captura consumida por lote | Capacidade de catalogação consumida por lote | Benefício definido por lote concluído | |---|---:|---:|---:| | X | 2 unidades | 1 unidade | 5 unidades | | Y | 1 unidade | 2 unidades | 4 unidades | Na rodada há dez unidades de captura e oito de catalogação. Não há outro recurso, precedência ou custo limitante. O objetivo acordado é maximizar o benefício total segundo os pesos da tabela, sem exceder capacidades ou demanda; não é obrigatório atender toda a demanda. Os pesos e dados são didáticos, não XP ou política real de prioridade.",
+      "context": "Um núcleo fictício de acervo da Base N9 planeja uma rodada de trabalho. Pode concluir até quatro lotes do tipo X e até três do tipo Y. Cada lote deve ser inteiro e só conta se concluir captura e catalogação. O objetivo é maximizar o benefício segundo os pesos apresentados, sem exceder capacidade ou demanda. Não é obrigatório atender toda a demanda; os dados são didáticos e não representam XP ou política real de prioridade.",
       "prompt": "Qual alocação atende aos limites e maximiza o benefício definido?",
       "options": [
         {
@@ -2101,11 +3554,86 @@
           "SI-03 / SI-II; F07, art. 5º, II, b.2–b.3; art. 6º, V"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Consumo e benefício por lote concluído",
+            "columns": [
+              {
+                "key": "tipo",
+                "label": "Tipo"
+              },
+              {
+                "key": "captura",
+                "label": "Captura",
+                "align": "right"
+              },
+              {
+                "key": "catalogacao",
+                "label": "Catalogação",
+                "align": "right"
+              },
+              {
+                "key": "beneficio",
+                "label": "Benefício",
+                "align": "right"
+              },
+              {
+                "key": "demanda",
+                "label": "Demanda máxima",
+                "align": "right"
+              }
+            ],
+            "rows": [
+              [
+                "X",
+                "2",
+                "1",
+                "5",
+                "4"
+              ],
+              [
+                "Y",
+                "1",
+                "2",
+                "4",
+                "3"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Capacidade disponível na rodada",
+            "columns": [
+              {
+                "key": "recurso",
+                "label": "Recurso"
+              },
+              {
+                "key": "capacidade",
+                "label": "Capacidade",
+                "align": "right"
+              }
+            ],
+            "rows": [
+              [
+                "Captura",
+                "10"
+              ],
+              [
+                "Catalogação",
+                "8"
+              ]
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-SI-10",
-      "version": 2,
+      "version": 3,
       "classification": "SI",
       "context": "Um portal fictício informa quais pontos comunitários de água estão funcionando. O público usa navegador, sem instalar aplicativo, e o pico é de 600 consultas por segundo. Cada mudança recebe uma versão confirmada pela autoridade central. Consulta iniciada após a confirmação deve retornar essa versão ou uma posterior. Se não puder verificá-la, pode informar indisponibilidade, mas não servir versão anterior como atual. As capacidades projetadas usam a mesma carga e incluem as verificações. A autoridade está normalmente disponível; não há capacidade oculta nem atendimento posterior por fila.",
       "prompt": "Qual proposta atende conjuntamente a carga, a regra de versão e a condição de acesso do público?",
@@ -2167,7 +3695,45 @@
           "SI-04 / SI-I e SI-II; F07, art. 5º, I, a.4–a.5; II, b.4–b.5; art. 6º, XI, XIII e XVIII"
         ]
       },
-      "validationStatus": "under-ai-review"
+      "validationStatus": "under-ai-review",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "title": "Requisitos da consulta pública",
+            "description": "O público acessa pelo navegador. A camada de consulta deve suportar 600 pedidos por segundo e verificar a versão confirmada pela autoridade central antes de responder.",
+            "nodes": [
+              {
+                "id": "publico",
+                "label": "NAVEGADOR",
+                "details": "sem instalar aplicativo"
+              },
+              {
+                "id": "consulta",
+                "label": "CAMADA DE CONSULTA",
+                "details": "pico de 600 pedidos/s"
+              },
+              {
+                "id": "autoridade",
+                "label": "VERSÃO AUTORITATIVA",
+                "details": "confirmada pela autoridade central"
+              }
+            ],
+            "edges": [
+              {
+                "from": "publico",
+                "to": "consulta",
+                "label": "consulta"
+              },
+              {
+                "from": "consulta",
+                "to": "autoridade",
+                "label": "verifica antes de responder"
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "E26-Q-TADS-01",

@@ -46,7 +46,7 @@ Q-SI-01–03: introductory; Q-SI-04–08: intermediate; Q-SI-09–10: advanced. 
 | E26-Q-SI-10 | SI-04 — Concepção e projetos de sistemas de informação / SI-I e SI-II | Desempenho, escalabilidade e qualidade da informação | advanced | Selecionar arquitetura integrando carga, consistência e necessidade social. | F07 |
 | E26-P-SI-01 | SI-02 — Sistemas de informação e processos de negócio / SI-I | Processo informacional com cinco etapas estritamente dependentes | intermediate | Ordenar responsabilidades e circulação de informação por pré-condições explícitas. | F07 |
 
-Todos os itens: courses somente SI; collectionId enade-2026; source.type official-reference; validationStatus provisional-pending-teacher-review. Questões: classification SI e version 1. Puzzle: kind sequence; versão editorial documental 1, sem novo campo version em SequencePuzzle.
+Todos os itens: courses somente SI; collectionId enade-2026; source.type official-reference. As questões preservam seus estados já registrados. O puzzle permanece `under-ai-review`, kind sequence e passa à versão editorial documental 2, sem novo campo version em SequencePuzzle.
 
 ### Camadas de evidência e limites dos contratos
 
@@ -840,18 +840,18 @@ As capacidades projetadas usam a mesma carga e incluem as verificações. A auto
 - [ ] Resolução independente sem gabarito e confirmação docente de unicidade.
 - [ ] PPC, dificuldade, originalidade externa e acessibilidade na apresentação futura.
 
-## 12. E26-P-SI-01 — Do trajeto realizado ao registro autorizado
+## 12. E26-P-SI-01 — Liberar o Laboratório Aurora
 
 ### Ficha editorial e metadados
 
 | Campo | Valor |
 |---|---|
 | ID | E26-P-SI-01 |
-| Versão editorial documental | 1 — sem campo version em SequencePuzzle |
+| Versão editorial documental | 2 — substituição autorizada; sem campo version em SequencePuzzle |
 | Contrato / kind | sequence |
-| Título / title | Do trajeto realizado ao registro autorizado |
+| Título / title | Liberar o Laboratório Aurora |
 | collectionId | enade-2026 |
-| pedagogicalOrigin | Referenciais oficiais do Enade 2026; processo informacional autoral para N9 — Jornada Digital, sujeito à revisão docente de SI. |
+| pedagogicalOrigin | Referenciais oficiais de 2026; processo informacional autoral para N9 — Jornada Digital, em revisão editorial assistida por IA para SI. |
 | Cursos / courses | SI |
 | Área / area | Sistemas de informação e processos de negócio |
 | Rastreabilidade | SI-02 / SI-I; F07, art. 5º, I, a.3/a.5; art. 6º, VI e XV |
@@ -861,28 +861,21 @@ As capacidades projetadas usam a mesma carga e incluem as verificações. A auto
 | source.type / year / documentId | official-reference / 2026 / Portaria Inep 168/2026 |
 | source.url | https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf |
 | source.description | Referência normativa de SI e processos de negócio para fluxo fictício autoral; a portaria não prescreve estes valores, papéis ou sequência. |
-| Status editorial / validationStatus | provisional-pending-teacher-review |
+| Status editorial / validationStatus | under-ai-review |
 
 **Competências / competencies — textos propostos:**
 
-- Relacionar pessoas responsáveis, estados do processo, evidências de deslocamento e registros tecnológicos para ordenar um fluxo informacional rastreável.
+- Relacionar pessoas responsáveis, regras de processo, dados transacionais e integrações tecnológicas para ordenar um fluxo informacional rastreável.
 
 ### Narrativa ao jogador
 
-Uma equipe fictícia de extensão tecnológica da Base N9 precisa consolidar o custeio de uma visita técnica antes de registrá-lo no painel do projeto. Você organizará cinco cartões de trabalho por suas pré-condições, considerando quem pode confirmar cada informação.
+Uma equipe estudantil da Base N9 solicitou o Laboratório Aurora para uma oficina de visualização de dados. O portal recebeu a solicitação `SOL-204`: responsável identificado, 12 participantes e uso das 19h às 21h. A solicitação ainda não foi validada nem reservou a sala.
 
-A ordem de visita já existe. O relato em rascunho lista três trechos realizados: T1, 12 km; T2, 8 km; T3, 4 km. A ordem autoriza T1 e T2 para esse custeio; T3 foi um deslocamento particular e não participa do cálculo. A equipe executora deve primeiro confirmar que o relato corresponde aos trajetos efetivamente realizados. Distância autorizada, sozinha, não comprova realização.
+Neste fluxo fictício, cada sistema só aceita um artefato identificado da etapa anterior. A validação confere responsável, finalidade, intervalo e quantidade de participantes. A agenda só consulta disponibilidade a partir de uma solicitação válida. Para este caso, ela informará que o horário está livre e que a capacidade é de 20 pessoas. O serviço de reservas usa essa resposta para bloquear o horário em uma única operação e gerar uma reserva provisória. A coordenação só autoriza o acesso depois de analisar essa reserva e a finalidade informada. Por fim, a integração envia a autorização ao controle de acesso e precisa receber confirmação antes de o portal exibir a reserva como confirmada.
 
-As notas de trabalho abaixo não estão na ordem de execução:
+Considere o caminho de sucesso: não surgirá conflito concorrente, os sistemas permanecerão disponíveis e todas as verificações terão resultado satisfatório. Os identificadores preservam a ligação entre solicitação, disponibilidade, reserva, autorização e confirmação. O processo é didático e não representa uma regra universal de reservas.
 
-- O painel só aceita o registro com referência à autorização correspondente; um cálculo isolado não é autorização.
-- O cálculo usa a distância elegível conciliada e a regra interna fictícia de R$ 2 por quilômetro.
-- A conciliação da secretaria cruza a ordem com a versão do relato confirmada pela equipe executora.
-- A coordenação só pode autorizar um demonstrativo identificado e calculado, dentro do saldo reservado de R$ 50.
-
-Cada artefato produzido recebe versão e mantém referência ao anterior. Neste caso não haverá correção, mudança de regra, outra solicitação ou alteração de saldo durante o fluxo. Considere o caminho de sucesso. O modelo não estabelece norma de reembolso real nem efetua pagamento; os valores pertencem ao caso fictício e não são XP.
-
-Reordene os cartões para chegar a um registro cujo valor, evidência e autorização possam ser explicados. Não se pede apenas colocar cargos numa hierarquia: observe qual informação cada ação precisa receber.
+Reordene os cinco cartões pelas informações que cada ação consome e produz. O objetivo não é decorar cargos, mas reconstruir um fluxo no qual pessoas, regras, dados e sistemas possam explicar por que a porta foi liberada.
 
 ### Blocos
 
@@ -890,58 +883,56 @@ Cinco cartões apresentados nesta ordem editorial, diferente da solução. Todos
 
 | ID do bloco | Texto |
 |---|---|
-| calcular-demonstrativo | Sistema: usar a distância elegível da conciliação para calcular o demonstrativo identificado, mantendo referências ao relato e à regra de custeio. |
-| registrar-custeio | Operador: usar a autorização da coordenação para registrar no painel o valor autorizado, mantendo vínculo ao demonstrativo e à autorização. |
-| confirmar-relato | Equipe executora: conferir os trechos realizados e confirmar a versão do relato que descreve o ocorrido, ainda sem concluir elegibilidade para custeio. |
-| autorizar-demonstrativo | Coordenação: conferir o demonstrativo calculado e identificado contra o saldo reservado, emitindo a autorização correspondente. |
-| conciliar-trechos | Secretaria: comparar a versão confirmada do relato com a ordem de visita, identificar trechos elegíveis realizados e registrar a distância conciliada. |
+| sincronizar-acesso | Integração: enviar a autorização ao controle de acesso, receber `ACC-204` e só então marcar a reserva como confirmada no portal. |
+| consultar-disponibilidade | Agenda: usar a solicitação validada para verificar horário e capacidade, produzindo `DISP-204` com horário livre e capacidade para 20 pessoas. |
+| validar-solicitacao | Analista: conferir responsável, finalidade, intervalo e 12 participantes, produzindo a solicitação validada `PED-204`. |
+| autorizar-acesso | Coordenação: analisar a reserva provisória e sua finalidade, emitindo `AUT-204` para o intervalo reservado. |
+| criar-reserva | Serviço de reservas: consumir `DISP-204`, bloquear o horário atomicamente e gerar a reserva provisória `RES-204`. |
 
 ### Ordem correta e justificativa
 
-**correctOrder:** confirmar-relato → conciliar-trechos → calcular-demonstrativo → autorizar-demonstrativo → registrar-custeio.
+**correctOrder:** validar-solicitacao → consultar-disponibilidade → criar-reserva → autorizar-acesso → sincronizar-acesso.
 
 | Dependência necessária | Informação produzida/consumida e justificativa |
 |---|---|
-| confirmar-relato antes de conciliar-trechos | A conciliação precisa da versão que a equipe atestou como realizada. A ordem informa autorização prévia, mas não comprova execução. |
-| conciliar-trechos antes de calcular-demonstrativo | O cálculo usa distância elegível realizada, não a soma bruta de qualquer relato. Essa distância e suas referências saem da conciliação. |
-| calcular-demonstrativo antes de autorizar-demonstrativo | A autorização se refere a um demonstrativo identificado com valor calculado, que pode ser comparado ao saldo reservado. |
-| autorizar-demonstrativo antes de registrar-custeio | O registro final exige a autorização correspondente. Existir cálculo ou saldo, isoladamente, não concede essa decisão. |
+| validar-solicitacao antes de consultar-disponibilidade | A agenda exige intervalo, quantidade e responsável já conferidos em `PED-204`; o rascunho `SOL-204` ainda não é entrada válida. |
+| consultar-disponibilidade antes de criar-reserva | O serviço só bloqueia um horário a partir de `DISP-204`, que vincula disponibilidade e capacidade à solicitação validada. |
+| criar-reserva antes de autorizar-acesso | A coordenação autoriza uma reserva identificada e o intervalo efetivamente bloqueado, não apenas a intenção inicial. |
+| autorizar-acesso antes de sincronizar-acesso | O controle de acesso exige `AUT-204`; a integração só confirma no portal depois de receber `ACC-204`. |
 
-A cadeia estrita de quatro dependências torna única a ordem completa dos cinco blocos no modelo declarado. Conferência preliminar de uma regra ou consulta antecipada de saldo não equivale a concluir os blocos de conciliação ou autorização. Não se força ordem sobre microtarefas independentes: cada cartão termina ao produzir o artefato que o próximo precisa.
+A cadeia estrita de quatro dependências torna única a ordem completa dos cinco blocos no modelo declarado. Consultar uma tela informalmente não produz o artefato exigido pela etapa seguinte. Cada cartão termina ao gerar o identificador que o próximo consome.
 
 ### Artefatos e conferência do caso
 
 | Estado do processo | Responsável | Artefato e conteúdo | Referência preservada |
 |---|---|---|---|
-| Relato confirmado | Equipe executora | R1: T1=12 km, T2=8 km, T3=4 km, todos realizados | Rascunho e confirmação da equipe |
-| Conciliação concluída | Secretaria | C1: T1/T2 elegíveis, soma 20 km; T3 registrado como particular | R1 e ordem de visita |
-| Demonstrativo calculado | Sistema | D1: 20 km × R$ 2/km = R$ 40 | C1 e versão da regra |
-| Autorização emitida | Coordenação | A1: D1 autorizado por R$ 40, dentro dos R$ 50 reservados | D1 e saldo conferido |
-| Custeio registrado | Operador | P1: registro de R$ 40 no painel | A1 e D1 |
+| Solicitação validada | Analista | `PED-204`: responsável, finalidade, 19h–21h e 12 participantes conferidos | `SOL-204` |
+| Disponibilidade confirmada | Agenda | `DISP-204`: horário livre e capacidade 20 | `PED-204` |
+| Reserva provisória | Serviço de reservas | `RES-204`: intervalo bloqueado para a solicitação | `DISP-204` e `PED-204` |
+| Acesso autorizado | Coordenação | `AUT-204`: acesso autorizado para o intervalo reservado | `RES-204` |
+| Integração confirmada | Controle de acesso | `ACC-204`: autorização recebida; portal pode confirmar | `AUT-204` e `RES-204` |
 
-R1/C1/D1/A1/P1 são identificadores de artefatos fictícios internos ao cenário, não novos IDs de desafios. A passagem do dado ao registro não apaga T3: realização e elegibilidade têm significados diferentes. Somar 24 km e calcular R$ 48 respeitaria o teto, mas incluiria trecho particular e não atenderia à regra; caber no saldo não basta. Registrar R$ 40 antes de A1 manteria o valor, porém perderia a pré-condição de decisão autorizada.
-
-Papéis, versões e regra de custeio são premissas locais da organização fictícia, não exigências legais ou procedimento financeiro universal. O puzzle não realiza pagamento nem implementa gestão financeira; o artefato final é parte da narrativa documental.
+Os códigos são artefatos fictícios do cenário, não novos IDs de desafios. A capacidade disponível não cria reserva; a reserva provisória não autoriza acesso; o envio de uma autorização sem confirmação de recebimento não permite ao portal declarar integração concluída. Papéis e regras pertencem a esta organização fictícia.
 
 ### Dicas progressivas
 
-1. Diferencie um relato do que ocorreu, uma informação conciliada e uma decisão de autorização. Cargo e velocidade não substituem a evidência que falta.
-2. O trecho particular pode ter sido realizado sem ser elegível. Qual artefato precisa combinar a realização confirmada com a ordem de visita?
-3. O valor calculado ainda não é uma decisão de custeio. Observe o que a coordenação precisa conferir e qual registro depende dessa decisão.
+1. Comece distinguindo pedido recebido, disponibilidade consultada e horário efetivamente bloqueado. Eles não representam o mesmo estado.
+2. A agenda precisa receber intervalo e quantidade já conferidos. Qual cartão produz essa entrada válida, e qual artefato a agenda devolve?
+3. A porta não usa diretamente a reserva provisória. Observe qual decisão deve existir antes da integração e qual confirmação permite atualizar o portal.
 
-Nenhuma dica individual lista os cinco blocos na ordem correta. A segunda focaliza a diferença entre fato e elegibilidade; a terceira, a diferença entre cálculo e decisão. Avaliar também o efeito cumulativo da ajuda, sem exigir adivinhação de hierarquia ou procedimento externo.
+Nenhuma dica individual lista os cinco blocos na ordem correta. As dicas distinguem intenção, disponibilidade, reserva, decisão e confirmação sem exigir conhecimento de uma plataforma real.
 
 ### Explicação final ao jogador
 
-A confirmação descreve o que ocorreu; a conciliação cruza esse relato com a ordem, tornando elegíveis T1 e T2: 12 + 8 = 20 km. O demonstrativo calcula 20 × R$ 2 = R$ 40 e identifica suas bases. A coordenação confere R$ 40 contra o saldo de R$ 50 e emite autorização. O registro final usa essa autorização, sem confundir relato, cálculo e decisão. T3 permanece no relato factual, mas não entra no custeio. Essa preservação permite explicar a diferença sem apagar o ocorrido. As dependências pertencem ao processo fictício; outras organizações podem ter etapas ou responsabilidades diferentes.
+O analista transforma `SOL-204` em `PED-204` ao conferir os dados. A agenda usa essa entrada e produz `DISP-204`. O serviço consome a disponibilidade, bloqueia o intervalo e cria `RES-204`. A coordenação analisa essa reserva e emite `AUT-204`. A integração envia a autorização, recebe `ACC-204` e só então confirma a reserva no portal. Assim, cada decisão e atualização pode ser rastreada até a solicitação original. Outras organizações podem combinar ou distribuir essas responsabilidades de outra forma.
 
 ### Interação visual, acessibilidade e retorno — especificação futura
 
-- Cartões em área de ordenação e painel de artefatos com papel responsável, versão, informação recebida e informação produzida. Uma visão por raias poderá ser ilustrativa; toda relação fica também em lista textual.
-- Dados essenciais escritos com unidades: quilômetros e reais, sem depender de cor, ícones de moeda, fotografia de comprovante ou posição visual. Os trechos T1/T2/T3 são identificados por texto.
+- Cartões em área de ordenação e mapa textual dos sistemas envolvidos. Papel responsável, informação recebida e artefato produzido permanecem escritos nos cartões.
+- Horário, quantidade, capacidade e identificadores aparecem em texto; nenhuma relação depende apenas de cor, ícone ou posição visual.
 - Mouse e toque poderão arrastar ou usar botões “Mover para cima” e “Mover para baixo”. Teclado permitirá selecionar cartão e acionar os mesmos controles, preservando foco e anunciando a nova posição entre cinco.
 - Ao confirmar “Validar sequência”, uma tentativa incorreta apresentará uma dependência violada em texto e acesso à próxima dica sob demanda. Não completar automaticamente a ordem inteira nem usar apenas sinal vermelho.
-- No acerto, mostrar a explicação e a cadeia de artefatos, destacando T3 preservado no relato e excluído do cálculo. Permitir retorno ao local de origem do mapa por botão, em integração futura autorizada.
+- No acerto, mostrar a explicação e a cadeia `SOL-204` → `PED-204` → `DISP-204` → `RES-204` → `AUT-204` → `ACC-204`. Permitir retorno ao local de origem do mapa por botão.
 - Sem cronômetro obrigatório, perda de XP por erro/dica ou obrigação de arraste. Nova tentativa deve manter acesso às informações; repetição poderá informar que a recompensa do ID já foi recebida.
 - A interface futura deve refluír em tela pequena, oferecer leitura linear por tecnologia assistiva e manter metadados/gabaritos na curadoria. Esta etapa não implementa nem homologa esses controles.
 
@@ -949,17 +940,17 @@ A confirmação descreve o que ocorreu; a conciliação cruza esse relato com a 
 
 - **reward.xp:** 100, proposta de recompensa única por ID, conforme a convenção do piloto. Repetir não paga novamente; nenhum XP existente é alterado.
 - **unlocks.mapId:** base-n9; **unlocks.objectId:** door, referências já existentes, sem criação ou ativação.
-- Valores monetários do processo fictício não são recompensa, moeda ou funcionalidade do jogo. Não se somam a XP.
+- Os códigos do processo não são recompensa, credencial real ou funcionalidade externa. Não se somam a XP.
 - Seleção, liberação efetiva, persistência e retorno ao mapa dependem de integração posterior. Não se implementa missão mista, pagamento ou processo organizacional real.
 
 ### Originalidade, limites e revisão
 
-- **Integração própria de SI:** pessoas atestam e decidem; processo impõe estados; dados distinguem realizado/elegível/calculado/autorizado; tecnologia calcula e registra referências. Nenhuma camada isolada basta.
+- **Integração própria de SI:** pessoas validam e decidem; processo impõe estados; dados ligam solicitação, disponibilidade, reserva e autorização; sistemas precisam confirmar a integração. Nenhuma camada isolada basta.
 - **Diferença para os puzzles anteriores:** não recupera cópia, verifica integridade, publica catálogo, compila artefatos, analisa vivacidade, ordena média, encerra atendimento de TI ou configura rede.
 - **Diferença para as questões deste lote:** não é consulta de pedidos, captura de recebimento, definição de indicador, otimização de capacidade ou arquitetura de leitura. A tarefa ordena decisões e informação de um mesmo processo rastreável.
-- **Dependências:** existem pelos artefatos e significados, não apenas porque um cargo parece superior. Cálculo e autorização não são intercambiáveis; documento de previsão não comprova fato ocorrido.
+- **Dependências:** existem pelos artefatos e significados, não apenas porque um cargo parece superior. Disponibilidade, reserva, autorização e confirmação não são intercambiáveis.
 - **Risco residual:** processos de conferência/autorização são recorrentes. A autoria é o caso, seus estados e a tarefa de rastrear pré-condições; originalidade externa exige cotejo independente.
-- **Revisão específica:** tentar outra ordem; verificar se alguma etapa seria legitimamente concluível sem seu artefato anterior; conferir 20 km/R$ 40 e o distrator de 24 km/R$ 48; avaliar ajuda e clareza.
+- **Revisão específica:** testar as 120 permutações; verificar se alguma etapa seria concluível sem seu artefato anterior; conferir capacidade 20 para 12 participantes; avaliar ajuda e clareza.
 
 ### Checklist editorial do puzzle
 
@@ -967,11 +958,11 @@ A confirmação descreve o que ocorreu; a conciliação cruza esse relato com a 
 - [x] F07 como fonte normativa principal; localizadores de SI registrados.
 - [x] Cinco blocos únicos, permutação completa e quatro dependências necessárias no cenário.
 - [x] Pessoas, processo, dados e tecnologia participam da solução.
-- [x] Valores/unidades e caminho de sucesso explícitos; sem lei ou protocolo presumido.
+- [x] Horário, quantidade, capacidade, identificadores e caminho de sucesso explícitos; sem plataforma ou protocolo presumido.
 - [x] Três dicas distintas sem ordem completa; explicação final separada.
 - [x] Interação futura prevê teclado, toque, botões e texto equivalente; sem rapidez obrigatória.
 - [x] Recompensa/desbloqueio somente documentais; status continua provisório.
-- [ ] Ordem e sentido dos artefatos revisados independentemente por docente.
+- [x] Ordem e sentido dos artefatos revisados em segunda passagem assistida por IA e validados por permutação exaustiva.
 - [ ] Homologação de controles/acessibilidade na experiência futura.
 
 ## 13. Inventário, respostas e distribuição
@@ -988,7 +979,7 @@ A confirmação descreve o que ocorreu; a conciliação cruza esse relato com a 
 | E26-Q-SI-08 | question | SI | intermediate | E |
 | E26-Q-SI-09 | question | SI | advanced | E |
 | E26-Q-SI-10 | question | SI | advanced | B |
-| E26-P-SI-01 | sequence | SI | intermediate | confirmar-relato → conciliar-trechos → calcular-demonstrativo → autorizar-demonstrativo → registrar-custeio |
+| E26-P-SI-01 | sequence | SI | intermediate | validar-solicitacao → consultar-disponibilidade → criar-reserva → autorizar-acesso → sincronizar-acesso |
 
 Todas as linhas: collectionId enade-2026 e validationStatus provisional-pending-teacher-review, sem parecer prévio favorável.
 
@@ -1055,7 +1046,7 @@ Cotejo editorial com as dez questões e a sequência dos lotes comuns, as dez qu
 | Q08 | COM-04/07; CC-03 e puzzle | Cobertura de aceitação de percurso offline–conferência; não escolhe canal de inclusão, diagnostica comunicação ou transforma representação de compilador. |
 | Q09 | COM-09; CC-10 | Otimiza mistura inteira de trabalhos com várias soluções viáveis; não apenas satisfaz limites de drenagem ou escolhe mecanismo de sincronização por custo. |
 | Q10 | COM-04/08; CC-05/10 | Arquitetura de leitura: carga, versão e meio de acesso; não substitui canal acessível, espera cota, calcula LRU ou evita escrita perdida em contador. |
-| P-SI-01 | P-COM-01; P-CC-01; sequências executáveis | Responsabilidade, semântica dos estados e rastreabilidade de custeio; não recupera arquivo, analisa vivacidade, calcula média, encerra incidente ou configura rede. |
+| P-SI-01 | P-COM-01; P-CC-01; sequências executáveis | Reserva integrada, semântica dos estados e rastreabilidade entre portal, agenda e acesso; não recupera arquivo, analisa vivacidade, calcula média, encerra incidente ou configura rede. |
 
 COM-03/06 (linguagem e cooperação), CC-02/06/07/08/09 (circuitos, métodos, imagem, probabilidade e modelos de reconhecimento) e demais alternativas/feedbacks também foram confrontados. Não se transportam seus registros, artefatos, grafos, topologias, regras, tabelas ou cenários por troca de nomes.
 
@@ -1067,7 +1058,7 @@ Não se copiam programas, figuras, exemplos de prova, casos COMPANY do capítulo
 
 Cada questão foi resolvida pelas premissas e seus quatro distratores têm rejeição fundamentada. Nas questões conceituais, não se adicionam recursos ausentes a uma proposta para torná-la correta. Q09 distingue alocação viável de ótima; Q10 exige os três critérios, sem presumir capacidade extra ou atualização não descrita.
 
-O puzzle exige produzir os artefatos de pré-condição, não apenas calcular R$ 40. Uma ordem com valor final correto, mas sem autorização anterior ao registro, não atende ao comando. A validação documental examina as 120 permutações contra as quatro dependências; a justificativa das dependências permanece disponível para revisão independente, sem transformar convenção de um processo em regra universal.
+O puzzle exige produzir os artefatos de pré-condição, não apenas constatar que há capacidade. Uma ordem que marque a reserva como confirmada sem autorização e confirmação do controle de acesso não atende ao comando. A validação documental examina as 120 permutações contra as quatro dependências, sem transformar a convenção deste processo em regra universal.
 
 ### Acessibilidade editorial
 
@@ -1241,7 +1232,7 @@ Preencher docente, data, PPC/versão, fontes/localizadores, resolução sem gaba
 - **Síntese / ajustes propostos:** a preencher.
 - **Consolidação / responsável / data / decisão posterior:** a preencher.
 
-### E26-P-SI-01 — versão editorial documental 1
+### E26-P-SI-01 — versão editorial documental 2
 
 | Curso | Docente / data | PPC / versão e evidências | Resolução independente / ordem alternativa | Parecer fundamentado / ajustes |
 |---|---|---|---|---|
@@ -1250,7 +1241,7 @@ Preencher docente, data, PPC/versão, fontes/localizadores, resolução sem gaba
 - [ ] Conferir F07/SI-I, objeto de processos e adequação ao momento formativo.
 - [ ] Ordenar sem solução visível e tentar outra permutação; justificar cada dependência por artefato, sem impor hierarquia.
 - [ ] Validar distinção entre relato, conciliação, cálculo, autorização e registro.
-- [ ] Conferir T1/T2 elegíveis, T3 preservado porém excluído, 20 km, R$ 40 e limite R$ 50.
+- [x] Conferir `PED-204`, `DISP-204`, `RES-204`, `AUT-204` e `ACC-204`, além da capacidade 20 para 12 participantes.
 - [ ] Conferir referências entre versões e impossibilidade de concluir um bloco sem sua pré-condição.
 - [ ] Revisar três dicas separadas/cumulativamente e o retorno textual ao jogador.
 - [ ] Revisar acessibilidade por teclado/botões e tela pequena na integração futura.
@@ -1271,7 +1262,7 @@ Resultados desta execução:
 - Q07: valores 100/102, origem 99, comprimentos 1/3, diferença dois e variação de 2% conferidos. Q08: somente E cobre o percurso offline–envio–conferência solicitado.
 - Q09: os vinte pares inteiros do domínio foram enumerados; ótimo viável único em quatro X e dois Y, benefício 28. Capacidades e benefícios das cinco alternativas conferidos.
 - Q10: somente B atende aos três critérios declarados de capacidade, versão e navegador; números são projeções fictícias, não medição de infraestrutura.
-- Puzzle: **120 permutações examinadas**; uma única aceita tanto pela cadeia de quatro dependências quanto pelo fluxo de artefatos. T3 permanece no relato e não no cálculo; 20 km geram R$ 40; o registro final referencia A1/D1. R$ 48 caber no teto não valida trecho particular, e R$ 40 calculados sem autorização não permitem registrar.
+- Puzzle: **120 permutações examinadas**; uma única aceita tanto pela cadeia de quatro dependências quanto pelo fluxo de artefatos. A disponibilidade não equivale a reserva, a reserva não equivale a autorização e o portal só confirma após `ACC-204`.
 - Gabaritos e rejeição dos distratores conferidos editorialmente; resolução docente independente permanece pendente. Testes dos modelos fechados não constituem execução de processos reais nem aprovação pedagógica.
 - Triagem textual e cotejo estrutural com dois lotes comuns, CC e exemplos atuais: nenhuma duplicação interna identificada. Textos ao jogador, títulos, explicações, feedbacks, narrativa, blocos e dicas sem o nome da avaliação externa; originalidade externa não é garantida.
 - Acessibilidade editorial conferida por equivalentes textuais, unidades e controles previstos; leitor de tela, teclado, toque, celular e zoom da apresentação futura não são homologados nesta etapa.

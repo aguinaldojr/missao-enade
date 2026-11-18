@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
 import schema from '../../schemas/editorial.schema.json';
+import presentationSchema from '../../schemas/question-presentation.schema.json';
 import type { EditorialMetadata } from '../../domain/models/EditorialMetadata';
 import type { CollectionRepository } from '../../ports/CollectionRepository';
 
@@ -14,6 +15,7 @@ export function createEditorialAjv(): Ajv {
     },
   });
   ajv.addSchema(schema);
+  ajv.addSchema(presentationSchema);
   return ajv;
 }
 export function validateEditorialReferences(metadata: EditorialMetadata, collections: CollectionRepository): void {

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="760" viewBox="0 0 640 760" role="img" aria-labelledby="title desc">
+  <title id="title">Aviso ambíguo da roda de troca de saberes</title>
+  <desc id="desc">O aviso diz Chegue junto para virar a chave no Ponto, mas não informa atividade, local completo nem horário. Pessoas registraram interpretações diferentes: conversa e conserto de fechadura.</desc>
+  <rect width="640" height="760" rx="28" fill="#f7f4e9"/>
+  <rect x="24" y="24" width="592" height="712" rx="22" fill="#ffffff" stroke="#0b826f" stroke-width="4"/>
+  <rect x="48" y="48" width="544" height="150" rx="18" fill="#d8f3ea"/>
+  <text x="320" y="91" text-anchor="middle" fill="#12323d" font-family="system-ui, sans-serif" font-size="22" font-weight="700">RODA DE TROCA DE SABERES</text>
+  <text x="320" y="137" text-anchor="middle" fill="#0b826f" font-family="system-ui, sans-serif" font-size="26" font-weight="800">“Chegue junto para virar</text>
+  <text x="320" y="170" text-anchor="middle" fill="#0b826f" font-family="system-ui, sans-serif" font-size="26" font-weight="800">a chave no Ponto!”</text>
+  <text x="48" y="244" fill="#12323d" font-family="system-ui, sans-serif" font-size="22" font-weight="700">O AVISO NÃO INFORMA:</text>
+  <g font-family="system-ui, sans-serif" font-size="23" fill="#12323d">
+    <rect x="48" y="266" width="544" height="64" rx="12" fill="#fff4d9" stroke="#b66a12" stroke-width="2"/>
+    <text x="320" y="307" text-anchor="middle">Qual é a atividade?</text>
+    <rect x="48" y="344" width="544" height="64" rx="12" fill="#fff4d9" stroke="#b66a12" stroke-width="2"/>
+    <text x="320" y="385" text-anchor="middle">Onde será?</text>
+    <rect x="48" y="422" width="544" height="64" rx="12" fill="#fff4d9" stroke="#b66a12" stroke-width="2"/>
+    <text x="320" y="463" text-anchor="middle">Em qual horário?</text>
+  </g>
+  <text x="48" y="536" fill="#12323d" font-family="system-ui, sans-serif" font-size="22" font-weight="700">INTERPRETAÇÕES REGISTRADAS:</text>
+  <g font-family="system-ui, sans-serif" font-size="22" fill="#12323d">
+    <rect x="48" y="558" width="544" height="60" rx="12" fill="#eef7f5" stroke="#6f8d92" stroke-width="2"/>
+    <text x="320" y="596" text-anchor="middle">“Será uma conversa.”</text>
+    <rect x="48" y="632" width="544" height="72" rx="12" fill="#eef7f5" stroke="#6f8d92" stroke-width="2"/>
+    <text x="320" y="662" text-anchor="middle">“É para consertar</text>
+    <text x="320" y="691" text-anchor="middle">uma fechadura?”</text>
+  </g>
+</svg>

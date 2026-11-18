@@ -1,0 +1,127 @@
+{
+  "$id": "urn:n9:question-presentation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["blocks"],
+  "properties": {
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/code" },
+          { "$ref": "#/definitions/table" },
+          { "$ref": "#/definitions/diagram" },
+          { "$ref": "#/definitions/image" }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "nonBlank": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "code": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "language", "caption", "code"],
+      "properties": {
+        "type": { "const": "code" },
+        "language": { "enum": ["sql", "c", "python", "text"] },
+        "caption": { "$ref": "#/definitions/nonBlank" },
+        "code": { "$ref": "#/definitions/nonBlank" }
+      }
+    },
+    "tableColumn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "label"],
+      "properties": {
+        "key": { "type": "string", "minLength": 1, "pattern": "^[a-z][a-z0-9_-]*$" },
+        "label": { "$ref": "#/definitions/nonBlank" },
+        "align": { "enum": ["left", "center", "right"] }
+      }
+    },
+    "table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "caption", "columns", "rows"],
+      "properties": {
+        "type": { "const": "table" },
+        "caption": { "$ref": "#/definitions/nonBlank" },
+        "columns": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": { "$ref": "#/definitions/tableColumn" }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 12,
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "diagramNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "pattern": "^[a-z][a-z0-9_-]*$" },
+        "label": { "$ref": "#/definitions/nonBlank" },
+        "details": { "$ref": "#/definitions/nonBlank" }
+      }
+    },
+    "diagramEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "label"],
+      "properties": {
+        "from": { "type": "string", "minLength": 1 },
+        "to": { "type": "string", "minLength": 1 },
+        "label": { "$ref": "#/definitions/nonBlank" }
+      }
+    },
+    "diagram": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "title", "description", "nodes", "edges"],
+      "properties": {
+        "type": { "const": "diagram" },
+        "title": { "$ref": "#/definitions/nonBlank" },
+        "description": { "$ref": "#/definitions/nonBlank" },
+        "nodes": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": { "$ref": "#/definitions/diagramNode" }
+        },
+        "edges": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": { "$ref": "#/definitions/diagramEdge" }
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "src", "alt"],
+      "properties": {
+        "type": { "const": "image" },
+        "src": {
+          "type": "string",
+          "pattern": "^(?!.*(?:^|/)\\.\\.(?:/|$))(?:assets|images|media)/[A-Za-z0-9._/-]+$"
+        },
+        "alt": { "$ref": "#/definitions/nonBlank" },
+        "caption": { "$ref": "#/definitions/nonBlank" }
+      }
+    }
+  }
+}

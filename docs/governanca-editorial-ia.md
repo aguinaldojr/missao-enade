@@ -84,7 +84,7 @@ A normalização não regrava arquivos ou LocalStorage, não altera IDs, versõe
 
 ## 7. Situação da coleção atual
 
-As 60 questões e os seis puzzles executáveis estão em `under-ai-review`. Nenhum item foi promovido automaticamente para `ready-for-pilot` ou `ready-for-release`. O aviso ao jogador é **Conteúdo experimental em revisão editorial.**
+Das 66 questões executáveis, 64 permanecem em `under-ai-review` e `E26-Q-SI-02`/`E26-Q-SI-05` estão em `ready-for-pilot` após duas passagens documentadas e autorização explícita de integração. Os oito puzzles atuais permanecem em `under-ai-review`, incluindo os dois exercícios complementares de C adicionados depois do inventário original. Nenhum item foi promovido automaticamente ou para `ready-for-release`. O aviso ao jogador é **Conteúdo experimental em revisão editorial.**
 
 Os documentos de autoria e auditoria produzidos antes de 16/11/2026 preservam expressões como revisão docente e os estados anteriores para demonstrar a evolução do projeto. Esses registros são históricos; quando convertidos ou carregados, o normalizador aplica a política desta versão.
 

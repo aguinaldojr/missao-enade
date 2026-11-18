@@ -38,6 +38,33 @@ function oldPuzzles() {
 }
 
 describe('contratos editoriais compartilhados — exemplos exclusivamente fictícios', () => {
+  it('aceita apresentação estruturada de código, tabela, diagrama e imagem local', () => {
+    const presentation = { blocks: [
+      { type: 'code', language: 'sql', caption: 'Consulta fictícia', code: 'SELECT 1;' },
+      { type: 'table', caption: 'Dados fictícios', columns: [{ key: 'valor', label: 'Valor', align: 'right' }],
+        rows: [['1']] },
+      { type: 'diagram', title: 'Fluxo fictício', description: 'O nó inicial leva ao nó final.',
+        nodes: [{ id: 'inicio', label: 'Início' }, { id: 'fim', label: 'Fim' }],
+        edges: [{ from: 'inicio', to: 'fim', label: 'segue' }] },
+      { type: 'image', src: 'images/exemplo.svg', alt: 'Imagem fictícia para teste.' },
+    ] };
+    const result = validateContent({ ...newCatalog(), questions: [{ ...newQuestion(), presentation }] }, customCollections);
+    expect(result.questions[0]?.presentation).toEqual(presentation);
+  });
+  it('rejeita apresentação insegura ou estruturalmente inconsistente', () => {
+    const invalidPresentations = [
+      { blocks: [{ type: 'image', src: 'https://example.invalid/a.png', alt: 'Imagem remota.' }] },
+      { blocks: [{ type: 'table', caption: 'Tabela', columns: [{ key: 'a', label: 'A' }], rows: [['1', '2']] }] },
+      { blocks: [{ type: 'diagram', title: 'Diagrama', description: 'Descrição.',
+        nodes: [{ id: 'a', label: 'A' }, { id: 'a', label: 'A repetido' }],
+        edges: [{ from: 'a', to: 'b', label: 'segue' }] }] },
+      { blocks: [{ type: 'code', language: 'sql', caption: 'Código', code: 'SELECT 1;', html: true }] },
+    ];
+    for (const presentation of invalidPresentations) {
+      expect(() => validateContent({ ...newCatalog(), questions: [{ ...newQuestion(), presentation }] }, customCollections))
+        .toThrow();
+    }
+  });
   it('aceita questão pronta para piloto e novas coleção/versão/fase sem os antigos literais', () => {
     const result = validateContent(newCatalog(), customCollections);
     expect(result).toMatchObject({ mode: 'approved', contentVersion: 'fixture-2.0', phaseId: 'FASE-FICTICIA-02' });

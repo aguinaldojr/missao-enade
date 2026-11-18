@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title description">
+  <title id="title">Participação registrada em duas semanas</title>
+  <desc id="description">Das mesmas quarenta pessoas convidadas, dezesseis participaram na semana anterior e vinte e quatro na semana com o novo horário.</desc>
+  <rect width="720" height="360" rx="24" fill="#fbf8ef"/>
+  <text x="44" y="42" fill="#0b2b36" font-family="Arial, sans-serif" font-size="22" font-weight="700">Pessoas que conseguiram participar</text>
+  <g stroke="#9ab8af" stroke-width="2">
+    <line x1="105" y1="288" x2="680" y2="288"/>
+    <line x1="105" y1="228" x2="680" y2="228" stroke-dasharray="6 7"/>
+    <line x1="105" y1="168" x2="680" y2="168" stroke-dasharray="6 7"/>
+    <line x1="105" y1="108" x2="680" y2="108" stroke-dasharray="6 7"/>
+  </g>
+  <g fill="#405d63" font-family="Arial, sans-serif" font-size="15" text-anchor="end">
+    <text x="90" y="293">0</text><text x="90" y="233">10</text><text x="90" y="173">20</text><text x="90" y="113">30</text>
+  </g>
+  <rect x="190" y="192" width="150" height="96" rx="12" fill="#38bfa0"/>
+  <rect x="435" y="144" width="150" height="144" rx="12" fill="#008c72"/>
+  <g fill="#0b2b36" font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="265" y="180" font-size="23" font-weight="700">16</text>
+    <text x="510" y="132" font-size="23" font-weight="700">24</text>
+    <text x="265" y="320" font-size="16">Semana anterior</text>
+    <text x="510" y="310" font-size="16">Semana com</text><text x="510" y="331" font-size="16">novo horário</text>
+  </g>
+  <text x="675" y="350" fill="#405d63" font-family="Arial, sans-serif" font-size="13" text-anchor="end">40 pessoas convidadas em cada semana</text>
+</svg>

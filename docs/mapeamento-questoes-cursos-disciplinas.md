@@ -2,9 +2,9 @@
 
 Data do levantamento: 15 de novembro de 2026. Revisão de planejamento de SI: 16 de novembro de 2026.
 
-Este documento relaciona as 60 questões provisórias atuais do N9 — Jornada Digital às áreas normativas, aos cursos que possuem sustentação explícita para o recorte, às disciplinas sugeridas e aos conteúdos cobrados. Ele não altera o catálogo executável.
+Este documento relaciona as 66 questões atuais do N9 — Jornada Digital às áreas normativas, aos cursos que possuem sustentação explícita para o recorte, às disciplinas sugeridas e aos conteúdos cobrados. Ele não altera o catálogo executável.
 
-Os itens executáveis usam `under-ai-review` conforme a [governança editorial assistida por IA](governanca-editorial-ia.md); nenhum item foi promovido para piloto ou liberação. “Disciplina sugerida” não equivale a componente curricular oficial da UNINOVE: o vínculo definitivo depende de confrontação futura com o PPC e a matriz curricular vigente.
+Os seis itens SI-M03 usam `under-ai-review` conforme a [governança editorial assistida por IA](governanca-editorial-ia.md). “Disciplina sugerida” não equivale a componente curricular oficial da UNINOVE: o vínculo definitivo depende de confrontação futura com o PPC e a matriz curricular vigente.
 
 ## Regra de elegibilidade
 
@@ -21,12 +21,12 @@ Referências normativas: Portaria 154/2026 para Formação Geral; 157/2026 para 
 | Curso | Banco atual | Banco proposto | Introdutórias | Intermediárias | Avançadas |
 |---|---:|---:|---:|---:|---:|
 | CC | 20 | 39 | 14 | 18 | 7 |
-| SI | 20 | 40 | 15 | 19 | 6 |
+| SI | 26 | 46 | 17 | 22 | 7 |
 | TADS | 20 | 31 | 12 | 14 | 5 |
 | TGTI | 20 | 40 | 15 | 18 | 7 |
 | TRC | 20 | 23 | 8 | 10 | 5 |
 
-A distribuição 7/9/4 continua válida para o núcleo autoral histórico de vinte questões de cada curso, mas não descreve o banco ampliado. Para SI, o novo planejamento propõe 9/11/5 em cada jornada de 25; a mudança ainda não foi implementada. O banco proposto de 40 para SI reúne 20 elegíveis atuais e 20 compartilhamentos ainda não validados, concentra itens em engenharia/projetos e não equivale ao núcleo balanceado de 60 descrito no plano de revisão.
+A distribuição 7/9/4 continua válida para o núcleo autoral histórico de vinte questões de cada curso, mas não descreve o banco ampliado. SI possui agora 26 questões executáveis, distribuídas em 9 introdutórias, 12 intermediárias e 5 avançadas. O banco proposto de 46 soma os 26 itens atuais e vinte compartilhamentos ainda não validados; essa projeção não equivale ao núcleo balanceado descrito no plano de revisão.
 
 ## Questões comuns
 
@@ -72,6 +72,12 @@ A distribuição 7/9/4 continua válida para o núcleo autoral histórico de vin
 | E26-Q-SI-08 — O ensaio precisa acompanhar a vistoria | SI-04 / COMUM-TEC11 — Engenharia e qualidade de software | CC, SI, TADS, TGTI | Qualidade e Testes de Software | Evidência de teste, aceitação e necessidade de trabalho |
 | E26-Q-SI-09 — Distribuir capacidade entre dois trabalhos | SI-03 — Dados para decisão e pesquisa operacional | SI | Pesquisa Operacional | Alocação inteira, capacidade, demanda, viabilidade e maximização |
 | E26-Q-SI-10 — Escalar sem informar uma versão antiga | SI-04 — Concepção e projetos de sistemas de informação | CC, SI, TADS, TGTI | Arquitetura de Sistemas e Engenharia de Software | Desempenho, escalabilidade, consistência e acesso à informação |
+| E26-Q-SI-11 — O portal não trabalha sozinho | SI-M03 — Fundamentos de sistemas de informação e teoria geral de sistemas | SI | Fundamentos de Sistemas de Informação | Sistema sociotécnico, pessoas, processos, dados e tecnologia |
+| E26-Q-SI-12 — A previsão precisa voltar para o sistema | SI-M03 — Fundamentos de sistemas de informação e teoria geral de sistemas | SI | Integração de Sistemas | Ciclo de informação, previsão e retorno operacional |
+| E26-Q-SI-13 — Onde termina o sistema da equipe? | SI-M03 — Fundamentos de sistemas de informação e teoria geral de sistemas | SI | Fundamentos de Sistemas de Informação | Fronteira de controle, interface, rastreabilidade e evidência |
+| E26-Q-SI-14 — Dois minutos no quiosque, quatorze no percurso | SI-M03 — Fundamentos de sistemas de informação e teoria geral de sistemas | SI | Análise de Processos | Desempenho ponta a ponta, espera e otimização local |
+| E26-Q-SI-15 — Uma regra fixa em um ambiente que mudou | SI-M03 — Fundamentos de sistemas de informação e teoria geral de sistemas | SI | Evolução de Sistemas | Adaptação, regras de negócio e mudanças no ambiente |
+| E26-Q-SI-16 — O lembrete que aumenta a própria fila | SI-M03 — Fundamentos de sistemas de informação e teoria geral de sistemas | SI | Pensamento Sistêmico | Realimentação, efeitos não intencionais e intervenção mensurável |
 
 ## Questões do lote de Análise e Desenvolvimento de Sistemas
 

@@ -7,10 +7,13 @@ const lotPaths = [
   '../../docs/autoria/lote-comum-01.md',
   '../../docs/autoria/lote-comum-02.md',
   '../../docs/autoria/lote-especifico-cc.md',
+  '../../docs/autoria/lote-si-m03-fundamentos-sistemas.md',
   '../../docs/autoria/lote-especifico-si.md',
   '../../docs/autoria/lote-especifico-tads.md',
   '../../docs/autoria/lote-especifico-tgti.md',
   '../../docs/autoria/lote-especifico-trc.md',
+  '../../docs/autoria/puzzle-c-si-prioridade.md',
+  '../../docs/autoria/puzzle-c-si-monitor-alertas.md',
 ] as const;
 
 interface Section {
@@ -47,6 +50,13 @@ function plain(text = ''): string {
   return text.replace(/\[([^\]]+)]\([^)]+\)/g, '$1').replace(/[*_`]/g, '').replace(/\s+/g, ' ').trim();
 }
 
+function puzzleBlockText(text = ''): string {
+  const escapedNewline = '__N9_C_STRING_NEWLINE__';
+  return text.replace(/\[([^\]]+)]\([^)]+\)/g, '$1').replace(/`/g, '')
+    .replaceAll('\\\\n', escapedNewline).replace(/\\n/g, '\n').replaceAll(escapedNewline, '\\n')
+    .replace(/[ \t]+/g, ' ').trim();
+}
+
 function parseCourses(text: string): readonly string[] {
   return ['CC', 'SI', 'TADS', 'TGTI', 'TRC'].filter((course) => new RegExp('(?:^|[, /])' + course + '(?:$|[, /])').test(text));
 }
@@ -79,8 +89,13 @@ function parseSources(fields: Readonly<Record<string, string>>): readonly Record
       description: 'Corroboração normativa do curso ' + match[2] + '.', documentId: 'F' + match[1] });
   }
   const technical = findField(fields, 'Complemento documental').match(/^(T\d+)\s*—\s*(.+)$/);
-  if (technical) result.push({ role: 'technical', type: 'official-reference',
-    description: plain(technical[2]), documentId: technical[1] });
+  if (technical) {
+    const source: Record<string, unknown> = { role: 'technical', type: 'official-reference',
+      description: plain(technical[2]), documentId: technical[1] };
+    const url = plain(findField(fields, 'Complemento documental URL'));
+    if (url) source.url = url;
+    result.push(source);
+  }
   return result;
 }
 
@@ -117,7 +132,7 @@ function parseQuestion(section: Section): Record<string, unknown> {
     context: plain(text?.[1]),
     prompt: plain(text?.[2]),
     options: [...section.text.matchAll(/^- \*\*([A-E])\.\*\* (.+)$/gm)].slice(0, 5)
-      .map((match) => ({ id: match[1], text: plain(match[2]) })),
+      .map((match) => ({ id: match[1], text: puzzleBlockText(match[2]) })),
     correctOptionId: answer?.[1],
     explanation: plain(explanation?.[1]),
     feedbackByOption,
@@ -136,7 +151,7 @@ function parsePuzzle(section: Section): Record<string, unknown> {
     title: section.title,
     narrative: plain(narrative?.[1]),
     blocks: [...blockPart.matchAll(/^\| ([a-z0-9-]+) \| (.+) \|$/gm)]
-      .map((match) => ({ id: match[1], text: plain(match[2]) })),
+      .map((match) => ({ id: match[1], text: puzzleBlockText(match[2]) })),
     correctOrder: (section.text.match(/\*\*correctOrder:\*\* (.+)\./)?.[1] ?? '').split('→').map(plain).filter(Boolean),
     hints: [...hintPart.matchAll(/^\d+\. (.+)$/gm)].map((match) => plain(match[1])),
     explanation: plain(section.text.match(/### Explicação final(?: ao jogador)?\s*\n\n([\s\S]*?)(?=\n### )/)?.[1]),
@@ -160,11 +175,11 @@ const reducedAnswers = new Map([
   ['E26-Q-TRC-08', 'D'], ['E26-Q-TRC-09', 'E'], ['E26-Q-TRC-10', 'C'],
 ]);
 
-describe('documentos editoriais da coleção de 66 desafios', () => {
-  it('valida 60 questões e seis puzzles canônicos reconstruídos somente em memória', () => {
-    expect(catalog.questions).toHaveLength(60);
-    expect(puzzleCatalog).toHaveLength(6);
-    expect(new Set([...catalog.questions, ...puzzleCatalog].map((item) => item.id)).size).toBe(66);
+describe('documentos editoriais da coleção ampliada', () => {
+  it('valida 66 questões e oito puzzles canônicos reconstruídos somente em memória', () => {
+    expect(catalog.questions).toHaveLength(66);
+    expect(puzzleCatalog).toHaveLength(8);
+    expect(new Set([...catalog.questions, ...puzzleCatalog].map((item) => item.id)).size).toBe(74);
     expect([...catalog.questions, ...puzzleCatalog].every((item) => item.validationStatus === 'under-ai-review')).toBe(true);
   });
 
@@ -172,13 +187,13 @@ describe('documentos editoriais da coleção de 66 desafios', () => {
     for (const course of ['CC', 'SI', 'TADS', 'TGTI', 'TRC'] as const) {
       const eligible = catalog.questions.filter((question) => question.courses.includes(course));
       const eligiblePuzzles = puzzleCatalog.filter((puzzle) => puzzle.courses.includes(course));
-      expect(eligible).toHaveLength(20);
+      expect(eligible).toHaveLength(course === 'SI' ? 26 : 20);
       expect(eligible.filter((question) => question.classification === 'COMUM')).toHaveLength(10);
-      expect(eligible.filter((question) => question.classification === course)).toHaveLength(10);
-      expect(eligible.filter((question) => question.difficulty === 'introductory')).toHaveLength(7);
-      expect(eligible.filter((question) => question.difficulty === 'intermediate')).toHaveLength(9);
-      expect(eligible.filter((question) => question.difficulty === 'advanced')).toHaveLength(4);
-      expect(eligiblePuzzles).toHaveLength(2);
+      expect(eligible.filter((question) => question.classification === course)).toHaveLength(course === 'SI' ? 16 : 10);
+      expect(eligible.filter((question) => question.difficulty === 'introductory')).toHaveLength(course === 'SI' ? 9 : 7);
+      expect(eligible.filter((question) => question.difficulty === 'intermediate')).toHaveLength(course === 'SI' ? 12 : 9);
+      expect(eligible.filter((question) => question.difficulty === 'advanced')).toHaveLength(course === 'SI' ? 5 : 4);
+      expect(eligiblePuzzles).toHaveLength(course === 'SI' ? 4 : 2);
     }
   });
 

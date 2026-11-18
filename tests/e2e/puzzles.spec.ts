@@ -62,6 +62,12 @@ test('teclado, dicas graduais, conclusão, retorno e replay sem XP adicional', a
   page.on('pageerror', (error) => errors.push(error.message));
   await start(page);
   await expect(page.locator('.example-warning')).toContainText('EM REVISÃO EDITORIAL');
+  await expect(page.locator('.common-terminal')).toHaveAttribute('data-state', 'recovering');
+  await expect(page.getByRole('region', { name: 'Briefing completo da ocorrência' })).toContainText(catalog[0]!.narrative);
+  await expect(page.locator('.common-terminal-item')).toHaveCount(4);
+  await expect(page.locator('.block-command')).toHaveCount(5);
+  await expect(page.locator('.puzzle-sequence-console')).toHaveAttribute('aria-label', 'Fila de recuperação para ordenar');
+  await page.screenshot({ path: info.outputPath('sequencia-comum-modernizada.png'), fullPage: true });
   await expect(page.locator('.puzzle-explanation')).toBeEmpty();
   await expect(page.locator('.puzzle-hints li')).toHaveCount(0);
   await expect(page.locator('.puzzle-xp')).toHaveText('XP de quebra-cabeças: 0');
@@ -74,6 +80,9 @@ test('teclado, dicas graduais, conclusão, retorno e replay sem XP adicional', a
   await expect(page.locator('.puzzle-hints li')).toHaveCount(2);
   await expect(page.locator('.puzzle-explanation')).toBeEmpty();
   await solve(page, info, 0, true);
+  await expect(page.locator('.common-terminal')).toHaveAttribute('data-state', 'recovered');
+  await expect(page.locator('.common-terminal-value').last()).toHaveText('LIBERADA');
+  await expect(page.locator('.sequence-blocks')).toHaveClass(/sequence-complete/);
   await expect(page.locator('.puzzle-earned')).toContainText('+100 XP');
   await expect(page.getByRole('heading', { name: 'Sistema recuperado!' })).toBeFocused();
   await page.screenshot({ path: info.outputPath('sequencia-concluida.png'), fullPage: true });
@@ -95,7 +104,7 @@ test('teclado, dicas graduais, conclusão, retorno e replay sem XP adicional', a
   expect(errors).toEqual([]);
 });
 
-test('arraste com mouse/toque, botões e dois conteúdos elegíveis com XP único por ID', async ({ page }, info) => {
+test('arraste com mouse/toque, botões e conteúdos elegíveis com XP único por ID', async ({ page }, info) => {
   await start(page);
   const before = await order(page);
   await page.locator('.sequence-block').first().evaluate((node) => node.scrollIntoView({ block: 'start' }));
@@ -121,15 +130,39 @@ test('arraste com mouse/toque, botões e dois conteúdos elegíveis com XP únic
   await page.screenshot({ path: info.outputPath('sequencia-blocos.png') });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   for (const [index, puzzle] of catalog.entries()) {
-    if (index > 0) await press(page, puzzle.title, info);
+    if (index > 0) {
+      await press(page, puzzle.title, info);
+      if (puzzle.id === 'E26-P-SI-01') {
+        await expect(page.getByRole('heading', { name: 'Liberar o Laboratório Aurora' })).toBeVisible();
+        await expect(page.getByRole('region', { name: 'Briefing completo da ocorrência' })).toContainText('SOL-204');
+        await expect(page.getByRole('region', { name: 'Sistemas e pessoas envolvidos na reserva' })).toBeVisible();
+        await expect(page.locator('.si-system-card')).toHaveCount(4);
+        await expect(page.locator('.puzzle-narrative')).not.toContainText('custeio');
+        await page.screenshot({ path: info.outputPath('puzzle-si-laboratorio-aurora.png'), fullPage: true });
+      } else if (puzzle.id === 'E26-P-SI-02') {
+        await expect(page.getByRole('heading', { name: 'Montar o classificador de prioridade' })).toBeVisible();
+        await expect(page.getByRole('region', { name: 'Casos de teste do classificador' })).toBeVisible();
+        await expect(page.locator('.code-puzzle-table tbody tr')).toHaveCount(7);
+        await expect(page.locator('.block-text').filter({ hasText: 'impacto * urgencia' })).toHaveCount(1);
+        await page.screenshot({ path: info.outputPath('puzzle-si-c-prioridade.png'), fullPage: true });
+      } else {
+        await expect(page.getByRole('heading', { name: 'Montar o monitor de alertas' })).toBeVisible();
+        await expect(page.getByRole('region', { name: 'Medições do monitor de alertas' })).toBeVisible();
+        await expect(page.locator('.code-puzzle-table tbody tr')).toHaveCount(5);
+        await expect(page.locator('.block-text').filter({ hasText: 'registrar_alerta(&alertas)' })).toHaveCount(1);
+        await expect(page.locator('.block-text').filter({ hasText: '(*contador)++' })).toHaveCount(1);
+        await page.screenshot({ path: info.outputPath('puzzle-si-c-monitor-alertas.png'), fullPage: true });
+      }
+      await expect(page.locator('.block-command')).toHaveCount(5);
+    }
     await solve(page, info, index);
     await expect(page.locator('.puzzle-xp')).toHaveText('XP de quebra-cabeças: ' + (index + 1) * 100);
   }
   const saved = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), PUZZLE_KEY);
-  expect(Object.values(saved.entries).filter((entry) => (entry as { completed: boolean }).completed)).toHaveLength(2);
+  expect(Object.values(saved.entries).filter((entry) => (entry as { completed: boolean }).completed)).toHaveLength(catalog.length);
   await page.reload();
   await enter(page);
-  await expect(page.locator('.puzzle-xp')).toHaveText('XP de quebra-cabeças: 200');
+  await expect(page.locator('.puzzle-xp')).toHaveText('XP de quebra-cabeças: ' + catalog.length * 100);
 });
 
 test('guarda ordem e dicas sem concluir; restaura após recarga', async ({ page }, info) => {

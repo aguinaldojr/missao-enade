@@ -1,6 +1,6 @@
 # N9 — Jornada Digital: candidatas-piloto SI-02 e SI-05
 
-Autoria e revisão editorial assistidas por IA — 16/11/2026, horário de Brasília. Escopo exclusivo: duas propostas documentais para comparação com `E26-Q-SI-02` e `E26-Q-SI-05`. O catálogo executável permanece com as versões 1; este arquivo não autoriza substituição, integração ou publicação.
+Autoria e revisão editorial assistidas por IA — 16/11/2026, horário de Brasília. O documento nasceu como comparação entre as versões 1 e duas candidatas. Em autorização posterior no mesmo dia, as candidatas foram integradas ao catálogo executável como versões 2 para piloto local; isso não autoriza publicação.
 
 Procedimento editorial: governança de IA v1.0, com uma passagem de autoria e uma segunda passagem de resolução independente. Modelo usado: Codex da sessão; identificador técnico mais específico não disponibilizado ao artefato. Consolidação e decisão futura de integração permanecem sob responsabilidade da pessoa responsável pelo projeto.
 
@@ -11,8 +11,10 @@ Procedimento editorial: governança de IA v1.0, com uma passagem de autoria e um
 | Git antes da autoria | Limpo em `90da64a6206c3c67e54d5b8ddc158cd8d5a2528c` |
 | Catálogo examinado | `src/content/questions/enade-2026-provisional.json`: 60 questões e 60 IDs únicos |
 | Hash SHA-256 inicial do catálogo | `107D49888E66DFCACAD995E8205F852FB54F85DCE07F1728A147496F99AD48C6` |
-| SI-02 executável | versão 1, gabarito E, `under-ai-review` |
-| SI-05 executável | versão 1, gabarito D, `under-ai-review` |
+| SI-02 executável antes da integração | versão 1, gabarito E, `under-ai-review` |
+| SI-05 executável antes da integração | versão 1, gabarito D, `under-ai-review` |
+| SI-02 executável após autorização | versão 2, gabarito C, `ready-for-pilot` |
+| SI-05 executável após autorização | versão 2, gabarito B, `ready-for-pilot` |
 | Alteração autorizada nesta etapa | Somente este documento Markdown |
 
 As candidatas usam os mesmos IDs apenas como referência de evolução. Se uma substituição for autorizada depois, deverão entrar como versão 2 em migração controlada. Até essa decisão, não são dois novos IDs nem objetos adicionais do banco.
@@ -238,7 +240,7 @@ Foi criada em memória uma realização equivalente com `analista`, `chamado` e 
 
 ## 5. Validação documental contra os contratos
 
-Para a validação em memória, cada candidata é projetada como `Question` canônica: mesmo ID de referência, `version: 2`, `classification: SI`, cinco opções A–E, um `correctOptionId`, cinco feedbacks, metadados compartilhados, exatamente uma fonte `primary`, rastreabilidade e estado `ready-for-pilot`. Não se adicionam campos para SQL, diagrama, revisão ou evidências ao objeto estrito; esses elementos permanecem nesta ficha Markdown.
+Para a validação e integração, cada candidata é projetada como `Question` canônica: mesmo ID de referência, `version: 2`, `classification: SI`, cinco opções A–E, um `correctOptionId`, cinco feedbacks, metadados compartilhados, exatamente uma fonte `primary`, rastreabilidade e estado `ready-for-pilot`. SQL, tabela e diagrama usam o campo opcional estrito `presentation`; evidências de revisão e execução continuam somente nesta ficha Markdown.
 
 | Regra | SI-02 | SI-05 |
 |---|---|---|

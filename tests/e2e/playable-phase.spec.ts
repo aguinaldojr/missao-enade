@@ -43,6 +43,22 @@ for (const course of courseIds) {
       await expect(page.getByText('Desafio ' + (index + 1) + ' de 10', { exact: true })).toBeVisible();
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(question.prompt);
       await expect(page.getByRole('radio')).toHaveCount(5);
+      await expect(page.locator('.question-view')).toHaveAttribute('data-question-id', question.id);
+      if (question.id === 'E26-Q-SI-02') {
+        await expect(page.locator('.question-code')).toHaveCount(2);
+        await expect(page.locator('.question-code-content').first()).toContainText('CREATE TABLE chamados');
+        await expect(page.locator('.question-data-table caption')).toHaveText('Dados sintéticos disponíveis');
+        await expect(page.locator('.question-data-table tbody tr')).toHaveCount(5);
+        await expect(page.locator('.question-table-scroll')).toHaveAttribute('role', 'region');
+        await page.screenshot({ path: info.outputPath('si-02-layout.png'), fullPage: true });
+      }
+      if (question.id === 'E26-Q-SI-05') {
+        await expect(page.locator('.question-diagram-node')).toHaveCount(3);
+        await expect(page.locator('.question-diagram-description'))
+          .toContainText('Cada ATUAÇÃO pertence obrigatoriamente a um analista e a um chamado.');
+        await expect(page.locator('.question-diagram-visual')).toHaveAttribute('aria-hidden', 'true');
+        await page.screenshot({ path: info.outputPath('si-05-layout.png'), fullPage: true });
+      }
       expect(await page.locator('body').innerText()).not.toMatch(/\bENADE\b|simulado|preparação para prova/i);
       await expect(page).toHaveTitle(/N9 — Jornada Digital/);
       await expect(page.locator('.example-warning')).toContainText('CONTEÚDO EXPERIMENTAL EM REVISÃO EDITORIAL');
@@ -156,4 +172,53 @@ test('fase inicia mesmo sem randomUUID disponível', async ({ page }, info) => {
   await startPhase(page, 'TRC', info);
   await expect(page.getByText('Desafio 1 de 10', { exact: true })).toBeVisible();
   await press(page, 'Voltar ao menu', info);
+});
+
+test('as questões ajustadas exibem seus artefatos visuais na Arena de SI', async ({ page }, info) => {
+  await page.goto('./');
+  await startPhase(page, 'SI', info, 'arena');
+  const expected = new Map([
+    ['E26-Q-COM-01', ['image']], ['E26-Q-COM-02', ['diagram']],
+    ['E26-Q-COM-03', ['image']], ['E26-Q-COM-04', ['diagram']],
+    ['E26-Q-COM-05', ['table']], ['E26-Q-COM-06', ['table', 'diagram']],
+    ['E26-Q-COM-07', ['code', 'code']], ['E26-Q-COM-08', ['image']],
+    ['E26-Q-COM-09', ['diagram', 'table']], ['E26-Q-COM-10', ['table']],
+    ['E26-Q-SI-11', ['diagram']], ['E26-Q-SI-12', ['table']],
+    ['E26-Q-SI-13', ['diagram', 'code']], ['E26-Q-SI-14', ['table']],
+    ['E26-Q-SI-15', ['table', 'code']], ['E26-Q-SI-16', ['diagram', 'table']],
+    ['E26-Q-SI-01', ['diagram']], ['E26-Q-SI-02', ['code', 'table', 'code']],
+    ['E26-Q-SI-03', ['table', 'diagram']], ['E26-Q-SI-04', ['diagram']],
+  ]);
+  for (let index = 0; index < 20; index++) {
+    const view = page.locator('.question-view');
+    const id = await view.getAttribute('data-question-id');
+    if (id && expected.has(id)) {
+      const types = await page.locator('.question-presentation .question-resource').evaluateAll((nodes) =>
+        nodes.map((node) => node.classList.contains('question-code') ? 'code' :
+          node.classList.contains('question-table-resource') ? 'table' :
+            node.classList.contains('question-diagram') ? 'diagram' : 'image'));
+      expect(types).toEqual(expected.get(id));
+      if (['E26-Q-COM-01', 'E26-Q-COM-03', 'E26-Q-COM-08', 'E26-Q-SI-07'].includes(id)) {
+        if (id === 'E26-Q-SI-07') {
+          await expect(page.locator('.question-resource-image')).toHaveAttribute('alt', /Alfa está em 100/);
+        } else if (id === 'E26-Q-COM-03') {
+          await expect(page.locator('.question-resource-image')).toHaveAttribute('alt', /Três campos aparecem sem informação/);
+        } else {
+          await expect(page.locator('.question-resource-image')).toHaveAttribute('alt', /Gráfico de barras|Diagrama de memória/);
+        }
+        await expect.poll(() => page.locator('.question-resource-image')
+          .evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+      }
+      if (['E26-Q-COM-01', 'E26-Q-COM-02', 'E26-Q-COM-03', 'E26-Q-COM-04',
+        'E26-Q-COM-06', 'E26-Q-COM-08', 'E26-Q-COM-09',
+        'E26-Q-SI-03', 'E26-Q-SI-11', 'E26-Q-SI-13', 'E26-Q-SI-15', 'E26-Q-SI-16'].includes(id)) {
+        await page.screenshot({ path: info.outputPath(id.toLowerCase() + '-layout.png'), fullPage: true });
+      }
+      await reflow(page);
+    }
+    await page.getByRole('radio').first().check();
+    await press(page, 'Confirmar resposta', info);
+    await press(page, index === 19 ? 'Ver relatório da missão' : 'Próximo desafio', info);
+  }
+  await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
 });

@@ -31,11 +31,12 @@ function startMission(game: GameSession, course: (typeof COURSE_IDS)[number], mi
 }
 
 describe('coleção provisória integrada', () => {
-  it('carrega 60 questões e seis puzzles sem remover os exemplos', () => {
-    expect(provisionalQuestions.questions).toHaveLength(60);
-    expect(provisionalPuzzles).toHaveLength(6);
+  it('carrega 66 questões e oito puzzles sem remover os exemplos', () => {
+    expect(provisionalQuestions.questions).toHaveLength(66);
+    expect(provisionalPuzzles).toHaveLength(8);
+    expect(provisionalQuestions.questions.filter((question) => question.courses.includes('SI'))).toHaveLength(26);
     expect(content.questionsForCourse('CC')).toHaveLength(30);
-    expect(puzzles.all()).toHaveLength(9);
+    expect(puzzles.all()).toHaveLength(11);
   });
 
   it.each(COURSE_IDS.flatMap((course) => QUESTION_MISSION_LIST.map((mission) => [course, mission] as const)))(
@@ -56,7 +57,9 @@ describe('coleção provisória integrada', () => {
     const game = session();
     game.dispatch({ type: 'start' });
     game.dispatch({ type: 'select-course', course });
-    expect(game.snapshot.puzzles.map((puzzle) => puzzle.id).sort()).toEqual(['E26-P-COM-01', 'E26-P-' + course + '-01'].sort());
+    const expected = ['E26-P-COM-01', 'E26-P-' + course + '-01'];
+    if (course === 'SI') expected.push('E26-P-SI-02', 'E26-P-SI-03');
+    expect(game.snapshot.puzzles.map((puzzle) => puzzle.id).sort()).toEqual(expected.sort());
   });
 
   it('mantém recibos e relatório antigos e salva a nova missão em chave separada', () => {

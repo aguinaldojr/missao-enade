@@ -211,43 +211,43 @@
   {
     "kind": "sequence",
     "id": "E26-P-SI-01",
-    "title": "Do trajeto realizado ao registro autorizado",
-    "narrative": "Uma equipe fictícia de extensão tecnológica da Base N9 precisa consolidar o custeio de uma visita técnica antes de registrá-lo no painel do projeto. Você organizará cinco cartões de trabalho por suas pré-condições, considerando quem pode confirmar cada informação. A ordem de visita já existe. O relato em rascunho lista três trechos realizados: T1, 12 km; T2, 8 km; T3, 4 km. A ordem autoriza T1 e T2 para esse custeio; T3 foi um deslocamento particular e não participa do cálculo. A equipe executora deve primeiro confirmar que o relato corresponde aos trajetos efetivamente realizados. Distância autorizada, sozinha, não comprova realização. As notas de trabalho abaixo não estão na ordem de execução: - O painel só aceita o registro com referência à autorização correspondente; um cálculo isolado não é autorização. - O cálculo usa a distância elegível conciliada e a regra interna fictícia de R$ 2 por quilômetro. - A conciliação da secretaria cruza a ordem com a versão do relato confirmada pela equipe executora. - A coordenação só pode autorizar um demonstrativo identificado e calculado, dentro do saldo reservado de R$ 50. Cada artefato produzido recebe versão e mantém referência ao anterior. Neste caso não haverá correção, mudança de regra, outra solicitação ou alteração de saldo durante o fluxo. Considere o caminho de sucesso. O modelo não estabelece norma de reembolso real nem efetua pagamento; os valores pertencem ao caso fictício e não são XP. Reordene os cartões para chegar a um registro cujo valor, evidência e autorização possam ser explicados. Não se pede apenas colocar cargos numa hierarquia: observe qual informação cada ação precisa receber.",
+    "title": "Liberar o Laboratório Aurora",
+    "narrative": "Uma equipe estudantil da Base N9 solicitou o Laboratório Aurora para uma oficina de visualização de dados. O portal recebeu a solicitação SOL-204: responsável identificado, 12 participantes e uso das 19h às 21h. A solicitação ainda não foi validada nem reservou a sala. Neste fluxo fictício, cada sistema só aceita um artefato identificado da etapa anterior. A validação confere responsável, finalidade, intervalo e quantidade de participantes. A agenda só consulta disponibilidade a partir de uma solicitação válida. Para este caso, ela informará que o horário está livre e que a capacidade é de 20 pessoas. O serviço de reservas usa essa resposta para bloquear o horário em uma única operação e gerar uma reserva provisória. A coordenação só autoriza o acesso depois de analisar essa reserva e a finalidade informada. Por fim, a integração envia a autorização ao controle de acesso e precisa receber confirmação antes de o portal exibir a reserva como confirmada. Considere o caminho de sucesso: não surgirá conflito concorrente, os sistemas permanecerão disponíveis e todas as verificações terão resultado satisfatório. Os identificadores preservam a ligação entre solicitação, disponibilidade, reserva, autorização e confirmação. O processo é didático e não representa uma regra universal de reservas. Reordene os cinco cartões pelas informações que cada ação consome e produz. O objetivo não é decorar cargos, mas reconstruir um fluxo no qual pessoas, regras, dados e sistemas possam explicar por que a porta foi liberada.",
     "blocks": [
       {
-        "id": "calcular-demonstrativo",
-        "text": "Sistema: usar a distância elegível da conciliação para calcular o demonstrativo identificado, mantendo referências ao relato e à regra de custeio."
+        "id": "sincronizar-acesso",
+        "text": "Integração: enviar a autorização ao controle de acesso, receber ACC-204 e só então marcar a reserva como confirmada no portal."
       },
       {
-        "id": "registrar-custeio",
-        "text": "Operador: usar a autorização da coordenação para registrar no painel o valor autorizado, mantendo vínculo ao demonstrativo e à autorização."
+        "id": "consultar-disponibilidade",
+        "text": "Agenda: usar a solicitação validada para verificar horário e capacidade, produzindo DISP-204 com horário livre e capacidade para 20 pessoas."
       },
       {
-        "id": "confirmar-relato",
-        "text": "Equipe executora: conferir os trechos realizados e confirmar a versão do relato que descreve o ocorrido, ainda sem concluir elegibilidade para custeio."
+        "id": "validar-solicitacao",
+        "text": "Analista: conferir responsável, finalidade, intervalo e 12 participantes, produzindo a solicitação validada PED-204."
       },
       {
-        "id": "autorizar-demonstrativo",
-        "text": "Coordenação: conferir o demonstrativo calculado e identificado contra o saldo reservado, emitindo a autorização correspondente."
+        "id": "autorizar-acesso",
+        "text": "Coordenação: analisar a reserva provisória e sua finalidade, emitindo AUT-204 para o intervalo reservado."
       },
       {
-        "id": "conciliar-trechos",
-        "text": "Secretaria: comparar a versão confirmada do relato com a ordem de visita, identificar trechos elegíveis realizados e registrar a distância conciliada."
+        "id": "criar-reserva",
+        "text": "Serviço de reservas: consumir DISP-204, bloquear o horário atomicamente e gerar a reserva provisória RES-204."
       }
     ],
     "correctOrder": [
-      "confirmar-relato",
-      "conciliar-trechos",
-      "calcular-demonstrativo",
-      "autorizar-demonstrativo",
-      "registrar-custeio"
+      "validar-solicitacao",
+      "consultar-disponibilidade",
+      "criar-reserva",
+      "autorizar-acesso",
+      "sincronizar-acesso"
     ],
     "hints": [
-      "Diferencie um relato do que ocorreu, uma informação conciliada e uma decisão de autorização. Cargo e velocidade não substituem a evidência que falta.",
-      "O trecho particular pode ter sido realizado sem ser elegível. Qual artefato precisa combinar a realização confirmada com a ordem de visita?",
-      "O valor calculado ainda não é uma decisão de custeio. Observe o que a coordenação precisa conferir e qual registro depende dessa decisão."
+      "Comece distinguindo pedido recebido, disponibilidade consultada e horário efetivamente bloqueado. Eles não representam o mesmo estado.",
+      "A agenda precisa receber intervalo e quantidade já conferidos. Qual cartão produz essa entrada válida, e qual artefato a agenda devolve?",
+      "A porta não usa diretamente a reserva provisória. Observe qual decisão deve existir antes da integração e qual confirmação permite atualizar o portal."
     ],
-    "explanation": "A confirmação descreve o que ocorreu; a conciliação cruza esse relato com a ordem, tornando elegíveis T1 e T2: 12 + 8 = 20 km. O demonstrativo calcula 20 × R$ 2 = R$ 40 e identifica suas bases. A coordenação confere R$ 40 contra o saldo de R$ 50 e emite autorização. O registro final usa essa autorização, sem confundir relato, cálculo e decisão. T3 permanece no relato factual, mas não entra no custeio. Essa preservação permite explicar a diferença sem apagar o ocorrido. As dependências pertencem ao processo fictício; outras organizações podem ter etapas ou responsabilidades diferentes.",
+    "explanation": "O analista transforma SOL-204 em PED-204 ao conferir os dados. A agenda usa essa entrada e produz DISP-204. O serviço consome a disponibilidade, bloqueia o intervalo e cria RES-204. A coordenação analisa essa reserva e emite AUT-204. A integração envia a autorização, recebe ACC-204 e só então confirma a reserva no portal. Assim, cada decisão e atualização pode ser rastreada até a solicitação original. Outras organizações podem combinar ou distribuir essas responsabilidades de outra forma.",
     "reward": {
       "xp": 100
     },
@@ -256,13 +256,13 @@
       "objectId": "door"
     },
     "collectionId": "enade-2026",
-    "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; processo informacional autoral para N9 — Jornada Digital, em revisão editorial assistida por IA para SI.",
+    "pedagogicalOrigin": "Referenciais oficiais de 2026; processo informacional autoral para N9 — Jornada Digital, em revisão editorial assistida por IA para SI.",
     "courses": [
       "SI"
     ],
     "area": "Sistemas de informação e processos de negócio",
     "competencies": [
-      "Relacionar pessoas responsáveis, estados do processo, evidências de deslocamento e registros tecnológicos para ordenar um fluxo informacional rastreável."
+      "Relacionar pessoas responsáveis, regras de processo, dados transacionais e integrações tecnológicas para ordenar um fluxo informacional rastreável."
     ],
     "difficulty": "intermediate",
     "sources": [
@@ -276,7 +276,7 @@
       }
     ],
     "traceability": {
-      "title": "Do trajeto realizado ao registro autorizado",
+      "title": "Liberar o Laboratório Aurora",
       "objective": "Ordenar responsabilidades e circulação de informação por pré-condições explícitas.",
       "locators": [
         "SI-02 / SI-I; F07, art. 5º, I, a.3/a.5; art. 6º, VI e XV"
@@ -523,6 +523,158 @@
       "objective": "Ordenar dependências de uma mudança de rede com critérios de continuidade declarados.",
       "locators": [
         "TRC-04 / TRC-II; F10, art. 5º, II, b.1/b.2/b.4; art. 6º, XIII, XV e XVI"
+      ]
+    },
+    "validationStatus": "under-ai-review"
+  },
+  {
+    "kind": "sequence",
+    "id": "E26-P-SI-02",
+    "title": "Montar o classificador de prioridade",
+    "narrative": "O service desk fictício da Base N9 precisa classificar chamados usando dois valores inteiros: impacto e urgência. Cada valor válido vai de 1 a 3. A função deve retornar -1 quando qualquer entrada estiver fora desse intervalo. Para entradas válidas, a pontuação é impacto multiplicado por urgência: pontuação a partir de 6 retorna prioridade 3; pontuação a partir de 3 retorna prioridade 2; as demais retornam prioridade 1. Os cinco cartões formam uma única função em C17. Organize-os para que as chaves fiquem balanceadas, nenhuma variável seja usada antes da declaração, entradas inválidas sejam rejeitadas antes do cálculo e a faixa mais alta seja examinada antes da intermediária. O programa será conferido com estes casos: (3,3) → 3; (2,3) → 3; (2,2) → 2; (1,3) → 2; (1,1) → 1; (0,2) → -1; (2,4) → -1. Não é necessário escrever código novo: todos os trechos devem ser usados exatamente uma vez. Os valores e a regra são fictícios e não representam uma política real de atendimento.",
+    "blocks": [
+      {
+        "id": "aplicar-faixas",
+        "text": "if (pontuacao >= 6) return 3;\nif (pontuacao >= 3) return 2;"
+      },
+      {
+        "id": "fechar-funcao",
+        "text": "return 1;\n}"
+      },
+      {
+        "id": "abrir-funcao",
+        "text": "int classificar_prioridade(int impacto, int urgencia) {"
+      },
+      {
+        "id": "calcular-pontuacao",
+        "text": "int pontuacao = impacto * urgencia;"
+      },
+      {
+        "id": "validar-entradas",
+        "text": "if (impacto < 1) return -1;\nif (impacto > 3) return -1;\nif (urgencia < 1) return -1;\nif (urgencia > 3) return -1;"
+      }
+    ],
+    "correctOrder": [
+      "abrir-funcao",
+      "validar-entradas",
+      "calcular-pontuacao",
+      "aplicar-faixas",
+      "fechar-funcao"
+    ],
+    "hints": [
+      "Localize primeiro o trecho que abre o corpo da função e o que contém a chave final.",
+      "A variável pontuacao precisa existir antes das condições que a consultam, mas entradas inválidas devem sair antes dessa multiplicação.",
+      "Se a condição pontuacao >= 3 vier antes da condição pontuacao >= 6, qual prioridade será devolvida para a pontuação 9?"
+    ],
+    "explanation": "A função abre seu corpo, rejeita impacto ou urgência fora de 1 a 3 e só então calcula a pontuação. As faixas são testadas da maior para a menor: pontuações 6 a 9 retornam 3; pontuações 3 a 4 retornam 2; pontuações 1 ou 2 chegam ao retorno padrão 1. O último cartão também fecha a chave da função. Essa ordem compõe um fonte C17 completo para os casos declarados.",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "collectionId": "enade-2026",
+    "pedagogicalOrigin": "Exercício autoral complementar de programação em C para N9 — Jornada Digital, em revisão editorial assistida por IA.",
+    "courses": [
+      "SI"
+    ],
+    "area": "Programação aplicada a processos de SI",
+    "competencies": [
+      "Interpretar dependências sintáticas e semânticas entre trechos de uma função em C.",
+      "Aplicar validação de entradas e decisões ordenadas para implementar uma regra de prioridade."
+    ],
+    "difficulty": "introductory",
+    "sources": [
+      {
+        "role": "primary",
+        "type": "authorial",
+        "description": "Código e casos de teste fictícios criados para o jogo; não derivados de prova, biblioteca ou sistema real.",
+        "year": 2026,
+        "documentId": "N9-C-SI-01"
+      }
+    ],
+    "traceability": {
+      "title": "Montar o classificador de prioridade",
+      "objective": "Organizar validação, cálculo e decisões em C para implementar uma regra de negócio testável.",
+      "locators": [
+        "EXP-SI-C01 — ampliação autoral posterior ao plano original de 66 desafios"
+      ]
+    },
+    "validationStatus": "under-ai-review"
+  },
+  {
+    "kind": "sequence",
+    "id": "E26-P-SI-03",
+    "title": "Montar o monitor de alertas",
+    "narrative": "O laboratório fictício da Base N9 registra cinco medições inteiras: 42, 78, 65, 91 e 55. Uma medição gera alerta quando é maior ou igual a 70. Monte um programa C17 completo que percorra o vetor, use uma decisão para identificar cada alerta e chame o procedimento de registro. O procedimento recebe o endereço do contador e altera a variável original por meio do ponteiro. Ao final, o programa deve exibir Alertas: 2. Os cinco cartões devem ser usados exatamente uma vez. A solução precisa manter diretivas e protótipos fora das funções, declarações antes do uso, chaves balanceadas e a definição do procedimento depois de main. Não é necessário escrever código novo. As medições e o limite são fictícios e não representam um sistema real de monitoramento.",
+    "blocks": [
+      {
+        "id": "finalizar-programa",
+        "text": "printf(\"Alertas: %d\\n\", alertas);\nreturn 0;\n}\n\nvoid registrar_alerta(int *contador) {"
+      },
+      {
+        "id": "iniciar-repeticao",
+        "text": "int medicoes[5] = {42, 78, 65, 91, 55};\nint alertas = 0;\nfor (int i = 0; i < 5; i++) {"
+      },
+      {
+        "id": "atualizar-contador",
+        "text": "(*contador)++;\n}"
+      },
+      {
+        "id": "preparar-programa",
+        "text": "#include <stdio.h>\n\nvoid registrar_alerta(int *contador);\n\nint main(void) {"
+      },
+      {
+        "id": "decidir-alerta",
+        "text": "if (medicoes[i] >= 70) {\nregistrar_alerta(&alertas);\n}\n}"
+      }
+    ],
+    "correctOrder": [
+      "preparar-programa",
+      "iniciar-repeticao",
+      "decidir-alerta",
+      "finalizar-programa",
+      "atualizar-contador"
+    ],
+    "hints": [
+      "O cartão com #include e o protótipo precisa estar no escopo global e também abre a função principal.",
+      "Antes de testar medicoes[i], localize o cartão que declara o vetor, o contador e inicia o laço.",
+      "O operador de endereço aplicado a alertas envia a localização da variável; a desreferenciação de contador só pode ocorrer depois que a definição do procedimento declarar esse ponteiro."
+    ],
+    "explanation": "O programa inclui a biblioteca de entrada e saída, declara o protótipo e abre a função principal. Depois cria o vetor e o contador, percorre as cinco posições com um laço e chama o procedimento somente para 78 e 91. O operador de endereço fornece a localização de alertas; no procedimento, a desreferenciação do ponteiro acessa essa localização e incrementa a variável original. Após o laço, a saída exibe Alertas: 2. A definição do procedimento aparece depois da função principal, permitida pelo protótipo anterior.",
+    "reward": {
+      "xp": 100
+    },
+    "unlocks": {
+      "mapId": "base-n9",
+      "objectId": "door"
+    },
+    "collectionId": "enade-2026",
+    "pedagogicalOrigin": "Exercício autoral complementar de programação em C para N9 — Jornada Digital, em revisão editorial assistida por IA.",
+    "courses": [
+      "SI"
+    ],
+    "area": "Programação aplicada a processos de SI",
+    "competencies": [
+      "Relacionar biblioteca, protótipo, função principal, repetição, decisão e procedimento na estrutura de um programa em C.",
+      "Interpretar passagem por referência com endereço e desreferenciação para atualizar uma variável do chamador."
+    ],
+    "difficulty": "intermediate",
+    "sources": [
+      {
+        "role": "primary",
+        "type": "authorial",
+        "description": "Código, medições e resultado fictícios criados para o jogo; não derivados de prova, biblioteca ou sistema real.",
+        "year": 2026,
+        "documentId": "N9-C-SI-02"
+      }
+    ],
+    "traceability": {
+      "title": "Montar o monitor de alertas",
+      "objective": "Organizar um programa C17 completo que percorre medições, toma uma decisão e atualiza um contador por ponteiro.",
+      "locators": [
+        "EXP-SI-C02 — ampliação autoral posterior ao plano original de 66 desafios"
       ]
     },
     "validationStatus": "under-ai-review"

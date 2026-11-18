@@ -386,10 +386,103 @@ As referências a revisão docente nas entregas 11–17 permanecem como históri
 - [x] Migrar as 60 questões e os seis puzzles executáveis para `under-ai-review`.
 - [x] Preservar IDs, versões, alternativas, gabaritos, explicações, feedbacks, cursos, dificuldades, fontes, rastreabilidade, recompensas e soluções.
 - [x] Atualizar o aviso visível para **Conteúdo experimental em revisão editorial.**
+
+## Ampliação SI-M03 — fundamentos de sistemas (17/11/2026)
+
+- [x] Integrar `E26-Q-SI-11` a `E26-Q-SI-16` ao catálogo executável sem substituir as questões anteriores.
+- [x] Renderizar diagramas, tabelas e código com descrição textual e comportamento responsivo.
+- [x] Manter as seis questões em `under-ai-review`, com fontes e rastreabilidade preservadas.
+- [x] Ampliar SI para 26 questões elegíveis, mantendo as cotas das missões e os oito puzzles.
+- [ ] Realizar piloto com estudantes e revisar clareza, dificuldade e atratividade dos seis itens.
 - [x] Registrar critérios, transições, responsabilidade e limitações em [governanca-editorial-ia.md](governanca-editorial-ia.md).
 - [x] Manter documentos anteriores como registros da governança vigente quando foram produzidos.
 - [x] Não implementar jornada de 25, novas questões, publicação, serviços externos ou mudanças de progresso.
 - [x] Aprovar 262 testes Vitest de unidade/DOM/integração, 132 verificações de conteúdo/contrato, lint, TypeScript e build de produção.
 - [x] Aprovar 67 testes Playwright em desktop e celular; um caso móvel extenso permaneceu explicitamente ignorado pela configuração existente, sem falha nem travamento no encerramento.
 
-Próxima etapa autorizável: criar as candidatas SI-02 e SI-05, submetê-las ao processo registrado e comparar versões sem substituir silenciosamente os originais.
+Etapa concluída posteriormente: as candidatas SI-02 e SI-05 foram revisadas, documentadas e integradas somente após autorização explícita.
+
+## 19. Integração das candidatas SI-02 e SI-05 — 16/11/2026
+
+- [x] Preservar os sete lotes originais como histórico e aplicar somente as duas candidatas autorizadas na conversão determinística.
+- [x] Integrar `E26-Q-SI-02` versão 2, SQL SQLite funcional, tabela semântica e gabarito C.
+- [x] Integrar `E26-Q-SI-05` versão 2, diagrama relacional com descrição textual e gabarito B.
+- [x] Criar contrato opcional estrito para código, tabela, diagrama e imagem local, sem quebrar questões textuais.
+- [x] Renderizar recursos sem `innerHTML`, com rolagem, foco, semântica e layout responsivo.
+- [x] Manter outras 58 questões e os seis puzzles byte a byte; preservar seleção, cotas, pontuação e progresso.
+- [ ] Realizar piloto humano com estudantes, leitor de tela e dispositivos reais antes de `ready-for-release`.
+
+## 20. Melhorias visuais das questões existentes de SI — 17/11/2026
+
+- [x] Preservar IDs, competências, áreas, dificuldades, alternativas, gabaritos, fontes, cotas e progresso.
+- [x] Adicionar mapa de informação a SI-01, fluxo de processo a SI-03 e linha de eventos a SI-04.
+- [x] Adicionar comparação de definições a SI-06 e gráfico SVG acessível a SI-07.
+- [x] Adicionar artefato de teste a SI-08, quadros de alocação a SI-09 e arquitetura a SI-10.
+- [x] Manter SI-02 e SI-05 nas versões piloto já integradas.
+- [x] Validar as dez questões na Arena em desktop e celular, incluindo carregamento do SVG local.
+- [x] Aprovar conteúdo/contratos, TypeScript, lint e build de produção.
+- [ ] Realizar homologação humana com leitor de tela e dispositivos reais.
+
+Próxima etapa: criar novas questões de SI em entrega separada, seguindo a matriz de capacidade e sem reutilizar IDs.
+
+## 21. Melhorias visuais comuns - lote 01 — 17/11/2026
+
+- [x] Implementar gráfico acessível em COM-01 e diagrama de memória em COM-08.
+- [x] Transformar a tabela achatada de COM-05 em tabela semântica.
+- [x] Apresentar logs remotos e local em COM-07, sem executar conteúdo editorial.
+- [x] Mostrar relação territorial e três limites simultâneos em COM-09.
+- [x] Mostrar papéis, permissões e rastreabilidade em COM-10.
+- [x] Preservar IDs, elegibilidade para os cinco cursos, gabaritos, dificuldade, fontes e estado editorial.
+- [x] Manter COM-02, COM-03, COM-04, COM-06 e os puzzles fora desta entrega.
+- [ ] Homologar os recursos com leitores de tela e dispositivos reais.
+
+## 22. Melhorias visuais comuns - lote 02 — 17/11/2026
+
+- [x] Mostrar em COM-02 os canais, as finalidades e a separação entre registros de atendimento e convite público.
+- [x] Representar em COM-03 o aviso ambíguo, as informações ausentes e as interpretações divergentes.
+- [x] Mostrar em COM-04 as duas rotas de reserva ligadas à mesma disponibilidade de vagas.
+- [x] Comparar em COM-06 as versões do sensor e representar o objetivo de intercâmbio recíproco.
+- [x] Preservar IDs, alternativas, gabaritos, competências, dificuldades, fontes, elegibilidade e estado editorial.
+- [x] Validar os quatro recursos na Arena em desktop e celular.
+- [ ] Homologar os recursos com leitores de tela e dispositivos reais.
+
+## 23. Modernização visual do puzzle comum — 17/11/2026
+
+- [x] Apresentar o estado inicial da recuperação em painel tecnológico acessível.
+- [x] Organizar os cinco blocos em uma fila operacional, mantendo arraste, botões e setas.
+- [x] Identificar cada cartão por ação textual, sem depender de cor ou revelar a ordem correta.
+- [x] Exibir estados distintos de recuperação em andamento e sistema liberado.
+- [x] Preservar conteúdo, sequência, dicas, XP, desbloqueio, replay e LocalStorage.
+- [x] Respeitar movimento reduzido e layout de celular.
+- [ ] Homologar com leitor de tela humano e dispositivos físicos.
+
+## 24. Substituição do puzzle específico de SI — 17/11/2026
+
+- [x] Substituir o cenário de custeio pelo fluxo integrado de reserva do Laboratório Aurora.
+- [x] Preservar ID, área, dificuldade, curso, fonte, recompensa, desbloqueio e estado editorial.
+- [x] Validar uma única solução entre 120 permutações.
+- [x] Adicionar mapa textual do ecossistema e rótulos operacionais aos cartões.
+- [x] Migrar em memória ordens salvas da versão anterior sem apagar conclusão, dicas ou XP.
+- [x] Preservar mouse, teclado, toque, replay e retorno ao mapa.
+- [ ] Observar clareza, dificuldade e engajamento em piloto com estudantes.
+
+## 25. Puzzle complementar de código C para SI — 17/11/2026
+
+- [x] Criar `E26-P-SI-02` sem substituir os 66 IDs originais.
+- [x] Montar função C17 em cinco cartões, preservando `_`, `*` e quebras de linha.
+- [x] Cobrir validação, cálculo e faixas de prioridade com sete casos de teste.
+- [x] Apresentar código monoespaçado, briefing acessível e tabela semântica de casos.
+- [x] Manter o puzzle fora das cotas de 3, 5, 10 e 20 questões.
+- [x] Preservar progresso e recompensas dos puzzles anteriores.
+- [ ] Compilar o fonte com GCC, Clang ou MSVC quando um compilador C estiver disponível no ambiente.
+- [ ] Realizar piloto humano de clareza e dificuldade.
+
+## 26. Puzzle de programa completo em C para SI — 17/11/2026
+
+- [x] Criar `E26-P-SI-03` com exatamente cinco cartões, sem substituir desafios existentes.
+- [x] Cobrir `stdio.h`, protótipo, `main`, vetor, repetição, decisão, procedimento e ponteiro.
+- [x] Tornar a ordem única por dependências de escopo, identificadores e chaves balanceadas.
+- [x] Apresentar cinco medições em tabela semântica e código em fonte monoespaçada.
+- [x] Preservar as cotas de questões e as chaves atuais de LocalStorage.
+- [ ] Compilar o fonte com GCC, Clang ou MSVC quando um compilador C estiver disponível no ambiente.
+- [ ] Realizar piloto humano de clareza, dificuldade e entendimento de ponteiros.

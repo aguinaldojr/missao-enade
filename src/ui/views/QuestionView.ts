@@ -4,11 +4,13 @@ import type { Attempt } from '../../domain/models/Attempt';
 import { currentQuestion } from '../../domain/progression';
 import { calculateScore } from '../../domain/scoring';
 import { button, element } from '../components/elements';
+import { questionPresentation } from '../components/QuestionPresentation';
 
 export function questionView(attempt: Attempt, dispatch: (command: Command) => void, signal: AbortSignal): HTMLElement {
   const question = currentQuestion(attempt);
   const answer = attempt.answers[attempt.index];
   const view = element('section', 'view question-view');
+  view.dataset.questionId = question.id;
   const toolbar = element('div', 'question-toolbar');
   toolbar.append(element('p', 'eyebrow', gameConfig.format.challengeProgress(attempt.index + 1, attempt.mission.questionCount)), element('p', 'score', gameConfig.format.score(calculateScore(attempt.answers))));
   const progress = element('div', 'mission-progress');
@@ -29,7 +31,9 @@ export function questionView(attempt: Attempt, dispatch: (command: Command) => v
   context.tabIndex = 0;
   context.setAttribute('role', 'region');
   context.setAttribute('aria-label', 'Contexto do desafio');
-  view.append(element('p', 'question-category', gameConfig.format.category(question.classification, attempt.courseAtStart)), context, title);
+  view.append(element('p', 'question-category', gameConfig.format.category(question.classification, attempt.courseAtStart)), context);
+  if (question.presentation) view.append(questionPresentation(question.presentation));
+  view.append(title);
   const form = element('form', 'answer-form');
   const fieldset = element('fieldset', 'answer-options');
   fieldset.setAttribute('aria-describedby', context.id);

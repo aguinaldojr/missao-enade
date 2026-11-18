@@ -9,7 +9,7 @@ N9 continua provisório e sujeito à aprovação institucional. ENADE permanece 
 | Conceito | Contrato atual | Limite desta entrega |
 | --- | --- | --- |
 | Metadados compartilhados | EditorialMetadata | Questões e sequências usam os mesmos campos; `sources` diferencia papéis e `traceability` preserva título, objetivo e localizadores. |
-| Questão contextualizada | Question extends EditorialMetadata | Cinco alternativas e gabarito único; sem mudança da interação existente. |
+| Questão contextualizada | Question extends EditorialMetadata | Cinco alternativas, gabarito único e apresentação estruturada opcional para código, tabela, diagrama ou imagem local. |
 | Catálogo de questões | QuestionCatalog | mode, versão e fase generalizados; editoriais podem ter uma ou mais questões. A fase jogável atual exige dez para o curso solicitado. |
 | Sequência Lógica | SequencePuzzle extends EditorialMetadata | Único tipo de puzzle implementado; blocos, dicas e recompensa preservados. |
 | Coleção | LearningCollection + CollectionRepository | IDs de coleção referenciados são validados; status não ativa conteúdo nem substitui revisão. |
@@ -26,7 +26,7 @@ O conjunto obrigatório é `collectionId`, `pedagogicalOrigin`, `courses`, `area
 | Arquivo | Estruturas/finalidade |
 | --- | --- |
 | `src/domain/models/EditorialMetadata.ts` | EditorialMetadata, EditorialSource, EditorialTraceability, SourceRole, Difficulty, SourceType, ValidationStatus, ContentMode, LearningCollection, CollectionStatus e suas constantes. |
-| `src/domain/models/Question.ts` | Question herda EditorialMetadata; QuestionCatalog generalizado; LegacyQuestion para compatibilidade. |
+| `src/domain/models/Question.ts` | Question herda EditorialMetadata; QuestionCatalog generalizado; apresentação estruturada opcional; LegacyQuestion para compatibilidade. |
 | `src/domain/puzzles/SequencePuzzle.ts` | SequencePuzzle herda EditorialMetadata; LegacySequencePuzzle e progresso inalterado. |
 | `src/content/collections.json` | Catálogo de três coleções: uma planejada e duas de exemplos piloto. |
 | `src/config/collections.ts` | Reexporta LearningCollection e preserva firstLearningCollection (enade-2026). |
@@ -37,6 +37,7 @@ O conjunto obrigatório é `collectionId`, `pedagogicalOrigin`, `courses`, `area
 | `src/schemas/editorial.schema.json` | Definições comuns, `sources` e `traceability` estritas; refs por urn:n9:editorial. |
 | `src/schemas/collections.schema.json` | Coleções estritas e estados planned/pilot/active/archived. |
 | `src/schemas/question.schema.json` | Catálogo canônico generalizado de questões, com refs aos metadados comuns. |
+| `src/schemas/question-presentation.schema.json` | Blocos visuais estritos e opcionais de código, tabela, diagrama e imagem local. |
 | `src/schemas/puzzles.schema.json` | Array canônico de sequências, com collectionId e os mesmos metadados. |
 | `src/schemas/legacy-question.schema.json; src/schemas/legacy-puzzles.schema.json` | Schemas históricos de entrada: reconhecem o formato antigo antes da normalização; não são o contrato de novos conteúdos. |
 | `tests/unit/editorial.test.ts` | Casos de aprovação, fontes, dificuldade, validações negativas, legado, hashes pedagógicos e progresso anterior. |
@@ -206,6 +207,7 @@ Uma fase/catálogo pode ser de uma coleção ou reunir itens de diferentes cole�
 | `example` | boolean | Não | Marcador de compatibilidade. Aceita true ou false; não substitui validationStatus. | true |
 | `editorialStatus` | ContentMode | Não | Marcador de compatibilidade: example/provisional/pilot/approved. | example |
 | `context` | string | Sim | Situação contextualizada não branca. | No campus fictício Nexo... |
+| `presentation` | QuestionPresentation | Não | Recursos estruturados exibidos entre contexto e enunciado. Omissão preserva integralmente questões antigas. | `{"blocks":[{"type":"code",...}]}` |
 | `prompt` | string | Sim | Enunciado não branco. | Qual conclusão é sustentada por esses dados? |
 | `options` | object[] | Sim | Exatamente cinco alternativas com IDs distintos. | Alternativas A–E |
 | `options[].id` | OptionId | Sim | A, B, C, D ou E. | B |
@@ -214,6 +216,17 @@ Uma fase/catálogo pode ser de uma coleção ou reunir itens de diferentes cole�
 | `explanation` | string | Sim | Explicação geral não branca. | 140 dividido por 200 é 0,70... |
 | `feedbackByOption` | Record<OptionId,string> | Sim | Objeto estrito com A/B/C/D/E, cada valor não branco. | Cinco justificativas |
 | `feedbackByOption.A/B/C/D/E` | string por letra | Sim | Feedback específico de cada alternativa. | O balcão recebeu 30%... |
+
+`presentation.blocks` aceita de um a oito objetos estritos:
+
+| Tipo | Campos obrigatórios | Regra principal |
+| --- | --- | --- |
+| `code` | `type`, `language`, `caption`, `code` | `language`: sql, c, python ou text; exibido como texto, sem executar HTML ou código. |
+| `table` | `type`, `caption`, `columns`, `rows` | Uma a doze colunas; cada linha deve possuir exatamente a mesma quantidade de células. |
+| `diagram` | `type`, `title`, `description`, `nodes`, `edges` | IDs de nós únicos; toda aresta referencia nós existentes; a descrição textual é obrigatória. |
+| `image` | `type`, `src`, `alt`; `caption` opcional | Somente caminho local sob `assets/`, `images/` ou `media/`; URL remota e `..` são rejeitados; texto alternativo é obrigatório. |
+
+O renderizador usa apenas criação segura de elementos DOM, tabelas HTML semânticas, região rolável para código/tabela e descrição textual equivalente para diagramas. Imagens são responsivas e resolvidas contra `document.baseURI`, preservando builds em subdiretórios. Os objetos continuam sob `additionalProperties: false`.
 
 
 `validateContent` normaliza entradas antigas reconhecidas, aplica schema canônico, exige coleção existente, IDs únicos, cinco IDs distintos e gabarito presente. Não descarta campos desconhecidos e não completa metadados parcialmente ausentes de um conteúdo já canônico.

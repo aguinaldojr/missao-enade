@@ -29,7 +29,7 @@ function permutations<T>(items: readonly T[]): readonly (readonly T[])[] {
 
 function playerText(question: Question): string {
   return [question.context, question.prompt, ...question.options.map((option) => option.text), question.explanation,
-    ...Object.values(question.feedbackByOption)].join(' ');
+    ...Object.values(question.feedbackByOption), JSON.stringify(question.presentation ?? '')].join(' ');
 }
 
 function puzzlePlayerText(puzzle: SequencePuzzle): string {
@@ -37,40 +37,40 @@ function puzzlePlayerText(puzzle: SequencePuzzle): string {
     puzzle.explanation].join(' ');
 }
 
-describe('conversão controlada dos 66 desafios para JSON', () => {
-  it('mantém os JSON idênticos à projeção integral dos sete lotes', () => {
+describe('conversão controlada da coleção ampliada para JSON', () => {
+  it('mantém os JSON idênticos à projeção integral dos lotes de autoria', () => {
     const converted = convertedCatalogs(projectRoot);
     expect(questionJson).toEqual(converted.questions);
     expect(puzzleJson).toEqual(converted.puzzles);
     const documents = readEditorialDocuments(projectRoot);
-    expect(documents.sections).toHaveLength(66);
+    expect(documents.sections).toHaveLength(74);
     expect(documents.questions).toEqual(questions);
     expect(documents.puzzles).toEqual(puzzles);
   });
 
-  it('corresponde exatamente aos 66 IDs únicos do plano', () => {
+  it('corresponde aos 66 IDs originais e aos puzzles complementares planejados', () => {
     const plan = readFileSync(resolve(projectRoot, 'docs/plano-colecao-enade-2026.md'), 'utf8');
     const plannedIds = [...new Set(plan.match(/E26-[QP]-(?:COM|CC|SI|TADS|TGTI|TRC)-\d{2}/g) ?? [])].sort();
     const convertedIds = [...questions, ...puzzles].map((item) => item.id).sort();
-    expect(plannedIds).toHaveLength(66);
-    expect(convertedIds).toHaveLength(66);
-    expect(new Set(convertedIds).size).toBe(66);
+    expect(plannedIds).toHaveLength(74);
+    expect(convertedIds).toHaveLength(74);
+    expect(new Set(convertedIds).size).toBe(74);
     expect(convertedIds).toEqual(plannedIds);
-    expect(questions).toHaveLength(60);
-    expect(puzzles).toHaveLength(6);
+    expect(questions).toHaveLength(66);
+    expect(puzzles).toHaveLength(8);
   });
 
   it('preserva cursos, cotas e distribuição de dificuldades', () => {
     for (const course of COURSE_IDS) {
       const eligible = questions.filter((question) => question.courses.includes(course));
       const eligiblePuzzles = puzzles.filter((puzzle) => puzzle.courses.includes(course));
-      expect(eligible).toHaveLength(20);
+      expect(eligible).toHaveLength(course === 'SI' ? 26 : 20);
       expect(eligible.filter((question) => question.classification === 'COMUM')).toHaveLength(10);
-      expect(eligible.filter((question) => question.classification === course)).toHaveLength(10);
-      expect(eligible.filter((question) => question.difficulty === 'introductory')).toHaveLength(7);
-      expect(eligible.filter((question) => question.difficulty === 'intermediate')).toHaveLength(9);
-      expect(eligible.filter((question) => question.difficulty === 'advanced')).toHaveLength(4);
-      expect(eligiblePuzzles).toHaveLength(2);
+      expect(eligible.filter((question) => question.classification === course)).toHaveLength(course === 'SI' ? 16 : 10);
+      expect(eligible.filter((question) => question.difficulty === 'introductory')).toHaveLength(course === 'SI' ? 9 : 7);
+      expect(eligible.filter((question) => question.difficulty === 'intermediate')).toHaveLength(course === 'SI' ? 12 : 9);
+      expect(eligible.filter((question) => question.difficulty === 'advanced')).toHaveLength(course === 'SI' ? 5 : 4);
+      expect(eligiblePuzzles).toHaveLength(course === 'SI' ? 4 : 2);
     }
   });
 
@@ -87,26 +87,113 @@ describe('conversão controlada dos 66 desafios para JSON', () => {
 
   it('preserva fontes, papéis e rastreabilidade sem liberar conteúdo', () => {
     const items = [...questions, ...puzzles];
-    expect(items.every((item) => item.validationStatus === 'under-ai-review')).toBe(true);
+    expect(questions.filter((item) => item.validationStatus === 'ready-for-pilot').map((item) => item.id))
+      .toEqual(['E26-Q-SI-02', 'E26-Q-SI-05']);
+    expect(questions.filter((item) => item.validationStatus === 'under-ai-review')).toHaveLength(64);
+    expect(puzzles.every((item) => item.validationStatus === 'under-ai-review')).toBe(true);
     expect(items.every((item) => item.sources.filter((source) => source.role === 'primary').length === 1)).toBe(true);
     expect(items.every((item) => item.traceability && item.traceability.title && item.traceability.objective &&
       item.traceability.locators.length > 0)).toBe(true);
     expect(items.flatMap((item) => item.sources).filter((source) => source.role === 'normative-complementary')).toHaveLength(16);
-    expect(items.flatMap((item) => item.sources).filter((source) => source.role === 'technical')).toHaveLength(24);
+    expect(items.flatMap((item) => item.sources).filter((source) => source.role === 'technical')).toHaveLength(30);
     for (const id of ['E26-Q-COM-07', 'E26-Q-COM-08', 'E26-Q-COM-10', 'E26-P-COM-01']) {
       const item = items.find((candidate) => candidate.id === id)!;
       expect(item.sources.filter((source) => source.role === 'normative-complementary')).toHaveLength(4);
     }
   });
 
-  it('altera somente a governança nos 66 objetos convertidos', () => {
-    const pedagogicalProjectionHash = (items: readonly Record<string, unknown>[]) => createHash('sha256')
-      .update(JSON.stringify(items.map((item) => Object.fromEntries(Object.entries(item)
-        .filter(([key]) => !['validationStatus', 'pedagogicalOrigin'].includes(key)))))).digest('hex');
+  it('melhora apenas os itens autorizados e preserva integralmente questões fora do lote comum e puzzles', () => {
+    const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
     const rawQuestions = (questionJson as { questions: Record<string, unknown>[] }).questions;
     const rawPuzzles = puzzleJson as Record<string, unknown>[];
-    expect(pedagogicalProjectionHash(rawQuestions)).toBe('9699289faa3b8408c5b66c4b11600f1181444b8bfac506119f1a4aef47f38519');
-    expect(pedagogicalProjectionHash(rawPuzzles)).toBe('dfbb77c169563400ca5bf63e72c5b370dca66a27a27f13842b9c9e45657865a7');
+    const commonImprovements = new Set(Array.from({ length: 10 }, (_, index) =>
+      `E26-Q-COM-${String(index + 1).padStart(2, '0')}`));
+    const newSiM03 = new Set(Array.from({ length: 6 }, (_, index) => `E26-Q-SI-${index + 11}`));
+    expect(hash(rawQuestions.filter((question) => !commonImprovements.has(String(question.id)) && !newSiM03.has(String(question.id)))))
+      .toBe('15259d7a3ec543b4d5933980770759a7e07cf0f82092909b9cc350b315af2b91');
+    expect(hash(rawPuzzles.filter((puzzle) => !String(puzzle.id).startsWith('E26-P-SI-'))))
+      .toBe('c4a95a078bdf8e44869a656881ca49f410b261aed850cbba308ac8548befbc81');
+    expect(rawPuzzles).toHaveLength(8);
+    const siPuzzle = puzzles.find((puzzle) => puzzle.id === 'E26-P-SI-01')!;
+    expect(siPuzzle).toMatchObject({
+      title: 'Liberar o Laboratório Aurora', difficulty: 'intermediate', courses: ['SI'],
+      area: 'Sistemas de informação e processos de negócio', reward: { xp: 100 },
+      validationStatus: 'under-ai-review',
+    });
+    expect(siPuzzle.correctOrder).toEqual(['validar-solicitacao', 'consultar-disponibilidade',
+      'criar-reserva', 'autorizar-acesso', 'sincronizar-acesso']);
+    const codePuzzle = puzzles.find((puzzle) => puzzle.id === 'E26-P-SI-02')!;
+    expect(codePuzzle).toMatchObject({ title: 'Montar o classificador de prioridade', courses: ['SI'],
+      difficulty: 'introductory', reward: { xp: 100 }, validationStatus: 'under-ai-review' });
+    expect(codePuzzle.blocks.find((block) => block.id === 'abrir-funcao')?.text)
+      .toContain('classificar_prioridade');
+    expect(codePuzzle.blocks.find((block) => block.id === 'calcular-pontuacao')?.text)
+      .toContain('impacto * urgencia');
+    const monitorPuzzle = puzzles.find((puzzle) => puzzle.id === 'E26-P-SI-03')!;
+    expect(monitorPuzzle).toMatchObject({ title: 'Montar o monitor de alertas', courses: ['SI'],
+      difficulty: 'intermediate', reward: { xp: 100 }, validationStatus: 'under-ai-review' });
+    expect(monitorPuzzle.blocks.find((block) => block.id === 'preparar-programa')?.text)
+      .toContain('#include <stdio.h>');
+    expect(monitorPuzzle.blocks.find((block) => block.id === 'atualizar-contador')?.text)
+      .toContain('(*contador)++');
+    const si02 = questions.find((question) => question.id === 'E26-Q-SI-02')!;
+    const si05 = questions.find((question) => question.id === 'E26-Q-SI-05')!;
+    expect(si02).toMatchObject({ version: 2, correctOptionId: 'C', validationStatus: 'ready-for-pilot' });
+    expect(si02.presentation?.blocks.map((block) => block.type)).toEqual(['code', 'table', 'code']);
+    expect(si05).toMatchObject({ version: 2, correctOptionId: 'B', validationStatus: 'ready-for-pilot' });
+    expect(si05.presentation?.blocks.map((block) => block.type)).toEqual(['diagram']);
+    const expected = {
+      'E26-Q-SI-01': { version: 2, answer: 'C', blocks: ['diagram'] },
+      'E26-Q-SI-03': { version: 2, answer: 'B', blocks: ['table', 'diagram'] },
+      'E26-Q-SI-04': { version: 2, answer: 'A', blocks: ['diagram'] },
+      'E26-Q-SI-06': { version: 2, answer: 'A', blocks: ['table'] },
+      'E26-Q-SI-07': { version: 2, answer: 'C', blocks: ['image'] },
+      'E26-Q-SI-08': { version: 2, answer: 'E', blocks: ['table'] },
+      'E26-Q-SI-09': { version: 2, answer: 'E', blocks: ['table', 'table'] },
+      'E26-Q-SI-10': { version: 3, answer: 'B', blocks: ['diagram'] },
+    } as const;
+    for (const [id, expectation] of Object.entries(expected)) {
+      const question = questions.find((candidate) => candidate.id === id)!;
+      expect(question.version).toBe(expectation.version);
+      expect(question.correctOptionId).toBe(expectation.answer);
+      expect(question.presentation?.blocks.map((block) => block.type)).toEqual(expectation.blocks);
+      expect(question.validationStatus).toBe('under-ai-review');
+    }
+    const expectedSiM03 = {
+      'E26-Q-SI-11': { answer: 'C', blocks: ['diagram'] },
+      'E26-Q-SI-12': { answer: 'A', blocks: ['table'] },
+      'E26-Q-SI-13': { answer: 'E', blocks: ['diagram', 'code'] },
+      'E26-Q-SI-14': { answer: 'B', blocks: ['table'] },
+      'E26-Q-SI-15': { answer: 'D', blocks: ['table', 'code'] },
+      'E26-Q-SI-16': { answer: 'C', blocks: ['diagram', 'table'] },
+    } as const;
+    for (const [id, expectation] of Object.entries(expectedSiM03)) {
+      const question = questions.find((candidate) => candidate.id === id)!;
+      expect(question.version).toBe(1);
+      expect(question.correctOptionId).toBe(expectation.answer);
+      expect(question.presentation?.blocks.map((block) => block.type)).toEqual(expectation.blocks);
+      expect(question.sources.map((source) => source.role)).toEqual(['primary', 'technical']);
+      expect(question.validationStatus).toBe('under-ai-review');
+    }
+    const expectedCommon = {
+      'E26-Q-COM-01': { version: 2, answer: 'C', blocks: ['image'] },
+      'E26-Q-COM-02': { version: 2, answer: 'A', blocks: ['diagram'] },
+      'E26-Q-COM-03': { version: 2, answer: 'E', blocks: ['image'] },
+      'E26-Q-COM-04': { version: 2, answer: 'B', blocks: ['diagram'] },
+      'E26-Q-COM-05': { version: 2, answer: 'D', blocks: ['table'] },
+      'E26-Q-COM-06': { version: 2, answer: 'B', blocks: ['table', 'diagram'] },
+      'E26-Q-COM-07': { version: 2, answer: 'D', blocks: ['code', 'code'] },
+      'E26-Q-COM-08': { version: 2, answer: 'D', blocks: ['image'] },
+      'E26-Q-COM-09': { version: 3, answer: 'A', blocks: ['diagram', 'table'] },
+      'E26-Q-COM-10': { version: 3, answer: 'C', blocks: ['table'] },
+    } as const;
+    for (const [id, expectation] of Object.entries(expectedCommon)) {
+      const question = questions.find((candidate) => candidate.id === id)!;
+      expect(question.version).toBe(expectation.version);
+      expect(question.correctOptionId).toBe(expectation.answer);
+      expect(question.presentation?.blocks.map((block) => block.type)).toEqual(expectation.blocks);
+      expect(question.validationStatus).toBe('under-ai-review');
+    }
   });
 
   it('mantém uma única solução estrutural para cada puzzle', () => {

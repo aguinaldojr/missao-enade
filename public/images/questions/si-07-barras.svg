@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title description">
+  <title id="title">Comparação dos lotes Alfa e Beta com eixo iniciado em 99</title>
+  <desc id="description">Alfa possui 100 registros e sua barra sobe uma unidade acima de 99. Beta possui 102 registros e sua barra sobe três unidades.</desc>
+  <rect width="720" height="360" rx="24" fill="#fbf8ef"/>
+  <text x="44" y="42" fill="#0b2b36" font-family="Arial, sans-serif" font-size="22" font-weight="700">Registros catalogados</text>
+  <g stroke="#9ab8af" stroke-width="2">
+    <line x1="100" y1="280" x2="680" y2="280"/>
+    <line x1="100" y1="220" x2="680" y2="220" stroke-dasharray="6 7"/>
+    <line x1="100" y1="160" x2="680" y2="160" stroke-dasharray="6 7"/>
+    <line x1="100" y1="100" x2="680" y2="100" stroke-dasharray="6 7"/>
+  </g>
+  <g fill="#405d63" font-family="Arial, sans-serif" font-size="16" text-anchor="end">
+    <text x="86" y="286">99</text><text x="86" y="226">100</text>
+    <text x="86" y="166">101</text><text x="86" y="106">102</text>
+  </g>
+  <rect x="200" y="220" width="140" height="60" rx="10" fill="#38bfa0"/>
+  <rect x="445" y="100" width="140" height="180" rx="10" fill="#008c72"/>
+  <g fill="#0b2b36" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">
+    <text x="270" y="316" font-weight="700">Alfa</text><text x="515" y="316" font-weight="700">Beta</text>
+    <text x="270" y="208">100</text><text x="515" y="88">102</text>
+  </g>
+  <text x="650" y="342" fill="#405d63" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Eixo iniciado em 99</text>
+</svg>

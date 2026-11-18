@@ -2,7 +2,7 @@
 
 ## Escopo
 
-Esta entrega habilita no jogo os 60 desafios de questões e os seis quebra-cabeças de sequência da coleção interna `enade-2026`. Desde 16/11/2026, o nome apresentado ao jogador é acompanhado do aviso **Conteúdo experimental em revisão editorial.** Todos os itens usam `validationStatus` igual a `under-ai-review`, conforme a [governança editorial assistida por IA](governanca-editorial-ia.md).
+Esta entrega habilitou inicialmente 60 desafios de questões e seis quebra-cabeças de sequência da coleção interna `enade-2026`. Em 17/11/2026, o catálogo recebeu os puzzles complementares `E26-P-SI-02` e `E26-P-SI-03` e seis questões do lote SI-M03, passando a 66 questões e oito puzzles. O nome apresentado ao jogador é acompanhado do aviso **Conteúdo experimental em revisão editorial.** As 64 questões não promovidas e os oito puzzles usam `under-ai-review`; `E26-Q-SI-02` e `E26-Q-SI-05` usam `ready-for-pilot`, conforme a [governança editorial assistida por IA](governanca-editorial-ia.md).
 
 Não foi criada uma missão mista. Questões continuam no computador da Base N9 e quebra-cabeças continuam no terminal tecnológico.
 
@@ -57,6 +57,7 @@ Ao selecionar um curso, o terminal disponibiliza exatamente:
 
 - `E26-P-COM-01`;
 - o puzzle específico `E26-P-<CURSO>-01`.
+- para SI, também os complementares de código `E26-P-SI-02` e `E26-P-SI-03`.
 
 A interação continua sendo uma sequência reordenável, com mouse, toque, teclado e botões de subir/descer. Ordem correta, dicas, explicação, recompensa e desbloqueio são lidos diretamente do JSON. O puzzle comum abre primeiro; a própria tela permite alternar para o puzzle específico. Recibos por ID impedem XP repetido e permitem replay sem nova recompensa.
 
@@ -77,7 +78,7 @@ As mudanças visíveis ficaram limitadas a:
 - identificação da missão selecionada no mapa;
 - mensagem detalhada de capacidade insuficiente.
 
-Os campos exibidos ao jogador nos 66 desafios e os textos de interface foram testados para não mostrar a referência pedagógica interna reservada.
+Os campos exibidos ao jogador nos 74 desafios atuais e os textos de interface foram testados para não mostrar a referência pedagógica interna reservada.
 
 ## Playwright no Windows
 

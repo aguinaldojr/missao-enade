@@ -6,6 +6,40 @@ export type Classification = (typeof CLASSIFICATIONS)[number];
 export const OPTION_IDS = ['A', 'B', 'C', 'D', 'E'] as const;
 export type OptionId = (typeof OPTION_IDS)[number];
 
+export interface QuestionCodeBlock {
+  readonly type: 'code';
+  readonly language: 'sql' | 'c' | 'python' | 'text';
+  readonly caption: string;
+  readonly code: string;
+}
+export interface QuestionTableBlock {
+  readonly type: 'table';
+  readonly caption: string;
+  readonly columns: readonly {
+    readonly key: string;
+    readonly label: string;
+    readonly align?: 'left' | 'center' | 'right';
+  }[];
+  readonly rows: readonly (readonly string[])[];
+}
+export interface QuestionDiagramBlock {
+  readonly type: 'diagram';
+  readonly title: string;
+  readonly description: string;
+  readonly nodes: readonly { readonly id: string; readonly label: string; readonly details?: string }[];
+  readonly edges: readonly { readonly from: string; readonly to: string; readonly label: string }[];
+}
+export interface QuestionImageBlock {
+  readonly type: 'image';
+  readonly src: string;
+  readonly alt: string;
+  readonly caption?: string;
+}
+export type QuestionPresentationBlock = QuestionCodeBlock | QuestionTableBlock | QuestionDiagramBlock | QuestionImageBlock;
+export interface QuestionPresentation {
+  readonly blocks: readonly QuestionPresentationBlock[];
+}
+
 export interface Question extends EditorialMetadata {
   readonly id: string;
   readonly version: number;
@@ -14,6 +48,7 @@ export interface Question extends EditorialMetadata {
   readonly example?: boolean;
   readonly editorialStatus?: ContentMode;
   readonly context: string;
+  readonly presentation?: QuestionPresentation;
   readonly prompt: string;
   readonly options: readonly { readonly id: OptionId; readonly text: string }[];
   readonly correctOptionId: OptionId;

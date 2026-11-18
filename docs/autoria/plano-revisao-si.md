@@ -2,6 +2,8 @@
 
 Planejamento documental — 16/11/2026, horário de Brasília. Esta entrega não altera questões, puzzles, JSON, contratos, schemas, seleção, interface ou progresso. A Portaria Inep nº 168/2026, registrada como F07, é a referência normativa principal. Os agrupamentos `SI-M01` a `SI-M10` são macroáreas editoriais internas: não são códigos nem numeração oficial do ato.
 
+> Atualização de execução em 17/11/2026: os pilotos `SI-02` e `SI-05` e as melhorias visuais das outras oito questões foram integrados após autorização. O histórico e as lacunas originais abaixo permanecem para rastreabilidade. A implementação está registrada em [melhorias-visuais-si-questoes-existentes.md](melhorias-visuais-si-questoes-existentes.md).
+
 ## 1. Decisões, escopo e limites
 
 O banco pretendido para Sistemas de Informação possui um núcleo balanceado de **15 questões comuns e 60 técnicas elegíveis**, suficiente para três jornadas iniciais de 25 itens sem repetição. Cada jornada terá cinco comuns e vinte técnicas, com duas técnicas de cada macroárea e distribuição total 9 introductory, 11 intermediate e 5 advanced.
@@ -198,7 +200,7 @@ Todos os 24 candidatos do núcleo são atualmente renderizados como texto, event
 | Decisão profissional curta | 3 |
 | **Total** | **36** |
 
-Converter questões atuais para apresentação visual poderá reduzir algumas dessas necessidades. Isso só será decidido após os pilotos SI-02 e SI-05. Código funcional deverá ser executado; diagramas precisarão de equivalente textual; nenhum item poderá depender exclusivamente de cor.
+A conversão visual das dez questões específicas existentes foi realizada após os pilotos SI-02 e SI-05. Ela melhora a experiência, mas não reduz automaticamente a quantidade de novos slots da matriz de capacidade. Código funcional foi executado; diagramas possuem equivalente textual; nenhum item depende exclusivamente de cor.
 
 ## 5. Blueprints das três jornadas
 

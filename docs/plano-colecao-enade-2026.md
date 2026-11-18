@@ -1959,3 +1959,46 @@ A busca de 13/11 por retificações recentes não identificou nas fontes recuper
 L01/F03 registram previsão de cadernos/gabaritos preliminares até 11/12/2026 e finais/expectativas até 30/04/2027. São previsões publicadas segundo a pesquisa-base, não constatação de divulgação nem rechecagem integral do cronograma nesta entrega. A edição ainda não foi aplicada na data deste plano. Registrar datas efetivas e conferir retificações quando os materiais surgirem.
 
 A próxima entrega pedagógica é elaborar e revisar as 60 questões e as seis sequências, começando pelas dez questões comuns e pela sequência comum, com prioridade para E26-Q-COM-04 e E26-P-COM-01 da missão mista. As questões terão cinco alternativas A–E, resposta única, explicação geral, feedback por alternativa e metadados completos; as sequências terão 4–7 blocos, ordem justificada, explicação e ao menos três dicas. A autoria e a revisão devem ser feitas em lotes, sem publicação automática. Seleção de missões e experiências novas terão planejamento técnico separado. Este documento permanece integralmente como proposta `provisional-pending-teacher-review`.
+## Ampliação experimental posterior ao plano original — 17/11/2026
+
+O inventário original auditado permanece composto por 60 questões e seis puzzles. Após autorização específica, a coleção executável recebe um sétimo puzzle experimental, sem substituir ou renumerar os 66 IDs originais.
+
+### E26-P-SI-02
+
+- **Contrato / cursos:** sequence / SI.
+- **Área / competência:** Programação aplicada a processos de SI; interpretação de fluxo de controle, validação e regras de negócio em C.
+- **Conteúdo / dificuldade:** Ordenação de cinco trechos de uma função C17 / introductory.
+- **Objetivo observável:** Organizar validação, cálculo e decisões para produzir um classificador de prioridade testável.
+- **Fonte:** exercício autoral complementar `N9-C-SI-01`, sem atribuição a item oficial ou prova anterior.
+- **Estado:** `under-ai-review`.
+- **Capacidade intermediária:** 60 questões e sete puzzles; 67 desafios únicos. SI passou a possuir o puzzle comum e dois puzzles específicos.
+- **Limitação:** compilação nativa deve ser repetida quando GCC, Clang ou MSVC estiver disponível; a entrega local valida fonte esperado e comportamento por casos automatizados.
+
+### E26-P-SI-03
+
+- **Contrato / cursos:** sequence / SI.
+- **Área / competência:** Programação aplicada a processos de SI; estrutura de programa C, repetição, decisão, procedimento e passagem por ponteiro.
+- **Conteúdo / dificuldade:** Ordenação de cinco trechos de um programa C17 completo / intermediate.
+- **Objetivo observável:** Montar um monitor que percorre cinco medições e atualiza um contador no chamador por meio de ponteiro.
+- **Fonte:** exercício autoral complementar `N9-C-SI-02`, sem atribuição a item oficial ou prova anterior.
+- **Estado:** `under-ai-review`.
+- **Capacidade resultante:** 60 questões e oito puzzles; 68 desafios únicos. SI possui o puzzle comum e três puzzles específicos.
+- **Limitação:** compilação nativa deve ser repetida quando GCC, Clang ou MSVC estiver disponível; a entrega local valida estrutura, fonte esperado e resultado por teste automatizado.
+
+## Ampliação editorial SI-M03 — fundamentos de sistemas
+
+O primeiro lote adicional de SI amplia o banco sem substituir os 60 slots originais. Foram acrescentadas seis questões específicas, todas em `under-ai-review`, vinculadas à área **Fundamentos de sistemas de informação e teoria geral de sistemas** e à Portaria Inep 168/2026. Os artefatos visuais e os dados são autorais e fictícios; o NASA Systems Engineering Handbook é usado somente como referência técnica complementar.
+
+| ID | Dificuldade | Recurso estruturado | Gabarito |
+|---|---|---|---|
+| E26-Q-SI-11 | introductory | diagrama sociotécnico | C |
+| E26-Q-SI-12 | intermediate | tabela de integração | A |
+| E26-Q-SI-13 | introductory | diagrama de fronteira e registro técnico | E |
+| E26-Q-SI-14 | intermediate | tabela de tempos do serviço | B |
+| E26-Q-SI-15 | intermediate | tabela e regra em pseudocódigo | D |
+| E26-Q-SI-16 | advanced | ciclo de realimentação e série temporal | C |
+
+- **Distribuição do lote:** duas introdutórias, três intermediárias e uma avançada.
+- **Capacidade executável resultante:** 66 questões e oito puzzles; 74 desafios únicos.
+- **Elegibilidade de SI:** 26 questões — dez comuns e dezesseis específicas — e quatro puzzles — um comum e três específicos.
+- **Preservação:** CC, TADS, TGTI e TRC continuam com vinte questões elegíveis e dois puzzles cada. As cotas das missões permanecem inalteradas; o banco maior apenas oferece mais candidatas específicas para SI.

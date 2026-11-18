@@ -22,6 +22,8 @@ export class SequencePuzzleView {
   private readonly retry = button(puzzleCopy.retry, true);
   private readonly replayNotice = element('p', 'helper', puzzleCopy.replayReward);
   private readonly movement = element('p', 'sr-only');
+  private readonly commonTerminal: HTMLElement | undefined;
+  private readonly commonPublicStatus: HTMLElement | undefined;
   private previousOrder = '';
   private lastTouchMove = -Infinity;
   private wasSolved = false;
@@ -32,7 +34,12 @@ export class SequencePuzzleView {
     this.puzzle = state.puzzles.find((puzzle) => puzzle.id === this.puzzleId)!;
     const family = puzzleFamilyFromId(this.puzzle.id);
     const familyVisual = puzzleFamilyVisuals[family];
+    const isCommon = this.puzzle.id === 'E26-P-COM-01';
+    const isSiReplacement = this.puzzle.id === 'E26-P-SI-01';
+    const isCodePuzzle = ['E26-P-SI-02', 'E26-P-SI-03'].includes(this.puzzle.id);
+    const hasOperationalCards = isCommon || isSiReplacement || isCodePuzzle;
     this.element.dataset.puzzleFamily = familyVisual.className;
+    if (isCodePuzzle) this.element.dataset.puzzleMode = 'code';
     const heading = element('h1', 'section-title', puzzleCopy.title);
     heading.tabIndex = -1;
     const choices = element('div', 'puzzle-choices');
@@ -48,21 +55,140 @@ export class SequencePuzzleView {
     const familySymbol = element('span', 'puzzle-family-symbol', familyVisual.symbol);
     familySymbol.setAttribute('aria-hidden', 'true');
     familyBadge.append(familySymbol, document.createTextNode(familyVisual.name));
+    const narrative = element('p', 'puzzle-narrative', this.puzzle.narrative);
+    let narrativeContent: HTMLElement = narrative;
+    if (isCommon || isSiReplacement || isCodePuzzle) {
+      const briefing = element('section', 'common-briefing puzzle-briefing');
+      briefing.tabIndex = 0;
+      briefing.setAttribute('role', 'region');
+      briefing.setAttribute('aria-label', 'Briefing completo da ocorrência');
+      const briefingHeader = element('div', 'common-briefing-header');
+      briefingHeader.append(element('strong', '', 'BRIEFING DA OCORRÊNCIA'), element('span', '', 'ROLE PARA LER'));
+      briefing.append(briefingHeader, narrative);
+      narrativeContent = briefing;
+    }
     this.element.append(element('p', 'eyebrow', 'TERMINAL TECNOLÓGICO'), familyBadge, heading,
       element('p', 'example-warning', puzzleCopy.provisional), element('p', 'intro intro--small', puzzleCopy.intro),
-      choices, element('h2', 'puzzle-title', this.puzzle.title), element('p', 'puzzle-narrative', this.puzzle.narrative),
+      choices, element('h2', 'puzzle-title', this.puzzle.title), narrativeContent,
       this.xp, this.replayNotice, element('p', 'helper', puzzleCopy.controls));
+    if (isCommon) {
+      this.commonTerminal = element('section', 'common-terminal');
+      this.commonTerminal.setAttribute('aria-label', 'Estado inicial da recuperação');
+      const terminalHeader = element('div', 'common-terminal-header');
+      const lights = element('span', 'common-terminal-lights', '● ● ●');
+      lights.setAttribute('aria-hidden', 'true');
+      terminalHeader.append(lights, element('strong', '', 'PAINEL DE RECUPERAÇÃO'),
+        element('span', 'common-terminal-environment', 'AMBIENTE ISOLADO'));
+      const statusGrid = element('div', 'common-terminal-grid');
+      const status = (label: string, value: string, className: string) => {
+        const card = element('div', 'common-terminal-item ' + className);
+        card.append(element('span', 'common-terminal-label', label), element('strong', 'common-terminal-value', value));
+        return card;
+      };
+      statusGrid.append(
+        status('REGISTROS DA FALHA', 'PRESERVADOS', 'is-ready'),
+        status('RECURSO AFETADO', 'ISOLADO', 'is-ready'),
+        status('AMBIENTE DE TESTE', 'PRONTO', 'is-ready'),
+      );
+      const publicStatus = status('CONSULTA PÚBLICA', 'DESLIGADA', 'is-offline');
+      this.commonPublicStatus = publicStatus.querySelector<HTMLElement>('.common-terminal-value')!;
+      statusGrid.append(publicStatus);
+      this.commonTerminal.append(terminalHeader, statusGrid,
+        element('p', 'common-terminal-note', 'Entrada disponível: cópia aprovada e resumo de integridade confiável.'));
+      this.element.append(this.commonTerminal);
+    }
+    if (isSiReplacement) {
+      const systems = element('section', 'si-systems-map');
+      systems.setAttribute('aria-label', 'Sistemas e pessoas envolvidos na reserva');
+      systems.append(element('strong', 'si-systems-title', 'ECOSSISTEMA DA RESERVA'));
+      const grid = element('div', 'si-systems-grid');
+      for (const [symbol, name, detail] of [
+        ['▣', 'PORTAL', 'solicitação e estado visível'],
+        ['◫', 'AGENDA', 'horário e capacidade'],
+        ['▤', 'RESERVAS', 'bloqueio do intervalo'],
+        ['⌁', 'CONTROLE DE ACESSO', 'autorização e confirmação'],
+      ]) {
+        const card = element('div', 'si-system-card');
+        const icon = element('span', 'si-system-symbol', symbol);
+        icon.setAttribute('aria-hidden', 'true');
+        card.append(icon, element('strong', '', name), element('span', '', detail));
+        grid.append(card);
+      }
+      systems.append(grid, element('p', 'si-systems-note', 'Analista e coordenação tomam decisões; os identificadores mantêm a rastreabilidade entre os sistemas.'));
+      this.element.append(systems);
+    }
+    if (isCodePuzzle) {
+      const isMonitorPuzzle = this.puzzle.id === 'E26-P-SI-03';
+      const columns = isMonitorPuzzle ? ['Índice', 'Medição', 'Gera alerta?'] : ['Impacto', 'Urgência', 'Retorno'];
+      const rows = isMonitorPuzzle
+        ? [['0', '42', 'Não'], ['1', '78', 'Sim'], ['2', '65', 'Não'], ['3', '91', 'Sim'], ['4', '55', 'Não']]
+        : [['3', '3', '3'], ['2', '3', '3'], ['2', '2', '2'], ['1', '3', '2'],
+          ['1', '1', '1'], ['0', '2', '-1'], ['2', '4', '-1']];
+      const tests = element('section', 'code-puzzle-tests');
+      tests.setAttribute('aria-label', isMonitorPuzzle ? 'Medições do monitor de alertas' : 'Casos de teste do classificador');
+      const testsHeader = element('div', 'code-puzzle-tests-header');
+      testsHeader.append(element('strong', '', isMonitorPuzzle ? 'MEDIÇÕES DO LABORATÓRIO' : 'CASOS DE TESTE'), element('span', '', 'C17'));
+      const table = element('table', 'code-puzzle-table');
+      const caption = element('caption', 'sr-only', isMonitorPuzzle
+        ? 'Medições percorridas e alertas esperados' : 'Entradas e retornos esperados da função');
+      const head = element('thead', '');
+      const headerRow = element('tr', '');
+      for (const label of columns) {
+        const cell = element('th', '', label); cell.scope = 'col'; headerRow.append(cell);
+      }
+      head.append(headerRow);
+      const body = element('tbody', '');
+      for (const values of rows) {
+        const row = element('tr', '');
+        for (const value of values) row.append(element('td', '', value));
+        body.append(row);
+      }
+      table.append(caption, head, body);
+      tests.append(testsHeader, table,
+        element('p', 'code-puzzle-tests-note', isMonitorPuzzle
+          ? 'Limite: 70. O programa completo deve exibir Alertas: 2.'
+          : 'Use todos os cartões uma vez. O código final deve atender aos sete casos.'));
+      this.element.append(tests);
+    }
     this.list.setAttribute('aria-label', 'Comandos em ordem');
+    const commonCommands: Readonly<Record<string, string>> = {
+      'recuperar-arquivo': 'RECUPERAR',
+      'conferir-integridade': 'VERIFICAR',
+      'montar-conteudo': 'MONTAR',
+      'testar-consulta': 'TESTAR',
+      'publicar-consulta': 'ATIVAR',
+      'validar-solicitacao': 'VALIDAR',
+      'consultar-disponibilidade': 'CONSULTAR',
+      'criar-reserva': 'RESERVAR',
+      'autorizar-acesso': 'AUTORIZAR',
+      'sincronizar-acesso': 'SINCRONIZAR',
+      'abrir-funcao': 'FUNÇÃO',
+      'validar-entradas': 'VALIDAÇÃO',
+      'calcular-pontuacao': 'CÁLCULO',
+      'aplicar-faixas': 'FAIXAS',
+      'fechar-funcao': 'PADRÃO',
+      'preparar-programa': 'ESTRUTURA',
+      'iniciar-repeticao': 'REPETIÇÃO',
+      'decidir-alerta': 'DECISÃO',
+      'finalizar-programa': 'SAÍDA E PROCEDIMENTO',
+      'atualizar-contador': 'PONTEIRO',
+    };
     for (const block of this.puzzle.blocks) {
       const row = element('li', 'sequence-block');
       row.dataset.blockId = block.id;
       const label = element('span', 'block-text', block.text);
+      if (isCodePuzzle) {
+        label.tabIndex = 0;
+        label.setAttribute('role', 'region');
+        label.setAttribute('aria-label', 'Trecho de código em C');
+      }
       const number = element('span', 'block-position');
       const handle = button('↕', true);
       handle.classList.add('block-handle');
       handle.dataset.focusKey = block.id + ':handle';
       handle.setAttribute('aria-label', 'Mover bloco: ' + block.text);
       handle.setAttribute('aria-describedby', 'sequence-instructions');
+      if (hasOperationalCards) handle.textContent = '⠿';
       handle.addEventListener('keydown', (event) => {
         if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
         event.preventDefault();
@@ -132,7 +258,14 @@ export class SequencePuzzleView {
         }, { signal });
         actions.append(move);
       }
-      row.append(number, handle, label, actions);
+      if (hasOperationalCards) {
+        const content = element('div', 'block-content');
+        content.append(element('span', 'block-command', commonCommands[block.id] ?? 'ETAPA'), label);
+        row.dataset.command = commonCommands[block.id] ?? 'ETAPA';
+        row.append(number, handle, content, actions);
+      } else {
+        row.append(number, handle, label, actions);
+      }
       this.rows.set(block.id, row);
       this.list.append(row);
     }
@@ -155,7 +288,17 @@ export class SequencePuzzleView {
     this.retry.addEventListener('click', () => dispatch({ type: 'save-puzzles' }), { signal });
     const exit = button(puzzleCopy.exit, true);
     exit.addEventListener('click', () => dispatch({ type: 'exit-puzzle' }), { signal });
-    this.element.append(instructions, this.list, this.movement, actions, this.feedback,
+    if (isCommon) {
+      const console = element('section', 'puzzle-sequence-console');
+      console.setAttribute('aria-label', 'Fila de recuperação para ordenar');
+      const consoleHeader = element('div', 'puzzle-sequence-console-header');
+      consoleHeader.append(element('strong', '', 'ORGANIZE A FILA OPERACIONAL'), element('span', '', this.puzzle.blocks.length + ' ETAPAS'));
+      console.append(consoleHeader, this.list);
+      this.element.append(instructions, console);
+    } else {
+      this.element.append(instructions, this.list);
+    }
+    this.element.append(this.movement, actions, this.feedback,
       this.hintList, this.success, this.saved, this.retry, exit);
     this.update(state);
   }
@@ -194,6 +337,12 @@ export class SequencePuzzleView {
     this.hintsButton.disabled = attempt.solved || entry.hintsUsed === this.puzzle.hints.length;
     this.hintsButton.textContent = entry.hintsUsed === this.puzzle.hints.length ? puzzleCopy.noMoreHints : puzzleCopy.hint;
     this.validateButton.disabled = attempt.solved;
+    this.list.classList.toggle('sequence-complete', attempt.solved);
+    if (this.commonTerminal && this.commonPublicStatus) {
+      this.commonTerminal.dataset.state = attempt.solved ? 'recovered' : 'recovering';
+      this.commonPublicStatus.textContent = attempt.solved ? 'LIBERADA' : 'DESLIGADA';
+      this.commonPublicStatus.closest('.common-terminal-item')?.classList.toggle('is-online', attempt.solved);
+    }
     this.replayNotice.hidden = !entry.completed || attempt.solved;
     this.success.hidden = !attempt.solved;
     // A explicação só entra no DOM após resolver.

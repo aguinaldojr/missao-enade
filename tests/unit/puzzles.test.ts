@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import data from '../../src/content/puzzles/sequences.json';
+import provisionalData from '../../src/content/puzzles/enade-2026-provisional-sequences.json';
 import { JsonPuzzleRepository } from '../../src/infrastructure/content/JsonPuzzleRepository';
 import { LocalStoragePuzzleRepository, PUZZLE_KEY } from '../../src/infrastructure/storage/LocalStoragePuzzleRepository';
 import { LocalStorageExplorationRepository, EXPLORATION_KEY } from '../../src/infrastructure/storage/LocalStorageExplorationRepository';
@@ -118,6 +119,29 @@ describe('regras de Sequência Lógica', () => {
 });
 
 describe('persistência e recibos por ID', () => {
+  it('migra em memória a tentativa e o recibo da versão anterior do puzzle de SI', () => {
+    const provisionalCatalog = new JsonPuzzleRepository(provisionalData);
+    const values = new Map<string, string>();
+    const legacyOrder = ['registrar-custeio', 'confirmar-relato', 'autorizar-demonstrativo',
+      'conciliar-trechos', 'calcular-demonstrativo'];
+    const stored = { schemaVersion: 1, entries: { 'E26-P-SI-01': {
+      order: legacyOrder, attempts: 2, hintsUsed: 1, completed: true,
+    } } };
+    values.set(PUZZLE_KEY, JSON.stringify(stored));
+    const adapter = { getItem: (key: string) => values.get(key) ?? null,
+      setItem: (key: string, value: string) => { values.set(key, value); } };
+    const repository = new LocalStoragePuzzleRepository(provisionalCatalog, () => adapter);
+    const loaded = repository.load();
+    expect(loaded.status).toBe('saved');
+    expect(loaded.progress?.entries['E26-P-SI-01']).toEqual({
+      order: ['sincronizar-acesso', 'validar-solicitacao', 'autorizar-acesso',
+        'consultar-disponibilidade', 'criar-reserva'],
+      attempts: 2, hintsUsed: 1, completed: true,
+    });
+    expect(values.get(PUZZLE_KEY)).toBe(JSON.stringify(stored));
+    expect(repository.save(loaded.progress!).status).toBe('saved');
+    expect(JSON.parse(values.get(PUZZLE_KEY)!).entries['E26-P-SI-01'].completed).toBe(true);
+  });
   it('mescla conclusões de abas sem duplicar XP ou apagar recibos', () => {
     const { repository, values } = storage();
     const completed = { schemaVersion: 1 as const, entries: { [puzzle.id]: entry(true) } };

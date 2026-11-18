@@ -91,6 +91,9 @@
             "minLength": 1,
             "pattern": "\\S"
           },
+          "presentation": {
+            "$ref": "urn:n9:question-presentation"
+          },
           "prompt": {
             "type": "string",
             "minLength": 1,

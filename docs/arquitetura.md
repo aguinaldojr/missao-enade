@@ -590,10 +590,23 @@ As referências a revisão docente e aos estados anteriores nas seções histór
 - `ValidationStatus` aceita `draft`, `under-ai-review`, `needs-revision`, `ready-for-pilot`, `ready-for-release` e `rejected`.
 - Os schemas canônicos aceitam somente os seis estados ativos e continuam estritos com `additionalProperties: false`.
 - O normalizador converte `provisional-pending-teacher-review` em `under-ai-review` e `approved-teacher` em `ready-for-pilot`; `needs-revision` e `rejected` são preservados. A conversão ocorre em memória, sem escrever conteúdo ou progresso.
-- As 60 questões e os seis puzzles da coleção integrada estão em `under-ai-review`. Nenhum item foi promovido automaticamente.
+- Após autorização específica, `E26-Q-SI-02` e `E26-Q-SI-05` estão em `ready-for-pilot`; as outras 64 questões e os oito puzzles permanecem em `under-ai-review`. Os dois puzzles adicionais e as seis questões SI-M03 são ampliações posteriores aos 66 itens originais. Nenhum item foi promovido automaticamente.
 - `ready-for-pilot` indica apenas aptidão para teste controlado. `ready-for-release` exige decisão explícita da pessoa responsável depois do piloto; não existe publicação automática.
 - O carregamento, os repositórios, a seleção, pontuação, puzzles, mapa, ranking, perfis e chaves de LocalStorage permanecem inalterados.
 - A interface apenas substitui o aviso editorial por **Conteúdo experimental em revisão editorial.**
 - O conversor documental normaliza os estados e textos de governança anteriores sem mudar campos pedagógicos. Documentos de autoria anteriores permanecem registros históricos.
 
 Política, critérios, transições, evidências e limitações: [governanca-editorial-ia.md](governanca-editorial-ia.md).
+
+## 23. Apresentação estruturada de questões — 16/11/2026
+
+- `Question.presentation` é opcional e mantém compatibilidade com todas as questões textuais. O schema separado `question-presentation.schema.json` admite blocos estritos de código, tabela, diagrama e imagem local.
+- `QuestionPresentation` renderiza somente nós DOM e `textContent`; nenhum conteúdo editorial vira `innerHTML`. Código não é executado. Tabelas usam caption/cabeçalhos, diagramas possuem descrição textual obrigatória e imagens exigem `alt` e caminho local.
+- Código e tabelas possuem rolagem horizontal com foco. Diagramas passam de fluxo horizontal no desktop para vertical no celular. Imagens respeitam o contêiner e o base path da aplicação.
+- O conversor aplica as candidatas documentadas de `E26-Q-SI-02` e `E26-Q-SI-05`, as apresentações autorizadas das outras oito questões de SI e os dois lotes visuais que abrangem as dez questões comuns. Os sete lotes originais continuam como histórico; 40 questões específicas não autorizadas permanecem idênticas.
+- Não há biblioteca externa, execução de SQL no navegador ou carregamento de imagem remota. A interação, pontuação, seleção, missões e LocalStorage permanecem inalterados.
+- O puzzle `E26-P-COM-01` utiliza a mesma `SequencePuzzleView` e o mesmo domínio dos demais, com uma camada visual condicional de terminal: painel do estado inicial, fila operacional, identificadores textuais dos comandos e estado recuperado. A camada não altera o JSON, a ordem correta, as dicas, a recompensa ou a persistência.
+- `E26-P-SI-01` foi substituído, sob o mesmo ID, por um fluxo de reserva integrada do Laboratório Aurora. O repositório de progresso normaliza em memória as cinco identificações de blocos da versão anterior, preservando tentativas, dicas, conclusão e XP no schema `n9:puzzles:v1`. A interface adiciona mapa textual dos sistemas e rótulos operacionais sem criar outro tipo de puzzle.
+- `E26-P-SI-02` reutiliza o contrato `sequence` para ordenar cinco trechos de uma função C17. Quebras de linha, `_` e `*` são preservados pelo conversor; a interface usa fonte monoespaçada e tabela de casos. O item é complementar, não entra na cota de questões e eleva o catálogo executável para 60 questões e sete puzzles.
+- `E26-P-SI-03` usa o mesmo contrato e os mesmos controles para ordenar cinco trechos de um programa C17 completo. Os cartões cobrem biblioteca, protótipo, `main`, repetição, decisão, procedimento e ponteiro; a tabela acessível explicita as cinco medições. Ele não entra nas cotas de questões e eleva o catálogo a 60 questões e oito puzzles.
+- `E26-Q-SI-11` a `E26-Q-SI-16` ampliam o banco para 66 questões sem mudar contratos, cotas ou seleção. O conversor editorial aplica apresentações estruturadas de diagrama, tabela e código; a interface existente as renderiza com equivalentes textuais. Como o lote precede as dez questões específicas originais no repositório, as missões determinísticas de SI exercitam o novo material e a Arena utiliza seis questões novas mais quatro anteriores.
