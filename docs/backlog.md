@@ -499,3 +499,4 @@ Próxima etapa: criar novas questões de SI em entrega separada, seguindo a matr
 - [x] Substituir a repetição cíclica posterior aos roteiros-base por sorteio determinístico balanceado por área e histórico recente.
 - [ ] Avaliar no piloto se a exclusão de apenas uma partida anterior oferece variedade suficiente no longo prazo.
 - [ ] Executar piloto com professores e estudantes antes de promover itens para `ready-for-release`.
+- [x] Preparar roteiro, cobertura mínima, checklist e formulário anônimo para o piloto controlado.

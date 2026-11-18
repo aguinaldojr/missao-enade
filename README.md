@@ -90,6 +90,7 @@ Não são solicitados nome completo, RA, e-mail, CPF ou telefone. Não há auten
 - `src/infrastructure/`: validação dos catálogos e persistência local;
 - `src/content/`: coleções provisórias em JSON;
 - `src/game/`: mapa e renderização Phaser 3;
+- `docs/piloto/`: roteiro de aplicação e formulário de feedback do teste controlado;
 - `src/ui/` e `src/styles/`: interface semântica e responsiva;
 - `tests/`: unidade, contratos, integração DOM e navegador;
 - `docs/`: arquitetura, autoria, auditorias e guias do projeto.
