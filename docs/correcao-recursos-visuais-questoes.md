@@ -34,3 +34,9 @@ No catálogo final, 124 das 205 questões possuem apresentação estruturada. A 
 - lint, TypeScript, testes de conteúdo e build.
 
 O piloto ainda deve observar legibilidade, rolagem e carga cognitiva em dispositivos físicos e tecnologias assistivas.
+
+## Correção de rolagem do diagrama COM-02
+
+Uma captura do teste local mostrou que o diagrama “Canais e finalidades disponíveis” centralizava um conteúdo mais largo que o quadro. Isso criava overflow à esquerda, fora do alcance da barra, cortando o início de “REGISTROS DO ATENDIMENTO”.
+
+O contêiner agora começa pelo primeiro símbolo quando há overflow e usa margens automáticas para continuar centralizado quando todo o fluxo cabe. Em telas abaixo de 600 px, o fluxo vertical preserva margens normais. O teste de navegador em 620 × 800 confirma que a rolagem inicia no primeiro símbolo e alcança “MURAL PÚBLICO” no final, em desktop e emulação móvel.

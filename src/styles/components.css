@@ -197,7 +197,9 @@
 .question-data-table .align-center { text-align: center; }
 .question-data-table .align-right { text-align: right; }
 .question-diagram { padding-bottom: 14px; }
-.question-diagram-visual { display: flex; align-items: stretch; justify-content: center; gap: 9px; padding: 20px 14px 12px; overflow-x: auto; }
+.question-diagram-visual { display: flex; align-items: stretch; justify-content: flex-start; gap: 9px; padding: 20px 14px 12px; overflow-x: auto; overscroll-behavior-inline: contain; }
+.question-diagram-visual > :first-child { margin-inline-start: auto; }
+.question-diagram-visual > :last-child { margin-inline-end: auto; }
 .question-diagram-node { display: grid; align-content: center; gap: 6px; flex: 0 0 min(180px, 28vw); min-height: 92px; padding: 13px; border: 2px solid var(--accent); border-radius: var(--radius-sm); background: var(--accent-soft); text-align: center; }
 .question-diagram-node-title { font-size: 14px; letter-spacing: .03em; }
 .question-diagram-node-details { color: var(--muted); font-size: 12px; line-height: 1.45; }
@@ -241,6 +243,7 @@
   .question-data-table { min-width: 520px; font-size: 13px; }
   .question-data-table th, .question-data-table td { padding: 9px 10px; }
   .question-diagram-visual { flex-direction: column; align-items: stretch; overflow: visible; padding: 14px 12px 8px; }
+  .question-diagram-visual > :first-child, .question-diagram-visual > :last-child { margin-inline: 0; }
   .question-diagram-node { flex-basis: auto; min-height: 76px; }
   .question-diagram-edge { flex-basis: auto; min-height: 50px; }
   .question-diagram-arrow { transform: rotate(90deg); }

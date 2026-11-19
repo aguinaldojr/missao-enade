@@ -508,3 +508,4 @@ Próxima etapa: criar novas questões de SI em entrega separada, seguindo a matr
 - [x] Recuperar tabelas e códigos documentados antes de `Texto ao jogador`.
 - [x] Auditar alertas restantes e confirmar que são textualmente autossuficientes.
 - [x] Preservar todos os gabaritos, alternativas, dificuldades e elegibilidades.
+- [x] Corrigir o overflow à esquerda do diagrama de `E26-Q-COM-02` e validar os dois extremos da rolagem.

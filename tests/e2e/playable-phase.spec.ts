@@ -136,6 +136,35 @@ test('a matriz necessária de SI-17 aparece com semântica e rolagem', async ({ 
   throw new Error('E26-Q-SI-17 não apareceu na posição prevista do roteiro SI-A.');
 });
 
+test('diagrama horizontal começa no primeiro símbolo e alcança o último', async ({ page }, info) => {
+  await page.goto('./');
+  await startPhase(page, 'CC', info);
+  const first = catalog.questions.find((question) => question.id === 'E26-Q-COM-01')!;
+  await page.locator('input[name="answer"][value="' + first.correctOptionId + '"]').check();
+  await press(page, 'Confirmar resposta', info);
+  await press(page, 'Próximo desafio', info);
+  await expect(page.locator('.question-view')).toHaveAttribute('data-question-id', 'E26-Q-COM-02');
+  await page.setViewportSize({ width: 620, height: 800 });
+  const visual = page.locator('.question-diagram-visual');
+  const initial = await visual.evaluate((node) => {
+    node.scrollLeft = 0;
+    const bounds = node.getBoundingClientRect();
+    const firstNode = node.firstElementChild!.getBoundingClientRect();
+    return { maxScroll: node.scrollWidth - node.clientWidth, containerLeft: bounds.left, firstLeft: firstNode.left };
+  });
+  expect(initial.maxScroll).toBeGreaterThan(0);
+  expect(initial.firstLeft).toBeGreaterThanOrEqual(initial.containerLeft);
+  await expect(visual.locator('.question-diagram-node').first()).toContainText('REGISTROS DO ATENDIMENTO');
+  const final = await visual.evaluate((node) => {
+    node.scrollLeft = node.scrollWidth;
+    const bounds = node.getBoundingClientRect();
+    const lastNode = node.lastElementChild!.getBoundingClientRect();
+    return { containerRight: bounds.right, lastRight: lastNode.right };
+  });
+  expect(final.lastRight).toBeLessThanOrEqual(final.containerRight + 1);
+  await expect(visual.locator('.question-diagram-node').last()).toContainText('MURAL PÚBLICO');
+});
+
 test('fluxo de resposta e avanço por teclado', async ({ page }, info) => {
   await page.goto('./');
   await startPhase(page, 'CC', info);
