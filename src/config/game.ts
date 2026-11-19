@@ -31,7 +31,7 @@ export const gameConfig = {
   "profileSaveFailed": "Não foi possível salvar o perfil neste navegador.",
   "rankingEyebrow": "RESULTADOS LOCAIS",
   "rankingTitle": "Ranking",
-  "rankingPrivacy": "Ranking salvo somente neste dispositivo. Ele não representa toda a turma.",
+  "rankingPrivacy": "Ranking salvo somente neste dispositivo. Ele não representa toda a turma. O ranking online é opcional e separado por curso.",
   "rankingTableCaption": "Classificação local por curso e tamanho de missão",
   "emptyRanking": "Ainda não há resultados concluídos para este curso e tamanho de missão.",
   "missionRanking": "Ranking desta missão",

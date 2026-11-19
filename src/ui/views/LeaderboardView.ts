@@ -4,6 +4,7 @@ import { gameConfig } from '../../config/game';
 import { activePlayer } from '../../domain/models/PlayerProfile';
 import { rankingFor, RANKING_QUESTION_COUNTS, type LeaderboardEntry } from '../../domain/models/Leaderboard';
 import { button, element } from '../components/elements';
+import { onlineLeaderboardPanel } from '../components/OnlineLeaderboardPanel';
 
 export function leaderboardTable(entries: readonly LeaderboardEntry[], currentPlayerId: string | null): HTMLElement {
   if (entries.length === 0) {
@@ -77,6 +78,7 @@ export function leaderboardView(state: SessionState, dispatch: (command: Command
   filters.append(courseLabel, course, sizeLabel, size);
   view.append(filters, leaderboardTable(rankingFor(state.leaderboard, state.rankingCourse, state.rankingQuestionCount),
     activePlayer(state.profiles)?.id ?? null));
+  if (state.rankingQuestionCount === 25) view.append(onlineLeaderboardPanel(state.rankingCourse));
 
   if (state.leaderboardSaveStatus === 'failed' || state.leaderboardSaveStatus === 'unavailable') {
     view.append(element('p', 'profile-error', gameConfig.copy.rankingStorageFailed));

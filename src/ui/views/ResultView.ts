@@ -9,6 +9,7 @@ import type { Leaderboard } from '../../domain/models/Leaderboard';
 import { rankingFor, isRankingQuestionCount } from '../../domain/models/Leaderboard';
 import type { PlayerProfile } from '../../domain/models/PlayerProfile';
 import { leaderboardTable } from './LeaderboardView';
+import { onlineLeaderboardPanel } from '../components/OnlineLeaderboardPanel';
 
 export function resultView(result: SavedResult, status: SaveStatus, leaderboard: Leaderboard,
   player: PlayerProfile | null, dispatch: (command: Command) => void, signal: AbortSignal): HTMLElement {
@@ -40,6 +41,9 @@ export function resultView(result: SavedResult, status: SaveStatus, leaderboard:
     const rankingTitle = element('h2', 'subsection-title', gameConfig.copy.missionRanking);
     view.append(rankingTitle, element('p', 'helper', gameConfig.copy.rankingPrivacy),
       leaderboardTable(rankingFor(leaderboard, result.course, result.total), player?.id ?? null));
+  }
+  if (result.mode === 'provisional' && result.total === 25) {
+    view.append(onlineLeaderboardPanel(result.course, result));
   }
   const openRanking = button(gameConfig.copy.rankingTitle, true);
   openRanking.addEventListener('click', () => dispatch({ type: 'open-ranking' }), { signal });

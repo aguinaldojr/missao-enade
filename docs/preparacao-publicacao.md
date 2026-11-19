@@ -28,6 +28,8 @@ A aplicação não possui rotas no servidor. A navegação entre telas ocorre no
 
 ## Pré-requisitos futuros
 
+Se o ranking online for usado, configure no repositório a variável de Actions `VITE_RANKING_API_URL` com a URL `/exec` do Google Apps Script. Sem essa variável, a publicação continua funcional e utiliza somente o ranking local. Nunca cadastre `SPREADSHEET_ID` ou `RANKING_HMAC_SECRET` como variáveis do Vite; esses valores pertencem exclusivamente às propriedades privadas do Apps Script.
+
 - conta GitHub autorizada a hospedar o projeto;
 - Git instalado e autoria configurada;
 - Node.js 26.x e npm 11 ou 12 para validação local;

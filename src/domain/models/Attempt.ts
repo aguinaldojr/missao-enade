@@ -46,6 +46,8 @@ export interface MissionResult {
   readonly total: number;
   readonly correctCount: number;
   readonly score: number;
+  /** Tempo da sessão ativa; não inclui garantia contra manipulação no cliente. */
+  readonly durationMs?: number;
   readonly completedAt: string;
 }
 

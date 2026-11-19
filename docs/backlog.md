@@ -509,3 +509,15 @@ Próxima etapa: criar novas questões de SI em entrega separada, seguindo a matr
 - [x] Auditar alertas restantes e confirmar que são textualmente autossuficientes.
 - [x] Preservar todos os gabaritos, alternativas, dificuldades e elegibilidades.
 - [x] Corrigir o overflow à esquerda do diagrama de `E26-Q-COM-02` e validar os dois extremos da rolagem.
+
+## 29. Ranking online opcional — 19/11/2026
+
+- [x] Preservar o ranking local e suas chaves de armazenamento.
+- [x] Preparar ranking online dos 15 melhores, separado por curso e limitado às jornadas de 25 desafios.
+- [x] Pseudonimizar o RA no Apps Script e impedir sua gravação ou exibição na planilha.
+- [x] Manter somente o melhor resultado por estudante e curso.
+- [x] Adicionar consentimento explícito, tabela acessível e fallback quando o serviço não estiver configurado.
+- [x] Preparar planilha privada, Apps Script e variável de build sem incluir credenciais no projeto.
+- [ ] Criar a planilha institucional, implantar o Apps Script e validar o endpoint real.
+- [ ] Definir base legal, retenção e canal institucional para correção ou exclusão antes do piloto.
+- [ ] Avaliar autenticação e proteção antifraude se o ranking deixar de ser apenas lúdico.

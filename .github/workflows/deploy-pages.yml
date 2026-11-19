@@ -40,6 +40,7 @@ jobs:
       - name: Compilar para o subdiretório do repositório
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_RANKING_API_URL: ${{ vars.VITE_RANKING_API_URL }}
         run: npm run build
 
       - name: Enviar artefato estático

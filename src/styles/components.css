@@ -224,6 +224,12 @@
 .current-ranking-player { outline: 3px solid var(--accent); outline-offset: -3px; background: var(--accent-soft) !important; }
 .empty-ranking { border-radius: var(--radius-md); background: var(--surface); }
 .delete-confirmation, .profile-error, .content-error { border-color: var(--danger); border-radius: var(--radius-md); background: var(--danger-soft); color: #6c2420; }
+.online-ranking-panel { display: grid; gap: 14px; margin-top: 26px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface-soft); }
+.online-ranking-form { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
+.online-ranking-form .text-input { width: min(100%, 28rem); min-height: 48px; }
+.consent-field { display: flex; align-items: flex-start; gap: 9px; max-width: 48rem; line-height: 1.5; }
+.consent-field input { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 2px; }
+.online-ranking-table { min-width: 690px; }
 
 @media (max-width: 599px) {
   .hero-title { font-size: clamp(40px, 13vw, 52px); }
@@ -255,6 +261,8 @@
   .result-numbers > div { border-left: 0; border-top: 1px solid var(--line); }
   .result-numbers > div:first-child { border-top: 0; }
   .ranking-table { min-width: 520px; }
+  .online-ranking-panel { padding: 14px; }
+  .online-ranking-table { min-width: 650px; }
   .ranking-table-wrap { scrollbar-color: var(--accent) var(--surface-soft); }
 }
 

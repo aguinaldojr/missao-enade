@@ -4,7 +4,7 @@
 
 Esta primeira versão permite manter diferentes jogadores no mesmo navegador por apelido e registrar o melhor resultado de cada jogador em rankings locais separados por curso e tamanho de missão.
 
-Não existe autenticação, conta online, identificação acadêmica, sincronização ou envio de dados. A interface informa: **“Ranking salvo somente neste dispositivo.”** O ranking não representa toda a turma.
+O ranking local continua sem autenticação, identificação acadêmica, sincronização ou envio de dados. Um ranking online opcional e independente pode ser configurado conforme `docs/ranking-online-google-sheets.md`; ele não altera esta persistência local.
 
 ## Perfil local
 
@@ -49,7 +49,7 @@ Cada entrada contém:
 | `playerId` | string | Liga a entrada ao perfil local |
 | `nickname` | string | Apelido no momento da conquista |
 | `course` | enum | `CC`, `SI`, `TADS`, `TGTI` ou `TRC` |
-| `questionCount` | enum numérico | `3`, `5`, `10` ou `20` |
+| `questionCount` | enum numérico | `3`, `5`, `10`, `20` ou `25` |
 | `correctCount` | inteiro | Quantidade de acertos |
 | `score` | inteiro | Pontuação obtida |
 | `maxScore` | inteiro | Pontuação máxima da missão |
@@ -77,7 +77,7 @@ Dentro do mesmo curso e tamanho:
 3. menor `durationMs`, somente quando ambas as entradas possuem duração confiável;
 4. `achievedAt` mais antigo.
 
-A versão atual não grava duração. Uma medida baseada apenas no tempo da aba poderia incluir suspensão, troca de aba ou pausa do dispositivo e produzir desempate enganoso. O campo e a regra estão preparados para uma futura medição confiável.
+A versão atual mede a duração entre o início e a conclusão da jornada na sessão ativa. A medida pode incluir suspensão, troca de aba ou pausa do dispositivo e, por isso, serve apenas ao desempate lúdico; não deve ser tratada como medição inviolável.
 
 ## Interface e acessibilidade
 
@@ -99,6 +99,6 @@ As chaves existentes não foram renomeadas ou migradas. Resultados antigos sem j
 
 Registros com versão futura desconhecida não são sobrescritos automaticamente. Dados inválidos são ignorados sem apagar outras chaves.
 
-## Evolução futura
+## Complemento online opcional
 
-Um ranking online exigirá decisão institucional e uma etapa própria de arquitetura, incluindo consentimento e base legal, autenticação adequada, proteção contra fraude, segurança, política de retenção, moderação de apelidos, API, banco de dados e regras claras de escopo. A estrutura local atual não envia dados e não deve ser apresentada como ranking institucional ou da turma.
+O jogo possui uma integração opcional com Google Apps Script e planilha privada. Ela usa consentimento explícito e pseudonimiza o RA antes de gravar. Sem `VITE_RANKING_API_URL`, nenhuma chamada é feita. A estrutura local permanece independente e não deve ser apresentada como ranking institucional ou da turma.

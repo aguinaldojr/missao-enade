@@ -98,6 +98,7 @@ export type Command =
 
 export class GameSession {
   private state: SessionState;
+  private missionStartedAtMs: number | null = null;
 
   constructor(
     private readonly content?: ContentRepository,
@@ -261,6 +262,7 @@ export class GameSession {
               this.missionRouteStorage?.recentQuestionIds(current.selectedCourse) ?? [])) : undefined;
           const questions = selectMissionQuestions(bank, { course: current.selectedCourse,
             collectionId: this.playableCollection.collectionId, mission }, ordering);
+          this.missionStartedAtMs = Date.parse(this.now());
           this.update({ screen: 'question', contentError: null,
             attempt: createAttempt(this.createId(), current.selectedCourse, questions, mission),
             exploration: Object.freeze({ ...current.exploration, missionStatus: current.exploration.missionStatus === 'completed' ? 'completed' : 'active' }) });
@@ -291,24 +293,28 @@ export class GameSession {
           this.update({ attempt: Object.freeze({ ...attempt, index: attempt.index + 1, selectedOptionId: null }) });
         } else if (isComplete(attempt)) {
           const score = calculateScore(attempt.answers);
+          const completedAt = this.now();
+          const completedAtMs = Date.parse(completedAt);
+          const durationMs = this.missionStartedAtMs !== null && Number.isFinite(completedAtMs)
+            ? Math.max(0, completedAtMs - this.missionStartedAtMs) : undefined;
           const result: SavedResult = this.playableCollection.mode === 'example' && attempt.mission.id === LEGACY_EXAMPLE_MISSION.id
             ? Object.freeze<ExampleResult>({
               schemaVersion: 1, contentVersion: 'example-1', mode: 'example', phaseId: 'FASE-EXEMPLO-01',
               attemptId: attempt.id, course: attempt.courseAtStart, total: 10,
-              score, correctCount: score / 100, completedAt: this.now(),
+              score, correctCount: score / 100, completedAt,
             })
             : Object.freeze<MissionResult>({
               schemaVersion: 1, contentVersion: this.playableCollection.contentVersion, mode: 'provisional',
               phaseId: this.playableCollection.phaseId, missionId: attempt.mission.id,
               attemptId: attempt.id, course: attempt.courseAtStart, total: attempt.mission.questionCount,
-              score, correctCount: score / 100, completedAt: this.now(),
+              score, correctCount: score / 100, ...(durationMs !== undefined ? { durationMs } : {}), completedAt,
             });
           let leaderboard = current.leaderboard;
           let leaderboardSaveStatus = current.leaderboardSaveStatus;
           const player = activePlayer(current.profiles);
           if (result.mode === 'provisional' && player && this.leaderboardStorage) {
             leaderboard = recordBestResult(leaderboard,
-              entryFromResult(result, player, this.playableCollection.collectionId));
+              entryFromResult(result, player, this.playableCollection.collectionId, result.durationMs));
             leaderboardSaveStatus = this.leaderboardStorage.save(leaderboard) ? 'saved' : 'failed';
           }
           this.update({ screen: 'result', lastResult: result,
@@ -320,6 +326,7 @@ export class GameSession {
             this.missionRouteStorage?.recordCompletion(result.course, attempt.questions.map((question) => question.id));
           }
           this.persistExploration();
+          this.missionStartedAtMs = null;
         }
         break;
       case 'retry-save':
