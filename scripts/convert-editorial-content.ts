@@ -260,11 +260,14 @@ function parseQuestion(section: Section): Record<string, unknown> {
   if (!playerText || !answer || options.length !== 5 || Object.keys(feedbackByOption).length !== 5) {
     throw new Error('Questão documental incompleta: ' + section.id);
   }
+  const rawContext = playerText[1]!;
+  const presentation = genericPresentation(rawContext);
   return {
     id: section.id,
     version: Number(findField(fields, 'Versão')),
     classification: findField(fields, 'Contrato / classification').split('/').map(plain)[1],
-    context: plain(playerText[1]),
+    context: presentation ? playerPlain(rawContext) : plain(rawContext),
+    ...(presentation ? { presentation } : {}),
     prompt: plain(playerText[2]),
     options,
     correctOptionId: answer[1],
@@ -840,6 +843,21 @@ function genericPresentation(text: string): Record<string, unknown> | undefined 
   return blocks.length ? { blocks: blocks.slice(0, 8) } : undefined;
 }
 
+const PLAYER_RESOURCE_HEADING = /^(?:Objeto|Objetos|Código|Matriz|Tabela|Diagrama|Painel|Fluxo|Fluxos|Grafo|Árvore|Autômato|Caminhos|Cartão|Cartões|Coordenadas|Definições|Esquema|Expressão|Instruções|Linguagem|Linha do tempo|Mapa|Pilha|Protótipos|Recursos|Registrador|Regra|Representação|Requisitos|Restrições|Convenção|Convenções)\b/i;
+
+function resourceSegment(section: Section, promptIndex: number): string {
+  const beforePrompt = section.text.slice(0, promptIndex);
+  const playerIndex = beforePrompt.lastIndexOf('### Texto ao jogador');
+  const editorialPart = playerIndex >= 0 ? beforePrompt.slice(0, playerIndex) : beforePrompt;
+  const headings = [...editorialPart.matchAll(/^###\s+(.+)$/gm)];
+  return headings.flatMap((heading, index) => {
+    const title = plain(heading[1]);
+    if (!PLAYER_RESOURCE_HEADING.test(title)) return [];
+    const end = headings[index + 1]?.index ?? editorialPart.length;
+    return [editorialPart.slice(heading.index, end)];
+  }).join('\n');
+}
+
 function contextSegment(section: Section, promptIndex: number): string {
   const beforePrompt = section.text.slice(0, promptIndex);
   const playerHeading = [...beforePrompt.matchAll(/^###\s+(?!Ficha)(.+)$/gm)].at(-1);
@@ -904,7 +922,7 @@ function genericQuestion(section: Section, inventory: Readonly<Record<string, st
     section.text.match(/\|\s*(?:Cursos\s*\/\s*courses|Cursos elegíveis)\s*\|\s*([^|\n]+)\|/i)?.[1] || '';
   const courses = origin === 'COM' ? ['CC', 'SI', 'TADS', 'TGTI', 'TRC'] :
     parseCourses(sectionCourses).length ? parseCourses(sectionCourses) : [origin];
-  const presentation = genericPresentation(rawContext);
+  const presentation = genericPresentation(resourceSegment(section, promptMatch.index) + '\n' + rawContext);
   const context = playerPlain(rawContext) || 'Analise os dados e o recurso apresentados para tomar a decisão solicitada.';
   if (options.length !== 5 || Object.keys(feedbackByOption).length !== 5 || !explanation ||
       !['introductory', 'intermediate', 'advanced'].includes(difficulty)) {

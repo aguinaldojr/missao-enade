@@ -500,3 +500,11 @@ Próxima etapa: criar novas questões de SI em entrega separada, seguindo a matr
 - [ ] Avaliar no piloto se a exclusão de apenas uma partida anterior oferece variedade suficiente no longo prazo.
 - [ ] Executar piloto com professores e estudantes antes de promover itens para `ready-for-release`.
 - [x] Preparar roteiro, cobertura mínima, checklist e formulário anônimo para o piloto controlado.
+
+## 28. Correção de recursos visuais na conversão — 18/11/2026
+
+- [x] Restaurar a matriz necessária para responder `E26-Q-SI-17`.
+- [x] Estruturar as tabelas embutidas de `E26-Q-TGTI-04` e `E26-Q-TRC-04`.
+- [x] Recuperar tabelas e códigos documentados antes de `Texto ao jogador`.
+- [x] Auditar alertas restantes e confirmar que são textualmente autossuficientes.
+- [x] Preservar todos os gabaritos, alternativas, dificuldades e elegibilidades.

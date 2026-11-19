@@ -86,6 +86,23 @@ describe('conversão controlada da coleção ampliada para JSON', () => {
     }
   });
 
+  it('leva recursos anteriores ao texto do jogador para a apresentação estruturada', () => {
+    const si17 = questions.find((question) => question.id === 'E26-Q-SI-17')!;
+    expect(si17.presentation?.blocks).toEqual([expect.objectContaining({
+      type: 'table', caption: 'Objeto visual proposto — matriz do piloto',
+      rows: [
+        ['Marcou como urgente', '40', '95', '135'],
+        ['Não marcou como urgente', '10', '855', '865'],
+        ['Total', '50', '950', '1.000'],
+      ],
+    })]);
+    for (const id of ['E26-Q-TGTI-04', 'E26-Q-TRC-04']) {
+      const question = questions.find((candidate) => candidate.id === id)!;
+      expect(question.presentation?.blocks.some((block) => block.type === 'table')).toBe(true);
+      expect(question.context).not.toContain('|---');
+    }
+  });
+
   it('preserva fontes, papéis e rastreabilidade sem liberar conteúdo', () => {
     const items = [...questions, ...puzzles];
     expect(questions.filter((item) => item.validationStatus === 'ready-for-pilot').map((item) => item.id))

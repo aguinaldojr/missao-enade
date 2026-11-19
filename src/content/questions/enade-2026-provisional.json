@@ -8,6 +8,16 @@
       "version": 2,
       "classification": "COMUM",
       "context": "Na Base N9 fictícia, uma oficina de organização dos estudos passou a oferecer um horário à noite. O registro acompanha as mesmas 40 pessoas convidadas em duas semanas; todas responderam em ambas. “Conseguiu participar” significa ter comparecido a pelo menos um encontro naquela semana, e cada pessoa foi contada uma vez por semana. O registro não informa motivos de participação, não mede bem-estar e não possui grupo de comparação. Os dados são inteiramente fictícios.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "image",
+            "src": "images/questions/com-01-participacao.svg",
+            "alt": "Gráfico de barras. Entre 40 pessoas convidadas, 16 conseguiram participar na semana anterior e 24 na semana com o novo horário. O aumento observado foi de oito pessoas, sem demonstrar sua causa.",
+            "caption": "Participação registrada nas duas semanas"
+          }
+        ]
+      },
       "prompt": "Qual conclusão a equipe pode registrar com base nessas informações?",
       "options": [
         {
@@ -117,17 +127,7 @@
           "Matriz canônica de partidas de 25: TRC"
         ]
       },
-      "validationStatus": "under-ai-review",
-      "presentation": {
-        "blocks": [
-          {
-            "type": "image",
-            "src": "images/questions/com-01-participacao.svg",
-            "alt": "Gráfico de barras. Entre 40 pessoas convidadas, 16 conseguiram participar na semana anterior e 24 na semana com o novo horário. O aumento observado foi de oito pessoas, sem demonstrar sua causa.",
-            "caption": "Participação registrada nas duas semanas"
-          }
-        ]
-      }
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "E26-Q-COM-02",
@@ -573,6 +573,49 @@
       "version": 2,
       "classification": "COMUM",
       "context": "No entorno fictício da Base N9, a equipe propõe um piloto de sombra em locais de espera durante o calor. O objetivo é reduzir a exposição ao sol de quem já espera nesses locais. Há recurso para uma intervenção de mesmo custo em um dos dois pontos, e ambos permitem instalação sem bloquear a circulação. Em uma observação sintética de 30 minutos, cada pessoa foi contada uma vez e permaneceu no mesmo local. A estimativa indica quantas pessoas ao sol caberiam na nova sombra; não prevê temperatura, adoecimento ou comportamento futuro.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Observação dos locais de espera",
+            "columns": [
+              {
+                "key": "local",
+                "label": "Local"
+              },
+              {
+                "key": "observadas",
+                "label": "Pessoas observadas",
+                "align": "right"
+              },
+              {
+                "key": "sol",
+                "label": "Pessoas ao sol",
+                "align": "right"
+              },
+              {
+                "key": "cobertura",
+                "label": "Caberiam na nova sombra",
+                "align": "right"
+              }
+            ],
+            "rows": [
+              [
+                "Ponto da praça",
+                "20",
+                "15",
+                "10"
+              ],
+              [
+                "Ponto da alameda",
+                "40",
+                "8",
+                "6"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Considerando o objetivo do piloto e os limites desse registro, qual proposta é mais bem sustentada?",
       "options": [
         {
@@ -682,50 +725,7 @@
           "Matriz canônica de partidas de 25: TRC"
         ]
       },
-      "validationStatus": "under-ai-review",
-      "presentation": {
-        "blocks": [
-          {
-            "type": "table",
-            "caption": "Observação dos locais de espera",
-            "columns": [
-              {
-                "key": "local",
-                "label": "Local"
-              },
-              {
-                "key": "observadas",
-                "label": "Pessoas observadas",
-                "align": "right"
-              },
-              {
-                "key": "sol",
-                "label": "Pessoas ao sol",
-                "align": "right"
-              },
-              {
-                "key": "cobertura",
-                "label": "Caberiam na nova sombra",
-                "align": "right"
-              }
-            ],
-            "rows": [
-              [
-                "Ponto da praça",
-                "20",
-                "15",
-                "10"
-              ],
-              [
-                "Ponto da alameda",
-                "40",
-                "8",
-                "6"
-              ]
-            ]
-          }
-        ]
-      }
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "E26-Q-COM-06",
@@ -3122,6 +3122,77 @@
       "version": 2,
       "classification": "SI",
       "context": "A equipe de Sistemas da Base N9 prepara um painel com o esforço previsto para seus chamados abertos. O banco usa SQLite 3 e possui esta tabela:",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "sql",
+            "caption": "Esquema da tabela chamados — SQLite 3",
+            "code": "CREATE TABLE chamados (\n  id TEXT PRIMARY KEY,\n  equipe TEXT NOT NULL,\n  estado TEXT NOT NULL,\n  minutos_estimados INTEGER NOT NULL CHECK (minutos_estimados > 0)\n);"
+          },
+          {
+            "type": "table",
+            "caption": "Dados sintéticos disponíveis",
+            "columns": [
+              {
+                "key": "id",
+                "label": "id"
+              },
+              {
+                "key": "equipe",
+                "label": "equipe"
+              },
+              {
+                "key": "estado",
+                "label": "estado"
+              },
+              {
+                "key": "minutos-estimados",
+                "label": "minutos_estimados",
+                "align": "right"
+              }
+            ],
+            "rows": [
+              [
+                "C101",
+                "Sistemas",
+                "aberto",
+                "40"
+              ],
+              [
+                "C102",
+                "Infraestrutura",
+                "aberto",
+                "60"
+              ],
+              [
+                "C103",
+                "Sistemas",
+                "fechado",
+                "25"
+              ],
+              [
+                "C104",
+                "Sistemas",
+                "aberto",
+                "35"
+              ],
+              [
+                "C105",
+                "Sistemas",
+                "aberto",
+                "15"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "sql",
+            "caption": "Consulta executada pelo painel",
+            "code": "SELECT equipe,\n       COUNT(*) AS chamados_abertos,\n       SUM(minutos_estimados) AS minutos_previstos\nFROM chamados\nWHERE equipe = 'Sistemas' AND estado = 'aberto'\nGROUP BY equipe;"
+          }
+        ]
+      },
       "prompt": "Qual linha a consulta devolve?",
       "options": [
         {
@@ -3202,155 +3273,13 @@
           "Matriz canônica de partidas de 25: TGTI"
         ]
       },
-      "validationStatus": "ready-for-pilot",
-      "presentation": {
-        "blocks": [
-          {
-            "type": "code",
-            "language": "sql",
-            "caption": "Esquema da tabela chamados — SQLite 3",
-            "code": "CREATE TABLE chamados (\n  id TEXT PRIMARY KEY,\n  equipe TEXT NOT NULL,\n  estado TEXT NOT NULL,\n  minutos_estimados INTEGER NOT NULL CHECK (minutos_estimados > 0)\n);"
-          },
-          {
-            "type": "table",
-            "caption": "Dados sintéticos disponíveis",
-            "columns": [
-              {
-                "key": "id",
-                "label": "id"
-              },
-              {
-                "key": "equipe",
-                "label": "equipe"
-              },
-              {
-                "key": "estado",
-                "label": "estado"
-              },
-              {
-                "key": "minutos-estimados",
-                "label": "minutos_estimados",
-                "align": "right"
-              }
-            ],
-            "rows": [
-              [
-                "C101",
-                "Sistemas",
-                "aberto",
-                "40"
-              ],
-              [
-                "C102",
-                "Infraestrutura",
-                "aberto",
-                "60"
-              ],
-              [
-                "C103",
-                "Sistemas",
-                "fechado",
-                "25"
-              ],
-              [
-                "C104",
-                "Sistemas",
-                "aberto",
-                "35"
-              ],
-              [
-                "C105",
-                "Sistemas",
-                "aberto",
-                "15"
-              ]
-            ]
-          },
-          {
-            "type": "code",
-            "language": "sql",
-            "caption": "Consulta executada pelo painel",
-            "code": "SELECT equipe,\n       COUNT(*) AS chamados_abertos,\n       SUM(minutos_estimados) AS minutos_previstos\nFROM chamados\nWHERE equipe = 'Sistemas' AND estado = 'aberto'\nGROUP BY equipe;"
-          }
-        ]
-      }
+      "validationStatus": "ready-for-pilot"
     },
     {
       "id": "E26-Q-SI-03",
       "version": 2,
       "classification": "SI",
       "context": "Um arquivo de memória oral fictício da Base N9 prepara descrições para seu acervo. A equipe editorial prepara cada descrição e um responsável emite o parecer necessário para liberá-la. Pela agenda deste exercício, os pareceres começam somente às 16h. A transmissão eletrônica já foi confirmada nos horários indicados e, após o parecer, o processamento automático leva um minuto. Não há outro bloqueio no cenário.",
-      "prompt": "Qual etapa concentra a espera que precisa ser examinada primeiro pela gestão do processo?",
-      "options": [
-        {
-          "id": "A",
-          "text": "A transmissão eletrônica, supondo que as descrições não chegaram quando ficaram disponíveis."
-        },
-        {
-          "id": "B",
-          "text": "A passagem entre preparação e parecer, condicionada à janela de atuação do responsável."
-        },
-        {
-          "id": "C",
-          "text": "O processamento automático posterior, por levar um minuto depois de cada parecer."
-        },
-        {
-          "id": "D",
-          "text": "A produção inicial da descrição, por ainda não estar concluída nos horários informados."
-        },
-        {
-          "id": "E",
-          "text": "O armazenamento do acervo, supondo que a capacidade esgotada reteve os documentos."
-        }
-      ],
-      "correctOptionId": "B",
-      "explanation": "Os documentos estavam prontos e disponíveis às 09h, 10h e 11h, mas o parecer só podia começar às 16h. A espera relevante está nessa passagem de responsabilidade e sua janela de decisão. O caso não autoriza culpar a pessoa nem concluir qual redesenho será melhor: a agenda é uma regra organizacional fornecida, e sua alteração exige análise própria.",
-      "feedbackByOption": {
-        "A": "A chegada foi confirmada nos horários registrados. Reinvestigar envio como se não houvesse essa evidência ignora o cenário.",
-        "B": "Correto: a informação já está disponível, mas o processo aguarda a janela do parecer. Pessoas, responsabilidades e agenda fazem parte do sistema de informação.",
-        "C": "Um minuto após o parecer não explica as várias horas anteriores de espera.",
-        "D": "Os horários da segunda coluna já marcam a preparação concluída. Eles não representam o início da redação.",
-        "E": "O cenário exclui esgotamento computacional como bloqueio. Não há evidência de retenção por armazenamento."
-      },
-      "collectionId": "enade-2026",
-      "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; elaboração autoral inédita para N9 — Jornada Digital, em revisão editorial assistida por IA para SI.",
-      "courses": [
-        "SI",
-        "TGTI"
-      ],
-      "area": "Sistemas de informação e processos de negócio",
-      "competencies": [
-        "Relacionar fluxo de informação, disponibilidade de responsável e espera observada em um processo organizacional."
-      ],
-      "difficulty": "introductory",
-      "sources": [
-        {
-          "role": "primary",
-          "type": "official-reference",
-          "description": "Referência normativa específica de SI para criação autoral no recorte indicado; contexto e solução didáticos, sem autoria ou chancela do Inep.",
-          "year": 2026,
-          "documentId": "Portaria Inep 168/2026",
-          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
-        },
-        {
-          "role": "normative-complementary",
-          "type": "official-reference",
-          "year": 2026,
-          "documentId": "Portaria Inep 171/2026",
-          "description": "Corroboração normativa da elegibilidade para TGTI conforme a matriz canônica de partidas.",
-          "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-171-2026-04-14.pdf"
-        }
-      ],
-      "traceability": {
-        "title": "O trabalho espera pelo parecer",
-        "objective": "Identificar gargalo sustentado por fluxo informacional fornecido.",
-        "locators": [
-          "SI-02 / SI-I; F07, art. 5º, I, a.3; art. 6º, VI e XV",
-          "Matriz canônica de partidas de 25: SI",
-          "Matriz canônica de partidas de 25: TGTI"
-        ]
-      },
-      "validationStatus": "under-ai-review",
       "presentation": {
         "blocks": [
           {
@@ -3423,7 +3352,78 @@
             ]
           }
         ]
-      }
+      },
+      "prompt": "Qual etapa concentra a espera que precisa ser examinada primeiro pela gestão do processo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A transmissão eletrônica, supondo que as descrições não chegaram quando ficaram disponíveis."
+        },
+        {
+          "id": "B",
+          "text": "A passagem entre preparação e parecer, condicionada à janela de atuação do responsável."
+        },
+        {
+          "id": "C",
+          "text": "O processamento automático posterior, por levar um minuto depois de cada parecer."
+        },
+        {
+          "id": "D",
+          "text": "A produção inicial da descrição, por ainda não estar concluída nos horários informados."
+        },
+        {
+          "id": "E",
+          "text": "O armazenamento do acervo, supondo que a capacidade esgotada reteve os documentos."
+        }
+      ],
+      "correctOptionId": "B",
+      "explanation": "Os documentos estavam prontos e disponíveis às 09h, 10h e 11h, mas o parecer só podia começar às 16h. A espera relevante está nessa passagem de responsabilidade e sua janela de decisão. O caso não autoriza culpar a pessoa nem concluir qual redesenho será melhor: a agenda é uma regra organizacional fornecida, e sua alteração exige análise própria.",
+      "feedbackByOption": {
+        "A": "A chegada foi confirmada nos horários registrados. Reinvestigar envio como se não houvesse essa evidência ignora o cenário.",
+        "B": "Correto: a informação já está disponível, mas o processo aguarda a janela do parecer. Pessoas, responsabilidades e agenda fazem parte do sistema de informação.",
+        "C": "Um minuto após o parecer não explica as várias horas anteriores de espera.",
+        "D": "Os horários da segunda coluna já marcam a preparação concluída. Eles não representam o início da redação.",
+        "E": "O cenário exclui esgotamento computacional como bloqueio. Não há evidência de retenção por armazenamento."
+      },
+      "collectionId": "enade-2026",
+      "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; elaboração autoral inédita para N9 — Jornada Digital, em revisão editorial assistida por IA para SI.",
+      "courses": [
+        "SI",
+        "TGTI"
+      ],
+      "area": "Sistemas de informação e processos de negócio",
+      "competencies": [
+        "Relacionar fluxo de informação, disponibilidade de responsável e espera observada em um processo organizacional."
+      ],
+      "difficulty": "introductory",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Referência normativa específica de SI para criação autoral no recorte indicado; contexto e solução didáticos, sem autoria ou chancela do Inep.",
+          "year": 2026,
+          "documentId": "Portaria Inep 168/2026",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        },
+        {
+          "role": "normative-complementary",
+          "type": "official-reference",
+          "year": 2026,
+          "documentId": "Portaria Inep 171/2026",
+          "description": "Corroboração normativa da elegibilidade para TGTI conforme a matriz canônica de partidas.",
+          "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-inep-171-2026-04-14.pdf"
+        }
+      ],
+      "traceability": {
+        "title": "O trabalho espera pelo parecer",
+        "objective": "Identificar gargalo sustentado por fluxo informacional fornecido.",
+        "locators": [
+          "SI-02 / SI-I; F07, art. 5º, I, a.3; art. 6º, VI e XV",
+          "Matriz canônica de partidas de 25: SI",
+          "Matriz canônica de partidas de 25: TGTI"
+        ]
+      },
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "E26-Q-SI-04",
@@ -3999,67 +3999,6 @@
       "version": 2,
       "classification": "SI",
       "context": "Um núcleo fictício de acervo da Base N9 planeja uma rodada de trabalho. Pode concluir até quatro lotes do tipo X e até três do tipo Y. Cada lote deve ser inteiro e só conta se concluir captura e catalogação. O objetivo é maximizar o benefício segundo os pesos apresentados, sem exceder capacidade ou demanda. Não é obrigatório atender toda a demanda; os dados são didáticos e não representam XP ou política real de prioridade.",
-      "prompt": "Qual alocação atende aos limites e maximiza o benefício definido?",
-      "options": [
-        {
-          "id": "A",
-          "text": "Concluir três lotes X e dois Y, obtendo benefício 23."
-        },
-        {
-          "id": "B",
-          "text": "Concluir três lotes X e três Y, obtendo benefício 27."
-        },
-        {
-          "id": "C",
-          "text": "Concluir cinco lotes X e nenhum Y, obtendo benefício 25."
-        },
-        {
-          "id": "D",
-          "text": "Concluir quatro lotes X e um Y, obtendo benefício 24."
-        },
-        {
-          "id": "E",
-          "text": "Concluir quatro lotes X e dois Y, obtendo benefício 28."
-        }
-      ],
-      "correctOptionId": "E",
-      "explanation": "E usa 2×4 + 2 = 10 unidades de captura e 4 + 2×2 = 8 de catalogação, dentro das demandas 4 e 3, com benefício 5×4 + 4×2 = 28. A e D são viáveis, mas rendem 23 e 24. B consome nove de catalogação, acima de oito; C ultrapassa a demanda de X. Entre todos os pares inteiros de 0 a 4 X e 0 a 3 Y, nenhum outro viável supera ou iguala 28. A escolha depende dos pesos explícitos, não de valor social presumido de um tipo.",
-      "feedbackByOption": {
-        "A": "A alocação cabe nas capacidades, mas deixa benefício abaixo de outra solução viável. Viabilidade não é o mesmo que maximização.",
-        "B": "Três X e três Y consomem 3 + 2×3 = 9 de catalogação. O benefício não pode ser aceito violando capacidade.",
-        "C": "Há demanda para no máximo quatro X. Capacidade de captura não autoriza criar um quinto pedido.",
-        "D": "Quatro X e um Y são viáveis, mas há capacidade para mais um Y, elevando o benefício a 28.",
-        "E": "Correto: usa as duas capacidades sem exceder a demanda e obtém o maior benefício do domínio inteiro declarado."
-      },
-      "collectionId": "enade-2026",
-      "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; elaboração autoral inédita para N9 — Jornada Digital, em revisão editorial assistida por IA para SI.",
-      "courses": [
-        "SI"
-      ],
-      "area": "Dados para decisão e pesquisa operacional",
-      "competencies": [
-        "Avaliar uma alocação inteira sob limites de capacidade e demanda, distinguindo viabilidade e maximização do objetivo definido."
-      ],
-      "difficulty": "advanced",
-      "sources": [
-        {
-          "role": "primary",
-          "type": "official-reference",
-          "description": "Referência normativa específica de SI para criação autoral no recorte indicado; contexto e solução didáticos, sem autoria ou chancela do Inep.",
-          "year": 2026,
-          "documentId": "Portaria Inep 168/2026",
-          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
-        }
-      ],
-      "traceability": {
-        "title": "Distribuir capacidade entre dois trabalhos",
-        "objective": "Selecionar alocação viável integrando capacidade, demanda e objetivo.",
-        "locators": [
-          "SI-03 / SI-II; F07, art. 5º, II, b.2–b.3; art. 6º, V",
-          "Matriz canônica de partidas de 25: SI"
-        ]
-      },
-      "validationStatus": "under-ai-review",
       "presentation": {
         "blocks": [
           {
@@ -4134,7 +4073,68 @@
             ]
           }
         ]
-      }
+      },
+      "prompt": "Qual alocação atende aos limites e maximiza o benefício definido?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Concluir três lotes X e dois Y, obtendo benefício 23."
+        },
+        {
+          "id": "B",
+          "text": "Concluir três lotes X e três Y, obtendo benefício 27."
+        },
+        {
+          "id": "C",
+          "text": "Concluir cinco lotes X e nenhum Y, obtendo benefício 25."
+        },
+        {
+          "id": "D",
+          "text": "Concluir quatro lotes X e um Y, obtendo benefício 24."
+        },
+        {
+          "id": "E",
+          "text": "Concluir quatro lotes X e dois Y, obtendo benefício 28."
+        }
+      ],
+      "correctOptionId": "E",
+      "explanation": "E usa 2×4 + 2 = 10 unidades de captura e 4 + 2×2 = 8 de catalogação, dentro das demandas 4 e 3, com benefício 5×4 + 4×2 = 28. A e D são viáveis, mas rendem 23 e 24. B consome nove de catalogação, acima de oito; C ultrapassa a demanda de X. Entre todos os pares inteiros de 0 a 4 X e 0 a 3 Y, nenhum outro viável supera ou iguala 28. A escolha depende dos pesos explícitos, não de valor social presumido de um tipo.",
+      "feedbackByOption": {
+        "A": "A alocação cabe nas capacidades, mas deixa benefício abaixo de outra solução viável. Viabilidade não é o mesmo que maximização.",
+        "B": "Três X e três Y consomem 3 + 2×3 = 9 de catalogação. O benefício não pode ser aceito violando capacidade.",
+        "C": "Há demanda para no máximo quatro X. Capacidade de captura não autoriza criar um quinto pedido.",
+        "D": "Quatro X e um Y são viáveis, mas há capacidade para mais um Y, elevando o benefício a 28.",
+        "E": "Correto: usa as duas capacidades sem exceder a demanda e obtém o maior benefício do domínio inteiro declarado."
+      },
+      "collectionId": "enade-2026",
+      "pedagogicalOrigin": "Referenciais oficiais do Enade 2026; elaboração autoral inédita para N9 — Jornada Digital, em revisão editorial assistida por IA para SI.",
+      "courses": [
+        "SI"
+      ],
+      "area": "Dados para decisão e pesquisa operacional",
+      "competencies": [
+        "Avaliar uma alocação inteira sob limites de capacidade e demanda, distinguindo viabilidade e maximização do objetivo definido."
+      ],
+      "difficulty": "advanced",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Referência normativa específica de SI para criação autoral no recorte indicado; contexto e solução didáticos, sem autoria ou chancela do Inep.",
+          "year": 2026,
+          "documentId": "Portaria Inep 168/2026",
+          "url": "https://proen.ufopa.edu.br/media/file/site/proen/documentos/2026/712d747f-55a1-4272-9fa6-dc48d7e25003.pdf"
+        }
+      ],
+      "traceability": {
+        "title": "Distribuir capacidade entre dois trabalhos",
+        "objective": "Selecionar alocação viável integrando capacidade, demanda e objetivo.",
+        "locators": [
+          "SI-03 / SI-II; F07, art. 5º, II, b.2–b.3; art. 6º, V",
+          "Matriz canônica de partidas de 25: SI"
+        ]
+      },
+      "validationStatus": "under-ai-review"
     },
     {
       "id": "E26-Q-SI-10",
@@ -5319,7 +5319,74 @@
       "id": "E26-Q-TGTI-04",
       "version": 1,
       "classification": "TGTI",
-      "context": "A central fictícia de serviços da Base N9 recebeu cinco chamados. A política determina: primeiro atender interrupções de atividade crítica que estejam sem alternativa de trabalho e tenham prazo de negócio em até 30 minutos; entre elas, iniciar pela de menor prazo restante. Os prazos são contados a partir de agora, não são estimativas da duração do reparo. Não há empates. | Chamado | Pessoas afetadas | Atividade crítica? | Prazo restante | Há alternativa de trabalho? | |---|---:|---|---:|---| | Alfa | 180 | Sim | 120 minutos | Sim | | Beta | 12 | Sim | 20 minutos | Não | | Gama | 60 | Sim | 10 minutos | Sim | | Delta | 35 | Sim | 15 minutos | Não | | Épsilon | 90 | Não | 5 minutos | Não | A tabela se lê por chamado: por exemplo, Beta afeta doze pessoas, interrompe atividade crítica, tem vinte minutos restantes e não possui alternativa. A central precisa escolher somente qual atendimento iniciar primeiro.",
+      "context": "A central fictícia de serviços da Base N9 recebeu cinco chamados. A política determina: primeiro atender interrupções de atividade crítica que estejam sem alternativa de trabalho e tenham prazo de negócio em até 30 minutos; entre elas, iniciar pela de menor prazo restante. Os prazos são contados a partir de agora, não são estimativas da duração do reparo. Não há empates. A tabela se lê por chamado: por exemplo, Beta afeta doze pessoas, interrompe atividade crítica, tem vinte minutos restantes e não possui alternativa. A central precisa escolher somente qual atendimento iniciar primeiro.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Dados apresentados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Chamado"
+              },
+              {
+                "key": "c2",
+                "label": "Pessoas afetadas"
+              },
+              {
+                "key": "c3",
+                "label": "Atividade crítica?"
+              },
+              {
+                "key": "c4",
+                "label": "Prazo restante"
+              },
+              {
+                "key": "c5",
+                "label": "Há alternativa de trabalho?"
+              }
+            ],
+            "rows": [
+              [
+                "Alfa",
+                "180",
+                "Sim",
+                "120 minutos",
+                "Sim"
+              ],
+              [
+                "Beta",
+                "12",
+                "Sim",
+                "20 minutos",
+                "Não"
+              ],
+              [
+                "Gama",
+                "60",
+                "Sim",
+                "10 minutos",
+                "Sim"
+              ],
+              [
+                "Delta",
+                "35",
+                "Sim",
+                "15 minutos",
+                "Não"
+              ],
+              [
+                "Épsilon",
+                "90",
+                "Não",
+                "5 minutos",
+                "Não"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual chamado deve ser iniciado primeiro segundo a política fornecida?",
       "options": [
         {
@@ -5699,7 +5766,56 @@
       "id": "E26-Q-TGTI-09",
       "version": 2,
       "classification": "TGTI",
-      "context": "Uma cooperativa fictícia quer rastrear pedidos entre três polos neste ciclo. Há oito unidades de orçamento. Só podem ser usados componentes cujo direito de uso já foi verificado; essa é uma regra interna do caso. | Iniciativa | Custo no ciclo | Entrega e condição | |---|---:|---| | I — Integração dos pedidos | 5 unidades | Entrega o rastreamento entre polos somente se C estiver incluída. | | C — Cadastro compartilhado | 2 unidades | Fornece a base exigida por I; sozinha não integra pedidos. | | V — Vitrine de divulgação | 2 unidades | Divulga serviços, sem rastrear pedidos entre polos. | | T — Solução completa externa | 7 unidades | Entrega o rastreamento, mas usa componente com direito de uso ainda não verificado. | | S — Análise adicional | 4 unidades | Acrescenta análises; não substitui I nem C. | I, C, V e S têm uso verificado. Os custos se somam, sem descontos ou soluções ocultas. O objetivo é entregar o rastreamento, não maximizar funções.",
+      "context": "Uma cooperativa fictícia quer rastrear pedidos entre três polos neste ciclo. Há oito unidades de orçamento. Só podem ser usados componentes cujo direito de uso já foi verificado; essa é uma regra interna do caso. I, C, V e S têm uso verificado. Os custos se somam, sem descontos ou soluções ocultas. O objetivo é entregar o rastreamento, não maximizar funções.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Dados apresentados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Iniciativa"
+              },
+              {
+                "key": "c2",
+                "label": "Custo no ciclo"
+              },
+              {
+                "key": "c3",
+                "label": "Entrega e condição"
+              }
+            ],
+            "rows": [
+              [
+                "I — Integração dos pedidos",
+                "5 unidades",
+                "Entrega o rastreamento entre polos somente se C estiver incluída."
+              ],
+              [
+                "C — Cadastro compartilhado",
+                "2 unidades",
+                "Fornece a base exigida por I; sozinha não integra pedidos."
+              ],
+              [
+                "V — Vitrine de divulgação",
+                "2 unidades",
+                "Divulga serviços, sem rastrear pedidos entre polos."
+              ],
+              [
+                "T — Solução completa externa",
+                "7 unidades",
+                "Entrega o rastreamento, mas usa componente com direito de uso ainda não verificado."
+              ],
+              [
+                "S — Análise adicional",
+                "4 unidades",
+                "Acrescenta análises; não substitui I nem C."
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual pacote atende conjuntamente à meta, às dependências, à política e ao orçamento?",
       "options": [
         {
@@ -5766,7 +5882,74 @@
       "id": "E26-Q-TGTI-10",
       "version": 2,
       "classification": "TGTI",
-      "context": "Se o local principal de um serviço fictício parar, o plano deve: recuperar em até 40 minutos; perder no máximo 10 minutos de registros; usar ambiente protegido e autorizado; e consumir até 60 pessoa-minutos da equipe. Pessoa-minutos somam o esforço da equipe; recuperação mede duração no relógio. Recursos, paralelismo e acesso já foram verificados. Os valores são projeções de ensaios comparáveis, não garantias. | Plano | Recuperação no relógio | Perda de registros | Ambiente protegido e autorizado? | Esforço total | |---|---:|---:|---|---:| | A | 20 minutos | 2 minutos | Não | 20 pessoa-minutos | | B | 25 minutos | 5 minutos | Sim | 90 pessoa-minutos | | C | 35 minutos | 8 minutos | Sim | 60 pessoa-minutos | | D | 45 minutos | 5 minutos | Sim | 40 pessoa-minutos | | E | 30 minutos | 18 minutos | Sim | 40 pessoa-minutos |",
+      "context": "Se o local principal de um serviço fictício parar, o plano deve: recuperar em até 40 minutos; perder no máximo 10 minutos de registros; usar ambiente protegido e autorizado; e consumir até 60 pessoa-minutos da equipe. Pessoa-minutos somam o esforço da equipe; recuperação mede duração no relógio. Recursos, paralelismo e acesso já foram verificados. Os valores são projeções de ensaios comparáveis, não garantias.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Dados apresentados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Plano"
+              },
+              {
+                "key": "c2",
+                "label": "Recuperação no relógio"
+              },
+              {
+                "key": "c3",
+                "label": "Perda de registros"
+              },
+              {
+                "key": "c4",
+                "label": "Ambiente protegido e autorizado?"
+              },
+              {
+                "key": "c5",
+                "label": "Esforço total"
+              }
+            ],
+            "rows": [
+              [
+                "A",
+                "20 minutos",
+                "2 minutos",
+                "Não",
+                "20 pessoa-minutos"
+              ],
+              [
+                "B",
+                "25 minutos",
+                "5 minutos",
+                "Sim",
+                "90 pessoa-minutos"
+              ],
+              [
+                "C",
+                "35 minutos",
+                "8 minutos",
+                "Sim",
+                "60 pessoa-minutos"
+              ],
+              [
+                "D",
+                "45 minutos",
+                "5 minutos",
+                "Sim",
+                "40 pessoa-minutos"
+              ],
+              [
+                "E",
+                "30 minutos",
+                "18 minutos",
+                "Sim",
+                "40 pessoa-minutos"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual plano atende às quatro condições, sem confundir rapidez com suficiência de capacidade ou proteção?",
       "options": [
         {
@@ -6090,7 +6273,46 @@
       "id": "E26-Q-TRC-04",
       "version": 2,
       "classification": "TRC",
-      "context": "Num laboratório fictício, o roteador R encaminha tráfego por S (192.0.2.2) ou T (192.0.2.6). S alcança toda a rede 203.0.113.0/24 e tem retorno ao cliente; T não. Enlaces e filtros foram conferidos. R escolhe primeiro o prefixo mais longo; a métrica só desempata prefixos de igual comprimento. /24 abrange finais 0–255 e /25 iniciado em 128 abrange 128–255. | Destino | Próximo salto | Métrica | |---|---|---:| | 203.0.113.0/24 | 192.0.2.2 — S | 10 | | 203.0.113.128/25 | 192.0.2.6 — T | 20 | | 0.0.0.0/0 | 192.0.2.6 — T | 1 | O destino .40 funciona; .150 segue para T e falha. Não há outra rota ou política relevante.",
+      "context": "Num laboratório fictício, o roteador R encaminha tráfego por S (192.0.2.2) ou T (192.0.2.6). S alcança toda a rede 203.0.113.0/24 e tem retorno ao cliente; T não. Enlaces e filtros foram conferidos. R escolhe primeiro o prefixo mais longo; a métrica só desempata prefixos de igual comprimento. /24 abrange finais 0–255 e /25 iniciado em 128 abrange 128–255. O destino .40 funciona; .150 segue para T e falha. Não há outra rota ou política relevante.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Dados apresentados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Destino"
+              },
+              {
+                "key": "c2",
+                "label": "Próximo salto"
+              },
+              {
+                "key": "c3",
+                "label": "Métrica"
+              }
+            ],
+            "rows": [
+              [
+                "203.0.113.0/24",
+                "192.0.2.2 — S",
+                "10"
+              ],
+              [
+                "203.0.113.128/25",
+                "192.0.2.6 — T",
+                "20"
+              ],
+              [
+                "0.0.0.0/0",
+                "192.0.2.6 — T",
+                "1"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual ajuste corrige o desvio de 203.0.113.150 preservando os outros destinos da rede pelo caminho conhecido?",
       "options": [
         {
@@ -6422,7 +6644,53 @@
       "id": "E26-Q-TRC-08",
       "version": 2,
       "classification": "TRC",
-      "context": "Um coletor fictício lê a cada 60 segundos o contador acumulado de bytes de uma interface. A taxa é a diferença entre contadores comparáveis dividida pelo intervalo. O equipamento reiniciou entre as coletas 0 e 1; não reiniciou nem sofreu estouro entre 1 e 2. | Coleta | Tempo no relógio do coletor | Tempo desde o início do equipamento | Contador de bytes | |---|---:|---:|---:| | 0 | 0 segundos | 500 segundos | 9000 | | 1 | 60 segundos | 20 segundos | 100 | | 2 | 120 segundos | 80 segundos | 700 | O coletor deve preservar o histórico e distinguir medida indisponível de taxa zero. Só pode ler e alertar.",
+      "context": "Um coletor fictício lê a cada 60 segundos o contador acumulado de bytes de uma interface. A taxa é a diferença entre contadores comparáveis dividida pelo intervalo. O equipamento reiniciou entre as coletas 0 e 1; não reiniciou nem sofreu estouro entre 1 e 2. O coletor deve preservar o histórico e distinguir medida indisponível de taxa zero. Só pode ler e alertar.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Dados apresentados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Coleta"
+              },
+              {
+                "key": "c2",
+                "label": "Tempo no relógio do coletor"
+              },
+              {
+                "key": "c3",
+                "label": "Tempo desde o início do equipamento"
+              },
+              {
+                "key": "c4",
+                "label": "Contador de bytes"
+              }
+            ],
+            "rows": [
+              [
+                "0",
+                "0 segundos",
+                "500 segundos",
+                "9000"
+              ],
+              [
+                "1",
+                "60 segundos",
+                "20 segundos",
+                "100"
+              ],
+              [
+                "2",
+                "120 segundos",
+                "80 segundos",
+                "700"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual proposta evita um alerta de ausência de tráfego sem evidência e volta a calcular uma taxa válida quando possível?",
       "options": [
         {
@@ -6497,7 +6765,83 @@
       "id": "E26-Q-TRC-09",
       "version": 2,
       "classification": "TRC",
-      "context": "Cada uma de duas salas envia 2 × 60 Mb/s ao arquivo central: 120 Mb/s por sala e 240 Mb/s no centro. As capacidades úteis incluem a sobrecarga; não há caminho paralelo. Os dois acessos existentes suportam 1 Gb/s e marcação compatível. O projeto deve reutilizá-los, isolar a gestão e consumir até 45 W. O consumo é um critério parcial. | Projeto | Retorno/sala | Centro | Gestão isolada | Reusa acessos | Consumo | |---|---:|---:|---|---|---:| | A | 100 Mb/s | 1 Gb/s | Sim | Sim | 30 W | | B | 1 Gb/s | 1 Gb/s | Não | Sim | 38 W | | C | 1 Gb/s | 1 Gb/s | Sim | Não | 65 W | | D | 1 Gb/s | 1 Gb/s | Marcação incompatível | Sim | 35 W | | E | 1 Gb/s | 1 Gb/s | Sim, compatível | Sim | 40 W | Neste exercício, 1 Gb/s = 1.000 Mb/s. D não integra as salas e não há adaptador. As demais condições foram ensaiadas.",
+      "context": "Cada uma de duas salas envia 2 × 60 Mb/s ao arquivo central: 120 Mb/s por sala e 240 Mb/s no centro. As capacidades úteis incluem a sobrecarga; não há caminho paralelo. Os dois acessos existentes suportam 1 Gb/s e marcação compatível. O projeto deve reutilizá-los, isolar a gestão e consumir até 45 W. O consumo é um critério parcial. Neste exercício, 1 Gb/s = 1.000 Mb/s. D não integra as salas e não há adaptador. As demais condições foram ensaiadas.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Dados apresentados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Projeto"
+              },
+              {
+                "key": "c2",
+                "label": "Retorno/sala"
+              },
+              {
+                "key": "c3",
+                "label": "Centro"
+              },
+              {
+                "key": "c4",
+                "label": "Gestão isolada"
+              },
+              {
+                "key": "c5",
+                "label": "Reusa acessos"
+              },
+              {
+                "key": "c6",
+                "label": "Consumo"
+              }
+            ],
+            "rows": [
+              [
+                "A",
+                "100 Mb/s",
+                "1 Gb/s",
+                "Sim",
+                "Sim",
+                "30 W"
+              ],
+              [
+                "B",
+                "1 Gb/s",
+                "1 Gb/s",
+                "Não",
+                "Sim",
+                "38 W"
+              ],
+              [
+                "C",
+                "1 Gb/s",
+                "1 Gb/s",
+                "Sim",
+                "Não",
+                "65 W"
+              ],
+              [
+                "D",
+                "1 Gb/s",
+                "1 Gb/s",
+                "Marcação incompatível",
+                "Sim",
+                "35 W"
+              ],
+              [
+                "E",
+                "1 Gb/s",
+                "1 Gb/s",
+                "Sim, compatível",
+                "Sim",
+                "40 W"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual projeto atende aos fluxos simultâneos e às condições lógicas e ambientais informadas?",
       "options": [
         {
@@ -6640,6 +6984,16 @@
       "version": 1,
       "classification": "COMUM",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "SEX 16h       DOM 22h                  SEG 8h\nturno 14h ─── alteração para 8h ───── início do novo horário\n               aviso entregue, mas não aberto"
+          }
+        ]
+      },
       "prompt": "Qual ação respeita a política fornecida e produz evidência para melhorar o processo?",
       "options": [
         {
@@ -6870,6 +7224,16 @@
       "version": 1,
       "classification": "COMUM",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "PROMESSA: “reduz o estresse em 40%”\nBASE APRESENTADA: 12 depoimentos positivos escolhidos pela equipe do aplicativo\nNÃO INFORMADO: medida anterior, total de participantes, desistências,\ncomparação, duração, instrumento de avaliação ou tratamento dos dados"
+          }
+        ]
+      },
       "prompt": "Qual conclusão e próxima ação são mais responsáveis?",
       "options": [
         {
@@ -6985,6 +7349,16 @@
       "version": 1,
       "classification": "COMUM",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "MANCHETE: “Participação explode após a campanha!”\n\nParticipação entre pessoas convidadas\nAntes: 48%  ███\nDepois: 52% ███████\nEixo exibido no gráfico original: 45% a 55%\nAmostras: 200 pessoas em cada período; grupos não pareados"
+          }
+        ]
+      },
       "prompt": "Qual revisão comunica os dados com mais responsabilidade?",
       "options": [
         {
@@ -7231,7 +7605,43 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Painel apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Indicador"
+              },
+              {
+                "key": "c2",
+                "label": "Observação"
+              }
+            ],
+            "rows": [
+              [
+                "uso de CPU",
+                "24%"
+              ],
+              [
+                "fila média do armazenamento",
+                "31 solicitações"
+              ],
+              [
+                "latência média de leitura",
+                "118 ms"
+              ],
+              [
+                "uso de memória",
+                "52%"
+              ],
+              [
+                "rede",
+                "abaixo de 10% da capacidade"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Painel apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -7374,7 +7784,49 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Linha do tempo apresentada",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Momento"
+              },
+              {
+                "key": "c2",
+                "label": "Análises ativas"
+              },
+              {
+                "key": "c3",
+                "label": "faltas de página/s"
+              },
+              {
+                "key": "c4",
+                "label": "CPU"
+              },
+              {
+                "key": "c5",
+                "label": "armazenamento ocupado"
+              }
+            ],
+            "rows": [
+              [
+                "09:00",
+                "2",
+                "18",
+                "71%",
+                "22%"
+              ],
+              [
+                "09:10",
+                "4",
+                "2.480",
+                "19%",
+                "96%"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Linha do tempo apresentada",
             "columns": [
               {
                 "key": "c1",
@@ -7517,6 +7969,12 @@
       "context": "Após medição, uma rotina leva 100 segundos: Descrição equivalente: 40% do tempo não pode ser paralelizado; 60% pode ser dividido entre núcleos. Ignore comunicação e outros custos. Use S(p) = 1 / (0,40 + 0,60/p), em que p é o número de núcleos usados pela parte paralela.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "parte serial:        40 s  ████████\nparte paralelizável: 60 s  ████████████"
+          },
           {
             "type": "code",
             "language": "text",
@@ -7714,6 +8172,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "sensores produtores ──> [ fila compartilhada: 3 posições ] ──> analisador consumidor\n                         [ 41 ][ 42 ][ livre ]"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "sensores produtores ──> [ fila compartilhada: 3 posições ] ──> analisador consumidor\n                         [ 41 ][ 42 ][ livre ]"
           }
         ]
       },
@@ -7820,7 +8284,31 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Fluxos apresentados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Fluxo"
+              },
+              {
+                "key": "c2",
+                "label": "Requisito da aplicação"
+              }
+            ],
+            "rows": [
+              [
+                "F1 — posição no mapa",
+                "envia atualização a cada segundo; uma amostra atrasada perde valor; perda ocasional é tolerada; a aplicação numera as amostras"
+              ],
+              [
+                "F2 — arquivo de configuração",
+                "todos os bytes precisam chegar íntegros e na ordem; atraso por retransmissão é aceitável; a aplicação valida e aplica o arquivo uma única vez"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Fluxos apresentados",
             "columns": [
               {
                 "key": "c1",
@@ -7970,6 +8458,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "endereços utilizáveis = 2^(32 − prefixo) − 2\n\n/28 → 14     /27 → 30     /26 → 62     /25 → 126     /24 → 254"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "endereços utilizáveis = 2^(32 − prefixo) − 2\n\n/28 → 14     /27 → 30     /26 → 62     /25 → 126     /24 → 254"
           }
         ]
       },
@@ -8090,7 +8584,7 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Caminhos medidos",
             "columns": [
               {
                 "key": "c1",
@@ -8129,6 +8623,54 @@
                 "7 ms"
               ]
             ]
+          },
+          {
+            "type": "table",
+            "caption": "Caminhos medidos",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Caminho"
+              },
+              {
+                "key": "c2",
+                "label": "Taxa"
+              },
+              {
+                "key": "c3",
+                "label": "Fila"
+              },
+              {
+                "key": "c4",
+                "label": "Propagação"
+              },
+              {
+                "key": "c5",
+                "label": "Processamento"
+              }
+            ],
+            "rows": [
+              [
+                "A — fisicamente mais curto",
+                "40 Mbit/s",
+                "4 ms",
+                "6 ms",
+                "4 ms"
+              ],
+              [
+                "B — fisicamente mais longo",
+                "100 Mbit/s",
+                "35 ms",
+                "8 ms",
+                "7 ms"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "tempo de transmissão = tamanho em Mbit / taxa em Mbit/s\nlatência total = transmissão + fila + propagação + processamento"
           },
           {
             "type": "code",
@@ -8247,6 +8789,12 @@
       "context": "Regra do serviço: operação possui restrição de unicidade. Ao receber um identificador já concluído com os mesmos dados, o servidor não executa novamente; devolve o resultado armazenado. Identificador repetido com dados diferentes é rejeitado.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "t0 cliente envia: registrar(operação=\"op-784\", valor=120)\nt1 servidor grava op-784 e o resultado R51\nt2 resposta R51 se perde; cliente recebe timeout\nt3 cliente tenta novamente"
+          },
           {
             "type": "code",
             "language": "text",
@@ -8372,7 +8920,42 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Painel de réplicas",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Instância"
+              },
+              {
+                "key": "c2",
+                "label": "Verificação de saúde"
+              },
+              {
+                "key": "c3",
+                "label": "Capacidade ensaiada"
+              }
+            ],
+            "rows": [
+              [
+                "Instância A",
+                "falha: dependência obrigatória indisponível",
+                "40 req/s quando saudável"
+              ],
+              [
+                "Instância B",
+                "saudável",
+                "40 req/s"
+              ],
+              [
+                "Instância C",
+                "saudável",
+                "40 req/s"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Painel de réplicas",
             "columns": [
               {
                 "key": "c1",
@@ -8524,7 +9107,42 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Matriz apresentada",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Atividade: publicar versão"
+              },
+              {
+                "key": "c2",
+                "label": "Camila"
+              },
+              {
+                "key": "c3",
+                "label": "Diego"
+              },
+              {
+                "key": "c4",
+                "label": "Elisa"
+              },
+              {
+                "key": "c5",
+                "label": "Bruno"
+              }
+            ],
+            "rows": [
+              [
+                "Papel atual",
+                "R",
+                "A",
+                "A",
+                "C"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Matriz apresentada",
             "columns": [
               {
                 "key": "c1",
@@ -8670,7 +9288,35 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Painel de valor agregado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Indicador"
+              },
+              {
+                "key": "c2",
+                "label": "Valor"
+              }
+            ],
+            "rows": [
+              [
+                "PV — valor planejado até hoje",
+                "R$ 120 mil"
+              ],
+              [
+                "EV — valor do trabalho efetivamente concluído",
+                "R$ 90 mil"
+              ],
+              [
+                "AC — custo real do trabalho executado",
+                "R$ 100 mil"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Painel de valor agregado",
             "columns": [
               {
                 "key": "c1",
@@ -9035,7 +9681,37 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Painel de equipamentos",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Grupo"
+              },
+              {
+                "key": "c2",
+                "label": "Estado"
+              },
+              {
+                "key": "c3",
+                "label": "Destino possível após tratamento"
+              }
+            ],
+            "rows": [
+              [
+                "6 unidades",
+                "funcionais",
+                "reuso em outra atividade"
+              ],
+              [
+                "4 unidades",
+                "sem reparo economicamente viável",
+                "reciclagem por operador autorizado"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Painel de equipamentos",
             "columns": [
               {
                 "key": "c1",
@@ -9191,6 +9867,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "bit 2  bit 1  bit 0\nsensor alarme manutenção"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "bit 2  bit 1  bit 0\nsensor alarme manutenção"
           }
         ]
       },
@@ -9299,6 +9981,12 @@
       "context": "Pipeline simplificado: IF → ID → EX → MEM → WB. Nesta versão, não existe encaminhamento (forwarding). Se um operando ainda não estiver disponível, a unidade de controle pode inserir espera antes da execução dependente.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "I1: LOAD R1, [A]       // grava em R1 somente ao final do estágio WB\nI2: ADD  R2, R1, R3    // precisa do novo valor de R1 no estágio EX"
+          },
           {
             "type": "code",
             "language": "text",
@@ -9418,6 +10106,12 @@
       "context": "No modelo fornecido, o dispositivo trabalha de forma independente. Ao terminar, gera uma interrupção. A CPU conclui a instrução corrente, preserva o contexto necessário, executa o tratador e depois retoma a análise. A alternativa seria consultar repetidamente o dispositivo enquanto ele ainda trabalha.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "CPU:        executa análise ─────┐ trata evento ├──── retoma análise\ndispositivo: trabalha ───────────└─ sinaliza conclusão"
+          },
           {
             "type": "code",
             "language": "text",
@@ -9546,6 +10240,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "Base ── Laboratório ── Arena ── Terminal\n  └──── Biblioteca ─── Estúdio ─┘"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "Base ── Laboratório ── Arena ── Terminal\n  └──── Biblioteca ─── Estúdio ─┘"
           }
         ]
       },
@@ -9660,6 +10360,12 @@
       "context": "Quatro laboratórios devem ficar conectados sem exigir ligação direta entre todos os pares. Os pesos representam unidades de cabo: Descrição equivalente: arestas AB=2, AC=5, BC=1, BD=4 e CD=3. A solução deve conectar A, B, C e D, não conter ciclo e minimizar a soma dos pesos.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "A──2──B\n|5   /1\\4\n|   C──3──D"
+          },
           {
             "type": "code",
             "language": "text",
@@ -9784,6 +10490,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "total = preco + 25;"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "total = preco + 25;"
           }
         ]
       },
@@ -9888,6 +10600,12 @@
       "context": "Regra da linguagem: possui precedência maior que +. Cada árvore é descrita como operador(filho esquerdo, filho direito).",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "a + b * c"
+          },
           {
             "type": "code",
             "language": "text",
@@ -9999,7 +10717,42 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Autômato apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Estado atual"
+              },
+              {
+                "key": "c2",
+                "label": "entrada 0"
+              },
+              {
+                "key": "c3",
+                "label": "entrada 1"
+              }
+            ],
+            "rows": [
+              [
+                "q0",
+                "q1",
+                "q0"
+              ],
+              [
+                "q1",
+                "q1",
+                "q2"
+              ],
+              [
+                "q2",
+                "q1",
+                "q0"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Autômato apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -10196,7 +10949,42 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Coordenadas apresentadas",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Vértice"
+              },
+              {
+                "key": "c2",
+                "label": "Antes"
+              },
+              {
+                "key": "c3",
+                "label": "Depois"
+              }
+            ],
+            "rows": [
+              [
+                "P",
+                "(1, 1)",
+                "(5, 0)"
+              ],
+              [
+                "Q",
+                "(3, 1)",
+                "(7, 0)"
+              ],
+              [
+                "R",
+                "(2, 3)",
+                "(6, 2)"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Coordenadas apresentadas",
             "columns": [
               {
                 "key": "c1",
@@ -10314,7 +11102,27 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Protótipos apresentados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Tela A"
+              },
+              {
+                "key": "c2",
+                "label": "Tela B"
+              }
+            ],
+            "rows": [
+              [
+                "Apaga os campos e mostra apenas Erro 42.",
+                "Mantém os campos e informa: Não foi possível enviar. Verifique a conexão e tente novamente. Também oferece o botão Tentar novamente."
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Protótipos apresentados",
             "columns": [
               {
                 "key": "c1",
@@ -10437,7 +11245,35 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Painel de sinais",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Borda de subida"
+              },
+              {
+                "key": "c2",
+                "label": "Valor de D imediatamente antes da borda"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "3",
+                "0"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Painel de sinais",
             "columns": [
               {
                 "key": "c1",
@@ -10546,6 +11382,12 @@
       "context": "Um laboratório libera a porta quando a pessoa é estudante e, além disso, está matriculada na atividade ou atua como monitora. Os três termos são proposições booleanas. A equipe quer escrever a condição equivalente para NEGAR, isto é, exatamente os casos em que LIBERAR é falsa.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "LIBERAR = ESTUDANTE E (MATRICULADA OU MONITORA)"
+          },
           {
             "type": "code",
             "language": "text",
@@ -10660,6 +11502,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "a(b|c)*"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "a(b|c)*"
           }
         ]
       },
@@ -10744,6 +11592,12 @@
       "context": "Um editor já salva o documento quando recebe o evento cliquesalvar. A equipe acrescentará o evento temporizador60s para salvamento automático. Os dois eventos devem solicitar a mesma operação, sem duplicar a regra de persistência. Descrição equivalente: dois eventos independentes ativam tratadores; ambos delegam a um único serviço de salvamento. O temporizador não simula clique e o clique não controla o relógio.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "clique_salvar ─────┐\n                   ├──> salvar_documento()\ntemporizador_60s ──┘"
+          },
           {
             "type": "code",
             "language": "text",
@@ -10851,6 +11705,52 @@
       "version": 1,
       "classification": "SI",
       "context": "A equipe quer usar a regra para ajudar a ordenar a fila, mas ainda não deseja deixar uma decisão crítica inteiramente automática.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — matriz do piloto",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Resultado da regra"
+              },
+              {
+                "key": "c2",
+                "label": "Era urgente"
+              },
+              {
+                "key": "c3",
+                "label": "Não era urgente"
+              },
+              {
+                "key": "c4",
+                "label": "Total"
+              }
+            ],
+            "rows": [
+              [
+                "Marcou como urgente",
+                "40",
+                "95",
+                "135"
+              ],
+              [
+                "Não marcou como urgente",
+                "10",
+                "855",
+                "865"
+              ],
+              [
+                "Total",
+                "50",
+                "950",
+                "1.000"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual conclusão e uso inicial são sustentados pela matriz?",
       "options": [
         {
@@ -10944,6 +11844,65 @@
       "version": 1,
       "classification": "SI",
       "context": "Uma analista precisa implementar a regra sem enviar mensagens em excesso. U, I e S representam as três condições do cartão.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto proposto — cartão da regra e casos",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Caso"
+              },
+              {
+                "key": "c2",
+                "label": "Urgente (U)"
+              },
+              {
+                "key": "c3",
+                "label": "Aplicativo indisponível (I)"
+              },
+              {
+                "key": "c4",
+                "label": "Optou por SMS (S)"
+              },
+              {
+                "key": "c5",
+                "label": "Deve enviar?"
+              }
+            ],
+            "rows": [
+              [
+                "R1",
+                "não",
+                "sim",
+                "sim",
+                "não"
+              ],
+              [
+                "R2",
+                "sim",
+                "não",
+                "sim",
+                "sim"
+              ],
+              [
+                "R3",
+                "sim",
+                "não",
+                "não",
+                "não"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "Enviar SMS quando:\no chamado for urgente E\n(o aplicativo estiver indisponível OU a pessoa tiver optado por SMS)."
+          }
+        ]
+      },
       "prompt": "Qual expressão implementa a regra e produz os três resultados apresentados?",
       "options": [
         {
@@ -11031,6 +11990,16 @@
       "version": 1,
       "classification": "SI",
       "context": "A Base N9 precisa gerar a lista de entrada sem incluir pessoas que atendam apenas parte dos critérios.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "Matrícula ativa (A):  {Bia, Caio, Davi, Eli}\nTermo aceito (T):     {Ana, Bia, Davi, Eli}\nBloqueio vigente (B): {Davi, Fê}\n\nRegra: elegíveis = (A ∩ T) − B"
+          }
+        ]
+      },
       "prompt": "Qual lista resulta da regra fornecida?",
       "options": [
         {
@@ -11118,6 +12087,80 @@
       "version": 1,
       "classification": "SI",
       "context": "A equipe comparou duas versões de um cadastro. O total favorece B, porém a distribuição de dispositivos é muito diferente.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — resultado de duas versões",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Versão"
+              },
+              {
+                "key": "c2",
+                "label": "Dispositivo"
+              },
+              {
+                "key": "c3",
+                "label": "Concluíram"
+              },
+              {
+                "key": "c4",
+                "label": "Participantes"
+              },
+              {
+                "key": "c5",
+                "label": "Taxa"
+              }
+            ],
+            "rows": [
+              [
+                "A",
+                "desktop",
+                "8",
+                "10",
+                "80%"
+              ],
+              [
+                "A",
+                "celular",
+                "45",
+                "90",
+                "50%"
+              ],
+              [
+                "A total",
+                "—",
+                "53",
+                "100",
+                "53%"
+              ],
+              [
+                "B",
+                "desktop",
+                "68",
+                "90",
+                "75,6%"
+              ],
+              [
+                "B",
+                "celular",
+                "4",
+                "10",
+                "40%"
+              ],
+              [
+                "B total",
+                "—",
+                "72",
+                "100",
+                "72%"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual decisão evita atribuir à versão um efeito que pode decorrer da composição dos grupos?",
       "options": [
         {
@@ -11191,6 +12234,70 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto proposto — eventos e função Python 3",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Chegada"
+              },
+              {
+                "key": "c2",
+                "label": "Protocolo"
+              },
+              {
+                "key": "c3",
+                "label": "Versão"
+              },
+              {
+                "key": "c4",
+                "label": "Estado"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "R1",
+                "1",
+                "aberto"
+              ],
+              [
+                "2",
+                "R2",
+                "2",
+                "em análise"
+              ],
+              [
+                "3",
+                "R1",
+                "3",
+                "resolvido"
+              ],
+              [
+                "4",
+                "R2",
+                "1",
+                "aberto"
+              ],
+              [
+                "5",
+                "R1",
+                "2",
+                "em análise"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "caption": "Recurso apresentado no desafio",
+            "code": "def estados_atuais(eventos):\n    atuais = {}\n    for protocolo, versao, estado in eventos:\n        # substituir CONDICAO\n        if CONDICAO:\n            atuais[protocolo] = (versao, estado)\n    return {p: estado for p, (_, estado) in atuais.items()}"
+          }
+        ]
+      },
       "prompt": "Qual condição completa a função e satisfaz o requisito para qualquer ordem de chegada?",
       "options": [
         {
@@ -11284,6 +12391,48 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto proposto — arquitetura da fila",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Ordem"
+              },
+              {
+                "key": "c2",
+                "label": "Evento"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "inserir R1 com prioridade 2, versão 1"
+              ],
+              [
+                "2",
+                "inserir R2 com prioridade 3, versão 1"
+              ],
+              [
+                "3",
+                "atualizar R1 para prioridade 5, versão 2"
+              ],
+              [
+                "4",
+                "cancelar R2"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "HEAP: entradas (-prioridade, ordem, id, versão)\nÍNDICE: id -> (prioridade atual, versão atual, ativo)\n\nAo atualizar: incrementar a versão no índice e inserir nova entrada no heap.\nAo cancelar: marcar ativo = falso no índice.\nAo retirar: remover do heap até encontrar uma entrada igual ao índice e ativa."
+          }
+        ]
+      },
       "prompt": "Por que a verificação contra o índice, feita durante a retirada, é necessária?",
       "options": [
         {
@@ -11367,6 +12516,51 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto proposto — função C17 e caso de teste",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Entrada"
+              },
+              {
+                "key": "c2",
+                "label": "Retorno esperado"
+              },
+              {
+                "key": "c3",
+                "label": "Início válido do vetor"
+              }
+            ],
+            "rows": [
+              [
+                "{12, -1, 7, -3, 7}",
+                "3",
+                "{12, 7, 7}"
+              ],
+              [
+                "{-1, -2}",
+                "0",
+                "{}"
+              ],
+              [
+                "{4, 5}",
+                "2",
+                "{4, 5}"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "c",
+            "caption": "Recurso apresentado no desafio",
+            "code": "#include <stddef.h>\n\nsize_t compactar_validos(int dados[], size_t quantidade) {\n    size_t escrita = 0;\n\n    for (size_t leitura = 0; leitura < quantidade; leitura++) {\n        if (dados[leitura] >= 0) {\n            /* substituir LINHA */\n        }\n    }\n    return escrita;\n}"
+          }
+        ]
+      },
       "prompt": "Qual linha completa a função de acordo com o contrato e os três casos?",
       "options": [
         {
@@ -11460,6 +12654,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "CSV noturno                 CSV noturno\n[PORTAL] ----------------------> [CRM] ---------------------> [FATURAMENTO]\n   |                              |                               |\n   | idPortal, e-mail, plano      | idCRM, e-mail, plano          | idFiscal, e-mail, plano\n   |                              v                               |\n   +------------------------> [SUPORTE] <-------------------------+\n                              idExterno, e-mail, categoria"
+          }
+        ]
+      },
       "prompt": "Qual arquitetura-alvo e estratégia de transição atendem melhor ao objetivo e às restrições?",
       "options": [
         {
@@ -11537,6 +12741,66 @@
       "version": 1,
       "classification": "SI",
       "context": "A organização precisa escolher quais mudanças podem iniciar como piloto sem confundir aquisição de tecnologia com decisão de governança.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — matriz de governança das mudanças",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Mudança"
+              },
+              {
+                "key": "c2",
+                "label": "Objetivo e indicador"
+              },
+              {
+                "key": "c3",
+                "label": "Responsável"
+              },
+              {
+                "key": "c4",
+                "label": "Dados e controle"
+              },
+              {
+                "key": "c5",
+                "label": "Decisão/retorno"
+              }
+            ],
+            "rows": [
+              [
+                "U1 — painel de situação dos pedidos",
+                "reduzir consultas sem resposta; medir consultas resolvidas",
+                "operações",
+                "proprietário e origem definidos; acesso por função",
+                "teste e reversão definidos"
+              ],
+              [
+                "U2 — cadastro único de clientes",
+                "“centralizar tudo”; sem indicador",
+                "não definido",
+                "dados confidenciais; origem e acessos não mapeados",
+                "fornecedor decidirá durante a implantação"
+              ],
+              [
+                "U3 — triagem assistida de solicitações",
+                "reduzir tempo de encaminhamento; medir correções",
+                "atendimento",
+                "registros internos; acesso e histórico definidos",
+                "baixa confiança vai para revisão; teste e reversão definidos"
+              ],
+              [
+                "U4 — recusa automática de benefício",
+                "reduzir custo; sem medida de erro",
+                "fornecedor externo",
+                "dados sensíveis; proprietário não definido",
+                "sem revisão ou contestação"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual decisão de portfólio aplica integralmente a política apresentada?",
       "options": [
         {
@@ -11604,6 +12868,59 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — painel do sistema operacional",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Processo"
+              },
+              {
+                "key": "c2",
+                "label": "Estado predominante"
+              },
+              {
+                "key": "c3",
+                "label": "CPU"
+              },
+              {
+                "key": "c4",
+                "label": "Espera de disco"
+              },
+              {
+                "key": "c5",
+                "label": "Evidência associada"
+              }
+            ],
+            "rows": [
+              [
+                "Relatórios",
+                "pronto/em execução",
+                "88%",
+                "2%",
+                "fila de cálculos cresce"
+              ],
+              [
+                "Importação",
+                "bloqueado por E/S",
+                "8%",
+                "75%",
+                "fila do disco com 18 operações"
+              ],
+              [
+                "API",
+                "esperando resposta de comunicação",
+                "6%",
+                "1%",
+                "timeouts no serviço remoto"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual interpretação orienta corretamente a investigação inicial?",
       "options": [
         {
@@ -11671,6 +12988,22 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "[PEDIDOS] -- evento EVT-91 --> [BARRAMENTO] --> [ESTOQUE]\n                                      ^              |\n                                      | sem ACK      | reserva e falha antes do ACK\n                                      +--------------+"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "14:02:01 receber EVT-91 pedido=P7 quantidade=2\n14:02:01 reservar P7 quantidade=2\n14:02:02 processo reiniciado antes de confirmar recebimento\n14:02:05 receber EVT-91 pedido=P7 quantidade=2\n14:02:05 reservar P7 quantidade=2"
+          }
+        ]
+      },
       "prompt": "Qual mudança impede a segunda reserva sem perder uma entrega válida?",
       "options": [
         {
@@ -11748,6 +13081,72 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — camadas e evolução",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Minuto"
+              },
+              {
+                "key": "c2",
+                "label": "Ações novas/s"
+              },
+              {
+                "key": "c3",
+                "label": "Chamadas à dependência/s"
+              },
+              {
+                "key": "c4",
+                "label": "Retentativas"
+              },
+              {
+                "key": "c5",
+                "label": "Erros"
+              }
+            ],
+            "rows": [
+              [
+                "0",
+                "80",
+                "82",
+                "2%",
+                "1%"
+              ],
+              [
+                "2",
+                "80",
+                "130",
+                "38%",
+                "18%"
+              ],
+              [
+                "4",
+                "79",
+                "205",
+                "61%",
+                "42%"
+              ],
+              [
+                "6",
+                "78",
+                "310",
+                "74%",
+                "67%"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "APP (até 2 retentativas) -> API (até 2) -> SERVIÇO (até 2) -> DEPENDÊNCIA"
+          }
+        ]
+      },
       "prompt": "Qual intervenção trata a causa de amplificação e permite recuperar o sistema com menor risco de nova onda sincronizada?",
       "options": [
         {
@@ -11821,6 +13220,58 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto proposto — código e telemetria",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Após processar"
+              },
+              {
+                "key": "c2",
+                "label": "Descritores abertos"
+              },
+              {
+                "key": "c3",
+                "label": "Memória do processo"
+              },
+              {
+                "key": "c4",
+                "label": "Resultado"
+              }
+            ],
+            "rows": [
+              [
+                "100 arquivos",
+                "112",
+                "118 MB",
+                "normal"
+              ],
+              [
+                "1.000 arquivos",
+                "1.012",
+                "121 MB",
+                "normal"
+              ],
+              [
+                "2.000 arquivos",
+                "2.012",
+                "124 MB",
+                "Too many open files"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "caption": "Recurso apresentado no desafio",
+            "code": "arquivos_em_processamento = []\n\ndef ler_titulo(caminho):\n    arquivo = open(caminho, encoding=\"utf-8\")\n    arquivos_em_processamento.append(arquivo)\n    return arquivo.readline().strip()"
+          }
+        ]
+      },
       "prompt": "Qual alteração resolve a causa indicada e mantém o arquivo fechado mesmo se a leitura gerar exceção?",
       "options": [
         {
@@ -11904,6 +13355,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "┌─> [ANALISAR CRÉDITO] ─┐\n[VALIDAR PEDIDO] -> (G1)                         (G2) -> [LIBERAR PEDIDO]\n                         └─> [VERIFICAR ESTOQUE] ┘"
+          }
+        ]
+      },
       "prompt": "Quais gateways representam corretamente G1 e G2?",
       "options": [
         {
@@ -11987,6 +13448,88 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — fluxo atual e amostra do log",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Caso"
+              },
+              {
+                "key": "c2",
+                "label": "Completo no primeiro envio?"
+              },
+              {
+                "key": "c3",
+                "label": "Devoluções"
+              },
+              {
+                "key": "c4",
+                "label": "Trabalho ativo"
+              },
+              {
+                "key": "c5",
+                "label": "Espera por correção"
+              },
+              {
+                "key": "c6",
+                "label": "Tempo total"
+              }
+            ],
+            "rows": [
+              [
+                "P1",
+                "sim",
+                "0",
+                "6 min",
+                "0 min",
+                "6 min"
+              ],
+              [
+                "P2",
+                "não",
+                "2",
+                "8 min",
+                "22 min",
+                "30 min"
+              ],
+              [
+                "P3",
+                "não",
+                "1",
+                "7 min",
+                "12 min",
+                "19 min"
+              ],
+              [
+                "P4",
+                "sim",
+                "0",
+                "6 min",
+                "0 min",
+                "6 min"
+              ],
+              [
+                "P5",
+                "não",
+                "2",
+                "9 min",
+                "25 min",
+                "34 min"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "[ENVIAR] -> [TRIAR] -> documento incompleto? --sim--> [DEVOLVER] --nova versão--> [TRIAR]\n                         |\n                        não\n                         v\n                      [ANALISAR]"
+          }
+        ]
+      },
       "prompt": "Qual redesenho enfrenta o padrão observado e produz evidência para verificar a melhoria?",
       "options": [
         {
@@ -12054,6 +13597,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "S1  08:03 aberta\nS1  08:18 encerrada\nS2  08:07 aberta\nS2  09:40 abandonada\nS3  08:12 aberta\nS3  08:30 encerrada\nS3  10:05 reaberta"
+          }
+        ]
+      },
       "prompt": "Qual produto transforma os registros em informação adequada ao objetivo?",
       "options": [
         {
@@ -12131,6 +13684,59 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — painel do pedido P84",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Sistema/etapa"
+              },
+              {
+                "key": "c2",
+                "label": "Campo exibido"
+              },
+              {
+                "key": "c3",
+                "label": "Valor"
+              },
+              {
+                "key": "c4",
+                "label": "Atualizado"
+              },
+              {
+                "key": "c5",
+                "label": "Origem declarada"
+              }
+            ],
+            "rows": [
+              [
+                "Vendas",
+                "situação",
+                "aprovado",
+                "10:02",
+                "decisão comercial"
+              ],
+              [
+                "Financeiro",
+                "status",
+                "suspenso",
+                "10:04",
+                "confirmação de pagamento"
+              ],
+              [
+                "Portal",
+                "estado",
+                "aprovado",
+                "08:00",
+                "cache sem origem exibida"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual ação trata a divergência e reduz sua repetição em novos pedidos?",
       "options": [
         {
@@ -12204,6 +13810,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "ANTES DO CLIQUE                  DEPOIS DO CLIQUE\n┌─────────────────────┐          ┌─────────────────────┐\n│ arquivo: projeto.zip│          │ arquivo: projeto.zip│\n│ [ ENVIAR ]          │   ->     │ [ ENVIAR ]          │\n│                     │          │                     │\n└─────────────────────┘          └─────────────────────┘"
+          }
+        ]
+      },
       "prompt": "Qual alteração trata diretamente o problema observado?",
       "options": [
         {
@@ -12291,6 +13907,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "┌──────────────────────────────────┐\n│ [ seu e-mail                   ] │  <- apenas placeholder\n│ [ data                         ] │\n│                        [ENVIAR]  │\n│                 inválido          │  <- somente vermelho\n└──────────────────────────────────┘"
+          }
+        ]
+      },
       "prompt": "Qual conjunto de mudanças resolve as barreiras sem depender apenas de aparência visual?",
       "options": [
         {
@@ -12384,6 +14010,66 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — matriz mínima",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Papel"
+              },
+              {
+                "key": "c2",
+                "label": "Criar solicitação"
+              },
+              {
+                "key": "c3",
+                "label": "Aprovar"
+              },
+              {
+                "key": "c4",
+                "label": "Executar pagamento"
+              },
+              {
+                "key": "c5",
+                "label": "Ler trilha"
+              }
+            ],
+            "rows": [
+              [
+                "Solicitante",
+                "sim",
+                "não",
+                "não",
+                "próprias"
+              ],
+              [
+                "Aprovador",
+                "não",
+                "sim",
+                "não",
+                "relacionadas"
+              ],
+              [
+                "Financeiro",
+                "não",
+                "não",
+                "sim",
+                "relacionadas"
+              ],
+              [
+                "Auditor",
+                "não",
+                "não",
+                "não",
+                "todas"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual implementação preserva a matriz e as duas regras adicionais?",
       "options": [
         {
@@ -12457,6 +14143,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "09:10 LOGIN usuario=maria resultado=sucesso\n09:11 GET /documentos/maria resultado=200 politica=proprietaria\n09:12 GET /documentos/joao  resultado=403 politica=proprietaria"
+          }
+        ]
+      },
       "prompt": "Qual interpretação está correta?",
       "options": [
         {
@@ -12570,6 +14266,38 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — três cartões de requisito",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Requisito"
+              },
+              {
+                "key": "c2",
+                "label": "Propriedade necessária"
+              }
+            ],
+            "rows": [
+              [
+                "R1 — verificar senha sem recuperar o texto original",
+                "verificação resistente a tentativa e base vazada"
+              ],
+              [
+                "R2 — permitir que pessoas autorizadas leiam relatório confidencial",
+                "sigilo com recuperação controlada"
+              ],
+              [
+                "R3 — detectar alteração não autorizada em arquivo distribuído",
+                "integridade e autenticidade da verificação"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual associação atende aos três requisitos?",
       "options": [
         {
@@ -12667,6 +14395,65 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — tabela atual",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "idmatricula"
+              },
+              {
+                "key": "c2",
+                "label": "idestudante"
+              },
+              {
+                "key": "c3",
+                "label": "nomeestudante"
+              },
+              {
+                "key": "c4",
+                "label": "idtrilha"
+              },
+              {
+                "key": "c5",
+                "label": "nometrilha"
+              }
+            ],
+            "rows": [
+              [
+                "501",
+                "E7",
+                "Lina",
+                "T1",
+                "Dados"
+              ],
+              [
+                "502",
+                "E7",
+                "Lina",
+                "T2",
+                "Processos"
+              ],
+              [
+                "503",
+                "E9",
+                "Caio",
+                "T1",
+                "Dados"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "id_matricula -> id_estudante, id_trilha\nid_estudante -> nome_estudante\nid_trilha -> nome_trilha"
+          }
+        ]
+      },
       "prompt": "Qual decomposição reduz essas anomalias e preserva as matrículas?",
       "options": [
         {
@@ -12772,6 +14559,58 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — avaliação fora do treino",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Modelo"
+              },
+              {
+                "key": "c2",
+                "label": "VP"
+              },
+              {
+                "key": "c3",
+                "label": "FN"
+              },
+              {
+                "key": "c4",
+                "label": "FP"
+              },
+              {
+                "key": "c5",
+                "label": "VN"
+              },
+              {
+                "key": "c6",
+                "label": "Acurácia"
+              }
+            ],
+            "rows": [
+              [
+                "M0 — nunca alerta",
+                "0",
+                "100",
+                "0",
+                "9.900",
+                "99,0%"
+              ],
+              [
+                "M1 — alerta seletivo",
+                "70",
+                "30",
+                "180",
+                "9.720",
+                "97,9%"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual decisão é sustentada pelos dados e critérios?",
       "options": [
         {
@@ -12855,6 +14694,55 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — painel do mutirão digital",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Indicador"
+              },
+              {
+                "key": "c2",
+                "label": "Grupo Horizonte"
+              },
+              {
+                "key": "c3",
+                "label": "Grupo Ponte"
+              }
+            ],
+            "rows": [
+              [
+                "Possui dispositivo compatível",
+                "90%",
+                "75%"
+              ],
+              [
+                "Possui conexão estável",
+                "85%",
+                "72%"
+              ],
+              [
+                "Declara domínio do processo digital",
+                "42%",
+                "70%"
+              ],
+              [
+                "Encontra apoio acessível quando precisa",
+                "20%",
+                "68%"
+              ],
+              [
+                "Conclui o serviço",
+                "35%",
+                "66%"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Uma equipe vai redesenhar o atendimento. Qual ação responde melhor ao painel sem reduzir inclusão digital à entrega de equipamentos?",
       "options": [
         {
@@ -12942,6 +14830,50 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — funil do piloto",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Indicador"
+              },
+              {
+                "key": "c2",
+                "label": "Grupo Sol"
+              },
+              {
+                "key": "c3",
+                "label": "Grupo Lua"
+              }
+            ],
+            "rows": [
+              [
+                "Participação nas candidaturas",
+                "60%",
+                "40%"
+              ],
+              [
+                "Teve entrevista no processo antigo",
+                "35%",
+                "10%"
+              ],
+              [
+                "Aprovou teste técnico atual",
+                "72%",
+                "70%"
+              ],
+              [
+                "Foi priorizado pelo modelo",
+                "28%",
+                "8%"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Antes de usar o modelo para rejeitar candidaturas, qual decisão é mais defensável diante desses dados?",
       "options": [
         {
@@ -13015,6 +14947,45 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — inventário de saída",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Grupo"
+              },
+              {
+                "key": "c2",
+                "label": "Quantidade"
+              },
+              {
+                "key": "c3",
+                "label": "Condição"
+              }
+            ],
+            "rows": [
+              [
+                "A",
+                "20",
+                "Reparável ou atualizável"
+              ],
+              [
+                "B",
+                "10",
+                "Funcional, mas sem uso no laboratório"
+              ],
+              [
+                "C",
+                "5",
+                "Irreparável e com unidade de armazenamento"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual plano aplica melhor uma abordagem de ciclo de vida?",
       "options": [
         {
@@ -13128,6 +15099,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "É permitido usar, modificar e distribuir o componente.\nAo distribuir uma versão modificada, a equipe deve:\n1. manter o aviso de autoria e uma cópia desta licença;\n2. disponibilizar o código-fonte do componente modificado sob Aurora-1;\n3. registrar as modificações realizadas.\nOutros módulos independentes do produto não mudam de licença por esta regra."
+          }
+        ]
+      },
       "prompt": "Qual ação atende às condições fornecidas?",
       "options": [
         {
@@ -13205,6 +15186,46 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — quadro de finalidade e campos",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Campo proposto"
+              },
+              {
+                "key": "c2",
+                "label": "Uso informado"
+              }
+            ],
+            "rows": [
+              [
+                "Identificador de estudante",
+                "Evitar inscrição duplicada"
+              ],
+              [
+                "E-mail",
+                "Enviar confirmação e certificado"
+              ],
+              [
+                "Data de nascimento",
+                "Nenhum uso informado"
+              ],
+              [
+                "Lista de contatos do celular",
+                "Nenhum uso informado"
+              ],
+              [
+                "Localização contínua",
+                "Nenhum uso informado"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual configuração aplica melhor o princípio de necessidade ao caso?",
       "options": [
         {
@@ -13288,6 +15309,55 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto visual proposto — painel antes/depois",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Indicador"
+              },
+              {
+                "key": "c2",
+                "label": "Antes"
+              },
+              {
+                "key": "c3",
+                "label": "Depois"
+              }
+            ],
+            "rows": [
+              [
+                "Solicitações iniciadas que foram concluídas",
+                "78%",
+                "70%"
+              ],
+              [
+                "Abandono",
+                "8%",
+                "22%"
+              ],
+              [
+                "Correções manuais pela equipe",
+                "12%",
+                "30%"
+              ],
+              [
+                "Tempo mediano de quem concluiu",
+                "2 dias",
+                "20 minutos"
+              ],
+              [
+                "Canal assistido disponível",
+                "Sim",
+                "Não"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual decisão avalia o sistema sem confundir rapidez de uma parte das pessoas com melhoria global do serviço?",
       "options": [
         {
@@ -13438,6 +15508,45 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Decisão"
+              },
+              {
+                "key": "c2",
+                "label": "Horizonte"
+              },
+              {
+                "key": "c3",
+                "label": "Informação necessária"
+              }
+            ],
+            "rows": [
+              [
+                "D1",
+                "Agora",
+                "Confirmar uma entrega específica conforme regra vigente"
+              ],
+              [
+                "D2",
+                "Próximo mês",
+                "Redistribuir equipe usando volume, tempo e capacidade por setor"
+              ],
+              [
+                "D3",
+                "Próximos três anos",
+                "Decidir se a organização abrirá uma nova unidade de atendimento"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual associação é mais adequada?",
       "options": [
         {
@@ -13515,6 +15624,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "CAPTURAR → INTERPRETAR → DECIDIR → AGIR → APRENDER\n    ^                                      |\n    └──────── atualizar regra e medida ────┘"
+          }
+        ]
+      },
       "prompt": "Qual ação completa adequadamente o ciclo definido?",
       "options": [
         {
@@ -13659,6 +15778,38 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Atividade"
+              },
+              {
+                "key": "c2",
+                "label": "Evidência"
+              }
+            ],
+            "rows": [
+              [
+                "Recebimento de peças",
+                "35% chegam sem vínculo ao chamado e exigem conferência manual"
+              ],
+              [
+                "Operações de reparo",
+                "tempo técnico dentro da meta em 91% dos casos"
+              ],
+              [
+                "Serviço pós-reparo",
+                "18% dos clientes ligam porque não veem teste final e previsão de retirada"
+              ]
+            ]
+          }
+        ]
+      },
       "prompt": "Qual iniciativa está mais alinhada à estratégia e às evidências?",
       "options": [
         {
@@ -13736,6 +15887,16 @@
       "version": 1,
       "classification": "SI",
       "context": "Analise os dados e o recurso apresentados para tomar a decisão solicitada.",
+      "presentation": {
+        "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "S --2--> A --5--> G\n|         \\\n1          1\nv           v\nB --3--> C --2--> G\n \\--7----------------> G"
+          }
+        ]
+      },
       "prompt": "Qual caminho de menor custo será aceito?",
       "options": [
         {
@@ -14825,6 +16986,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "Aplicativo de atendimento ──grava──> Base operacional\n                                      ├─ 180 transações/s\n                                      └─ relatório trimestral lê 90 milhões de linhas"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "Aplicativo de atendimento ──grava──> Base operacional\n                                      ├─ 180 transações/s\n                                      └─ relatório trimestral lê 90 milhões de linhas"
           }
         ]
       },
@@ -14915,7 +17082,42 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Fonte"
+              },
+              {
+                "key": "c2",
+                "label": "Formato"
+              },
+              {
+                "key": "c3",
+                "label": "Uso pretendido"
+              }
+            ],
+            "rows": [
+              [
+                "vendas",
+                "tabelas relacionais",
+                "painel financeiro mensal"
+              ],
+              [
+                "sensores",
+                "JSON variável",
+                "exploração e modelos futuros"
+              ],
+              [
+                "atendimento",
+                "CSV com códigos divergentes",
+                "indicador corporativo"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -15027,7 +17229,55 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Mês"
+              },
+              {
+                "key": "c2",
+                "label": "Portal"
+              },
+              {
+                "key": "c3",
+                "label": "Telefone"
+              },
+              {
+                "key": "c4",
+                "label": "Meta"
+              }
+            ],
+            "rows": [
+              [
+                "jan",
+                "11 h",
+                "9 h",
+                "8 h"
+              ],
+              [
+                "abr",
+                "9 h",
+                "10 h",
+                "8 h"
+              ],
+              [
+                "jul",
+                "7 h",
+                "9 h",
+                "8 h"
+              ],
+              [
+                "out",
+                "6 h",
+                "7 h",
+                "8 h"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -15162,7 +17412,35 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Finalidade"
+              },
+              {
+                "key": "c2",
+                "label": "Situação informada"
+              }
+            ],
+            "rows": [
+              [
+                "F1",
+                "executar a entrega solicitada pela pessoa usuária"
+              ],
+              [
+                "F2",
+                "cumprir uma obrigação legal aplicável, já identificada pela organização"
+              ],
+              [
+                "F3",
+                "enviar ofertas de parceiros, atividade opcional e não necessária à entrega"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -15274,6 +17552,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "chave.csv: codigo_pessoa ↔ CPF\nchamados.csv: codigo_pessoa, diagnóstico informado, data e unidade"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "chave.csv: codigo_pessoa ↔ CPF\nchamados.csv: codigo_pessoa, diagnóstico informado, data e unidade"
           }
         ]
       },
@@ -15354,7 +17638,35 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Código"
+              },
+              {
+                "key": "c2",
+                "label": "Declaração"
+              }
+            ],
+            "rows": [
+              [
+                "R1",
+                "O sistema deve permitir que a pessoa usuária cancele uma reserva ainda não iniciada."
+              ],
+              [
+                "R2",
+                "Em carga de 100 acessos simultâneos, 95% das confirmações devem aparecer em até 2 segundos."
+              ],
+              [
+                "R3",
+                "Uma reserva iniciada não pode ser cancelada; deve ser encerrada ou marcada como incidente."
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -15660,6 +17972,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "PEDIDO (id_pedido) 1 ── contém ── N ITEM_PEDIDO (numero_item parcial, quantidade)\nITEM_PEDIDO N ── referencia ── 1 PRODUTO (id_produto)\n\nPESSOA (id_pessoa, nome)\n  especialização total e sobreposta em CLIENTE e FUNCIONARIO"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "PEDIDO (id_pedido) 1 ── contém ── N ITEM_PEDIDO (numero_item parcial, quantidade)\nITEM_PEDIDO N ── referencia ── 1 PRODUTO (id_produto)\n\nPESSOA (id_pessoa, nome)\n  especialização total e sobreposta em CLIENTE e FUNCIONARIO"
           }
         ]
       },
@@ -15740,7 +18058,7 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Esquema lógico e dados mínimos",
             "columns": [
               {
                 "key": "c1",
@@ -15793,6 +18111,68 @@
                 "FECHADO"
               ]
             ]
+          },
+          {
+            "type": "table",
+            "caption": "Esquema lógico e dados mínimos",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "CLIENTE"
+              },
+              {
+                "key": "c2",
+                "label": "nome"
+              },
+              {
+                "key": "c3",
+                "label": "CHAMADO"
+              },
+              {
+                "key": "c4",
+                "label": "clienteid"
+              },
+              {
+                "key": "c5",
+                "label": "status"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "Ana",
+                "10",
+                "1",
+                "FECHADO"
+              ],
+              [
+                "1",
+                "Ana",
+                "11",
+                "1",
+                "ABERTO"
+              ],
+              [
+                "2",
+                "Bruno",
+                "—",
+                "—",
+                "—"
+              ],
+              [
+                "3",
+                "Carla",
+                "12",
+                "3",
+                "FECHADO"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "CLIENTE(id PK, nome)\nCHAMADO(id PK, cliente_id FK → CLIENTE.id, status)"
           },
           {
             "type": "code",
@@ -15899,7 +18279,7 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Esquema lógico e dados",
             "columns": [
               {
                 "key": "c1",
@@ -15931,6 +18311,47 @@
                 "ABERTO"
               ]
             ]
+          },
+          {
+            "type": "table",
+            "caption": "Esquema lógico e dados",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "CHAMADO"
+              },
+              {
+                "key": "c2",
+                "label": "clienteid"
+              },
+              {
+                "key": "c3",
+                "label": "status"
+              }
+            ],
+            "rows": [
+              [
+                "10",
+                "1",
+                "FECHADO"
+              ],
+              [
+                "11",
+                "NULL",
+                "FECHADO"
+              ],
+              [
+                "12",
+                "3",
+                "ABERTO"
+              ]
+            ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "CLIENTE(id PK, nome)\nCHAMADO(id PK, cliente_id opcional FK → CLIENTE.id, status)"
           },
           {
             "type": "code",
@@ -16015,6 +18436,12 @@
       "context": "Considere n > 1; atribuições, comparações e registrar têm custo constante. O laço externo executa n vezes. No interno, j assume potências de dois até alcançar n.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "para i de 0 até n-1:\n    j ← 1\n    enquanto j < n:\n        registrar(i, j)   // custo constante\n        j ← j * 2"
+          },
           {
             "type": "code",
             "language": "text",
@@ -16123,6 +18550,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "edições: mover A, renomear B, excluir C  → primeiro desfazer: excluir C\nchegadas: chamado 31, chamado 32, chamado 33 → primeiro atender: chamado 31"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "edições: mover A, renomear B, excluir C  → primeiro desfazer: excluir C\nchegadas: chamado 31, chamado 32, chamado 33 → primeiro atender: chamado 31"
           }
         ]
       },
@@ -16223,7 +18656,37 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Índice"
+              },
+              {
+                "key": "c2",
+                "label": "Operação dominante"
+              },
+              {
+                "key": "c3",
+                "label": "Garantia fornecida"
+              }
+            ],
+            "rows": [
+              [
+                "I1",
+                "localizar um ativo por código exato",
+                "função hash adequada; busca média O(1); ordem irrelevante"
+              ],
+              [
+                "I2",
+                "listar códigos entre dois limites, já ordenados",
+                "árvore de busca balanceada; busca O(log n) mais os k resultados"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -16340,7 +18803,39 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Convenções e alertas",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Alerta"
+              },
+              {
+                "key": "c2",
+                "label": "Evidência principal"
+              }
+            ],
+            "rows": [
+              [
+                "P",
+                "relatório restrito foi lido por conta sem autorização"
+              ],
+              [
+                "Q",
+                "valor de pagamento foi alterado sem aprovação"
+              ],
+              [
+                "R",
+                "portal ficou inacessível às pessoas autorizadas"
+              ],
+              [
+                "S",
+                "servidor falso apresentou-se como o portal legítimo"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Convenções e alertas",
             "columns": [
               {
                 "key": "c1",
@@ -16455,7 +18950,7 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Objeto apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -16500,7 +18995,87 @@
           },
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Medida"
+              },
+              {
+                "key": "c2",
+                "label": "Serviço A"
+              },
+              {
+                "key": "c3",
+                "label": "Serviço B"
+              }
+            ],
+            "rows": [
+              [
+                "média",
+                "10",
+                "10"
+              ],
+              [
+                "mediana",
+                "10",
+                "10"
+              ],
+              [
+                "amplitude (máximo − mínimo)",
+                "4",
+                "16"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Execução"
+              },
+              {
+                "key": "c2",
+                "label": "Serviço A"
+              },
+              {
+                "key": "c3",
+                "label": "Serviço B"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "8",
+                "2"
+              ],
+              [
+                "2",
+                "9",
+                "6"
+              ],
+              [
+                "3",
+                "10",
+                "10"
+              ],
+              [
+                "4",
+                "11",
+                "14"
+              ],
+              [
+                "5",
+                "12",
+                "18"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -16632,7 +19207,43 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Objeto apresentado",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Oficina"
+              },
+              {
+                "key": "c2",
+                "label": "Horas de mentoria"
+              },
+              {
+                "key": "c3",
+                "label": "Horas de laboratório"
+              },
+              {
+                "key": "c4",
+                "label": "Benefício"
+              }
+            ],
+            "rows": [
+              [
+                "A",
+                "2",
+                "1",
+                "7 pontos"
+              ],
+              [
+                "B",
+                "1",
+                "3",
+                "9 pontos"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Objeto apresentado",
             "columns": [
               {
                 "key": "c1",
@@ -16745,7 +19356,35 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Cartões de descoberta",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Cartão"
+              },
+              {
+                "key": "c2",
+                "label": "Informação ainda necessária"
+              }
+            ],
+            "rows": [
+              [
+                "Público",
+                "Quem tenta usar a monitoria e em qual situação?"
+              ],
+              [
+                "Problema",
+                "Em que etapa ocorre a desistência e com que frequência?"
+              ],
+              [
+                "Evidência",
+                "Registros, observações ou entrevistas convergem sobre a dificuldade?"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Cartões de descoberta",
             "columns": [
               {
                 "key": "c1",
@@ -17066,6 +19705,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "a81  ← tag piloto-1\n └─ b52  ← correção posterior ainda não liberada"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "a81  ← tag piloto-1\n └─ b52  ← correção posterior ainda não liberada"
           }
         ]
       },
@@ -17144,6 +19789,12 @@
       "context": "Uma equipe desenvolverá um portal em oito semanas. O contexto estabelece: 1. uma regra legal de retenção está definida e deve permanecer rastreável em todas as entregas; 2. pessoas usuárias avaliarão um incremento funcional a cada duas semanas; 3. itens de interface poderão ser repriorizados após cada avaliação; 4. cada incremento precisa passar por testes de regressão antes da demonstração. Fluxo visual pretendido: Descrição equivalente: a regra obrigatória permanece rastreável; funcionalidades são entregues, testadas e avaliadas em ciclos de duas semanas; somente itens permitidos retornam para repriorização.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "baseline da regra obrigatória\n          ↓\nplanejar incremento → implementar → testar → demonstrar\n          ↑                                  ↓\n          └──── repriorizar itens permitidos ┘"
+          },
           {
             "type": "code",
             "language": "text",
@@ -17338,6 +19989,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "PC-A ─┐\n      ├─ Switch S ─ Roteador R ─ Internet\nPC-B ─┘"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "PC-A ─┐\n      ├─ Switch S ─ Roteador R ─ Internet\nPC-B ─┘"
           }
         ]
       },
@@ -17412,7 +20069,39 @@
         "blocks": [
           {
             "type": "table",
-            "caption": "Dados apresentados",
+            "caption": "Painel do enlace",
+            "columns": [
+              {
+                "key": "c1",
+                "label": "Observação"
+              },
+              {
+                "key": "c2",
+                "label": "Resultado"
+              }
+            ],
+            "rows": [
+              [
+                "Potência recebida",
+                "diminui conforme o comprimento aumenta"
+              ],
+              [
+                "Ruído impulsivo",
+                "coincide com erros em rajada"
+              ],
+              [
+                "Interfaces",
+                "permanecem ativas"
+              ],
+              [
+                "Teste com trecho curto, afastado da fonte de ruído",
+                "não apresenta erros"
+              ]
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Painel do enlace",
             "columns": [
               {
                 "key": "c1",
@@ -17518,6 +20207,12 @@
             "language": "text",
             "caption": "Recurso apresentado no desafio",
             "code": "Aplicação: HTTP\nTransporte: TCP\nRede: IP\nEnlace: Ethernet\nFísica: sinal e meio"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "Aplicação: HTTP\nTransporte: TCP\nRede: IP\nEnlace: Ethernet\nFísica: sinal e meio"
           }
         ]
       },
@@ -17590,6 +20285,12 @@
       "context": "A tabela equivalente contém enlaces bidirecionais AB=1, AC=4, BC=1, BD=5 e CD=1. Considere um protocolo que seleciona o caminho de menor soma de custos, sem outras políticas.",
       "presentation": {
         "blocks": [
+          {
+            "type": "code",
+            "language": "text",
+            "caption": "Recurso apresentado no desafio",
+            "code": "A ─1─ B ─1─ C ─1─ D\n \\4── C     B ─5─ D"
+          },
           {
             "type": "code",
             "language": "text",

@@ -113,6 +113,29 @@ for (const course of courseIds) {
   });
 }
 
+test('a matriz necessária de SI-17 aparece com semântica e rolagem', async ({ page }, info) => {
+  await page.goto('./');
+  await startPhase(page, 'SI', info);
+  for (let index = 0; index < 6; index += 1) {
+    const view = page.locator('.question-view');
+    const id = await view.getAttribute('data-question-id');
+    if (id === 'E26-Q-SI-17') {
+      await expect(page.locator('.question-data-table caption')).toHaveText('Objeto visual proposto — matriz do piloto');
+      await expect(page.locator('.question-data-table thead th')).toHaveCount(4);
+      await expect(page.locator('.question-data-table tbody tr')).toHaveCount(3);
+      await expect(page.locator('.question-data-table tbody')).toContainText('Não marcou como urgente');
+      await expect(page.locator('.question-table-scroll')).toHaveAttribute('role', 'region');
+      await reflow(page);
+      return;
+    }
+    const question = catalog.questions.find((candidate) => candidate.id === id)!;
+    await page.locator('input[name="answer"][value="' + question.correctOptionId + '"]').check();
+    await press(page, 'Confirmar resposta', info);
+    await press(page, 'Próximo desafio', info);
+  }
+  throw new Error('E26-Q-SI-17 não apareceu na posição prevista do roteiro SI-A.');
+});
+
 test('fluxo de resposta e avanço por teclado', async ({ page }, info) => {
   await page.goto('./');
   await startPhase(page, 'CC', info);
