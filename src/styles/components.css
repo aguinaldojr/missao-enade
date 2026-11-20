@@ -48,6 +48,8 @@
 .notice p { font-size: 14px; color: var(--muted); }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .home-actions { margin-top: 12px; }
+.learning-lab-entry { border-color: #167fb6; color: #064784; background: #e4f5fd; box-shadow: 0 3px 0 #a9c9dd; }
+.learning-lab-entry::before { content: "⚡"; }
 .player-indicator, .current-player, .privacy-notice { margin-bottom: 18px; padding: 10px 12px; border-left: 3px solid var(--accent); background: #e8f1e8; font-size: 14px; }
 .privacy-notice { color: #435952; border-left-color: #6e5424; background: #f8f1df; }
 .profile-form { display: grid; gap: 8px; margin: 24px 0 12px; max-width: 480px; }

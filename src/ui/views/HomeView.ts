@@ -9,6 +9,7 @@ export interface HomeActions {
   readonly start: () => void;
   readonly profile: () => void;
   readonly ranking: () => void;
+  readonly learningLab: () => void;
 }
 
 export function homeView(actions: HomeActions, signal: AbortSignal, lastResult: SavedResult | null = null,
@@ -27,7 +28,10 @@ export function homeView(actions: HomeActions, signal: AbortSignal, lastResult: 
   profile.addEventListener('click', actions.profile, { signal });
   const ranking = button(gameConfig.copy.rankingTitle, true);
   ranking.addEventListener('click', actions.ranking, { signal });
-  secondaryActions.append(profile, ranking);
+  const laboratory = button('Experimentar modo rápido', true);
+  laboratory.classList.add('learning-lab-entry');
+  laboratory.addEventListener('click', actions.learningLab, { signal });
+  secondaryActions.append(profile, ranking, laboratory);
   view.append(start, secondaryActions, element('p', 'helper', gameConfig.copy.homeHint));
   const steps = element('ol', 'journey');
   for (const [number, name, detail] of [

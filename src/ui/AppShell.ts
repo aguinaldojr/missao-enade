@@ -97,6 +97,7 @@ export class AppShell {
           start: () => dispatch({ type: 'start' }),
           profile: () => dispatch({ type: 'open-profile' }),
           ranking: () => dispatch({ type: 'open-ranking' }),
+          learningLab: () => { window.location.hash = '#/laboratorio'; },
         }, signal, state.lastResult, state.saveStatus, activePlayer(state.profiles));
         break;
       case 'profile':
