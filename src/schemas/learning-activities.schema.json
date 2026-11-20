@@ -1,0 +1,257 @@
+{
+  "$id": "urn:n9:learning-activities",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "batchId", "activities"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "batchId": { "type": "string", "pattern": "^N9-[A-Z0-9-]+$" },
+    "activities": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": { "$ref": "#/definitions/activity" }
+    }
+  },
+  "definitions": {
+    "nonBlank": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "shortId": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "feedback"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "text": { "$ref": "#/definitions/nonBlank" },
+        "feedback": { "$ref": "#/definitions/nonBlank" }
+      }
+    },
+    "help": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hint", "concept", "example"],
+      "properties": {
+        "hint": { "$ref": "#/definitions/nonBlank" },
+        "concept": { "$ref": "#/definitions/nonBlank" },
+        "example": { "$ref": "#/definitions/nonBlank" }
+      }
+    },
+    "singleChoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "options", "correctId"],
+      "properties": {
+        "type": { "const": "single-choice" },
+        "options": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "$ref": "#/definitions/option" } },
+        "correctId": { "$ref": "#/definitions/shortId" }
+      }
+    },
+    "binaryChoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "statement", "correctValue"],
+      "properties": {
+        "type": { "const": "binary-choice" },
+        "statement": { "$ref": "#/definitions/nonBlank" },
+        "correctValue": { "type": "boolean" }
+      }
+    },
+    "multipleOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "feedback", "correct"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "text": { "$ref": "#/definitions/nonBlank" },
+        "feedback": { "$ref": "#/definitions/nonBlank" },
+        "correct": { "type": "boolean" }
+      }
+    },
+    "multipleSelect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "requiredCount", "options"],
+      "properties": {
+        "type": { "const": "multiple-select" },
+        "requiredCount": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "options": { "type": "array", "minItems": 5, "maxItems": 7, "items": { "$ref": "#/definitions/multipleOption" } }
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text"],
+      "properties": { "id": { "$ref": "#/definitions/shortId" }, "text": { "$ref": "#/definitions/nonBlank" } }
+    },
+    "sequenceOrder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "blocks", "correctOrder"],
+      "properties": {
+        "type": { "const": "sequence-order" },
+        "blocks": { "type": "array", "minItems": 4, "maxItems": 6, "items": { "$ref": "#/definitions/block" } },
+        "correctOrder": { "type": "array", "minItems": 4, "maxItems": 6, "items": { "$ref": "#/definitions/shortId" } }
+      }
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "left", "right"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "left": { "$ref": "#/definitions/nonBlank" },
+        "right": { "$ref": "#/definitions/nonBlank" }
+      }
+    },
+    "pairMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "pairs"],
+      "properties": {
+        "type": { "const": "pair-match" },
+        "pairs": { "type": "array", "minItems": 3, "maxItems": 5, "items": { "$ref": "#/definitions/pair" } }
+      }
+    },
+    "category": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "description"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "label": { "$ref": "#/definitions/nonBlank" },
+        "description": { "$ref": "#/definitions/nonBlank" }
+      }
+    },
+    "categoryItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "categoryId"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "text": { "$ref": "#/definitions/nonBlank" },
+        "categoryId": { "$ref": "#/definitions/shortId" }
+      }
+    },
+    "categorize": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "categories", "items"],
+      "properties": {
+        "type": { "const": "categorize" },
+        "categories": { "type": "array", "minItems": 2, "maxItems": 3, "items": { "$ref": "#/definitions/category" } },
+        "items": { "type": "array", "minItems": 4, "maxItems": 6, "items": { "$ref": "#/definitions/categoryItem" } }
+      }
+    },
+    "token": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text"],
+      "properties": { "id": { "$ref": "#/definitions/shortId" }, "text": { "$ref": "#/definitions/nonBlank" } }
+    },
+    "fillSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "contentBefore", "contentAfter", "tokens", "correctTokenId"],
+      "properties": {
+        "type": { "const": "fill-slot" },
+        "language": { "enum": ["c", "python", "javascript", "sql", "text"] },
+        "contentBefore": { "$ref": "#/definitions/nonBlank" },
+        "contentAfter": { "type": "string" },
+        "tokens": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "$ref": "#/definitions/token" } },
+        "correctTokenId": { "$ref": "#/definitions/shortId" }
+      }
+    },
+    "hotspotNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "detail"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "label": { "$ref": "#/definitions/nonBlank" },
+        "detail": { "$ref": "#/definitions/nonBlank" }
+      }
+    },
+    "visualHotspot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "visualDescription", "accessibleDescription", "nodes", "correctNodeId"],
+      "properties": {
+        "type": { "const": "visual-hotspot" },
+        "visualDescription": { "$ref": "#/definitions/nonBlank" },
+        "accessibleDescription": { "$ref": "#/definitions/nonBlank" },
+        "nodes": { "type": "array", "minItems": 2, "maxItems": 8, "items": { "$ref": "#/definitions/hotspotNode" } },
+        "correctNodeId": { "$ref": "#/definitions/shortId" }
+      }
+    },
+    "dialogueChoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "reaction", "correct"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "text": { "$ref": "#/definitions/nonBlank" },
+        "reaction": { "$ref": "#/definitions/nonBlank" },
+        "correct": { "type": "boolean" }
+      }
+    },
+    "dialogueStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "speaker", "message", "choices"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "speaker": { "$ref": "#/definitions/nonBlank" },
+        "message": { "$ref": "#/definitions/nonBlank" },
+        "choices": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/definitions/dialogueChoice" } }
+      }
+    },
+    "decisionDialogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "steps"],
+      "properties": {
+        "type": { "const": "decision-dialogue" },
+        "steps": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/definitions/dialogueStep" } }
+      }
+    },
+    "payload": {
+      "oneOf": [
+        { "$ref": "#/definitions/singleChoice" },
+        { "$ref": "#/definitions/binaryChoice" },
+        { "$ref": "#/definitions/multipleSelect" },
+        { "$ref": "#/definitions/sequenceOrder" },
+        { "$ref": "#/definitions/pairMatch" },
+        { "$ref": "#/definitions/categorize" },
+        { "$ref": "#/definitions/fillSlot" },
+        { "$ref": "#/definitions/visualHotspot" },
+        { "$ref": "#/definitions/decisionDialogue" }
+      ]
+    },
+    "activity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "mechanic", "courses", "area", "conceptId", "difficulty", "context",
+        "instruction", "xp", "help", "explanation", "sources", "sourceVerificationNeeded", "traceability",
+        "validationStatus", "payload"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^N9-[A-Z0-9-]+$" },
+        "title": { "$ref": "#/definitions/nonBlank" },
+        "mechanic": { "enum": ["single-choice", "binary-choice", "multiple-select", "sequence-order", "pair-match", "categorize", "fill-slot", "visual-hotspot", "decision-dialogue"] },
+        "courses": { "$ref": "urn:n9:editorial#/definitions/courses" },
+        "area": { "$ref": "urn:n9:editorial#/definitions/area" },
+        "conceptId": { "$ref": "#/definitions/shortId" },
+        "difficulty": { "$ref": "urn:n9:editorial#/definitions/difficulty" },
+        "context": { "$ref": "#/definitions/nonBlank" },
+        "instruction": { "$ref": "#/definitions/nonBlank" },
+        "xp": { "type": "integer", "minimum": 1, "maximum": 1000 },
+        "help": { "$ref": "#/definitions/help" },
+        "explanation": { "$ref": "#/definitions/nonBlank" },
+        "sources": { "$ref": "urn:n9:editorial#/definitions/sources" },
+        "sourceVerificationNeeded": { "type": "boolean" },
+        "traceability": { "$ref": "urn:n9:editorial#/definitions/traceability" },
+        "validationStatus": { "$ref": "urn:n9:editorial#/definitions/validationStatus" },
+        "payload": { "$ref": "#/definitions/payload" }
+      }
+    }
+  }
+}
