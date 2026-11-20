@@ -1,0 +1,1598 @@
+{
+  "schemaVersion": 1,
+  "batchId": "N9-COM-03",
+  "activities": [
+    {
+      "id": "N9-COM-041",
+      "title": "Os Quatro Vs no Monitoramento do Campus",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Dados e Inteligência Analítica",
+      "conceptId": "BIG-4VS-01",
+      "difficulty": "introductory",
+      "context": "A equipe de infraestrutura N9 recebe milhares de eventos por segundo de catracas, sensores de energia e logs de acesso, com dados estruturados e textos livres, mas parte dos sensores envia leituras duplicadas ou falhas.",
+      "instruction": "Na caracterização clássica de Big Data pelos quatro Vs (Volume, Velocidade, Variedade e Veracidade), qual dimensão refere-se diretamente à confiabilidade e qualidade dos registros coletados?",
+      "xp": 50,
+      "help": {
+        "hint": "Observe qual dos quatro Vs trata de ruído, inconsistências e grau de confiança dos dados antes da análise.",
+        "concept": "Em Big Data, Volume trata da escala de dados, Velocidade do ritmo de geração/processamento, Variedade da diversidade de formatos e Veracidade da confiabilidade e qualidade dos dados.",
+        "example": "Sensores descalibrados geram registros imprecisos, exigindo tratamento de veracidade antes de alimentar relatórios."
+      },
+      "explanation": "Veracidade diz respeito à confiabilidade, exatidão e integridade dos dados coletados, afetadas por ruídos, duplicidades ou falhas de sensores. Volume refere-se à grande quantidade acumulada; Velocidade indica a taxa contínua de chegada e processamento; e Variedade corresponde aos múltiplos formatos estruturados, semiestruturados e não estruturados.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Os Quatro Vs no Monitoramento do Campus (BIG-4VS-01)",
+        "objective": "Distinguir a dimensão de Veracidade das dimensões de Volume, Velocidade e Variedade em cenários de Big Data.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Veracidade, pois avalia a confiabilidade, consistência e ausência de ruídos nos dados.",
+            "feedback": "Correto. A veracidade trata da qualidade e confiabilidade dos registros para evitar decisões baseadas em dados falhos."
+          },
+          {
+            "id": "opt-b",
+            "text": "Velocidade, pois mede o atraso causado pela limpeza manual das planilhas.",
+            "feedback": "Incorreto. Velocidade refere-se à frequência e rapidez com que os dados são gerados e processados."
+          },
+          {
+            "id": "opt-c",
+            "text": "Variedade, pois indica a mistura entre sensores defeituosos e sensores calibrados.",
+            "feedback": "Incorreto. Variedade diz respeito aos diferentes formatos e fontes de dados (texto, áudio, tabelas, logs)."
+          },
+          {
+            "id": "opt-d",
+            "text": "Volume, pois representa a quantidade de falhas acumuladas no disco rígido.",
+            "feedback": "Incorreto. Volume expressa a escala massiva de armazenamento gerada pelo ambiente, não a qualidade do conteúdo."
+          },
+          {
+            "id": "opt-e",
+            "text": "Volatilidade, pois define por quanto tempo os logs permanecem na memória cache.",
+            "feedback": "Incorreto. Volatilidade não compõe o quarteto clássico Volume, Velocidade, Variedade e Veracidade."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-042",
+      "title": "Repositório para Dados Brutos e Exploratórios",
+      "mechanic": "single-choice",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Arquitetura de Dados Analíticos",
+      "conceptId": "ARC-DLK-01",
+      "difficulty": "intermediate",
+      "context": "O núcleo de pesquisa do campus N9 precisa armazenar gravações de áudio de atendimentos, imagens de equipamentos, arquivos JSON semiestruturados e tabelas relacionais em seu formato nativo para exploração futura por cientistas de dados.",
+      "instruction": "Qual arquitetura de repositório de dados atende diretamente a essa necessidade de armazenar dados heterogêneos brutos com esquema definido na leitura (schema-on-read)?",
+      "xp": 75,
+      "help": {
+        "hint": "Compare um repositório rígido de dados relacionais já modelados para relatórios com um repositório que guarda arquivos brutos em múltiplos formatos.",
+        "concept": "Data Lake armazena grandes volumes de dados brutos estruturados, semiestruturados e não estruturados (schema-on-read); Data Warehouse armazena dados limpos e modelados (schema-on-write).",
+        "example": "Guardar arquivos CSV, imagens e logs brutos em armazenamento de objetos para futura mineração caracteriza um Data Lake."
+      },
+      "explanation": "O Data Lake é projetado para armazenar dados brutos em seus formatos originais (estruturados, semiestruturados e não estruturados) aplicando esquema apenas no momento da leitura e análise (schema-on-read). O Data Warehouse tradicional exige modelagem dimensional prévia (schema-on-write) voltada a dados estruturados e indicadores consolidados.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Repositório para Dados Brutos e Exploratórios (ARC-DLK-01)",
+        "objective": "Selecionar a arquitetura Data Lake quando o cenário exige ingestão de dados brutos heterogêneos e schema-on-read.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Data Lake, pois retém dados brutos em formatos diversos e aplica esquema apenas na leitura.",
+            "feedback": "Correto. O Data Lake suporta arquivos não estruturados, semiestruturados e estruturados sem exigir modelagem rígida na ingestão."
+          },
+          {
+            "id": "opt-b",
+            "text": "Data Warehouse dimensional em esquema estrela, pois exige normalização prévia de áudios e imagens.",
+            "feedback": "Incorreto. Data Warehouses são voltados a dados estruturados previamente transformados (schema-on-write) para consultas gerenciais."
+          },
+          {
+            "id": "opt-c",
+            "text": "Banco transacional OLTP em terceira forma normal, otimizado para inserções curtas de atendimento.",
+            "feedback": "Incorreto. Bancos OLTP atendem operações cotidianas rápidas, não armazenamento exploratório massivo de mídias brutas."
+          },
+          {
+            "id": "opt-d",
+            "text": "Data Mart departamental de finanças, restrito a indicadores contábeis já agregados.",
+            "feedback": "Incorreto. Um Data Mart é um subconjunto temático de Data Warehouse já estruturado e agregado."
+          },
+          {
+            "id": "opt-e",
+            "text": "Cache em memória chave-valor volátil, destinado apenas a sessões temporárias de usuários.",
+            "feedback": "Incorreto. Caches em memória armazenam pares temporários de baixa latência, não repositórios históricos brutos."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-043",
+      "title": "Paradigma de Aprendizagem no Apoio Acadêmico",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Inteligência Artificial e Ciência de Dados",
+      "conceptId": "ML-SUP-01",
+      "difficulty": "introductory",
+      "context": "A coordenação pedagógica N9 possui uma base histórica de 10.000 estudantes onde cada registro já contém o rótulo final 'Concluiu' ou 'Evadiu', além de frequência e notas do primeiro semestre.",
+      "instruction": "Qual abordagem de aprendizagem de máquina utiliza esses exemplos previamente rotulados para treinar um modelo capaz de prever o risco de novos estudantes?",
+      "xp": 50,
+      "help": {
+        "hint": "Observe que a base de treinamento já dispõe da resposta correta conhecida ('Concluiu' ou 'Evadiu') para cada exemplo.",
+        "concept": "Aprendizado supervisionado treina modelos a partir de pares entrada-saída rotulados; aprendizado não supervisionado busca padrões ocultos sem rótulos prévios.",
+        "example": "Classificar e-mails como spam ou legítimos usando mensagens já marcadas por usuários é aprendizado supervisionado."
+      },
+      "explanation": "Como o conjunto de dados histórico apresenta exemplos com o desfecho conhecido ('Concluiu' ou 'Evadiu'), o problema caracteriza aprendizagem supervisionada. Na aprendizagem não supervisionada, o algoritmo explora semelhanças sem rótulos prévios; na aprendizagem por reforço, um agente aprende por recompensas e penalidades em interação sequencial.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Paradigma de Aprendizagem no Apoio Acadêmico (ML-SUP-01)",
+        "objective": "Identificar o paradigma de aprendizagem supervisionada em problema profissional com base histórica rotulada.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Aprendizado supervisionado, pois o modelo aprende a mapear atributos de entrada para rótulos conhecidos.",
+            "feedback": "Correto. A existência de registros históricos rotulados ('Concluiu' ou 'Evadiu') define o treinamento supervisionado."
+          },
+          {
+            "id": "opt-b",
+            "text": "Aprendizado não supervisionado, pois o algoritmo ignora os rótulos históricos para criar grupos aleatórios.",
+            "feedback": "Incorreto. O aprendizado não supervisionado é empregado quando não há variável-alvo rotulada na base."
+          },
+          {
+            "id": "opt-c",
+            "text": "Aprendizado por reforço em tempo real, pois um robô aplica punições financeiras a cada falta.",
+            "feedback": "Incorreto. Aprendizado por reforço baseia-se em políticas de ação-recompensa em ambientes dinâmicos, não em tabela histórica rotulada."
+          },
+          {
+            "id": "opt-d",
+            "text": "Redução de dimensionalidade pura, pois o objetivo é apenas compactar colunas sem fazer previsões.",
+            "feedback": "Incorreto. Redução de dimensionalidade comprime atributos, mas não realiza previsão de classes rotuladas."
+          },
+          {
+            "id": "opt-e",
+            "text": "Busca heurística determinística sem ajuste de parâmetros a partir dos dados históricos.",
+            "feedback": "Incorreto. O enunciado pede treinamento de modelo preditivo baseado em dados históricos rotulados."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-044",
+      "title": "Maturidade e Melhoria Contínua de Processos",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Qualidade e Processos de Software",
+      "conceptId": "PRC-MAT-01",
+      "difficulty": "intermediate",
+      "context": "Na fábrica de software universitária N9, cada equipe conduz projetos de um jeito improvisado, sem métricas históricas nem padrões institucionalizados. A coordenação decidiu adotar modelos de maturidade como CMMI (Capability Maturity Model Integration) e MPS.BR (Melhoria de Processo do Software Brasileiro).",
+      "instruction": "Qual é o objetivo central da adoção desses modelos de maturidade e capacidade na organização?",
+      "xp": 75,
+      "help": {
+        "hint": "Pense em como transformar práticas individuais improvisadas em processos organizacionais previsíveis, mensuráveis e continuamente aperfeiçoados.",
+        "concept": "Modelos como CMMI e MPS.BR fornecem boas práticas evolutivas para institucionalizar processos, reduzir variabilidade e melhorar qualidade e previsibilidade.",
+        "example": "Sair de entregas dependentes de esforço heroico individual para processos definidos, monitorados e otimizados continuamente."
+      },
+      "explanation": "Modelos de maturidade como CMMI e MPS.BR orientam a evolução gradual da capacidade organizacional por meio de boas práticas institucionalizadas, medição de desempenho e melhoria contínua, aumentando a previsibilidade de prazo, custo e qualidade. Eles não impõem uma única linguagem de programação, não substituem testes técnicos e não funcionam apenas como certificação burocrática sem mudança prática.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Maturidade e Melhoria Contínua de Processos (PRC-MAT-01)",
+        "objective": "Compreender o propósito organizacional de modelos de maturidade e melhoria de processos (CMMI e MPS.BR) sem memorização de níveis.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Estabelecer evolução gradual de processos institucionalizados para aumentar previsibilidade, qualidade e melhoria contínua.",
+            "feedback": "Correto. CMMI e MPS.BR guiam a organização na consolidação de práticas mensuráveis e na redução do improviso."
+          },
+          {
+            "id": "opt-b",
+            "text": "Padronizar obrigatoriamente a linguagem de programação e o banco de dados de todos os projetos.",
+            "feedback": "Incorreto. Modelos de maturidade tratam de processos de engenharia e gestão, independentemente de pilha tecnológica."
+          },
+          {
+            "id": "opt-c",
+            "text": "Eliminar a necessidade de revisão de código e testes automatizados após obter o selo inicial.",
+            "feedback": "Incorreto. Pelo contrário, modelos de maturidade fortalecem verificação, validação e garantia da qualidade."
+          },
+          {
+            "id": "opt-d",
+            "text": "Substituir toda comunicação entre equipe e clientes por formulários estáticos sem revisão.",
+            "feedback": "Incorreto. A melhoria de processos exige alinhamento contínuo com partes interessadas e adaptação baseada em métricas."
+          },
+          {
+            "id": "opt-e",
+            "text": "Garantir que nenhum requisito mude durante o projeto, bloqueando evoluções do negócio.",
+            "feedback": "Incorreto. Modelos de maturidade estruturam a gestão controlada de mudanças, não o congelamento irreal de requisitos."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-045",
+      "title": "Atomicidade na Transferência de Créditos",
+      "mechanic": "binary-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Banco de Dados e Informação",
+      "conceptId": "DB-ACID-01",
+      "difficulty": "introductory",
+      "context": "No sistema de restaurantes universitários N9, uma transferência de saldo entre dois estudantes executa duas operações dentro da mesma transação ACID (Atomicidade, Consistência, Isolamento e Durabilidade): debitar R$ 20,00 da conta A e creditar R$ 20,00 na conta B. Uma queda de energia ocorre logo após o débito.",
+      "instruction": "Avalie se a afirmação sobre o comportamento garantido pela propriedade de atomicidade está correta ou incorreta.",
+      "xp": 40,
+      "help": {
+        "hint": "Lembre-se da regra 'tudo ou nada' de uma transação indivisível.",
+        "concept": "A atomicidade garante que todas as operações de uma transação sejam concluídas com êxito (commit) ou nenhuma delas tenha efeito (rollback).",
+        "example": "Se a segunda escrita de uma transferência falhar, o banco desfaz o débito inicial automaticamente."
+      },
+      "explanation": "A afirmação está correta. Pela propriedade de atomicidade (regra do 'tudo ou nada'), uma transação é uma unidade indivisível de trabalho: se ocorrer falha antes da efetivação (commit), o sistema de gerenciamento de banco de dados desfaz (rollback) o débito parcial realizado na conta A, preservando o estado anterior.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Atomicidade na Transferência de Créditos (DB-ACID-01)",
+        "objective": "Verificar o entendimento da propriedade de atomicidade ('tudo ou nada') em transações de banco de dados ACID.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC 9075 — Database languages — SQL"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "A propriedade de atomicidade garante que, diante de uma falha antes do término da transação, o débito já executado na conta A seja desfeito integralmente (rollback), evitando que o valor desapareça.",
+        "correctValue": true,
+        "feedbackTrue": "Correto. A atomicidade assegura o comportamento 'tudo ou nada': ou ambas as operações são confirmadas ou nenhuma permanece gravada.",
+        "feedbackFalse": "Incorreto. Sem desfazer a operação parcial, haveria perda de saldo; é justamente a atomicidade que garante o rollback completo."
+      }
+    },
+    {
+      "id": "N9-COM-046",
+      "title": "Máquinas Virtuais e Contêineres no Laboratório",
+      "mechanic": "binary-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Sistemas Operacionais e Infraestrutura",
+      "conceptId": "INF-CNT-01",
+      "difficulty": "introductory",
+      "context": "Ao preparar ambientes de execução para as aplicações do campus N9, a equipe compara máquinas virtuais gerenciadas por hipervisor (hypervisor) com contêineres isolados no espaço de usuário.",
+      "instruction": "Julgue se a afirmação técnica sobre a arquitetura de máquinas virtuais e contêineres é verdadeira ou falsa.",
+      "xp": 40,
+      "help": {
+        "hint": "Compare onde fica o núcleo (kernel) do sistema operacional em cada abordagem.",
+        "concept": "Máquinas virtuais virtualizam hardware e executam um sistema operacional convidado completo cada uma; contêineres empacotam aplicações e dependências compartilhando o kernel do sistema hospedeiro.",
+        "example": "Vários contêineres Linux em um mesmo servidor usam o mesmo kernel Linux, enquanto VMs carregam kernels independentes."
+      },
+      "explanation": "A afirmação está incorreta. Máquinas virtuais e contêineres não possuem arquitetura idêntica: cada máquina virtual emula hardware por meio de um hipervisor e executa seu próprio sistema operacional completo (incluindo kernel), enquanto contêineres isolam processos e dependências no espaço de usuário compartilhando o kernel do sistema operacional hospedeiro, o que os torna mais leves e rápidos na inicialização.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Máquinas Virtuais e Contêineres no Laboratório (INF-CNT-01)",
+        "objective": "Distinguir o isolamento por virtualização de hardware (VM com SO completo) do isolamento em nível de processo (contêiner compartilhando kernel).",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Máquinas virtuais e contêineres são tecnicamente equivalentes porque ambos instalam um núcleo (kernel) de sistema operacional completo e independente para cada aplicação empacotada.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. Apenas máquinas virtuais executam um sistema operacional completo próprio; contêineres compartilham o kernel do sistema hospedeiro.",
+        "feedbackFalse": "Correto. Contêineres compartilham o kernel do hospedeiro isolando processos e dependências, enquanto VMs virtualizam hardware com SO completo."
+      }
+    },
+    {
+      "id": "N9-COM-047",
+      "title": "Estratégia Equilibrada de Testes de Software",
+      "mechanic": "multiple-select",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Engenharia e Qualidade de Software",
+      "conceptId": "QA-PYR-01",
+      "difficulty": "intermediate",
+      "context": "A equipe do sistema de reservas N9 enfrenta suítes lentas e frágeis porque tenta validar todas as regras de cálculo apenas por meio de cliques automatizados na interface gráfica completa.",
+      "instruction": "Selecione exatamente 3 práticas que compõem uma estratégia equilibrada combinando testes unitários, de integração, de sistema e de aceitação.",
+      "xp": 80,
+      "help": {
+        "hint": "Pense na pirâmide de testes: base ampla e rápida em unidades isoladas, verificações de comunicação entre módulos e validações de ponta a ponta focadas em fluxos críticos e negócio.",
+        "concept": "Uma boa estratégia distribui testes por níveis: unitários (lógica isolada), integração (contratos entre componentes), sistema (fluxo completo) e aceitação (critérios do usuário).",
+        "example": "Testar o cálculo de multa em teste unitário rápido e reservar testes de sistema para o fluxo completo de reserva."
+      },
+      "explanation": "Concentrar tudo na interface torna os testes lentos e difíceis de diagnosticar. Uma estratégia equilibrada utiliza testes unitários rápidos para cobrir regras de negócio isoladas, testes de integração para validar contratos com banco de dados e APIs externas, e testes de sistema e aceitação focados nos fluxos críticos ponta a ponta e nos critérios acordados com os usuários.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC/IEEE 29119 — Software and systems engineering — Software testing."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Estratégia Equilibrada de Testes de Software (QA-PYR-01)",
+        "objective": "Selecionar práticas que equilibram testes unitários, de integração, de sistema e de aceitação.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC/IEEE 29119"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Cobrir regras de cálculo e validações isoladas com testes unitários rápidos e determinísticos.",
+            "feedback": "Correto. Testes unitários formam a base rápida que isola defeitos na lógica sem depender de rede ou interface.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Verificar a comunicação e os contratos entre aplicação, banco de dados e APIs com testes de integração.",
+            "feedback": "Correto. Testes de integração garantem que os módulos cooperem corretamente nas fronteiras técnicas.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Validar fluxos críticos ponta a ponta e critérios do usuário por meio de testes de sistema e aceitação.",
+            "feedback": "Correto. Esses níveis confirmam o funcionamento integrado e a aderência às necessidades reais de negócio.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Substituir todos os testes unitários por testes manuais exploratórios apenas antes do lançamento.",
+            "feedback": "Incorreto. Eliminar testes unitários automatizados reduz a proteção contra regressões e atrasa o diagnóstico.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Testar cada combinação matemática de entrada exclusivamente pela interface gráfica completa.",
+            "feedback": "Incorreto. Combinatória de regras deve ser validada na camada unitária para evitar suítes lentas e frágeis.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Ignorar testes de integração porque cada função individual já passou nos testes unitários.",
+            "feedback": "Incorreto. Unidades isoladas podem funcionar bem sozinhas e falhar ao integrar consultas SQL ou contratos de API.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-048",
+      "title": "Camadas de Controle em Segurança da Informação",
+      "mechanic": "multiple-select",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-CTL-01",
+      "difficulty": "intermediate",
+      "context": "Ao revisar a arquitetura defensiva do portal acadêmico N9, o comitê de segurança precisa combinar controles preventivos, detectivos e corretivos para reduzir riscos operacionais.",
+      "instruction": "Selecione exatamente 3 medidas que representam, respectivamente, um controle preventivo, um detectivo e um corretivo eficazes.",
+      "xp": 80,
+      "help": {
+        "hint": "Preventivos bloqueiam o incidente antes que ocorra; detectivos identificam e alertam durante ou após o evento; corretivos restauram a operação.",
+        "concept": "Defesa em profundidade combina controles preventivos (barreira prévia), detectivos (monitoramento/alerta) e corretivos (recuperação e remediação).",
+        "example": "Autenticação multifator previne, alerta de login anômalo detecta e restauração de backup corrige."
+      },
+      "explanation": "Exigir autenticação multifator (MFA) bloqueia acessos não autorizados antes que se concretizem (controle preventivo). Monitorar logs em tempo real para disparar alertas de tentativas anômalas identifica eventos suspeitos (controle detectivo). Restaurar dados íntegros a partir de cópias de segurança testadas restabelece o serviço após incidente (controle corretivo).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 27001 — Information security, cybersecurity and privacy protection — Information security management systems."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Camadas de Controle em Segurança da Informação (SEC-CTL-01)",
+        "objective": "Combinar controles preventivos, detectivos e corretivos em uma arquitetura de defesa em profundidade.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 27001"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Exigir autenticação multifator (MFA) e princípio do menor privilégio no acesso administrativo (preventivo).",
+            "feedback": "Correto. Impede que credenciais comprometidas ou permissões excessivas resultem em acesso indevido.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Coletar trilhas de auditoria centralizadas com alertas automáticos para padrões anômalos (detectivo).",
+            "feedback": "Correto. Permite identificar rapidamente tentativas de invasão ou alterações suspeitas em andamento.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Executar plano de recuperação restaurando backups isolados e aplicando correções de vulnerabilidade (corretivo).",
+            "feedback": "Correto. Restaura a integridade e a disponibilidade do ambiente após a ocorrência de um incidente.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Desativar o registro de logs para evitar que ocupem espaço em disco durante picos de acesso.",
+            "feedback": "Incorreto. Desativar logs elimina a capacidade detectiva e impede investigações forenses.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Conceder permissão de administrador global a todos os desenvolvedores para agilizar manutenções.",
+            "feedback": "Incorreto. Viola o menor privilégio e enfraquece os controles preventivos do sistema.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Manter cópias de backup apenas na mesma pasta do servidor de produção sem teste de restauração.",
+            "feedback": "Incorreto. Backups no mesmo servidor são perdidos junto com o ambiente principal e não garantem recuperação.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-049",
+      "title": "Esteira de Integração e Entrega Contínua",
+      "mechanic": "sequence-order",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Engenharia de Software e DevOps",
+      "conceptId": "DEV-CICD-01",
+      "difficulty": "intermediate",
+      "context": "A equipe de engenharia N9 está automatizando sua esteira de Integração Contínua e Entrega Contínua (CI/CD) para reduzir falhas manuais entre o envio de código e a operação em produção.",
+      "instruction": "Ordene as 5 etapas da esteira automatizada desde a submissão da alteração no repositório até a observação em produção.",
+      "xp": 80,
+      "help": {
+        "hint": "Primeiro integra-se e compila-se o código, depois validam-se testes e segurança antes de empacotar, implantar e monitorar.",
+        "concept": "Uma esteira CI/CD automatiza integração de código, verificação por testes, geração de artefato, implantação controlada e monitoramento contínuo.",
+        "example": "Um pull request dispara build e testes automatizados antes de liberar o pacote para homologação e produção."
+      },
+      "explanation": "O fluxo inicia quando o desenvolvedor submete a alteração ao repositório versionado. Em seguida, a integração contínua compila o projeto e executa testes automatizados e análises estáticas. Aprovadas as verificações, gera-se o artefato versionado imutável. Depois, realiza-se a implantação controlada em produção e, por fim, monitoram-se métricas, logs e saúde do serviço para detectar regressões rapidamente.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Esteira de Integração e Entrega Contínua (DEV-CICD-01)",
+        "objective": "Sequenciar as etapas de uma esteira controlada de CI/CD da alteração de código ao monitoramento em produção.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "cicd-1",
+            "text": "Submeter a alteração de código e abrir solicitação de revisão (pull request) no repositório."
+          },
+          {
+            "id": "cicd-2",
+            "text": "Executar build automatizado, análise estática e suíte de testes unitários e de integração."
+          },
+          {
+            "id": "cicd-3",
+            "text": "Empacotar o artefato aprovado com identificador de versão imutável para promoção."
+          },
+          {
+            "id": "cicd-4",
+            "text": "Implantar a nova versão no ambiente de produção de forma controlada."
+          },
+          {
+            "id": "cicd-5",
+            "text": "Monitorar disponibilidade, latência e taxas de erro em produção para validar estabilidade."
+          }
+        ],
+        "correctOrder": [
+          "cicd-1",
+          "cicd-2",
+          "cicd-3",
+          "cicd-4",
+          "cicd-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-050",
+      "title": "Ciclo de Vida em Ciência de Dados",
+      "mechanic": "sequence-order",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Inteligência Artificial e Ciência de Dados",
+      "conceptId": "DS-CYC-01",
+      "difficulty": "intermediate",
+      "context": "A equipe analítica N9 vai desenvolver um modelo preditivo para estimar a demanda por atendimentos estudantis no início de cada semestre.",
+      "instruction": "Ordene as 5 etapas metodológicas do ciclo de ciência de dados desde a definição do problema até o acompanhamento contínuo.",
+      "xp": 80,
+      "help": {
+        "hint": "Sem compreender o problema e preparar os dados limpos, não faz sentido treinar ou validar modelos.",
+        "concept": "Inspirado em metodologias como CRISP-DM, o ciclo de ciência de dados parte do entendimento do negócio/objetivo, passa pela preparação de dados, treinamento e validação do modelo, até implantação e monitoramento.",
+        "example": "Primeiro define-se a métrica de sucesso do negócio; só depois limpam-se os dados e treinam-se algoritmos."
+      },
+      "explanation": "O ciclo começa pela definição clara do objetivo de negócio e dos critérios de sucesso. Em seguida, realiza-se a coleta, limpeza e engenharia de atributos na preparação dos dados. Depois, treinam-se algoritmos sobre o conjunto de treino e valida-se o desempenho e a equidade em dados separados de teste. Por fim, implanta-se o modelo e monitora-se sua degradação ao longo do tempo.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ciclo de Vida em Ciência de Dados (DS-CYC-01)",
+        "objective": "Ordenar as etapas de definição de objetivo, preparação de dados, treinamento, validação e monitoramento de modelos.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "ds-1",
+            "text": "Definir o objetivo institucional do problema e as métricas de sucesso esperadas."
+          },
+          {
+            "id": "ds-2",
+            "text": "Coletar, limpar valores ausentes, transformar variáveis e dividir os conjuntos de dados."
+          },
+          {
+            "id": "ds-3",
+            "text": "Treinar modelos candidatos ajustando parâmetros sobre os dados de treinamento."
+          },
+          {
+            "id": "ds-4",
+            "text": "Validar desempenho, generalização e possíveis vieses no conjunto de teste reservado."
+          },
+          {
+            "id": "ds-5",
+            "text": "Implantar o modelo aprovado e monitorar continuamente a deriva dos dados (data drift)."
+          }
+        ],
+        "correctOrder": [
+          "ds-1",
+          "ds-2",
+          "ds-3",
+          "ds-4",
+          "ds-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-051",
+      "title": "Métodos HTTP em uma API REST",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Desenvolvimento Web e Sistemas Distribuídos",
+      "conceptId": "WEB-RST-01",
+      "difficulty": "introductory",
+      "context": "A equipe de desenvolvimento N9 está documentando os endpoints do recurso /livros em uma API RESTful (Representational State Transfer) seguindo a semântica padrão do protocolo HTTP.",
+      "instruction": "Relacione cada método HTTP à intenção semântica correspondente na manipulação do recurso.",
+      "xp": 60,
+      "help": {
+        "hint": "Associe leitura sem efeitos colaterais ao GET, criação de novo recurso ao POST, substituição completa ao PUT e remoção ao DELETE.",
+        "concept": "APIs REST utilizam a semântica padronizada dos métodos HTTP: GET recupera, POST cria, PUT substitui/atualiza integralmente e DELETE remove.",
+        "example": "GET /livros/42 consulta os dados do livro 42 sem alterar o estado no servidor."
+      },
+      "explanation": "Em APIs REST alinhadas à RFC 9110, GET realiza leitura segura sem modificar o recurso; POST submete dados para criar um novo item na coleção; PUT substitui integralmente a representação de um recurso identificado de forma idempotente; e DELETE solicita a remoção do recurso especificado.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 9110 — HTTP Semantics."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Métodos HTTP em uma API REST (WEB-RST-01)",
+        "objective": "Correlacionar os métodos HTTP GET, POST, PUT e DELETE às suas respectivas intenções semânticas em APIs REST.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "RFC 9110 — HTTP Semantics"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "GET /livros/15",
+            "right": "Consultar e recuperar a representação atual do livro 15 sem alterar dados no servidor."
+          },
+          {
+            "id": "pair-2",
+            "left": "POST /livros",
+            "right": "Criar um novo registro de livro na coleção a partir dos dados enviados no corpo da requisição."
+          },
+          {
+            "id": "pair-3",
+            "left": "PUT /livros/15",
+            "right": "Substituir integralmente os dados do livro 15 por uma nova representação completa."
+          },
+          {
+            "id": "pair-4",
+            "left": "DELETE /livros/15",
+            "right": "Remover o registro correspondente ao livro 15 do acervo."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-052",
+      "title": "Ordens de Complexidade Assintótica",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Algoritmos e Estruturas de Dados",
+      "conceptId": "AED-BIGO-01",
+      "difficulty": "intermediate",
+      "context": "Ao analisar o crescimento do tempo de execução no pior caso em função do tamanho da entrada n, um engenheiro compara quatro operações clássicas de manipulação de coleções.",
+      "instruction": "Associe cada ordem de complexidade assintótica (notação Big-O) ao exemplo clássico correspondente.",
+      "xp": 75,
+      "help": {
+        "hint": "Acesso direto por índice não depende de n; busca binária divide o espaço ao meio a cada passo; varredura simples percorre todos os n itens.",
+        "concept": "O(1) é tempo constante, O(log n) é logarítmico (divisão sucessiva), O(n) é linear e O(n log n) é típico de ordenações eficientes por comparação.",
+        "example": "Dividir uma lista ordenada ao meio repetidamente reduz n pela metade a cada passo: O(log n)."
+      },
+      "explanation": "O acesso direto a um elemento de vetor pelo índice ocorre em tempo constante O(1), independentemente do tamanho n. A busca binária em vetor ordenado descarta metade dos elementos por iteração, resultando em O(log n). A busca sequencial em lista não ordenada inspeciona até n elementos no pior caso, caracterizando O(n). Algoritmos eficientes de ordenação por comparação, como Merge Sort, operam em O(n log n).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ordens de Complexidade Assintótica (AED-BIGO-01)",
+        "objective": "Associar as classes de complexidade O(1), O(log n), O(n) e O(n log n) a operações e algoritmos clássicos.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "O(1) — Tempo constante",
+            "right": "Acessar diretamente o elemento na posição i de um vetor em memória pelo seu índice."
+          },
+          {
+            "id": "pair-2",
+            "left": "O(log n) — Tempo logarítmico",
+            "right": "Executar busca binária em um vetor ordenado dividindo o intervalo ao meio a cada passo."
+          },
+          {
+            "id": "pair-3",
+            "left": "O(n) — Tempo linear",
+            "right": "Percorrer uma lista não ordenada do início ao fim para encontrar o maior valor."
+          },
+          {
+            "id": "pair-4",
+            "left": "O(n log n) — Tempo linearítmico",
+            "right": "Ordenar uma lista de n registros utilizando o algoritmo Merge Sort."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-053",
+      "title": "Artefatos Essenciais de Gestão de Projetos",
+      "mechanic": "pair-match",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Gerência de Projetos",
+      "conceptId": "PRJ-ART-01",
+      "difficulty": "introductory",
+      "context": "No escritório de projetos da instituição N9, a equipe organiza escopo, incertezas, prioridades de entrega e condições de validação por meio de quatro artefatos clássicos.",
+      "instruction": "Associe cada artefato de projeto (EAP, Registro de Riscos, Backlog do Produto e Critérios de Aceitação) à sua finalidade principal.",
+      "xp": 60,
+      "help": {
+        "hint": "Diferencie a decomposição hierárquica das entregas (EAP) da lista priorizada de demandas (Backlog) e das condições de verificação de cada item.",
+        "concept": "EAP decompõe o escopo em pacotes de trabalho; Registro de Riscos acompanha ameaças/oportunidades; Backlog ordena itens por valor; Critérios de Aceitação definem quando um item está pronto.",
+        "example": "A EAP quebra o projeto em módulos e pacotes menores para facilitar estimativas e controle."
+      },
+      "explanation": "A Estrutura Analítica do Projeto (EAP) decompõe hierarquicamente o escopo total em entregas menores e gerenciáveis. O Registro de Riscos documenta eventos incertos, probabilidade, impacto e planos de resposta. O Backlog do Produto mantém a lista ordenada e dinâmica de funcionalidades e melhorias priorizadas por valor. Os Critérios de Aceitação especificam as condições verificáveis que uma entrega deve cumprir para ser validada.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Artefatos Essenciais de Gestão de Projetos (PRJ-ART-01)",
+        "objective": "Correlacionar EAP, Registro de Riscos, Backlog do Produto e Critérios de Aceitação às suas respectivas finalidades.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "EAP (Estrutura Analítica do Projeto)",
+            "right": "Decompor hierarquicamente o escopo total do projeto em entregas e pacotes de trabalho gerenciáveis."
+          },
+          {
+            "id": "pair-2",
+            "left": "Registro de Riscos",
+            "right": "Documentar incertezas identificadas, análise de impacto/probabilidade, responsáveis e planos de resposta."
+          },
+          {
+            "id": "pair-3",
+            "left": "Backlog do Produto",
+            "right": "Manter lista priorizada e evolutiva de funcionalidades, correções e requisitos ordenados por valor."
+          },
+          {
+            "id": "pair-4",
+            "left": "Critérios de Aceitação",
+            "right": "Estabelecer condições objetivas e testáveis que cada entrega precisa satisfazer para ser aprovada."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-054",
+      "title": "Classificação, Regressão e Agrupamento",
+      "mechanic": "categorize",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Inteligência Artificial e Ciência de Dados",
+      "conceptId": "ML-TSK-01",
+      "difficulty": "introductory",
+      "context": "A equipe de ciência de dados N9 recebeu cinco demandas distintas da gestão acadêmica e administrativa para resolver com aprendizagem de máquina.",
+      "instruction": "Classifique cada problema de acordo com a tarefa adequada: Classificação, Regressão ou Agrupamento (Clustering).",
+      "xp": 60,
+      "help": {
+        "hint": "Classificação prevê categorias discretas; Regressão estima valores numéricos contínuos; Agrupamento descobre segmentos naturais sem rótulos prévios.",
+        "concept": "Classificação e regressão são tarefas supervisionadas (saída categórica vs. numérica contínua); agrupamento é tarefa não supervisionada por similaridade.",
+        "example": "Prever o preço de um imóvel é regressão; diagnosticar se um exame é positivo ou negativo é classificação."
+      },
+      "explanation": "Prever categorias discretas ('Aprovado' ou 'Reprovado' e prioridade 'Baixa/Média/Alta') corresponde à classificação. Estimar grandezas numéricas contínuas (consumo em kWh e tempo de espera em minutos) corresponde à regressão. Segmentar perfis de estudo sem rótulos prévios com base em semelhança de comportamento corresponde ao agrupamento (clustering).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Classificação, Regressão e Agrupamento (ML-TSK-01)",
+        "objective": "Categorizar problemas aplicados de aprendizagem de máquina entre classificação, regressão e agrupamento.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-clf",
+            "label": "Classificação",
+            "description": "Prevê uma categoria ou classe discreta a partir de exemplos rotulados."
+          },
+          {
+            "id": "cat-reg",
+            "label": "Regressão",
+            "description": "Estima um valor numérico contínuo a partir de variáveis explicativas."
+          },
+          {
+            "id": "cat-clu",
+            "label": "Agrupamento (Clustering)",
+            "description": "Identifica grupos naturais por semelhança sem rótulos prévios na base."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Rotular automaticamente um chamado de suporte nas categorias 'Rede', 'Acesso' ou 'Hardware'.",
+            "categoryId": "cat-clf"
+          },
+          {
+            "id": "item-2",
+            "text": "Estimar o consumo mensal de energia elétrica em quilowatts-hora (kWh) de cada bloco do campus.",
+            "categoryId": "cat-reg"
+          },
+          {
+            "id": "item-3",
+            "text": "Descobrir perfis naturais de hábitos de estudo na biblioteca sem categorias predefinidas.",
+            "categoryId": "cat-clu"
+          },
+          {
+            "id": "item-4",
+            "text": "Prever o tempo contínuo em minutos necessário para concluir o atendimento de uma fila.",
+            "categoryId": "cat-reg"
+          },
+          {
+            "id": "item-5",
+            "text": "Identificar se uma transação no cartão universitário é 'Legítima' ou 'Fraudulenta'.",
+            "categoryId": "cat-clf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-055",
+      "title": "Classificando Controles de Segurança Aplicados",
+      "mechanic": "categorize",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-CTL-02",
+      "difficulty": "intermediate",
+      "context": "Durante o plano de melhoria de segurança do ambiente N9, seis medidas operacionais foram catalogadas conforme o momento em que atuam em relação a um incidente.",
+      "instruction": "Classifique cada medida entre Controle Preventivo, Controle Detectivo ou Controle Corretivo.",
+      "xp": 75,
+      "help": {
+        "hint": "Pergunte-se: a medida evita o problema antes de acontecer, avisa quando ele acontece ou repara o sistema depois?",
+        "concept": "Controles preventivos atuam antes do evento; detectivos identificam ocorrências; corretivos contêm danos e restauram a normalidade.",
+        "example": "Bloquear portas desnecessárias no firewall é preventivo; soar alarme de intrusão é detectivo."
+      },
+      "explanation": "Regras restritivas de firewall e validação rigorosa de entrada bloqueiam ataques antes que ocorram (preventivos). Sistemas de detecção de intrusão (IDS) e verificação periódica de integridade de arquivos identificam alterações ou acessos anômalos (detectivos). Isolar estação infectada da rede e aplicar patch emergencial após incidente restauram a segurança operacional (corretivos).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 27001 — Information security, cybersecurity and privacy protection — Information security management systems."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Classificando Controles de Segurança Aplicados (SEC-CTL-02)",
+        "objective": "Distinguir controles preventivos, detectivos e corretivos em situações operacionais concretas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 27001"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-prev",
+            "label": "Controle Preventivo",
+            "description": "Impede ou dificulta a concretização de uma ameaça antes que o incidente ocorra."
+          },
+          {
+            "id": "cat-det",
+            "label": "Controle Detectivo",
+            "description": "Identifica e registra atividades anômalas ou violações durante ou após sua ocorrência."
+          },
+          {
+            "id": "cat-corr",
+            "label": "Controle Corretivo",
+            "description": "Contém impactos, remedia vulnerabilidades exploradas e restaura a operação normal."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Configurar firewall bloqueando por padrão conexões externas a portas administrativas.",
+            "categoryId": "cat-prev"
+          },
+          {
+            "id": "item-2",
+            "text": "Emitir alerta automático quando um usuário falha dez tentativas de login em um minuto.",
+            "categoryId": "cat-det"
+          },
+          {
+            "id": "item-3",
+            "text": "Isolar da rede um servidor comprometido e restaurar sua imagem limpa validada.",
+            "categoryId": "cat-corr"
+          },
+          {
+            "id": "item-4",
+            "text": "Validar e sanitizar campos de formulário antes de processar qualquer requisição.",
+            "categoryId": "cat-prev"
+          },
+          {
+            "id": "item-5",
+            "text": "Comparar resumos criptográficos (hashes) de arquivos críticos para apontar modificações.",
+            "categoryId": "cat-det"
+          },
+          {
+            "id": "item-6",
+            "text": "Aplicar atualização emergencial de segurança após identificar exploração de falha.",
+            "categoryId": "cat-corr"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-056",
+      "title": "Contagem de Chamados por Categoria em Python",
+      "mechanic": "fill-slot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Algoritmos e Programação",
+      "conceptId": "PY-DICT-01",
+      "difficulty": "intermediate",
+      "context": "No script Python 3 de triagem do suporte N9, a lista de entrada chamados = ['rede', 'acesso', 'rede', 'impressora', 'acesso', 'rede'] deve produzir o dicionário {'rede': 3, 'acesso': 2, 'impressora': 1}, exibindo 3 na saída.",
+      "instruction": "Selecione a expressão que atualiza corretamente a contagem de cada categoria no dicionário sem gerar erro de chave inexistente.",
+      "xp": 75,
+      "help": {
+        "hint": "Quando uma chave aparece pela primeira vez no dicionário, o valor anterior padrão deve ser 0 antes de somar 1.",
+        "concept": "O método dict.get(chave, padrao) retorna o valor associado à chave ou o valor padrão informado (como 0) caso a chave ainda não exista.",
+        "example": "contagem[item] = contagem.get(item, 0) + 1"
+      },
+      "explanation": "A expressão contagem.get(categoria, 0) + 1 busca o total atual da categoria ou assume 0 na primeira ocorrência, somando 1 a cada aparição e produzindo {'rede': 3, 'acesso': 2, 'impressora': 1} (saída: 3). Usar contagem[categoria] + 1 lança KeyError na primeira ocorrência; usar valor padrão 1 inicia cada item em 2; e len(chamados) atribui 6 a todas as chaves.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "Python 3 Language Reference — Built-in Types (Mapping Types — dict)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Contagem de Chamados por Categoria em Python (PY-DICT-01)",
+        "objective": "Implementar contagem determinística de ocorrências em dicionário Python 3 utilizando dict.get() com valor padrão zero.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Python 3 Language Reference — dict.get"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "python",
+        "contentBefore": "chamados = [\"rede\", \"acesso\", \"rede\", \"impressora\", \"acesso\", \"rede\"]\ncontagem = {}\n\nfor categoria in chamados:\n    contagem[categoria] = ",
+        "contentAfter": "\n\nprint(contagem[\"rede\"])",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "contagem.get(categoria, 0) + 1",
+            "feedback": "Correto. Retorna 0 quando a categoria ainda não existe no dicionário e soma 1 a cada ocorrência, imprimindo 3."
+          },
+          {
+            "id": "tok-2",
+            "text": "contagem[categoria] + 1",
+            "feedback": "Incorreto. Como o dicionário inicia vazio, acessar contagem['rede'] na primeira iteração gera KeyError."
+          },
+          {
+            "id": "tok-3",
+            "text": "contagem.get(categoria, 1) + 1",
+            "feedback": "Incorreto. O valor padrão 1 faz a primeira ocorrência valer 2, resultando em 4 para 'rede' em vez de 3."
+          },
+          {
+            "id": "tok-4",
+            "text": "len(chamados)",
+            "feedback": "Incorreto. Atribui o tamanho total da lista (6) a cada chave em vez de contar quantas vezes cada categoria aparece."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-057",
+      "title": "Filtrando Avisos Pendentes em JavaScript",
+      "mechanic": "fill-slot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Desenvolvimento Web e Interfaces",
+      "conceptId": "JS-ARR-01",
+      "difficulty": "introductory",
+      "context": "No painel do estudante N9 em JavaScript moderno, o array avisos contém objetos com id, titulo e lido. O componente precisa obter apenas o subconjunto de objetos em que lido seja false.",
+      "instruction": "Escolha o método nativo de array que retorna uma nova lista contendo somente os avisos ainda não lidos.",
+      "xp": 50,
+      "help": {
+        "hint": "Procure o método funcional de array que seleciona todos os elementos que satisfazem uma condição booleana.",
+        "concept": "Array.prototype.filter() cria um novo array com todos os elementos que passam no teste implementado pela função fornecida.",
+        "example": "[10, 25, 30].filter(n => n > 20) retorna [25, 30]."
+      },
+      "explanation": "O método filter percorre o array avisos e retorna um novo array contendo apenas os objetos para os quais !item.lido é verdadeiro (os itens de id 2 e 3). O método map transformaria cada objeto em um booleano mantendo o mesmo tamanho; find retornaria somente o primeiro objeto encontrado; e forEach apenas itera retornando undefined.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ECMA-262 — ECMAScript Language Specification (Array.prototype.filter)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Filtrando Avisos Pendentes em JavaScript (JS-ARR-01)",
+        "objective": "Aplicar Array.prototype.filter em JavaScript moderno para selecionar elementos de uma coleção em interface web.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ECMA-262 — Array.prototype.filter"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "javascript",
+        "contentBefore": "const avisos = [\n  { id: 1, titulo: \"Matrícula\", lido: true },\n  { id: 2, titulo: \"Biblioteca\", lido: false },\n  { id: 3, titulo: \"Estágio\", lido: false }\n];\n\nconst pendentes = avisos.",
+        "contentAfter": "(item => !item.lido);",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "filter",
+            "feedback": "Correto. filter retorna um novo array contendo os 2 objetos de avisos não lidos (ids 2 e 3)."
+          },
+          {
+            "id": "tok-2",
+            "text": "map",
+            "feedback": "Incorreto. map transforma cada item no resultado booleano [false, true, true], sem filtrar os objetos."
+          },
+          {
+            "id": "tok-3",
+            "text": "find",
+            "feedback": "Incorreto. find retorna apenas o primeiro objeto correspondente (id 2), e não um array com todos os pendentes."
+          },
+          {
+            "id": "tok-4",
+            "text": "forEach",
+            "feedback": "Incorreto. forEach apenas percorre a lista para efeitos colaterais e retorna undefined."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-058",
+      "title": "Generalização e Especialização no Modelo Conceitual",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Modelagem e Bancos de Dados",
+      "conceptId": "DB-EER-01",
+      "difficulty": "intermediate",
+      "context": "No Modelo Entidade-Relacionamento Estendido (MER-E) do campus N9, a entidade PESSOA reúne atributos comuns (CPF, nome, e-mail) e especializa-se nas entidades filhas ESTUDANTE (atributo matricula) e DOCENTE (atributo titulacao), com restrição disjunta e total (d, total).",
+      "instruction": "Selecione o nó do diagrama que representa o conector de especialização/generalização responsável por herdar os atributos de PESSOA para ESTUDANTE e DOCENTE.",
+      "xp": 75,
+      "help": {
+        "hint": "Procure o símbolo de hierarquia (triângulo/círculo 'd') que liga a superclasse PESSOA às subclasses ESTUDANTE e DOCENTE.",
+        "concept": "Na generalização/especialização do MER-E, subclasses herdam automaticamente chave primária e atributos da superclasse, mantendo seus atributos específicos.",
+        "example": "VEICULO generaliza CARRO e MOTO: placa e modelo ficam em VEICULO, enquanto cilindradas fica apenas em MOTO."
+      },
+      "explanation": "O conector de especialização (d, total) estabelece a hierarquia 'é-um' entre a superclasse PESSOA e as subclasses ESTUDANTE e DOCENTE, garantindo que ambas herdem CPF, nome e e-mail sem duplicação. Os atributos específicos (matricula e titulacao) permanecem apenas nas respectivas entidades especializadas.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Generalização e Especialização no Modelo Conceitual (DB-EER-01)",
+        "objective": "Identificar o elemento de generalização/especialização e herança de atributos em um Modelo Entidade-Relacionamento Estendido.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama Entidade-Relacionamento Estendido vertical: no topo, retângulo PESSOA com atributos (PK CPF, nome, email); no centro, linha dupla descendo até círculo de especialização 'd' (disjunta e total); na base, dois ramos conectando-se aos retângulos ESTUDANTE (matricula) à esquerda e DOCENTE (titulacao) à direita.",
+        "accessibleDescription": "Componentes do diagrama MER-E: [node-super-pessoa] Entidade genérica PESSOA no topo com atributos CPF, nome e email; [node-spec-connector] Conector de especialização/generalização (círculo 'd' com linha dupla total) ligando PESSOA às subclasses; [node-sub-estudante] Entidade especializada ESTUDANTE com atributo específico matricula; [node-sub-docente] Entidade especializada DOCENTE com atributo específico titulacao.",
+        "nodes": [
+          {
+            "id": "node-super-pessoa",
+            "label": "Entidade PESSOA (Superclasse)",
+            "detail": "Define os atributos comuns (CPF, nome, email) compartilhados por todas as especializações."
+          },
+          {
+            "id": "node-spec-connector",
+            "label": "Conector de Especialização (d, total)",
+            "detail": "Representa a relação hierárquica de generalização/especialização que propaga a herança de atributos."
+          },
+          {
+            "id": "node-sub-estudante",
+            "label": "Entidade ESTUDANTE (Subclasse)",
+            "detail": "Especialização de PESSOA que acrescenta o atributo específico matricula."
+          },
+          {
+            "id": "node-sub-docente",
+            "label": "Entidade DOCENTE (Subclasse)",
+            "detail": "Especialização de PESSOA que acrescenta o atributo específico titulacao."
+          }
+        ],
+        "correctNodeId": "node-spec-connector"
+      }
+    },
+    {
+      "id": "N9-COM-059",
+      "title": "Decisão Exclusiva no Fluxo BPMN",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Gestão de Processos de Negócio",
+      "conceptId": "BPM-GWY-01",
+      "difficulty": "introductory",
+      "context": "No diagrama BPMN (Business Process Model and Notation) de aproveitamento de estudos do campus N9, após a análise documental da coordenação, o processo deve seguir por apenas um caminho mutuamente excludente: 'Deferido' (registrar equivalência) ou 'Indeferido' (notificar motivo ao estudante).",
+      "instruction": "Selecione o elemento do diagrama BPMN que representa o ponto de desvio condicional exclusivo (XOR) para escolher apenas um dos dois caminhos.",
+      "xp": 50,
+      "help": {
+        "hint": "Em BPMN, o losango com um 'X' representa decisão exclusiva (apenas um fluxo sai), enquanto o losango com '+' representa execução paralela simultânea.",
+        "concept": "Gateway exclusivo (XOR) direciona o fluxo para exatamente um caminho conforme condição; gateway paralelo (AND) ativa todos os ramos simultaneamente.",
+        "example": "Se saldo >= valor, aprova compra; senão, recusa — apenas um caminho ocorre (gateway exclusivo)."
+      },
+      "explanation": "O gateway exclusivo (losango marcado com 'X') avalia a condição de deferimento e ativa exatamente um dos fluxos de saída ('Deferido' ou 'Indeferido'). O evento de início apenas dispara o processo, a tarefa executa a análise técnica e o gateway paralelo (losango com '+') seria usado se duas atividades precisassem ocorrer ao mesmo tempo.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "OMG Business Process Model and Notation (BPMN) Version 2.0.2."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Decisão Exclusiva no Fluxo BPMN (BPM-GWY-01)",
+        "objective": "Identificar o gateway exclusivo (XOR) em um diagrama BPMN para ramificação condicional mutuamente excludente.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "OMG BPMN 2.0.2"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Fluxo horizontal BPMN: à esquerda, círculo fino de início 'Pedido recebido'; seguido pelo retângulo arredondado 'Analisar histórico'; depois um losango com 'X' ('Deferido?') bifurcando-se em dois caminhos exclusivos ('Registrar equivalência' acima e 'Notificar indeferimento' abaixo), além de referência comparativa a um losango '+' paralelo.",
+        "accessibleDescription": "Elementos do diagrama BPMN: [node-start] Evento de início 'Pedido recebido'; [node-task-analise] Tarefa 'Analisar histórico e ementa'; [node-gw-xor] Gateway exclusivo (losango com 'X') que direciona para 'Registrar equivalência' ou 'Notificar indeferimento'; [node-gw-and] Gateway paralelo (losango com '+') que executa ramos simultâneos.",
+        "nodes": [
+          {
+            "id": "node-start",
+            "label": "Evento de Início: Pedido Recebido",
+            "detail": "Círculo simples que marca o gatilho inicial da instância do processo."
+          },
+          {
+            "id": "node-task-analise",
+            "label": "Tarefa: Analisar Histórico e Ementa",
+            "detail": "Atividade executada pela coordenação para emitir parecer técnico."
+          },
+          {
+            "id": "node-gw-xor",
+            "label": "Gateway Exclusivo (Losango X): Deferido?",
+            "detail": "Ponto de decisão condicional que escolhe exatamente um caminho mutuamente excludente."
+          },
+          {
+            "id": "node-gw-and",
+            "label": "Gateway Paralelo (Losango +)",
+            "detail": "Divisor de fluxo simultâneo onde todos os caminhos de saída são executados em paralelo."
+          }
+        ],
+        "correctNodeId": "node-gw-xor"
+      }
+    },
+    {
+      "id": "N9-COM-060",
+      "title": "Resposta Responsável a Incidente com Dados Pessoais",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Ética, Privacidade e Segurança",
+      "conceptId": "PRV-INC-01",
+      "difficulty": "advanced",
+      "context": "Durante a operação do sistema de bolsas N9, a equipe identifica que um endpoint de relatório sem validação de perfil permitiu a consulta indevida de CPFs, telefones e dados bancários de 420 bolsistas durante a última hora.",
+      "instruction": "Conduza as três decisões críticas de resposta ao incidente envolvendo dados pessoais, articulando contenção técnica, registro de evidências e comunicação transparente.",
+      "xp": 100,
+      "help": {
+        "hint": "Priorize estancar a exposição imediatamente, preservar trilhas de auditoria sem apagar evidências e comunicar formalmente o encarregado (DPO), a autoridade competente e os titulares afetados quando houver risco relevante.",
+        "concept": "A gestão ética e legal de incidentes com dados pessoais (LGPD, art. 48) exige contenção imediata, preservação de registros técnicos e comunicação transparente aos órgãos de governança e titulares.",
+        "example": "Bloquear a rota exposta, preservar logs de acesso e notificar o encarregado de dados e os titulares com orientações de proteção."
+      },
+      "explanation": "Diante de incidente de segurança que possa acarretar risco ou dano relevante aos titulares, a atuação responsável exige conter imediatamente a vulnerabilidade sem destruir evidências, registrar a extensão e os dados afetados por meio dos logs de auditoria, e acionar formalmente o encarregado pelo tratamento de dados pessoais (DPO) para comunicação à autoridade nacional e aos titulares afetados com medidas de mitigação.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º."
+        },
+        {
+          "role": "normative-complementary",
+          "type": "official-reference",
+          "description": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), art. 48."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Resposta Responsável a Incidente com Dados Pessoais (PRV-INC-01)",
+        "objective": "Conduzir contenção técnica, preservação de registros e comunicação institucional responsável diante de vazamento de dados pessoais.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 4º–6º",
+          "Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º",
+          "Lei nº 13.709/2018 (LGPD), art. 48"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Analista de Segurança",
+            "message": "Confirmamos que o endpoint /api/relatorio-bolsistas está retornando CPFs e contas bancárias sem checar permissão, e há acessos externos nos últimos 50 minutos. Qual é a primeira ação?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Suspender imediatamente o endpoint exposto, aplicar verificação de autorização e preservar os logs de acesso.",
+                "reaction": "Decisão adequada: A exposição é contida no ato e as evidências técnicas permanecem íntegras para dimensionar o impacto.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Apagar os logs do servidor web para eliminar vestígios do problema antes que a auditoria consulte.",
+                "reaction": "Consequência: Destruir logs impede identificar quais registros foram acessados e viola deveres legais de rastreabilidade.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Deixar o endpoint ativo até a próxima janela mensal de manutenção para não interromper relatórios.",
+                "reaction": "Consequência: Manter a falha ativa prolonga a extração não autorizada de dados pessoais e bancários.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Encarregado de Dados (DPO)",
+            "message": "Com a falha contida, precisamos levantar o escopo exato do incidente para a análise de risco. Como você estrutura o registro técnico?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Enviar apenas uma mensagem informal dizendo que houve uma instabilidade passageira sem detalhar campos.",
+                "reaction": "Consequência: A omissão dos tipos de dados comprometidos impede avaliar corretamente o risco aos titulares.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Documentar janela temporal, categorias de dados expostos, quantidade de titulares afetados e evidências dos logs.",
+                "reaction": "Decisão adequada: O relatório técnico estruturado fundamenta a avaliação de risco e atende às exigências de governança e conformidade.",
+                "correct": true
+              },
+              {
+                "id": "s2-c3",
+                "text": "Publicar a planilha completa dos 420 bolsistas afetados no mural interno para que confiram seus dados.",
+                "reaction": "Consequência: Divulgar a lista completa provoca um segundo vazamento de dados pessoais.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Diretora de Tecnologia",
+            "message": "Como os dados expostos incluem CPF e conta bancária, há risco relevante de fraude contra os estudantes. Qual postura de comunicação devemos adotar?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Manter sigilo absoluto e não avisar os estudantes, já que a falha técnica foi corrigida.",
+                "reaction": "Consequência: Ocultar incidentes com risco relevante fere a legislação de proteção de dados e deixa os titulares vulneráveis a golpes.",
+                "correct": false
+              },
+              {
+                "id": "s3-c2",
+                "text": "Formalizar a comunicação à autoridade nacional e notificar os titulares afetados com linguagem clara e orientações de prevenção.",
+                "reaction": "Decisão adequada: A transparência responsável protege os titulares, cumpre a legislação e fortalece a confiança institucional.",
+                "correct": true
+              },
+              {
+                "id": "s3-c3",
+                "text": "Responsabilizar publicamente o desenvolvedor júnior em nota externa sem orientar os estudantes afetados.",
+                "reaction": "Consequência: Expor indivíduos não corrige processos institucionais nem oferece medidas práticas de proteção aos titulares.",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

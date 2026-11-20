@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('laboratório separado apresenta o lote compartilhado e feedback animado', async ({ page }, testInfo) => {
   await page.goto('./#/laboratorio');
   await expect(page.getByRole('heading', { name: /TREINE/ })).toBeVisible();
-  await expect(page.locator('.lab-mechanic-card')).toHaveCount(40);
+  await expect(page.locator('.lab-mechanic-card')).toHaveCount(60);
   await expect(page.locator('.lab-student')).toBeVisible();
   await expect(page.locator('.lab-bot')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
