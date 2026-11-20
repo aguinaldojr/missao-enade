@@ -10,6 +10,7 @@ test('laboratório separado apresenta o lote compartilhado e feedback animado', 
 
   await page.getByRole('button', { name: /Começar laboratório/ }).click();
   await expect(page.getByRole('heading', { name: 'Falha de Acesso no Portal N9' })).toBeVisible();
+  await expect(page.locator('.lab-option-key')).toHaveText(['A', 'B', 'C', 'D', 'E']);
   await page.locator('[data-option="opt-a"]').click();
   await page.getByRole('button', { name: 'Verificar' }).click();
   await expect(page.getByText('Excelente! +50 XP')).toBeVisible();

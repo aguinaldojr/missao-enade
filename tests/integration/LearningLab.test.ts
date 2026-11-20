@@ -27,6 +27,8 @@ describe('experiência do laboratório rápido', () => {
     clickText(root, 'Começar laboratório');
     expect(root.textContent).toContain('Falha de Acesso no Portal N9');
     expect(root.textContent).toContain('Preciso de ajuda');
+    expect([...root.querySelectorAll('.lab-option-key')].map((node) => node.textContent)).toEqual(['A', 'B', 'C', 'D', 'E']);
+    expect(root.textContent).not.toContain('opt-a');
     click(root, '[data-option="opt-a"]');
     click(root, '[data-action="check"]');
     expect(root.textContent).toContain('Excelente! +50 XP');

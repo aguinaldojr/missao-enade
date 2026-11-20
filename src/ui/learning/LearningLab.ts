@@ -197,12 +197,12 @@ export class LearningLab {
     const group = el('div', 'lab-options');
     group.setAttribute('role', 'radiogroup');
     group.setAttribute('aria-label', activity.instruction);
-    activity.options.forEach((option) => {
+    activity.options.forEach((option, index) => {
       const button = action('', 'lab-option');
       button.dataset.option = option.id;
       button.setAttribute('role', 'radio');
       button.setAttribute('aria-checked', String(this.selectedChoice === option.id));
-      button.append(el('span', 'lab-option-key', option.id), el('span', '', option.text));
+      button.append(el('span', 'lab-option-key', String.fromCharCode(65 + index)), el('span', '', option.text));
       button.addEventListener('click', () => { this.selectedChoice = option.id; this.feedback = ''; this.sound.play('tap'); this.render(); });
       group.append(button);
     });
