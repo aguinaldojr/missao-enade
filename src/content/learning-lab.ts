@@ -1,4 +1,5 @@
-import catalog from './learning/n9-com-01.json';
+import catalogOne from './learning/n9-com-01.json';
+import catalogTwo from './learning/n9-com-02.json';
 import type { CatalogLearningActivity } from '../domain/models/LearningActivityCatalog';
 import { JsonLearningActivityRepository } from '../infrastructure/content/JsonLearningActivityRepository';
 
@@ -129,10 +130,14 @@ function toLearningActivity(activity: CatalogLearningActivity): LearningActivity
   }
 }
 
-const repository = new JsonLearningActivityRepository(catalog);
+const activities = [catalogOne, catalogTwo]
+  .flatMap((catalog) => new JsonLearningActivityRepository(catalog).all());
+if (new Set(activities.map((activity) => activity.id)).size !== activities.length) {
+  throw new Error('IDs duplicados entre lotes de aprendizagem.');
+}
 
 /** Lote compartilhado validado pelo contrato editorial antes de chegar à interface. */
-export const N9_SHARED_LEARNING_LAB: readonly LearningActivity[] = Object.freeze(repository.all().map(toLearningActivity));
+export const N9_SHARED_LEARNING_LAB: readonly LearningActivity[] = Object.freeze(activities.map(toLearningActivity));
 
 /** Alias temporário para consumidores do protótipo anterior. */
 export const SI_LEARNING_LAB = N9_SHARED_LEARNING_LAB;

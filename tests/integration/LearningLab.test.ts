@@ -21,8 +21,8 @@ describe('experiência do laboratório rápido', () => {
     localStorage.clear();
     const root = document.createElement('div'); document.body.append(root);
     const exit = vi.fn(); lab = new LearningLab(root, exit);
-    expect(root.textContent).toContain('Vinte atividades compartilhadas');
-    expect(root.querySelectorAll('.lab-mechanic-card')).toHaveLength(20);
+    expect(root.textContent).toContain('40 atividades compartilhadas');
+    expect(root.querySelectorAll('.lab-mechanic-card')).toHaveLength(40);
 
     clickText(root, 'Começar laboratório');
     expect(root.textContent).toContain('Falha de Acesso no Portal N9');

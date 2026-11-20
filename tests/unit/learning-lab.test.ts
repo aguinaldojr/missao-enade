@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { SI_LEARNING_LAB } from '../../src/content/learning-lab';
 
 describe('laboratório de mecânicas compartilhadas', () => {
-  it('carrega as vinte atividades e cobre as nove mecânicas', () => {
-    expect(SI_LEARNING_LAB).toHaveLength(20);
+  it('carrega os dois lotes e cobre as nove mecânicas', () => {
+    expect(SI_LEARNING_LAB).toHaveLength(40);
     expect(new Set(SI_LEARNING_LAB.map((activity) => activity.type))).toEqual(new Set([
       'choice', 'binary-choice', 'multiple-select', 'order', 'match', 'categorize', 'complete-code',
       'hotspot', 'decision-dialogue',
     ]));
-    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(20);
+    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(40);
     expect(SI_LEARNING_LAB.every((activity) => activity.xp > 0 && activity.explanation.length > 40)).toBe(true);
   });
 
@@ -37,6 +37,22 @@ describe('laboratório de mecânicas compartilhadas', () => {
         expect(activity.steps).toHaveLength(3);
         expect(activity.steps.every((step) => step.choices.filter((choice) => choice.correct).length === 1)).toBe(true);
       }
+    }
+  });
+
+  it('preserva os trechos funcionais de C e SQL do segundo lote', () => {
+    const c = SI_LEARNING_LAB.find((activity) => activity.id === 'N9-COM-036');
+    expect(c?.type).toBe('complete-code');
+    if (c?.type === 'complete-code') {
+      expect(c.codeBefore).toContain('int pop(Pilha *p, int *saida)');
+      expect(c.tokens.find((token) => token.id === c.correctTokenId)?.text)
+        .toBe('*saida = p->dados[p->topo--];');
+    }
+    const sql = SI_LEARNING_LAB.find((activity) => activity.id === 'N9-COM-037');
+    expect(sql?.type).toBe('complete-code');
+    if (sql?.type === 'complete-code') {
+      expect(sql.tokens.find((token) => token.id === sql.correctTokenId)?.text)
+        .toBe('WHERE E.ID_ALUNO IS NULL');
     }
   });
 });

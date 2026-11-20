@@ -1,0 +1,1573 @@
+{
+"schemaVersion": 1,
+"batchId": "N9-COM-02",
+"activities": [
+{
+"id": "N9-COM-021",
+"title": "Fronteira e Retroalimentação no Atendimento",
+"mechanic": "single-choice",
+"courses": [
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Fundamentos de Sistemas de Informação",
+"conceptId": "SYS-TGS-01",
+"difficulty": "introductory",
+"context": "No portal acadêmico do campus N9, o módulo de chamados recebe solicitações dos estudantes, encaminha ao setor técnico e exibe uma pesquisa de satisfação após o encerramento para ajustar a triagem.",
+"instruction": "De acordo com a Teoria Geral dos Sistemas, qual elemento representa o mecanismo de retroalimentação (feedback) nesse cenário?",
+"xp": 50,
+"help": {
+"hint": "Observe qual fluxo retorna informações sobre o resultado da saída para regular o funcionamento futuro do sistema.",
+"concept": "Na Teoria Geral dos Sistemas, retroalimentação é o retorno de informações das saídas para ajustar entradas ou processamento.",
+"example": "Um termostato mede a temperatura da sala e ajusta o ar-condicionado conforme o resultado obtido."
+},
+"explanation": "A pesquisa de satisfação coletada após a resolução do chamado devolve informação sobre a qualidade da saída para recalibrar as regras de triagem (retroalimentação/feedback). O servidor que hospeda a aplicação é recurso interno de processamento; os estudantes externos compõem o ambiente; e o formulário inicial representa entrada (input) do sistema.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Fronteira e Retroalimentação no Atendimento (SYS-TGS-01)",
+"objective": "Identificar o elemento de retroalimentação (feedback) em um sistema de informação organizacional segundo a Teoria Geral dos Sistemas.",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "single-choice",
+"options": [
+{
+"id": "opt-a",
+"text": "O retorno da pesquisa de satisfação usado para recalibrar a triagem de novos chamados.",
+"feedback": "Correto. A informação gerada após a saída retorna ao processo para corrigir e aperfeiçoar o comportamento do sistema."
+},
+{
+"id": "opt-b",
+"text": "O cadastro inicial enviado pelo estudante ao abrir uma solicitação de suporte.",
+"feedback": "Incorreto. A abertura da solicitação corresponde à entrada (input) de dados no sistema."
+},
+{
+"id": "opt-c",
+"text": "Os servidores em nuvem onde o banco de dados de chamados está hospedado.",
+"feedback": "Incorreto. Os servidores fazem parte da infraestrutura interna de processamento do sistema."
+},
+{
+"id": "opt-d",
+"text": "As operadoras de internet externas que conectam os estudantes ao portal.",
+"feedback": "Incorreto. As operadoras externas pertencem ao ambiente fora da fronteira de controle do sistema."
+},
+{
+"id": "opt-e",
+"text": "O comprovante numérico exibido na tela imediatamente após o envio do formulário.",
+"feedback": "Incorreto. O comprovante é uma saída imediata, mas por si só não regula o desempenho futuro do processo."
+}
+],
+"correctId": "opt-a"
+}
+},
+{
+"id": "N9-COM-022",
+"title": "Da Leitura Bruta à Ação na Biblioteca",
+"mechanic": "single-choice",
+"courses": [
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Gestão da Informação e Conhecimento",
+"conceptId": "INF-DIKW-01",
+"difficulty": "introductory",
+"context": "A catraca da biblioteca N9 registra o código isolado '2026-11-18T19:05;9842'. Ao cruzar esse registro com a turma, nota-se que 85% dos acessos noturnos ocorrem na véspera das avaliações.",
+"instruction": "Na hierarquia DIKW (Dado, Informação, Conhecimento e Sabedoria/Decisão), o que representa o registro isolado '2026-11-18T19:05;9842'?",
+"xp": 50,
+"help": {
+"hint": "Considere o nível mais básico da pirâmide, antes de qualquer contextualização ou cruzamento semântico.",
+"concept": "Dado é o registro bruto sem contexto; informação resulta da organização contextualizada; conhecimento expressa padrões aplicáveis.",
+"example": "O número '39,2' isolado é um dado; 'temperatura corporal de 39,2 °C de um paciente' é informação."
+},
+"explanation": "O registro bruto gerado pela catraca ('2026-11-18T19:05;9842') não possui contexto interpretativo por si só, caracterizando um dado. Quando associado ao curso e ao calendário acadêmico, transforma-se em informação; o padrão recorrente de procura na véspera de provas constitui conhecimento; e a ampliação do horário de funcionamento representa decisão baseada em sabedoria organizacional.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Da Leitura Bruta à Ação na Biblioteca (INF-DIKW-01)",
+"objective": "Distinguir dado bruto de informação, conhecimento e decisão segundo a hierarquia DIKW.",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"referencias-enade-2026.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "single-choice",
+"options": [
+{
+"id": "opt-a",
+"text": "Dado bruto, pois é um registro simbólico isolado ainda sem contexto interpretativo.",
+"feedback": "Correto. Sem cruzamento com usuário, curso ou calendário, trata-se apenas de um registro elementar."
+},
+{
+"id": "opt-b",
+"text": "Informação gerencial, pois já indica por si só a necessidade de ampliar o horário.",
+"feedback": "Incorreto. A necessidade de ampliar o horário depende de cruzamento com outros registros e análise posterior."
+},
+{
+"id": "opt-c",
+"text": "Conhecimento tácito, pois expressa a experiência acumulada dos bibliotecários.",
+"feedback": "Incorreto. O registro vem de um sensor automático e não representa experiência humana internalizada."
+},
+{
+"id": "opt-d",
+"text": "Sabedoria organizacional, pois traduz uma política institucional consolidada.",
+"feedback": "Incorreto. Sabedoria envolve julgamento e ação estratégica, não a captura bruta de um evento."
+},
+{
+"id": "opt-e",
+"text": "Metadado analítico, pois resume a média mensal de ocupação das salas de estudo.",
+"feedback": "Incorreto. O trecho registra apenas um evento pontual, sem qualquer agregação ou resumo."
+}
+],
+"correctId": "opt-a"
+}
+},
+{
+"id": "N9-COM-023",
+"title": "Gráfico Certo para Evolução Mensal",
+"mechanic": "single-choice",
+"courses": [
+"CC",
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Visualização e Análise de Dados",
+"conceptId": "VIS-CHRT-01",
+"difficulty": "introductory",
+"context": "A coordenação de TI do campus N9 deseja apresentar a variação contínua da taxa média de ocupação dos laboratórios ao longo dos 12 meses do ano letivo.",
+"instruction": "Qual tipo de gráfico comunica com maior clareza a tendência temporal ao longo desses 12 meses?",
+"xp": 50,
+"help": {
+"hint": "Pense em qual representação visual conecta pontos sequenciais no tempo para destacar subidas, quedas e sazonalidade.",
+"concept": "Gráficos de linhas enfatizam evolução contínua e tendências temporais; setores mostram proporções de um todo; dispersão relaciona duas variáveis numéricas.",
+"example": "A variação diária da temperatura ao longo de um mês é representada de forma clara por um gráfico de linhas."
+},
+"explanation": "O gráfico de linhas conecta observações ordenadas cronologicamente, facilitando a leitura imediata de tendências, picos sazonais e quedas ao longo dos 12 meses. Gráficos de pizza ou rosca com 12 fatias dificultam a comparação de ângulos e não expressam continuidade temporal. Gráficos de dispersão avaliam correlação entre duas métricas numéricas distintas, e mapas de árvore mostram hierarquias de composição.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Gráfico Certo para Evolução Mensal (VIS-CHRT-01)",
+"objective": "Selecionar o gráfico de linhas como representação visual adequada para evolução temporal contínua.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "single-choice",
+"options": [
+{
+"id": "opt-a",
+"text": "Gráfico de linhas com os 12 meses ordenados no eixo horizontal e a taxa no eixo vertical.",
+"feedback": "Correto. A ligação sequencial entre os meses destaca tendências e variações sazonais com precisão."
+},
+{
+"id": "opt-b",
+"text": "Gráfico de pizza dividido em 12 fatias proporcionais à ocupação de cada mês.",
+"feedback": "Incorreto. Gráficos de setores servem para composição de um todo, não para mostrar evolução temporal."
+},
+{
+"id": "opt-c",
+"text": "Mapa de árvore (treemap) agrupando os meses pelo tamanho da área retangular.",
+"feedback": "Incorreto. Treemaps representam hierarquias e proporções, perdendo a leitura sequencial do tempo."
+},
+{
+"id": "opt-d",
+"text": "Gráfico de radar radial com 12 eixos partindo do centro sem escala temporal linear.",
+"feedback": "Incorreto. Gráficos de radar dificultam comparações precisas entre meses adjacentes e distorcem áreas."
+},
+{
+"id": "opt-e",
+"text": "Diagrama de dispersão sem eixo temporal relacionando apenas dois cursos distintos.",
+"feedback": "Incorreto. Sem a dimensão temporal explícita, não é possível acompanhar a evolução ao longo do ano."
+}
+],
+"correctId": "opt-a"
+}
+},
+{
+"id": "N9-COM-024",
+"title": "Triagem Automatizada de Bolsas",
+"mechanic": "single-choice",
+"courses": [
+"CC",
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Inteligência Artificial e Ética",
+"conceptId": "AI-BIAS-01",
+"difficulty": "intermediate",
+"context": "Um modelo de aprendizagem de máquina treinado com históricos antigos de concessão de bolsas de iniciação passou a atribuir pontuação sistematicamente menor a candidatos de cursos noturnos.",
+"instruction": "Qual medida técnica e de governança trata adequadamente esse problema antes de utilizar o modelo no apoio à decisão?",
+"xp": 75,
+"help": {
+"hint": "Modelos treinados com dados históricos podem reproduzir desigualdades passadas se não forem auditados e supervisionados.",
+"concept": "O viés algorítmico ocorre quando dados históricos ou atributos proxies geram discriminação sistemática, exigindo auditoria de equidade e supervisão humana.",
+"example": "Se um histórico favorecia apenas um turno por regras antigas, o algoritmo aprende a penalizar os demais turnos."
+},
+"explanation": "A penalização sistemática de candidatos do turno noturno indica viés aprendido a partir de padrões históricos desbalanceados. A mitigação responsável exige auditar métricas de desempenho e equidade por subgrupo, revisar atributos e amostras de treinamento, e manter supervisão humana na decisão final. Ocultar variáveis sem avaliar proxies ou delegar aprovação automática sem revisão perpetua a discriminação.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 154/2026 (Formação Geral), Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Triagem Automatizada de Bolsas (AI-BIAS-01)",
+"objective": "Identificar práticas de auditoria de equidade e supervisão humana para mitigar viés algorítmico em sistemas de apoio à decisão.",
+"locators": [
+"Portaria Inep nº 154/2026 (Formação Geral), arts. 4º–6º",
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"referencias-enade-2026.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "single-choice",
+"options": [
+{
+"id": "opt-a",
+"text": "Auditar taxas de aprovação por turno, revisar os dados de treino e manter revisão humana das recomendações.",
+"feedback": "Correto. Avaliar equidade entre grupos, corrigir distorções na base e preservar supervisão humana evita decisões injustas."
+},
+{
+"id": "opt-b",
+"text": "Manter o modelo em produção automática porque a acurácia global na base histórica superou 90%.",
+"feedback": "Incorreto. Alta acurácia global pode mascarar desempenho injusto e discriminatório em grupos minoritários."
+},
+{
+"id": "opt-c",
+"text": "Remover apenas a coluna 'turno' e implantar sem testes, pois o modelo não terá mais acesso a esse dado.",
+"feedback": "Incorreto. Outras variáveis, como horário de acesso ou trabalho, podem atuar como proxies e manter o viés."
+},
+{
+"id": "opt-d",
+"text": "Ocultar os critérios de pontuação dos candidatos para evitar questionamentos administrativos.",
+"feedback": "Incorreto. Reduzir transparência e explicabilidade agrava riscos éticos e fere princípios de governança."
+},
+{
+"id": "opt-e",
+"text": "Aumentar o peso das notas antigas anteriores a 2015 para reforçar o padrão histórico original.",
+"feedback": "Incorreto. Reforçar dados históricos enviesados intensifica a distorção em vez de corrigi-la."
+}
+],
+"correctId": "opt-a"
+}
+},
+{
+"id": "N9-COM-025",
+"title": "TI na Cadeia de Valor de Porter",
+"mechanic": "binary-choice",
+"courses": [
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Estratégia e Arquitetura Corporativa",
+"conceptId": "STR-PORT-01",
+"difficulty": "introductory",
+"context": "Na cadeia de valor de Michael Porter, atividades primárias envolvem criação, entrega e pós-venda do produto ou serviço, enquanto atividades de apoio sustentam toda a operação.",
+"instruction": "Avalie se a afirmação sobre o papel da Tecnologia da Informação na cadeia de valor está correta ou incorreta.",
+"xp": 40,
+"help": {
+"hint": "Considere se sistemas de informação atuam apenas no departamento de suporte ou também transformam logística, operações e atendimento.",
+"concept": "Na cadeia de valor de Porter, desenvolvimento de tecnologia é uma atividade de apoio que permeia e potencializa todas as atividades primárias e de suporte.",
+"example": "Um sistema de rastreamento em tempo real melhora diretamente a logística de entrega ao cliente."
+},
+"explanation": "A afirmação está incorreta. Embora o desenvolvimento de tecnologia seja classificado como atividade de apoio na estrutura de Porter, os sistemas de informação permeiam toda a cadeia de valor, aumentando eficiência, coordenação e diferenciação tanto nas atividades de suporte quanto nas atividades primárias (logística, operações, marketing, vendas e serviços).",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "TI na Cadeia de Valor de Porter (STR-PORT-01)",
+"objective": "Compreender a atuação transversal da Tecnologia da Informação nas atividades primárias e de apoio da cadeia de valor de Porter.",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "binary-choice",
+"statement": "Na cadeia de valor de Porter, a Tecnologia da Informação restringe-se exclusivamente às rotinas internas de suporte administrativo, sem impacto nas atividades primárias de entrega ao cliente.",
+"correctValue": false,
+"feedbackTrue": "Incorreto. A TI permeia toda a cadeia de valor e transforma diretamente atividades primárias como logística, operações e atendimento.",
+"feedbackFalse": "Correto. Embora classificada em desenvolvimento de tecnologia como apoio, a TI integra e agrega valor às atividades primárias e de suporte."
+}
+},
+{
+"id": "N9-COM-026",
+"title": "COBIT e ITIL na Organização de TI",
+"mechanic": "binary-choice",
+"courses": [
+"SI",
+"TGTI"
+],
+"area": "Governança e Gestão de Serviços de TI",
+"conceptId": "GOV-COB-01",
+"difficulty": "introductory",
+"context": "A diretoria de TI da instituição N9 está estruturando práticas para alinhar investimentos tecnológicos aos objetivos institucionais e, paralelamente, organizar a central de incidentes e mudanças.",
+"instruction": "Julgue a afirmação sobre a distinção entre governança com COBIT e gestão de serviços com ITIL.",
+"xp": 40,
+"help": {
+"hint": "Diferencie direcionamento estratégico, avaliação e monitoramento (governança) da operação cotidiana de entrega e suporte de serviços.",
+"concept": "COBIT foca na governança e gestão corporativa de TI alinhada ao negócio; ITIL concentra-se nas práticas de gerenciamento do ciclo de vida de serviços de TI.",
+"example": "Definir políticas de risco e retorno de TI relaciona-se ao COBIT; estruturar fila de incidentes relaciona-se ao ITIL."
+},
+"explanation": "A afirmação está correta. O COBIT oferece um modelo abrangente de governança e gestão corporativa de informação e tecnologia para avaliar, direcionar e monitorar o alinhamento ao negócio e os riscos. Já o ITIL reúne boas práticas voltadas especificamente à operação, entrega, suporte e melhoria contínua dos serviços de TI.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "COBIT e ITIL na Organização de TI (GOV-COB-01)",
+"objective": "Distinguir o escopo de governança corporativa de TI (COBIT) do gerenciamento de serviços de TI (ITIL).",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "binary-choice",
+"statement": "Enquanto o COBIT orienta a governança corporativa de TI para avaliar, direcionar e monitorar o alinhamento estratégico, o ITIL concentra-se nas práticas de entrega, suporte e operação dos serviços de TI.",
+"correctValue": true,
+"feedbackTrue": "Correto. COBIT e ITIL são complementares: o primeiro estrutura a governança corporativa de TI e o segundo detalha o gerenciamento de serviços.",
+"feedbackFalse": "Incorreto. A distinção apresentada está correta: COBIT atua na governança e gestão corporativa de TI, e ITIL foca na gestão de serviços."
+}
+},
+{
+"id": "N9-COM-027",
+"title": "Gargalo na Emissão de Diplomas",
+"mechanic": "multiple-select",
+"courses": [
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Gestão de Processos de Negócio",
+"conceptId": "BPM-IMP-01",
+"difficulty": "intermediate",
+"context": "O mapeamento BPMN da secretaria acadêmica N9 mostrou que um pedido de diploma leva 20 dias úteis: 18 dias aguardando conferência manual em uma única mesa e 2 dias em atividades efetivas.",
+"instruction": "Selecione exatamente 3 ações coerentes com a gestão de processos (BPM) para diagnosticar e melhorar esse fluxo.",
+"xp": 80,
+"help": {
+"hint": "Foque no tempo de espera na etapa restritiva, em indicadores de desempenho e na automação ou paralelização de verificações.",
+"concept": "Em BPM, identificar gargalos, medir lead time versus tempo de processamento e eliminar retrabalhos manuais orientam o redesenho de processos.",
+"example": "Automatizar validações de histórico já registradas no banco elimina filas de conferência manual."
+},
+"explanation": "Em gestão de processos (BPM), quando 90% do tempo total (18 de 20 dias) corresponde à fila de espera em uma etapa, tem-se um gargalo claro. As ações adequadas incluem monitorar indicadores de tempo de ciclo e fila, automatizar conferências de requisitos já existentes no sistema acadêmico e redesenhar o fluxo permitindo validações paralelas quando não houver dependência estrita.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Gargalo na Emissão de Diplomas (BPM-IMP-01)",
+"objective": "Selecionar práticas de análise de gargalos, indicadores de desempenho e redesenho de fluxo em BPM.",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "multiple-select",
+"requiredCount": 3,
+"options": [
+{
+"id": "opt-1",
+"text": "Medir separadamente o tempo de fila e o tempo efetivo de execução para acompanhar o gargalo.",
+"feedback": "Correto. Distinguir tempo de espera e tempo de processamento evidencia onde o fluxo realmente trava.",
+"correct": true
+},
+{
+"id": "opt-2",
+"text": "Automatizar a checagem de créditos e pendências já registradas na base acadêmica.",
+"feedback": "Correto. Eliminar conferências manuais repetitivas reduz erros e alivia a etapa congestionada.",
+"correct": true
+},
+{
+"id": "opt-3",
+"text": "Redesenhar o fluxo em BPMN para executar em paralelo verificações independentes.",
+"feedback": "Correto. O paralelismo controlado reduz o tempo total de atravessamento sem comprometer controles.",
+"correct": true
+},
+{
+"id": "opt-4",
+"text": "Acelerar apenas a etapa final de impressão, que já consome menos de um dia útil.",
+"feedback": "Incorreto. Otimizar etapas não restritivas não reduz a fila acumulada no gargalo principal.",
+"correct": false
+},
+{
+"id": "opt-5",
+"text": "Remover a conferência de integralização curricular para zerar o tempo de análise.",
+"feedback": "Incorreto. Eliminar um controle essencial gera emissão indevida e compromete a conformidade.",
+"correct": false
+},
+{
+"id": "opt-6",
+"text": "Redesenhá-lo apenas no diagrama visual sem definir metas nem responsáveis pela etapa.",
+"feedback": "Incorreto. Modelagem sem indicadores nem governança de papéis não sustenta melhoria contínua.",
+"correct": false
+}
+]
+}
+},
+{
+"id": "N9-COM-028",
+"title": "Qualidade Contínua na Sprint",
+"mechanic": "multiple-select",
+"courses": [
+"CC",
+"SI",
+"TADS"
+],
+"area": "Engenharia e Qualidade de Software",
+"conceptId": "QA-AGL-01",
+"difficulty": "intermediate",
+"context": "No desenvolvimento ágil do aplicativo N9, todas as verificações automatizadas passaram na integração contínua, mas usuários pilotos relataram que o fluxo de matrícula não atende à regra da secretaria.",
+"instruction": "Selecione exatamente 3 práticas que fortalecem conjuntamente a verificação e a validação ao longo das sprints.",
+"xp": 80,
+"help": {
+"hint": "Verificação confere se o produto foi construído corretamente segundo a especificação; validação confirma se o produto certo atende à necessidade real.",
+"concept": "Qualidade ágil combina testes automatizados (verificação) com critérios de aceitação claros e feedback frequente dos interessados (validação).",
+"example": "Revisar o incremento funcional com usuários reais ao fim da sprint valida se a regra de negócio foi compreendida."
+},
+"explanation": "Testes unitários e de integração garantem verificação técnica do código, mas não substituem a validação de valor junto aos usuários. Incluir critérios de aceitação testáveis antes da codificação, revisar incrementos funcionais com usuários-chave e automatizar testes de regressão assegura que o software funcione sem defeitos e atenda às regras reais do negócio.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Qualidade Contínua na Sprint (QA-AGL-01)",
+"objective": "Combinar práticas de verificação técnica e validação de negócio em ciclos iterativos de desenvolvimento ágil.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "multiple-select",
+"requiredCount": 3,
+"options": [
+{
+"id": "opt-1",
+"text": "Definir critérios de aceitação claros com exemplos de regras de negócio antes de iniciar a tarefa.",
+"feedback": "Correto. Critérios compartilhados alinham desenvolvedores, testadores e interessados sobre o comportamento esperado.",
+"correct": true
+},
+{
+"id": "opt-2",
+"text": "Validar incrementos funcionais com representantes da secretaria durante a revisão da sprint.",
+"feedback": "Correto. A demonstração frequente permite corrigir rapidamente interpretações equivocadas de regra de negócio.",
+"correct": true
+},
+{
+"id": "opt-3",
+"text": "Manter suíte automatizada de testes de regressão executada a cada integração de código.",
+"feedback": "Correto. A verificação contínua detecta quebras precocemente enquanto novas funcionalidades evoluem.",
+"correct": true
+},
+{
+"id": "opt-4",
+"text": "Concentrar todos os testes de aceitação apenas na semana final antes da entrega anual.",
+"feedback": "Incorreto. Postergar a validação aumenta o custo de retrabalho e contradiz o feedback contínuo ágil.",
+"correct": false
+},
+{
+"id": "opt-5",
+"text": "Considerar a história concluída assim que o código compila sem erros no ambiente local.",
+"feedback": "Incorreto. Compilação não comprova atendimento aos critérios de qualidade nem às regras do usuário.",
+"correct": false
+},
+{
+"id": "opt-6",
+"text": "Dispensar revisão de código para ganhar velocidade sempre que houver prazo curto.",
+"feedback": "Incorreto. Sacrificar revisão eleva a dívida técnica e a incidência de defeitos em produção.",
+"correct": false
+}
+]
+}
+},
+{
+"id": "N9-COM-029",
+"title": "Fluxo de Dados até o Painel Analítico",
+"mechanic": "sequence-order",
+"courses": [
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Dados e Apoio à Decisão",
+"conceptId": "DW-ETL-01",
+"difficulty": "intermediate",
+"context": "A equipe de inteligência de dados do campus N9 precisa consolidar registros da biblioteca, do portal acadêmico e do financeiro em um painel gerencial de evasão.",
+"instruction": "Ordene as 5 etapas do pipeline analítico desde a coleta nas bases operacionais até a análise gerencial.",
+"xp": 80,
+"help": {
+"hint": "Lembre-se da sequência clássica ETL (Extração, Transformação e Carga) antes da disponibilização nos painéis.",
+"concept": "Um pipeline de Data Warehouse extrai dados heterogêneos, padroniza e limpa formatos, carrega no repositório dimensional e alimenta consultas analíticas.",
+"example": "Datas em formatos diferentes são padronizadas na etapa de transformação antes de entrar no Data Warehouse."
+},
+"explanation": "O fluxo inicia pela extração dos dados brutos dos sistemas transacionais de origem. Em seguida, ocorre a transformação, na qual registros são limpos, deduplicados e padronizados. Depois, os dados tratados são carregados nas tabelas fato e dimensão do Data Warehouse. Na sequência, o painel analítico consulta o modelo dimensional e, por fim, os gestores interpretam os indicadores para decidir.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Fluxo de Dados até o Painel Analítico (DW-ETL-01)",
+"objective": "Ordenar as etapas de extração, transformação, carga em Data Warehouse e consumo em painel analítico.",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"referencias-enade-2026.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "sequence-order",
+"blocks": [
+{
+"id": "etl-1",
+"text": "Extrair registros brutos dos bancos transacionais da biblioteca, portal e financeiro."
+},
+{
+"id": "etl-2",
+"text": "Limpar inconsistências, remover duplicidades e padronizar códigos e datas."
+},
+{
+"id": "etl-3",
+"text": "Carregar os dados integrados nas tabelas fato e dimensão do Data Warehouse."
+},
+{
+"id": "etl-4",
+"text": "Atualizar as visões e indicadores consolidados no painel analítico."
+},
+{
+"id": "etl-5",
+"text": "Analisar os indicadores históricos para apoiar ações de retenção estudantil."
+}
+],
+"correctOrder": [
+"etl-1",
+"etl-2",
+"etl-3",
+"etl-4",
+"etl-5"
+]
+}
+},
+{
+"id": "N9-COM-030",
+"title": "Rastreabilidade da Mudança até a Entrega",
+"mechanic": "sequence-order",
+"courses": [
+"CC",
+"SI",
+"TADS"
+],
+"area": "Engenharia de Software e Configuração",
+"conceptId": "CFG-TRC-01",
+"difficulty": "intermediate",
+"context": "A secretaria solicitou uma nova regra de cálculo de frequência no sistema N9. A equipe precisa garantir rastreabilidade completa entre o pedido e a versão liberada.",
+"instruction": "Ordene as 5 etapas para conduzir e rastrear a alteração com controle de configuração.",
+"xp": 80,
+"help": {
+"hint": "Registre e identifique o requisito antes de vincular commits, executar testes e gerar a versão de entrega.",
+"concept": "Rastreabilidade bidirecional vincula requisitos, alterações versionadas de código, evidências de teste e artefatos implantados.",
+"example": "Cada commit e caso de teste referencia o identificador único do requisito aprovado."
+},
+"explanation": "A rastreabilidade inicia pelo registro formal do requisito com identificador único e critérios de aceitação. Em seguida, o desenvolvedor implementa a alteração em branch versionada referenciando esse identificador. Depois, executam-se os testes automatizados vinculados ao requisito, gera-se o pacote de release etiquetado e registra-se a implantação no histórico de mudanças.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Rastreabilidade da Mudança até a Entrega (CFG-TRC-01)",
+"objective": "Sequenciar o ciclo de rastreabilidade entre especificação de requisito, controle de versão, verificação por testes e liberação.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "sequence-order",
+"blocks": [
+{
+"id": "trc-1",
+"text": "Registrar a regra aprovada com identificador único de requisito e critérios de aceitação."
+},
+{
+"id": "trc-2",
+"text": "Implementar a mudança em branch controlada vinculando os commits ao ID do requisito."
+},
+{
+"id": "trc-3",
+"text": "Executar casos de teste automatizados associados ao requisito e registrar os resultados."
+},
+{
+"id": "trc-4",
+"text": "Gerar tag de versão e artefato imutável após revisão e aprovação do merge."
+},
+{
+"id": "trc-5",
+"text": "Implantar a release e atualizar a matriz de rastreabilidade com a versão entregue."
+}
+],
+"correctOrder": [
+"trc-1",
+"trc-2",
+"trc-3",
+"trc-4",
+"trc-5"
+]
+}
+},
+{
+"id": "N9-COM-031",
+"title": "Sistemas por Nível Organizacional",
+"mechanic": "pair-match",
+"courses": [
+"SI",
+"TGTI"
+],
+"area": "Sistemas de Informação Organizacionais",
+"conceptId": "SIS-LVL-01",
+"difficulty": "introductory",
+"context": "Uma instituição de ensino utiliza quatro categorias clássicas de sistemas de informação para apoiar desde o registro diário de matrículas até o planejamento plurianual da reitoria.",
+"instruction": "Relacione cada tipo de sistema (SPT, SIG, SAD e SAE) à sua função principal na organização.",
+"xp": 60,
+"help": {
+"hint": "Associe operações rotineiras ao SPT, relatórios periódicos ao SIG, simulações semiestruturadas ao SAD e visão estratégica ao SAE.",
+"concept": "SPT atende ao nível operacional; SIG e SAD apoiam o nível gerencial; SAE atende ao nível estratégico executivo.",
+"example": "O caixa de supermercado usa um SPT; o painel de cenários financeiros da diretoria é um SAE."
+},
+"explanation": "O Sistema de Processamento de Transações (SPT) registra eventos operacionais diários de forma padronizada. O Sistema de Informações Gerenciais (SIG) consolida dados do SPT em relatórios periódicos de acompanhamento. O Sistema de Apoio à Decisão (SAD) oferece modelos analíticos e simulações para problemas semiestruturados. O Sistema de Apoio ao Executivo (SAE) sintetiza indicadores internos e externos para decisões estratégicas de longo prazo.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Sistemas por Nível Organizacional (SIS-LVL-01)",
+"objective": "Correlacionar SPT, SIG, SAD e SAE às suas respectivas funções nos níveis operacional, gerencial e estratégico.",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"referencias-enade-2026.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "pair-match",
+"pairs": [
+{
+"id": "pair-1",
+"left": "SPT (Sistema de Processamento de Transações)",
+"right": "Registrar rotineiramente matrículas, empréstimos e pagamentos do dia a dia operacional."
+},
+{
+"id": "pair-2",
+"left": "SIG (Sistema de Informações Gerenciais)",
+"right": "Gerar relatórios periódicos de resumo e exceção a partir dos dados operacionais."
+},
+{
+"id": "pair-3",
+"left": "SAD (Sistema de Apoio à Decisão)",
+"right": "Simular cenários 'e se' para alocação de turmas e salas em problemas semiestruturados."
+},
+{
+"id": "pair-4",
+"left": "SAE (Sistema de Apoio ao Executivo)",
+"right": "Apresentar indicadores estratégicos consolidados para planejamento de longo prazo da direção."
+}
+]
+}
+},
+{
+"id": "N9-COM-032",
+"title": "Estruturas de Dados no Cotidiano de Software",
+"mechanic": "pair-match",
+"courses": [
+"CC",
+"SI",
+"TADS"
+],
+"area": "Algoritmos e Estruturas de Dados",
+"conceptId": "AED-STR-01",
+"difficulty": "intermediate",
+"context": "Durante o desenvolvimento das ferramentas do campus N9, cada funcionalidade exige uma estrutura de dados adequada ao padrão de acesso e relacionamento dos elementos.",
+"instruction": "Associe cada estrutura de dados ao cenário de aplicação mais adequado.",
+"xp": 75,
+"help": {
+"hint": "Lembre-se de LIFO para pilha, FIFO para fila, acesso direto por chave para tabela hash e vértices/arestas para grafo.",
+"concept": "A escolha da estrutura de dados depende da ordem de inserção/remoção, da necessidade de busca rápida por chave ou da modelagem de conexões.",
+"example": "Desfazer ações em um editor de texto segue a lógica de pilha (último a entrar, primeiro a sair)."
+},
+"explanation": "A pilha segue o princípio LIFO, ideal para histórico de desfazer ações. A fila segue o princípio FIFO, garantindo atendimento por ordem de chegada. A tabela hash mapeia chaves diretamente a posições de memória, oferecendo busca média em tempo constante O(1) por identificador. O grafo modela entidades (vértices) e suas conexões (arestas), como pré-requisitos entre disciplinas.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Estruturas de Dados no Cotidiano de Software (AED-STR-01)",
+"objective": "Associar pilha, fila, tabela hash e grafo aos problemas computacionais compatíveis com suas propriedades.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"referencias-enade-2026.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "pair-match",
+"pairs": [
+{
+"id": "pair-1",
+"left": "Pilha (Stack)",
+"right": "Controlar o histórico de 'desfazer' (Ctrl+Z) revertendo sempre a ação mais recente primeiro."
+},
+{
+"id": "pair-2",
+"left": "Fila (Queue)",
+"right": "Gerenciar solicitações de impressão para processamento estrito na ordem de chegada."
+},
+{
+"id": "pair-3",
+"left": "Tabela Hash (Hash Table)",
+"right": "Localizar rapidamente o cadastro de um estudante pelo número de matrícula em tempo médio constante."
+},
+{
+"id": "pair-4",
+"left": "Grafo (Graph)",
+"right": "Representar a rede de pré-requisitos entre disciplinas de um curso para verificar caminhos válidos."
+}
+]
+}
+},
+{
+"id": "N9-COM-033",
+"title": "Diagramas UML na Modelagem",
+"mechanic": "pair-match",
+"courses": [
+"CC",
+"SI",
+"TADS"
+],
+"area": "Modelagem e Arquitetura de Software",
+"conceptId": "UML-MOD-01",
+"difficulty": "introductory",
+"context": "A equipe de engenharia de software N9 precisa documentar quem interage com o sistema, como as entidades se estruturam e em que ordem os objetos trocam mensagens.",
+"instruction": "Relacione cada diagrama UML ao objetivo principal de representação.",
+"xp": 60,
+"help": {
+"hint": "Diferencie visão funcional externa (atores), visão estrutural estática (atributos/métodos) e interação temporal entre objetos.",
+"concept": "UML oferece diagramas estruturais e comportamentais para comunicar diferentes perspectivas de um sistema de software.",
+"example": "O diagrama de classes mostra atributos e métodos de Aluno e Turma; o de sequência mostra chamadas ao longo do tempo."
+},
+"explanation": "O diagrama de casos de uso descreve funcionalidades externas do sistema sob a perspectiva dos atores que interagem com ele. O diagrama de classes modela a estrutura estática com classes, atributos, operações e relacionamentos. O diagrama de sequência detalha a ordem cronológica das mensagens trocadas entre objetos durante um cenário específico.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Diagramas UML na Modelagem (UML-MOD-01)",
+"objective": "Distinguir o propósito dos diagramas UML de casos de uso, de classes e de sequência.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "pair-match",
+"pairs": [
+{
+"id": "pair-1",
+"left": "Diagrama de Casos de Uso",
+"right": "Representar atores externos e as funcionalidades que eles acionam no sistema."
+},
+{
+"id": "pair-2",
+"left": "Diagrama de Classes",
+"right": "Descrever a estrutura estática de classes, atributos, métodos e associações."
+},
+{
+"id": "pair-3",
+"left": "Diagrama de Sequência",
+"right": "Detalhar a ordem temporal das mensagens trocadas entre objetos em um fluxo."
+}
+]
+}
+},
+{
+"id": "N9-COM-034",
+"title": "Operação Diária vs. Análise Histórica",
+"mechanic": "categorize",
+"courses": [
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Bancos de Dados e Inteligência Analítica",
+"conceptId": "DB-OLAP-01",
+"difficulty": "introductory",
+"context": "A arquitetura de dados N9 separa o ambiente transacional de atendimento ao público (OLTP) do ambiente analítico gerencial (OLAP).",
+"instruction": "Classifique cada carga de trabalho entre OLTP (Processamento Transacional) e OLAP (Processamento Analítico).",
+"xp": 60,
+"help": {
+"hint": "OLTP prioriza transações curtas e concorrentes do dia a dia; OLAP foca em consultas agregadas sobre grandes volumes históricos.",
+"concept": "Sistemas OLTP otimizam inserções e atualizações rápidas e íntegras; sistemas OLAP otimizam leitura multidimensional e agregações históricas.",
+"example": "Registrar um pagamento no caixa é OLTP; comparar vendas trimestrais dos últimos 5 anos é OLAP."
+},
+"explanation": "Registrar matrícula em tempo real, atualizar saldo de biblioteca e cancelar reserva pontual são transações curtas, frequentes e altamente concorrentes típicas de OLTP. Já consolidar taxas de aprovação dos últimos cinco anos por campus e cruzar indicadores multidimensionais de evasão são consultas de leitura massiva e agregação próprias de OLAP.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Operação Diária vs. Análise Histórica (DB-OLAP-01)",
+"objective": "Classificar operações e cargas de trabalho de dados entre ambientes OLTP e OLAP.",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"referencias-enade-2026.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "categorize",
+"categories": [
+{
+"id": "cat-oltp",
+"label": "OLTP (Transacional)",
+"description": "Operações cotidianas curtas de leitura e escrita com alta concorrência e integridade imediata."
+},
+{
+"id": "cat-olap",
+"label": "OLAP (Analítico)",
+"description": "Consultas complexas de agregação sobre grandes volumes históricos para apoio à decisão."
+}
+],
+"items": [
+{
+"id": "item-1",
+"text": "Gravar a confirmação de matrícula de um estudante no instante da inscrição.",
+"categoryId": "cat-oltp"
+},
+{
+"id": "item-2",
+"text": "Comparar a evolução da evasão nos últimos cinco anos por curso, turno e semestre.",
+"categoryId": "cat-olap"
+},
+{
+"id": "item-3",
+"text": "Atualizar imediatamente a quantidade de vagas disponíveis após um cancelamento.",
+"categoryId": "cat-oltp"
+},
+{
+"id": "item-4",
+"text": "Agregar milhões de registros históricos de frequência para identificar padrões sazonais.",
+"categoryId": "cat-olap"
+},
+{
+"id": "item-5",
+"text": "Registrar a baixa de pagamento de uma taxa individual no guichê digital.",
+"categoryId": "cat-oltp"
+}
+]
+}
+},
+{
+"id": "N9-COM-035",
+"title": "Propriedades de Segurança na Prática",
+"mechanic": "categorize",
+"courses": [
+"CC",
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Segurança da Informação",
+"conceptId": "SEC-CIA-01",
+"difficulty": "intermediate",
+"context": "Durante uma auditoria de segurança no ambiente N9, foram analisados incidentes distintos afetando arquivos, serviços e comunicações institucionais.",
+"instruction": "Classifique cada situação de acordo com a propriedade de segurança diretamente violada: Confidencialidade, Integridade ou Disponibilidade.",
+"xp": 75,
+"help": {
+"hint": "Confidencialidade evita exposição não autorizada; Integridade impede alteração indevida; Disponibilidade mantém o acesso legítimo ativo.",
+"concept": "A tríade CID (Confidencialidade, Integridade e Disponibilidade) orienta a proteção de ativos de informação.",
+"example": "Alterar notas no banco sem permissão viola a integridade; tirar o portal do ar por sobrecarga viola a disponibilidade."
+},
+"explanation": "A leitura de relatórios sigilosos por usuários sem permissão viola a confidencialidade. A modificação indevida de notas lançadas e a adulteração de um arquivo de ata durante a transferência violam a integridade. A paralisação do portal de matrículas por ataque de negação de serviço e a falha sem redundância que impede acesso ao sistema violam a disponibilidade.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Propriedades de Segurança na Prática (SEC-CIA-01)",
+"objective": "Classificar incidentes de segurança da informação segundo a propriedade violada (Confidencialidade, Integridade ou Disponibilidade).",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"referencias-enade-2026.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "categorize",
+"categories": [
+{
+"id": "cat-conf",
+"label": "Confidencialidade",
+"description": "Garantia de que a informação seja acessada apenas por pessoas ou processos autorizados."
+},
+{
+"id": "cat-int",
+"label": "Integridade",
+"description": "Garantia de exatidão e completude da informação, protegendo contra alteração não autorizada."
+},
+{
+"id": "cat-disp",
+"label": "Disponibilidade",
+"description": "Garantia de que sistemas e dados estejam acessíveis e operacionais quando necessários."
+}
+],
+"items": [
+{
+"id": "item-1",
+"text": "Usuário comum visualiza relatórios financeiros restritos por falha de permissão de leitura.",
+"categoryId": "cat-conf"
+},
+{
+"id": "item-2",
+"text": "Invasor altera valores de notas finais diretamente em registros históricos do sistema.",
+"categoryId": "cat-int"
+},
+{
+"id": "item-3",
+"text": "Ataque de negação de serviço (DDoS) deixa o portal de inscrições inacessível no último dia.",
+"categoryId": "cat-disp"
+},
+{
+"id": "item-4",
+"text": "Arquivo de ata digital tem seu conteúdo adulterado antes da assinatura sem detecção.",
+"categoryId": "cat-int"
+},
+{
+"id": "item-5",
+"text": "Planilha com dados bancários de bolsistas fica indexada em pasta pública sem autenticação.",
+"categoryId": "cat-conf"
+},
+{
+"id": "item-6",
+"text": "Queda de servidor único sem contingência impede que estudantes acessem materiais de aula.",
+"categoryId": "cat-disp"
+}
+]
+}
+},
+{
+"id": "N9-COM-036",
+"title": "Remoção Segura no Topo da Pilha em C",
+"mechanic": "fill-slot",
+"courses": [
+"CC",
+"SI",
+"TADS"
+],
+"area": "Algoritmos e Programação",
+"conceptId": "AED-STK-C01",
+"difficulty": "intermediate",
+"context": "No utilitário em C do laboratório N9, a struct Pilha armazena até 5 inteiros em dados[5], com topo = -1 quando vazia e topo = 2 após empilhar {10, 20, 30}. A função pop remove o elemento do topo e grava o valor removido em *saida.",
+"instruction": "Selecione a instrução que retorna o elemento do topo atual e decrementa o índice topo corretamente.",
+"xp": 80,
+"help": {
+"hint": "Com topo = 2 apontando para o último item inserido (30), primeiro leia dados[topo] e depois reduza topo em 1.",
+"concept": "Em uma pilha baseada em vetor onde topo indica o índice do elemento mais recente, pop lê dados[topo] antes de decrementar topo (pós-decremento).",
+"example": "Se topo == 2 e dados[2] == 30, *saida = dados[topo--] atribui 30 a *saida e atualiza topo para 1."
+},
+    "explanation": "Como topo armazena o índice válido do elemento atualmente no topo (topo = 2 para {10, 20, 30}), a expressão *saida = p->dados[p->topo--]; lê primeiro p->dados[2] (30) e em seguida decrementa p->topo para 1. O pré-decremento (--p->topo) leria dados[1] (20), perdendo o topo real. Usar topo + 1 acessa posição fora dos elementos válidos (lixo de memória), e atribuir sem decrementar não remove o item da pilha.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "official-reference",
+"description": "ISO/IEC 9899 — Programming languages — C."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Remoção Segura no Topo da Pilha em C (AED-STK-C01)",
+"objective": "Implementar operação pop em pilha estática em C preservando ordem LIFO e sem comportamento indefinido.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"ISO/IEC 9899 — Programming languages — C"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "fill-slot",
+"language": "c",
+      "contentBefore": "typedef struct {\n    int dados[5];\n    int topo; /* -1 se vazia */\n} Pilha;\n\nint pop(Pilha *p, int *saida) {\n    if (p->topo < 0) return 0;\n    ",
+"contentAfter": "\n    return 1;\n}",
+"tokens": [
+{
+"id": "tok-1",
+          "text": "*saida = p->dados[p->topo--];",
+"feedback": "Correto. Lê o elemento atual em p->dados[p->topo] (30) e em seguida decrementa p->topo para 1."
+},
+{
+"id": "tok-2",
+          "text": "*saida = p->dados[--p->topo];",
+"feedback": "Incorreto. O pré-decremento reduz topo antes da leitura, retornando 20 em vez de 30 e ignorando o topo real."
+},
+{
+"id": "tok-3",
+          "text": "*saida = p->dados[p->topo + 1];",
+"feedback": "Incorreto. Acessa uma posição acima do topo válido (lixo de memória) e não altera o índice p->topo."
+},
+{
+"id": "tok-4",
+          "text": "*saida = p->dados[p->topo];",
+"feedback": "Incorreto. Apenas consulta o elemento do topo sem removê-lo, mantendo p->topo inalterado."
+}
+],
+"correctTokenId": "tok-1"
+}
+},
+{
+"id": "N9-COM-037",
+"title": "Estudantes sem Empréstimo Ativo em SQL",
+"mechanic": "fill-slot",
+"courses": [
+"CC",
+"SI",
+"TADS"
+],
+"area": "Banco de Dados e Informação",
+"conceptId": "DB-JOIN-01",
+"difficulty": "intermediate",
+"context": "No banco da biblioteca N9 (sintaxe padrão compatível com MySQL 8 e Oracle 19c), ALUNO(ID_ALUNO, NOME) contém {(1,'Ana'),(2,'Bruno')} e EMPRESTIMO(ID_EMP, ID_ALUNO) contém {(10,1)}.",
+"instruction": "Escolha a cláusula WHERE que filtra apenas os alunos que ainda não possuem nenhum empréstimo registrado.",
+"xp": 80,
+"help": {
+"hint": "Em um LEFT JOIN, linhas da tabela da esquerda sem correspondência na direita recebem valores nulos nas colunas da direita.",
+"concept": "O padrão LEFT JOIN combinado com WHERE chave_direita IS NULL identifica registros da tabela principal sem correspondência na tabela relacionada.",
+"example": "SELECT c.nome FROM cliente c LEFT JOIN pedido p ON c.id = p.id_cliente WHERE p.id_cliente IS NULL;"
+},
+"explanation": "O LEFT JOIN preserva todos os registros de ALUNO e preenche as colunas de EMPRESTIMO com NULL quando não há correspondência (caso de Bruno, ID 2). Filtrar com WHERE E.ID_ALUNO IS NULL retorna exatamente os alunos sem empréstimo. Comparar com '= NULL' sempre resulta em desconhecido (falso no WHERE); 'IS NOT NULL' retorna quem já tem empréstimo; e '<> A.ID_ALUNO' descarta linhas nulas.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "official-reference",
+"description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Estudantes sem Empréstimo Ativo em SQL (DB-JOIN-01)",
+"objective": "Construir consulta SQL com LEFT JOIN e predicado IS NULL para identificar ausência de correspondência referencial.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"ISO/IEC 9075 — Database languages — SQL"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "fill-slot",
+"language": "sql",
+"contentBefore": "SELECT A.ID_ALUNO, A.NOME\nFROM ALUNO A\nLEFT JOIN EMPRESTIMO E\n  ON A.ID_ALUNO = E.ID_ALUNO\n",
+"contentAfter": ";",
+"tokens": [
+{
+"id": "tok-1",
+"text": "WHERE E.ID_ALUNO IS NULL",
+"feedback": "Correto. Após o LEFT JOIN, E.ID_ALUNO fica nulo apenas para alunos sem empréstimo correspondente."
+},
+{
+"id": "tok-2",
+"text": "WHERE E.ID_ALUNO = NULL",
+"feedback": "Incorreto. Em SQL padrão (MySQL 8 e Oracle 19c), comparações com '= NULL' não retornam verdadeiro; deve-se usar IS NULL."
+},
+{
+"id": "tok-3",
+"text": "WHERE E.ID_ALUNO IS NOT NULL",
+"feedback": "Incorreto. Esse filtro faz o oposto: retorna apenas os alunos que possuem ao menos um empréstimo."
+},
+{
+"id": "tok-4",
+"text": "WHERE E.ID_ALUNO <> A.ID_ALUNO",
+"feedback": "Incorreto. Quando E.ID_ALUNO é NULL, a comparação de desigualdade resulta em desconhecido e não retorna a linha."
+}
+],
+"correctTokenId": "tok-1"
+}
+},
+{
+"id": "N9-COM-038",
+"title": "Chave Estrangeira no Modelo Relacional",
+"mechanic": "visual-hotspot",
+"courses": [
+"CC",
+"SI",
+"TADS"
+],
+"area": "Modelagem e Bancos de Dados",
+"conceptId": "DB-DER-01",
+"difficulty": "intermediate",
+"context": "No diagrama entidade-relacionamento lógico do sistema acadêmico N9, cada CURSO (lado 1) pode ofertar várias TURMAs (lado N), mas cada TURMA pertence a exatamente um CURSO.",
+"instruction": "Selecione o elemento do modelo lógico onde a chave estrangeira COD_CURSO deve ser posicionada para representar a cardinalidade 1:N.",
+"xp": 75,
+"help": {
+"hint": "Em relacionamentos 1:N, a chave estrangeira migra da entidade do lado '1' para a entidade do lado 'N'.",
+"concept": "A chave estrangeira fica na tabela do lado 'muitos' (N) referenciando a chave primária da tabela do lado 'um' (1).",
+"example": "Em Departamento (1) para Funcionário (N), a coluna id_departamento fica na tabela Funcionário."
+},
+"explanation": "Como um curso possui várias turmas (1:N), a chave estrangeira COD_CURSO deve ser armazenada na entidade TURMA (lado N), apontando para a chave primária COD_CURSO da entidade CURSO (lado 1). Colocar uma lista de turmas dentro de CURSO violaria a primeira forma normal e impediria integridade referencial.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Chave Estrangeira no Modelo Relacional (DB-DER-01)",
+"objective": "Identificar o posicionamento correto da chave estrangeira em um relacionamento 1:N no modelo relacional.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "visual-hotspot",
+"visualDescription": "Diagrama lógico relacional com duas tabelas ligadas por linha de cardinalidade 1 para N: à esquerda, tabela CURSO (PK COD_CURSO, NOME_CURSO); no centro, conector 1:N; à direita, tabela TURMA (PK ID_TURMA, SEMESTRE, slot FK COD_CURSO).",
+"accessibleDescription": "Componentes do diagrama: [node-curso-pk] Chave primária COD_CURSO na tabela CURSO (lado 1); [node-rel-1n] Linha de relacionamento com cardinalidade 1 em CURSO e N em TURMA; [node-turma-pk] Chave primária ID_TURMA na tabela TURMA (lado N); [node-turma-fk] Atributo estrangeiro COD_CURSO na tabela TURMA (lado N) referenciando CURSO.",
+"nodes": [
+{
+"id": "node-curso-pk",
+"label": "CURSO.COD_CURSO (PK — Lado 1)",
+"detail": "Identificador único da tabela pai CURSO."
+},
+{
+"id": "node-rel-1n",
+"label": "Relacionamento 1:N (CURSO -> TURMA)",
+"detail": "Conector lógico indicando que um curso possui várias turmas."
+},
+{
+"id": "node-turma-pk",
+"label": "TURMA.ID_TURMA (PK — Lado N)",
+"detail": "Identificador primário próprio de cada turma."
+},
+{
+"id": "node-turma-fk",
+"label": "TURMA.COD_CURSO (FK — Lado N)",
+"detail": "Coluna de referência na tabela filha TURMA que aponta para CURSO.COD_CURSO."
+}
+],
+"correctNodeId": "node-turma-fk"
+}
+},
+{
+"id": "N9-COM-039",
+"title": "Composição Forte no Diagrama de Classes",
+"mechanic": "visual-hotspot",
+"courses": [
+"CC",
+"SI",
+"TADS"
+],
+"area": "Programação Orientada a Objetos e UML",
+"conceptId": "UML-CMP-01",
+"difficulty": "introductory",
+"context": "No diagrama UML do módulo acadêmico N9, a classe PedidoMatricula é formada por instâncias de ItemMatricula que não existem de forma independente fora do pedido.",
+"instruction": "Selecione o elemento do diagrama UML que representa a relação de composição (todo-parte com dependência de ciclo de vida).",
+"xp": 50,
+"help": {
+"hint": "Procure o losango preenchido (preto) posicionado junto à classe 'todo'.",
+"concept": "Na UML, a composição é representada por um losango preenchido no lado do todo, indicando que as partes dependem existencialmente do todo.",
+"example": "Se um Pedido é excluído, seus ItensDePedido também deixam de existir."
+},
+"explanation": "Na notação UML, o losango preenchido (preto) ligado à classe PedidoMatricula indica composição: os objetos ItemMatricula pertencem exclusivamente àquele pedido e têm seu ciclo de vida controlado por ele. O losango vazio representa agregação compartilhada, a seta com triângulo vazio representa herança, e os atributos internos apenas listam dados da classe.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Composição Forte no Diagrama de Classes (UML-CMP-01)",
+"objective": "Reconhecer a notação UML de composição (losango preenchido) e seu significado de dependência existencial.",
+"locators": [
+"Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "visual-hotspot",
+"visualDescription": "Diagrama de classes UML mostrando a superclasse DocumentoAcademico ligada por triângulo vazio a PedidoMatricula; PedidoMatricula conecta-se por losango preenchido (1) a ItemMatricula (1..) e por losango vazio (0..) a AnexoOpcional.",
+"accessibleDescription": "Elementos do diagrama UML: [node-heranca] Seta com triângulo vazio de PedidoMatricula para DocumentoAcademico (herança); [node-composicao] Losango preenchido junto a PedidoMatricula ligado a ItemMatricula com multiplicidade 1 para 1.. (composição); [node-agregacao] Losango vazio junto a PedidoMatricula ligado a AnexoOpcional com multiplicidade 0.. (agregação); [node-classe-item] Caixa da classe ItemMatricula com atributos codigoDisciplina e turno.",
+"nodes": [
+{
+"id": "node-heranca",
+"label": "Triângulo vazio -> DocumentoAcademico",
+"detail": "Relação de generalização/herança entre subclasse e superclasse."
+},
+{
+"id": "node-composicao",
+"label": "Losango preenchido -> ItemMatricula (1..)",
+"detail": "Relação de composição todo-parte com ciclo de vida dependente."
+},
+{
+"id": "node-agregacao",
+"label": "Losango vazio -> AnexoOpcional (0..)",
+"detail": "Relação de agregação fraca onde o anexo pode existir independentemente."
+},
+{
+"id": "node-classe-item",
+"label": "Classe ItemMatricula (Atributos)",
+"detail": "Especificação dos atributos internos da classe parte."
+}
+],
+"correctNodeId": "node-composicao"
+}
+},
+{
+"id": "N9-COM-040",
+"title": "Escopo e Entrega Incremental no Novo Portal",
+"mechanic": "decision-dialogue",
+"courses": [
+"SI",
+"TADS",
+"TGTI"
+],
+"area": "Gerência de Projetos e Governança",
+"conceptId": "PRJ-INC-01",
+"difficulty": "advanced",
+"context": "Na metade do projeto do portal acadêmico N9, a coordenação de extensão solicita incluir um módulo completo de eventos sem alterar o prazo final nem a equipe disponível.",
+"instruction": "Conduza as três decisões de gerência de projeto equilibrando escopo, risco, partes interessadas e entrega incremental de valor.",
+"xp": 100,
+"help": {
+"hint": "Avalie o impacto no cronograma e nos riscos antes de aceitar novo escopo, negocie prioridades com os interessados e entregue em incrementos validados.",
+"concept": "A gestão de escopo e riscos exige controle de mudanças, alinhamento transparente com partes interessadas e entrega incremental priorizada por valor.",
+"example": "Incluir funcionalidades essenciais na primeira entrega e planejar extensões para o ciclo seguinte preserva qualidade e prazo."
+},
+"explanation": "Aceitar novo escopo sem análise de impacto nem repriorização compromete a qualidade e gera atrasos em cascata. A condução profissional consiste em avaliar esforço e riscos da solicitação, negociar com os interessados a priorização do produto mínimo viável para o prazo atual e organizar entregas incrementais com critérios claros de aceitação.",
+"sources": [
+{
+"role": "primary",
+"type": "official-reference",
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+},
+{
+"role": "technical",
+"type": "institutional",
+"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+}
+],
+"sourceVerificationNeeded": false,
+"traceability": {
+"title": "Escopo e Entrega Incremental no Novo Portal (PRJ-INC-01)",
+"objective": "Tomar decisões integradas de controle de escopo, mitigação de riscos, negociação com interessados e entrega incremental.",
+"locators": [
+"Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+"Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+"Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+"mapeamento-questoes-cursos-disciplinas.md"
+]
+},
+"validationStatus": "under-ai-review",
+"payload": {
+"type": "decision-dialogue",
+"steps": [
+{
+"id": "step-1",
+"speaker": "Coordenadora de Extensão",
+"message": "Precisamos incluir inscrições e certificados de eventos já na primeira entrega do portal, mantendo a mesma data de lançamento. Como você encaminha o pedido?",
+"choices": [
+{
+"id": "s1-c1",
+"text": "Aceitar verbalmente na reunião e pedir à equipe que faça horas extras contínuas sem alterar o plano.",
+"reaction": "Consequência: O escopo cresce sem controle (scope creep), a equipe entra em fadiga e os testes das funcionalidades principais são comprometidos.",
+"correct": false
+},
+{
+"id": "s1-c2",
+"text": "Registrar a solicitação, estimar esforço e riscos e apresentar alternativas de troca de escopo ou faseamento.",
+"reaction": "Decisão adequada: O impacto fica transparente e os interessados podem decidir com base em prazo, capacidade e risco.",
+"correct": true
+},
+{
+"id": "s1-c3",
+"text": "Recusar qualquer conversa sobre eventos sem analisar o valor institucional nem propor alternativa.",
+"reaction": "Consequência: A falta de diálogo gera atrito entre áreas e impede identificar uma entrega mínima viável.",
+"correct": false
+}
+]
+},
+{
+"id": "step-2",
+"speaker": "Patrocinador do Projeto",
+"message": "A análise mostrou que o módulo completo atrasaria a matrícula acadêmica em três semanas. Qual proposta equilibra prazo e valor para os interessados?",
+"choices": [
+{
+"id": "s2-c1",
+"text": "Manter matrícula no primeiro incremento e entregar o módulo de eventos no segundo incremento logo após o lançamento.",
+"reaction": "Decisão adequada: Garante o núcleo crítico no prazo combinado e estabelece uma entrega incremental previsível para eventos.",
+"correct": true
+},
+{
+"id": "s2-c2",
+"text": "Entregar ambos os módulos na data original removendo os testes integrados e a documentação.",
+"reaction": "Consequência: Cortar verificação e qualidade gera falhas graves em produção na semana de matrícula.",
+"correct": false
+},
+{
+"id": "s2-c3",
+"text": "Paralisar o desenvolvimento da matrícula para priorizar apenas o módulo novo de eventos.",
+"reaction": "Consequência: O objetivo principal do projeto é sacrificado, frustrando a maior parte dos usuários.",
+"correct": false
+}
+]
+},
+{
+"id": "step-3",
+"speaker": "Líder Técnico",
+"message": "Com o plano incremental aprovado, como devemos conduzir o acompanhamento até o segundo incremento?",
+"choices": [
+{
+"id": "s3-c1",
+"text": "Aguardar a conclusão total do segundo incremento para mostrar o resultado apenas no dia da publicação.",
+"reaction": "Consequência: Sem validações intermediárias, eventuais desvios de requisito só são descobertos tarde demais.",
+"correct": false
+},
+{
+"id": "s3-c2",
+"text": "Atualizar o registro de riscos, validar protótipos funcionais em ciclos curtos e manter métricas de progresso visíveis.",
+"reaction": "Decisão adequada: O acompanhamento contínuo reduz incertezas, mantém interessados alinhados e assegura qualidade incremental.",
+"correct": true
+},
+{
+"id": "s3-c3",
+"text": "Permitir que novas alterações entrem diretamente no código sem passar pelo backlog priorizado.",
+"reaction": "Consequência: Sem governança de backlog, o cronograma do segundo incremento perde previsibilidade.",
+"correct": false
+}
+]
+}
+]
+}
+}
+]
+}

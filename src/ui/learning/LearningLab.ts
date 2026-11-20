@@ -102,7 +102,7 @@ export class LearningLab {
     const title = el('h1', 'lab-title');
     title.tabIndex = -1;
     title.append('TREINE. ', el('span', '', 'DESCUBRA.'), ' AVANCE.');
-    copy.append(title, el('p', 'lab-lead', 'Vinte atividades compartilhadas de CC, SI, TADS e TGTI com situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
+    copy.append(title, el('p', 'lab-lead', SI_LEARNING_LAB.length + ' atividades compartilhadas de CC, SI, TADS e TGTI com situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
     const start = action('Começar laboratório  →', 'lab-button lab-button--primary');
     start.addEventListener('click', () => { this.index = 0; this.prepareActivity(); this.sound.play('tap'); this.render(); });
     copy.append(start, el('p', 'lab-note', 'Duração estimada: 10 a 15 minutos · Funciona com teclado, mouse e toque'));
@@ -501,7 +501,7 @@ export class LearningLab {
     const main = el('main', 'lab-result');
     const burst = el('div', 'lab-xp-burst', '⚡ +' + this.xp + ' XP');
     const title = el('h1', 'lab-title', 'LABORATÓRIO CONCLUÍDO!'); title.tabIndex = -1;
-    main.append(burst, title, el('p', 'lab-lead', 'Você concluiu vinte atividades e experimentou nove formas de aprender conceitos reais de tecnologia.'), characters());
+    main.append(burst, title, el('p', 'lab-lead', 'Você concluiu ' + SI_LEARNING_LAB.length + ' atividades e experimentou nove formas de aprender conceitos reais de tecnologia.'), characters());
     const stats = el('div', 'lab-result-stats');
     stats.append(el('span', '', SI_LEARNING_LAB.length + ' atividades'), el('span', '', this.xp + ' XP'), el('span', '', 'Sem alterar o jogo atual'));
     const restart = action('Jogar novamente', 'lab-button lab-button--primary');
