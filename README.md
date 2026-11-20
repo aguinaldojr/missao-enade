@@ -2,7 +2,7 @@
 
 **N9 é um nome provisório, sujeito à aprovação institucional.** O projeto não utiliza logotipo, slogan, brasão ou imagens oficiais e não afirma ser um produto oficial da Universidade Nove de Julho.
 
-N9 — Jornada Digital é uma experiência educacional 2D para desenvolvimento de competências em tecnologia. O MVP atende às trilhas CC, SI, TADS, TGTI e TRC e combina exploração em visão superior, missões de múltipla escolha, quebra-cabeças de sequência lógica, perfil e ranking local.
+N9 — Jornada Digital é uma experiência educacional 2D para desenvolvimento de competências em tecnologia. O MVP atende às trilhas CC, SI, TADS, TGTI e TRC e combina exploração em visão superior, missões de múltipla escolha, quebra-cabeças de sequência lógica, perfil local e ranking online por curso.
 
 O conteúdo permanece em governança editorial assistida por IA. O aviso **Conteúdo experimental em revisão editorial** é apresentado ao jogador.
 
@@ -79,7 +79,7 @@ As chaves versionadas do jogo armazenam somente dados locais, incluindo:
 - perfil por apelido;
 - progresso de exploração e puzzles;
 - último relatório de missão;
-- melhores resultados do ranking local.
+- ranking online dos 15 melhores resultados por curso.
 
 Não são solicitados nome completo, RA, e-mail, CPF ou telefone. Não há autenticação, telemetria, sincronização entre dispositivos ou envio de resultados. Limpar os dados do site no navegador remove os dados locais.
 

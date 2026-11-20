@@ -72,8 +72,7 @@ export class AppShell {
     }
     const key = [state.puzzleAttempt?.puzzleId, state.screen, state.attempt?.index, state.attempt?.answers.length,
       state.saveStatus, state.contentError, state.profiles.activePlayerId, state.profiles.players.length,
-      state.profileError, state.profileSaveStatus, state.leaderboard.entries.length, state.leaderboardSaveStatus,
-      state.rankingCourse, state.rankingQuestionCount, state.rankingDeletePending].join(':');
+      state.profileError, state.profileSaveStatus, state.rankingCourse].join(':');
     if (this.renderKey === key) {
       if (state.screen === 'course-select') this.updateCourse(state);
       if (state.screen === 'question' && state.attempt) {
@@ -130,8 +129,7 @@ export class AppShell {
         break;
       case 'result':
         if (!state.lastResult) throw new Error('Resultado necessário.');
-        view = resultView(state.lastResult, state.saveStatus, state.leaderboard,
-          activePlayer(state.profiles), dispatch, signal);
+        view = resultView(state.lastResult, state.saveStatus, dispatch, signal);
         break;
     }
     const player = activePlayer(state.profiles);

@@ -31,15 +31,7 @@ export const gameConfig = {
   "profileSaveFailed": "Não foi possível salvar o perfil neste navegador.",
   "rankingEyebrow": "CLASSIFICAÇÃO ONLINE",
   "rankingTitle": "Ranking",
-  "rankingPrivacy": "O ranking online reúne os 15 melhores resultados de jornadas com 25 desafios, separados por curso. Ranking salvo somente neste dispositivo. O histórico local permanece disponível abaixo.",
-  "rankingTableCaption": "Classificação local por curso e tamanho de missão",
-  "emptyRanking": "Ainda não há resultados concluídos para este curso e tamanho de missão.",
-  "missionRanking": "Ranking desta missão",
-  "deleteRanking": "Excluir dados locais do ranking",
-  "deleteRankingTitle": "Excluir todo o ranking local?",
-  "deleteRankingMessage": "Esta ação remove os resultados do ranking deste dispositivo. Perfis, progresso, puzzles e relatórios de missão serão preservados.",
-  "confirmDeleteRanking": "Sim, excluir ranking",
-  "rankingStorageFailed": "Não foi possível atualizar o ranking neste navegador.",
+  "rankingPrivacy": "O ranking online reúne os 15 melhores resultados de jornadas com 25 desafios, separados por curso. O RA é convertido em um código pseudônimo e não aparece na classificação.",
   "homeEyebrow": "UMA CIDADE. CINCO PERCURSOS.",
   "heroStart": "Conhecimento que ",
   "heroAccent": "conecta.",
@@ -130,7 +122,7 @@ export const gameConfig = {
 
 export function gamePageTitle(screen: string, index = 1, total = 10): string {
   const page = screen === 'profile' ? 'Perfil local'
-    : screen === 'leaderboard' ? 'Ranking local'
+    : screen === 'leaderboard' ? 'Ranking online'
     : screen === 'course-select' ? 'Escolha seu curso'
     : screen === 'question' ? gameConfig.format.challengeProgress(index, total)
     : screen === 'puzzle' ? 'Sequência Lógica'

@@ -48,7 +48,7 @@ export function onlineLeaderboardPanel(course: CourseId, result?: MissionResult,
   status.setAttribute('aria-live', 'polite');
   panel.append(title, privacy);
   if (!repository) {
-    panel.append(element('p', 'helper', 'Ranking online ainda não configurado. O ranking local continua disponível.'));
+    panel.append(element('p', 'helper', 'Ranking online temporariamente indisponível. Tente novamente mais tarde.'));
     return panel;
   }
   const tableHost = element('div', 'online-ranking-results');

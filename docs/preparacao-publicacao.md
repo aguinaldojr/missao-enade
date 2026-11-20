@@ -16,7 +16,7 @@ Não publique antes de confirmar que o nível de exposição dos conteúdos e ga
 
 ## Estado preparado
 
-O MVP validado inclui cinco cursos, missões de 3, 5, 10 e 20 questões, 60 questões provisórias, seis puzzles, mapa Base N9, perfil e ranking local. A validação final está registrada em [qa-final-mvp.md](qa-final-mvp.md).
+O MVP inclui cinco cursos, jornadas de 25 desafios, mapa Base N9, perfil local e ranking online por curso.
 
 O Vite usa a variável `VITE_BASE_PATH`:
 
@@ -28,7 +28,7 @@ A aplicação não possui rotas no servidor. A navegação entre telas ocorre no
 
 ## Pré-requisitos futuros
 
-Se o ranking online for usado, configure no repositório a variável de Actions `VITE_RANKING_API_URL` com a URL `/exec` do Google Apps Script. Sem essa variável, a publicação continua funcional e utiliza somente o ranking local. Nunca cadastre `SPREADSHEET_ID` ou `RANKING_HMAC_SECRET` como variáveis do Vite; esses valores pertencem exclusivamente às propriedades privadas do Apps Script.
+Configure no repositório a variável de Actions `VITE_RANKING_API_URL` com a URL `/exec` do Google Apps Script. Sem essa variável, o jogo continua funcional, mas o ranking fica indisponível. Nunca cadastre `SPREADSHEET_ID` ou `RANKING_HMAC_SECRET` como variáveis do Vite; esses valores pertencem exclusivamente às propriedades privadas do Apps Script.
 
 - conta GitHub autorizada a hospedar o projeto;
 - Git instalado e autoria configurada;

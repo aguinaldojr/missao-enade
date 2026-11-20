@@ -2,7 +2,7 @@
 
 ## Escopo
 
-O ranking online é opcional e complementa o ranking local existente. Ele reúne os 15 melhores resultados de jornadas concluídas de 25 desafios, em tabelas independentes para CC, SI, TADS, TGTI e TRC. Resultados de cursos diferentes não são comparados.
+O ranking online é o único ranking apresentado pelo jogo. Ele reúne os 15 melhores resultados de jornadas concluídas de 25 desafios, em tabelas independentes para CC, SI, TADS, TGTI e TRC. Resultados de cursos diferentes não são comparados.
 
 O jogador informa o RA somente após concluir a jornada e aceitar o envio. O RA viaja por HTTPS até o Google Apps Script, é normalizado em memória e convertido por HMAC-SHA-256 em uma chave irreversível para uso operacional. A planilha armazena somente `studentKey`, código público pseudônimo, curso, acertos, pontuação, duração, data e coleção. O RA não é salvo no navegador, na planilha nem devolvido pela API.
 
@@ -25,7 +25,7 @@ A fórmula permanece `arredondar((pontuação / 2500) × 1000)`. Cada RA ocupa n
 - `google-apps-script/ranking/appsscript.json`: manifesto do projeto Apps Script;
 - variável de build `VITE_RANKING_API_URL`: URL `/exec` da implantação.
 
-Sem a variável, nenhuma chamada de rede é feita e o jogo informa que o ranking online não está configurado. O ranking local continua funcionando com as mesmas chaves.
+Sem a variável, nenhuma chamada de rede é feita e o jogo informa que o ranking online está temporariamente indisponível. A partida, o perfil e o progresso continuam funcionando, mas não há classificação alternativa local.
 
 ## Configuração da planilha e do Apps Script
 

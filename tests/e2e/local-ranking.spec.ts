@@ -19,7 +19,7 @@ async function finishMission(page: Page, info: TestInfo) {
   }
 }
 
-test('perfil, ranking, persistência, troca e exclusão confirmada permanecem locais', async ({ page }, info) => {
+test('perfil permanece local e o ranking apresentado é somente online', async ({ page }, info) => {
   const external: string[] = [];
   await page.route('https://script.google.com/**', (route) => route.fulfill({ status: 200,
     contentType: 'application/json', body: JSON.stringify({ ok: true, entries: [] }) }));
@@ -45,23 +45,17 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   await press(page, 'Iniciar missão selecionada', info);
   expect(await page.evaluate((key) => localStorage.getItem(key), RANKING_KEY)).toBeNull();
   await finishMission(page, info);
-  await expect(page.getByRole('heading', { name: 'Ranking desta missão' })).toBeVisible();
-  await expect(page.locator('tr[aria-current="true"]')).toContainText('Nina Byte (você)');
-  await expect(page.locator('tr[aria-current="true"]')).toContainText('1000 / 1000');
-  const saved = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), RANKING_KEY);
-  expect(saved.entries).toHaveLength(1);
-  expect(saved.entries[0]).toMatchObject({ nickname: 'Nina Byte', course: 'CC', questionCount: 25,
-    correctCount: 25, score: 2500, maxScore: 2500, rankingScore: 1000, collectionId: 'enade-2026' });
+  await expect(page.getByRole('heading', { name: 'Ranking online · CC' })).toBeVisible();
+  await expect(page.getByLabel('RA para identificação pseudônima')).toBeVisible();
+  expect(await page.evaluate((key) => localStorage.getItem(key), RANKING_KEY)).toBeNull();
 
   await press(page, 'Voltar ao menu', info);
   await page.reload();
   await expect(page.getByText('Jogador atual: Nina Byte', { exact: true })).toBeVisible();
   await press(page, 'Ranking', info);
   await expect(page.locator('#ranking-size')).toHaveCount(0);
-  await expect(page.getByRole('table')).toContainText('Nina Byte (você)');
-  const rankingRegion = page.getByRole('region', { name: 'Tabela do ranking com rolagem horizontal' });
-  await rankingRegion.focus();
-  await expect(rankingRegion).toBeFocused();
+  await expect(page.getByRole('heading', { name: 'Ranking online · CC' })).toBeVisible();
+  await expect(page.getByText('Resultados neste dispositivo')).toHaveCount(0);
   await press(page, '← Voltar', info);
   await press(page, 'Trocar jogador', info);
   await page.getByLabel('Apelido').fill('Caio');
@@ -69,16 +63,6 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   await press(page, 'Continuar com este jogador', info);
   await expect(page.getByText('Jogador atual: Caio', { exact: true })).toBeVisible();
 
-  await press(page, 'Ranking', info);
-  await press(page, 'Excluir dados locais do ranking', info);
-  const dialog = page.getByRole('alertdialog');
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('heading')).toBeFocused();
-  await press(page, 'Cancelar', info);
-  await expect(page.getByRole('table')).toContainText('Nina Byte');
-  await press(page, 'Excluir dados locais do ranking', info);
-  await press(page, 'Sim, excluir ranking', info);
-  await expect(page.getByText('Ainda não há resultados concluídos', { exact: false })).toBeVisible();
   expect(await page.evaluate((key) => localStorage.getItem(key), RANKING_KEY)).toBeNull();
   expect(await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!).players.length, PROFILE_KEY)).toBe(2);
   expect(external.every((url) => url.startsWith('https://script.google.com/'))).toBe(true);

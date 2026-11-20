@@ -40,7 +40,7 @@ Depois do último roteiro-base, o jogo monta uma nova combinação determinísti
 
 - Os exemplos históricos e `central-nexo.json` continuam no projeto.
 - Formatos antigos continuam normalizados em memória.
-- O ranking mantém a chave `n9:leaderboard:v1` e passa a aceitar também partidas de 25.
+- O ranking online considera exclusivamente jornadas concluídas de 25 desafios e não grava classificação no navegador.
 - O relatório mantém `n9:mission-result:v1` e reconhece `journey-25`.
 - Nenhum puzzle, XP, gabarito ou progresso anterior foi apagado.
 

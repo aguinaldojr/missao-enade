@@ -13,7 +13,7 @@ describe('painel do ranking online', () => {
   it('explica indisponibilidade sem fazer requisição quando não está configurado', () => {
     const panel = onlineLeaderboardPanel('SI', result, null);
     document.body.append(panel);
-    expect(panel.textContent).toContain('ainda não configurado');
+    expect(panel.textContent).toContain('temporariamente indisponível');
     expect(panel.querySelector('form')).toBeNull();
   });
 

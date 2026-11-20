@@ -20,10 +20,7 @@ import type { ContentRepository } from '../ports/ContentRepository';
 import type { ProgressRepository, SaveStatus } from '../ports/ProgressRepository';
 import { activePlayer, createPlayer, emptyPlayerProfiles, selectPlayer,
   type PlayerProfile, type PlayerProfiles } from '../domain/models/PlayerProfile';
-import { emptyLeaderboard, entryFromResult, isRankingQuestionCount, recordBestResult,
-  type Leaderboard, type RankingQuestionCount } from '../domain/models/Leaderboard';
 import type { PlayerProfileRepository } from '../ports/PlayerProfileRepository';
-import type { LeaderboardRepository } from '../ports/LeaderboardRepository';
 import type { MissionRouteRepository } from '../ports/MissionRouteRepository';
 import { missionRouteForAttempt, routeOrdering } from '../config/missionRoutes';
 
@@ -51,12 +48,8 @@ export interface SessionState {
   readonly profileSaveStatus: SaveStatus;
   readonly profileError: string | null;
   readonly profileNextScreen: 'home' | 'course-select';
-  readonly leaderboard: Leaderboard;
-  readonly leaderboardSaveStatus: SaveStatus;
   readonly rankingCourse: CourseId;
-  readonly rankingQuestionCount: RankingQuestionCount;
   readonly rankingReturnScreen: 'home' | 'result';
-  readonly rankingDeletePending: boolean;
 }
 
 export type Command =
@@ -67,10 +60,6 @@ export type Command =
   | { type: 'continue-profile' }
   | { type: 'open-ranking' }
   | { type: 'select-ranking-course'; course: unknown }
-  | { type: 'select-ranking-size'; questionCount: number }
-  | { type: 'request-ranking-delete' }
-  | { type: 'cancel-ranking-delete' }
-  | { type: 'confirm-ranking-delete' }
   | { type: 'close-ranking' }
   | { type: 'select-course'; course: unknown }
   | { type: 'select-mission'; missionId: unknown }
@@ -112,7 +101,6 @@ export class GameSession {
     private readonly puzzleContent: PuzzleContentRepository = new JsonPuzzleRepository(puzzleCatalog),
     private readonly playableCollection: PlayableCollectionConfig = LEGACY_PLAYABLE_COLLECTION,
     private readonly profileStorage?: PlayerProfileRepository,
-    private readonly leaderboardStorage?: LeaderboardRepository,
     private readonly missionRouteStorage?: MissionRouteRepository,
   ) {
     const world = explorationProgress?.load() ?? { state: null, status: 'none' as const };
@@ -125,7 +113,6 @@ export class GameSession {
     }
     const loaded = progress?.loadResult() ?? { result: null, status: 'none' as const };
     const profileLoad = profileStorage?.load() ?? { profiles: null, status: 'none' as const };
-    const leaderboardLoad = leaderboardStorage?.load() ?? { leaderboard: null, status: 'none' as const };
     let profiles = profileLoad.profiles ?? emptyPlayerProfiles();
     let profileSaveStatus = profileLoad.status;
     const loadedPlayer = activePlayer(profiles);
@@ -144,8 +131,7 @@ export class GameSession {
       puzzleProgress, puzzleAttempt: null, puzzleSaveStatus: puzzleSave.status, puzzles: Object.freeze(collectionPuzzles),
       profiles, profileSaveStatus,
       profileError: null, profileNextScreen: 'course-select',
-      leaderboard: leaderboardLoad.leaderboard ?? emptyLeaderboard(), leaderboardSaveStatus: leaderboardLoad.status,
-      rankingCourse: 'CC', rankingQuestionCount: 25, rankingReturnScreen: 'home', rankingDeletePending: false,
+      rankingCourse: 'CC', rankingReturnScreen: 'home',
     });
   }
 
@@ -198,34 +184,14 @@ export class GameSession {
         if (current.screen !== 'home' && current.screen !== 'result') return current;
         const result = current.screen === 'result' ? current.lastResult : null;
         this.update({ screen: 'leaderboard', rankingReturnScreen: current.screen,
-          rankingCourse: result?.course ?? current.rankingCourse,
-          rankingQuestionCount: result && isRankingQuestionCount(result.total) ? result.total : current.rankingQuestionCount,
-          rankingDeletePending: false });
+          rankingCourse: result?.course ?? current.rankingCourse });
         break;
       }
       case 'select-ranking-course':
         if (current.screen === 'leaderboard' && isCourseId(command.course)) this.update({ rankingCourse: command.course });
         break;
-      case 'select-ranking-size':
-        if (current.screen === 'leaderboard' && isRankingQuestionCount(command.questionCount)) {
-          this.update({ rankingQuestionCount: command.questionCount });
-        }
-        break;
-      case 'request-ranking-delete':
-        if (current.screen === 'leaderboard') this.update({ rankingDeletePending: true });
-        break;
-      case 'cancel-ranking-delete':
-        if (current.screen === 'leaderboard') this.update({ rankingDeletePending: false });
-        break;
-      case 'confirm-ranking-delete':
-        if (current.screen === 'leaderboard' && current.rankingDeletePending) {
-          const cleared = this.leaderboardStorage?.clear() ?? false;
-          this.update({ leaderboard: cleared ? emptyLeaderboard() : current.leaderboard,
-            leaderboardSaveStatus: cleared ? 'saved' : 'failed', rankingDeletePending: false });
-        }
-        break;
       case 'close-ranking':
-        if (current.screen === 'leaderboard') this.update({ screen: current.rankingReturnScreen, rankingDeletePending: false });
+        if (current.screen === 'leaderboard') this.update({ screen: current.rankingReturnScreen });
         break;
       case 'select-course':
         if (current.screen !== 'course-select' || !isCourseId(command.course)) {
@@ -309,18 +275,9 @@ export class GameSession {
               attemptId: attempt.id, course: attempt.courseAtStart, total: attempt.mission.questionCount,
               score, correctCount: score / 100, ...(durationMs !== undefined ? { durationMs } : {}), completedAt,
             });
-          let leaderboard = current.leaderboard;
-          let leaderboardSaveStatus = current.leaderboardSaveStatus;
-          const player = activePlayer(current.profiles);
-          if (result.mode === 'provisional' && player && this.leaderboardStorage) {
-            leaderboard = recordBestResult(leaderboard,
-              entryFromResult(result, player, this.playableCollection.collectionId, result.durationMs));
-            leaderboardSaveStatus = this.leaderboardStorage.save(leaderboard) ? 'saved' : 'failed';
-          }
           this.update({ screen: 'result', lastResult: result,
             saveStatus: this.progress?.saveResult(result) ? 'saved' : 'failed',
-            leaderboard, leaderboardSaveStatus, rankingCourse: result.course,
-            rankingQuestionCount: isRankingQuestionCount(result.total) ? result.total : current.rankingQuestionCount,
+            rankingCourse: result.course,
             exploration: Object.freeze({ ...current.exploration, missionStatus: 'completed', doorUnlocked: true }) });
           if (result.mode === 'provisional' && attempt.mission.id === 'journey-25') {
             this.missionRouteStorage?.recordCompletion(result.course, attempt.questions.map((question) => question.id));

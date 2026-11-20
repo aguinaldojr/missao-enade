@@ -51,7 +51,7 @@ Abrir o endereço mostrado pelo Vite, normalmente `http://localhost:5173`. Antes
 - computador, Lia, terminal e porta;
 - uma questão com código ou tabela;
 - um puzzle por teclado e toque;
-- resultado e ranking local;
+- resultado e ranking online por curso;
 - ausência de erros no console.
 
 Não é necessário limpar todo o LocalStorage entre participantes. A troca de jogador preserva rankings separados. O contador de roteiros é compartilhado pelo navegador e curso, de modo que conclusões sucessivas avançam A, B, C e, em SI, D.
@@ -88,7 +88,7 @@ Tempo estimado: 35 a 50 minutos.
 3. Escolher o curso e explorar a Base N9 sem instrução detalhada — até 5 minutos.
 4. Completar uma jornada de 25 desafios — 20 a 35 minutos.
 5. Interagir com pelo menos um puzzle elegível — até 5 minutos.
-6. Abrir o relatório e o ranking local — 2 minutos.
+6. Abrir o relatório e o ranking online — 2 minutos.
 7. Preencher o formulário de feedback — 5 minutos.
 
 O facilitador deve observar sem ensinar a resposta. Pode ajudar em problemas de navegação, registrando a ajuda prestada. Se uma questão causar desconforto, ambiguidade séria ou bloqueio técnico, o participante pode avançar escolhendo qualquer alternativa; o ocorrido deve ser anotado.
