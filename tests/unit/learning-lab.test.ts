@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { SI_LEARNING_LAB } from '../../src/content/learning-lab';
 
-describe('laboratório de mecânicas de SI', () => {
-  it('oferece exatamente uma atividade válida de cada mecânica', () => {
-    expect(SI_LEARNING_LAB).toHaveLength(9);
+describe('laboratório de mecânicas compartilhadas', () => {
+  it('carrega as vinte atividades e cobre as nove mecânicas', () => {
+    expect(SI_LEARNING_LAB).toHaveLength(20);
     expect(new Set(SI_LEARNING_LAB.map((activity) => activity.type))).toEqual(new Set([
       'choice', 'binary-choice', 'multiple-select', 'order', 'match', 'categorize', 'complete-code',
       'hotspot', 'decision-dialogue',
     ]));
-    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(9);
+    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(20);
     expect(SI_LEARNING_LAB.every((activity) => activity.xp > 0 && activity.explanation.length > 40)).toBe(true);
   });
 
@@ -30,7 +30,7 @@ describe('laboratório de mecânicas de SI', () => {
         expect(activity.items.every((item) => categories.has(item.categoryId))).toBe(true);
       } else if (activity.type === 'complete-code') {
         expect(activity.tokens.filter((token) => token.id === activity.correctTokenId)).toHaveLength(1);
-        expect(activity.codeBefore).toContain('GROUP BY');
+        expect(activity.tokens.every((token) => token.feedback.length > 10)).toBe(true);
       } else if (activity.type === 'hotspot') {
         expect(activity.nodes.filter((node) => node.id === activity.correctNodeId)).toHaveLength(1);
       } else {

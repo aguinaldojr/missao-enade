@@ -1,0 +1,1546 @@
+{
+  "schemaVersion": 1,
+  "batchId": "N9-COM-01",
+  "activities": [
+    {
+      "id": "N9-COM-001",
+      "title": "Falha de Acesso no Portal N9",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-AUTH-01",
+      "difficulty": "introductory",
+      "context": "Durante o cadastro no sistema acadêmico N9, um atacante intercepta o tráfego de rede local e captura senhas enviadas em texto simples pelo formulário de entrada.",
+      "instruction": "Selecione a medida técnica que impede a leitura das credenciais durante a transmissão.",
+      "xp": 50,
+      "help": {
+        "hint": "Pense em como proteger o canal de comunicação entre o navegador do estudante e o servidor.",
+        "concept": "Criptografia em trânsito cifra os dados enquanto trafegam pela rede, impedindo leitura por terceiros.",
+        "example": "Um aplicativo bancário utiliza HTTPS com TLS para cifrar dados de login antes do envio."
+      },
+      "explanation": "O uso de HTTPS com TLS cifra o canal entre cliente e servidor, impedindo que interceptadores leiam as credenciais em trânsito. Ocultar caracteres no formulário protege apenas contra observação visual local. Armazenar hash no banco protege dados em repouso, não o tráfego. Bloquear tentativas repetidas mitiga força bruta, mas não evita captura na rede. Exigir senha longa dificulta adivinhação, porém continua legível se trafegar sem cifragem.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 8446 — The Transport Layer Security (TLS) Protocol Version 1.3."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Falha de Acesso no Portal N9 (SEC-AUTH-01)",
+        "objective": "Selecionar medida técnica de criptografia em trânsito (HTTPS/TLS) para impedir a interceptação e leitura de credenciais na rede.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 8446 — TLS Version 1.3"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Habilitar HTTPS com TLS ativo em todas as rotas de autenticação.",
+            "feedback": "Correto. O TLS cifra o canal de comunicação e impede a leitura das credenciais interceptadas na rede."
+          },
+          {
+            "id": "opt-b",
+            "text": "Substituir os caracteres digitados por asteriscos no campo de senha.",
+            "feedback": "Incorreto. A máscara visual oculta a senha na tela, mas os dados continuam sendo transmitidos sem cifragem."
+          },
+          {
+            "id": "opt-c",
+            "text": "Armazenar as senhas com função hash criptográfica no banco de dados.",
+            "feedback": "Incorreto. O hash protege o armazenamento no servidor, mas não protege os dados enquanto viajam pela rede."
+          },
+          {
+            "id": "opt-d",
+            "text": "Bloquear a conta após cinco tentativas consecutivas de login inválido.",
+            "feedback": "Incorreto. O bloqueio reduz ataques de tentativa e erro, mas não impede a captura do tráfego válido."
+          },
+          {
+            "id": "opt-e",
+            "text": "Exigir senhas com no mínimo doze caracteres e símbolos especiais.",
+            "feedback": "Incorreto. Senhas complexas resistem melhor à adivinhação, mas continuam expostas se trafegarem em texto plano."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-002",
+      "title": "Consulta de Notas em SQL",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Banco de Dados e Informação",
+      "conceptId": "DB-SQL-01",
+      "difficulty": "introductory",
+      "context": "No banco relacional do laboratório N9 (compatível com MySQL 8 e Oracle 19c), a tabela INSCRICAO possui as colunas ID_ALUNO, COD_DISCIPLINA e NOTA_FINAL, todas sem valores nulos.",
+      "instruction": "Escolha a consulta SQL que retorna o código da disciplina e a média das notas apenas das disciplinas com média superior a 7,0.",
+      "xp": 50,
+      "help": {
+        "hint": "Filtros aplicados sobre resultados de funções de agregação exigem uma cláusula específica após o agrupamento.",
+        "concept": "A cláusula GROUP BY agrupa registros e HAVING filtra grupos com base em funções agregadas como AVG.",
+        "example": "SELECT setor, AVG(salario)\nFROM empregados\nGROUP BY setor\nHAVING AVG(salario) > 3000;"
+      },
+      "explanation": "Para calcular a média por disciplina, usa-se GROUP BY COD_DISCIPLINA com AVG(NOTA_FINAL). Como o filtro depende do resultado da agregação, utiliza-se HAVING AVG(NOTA_FINAL) > 7.0. A cláusula WHERE filtra linhas antes do agrupamento e não aceita funções agregadas diretamente. Sem GROUP BY, o banco tenta agregar toda a tabela em uma única linha, gerando erro de sintaxe com coluna não agregada.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Consulta de Notas em SQL (DB-SQL-01)",
+        "objective": "Construir consulta SQL com agregação por grupo (GROUP BY) e filtragem de grupos agregados (HAVING).",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "ISO/IEC 9075 — Database languages — SQL"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "SELECT COD_DISCIPLINA, AVG(NOTA_FINAL)\nFROM INSCRICAO\nWHERE AVG(NOTA_FINAL) > 7.0\nGROUP BY COD_DISCIPLINA;",
+            "feedback": "Incorreto. A cláusula WHERE é avaliada antes do agrupamento e não permite funções de agregação como AVG."
+          },
+          {
+            "id": "opt-b",
+            "text": "SELECT COD_DISCIPLINA, AVG(NOTA_FINAL)\nFROM INSCRICAO\nGROUP BY COD_DISCIPLINA\nHAVING AVG(NOTA_FINAL) > 7.0;",
+            "feedback": "Correto. GROUP BY agrupa por disciplina e HAVING filtra os grupos cuja média supera 7,0."
+          },
+          {
+            "id": "opt-c",
+            "text": "SELECT COD_DISCIPLINA, AVG(NOTA_FINAL)\nFROM INSCRICAO\nHAVING AVG(NOTA_FINAL) > 7.0;",
+            "feedback": "Incorreto. Falta a cláusula GROUP BY COD_DISCIPLINA para agrupar os registros por disciplina."
+          },
+          {
+            "id": "opt-d",
+            "text": "SELECT COD_DISCIPLINA, AVG(NOTA_FINAL)\nFROM INSCRICAO\nWHERE NOTA_FINAL > 7.0\nGROUP BY COD_DISCIPLINA;",
+            "feedback": "Incorreto. Esse comando descarta notas individuais menores ou iguais a 7,0 antes de calcular a média."
+          },
+          {
+            "id": "opt-e",
+            "text": "SELECT COD_DISCIPLINA, SUM(NOTA_FINAL)\nFROM INSCRICAO\nGROUP BY COD_DISCIPLINA\nHAVING COUNT(*) > 7.0;",
+            "feedback": "Incorreto. O comando soma as notas e filtra pela quantidade de registros, não pela média."
+          }
+        ],
+        "correctId": "opt-b"
+      }
+    },
+    {
+      "id": "N9-COM-003",
+      "title": "Priorização no Painel Gerencial",
+      "mechanic": "single-choice",
+      "courses": [
+        "SI",
+        "TGTI"
+      ],
+      "area": "Dados e Apoio à Decisão",
+      "conceptId": "BI-DEC-01",
+      "difficulty": "intermediate",
+      "context": "A coordenação de suporte do campus N9 analisou um painel com o tempo médio de atendimento. O gráfico mostra aumento de 40% no tempo de espera após a troca do sistema de triagem.",
+      "instruction": "Indique a decisão analítica mais adequada antes de reverter a implantação do novo sistema.",
+      "xp": 75,
+      "help": {
+        "hint": "Correlação temporal entre dois eventos não comprova automaticamente relação de causa e efeito.",
+        "concept": "Análise causal exige controlar variáveis externas, como volume de chamados e sazonalidade, antes de concluir impacto.",
+        "example": "Antes de culpar um novo checkout pela queda de vendas, verifica-se se houve queda geral de tráfego no período."
+      },
+      "explanation": "O aumento de 40% no tempo médio ocorreu após a implantação, mas pode refletir maior volume de solicitações no início do semestre ou falta de treinamento inicial. Comparar o volume de chamados e segmentar por período permite isolar variáveis de confusão antes de descartar o sistema. Reverter imediatamente ignora evidências operacionais, enquanto culpar a equipe ou ocultar o indicador compromete a governança.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Priorização no Painel Gerencial (BI-DEC-01)",
+        "objective": "Distinguir correlação temporal de causalidade e isolar variáveis de confusão na análise de indicadores gerenciais.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Desativar o sistema imediatamente, pois a coincidência temporal comprova falha técnica.",
+            "feedback": "Incorreto. Coincidência no tempo indica correlação, não causalidade comprovada."
+          },
+          {
+            "id": "opt-b",
+            "text": "Cruzar o tempo de espera com o volume de chamados e o período letivo para isolar fatores externos.",
+            "feedback": "Correto. Controlar variáveis operacionais evita decisões precipitadas baseadas apenas em correlação."
+          },
+          {
+            "id": "opt-c",
+            "text": "Substituir a média pelo menor tempo registrado para reduzir a variação visual do painel.",
+            "feedback": "Incorreto. Alterar a métrica para mascarar o resultado distorce a análise gerencial."
+          },
+          {
+            "id": "opt-d",
+            "text": "Aplicar advertência aos atendentes pelo aumento do tempo registrado no relatório.",
+            "feedback": "Incorreto. Penalizar a equipe sem diagnosticar gargalos ou demanda não resolve a causa raiz."
+          },
+          {
+            "id": "opt-e",
+            "text": "Aguardar seis meses sem intervenções para verificar se o indicador retorna ao valor anterior.",
+            "feedback": "Incorreto. Adiar o diagnóstico mantém eventuais falhas operacionais sem investigação."
+          }
+        ],
+        "correctId": "opt-b"
+      }
+    },
+    {
+      "id": "N9-COM-004",
+      "title": "Consumo Energético em Data Center",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TGTI"
+      ],
+      "area": "Sustentabilidade Tecnológica",
+      "conceptId": "SUS-INFRA-01",
+      "difficulty": "intermediate",
+      "context": "O laboratório de servidores N9 opera 20 máquinas físicas com taxa média de uso de CPU de 12% fora do horário de aulas, mantendo todas ligadas continuamente.",
+      "instruction": "Qual estratégia reduz o consumo elétrico e a geração de calor mantendo a disponibilidade dos serviços essenciais?",
+      "xp": 75,
+      "help": {
+        "hint": "Considere técnicas que concentram cargas de trabalho ociosas em menos hardware ativo.",
+        "concept": "Consolidação de cargas por virtualização e gerenciamento dinâmico de energia reduzem consumo em períodos de baixa demanda.",
+        "example": "Migrar máquinas virtuais para poucos hosts à noite permite colocar servidores ociosos em modo de economia."
+      },
+      "explanation": "A consolidação de cargas via virtualização permite agrupar serviços leves em poucos servidores físicos durante períodos de baixa demanda e colocar os demais em suspensão controlada. Isso reduz consumo energético e carga térmica sem interromper os serviços. Desligar refrigeração coloca o hardware em risco térmico, e aumentar frequência eleva o gasto elétrico sem necessidade operacional.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral), Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Consumo Energético em Data Center (SUS-INFRA-01)",
+        "objective": "Identificar estratégia de consolidação de cargas virtualizadas e suspensão controlada de servidores ociosos para eficiência energética.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Desligar o sistema de climatização da sala durante a madrugada.",
+            "feedback": "Incorreto. Desligar a refrigeração com servidores ativos provoca superaquecimento e falhas de hardware."
+          },
+          {
+            "id": "opt-b",
+            "text": "Configurar todos os processadores em modo de desempenho máximo contínuo.",
+            "feedback": "Incorreto. O modo de desempenho máximo impede economia de energia e aumenta o consumo ocioso."
+          },
+          {
+            "id": "opt-c",
+            "text": "Consolidar máquinas virtuais em menos hosts físicos à noite e suspender os ociosos.",
+            "feedback": "Correto. A consolidação mantém os serviços ativos com menos servidores ligados, economizando energia."
+          },
+          {
+            "id": "opt-d",
+            "text": "Substituir os discos de estado sólido por discos magnéticos de maior rotação.",
+            "feedback": "Incorreto. Discos magnéticos de alta rotação consomem mais energia e geram mais calor que SSDs."
+          },
+          {
+            "id": "opt-e",
+            "text": "Interromper todos os serviços de rede entre 22h e 6h sem aviso prévio.",
+            "feedback": "Incorreto. A suspensão total viola o requisito de manter os serviços essenciais disponíveis."
+          }
+        ],
+        "correctId": "opt-c"
+      }
+    },
+    {
+      "id": "N9-COM-005",
+      "title": "Coleta de Dados Pessoais no Evento",
+      "mechanic": "binary-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Ética, Privacidade e LGPD",
+      "conceptId": "PRIV-MIN-01",
+      "difficulty": "introductory",
+      "context": "Para emitir certificados digitais de uma palestra aberta, o formulário do aplicativo N9 exige obrigatoriamente o tipo sanguíneo e a renda familiar dos participantes.",
+      "instruction": "Avalie se a afirmação técnica a seguir está correta ou incorreta.",
+      "xp": 40,
+      "help": {
+        "hint": "Verifique se os dados solicitados são realmente necessários para a finalidade declarada do formulário.",
+        "concept": "O princípio da necessidade limita o tratamento de dados pessoais ao mínimo estritamente indispensável para cumprir a finalidade informada.",
+        "example": "Um aplicativo de entrega precisa do endereço, mas não do histórico escolar do cliente."
+      },
+      "explanation": "A afirmação está incorreta. Pelo princípio da necessidade na proteção de dados pessoais, a coleta deve restringir-se aos dados pertinentes, proporcionais e estritamente necessários à finalidade declarada. Tipo sanguíneo e renda familiar não têm relação com a emissão de certificado de participação em palestra, caracterizando coleta excessiva e inadequada.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 5º e 6º."
+        },
+        {
+          "role": "normative-complementary",
+          "type": "official-reference",
+          "description": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), princípio da necessidade."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Coleta de Dados Pessoais no Evento (PRIV-MIN-01)",
+        "objective": "Avaliar a conformidade de formulários de coleta de dados frente ao princípio da necessidade da LGPD.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
+          "Portarias Inep nº 157, 168, 169 e 171/2026, arts. 5º e 6º",
+          "Lei nº 13.709/2018 (LGPD), princípio da necessidade"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "A exigência de tipo sanguíneo e renda familiar para emitir certificados de palestra atende ao princípio da necessidade no tratamento de dados pessoais.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. Esses dados não são necessários para emitir um certificado de participação, violando o princípio da necessidade.",
+        "feedbackFalse": "Correto. A coleta deve limitar-se apenas aos dados indispensáveis à finalidade informada ao titular."
+      }
+    },
+    {
+      "id": "N9-COM-006",
+      "title": "Contraste em Interface Móvel",
+      "mechanic": "binary-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Acessibilidade",
+      "conceptId": "ACC-VIS-01",
+      "difficulty": "introductory",
+      "context": "Na tela de aviso do aplicativo N9, mensagens de erro aparecem apenas com texto cinza-claro sobre fundo branco e sem ícone ou rótulo textual explicativo.",
+      "instruction": "Julgue a afirmação sobre acessibilidade visual em interfaces digitais.",
+      "xp": 40,
+      "help": {
+        "hint": "Considere pessoas com baixa visão ou daltonismo ao ler avisos críticos na tela do celular.",
+        "concept": "Interfaces acessíveis exigem contraste adequado entre texto e fundo e não devem depender exclusivamente de cor para transmitir informação.",
+        "example": "Um campo inválido exibe borda destacada, ícone de alerta e mensagem textual clara descrevendo o erro."
+      },
+      "explanation": "A afirmação está incorreta. Baixo contraste dificulta a leitura para pessoas com baixa visão ou em ambientes iluminados, e o uso exclusivo de variação cromática exclui usuários com deficiência na percepção de cores. Diretrizes de acessibilidade exigem razão de contraste mínima adequada e indicadores textuais ou simbólicos redundantes.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168 e 169/2026 (IHC), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "W3C Web Content Accessibility Guidelines (WCAG) 2.1."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Contraste em Interface Móvel (ACC-VIS-01)",
+        "objective": "Avaliar requisitos de contraste mínimo e redundância visual além da cor em mensagens de erro de interfaces móveis.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
+          "Portarias Inep nº 157, 168 e 169/2026 (IHC), arts. 5º e 6º",
+          "W3C WCAG 2.1"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Exibir avisos de erro apenas com texto cinza-claro sobre fundo branco atende aos critérios básicos de legibilidade e acessibilidade visual.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. O baixo contraste prejudica a leitura e a falta de reforço textual ou simbólico compromete a acessibilidade.",
+        "feedbackFalse": "Correto. É necessário garantir contraste suficiente e não depender apenas de cor para comunicar alertas."
+      }
+    },
+    {
+      "id": "N9-COM-007",
+      "title": "Responsabilidade Compartilhada na Nuvem",
+      "mechanic": "multiple-select",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Computação em Nuvem",
+      "conceptId": "CLD-SEC-01",
+      "difficulty": "intermediate",
+      "context": "A equipe do campus N9 contratou um serviço de banco de dados gerenciado em nuvem (PaaS) para hospedar registros acadêmicos fictícios.",
+      "instruction": "Selecione exatamente 3 responsabilidades que permanecem sob gestão da equipe contratante nesse modelo de serviço.",
+      "xp": 80,
+      "help": {
+        "hint": "No modelo PaaS, o provedor gerencia infraestrutura física e sistema operacional, mas o cliente controla dados e acessos da aplicação.",
+        "concept": "O modelo de responsabilidade compartilhada divide deveres de segurança e operação entre provedor e cliente conforme o serviço contratado.",
+        "example": "Em PaaS, o provedor atualiza o servidor físico, mas o cliente define quem pode consultar as tabelas."
+      },
+      "explanation": "Em bancos de dados gerenciados em nuvem (PaaS), o provedor cuida da segurança física do data center, da manutenção do hardware e das atualizações do sistema operacional subjacente. Já a equipe contratante permanece responsável pela classificação dos dados armazenados, pelo controle de permissões dos usuários da aplicação e pela configuração segura das credenciais de acesso.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-145 — The NIST Definition of Cloud Computing."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Responsabilidade Compartilhada na Nuvem (CLD-SEC-01)",
+        "objective": "Delimitar as responsabilidades de segurança e governança do cliente em um serviço gerenciado em nuvem (PaaS).",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "NIST SP 800-145"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Definir perfis de permissão e controle de acesso dos usuários da aplicação.",
+            "feedback": "Correto. O gerenciamento de identidades e permissões dos usuários da aplicação é responsabilidade do cliente.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Substituir fontes de alimentação defeituosas nos racks do data center.",
+            "feedback": "Incorreto. A manutenção do hardware físico pertence ao provedor de nuvem.",
+            "correct": false
+          },
+          {
+            "id": "opt-3",
+            "text": "Classificar e proteger os dados inseridos nas tabelas pela aplicação.",
+            "feedback": "Correto. A governança e a proteção dos dados armazenados permanecem com o contratante.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Controlar o acesso biométrico às salas físicas dos servidores do provedor.",
+            "feedback": "Incorreto. A segurança física das instalações é responsabilidade exclusiva do provedor.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Gerenciar e rotacionar as chaves e credenciais usadas pela aplicação cliente.",
+            "feedback": "Correto. Proteger segredos e credenciais da aplicação cabe à equipe contratante.",
+            "correct": true
+          },
+          {
+            "id": "opt-6",
+            "text": "Aplicar correções no hipervisor que isola as instâncias físicas do provedor.",
+            "feedback": "Incorreto. A camada de virtualização física é administrada pelo provedor em modelos PaaS.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-008",
+      "title": "Critérios de Qualidade de Requisitos",
+      "mechanic": "multiple-select",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Requisitos e Qualidade",
+      "conceptId": "REQ-QUAL-01",
+      "difficulty": "introductory",
+      "context": "Durante a revisão da especificação do módulo de reservas N9, o analista encontrou a frase: 'O sistema deve ser rápido e agradável de usar em qualquer celular.'",
+      "instruction": "Selecione exatamente 3 características que faltam a essa redação para torná-la um requisito verificável.",
+      "xp": 60,
+      "help": {
+        "hint": "Avalie como uma equipe de testes poderia comprovar objetivamente se o sistema atendeu ao que foi escrito.",
+        "concept": "Bons requisitos de software são claros, não ambíguos, mensuráveis e verificáveis por critérios objetivos.",
+        "example": "Em vez de 'rápido', especificar 'responder às buscas em até 2 segundos para 95% das requisições'."
+      },
+      "explanation": "Expressões como 'rápido' e 'agradável' são subjetivas e ambíguas, impedindo verificação objetiva em testes de aceitação. Para ser verificável, o requisito precisa definir métricas mensuráveis de desempenho, critérios objetivos de usabilidade ou aceitação e delimitação clara das plataformas e condições de operação suportadas.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC/IEEE 29148 — Systems and software engineering — Life cycle processes — Requirements engineering."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Critérios de Qualidade de Requisitos (REQ-QUAL-01)",
+        "objective": "Identificar atributos de mensurabilidade, objetividade e delimitação técnica necessários para tornar um requisito verificável.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "ISO/IEC/IEEE 29148"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Métrica quantitativa de tempo de resposta sob carga definida.",
+            "feedback": "Correto. Sem um limite numérico, não há como testar objetivamente o que significa 'rápido'.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Critério objetivo para avaliar a qualidade de interação ou usabilidade.",
+            "feedback": "Correto. O termo 'agradável' é subjetivo e exige indicadores observáveis para validação.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Delimitação das versões de navegadores e resoluções suportadas.",
+            "feedback": "Correto. A expressão 'qualquer celular' é ampla demais e precisa de escopo técnico testável.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Escolha prévia do framework visual e da paleta de cores definitiva.",
+            "feedback": "Incorreto. Detalhes de implementação visual não são necessários para tornar o requisito verificável.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Nome completo dos desenvolvedores que implementarão a interface.",
+            "feedback": "Incorreto. A atribuição de equipe pertence ao planejamento, não à qualidade do requisito.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-009",
+      "title": "Resposta a Incidente de Credencial",
+      "mechanic": "sequence-order",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-INC-01",
+      "difficulty": "intermediate",
+      "context": "O monitoramento do campus N9 detectou que uma chave de API com permissão de leitura foi publicada acidentalmente em um repositório público.",
+      "instruction": "Ordene as 5 etapas para conter e tratar o incidente de forma segura e rastreável.",
+      "xp": 80,
+      "help": {
+        "hint": "Primeiro interrompa o risco ativo, depois crie nova credencial, atualize o sistema, audite usos indevidos e documente.",
+        "concept": "A resposta a incidentes prioriza contenção imediata antes da erradicação, recuperação e análise pós-incidente.",
+        "example": "Ao perder um cartão corporativo, bloqueia-se o cartão antes de emitir outro e revisar a fatura."
+      },
+      "explanation": "A ordem correta inicia pela revogação imediata da chave exposta para estancar o acesso não autorizado. Em seguida, gera-se uma nova credencial segura e atualiza-se a configuração da aplicação para restabelecer o serviço. Depois, auditam-se os logs do período de exposição para verificar acessos anômalos e, por fim, registra-se a lição aprendida com bloqueio preventivo no repositório.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-61 Rev. 2 — Computer Security Incident Handling Guide."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Resposta a Incidente de Credencial (SEC-INC-01)",
+        "objective": "Sequenciar as etapas de contenção, rotação de credenciais, recuperação, auditoria e prevenção em incidentes de exposição de chave de API.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "NIST SP 800-61 Rev. 2"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "step-1",
+            "text": "Revogar imediatamente a chave de API exposta no provedor do serviço."
+          },
+          {
+            "id": "step-2",
+            "text": "Gerar uma nova chave de API restrita apenas aos escopos necessários."
+          },
+          {
+            "id": "step-3",
+            "text": "Atualizar a aplicação utilizando variáveis de ambiente protegidas."
+          },
+          {
+            "id": "step-4",
+            "text": "Auditar os registros de acesso durante a janela em que a chave esteve pública."
+          },
+          {
+            "id": "step-5",
+            "text": "Registrar o incidente e ativar verificação automática de segredos antes do commit."
+          }
+        ],
+        "correctOrder": [
+          "step-1",
+          "step-2",
+          "step-3",
+          "step-4",
+          "step-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-010",
+      "title": "Ciclo de Vida de Implantação ERP",
+      "mechanic": "sequence-order",
+      "courses": [
+        "SI",
+        "TGTI"
+      ],
+      "area": "Sistemas Empresariais",
+      "conceptId": "ERP-IMP-01",
+      "difficulty": "intermediate",
+      "context": "Uma organização fictícia vai substituir planilhas departamentais por um sistema integrado de gestão empresarial (ERP) nas áreas de compras e estoque.",
+      "instruction": "Ordene as 5 fases do processo de implantação organizacional desde o diagnóstico até a operação assistida.",
+      "xp": 80,
+      "help": {
+        "hint": "Mapear processos atuais vem antes de configurar o sistema e migrar dados validados.",
+        "concept": "A implantação de sistemas empresariais exige alinhamento prévio de processos, parametrização, validação de dados e capacitação.",
+        "example": "Não se migram cadastros duplicados para um ERP antes de sanear a base e testar os fluxos."
+      },
+      "explanation": "A implantação começa pelo mapeamento dos processos de negócio e requisitos organizacionais. Com os fluxos definidos, realiza-se a parametrização do ERP e a integração dos módulos. Em seguida, executa-se o saneamento e a migração controlada dos dados históricos, seguida pelos testes integrados com usuários-chave e capacitação. Por fim, ocorre a entrada em produção com operação assistida.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Plano da primeira coleção pedagógica N9 — Jornada Digital (plano-colecao-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ciclo de Vida de Implantação ERP (ERP-IMP-01)",
+        "objective": "Ordenar as fases organizacionais e técnicas da implantação de um sistema integrado de gestão empresarial (ERP).",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "plano-colecao-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "erp-1",
+            "text": "Mapear processos atuais de compras e estoque e definir requisitos de negócio."
+          },
+          {
+            "id": "erp-2",
+            "text": "Parametrizar regras fiscais, perfis de acesso e fluxos no sistema integrado."
+          },
+          {
+            "id": "erp-3",
+            "text": "Sanear cadastros legados e migrar dados validados para o ambiente de homologação."
+          },
+          {
+            "id": "erp-4",
+            "text": "Realizar testes integrados ponta a ponta e capacitar os usuários-chave."
+          },
+          {
+            "id": "erp-5",
+            "text": "Iniciar a operação em produção com suporte assistido e monitoramento de indicadores."
+          }
+        ],
+        "correctOrder": [
+          "erp-1",
+          "erp-2",
+          "erp-3",
+          "erp-4",
+          "erp-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-011",
+      "title": "Modelos de Serviço em Nuvem",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Computação em Nuvem",
+      "conceptId": "CLD-MOD-01",
+      "difficulty": "introductory",
+      "context": "A equipe de arquitetura N9 está avaliando diferentes ofertas de nuvem para hospedar servidores virtuais, implantar código sem gerenciar SO e usar webmail institucional.",
+      "instruction": "Relacione cada modelo de serviço em nuvem ao seu nível correspondente de abstração e controle.",
+      "xp": 60,
+      "help": {
+        "hint": "Observe quem gerencia o sistema operacional e a aplicação em cada sigla.",
+        "concept": "IaaS fornece infraestrutura virtualizada; PaaS entrega ambiente de execução; SaaS oferece software pronto para uso.",
+        "example": "Usar um editor de planilhas diretamente no navegador é um exemplo clássico de SaaS."
+      },
+      "explanation": "IaaS disponibiliza máquinas virtuais, armazenamento e redes, cabendo ao cliente administrar sistema operacional e aplicações. PaaS abstrai servidores e sistemas operacionais, permitindo que desenvolvedores implantem código e dados diretamente. SaaS entrega a aplicação completa pronta para o usuário final via navegador ou cliente leve, sem gestão de infraestrutura.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-145 — The NIST Definition of Cloud Computing."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Modelos de Serviço em Nuvem (CLD-MOD-01)",
+        "objective": "Associar os modelos IaaS, PaaS e SaaS aos seus respectivos níveis de abstração e gestão operacional.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "NIST SP 800-145"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "IaaS (Infraestrutura como Serviço)",
+            "right": "Fornece máquinas virtuais, redes e armazenamento com controle do sistema operacional pelo cliente."
+          },
+          {
+            "id": "pair-2",
+            "left": "PaaS (Plataforma como Serviço)",
+            "right": "Oferece ambiente gerenciado para implantar aplicações sem administrar o sistema operacional."
+          },
+          {
+            "id": "pair-3",
+            "left": "SaaS (Software como Serviço)",
+            "right": "Disponibiliza aplicação completa pronta para uso final via internet sem gestão de infraestrutura."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-012",
+      "title": "Gestão de Riscos em Projetos",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Projetos e Riscos",
+      "conceptId": "PRJ-RSK-01",
+      "difficulty": "intermediate",
+      "context": "No planejamento do portal N9, o gerente identificou ameaças como indisponibilidade de fornecedor, atraso em integração externa e perda de dados em testes.",
+      "instruction": "Associe cada estratégia de resposta a riscos negativos à ação correspondente do projeto.",
+      "xp": 75,
+      "help": {
+        "hint": "Diferencie eliminar a causa, reduzir probabilidade/impacto, repassar a terceiros e assumir o efeito.",
+        "concept": "Riscos negativos podem ser evitados, mitigados, transferidos ou aceitos conforme custo e impacto no projeto.",
+        "example": "Contratar seguro contra incêndio transfere o impacto financeiro para a seguradora."
+      },
+      "explanation": "Evitar elimina a ameaça mudando o plano do projeto, como remover uma dependência instável. Mitigar reduz a probabilidade ou o impacto do risco antes que ocorra, como criar cópias de segurança automatizadas. Transferir repassa a responsabilidade financeira ou operacional a um terceiro por contrato. Aceitar reconhece o risco sem alterar o plano previamente, reservando contingência se ocorrer.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Gestão de Riscos em Projetos (PRJ-RSK-01)",
+        "objective": "Correlacionar estratégias de resposta a ameaças em projetos de software (evitar, mitigar, transferir e aceitar) com ações práticas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Evitar o risco",
+            "right": "Remover do escopo uma biblioteca experimental para eliminar a chance de incompatibilidade."
+          },
+          {
+            "id": "pair-2",
+            "left": "Mitigar o risco",
+            "right": "Implementar backups automáticos diários para reduzir o impacto de eventual falha de disco."
+          },
+          {
+            "id": "pair-3",
+            "left": "Transferir o risco",
+            "right": "Contratar provedor especializado com acordo de nível de serviço e multa por indisponibilidade."
+          },
+          {
+            "id": "pair-4",
+            "left": "Aceitar o risco",
+            "right": "Manter reserva de contingência para absorver pequenos atrasos sem alterar o cronograma atual."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-013",
+      "title": "Integração de Sistemas Corporativos",
+      "mechanic": "pair-match",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Sistemas Empresariais",
+      "conceptId": "SYS-INT-01",
+      "difficulty": "intermediate",
+      "context": "O ecossistema N9 integra o módulo financeiro, o portal acadêmico e o serviço de notificações por meio de diferentes mecanismos de troca de dados.",
+      "instruction": "Relacione cada mecanismo de integração ao cenário operacional mais adequado.",
+      "xp": 75,
+      "help": {
+        "hint": "Considere se o remetente precisa aguardar resposta imediata ou se pode processar eventos de forma assíncrona.",
+        "concept": "Integrações síncronas exigem resposta imediata; filas assíncronas desacoplam produtores e consumidores; lotes processam volumes periódicos.",
+        "example": "Enviar milhares de boletos de madrugada costuma usar processamento em lote."
+      },
+      "explanation": "APIs REST síncronas são indicadas quando a interface precisa exibir resposta imediata ao usuário, como validar matrícula no ato. Filas de mensagens assíncronas absorvem picos de carga e desacoplam serviços quando o processamento pode ocorrer em segundo plano, como envio de e-mails. Transferência em lote agrupa grandes volumes em janelas programadas para conciliação contábil.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Integração de Sistemas Corporativos (SYS-INT-01)",
+        "objective": "Associar estilos de integração corporativa (REST síncrono, mensageria assíncrona e processamento em lote) aos respectivos cenários operacionais.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "API REST síncrona",
+            "right": "Consultar em tempo real se um estudante possui pendência antes de concluir a reserva."
+          },
+          {
+            "id": "pair-2",
+            "left": "Fila de mensagens assíncrona",
+            "right": "Enfileirar notificações de confirmação para envio sem travar a tela do usuário."
+          },
+          {
+            "id": "pair-3",
+            "left": "Processamento em lote (batch)",
+            "right": "Consolidar diariamente milhares de lançamentos financeiros durante a madrugada."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-014",
+      "title": "Requisitos Funcionais e Não Funcionais",
+      "mechanic": "categorize",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Requisitos e Qualidade",
+      "conceptId": "REQ-CAT-01",
+      "difficulty": "introductory",
+      "context": "Durante o levantamento do sistema de biblioteca N9, a equipe registrou cinco declarações distintas sobre o comportamento e as restrições da solução.",
+      "instruction": "Classifique cada item como Requisito Funcional ou Requisito Não Funcional.",
+      "xp": 60,
+      "help": {
+        "hint": "Requisitos funcionais descrevem o que o sistema faz; não funcionais definem qualidades como desempenho, segurança e disponibilidade.",
+        "concept": "Requisitos funcionais especificam serviços e regras de negócio; não funcionais estabelecem restrições e atributos de qualidade.",
+        "example": "'Emitir comprovante em PDF' é funcional; 'Operar 99,9% do tempo' é não funcional."
+      },
+      "explanation": "Registrar empréstimo, enviar alerta de devolução e gerar histórico de leitura descrevem ações e serviços executados pelo sistema para o usuário, sendo requisitos funcionais. Já o tempo máximo de resposta de 1 segundo e a exigência de disponibilidade de 99,5% definem atributos de desempenho e confiabilidade da operação, classificando-se como requisitos não funcionais.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC/IEEE 29148 — Systems and software engineering — Life cycle processes — Requirements engineering."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Requisitos Funcionais e Não Funcionais (REQ-CAT-01)",
+        "objective": "Classificar especificações de software entre requisitos funcionais e requisitos não funcionais.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "ISO/IEC/IEEE 29148"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-rf",
+            "label": "Requisito Funcional",
+            "description": "Define serviços, ações e regras de negócio que o sistema deve executar para os usuários."
+          },
+          {
+            "id": "cat-rnf",
+            "label": "Requisito Não Funcional",
+            "description": "Estabelece atributos de qualidade, restrições operacionais, desempenho e disponibilidade do sistema."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Permitir que o bibliotecário registre a devolução de um exemplar pelo código de barras.",
+            "categoryId": "cat-rf"
+          },
+          {
+            "id": "item-2",
+            "text": "Concluir qualquer consulta ao acervo em no máximo 1 segundo com 200 usuários simultâneos.",
+            "categoryId": "cat-rnf"
+          },
+          {
+            "id": "item-3",
+            "text": "Enviar mensagem automática lembrando o estudante um dia antes do vencimento.",
+            "categoryId": "cat-rf"
+          },
+          {
+            "id": "item-4",
+            "text": "Manter disponibilidade mensal mínima de 99,5% durante o período letivo.",
+            "categoryId": "cat-rnf"
+          },
+          {
+            "id": "item-5",
+            "text": "Gerar relatório mensal dos títulos mais emprestados por curso.",
+            "categoryId": "cat-rf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-015",
+      "title": "Dados Pessoais e Dados Sensíveis",
+      "mechanic": "categorize",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Ética, Privacidade e LGPD",
+      "conceptId": "PRIV-CAT-01",
+      "difficulty": "introductory",
+      "context": "O cadastro unificado do campus N9 armazena diferentes atributos sobre estudantes e visitantes para fins administrativos e de saúde ocupacional.",
+      "instruction": "Classifique cada atributo entre Dado Pessoal Comum ou Dado Pessoal Sensível.",
+      "xp": 60,
+      "help": {
+        "hint": "Dados sensíveis envolvem origem racial, saúde, biometria, convicção religiosa ou opinião política.",
+        "concept": "Dados pessoais sensíveis possuem maior potencial discriminatório e exigem hipóteses legais e controles mais rígidos de proteção.",
+        "example": "O prontuário médico é dado sensível; o endereço residencial é dado pessoal comum."
+      },
+      "explanation": "Nome completo, número de matrícula e e-mail institucional identificam uma pessoa natural sem revelar aspectos íntimos ou discriminatórios, sendo dados pessoais comuns. Já o laudo médico de alergia alimentar (dado referente à saúde) e o padrão biométrico de impressão digital pertencem à categoria de dados pessoais sensíveis, exigindo proteção reforçada.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 5º e 6º."
+        },
+        {
+          "role": "normative-complementary",
+          "type": "official-reference",
+          "description": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), art. 5º, incisos I e II."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Dados Pessoais e Dados Sensíveis (PRIV-CAT-01)",
+        "objective": "Distinguir dados pessoais comuns de dados pessoais sensíveis conforme definições legais da LGPD.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
+          "Portarias Inep nº 157, 168, 169 e 171/2026, arts. 5º e 6º",
+          "Lei nº 13.709/2018 (LGPD), art. 5º, incisos I e II"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-comum",
+            "label": "Dado Pessoal Comum",
+            "description": "Informação relacionada a pessoa natural identificada ou identificável sem natureza sensível especial."
+          },
+          {
+            "id": "cat-sensivel",
+            "label": "Dado Pessoal Sensível",
+            "description": "Dado sobre saúde, biometria, origem racial ou étnica, convicção religiosa, opinião política ou filiação sindical."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Número de matrícula acadêmica e e-mail institucional do estudante.",
+            "categoryId": "cat-comum"
+          },
+          {
+            "id": "item-2",
+            "text": "Laudo médico informando restrição alimentar ou condição de saúde.",
+            "categoryId": "cat-sensivel"
+          },
+          {
+            "id": "item-3",
+            "text": "Template biométrico de impressão digital usado na catraca.",
+            "categoryId": "cat-sensivel"
+          },
+          {
+            "id": "item-4",
+            "text": "Endereço residencial cadastrado para envio de correspondência.",
+            "categoryId": "cat-comum"
+          },
+          {
+            "id": "item-5",
+            "text": "Declaração de filiação sindical ou convicção religiosa.",
+            "categoryId": "cat-sensivel"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-016",
+      "title": "Consulta Parametrizada em Python",
+      "mechanic": "fill-slot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-INJ-01",
+      "difficulty": "intermediate",
+      "context": "No back-end Python 3 do portal N9, a função abaixo busca um estudante pelo código de matrícula (entrada: matricula = \"2026001\") e precisa evitar injeção de SQL.",
+      "instruction": "Escolha o trecho que completa corretamente a lacuna usando consulta parametrizada segura.",
+      "xp": 75,
+      "help": {
+        "hint": "Evite concatenar ou interpolar diretamente a variável do usuário dentro da string SQL.",
+        "concept": "Consultas parametrizadas separam o comando SQL dos valores fornecidos pelo usuário, neutralizando SQL Injection.",
+        "example": "cursor.execute('SELECT * FROM itens WHERE id = %s', (item_id,))"
+      },
+      "explanation": "Passar o placeholder %s e os parâmetros em uma tupla separada (matricula,) permite que o driver do banco trate o valor estritamente como dado, impedindo alteração da estrutura da consulta. Concatenar strings com +, interpolar com f-string ou usar format() insere a entrada diretamente no texto SQL, mantendo a vulnerabilidade a injeção de comandos.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "PEP 249 — Python Database API Specification v2.0."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Consulta Parametrizada em Python (SEC-INJ-01)",
+        "objective": "Aplicar consultas parametrizadas com vinculação segura de parâmetros em Python DB-API para prevenir injeção de SQL.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "PEP 249 — Python Database API Specification v2.0"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "python",
+        "contentBefore": "def buscar_estudante(cursor, matricula: str):\n    sql = \"SELECT nome FROM estudante WHERE matricula = %s\"\n    ",
+        "contentAfter": "\n    return cursor.fetchone()",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "cursor.execute(sql, (matricula,))",
+            "feedback": "Correto. O driver vincula a tupla de parâmetros de forma segura, sem misturar dados ao comando SQL."
+          },
+          {
+            "id": "tok-2",
+            "text": "cursor.execute(sql % f\"'{matricula}'\")",
+            "feedback": "Incorreto. A interpolação via operador % e f-string insere a entrada diretamente na consulta e permite SQL Injection."
+          },
+          {
+            "id": "tok-3",
+            "text": "cursor.execute(sql.replace(\"%s\", \"'\" + matricula + \"'\"))",
+            "feedback": "Incorreto. A substituição e concatenação direta de strings permite que caracteres especiais alterem o comando SQL."
+          },
+          {
+            "id": "tok-4",
+            "text": "cursor.execute(sql.replace(\"%s\", \"'{}'\".format(matricula)))",
+            "feedback": "Incorreto. O método format() apenas substitui texto antes do envio, sem proteção contra injeção."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-017",
+      "title": "Integridade Referencial em SQL",
+      "mechanic": "fill-slot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Banco de Dados e Informação",
+      "conceptId": "DB-DDL-01",
+      "difficulty": "intermediate",
+      "context": "Na modelagem relacional do sistema N9 (compatível com MySQL 8 e Oracle 19c), cada registro na tabela EMPRESTIMO deve referenciar um leitor existente na tabela LEITOR.",
+      "instruction": "Selecione a restrição SQL que impede inserir empréstimos para um ID_LEITOR inexistente.",
+      "xp": 75,
+      "help": {
+        "hint": "Qual restrição garante que o valor de uma coluna corresponda a uma chave primária em outra tabela?",
+        "concept": "A chave estrangeira (FOREIGN KEY) assegura integridade referencial entre tabelas relacionadas.",
+        "example": "FOREIGN KEY (id_curso) REFERENCES curso(id_curso)"
+      },
+      "explanation": "A cláusula FOREIGN KEY (ID_LEITOR) REFERENCES LEITOR(ID_LEITOR) impõe integridade referencial, bloqueando inserções ou atualizações que apontem para um leitor inexistente. UNIQUE apenas impede valores duplicados na própria tabela. CHECK valida expressões lógicas locais na linha. DEFAULT define um valor padrão quando nenhum é informado, sem verificar existência na tabela pai.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Integridade Referencial em SQL (DB-DDL-01)",
+        "objective": "Definir restrição de chave estrangeira (FOREIGN KEY) em DDL SQL para assegurar integridade referencial.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "ISO/IEC 9075 — Database languages — SQL"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "sql",
+        "contentBefore": "CREATE TABLE EMPRESTIMO (\n    ID_EMPRESTIMO INT PRIMARY KEY,\n    ID_LEITOR INT NOT NULL,\n    DATA_RETIRADA DATE NOT NULL,\n    ",
+        "contentAfter": "\n);",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "FOREIGN KEY (ID_LEITOR) REFERENCES LEITOR(ID_LEITOR)",
+            "feedback": "Correto. A chave estrangeira garante que todo ID_LEITOR exista previamente na tabela LEITOR."
+          },
+          {
+            "id": "tok-2",
+            "text": "UNIQUE (ID_LEITOR)",
+            "feedback": "Incorreto. UNIQUE impede que o mesmo leitor faça dois empréstimos, mas aceita códigos inexistentes."
+          },
+          {
+            "id": "tok-3",
+            "text": "CHECK (ID_LEITOR > 0)",
+            "feedback": "Incorreto. CHECK valida apenas se o número é positivo, sem consultar a tabela LEITOR."
+          },
+          {
+            "id": "tok-4",
+            "text": "DEFAULT (ID_LEITOR)",
+            "feedback": "Incorreto. DEFAULT não cria vínculo referencial entre tabelas."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-018",
+      "title": "Barreira de Acessibilidade no Formulário",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Acessibilidade",
+      "conceptId": "ACC-FORM-01",
+      "difficulty": "intermediate",
+      "context": "Na tela de inscrição móvel N9, usuários de leitores de tela não conseguem identificar o que devem digitar no segundo campo do formulário.",
+      "instruction": "Selecione o componente da interface que apresenta a falha crítica de acessibilidade semântica.",
+      "xp": 75,
+      "help": {
+        "hint": "Observe qual campo depende apenas de texto interno temporário (placeholder) sem rótulo associado.",
+        "concept": "Campos de formulário exigem elementos <label> associados programaticamente; placeholders desaparecem ao digitar e falham em tecnologias assistivas.",
+        "example": "Associar <label for='cpf'>CPF</label> ao <input id='cpf'> garante anúncio correto pelo leitor de tela."
+      },
+      "explanation": "O campo de entrada 'node-input-cpf' possui apenas placeholder interno 'Digite aqui' sem elemento <label> associado nem atributo aria-label. Quando o usuário começa a digitar, a dica desaparece e leitores de tela não identificam a finalidade do campo. O cabeçalho, o campo de nome com rótulo visível vinculado e o botão com texto descritivo estão semanticamente estruturados.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168 e 169/2026 (IHC), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "W3C Web Content Accessibility Guidelines (WCAG) 2.1 — Critério 3.3.2 (Labels or Instructions)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Barreira de Acessibilidade no Formulário (ACC-FORM-01)",
+        "objective": "Identificar falha de associação semântica de rótulos em formulários acessíveis conforme WCAG 2.1.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
+          "Portarias Inep nº 157, 168 e 169/2026 (IHC), arts. 5º e 6º",
+          "W3C WCAG 2.1 — Critério 3.3.2"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Wireframe vertical de tela móvel contendo quatro blocos empilhados: topo com título 'Inscrição N9', primeiro campo com rótulo fixo 'Nome completo' acima da caixa, segundo campo sem rótulo externo contendo apenas o texto interno 'Digite aqui', e botão inferior 'Confirmar inscrição'.",
+        "accessibleDescription": "Lista estrutural da tela: [node-header] Título H1 'Inscrição N9'; [node-input-nome] Campo de texto vinculado ao rótulo visível 'Nome completo'; [node-input-cpf] Campo de texto sem tag label, sem aria-label e apenas com placeholder 'Digite aqui'; [node-btn-submit] Botão de envio com texto 'Confirmar inscrição'.",
+        "nodes": [
+          {
+            "id": "node-header",
+            "label": "Cabeçalho H1: Inscrição N9",
+            "detail": "Título principal da página com hierarquia semântica correta."
+          },
+          {
+            "id": "node-input-nome",
+            "label": "Campo 1: Rótulo 'Nome completo' + Caixa de texto",
+            "detail": "Campo associado programaticamente ao elemento label."
+          },
+          {
+            "id": "node-input-cpf",
+            "label": "Campo 2: Caixa sem rótulo (apenas placeholder 'Digite aqui')",
+            "detail": "Entrada de dados sem label ou atributo acessível vinculado."
+          },
+          {
+            "id": "node-btn-submit",
+            "label": "Botão: Confirmar inscrição",
+            "detail": "Controle acionável por teclado e toque com nome acessível claro."
+          }
+        ],
+        "correctNodeId": "node-input-cpf"
+      }
+    },
+    {
+      "id": "N9-COM-019",
+      "title": "Ponto Único de Falha na Arquitetura",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Computação em Nuvem",
+      "conceptId": "CLD-HA-01",
+      "difficulty": "advanced",
+      "context": "O diagrama lógico da aplicação N9 em nuvem mostra clientes conectando-se a um balanceador redundante, duas instâncias web em zonas distintas, uma única instância de banco de dados sem réplica e armazenamento de objetos replicado.",
+      "instruction": "Identifique o nó arquitetural que representa o ponto único de falha (SPOF) capaz de interromper todo o sistema.",
+      "xp": 100,
+      "help": {
+        "hint": "Verifique qual componente crítico não possui redundância nem contingência automática em caso de queda.",
+        "concept": "Um ponto único de falha (SPOF) é qualquer componente cuja indisponibilidade paralisa integralmente o serviço por ausência de redundância.",
+        "example": "Ter dois servidores web conectados a um único servidor de banco de dados sem failover mantém o banco como SPOF."
+      },
+      "explanation": "Embora o balanceador de carga gerenciado e as duas instâncias web distribuídas em zonas diferentes suportem falhas isoladas, todas as requisições dependem de uma única instância de banco de dados relacional sem réplica de espera (standby). Se essa instância falhar, toda a aplicação fica indisponível. O armazenamento de objetos já possui replicação nativa entre zonas.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Plano da primeira coleção pedagógica N9 — Jornada Digital (plano-colecao-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ponto Único de Falha na Arquitetura (CLD-HA-01)",
+        "objective": "Diagnosticar ponto único de falha (SPOF) em topologias de aplicação distribuída em nuvem.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "plano-colecao-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama de arquitetura em nuvem com fluxo da esquerda para a direita: clientes apontam para um balanceador multi-zona, que distribui tráfego para duas instâncias web (Zona A e Zona B); ambas acessam uma única caixa de banco de dados na Zona A e um bucket de objetos replicado.",
+        "accessibleDescription": "Topologia de componentes: [node-lb] Balanceador de carga multi-zona redundante; [node-web] Grupo de duas instâncias de aplicação web em Zona A e Zona B; [node-db] Instância única de banco de dados relacional na Zona A sem réplica standby; [node-storage] Serviço de armazenamento de objetos com replicação entre zonas.",
+        "nodes": [
+          {
+            "id": "node-lb",
+            "label": "Balanceador de Carga (Multi-Zona)",
+            "detail": "Distribui requisições entre duas zonas de disponibilidade."
+          },
+          {
+            "id": "node-web",
+            "label": "Servidores de Aplicação (2 Instâncias)",
+            "detail": "Camada sem estado replicada nas Zonas A e B."
+          },
+          {
+            "id": "node-db",
+            "label": "Banco de Dados Relacional (Instância Única - Zona A)",
+            "detail": "Servidor único de leitura e escrita sem réplica de failover."
+          },
+          {
+            "id": "node-storage",
+            "label": "Armazenamento de Objetos (Replicado)",
+            "detail": "Repositório de arquivos estáticos com redundância automática."
+          }
+        ],
+        "correctNodeId": "node-db"
+      }
+    },
+    {
+      "id": "N9-COM-020",
+      "title": "Decisão sob Pressão no Lançamento",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Projetos e Riscos",
+      "conceptId": "PRJ-GOV-01",
+      "difficulty": "advanced",
+      "context": "Faltam 24 horas para liberar o novo portal de estágios N9. A equipe de qualidade reportou uma falha que permite a um usuário visualizar o currículo de outro candidato alterando o identificador na URL.",
+      "instruction": "Conduza o diálogo de decisão técnica e gerencial ao longo das três etapas sem comprometer a segurança nem a transparência do projeto.",
+      "xp": 100,
+      "help": {
+        "hint": "Priorize a proteção de dados pessoais, comunique riscos com transparência e valide a correção antes da abertura pública.",
+        "concept": "Decisões responsáveis em projetos de software equilibram prazo, escopo e qualidade sem sacrificar segurança ou privacidade.",
+        "example": "Adiar a abertura de um módulo exposto por falha de controle de acesso evita incidente grave de privacidade."
+      },
+      "explanation": "Lançar um sistema com falha conhecida de controle de acesso expõe dados pessoais de terceiros e gera risco legal e institucional grave. A condução adequada exige suspender a liberação pública do módulo afetado, aplicar correção no controle de autorização no servidor e validar com testes automatizados de acesso antes de autorizar a publicação.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Decisão sob Pressão no Lançamento (PRJ-GOV-01)",
+        "objective": "Conduzir decisões técnicas e gerenciais de contenção, correção de autorização no servidor e validação automatizada diante de falha de segurança pré-lançamento.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
+          "Portarias Inep nº 157, 168, 169 e 171/2026, arts. 5º e 6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Líder de Qualidade",
+            "message": "Confirmamos que qualquer usuário autenticado acessa currículos de terceiros trocando o número na URL. A direção espera o lançamento amanhã. Qual encaminhamento você propõe?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Lançar no prazo e corrigir o problema silenciosamente na semana seguinte.",
+                "reaction": "Consequência: Poucas horas após a abertura, estudantes descobrem a exposição e dados pessoais são acessados indevidamente, exigindo retirada emergencial do ar.",
+                "correct": false
+              },
+              {
+                "id": "s1-c2",
+                "text": "Bloquear a liberação do módulo afetado e comunicar formalmente o risco à coordenação.",
+                "reaction": "Decisão adequada: A exposição é contida antes do acesso público e a liderança recebe diagnóstico claro para reprogramar a entrega com segurança.",
+                "correct": true
+              },
+              {
+                "id": "s1-c3",
+                "text": "Ocultar o número do identificador apenas na barra de endereço via JavaScript no navegador.",
+                "reaction": "Consequência: Ocultar a URL na interface não impede requisições diretas à API, mantendo os currículos vulneráveis.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Desenvolvedor Back-end",
+            "message": "Com o lançamento segurado, temos duas propostas para corrigir o acesso. Qual abordagem resolve a falha na raiz?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Validar no servidor se o usuário autenticado é o titular do currículo ou possui perfil autorizado.",
+                "reaction": "Decisão adequada: A autorização passa a ser verificada no servidor a cada requisição, bloqueando acessos horizontais indevidos.",
+                "correct": true
+              },
+              {
+                "id": "s2-c2",
+                "text": "Trocar o número sequencial por um código numérico maior sem verificar permissão no servidor.",
+                "reaction": "Consequência: Apenas dificultar a adivinhação do código (segurança por obscuridade) não substitui controle real de autorização.",
+                "correct": false
+              },
+              {
+                "id": "s2-c3",
+                "text": "Pedir aos usuários nos termos de uso que não alterem os parâmetros da URL.",
+                "reaction": "Consequência: Avisos contratuais não impedem exploração técnica nem protegem os titulares dos dados.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Gerente de Projeto",
+            "message": "A correção foi aplicada no ambiente de homologação. O que falta para autorizar a abertura do portal com segurança?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Publicar imediatamente sem novos testes para recuperar o atraso do cronograma.",
+                "reaction": "Consequência: Sem evidência de teste, não há garantia de que outras rotas da API também não estejam expostas.",
+                "correct": false
+              },
+              {
+                "id": "s3-c2",
+                "text": "Executar testes automatizados de autorização positiva e negativa e registrar a evidência de aprovação.",
+                "reaction": "Decisão adequada: Os testes comprovam que o titular acessa seu próprio currículo e que tentativas de acesso a terceiros retornam bloqueio.",
+                "correct": true
+              },
+              {
+                "id": "s3-c3",
+                "text": "Testar manualmente apenas o login de um administrador no ambiente de produção.",
+                "reaction": "Consequência: Testar apenas perfil administrador não valida o isolamento entre estudantes comuns.",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

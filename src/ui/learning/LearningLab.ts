@@ -67,7 +67,7 @@ export class LearningLab {
   private selectedDialogueChoice: string | null = null;
   private readonly dialogueHistory: { readonly speaker: string; readonly text: string }[] = [];
   private feedback = '';
-  private guide = 'Eu sou a Lia. Vamos experimentar nove desafios rápidos?';
+  private guide = 'Eu sou a Lia. Vamos treinar com atividades rápidas e variadas?';
 
   constructor(private readonly root: HTMLElement, private readonly onExit: () => void) { this.render(); }
 
@@ -102,10 +102,10 @@ export class LearningLab {
     const title = el('h1', 'lab-title');
     title.tabIndex = -1;
     title.append('TREINE. ', el('span', '', 'DESCUBRA.'), ' AVANCE.');
-    copy.append(title, el('p', 'lab-lead', 'Nove atividades curtas de Sistemas de Informação com situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
+    copy.append(title, el('p', 'lab-lead', 'Vinte atividades compartilhadas de CC, SI, TADS e TGTI com situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
     const start = action('Começar laboratório  →', 'lab-button lab-button--primary');
     start.addEventListener('click', () => { this.index = 0; this.prepareActivity(); this.sound.play('tap'); this.render(); });
-    copy.append(start, el('p', 'lab-note', 'Duração estimada: 5 minutos · Funciona com teclado, mouse e toque'));
+    copy.append(start, el('p', 'lab-note', 'Duração estimada: 10 a 15 minutos · Funciona com teclado, mouse e toque'));
     const visual = el('aside', 'lab-hero-visual');
     const bubble = el('p', 'lab-speech', 'Oi! Eu sou a Lia. Cada acerto libera XP e uma nova reação.');
     visual.append(bubble, characters());
@@ -150,7 +150,8 @@ export class LearningLab {
     const challenge = el('section', 'lab-challenge');
     challenge.dataset.activityType = activity.type;
     challenge.append(el('p', 'lab-area', activity.area.toUpperCase()), el('h1', 'lab-question-title', activity.title),
-      el('p', 'lab-context', activity.context), el('p', 'lab-instruction', activity.instruction), this.mechanic(activity));
+      el('p', 'lab-context', activity.context), el('p', 'lab-instruction', activity.instruction),
+      this.helpPanel(activity), this.mechanic(activity));
     const footer = el('footer', 'lab-answer-bar');
     const feedback = el('div', 'lab-feedback' + (this.solved ? ' lab-feedback--success' : this.feedback ? ' lab-feedback--retry' : ''));
     feedback.setAttribute('role', 'status');
@@ -179,6 +180,17 @@ export class LearningLab {
       case 'hotspot': return this.hotspot(activity);
       case 'decision-dialogue': return this.dialogue(activity);
     }
+  }
+
+  private helpPanel(activity: LearningActivity): HTMLElement {
+    const details = el('details', 'lab-help');
+    details.append(el('summary', 'lab-help-summary', '💡 Preciso de ajuda'));
+    const content = el('div', 'lab-help-content');
+    content.append(el('strong', '', 'Pista'), el('p', '', activity.help.hint),
+      el('strong', '', 'Conceito'), el('p', '', activity.help.concept),
+      el('strong', '', 'Exemplo'), el('pre', 'lab-help-example', activity.help.example));
+    details.append(content);
+    return details;
   }
 
   private choice(activity: Extract<LearningActivity, { type: 'choice' }>): HTMLElement {
@@ -358,7 +370,7 @@ export class LearningLab {
       visual.append(button);
       if (index < activity.nodes.length - 1) visual.append(el('span', 'lab-diagram-arrow', '→'));
     });
-    const caption = el('figcaption', '', 'Descrição textual: CLIENTE, relacionamento “realiza” com cardinalidade 0..1 para 0..N, e PEDIDO com chave estrangeira id_cliente. Todos os elementos são selecionáveis por teclado.');
+    const caption = el('figcaption', '', 'Descrição textual: ' + activity.accessibleDescription + ' Todos os elementos são selecionáveis por teclado.');
     figure.append(visual, caption); return figure;
   }
 
@@ -419,14 +431,24 @@ export class LearningLab {
       this.guide = this.index === SI_LEARNING_LAB.length - 1 ? 'Sequência concluída! Você dominou nove maneiras de aprender.' : 'Mandou bem! O próximo desafio usa uma mecânica diferente.';
       this.sound.play(this.index === SI_LEARNING_LAB.length - 1 ? 'complete' : 'correct');
     } else {
-      this.feedback = activity.type === 'order' ? 'A sequência ainda deixa uma ação acontecer cedo demais.'
+      this.feedback = activity.type === 'choice' ? activity.options.find((option) => option.id === this.selectedChoice)?.feedback ?? 'Revise a alternativa.'
+        : activity.type === 'binary-choice' ? (this.selectedBinary ? activity.feedbackTrue : activity.feedbackFalse)
+          : activity.type === 'complete-code' ? activity.tokens.find((token) => token.id === this.selectedToken)?.feedback ?? 'Revise o trecho.'
+            : activity.type === 'order' ? 'A sequência ainda deixa uma ação acontecer cedo demais.'
         : activity.type === 'match' ? 'Uma ou mais conexões não representam a finalidade do sistema.'
           : activity.type === 'categorize' ? 'Há pelo menos um cenário no ambiente de dados incorreto.'
-            : activity.type === 'multiple-select' ? 'Uma ou mais medidas selecionadas não tratam diretamente a disponibilidade no cenário.'
+            : activity.type === 'multiple-select' ? this.multipleFeedback(activity)
             : 'Quase! Essa solução não atende completamente ao cenário.';
       this.guide = 'Tudo bem errar. Use a pista do cenário e tente novamente!'; this.sound.play('wrong');
     }
     this.render();
+  }
+
+  private multipleFeedback(activity: Extract<LearningActivity, { type: 'multiple-select' }>): string {
+    const wrongSelected = activity.options.find((option) => this.selectedMultiple.has(option.id) && !option.correct);
+    if (wrongSelected) return wrongSelected.feedback;
+    return activity.options.find((option) => option.correct && !this.selectedMultiple.has(option.id))?.feedback
+      ?? 'Revise as opções selecionadas.';
   }
 
   private checkDialogue(activity: Extract<LearningActivity, { type: 'decision-dialogue' }>): void {
@@ -459,7 +481,7 @@ export class LearningLab {
     this.activeCategoryItem = null; this.categories.clear(); this.selectedToken = null; this.selectedNode = null;
     this.dialogueStep = 0; this.selectedDialogueChoice = null; this.dialogueHistory.length = 0;
     const current = SI_LEARNING_LAB[this.index];
-    this.order = current?.type === 'order' ? [current.blocks[2]!.id, current.blocks[0]!.id, current.blocks[3]!.id, current.blocks[1]!.id] : [];
+    this.order = current?.type === 'order' ? [...current.blocks].reverse().map((block) => block.id) : [];
     this.guide = current ? 'Novo desafio: ' + typeLabels[current.type] + '. Você consegue!' : 'Laboratório concluído!';
   }
 
@@ -479,9 +501,9 @@ export class LearningLab {
     const main = el('main', 'lab-result');
     const burst = el('div', 'lab-xp-burst', '⚡ +' + this.xp + ' XP');
     const title = el('h1', 'lab-title', 'LABORATÓRIO CONCLUÍDO!'); title.tabIndex = -1;
-    main.append(burst, title, el('p', 'lab-lead', 'Você experimentou nove formas de aprender conceitos reais de Sistemas de Informação.'), characters());
+    main.append(burst, title, el('p', 'lab-lead', 'Você concluiu vinte atividades e experimentou nove formas de aprender conceitos reais de tecnologia.'), characters());
     const stats = el('div', 'lab-result-stats');
-    stats.append(el('span', '', '9 atividades'), el('span', '', this.xp + ' XP'), el('span', '', 'Sem alterar o jogo atual'));
+    stats.append(el('span', '', SI_LEARNING_LAB.length + ' atividades'), el('span', '', this.xp + ' XP'), el('span', '', 'Sem alterar o jogo atual'));
     const restart = action('Jogar novamente', 'lab-button lab-button--primary');
     restart.addEventListener('click', () => { this.index = 0; this.xp = 0; this.prepareActivity(); this.render(); });
     const exit = action('Voltar ao N9 atual', 'lab-button lab-button--ghost'); exit.addEventListener('click', this.onExit);

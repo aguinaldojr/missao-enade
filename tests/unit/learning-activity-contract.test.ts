@@ -20,7 +20,8 @@ function catalog(): Record<string, unknown> {
     { ...base, id: 'N9-TEST-SINGLE', title: 'Escolha', mechanic: 'single-choice',
       payload: { type: 'single-choice', options: ['a', 'b', 'c', 'd', 'e'].map(option), correctId: 'b' } },
     { ...base, id: 'N9-TEST-BINARY', title: 'Binária', mechanic: 'binary-choice',
-      payload: { type: 'binary-choice', statement: 'Uma afirmação verificável.', correctValue: true } },
+      payload: { type: 'binary-choice', statement: 'Uma afirmação verificável.', correctValue: true,
+        feedbackTrue: 'Feedback para verdadeiro.', feedbackFalse: 'Feedback para falso.' } },
     { ...base, id: 'N9-TEST-MULTI', title: 'Múltipla', mechanic: 'multiple-select',
       payload: { type: 'multiple-select', requiredCount: 2, options: ['a', 'b', 'c', 'd', 'e'].map((id, index) =>
         ({ ...option(id), correct: index < 2 })) } },
@@ -37,7 +38,8 @@ function catalog(): Record<string, unknown> {
         categoryId: index % 2 ? 'analise' : 'operacao' })) } },
     { ...base, id: 'N9-TEST-FILL', title: 'Lacuna', mechanic: 'fill-slot',
       payload: { type: 'fill-slot', language: 'python', contentBefore: 'if valor ', contentAfter: ':',
-        tokens: ['a', 'b', 'c', 'd'].map((id) => ({ id, text: 'trecho ' + id })), correctTokenId: 'a' } },
+        tokens: ['a', 'b', 'c', 'd'].map((id) => ({ id, text: 'trecho ' + id, feedback: 'Feedback ' + id })),
+        correctTokenId: 'a' } },
     { ...base, id: 'N9-TEST-HOTSPOT', title: 'Visual', mechanic: 'visual-hotspot',
       payload: { type: 'visual-hotspot', visualDescription: 'Diagrama com dois nós.',
         accessibleDescription: 'Descrição textual equivalente do diagrama.', nodes: [

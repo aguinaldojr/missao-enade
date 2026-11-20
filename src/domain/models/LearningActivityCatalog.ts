@@ -40,7 +40,8 @@ export interface LearningOption {
 
 export type LearningPayload =
   | { readonly type: 'single-choice'; readonly options: readonly LearningOption[]; readonly correctId: string }
-  | { readonly type: 'binary-choice'; readonly statement: string; readonly correctValue: boolean }
+  | { readonly type: 'binary-choice'; readonly statement: string; readonly correctValue: boolean;
+      readonly feedbackTrue: string; readonly feedbackFalse: string }
   | { readonly type: 'multiple-select'; readonly requiredCount: number;
       readonly options: readonly (LearningOption & { readonly correct: boolean })[] }
   | { readonly type: 'sequence-order'; readonly blocks: readonly { readonly id: string; readonly text: string }[];
@@ -51,7 +52,7 @@ export type LearningPayload =
       readonly categoryId: string }[] }
   | { readonly type: 'fill-slot'; readonly language?: 'c' | 'python' | 'javascript' | 'sql' | 'text';
       readonly contentBefore: string; readonly contentAfter: string; readonly tokens: readonly { readonly id: string;
-      readonly text: string }[]; readonly correctTokenId: string }
+      readonly text: string; readonly feedback: string }[]; readonly correctTokenId: string }
   | { readonly type: 'visual-hotspot'; readonly visualDescription: string; readonly accessibleDescription: string;
       readonly nodes: readonly { readonly id: string; readonly label: string; readonly detail: string }[];
       readonly correctNodeId: string }

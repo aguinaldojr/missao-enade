@@ -50,11 +50,13 @@
     "binaryChoice": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["type", "statement", "correctValue"],
+      "required": ["type", "statement", "correctValue", "feedbackTrue", "feedbackFalse"],
       "properties": {
         "type": { "const": "binary-choice" },
         "statement": { "$ref": "#/definitions/nonBlank" },
-        "correctValue": { "type": "boolean" }
+        "correctValue": { "type": "boolean" },
+        "feedbackTrue": { "$ref": "#/definitions/nonBlank" },
+        "feedbackFalse": { "$ref": "#/definitions/nonBlank" }
       }
     },
     "multipleOption": {
@@ -82,7 +84,10 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["id", "text"],
-      "properties": { "id": { "$ref": "#/definitions/shortId" }, "text": { "$ref": "#/definitions/nonBlank" } }
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "text": { "$ref": "#/definitions/nonBlank" }
+      }
     },
     "sequenceOrder": {
       "type": "object",
@@ -146,8 +151,12 @@
     "token": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "text"],
-      "properties": { "id": { "$ref": "#/definitions/shortId" }, "text": { "$ref": "#/definitions/nonBlank" } }
+      "required": ["id", "text", "feedback"],
+      "properties": {
+        "id": { "$ref": "#/definitions/shortId" },
+        "text": { "$ref": "#/definitions/nonBlank" },
+        "feedback": { "$ref": "#/definitions/nonBlank" }
+      }
     },
     "fillSlot": {
       "type": "object",
