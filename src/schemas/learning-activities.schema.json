@@ -16,6 +16,7 @@
   "definitions": {
     "nonBlank": { "type": "string", "minLength": 1, "pattern": "\\S" },
     "shortId": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "conceptId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9-]*$" },
     "option": {
       "type": "object",
       "additionalProperties": false,
@@ -239,7 +240,7 @@
         "mechanic": { "enum": ["single-choice", "binary-choice", "multiple-select", "sequence-order", "pair-match", "categorize", "fill-slot", "visual-hotspot", "decision-dialogue"] },
         "courses": { "$ref": "urn:n9:editorial#/definitions/courses" },
         "area": { "$ref": "urn:n9:editorial#/definitions/area" },
-        "conceptId": { "$ref": "#/definitions/shortId" },
+        "conceptId": { "$ref": "#/definitions/conceptId" },
         "difficulty": { "$ref": "urn:n9:editorial#/definitions/difficulty" },
         "context": { "$ref": "#/definitions/nonBlank" },
         "instruction": { "$ref": "#/definitions/nonBlank" },
