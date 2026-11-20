@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import catalog from '../../src/content/questions/central-nexo.json';
+import provisionalCatalog from '../../src/content/questions/enade-2026-provisional.json';
 import { CLASSIFICATIONS, type QuestionCatalog } from '../../src/domain/models/Question';
 import { COURSE_IDS } from '../../src/domain/models/Course';
 import { isEligible } from '../../src/domain/eligibility';
@@ -7,6 +8,13 @@ import { JsonContentRepository } from '../../src/infrastructure/content/JsonCont
 import { validateContent } from '../../src/infrastructure/content/validateContent';
 
 describe('catálogo local de exemplos', () => {
+  it('não expõe cabeçalhos editoriais nos contextos apresentados ao jogador', () => {
+    for (const question of provisionalCatalog.questions) {
+      expect(question.context).not.toMatch(/^(?:Ficha:|Objetivo:)/i);
+      expect(question.context).not.toContain('validationStatus:');
+    }
+  });
+
   it('carrega dez exemplos distintos por curso, com nove compartilhados e um específico', () => {
     const repository = new JsonContentRepository(catalog);
     for (const course of COURSE_IDS) {

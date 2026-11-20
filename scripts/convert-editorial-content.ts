@@ -874,6 +874,21 @@ function playerPlain(text: string): string {
     .replace(/^###\s+.*$/gm, ' '));
 }
 
+/** Remove cabeçalhos editoriais que não pertencem ao texto apresentado ao jogador. */
+function playerContext(text: string): string {
+  const value = playerPlain(text);
+  if (!value.startsWith('Ficha:')) return value;
+  const objective = value.indexOf('Objetivo:');
+  if (objective >= 0) {
+    const afterObjective = value.slice(objective + 'Objetivo:'.length).trim();
+    const boundary = afterObjective.indexOf('. ');
+    return boundary >= 0 ? afterObjective.slice(boundary + 2).trim() : '';
+  }
+  const validation = 'validationStatus: under-ai-review. ';
+  const boundary = value.indexOf(validation);
+  return boundary >= 0 ? value.slice(boundary + validation.length).trim() : value;
+}
+
 function sourceDefinitions(documentText: string): Readonly<Record<string, string>> {
   const result: Record<string, string> = {};
   for (const line of documentText.split(/\r?\n/)) {
@@ -923,7 +938,7 @@ function genericQuestion(section: Section, inventory: Readonly<Record<string, st
   const courses = origin === 'COM' ? ['CC', 'SI', 'TADS', 'TGTI', 'TRC'] :
     parseCourses(sectionCourses).length ? parseCourses(sectionCourses) : [origin];
   const presentation = genericPresentation(resourceSegment(section, promptMatch.index) + '\n' + rawContext);
-  const context = playerPlain(rawContext) || 'Analise os dados e o recurso apresentados para tomar a decisão solicitada.';
+  const context = playerContext(rawContext) || 'Analise os dados e o recurso apresentados para tomar a decisão solicitada.';
   if (options.length !== 5 || Object.keys(feedbackByOption).length !== 5 || !explanation ||
       !['introductory', 'intermediate', 'advanced'].includes(difficulty)) {
     throw new Error('Questão documental incompleta: ' + section.id);

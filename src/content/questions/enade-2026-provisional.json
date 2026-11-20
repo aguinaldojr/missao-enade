@@ -16050,7 +16050,7 @@
       "id": "E26-Q-SI-54",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M04/SI-M07; área “Sistemas empresariais integrados”; introductory. Objetivo: reconhecer a função integradora de um ERP em processo transversal. Uma empresa fictícia registra o mesmo pedido separadamente em vendas, estoque, expedição e financeiro. Códigos e totais divergem. O projeto define ERP como sistema integrado que compartilha dados e regras entre processos empresariais, com responsabilidades e controles.",
+      "context": "Uma empresa fictícia registra o mesmo pedido separadamente em vendas, estoque, expedição e financeiro. Códigos e totais divergem. O projeto define ERP como sistema integrado que compartilha dados e regras entre processos empresariais, com responsabilidades e controles.",
       "prompt": "Qual mudança representa melhor essa finalidade?",
       "options": [
         {
@@ -16127,7 +16127,7 @@
       "id": "E26-Q-SI-55",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M04/SI-M07; área “Gestão do relacionamento com clientes”; introductory. Objetivo: distinguir CRM de cadastro isolado ou controle financeiro. Uma organização fictícia deseja acompanhar consentimentos, contatos, propostas, atendimentos e preferências declaradas, mostrando uma linha do tempo autorizada às equipes de relacionamento. Faturamento e estoque permanecem em sistemas próprios.",
+      "context": "Uma organização fictícia deseja acompanhar consentimentos, contatos, propostas, atendimentos e preferências declaradas, mostrando uma linha do tempo autorizada às equipes de relacionamento. Faturamento e estoque permanecem em sistemas próprios.",
       "prompt": "Qual solução atende diretamente à finalidade de CRM descrita?",
       "options": [
         {
@@ -16194,7 +16194,7 @@
       "id": "E26-Q-SI-56",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M07; área “Gestão da cadeia de suprimentos”; intermediate. Objetivo: reconhecer amplificação de demanda e selecionar coordenação baseada em informação compartilhada. O prazo de reposição é conhecido, mas cada elo estima demanda usando somente o último pedido recebido.",
+      "context": "O prazo de reposição é conhecido, mas cada elo estima demanda usando somente o último pedido recebido.",
       "presentation": {
         "blocks": [
           {
@@ -16305,7 +16305,7 @@
       "id": "E26-Q-SI-57",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M04; área “Governança de informação e tecnologia”; intermediate. Objetivo: aplicar a distinção COBIT 2019 entre governança e gestão. Convenção do item: governança avalia, direciona e monitora; gestão alinha, planeja, constrói, executa e acompanha atividades conforme a direção. O conselho definiu tolerância de indisponibilidade e prioridade de continuidade. A gestão de TI deve preparar e operar a solução.",
+      "context": "Convenção do item: governança avalia, direciona e monitora; gestão alinha, planeja, constrói, executa e acompanha atividades conforme a direção. O conselho definiu tolerância de indisponibilidade e prioridade de continuidade. A gestão de TI deve preparar e operar a solução.",
       "prompt": "Qual divisão respeita essa convenção?",
       "options": [
         {
@@ -16382,7 +16382,7 @@
       "id": "E26-Q-SI-58",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M07/SI-M05; área “Gestão de serviços de TI”; intermediate. Objetivo: distinguir incident management, problem management e change enablement em ITIL 4. Um portal fica indisponível. A equipe aplica uma rota alternativa e restaura o serviço; depois analisa ocorrências recorrentes, identifica uma configuração defeituosa e agenda a correção permanente com avaliação, teste e retorno planejado.",
+      "context": "Um portal fica indisponível. A equipe aplica uma rota alternativa e restaura o serviço; depois analisa ocorrências recorrentes, identifica uma configuração defeituosa e agenda a correção permanente com avaliação, teste e retorno planejado.",
       "prompt": "Qual associação está correta?",
       "options": [
         {
@@ -16469,7 +16469,7 @@
       "id": "E26-Q-SI-59",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M06; área “Gerenciamento de projetos”; intermediate. Objetivo: selecionar registro de risco orientado a valor, responsabilidade e resposta, em alinhamento ao PMBOK Guide 8. Risco fictício: fornecedor pode atrasar um componente crítico. Se ocorrer, o piloto perde duas semanas. Há um fornecedor alternativo mais caro, acionável até dez dias antes da entrega.",
+      "context": "Risco fictício: fornecedor pode atrasar um componente crítico. Se ocorrer, o piloto perde duas semanas. Há um fornecedor alternativo mais caro, acionável até dez dias antes da entrega.",
       "prompt": "Qual registro apoia melhor a decisão do projeto?",
       "options": [
         {
@@ -16613,7 +16613,7 @@
       "id": "E26-Q-SI-61",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M05; área “Modelos de serviço em nuvem”; introductory. Objetivo: distinguir SaaS, PaaS e IaaS por responsabilidade do consumidor. Necessidades: N1 usar uma aplicação pronta de colaboração; N2 implantar código próprio sem administrar sistema operacional; N3 instalar sistema operacional e aplicações próprias sobre processamento, rede e armazenamento provisionados.",
+      "context": "Necessidades: N1 usar uma aplicação pronta de colaboração; N2 implantar código próprio sem administrar sistema operacional; N3 instalar sistema operacional e aplicações próprias sobre processamento, rede e armazenamento provisionados.",
       "prompt": "Qual mapeamento está correto?",
       "options": [
         {
@@ -16680,7 +16680,7 @@
       "id": "E26-Q-SI-62",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M09; área “Big Data e arquiteturas escaláveis”; advanced. Objetivo: selecionar arquitetura coerente com volume, velocidade, variedade e governança. Um projeto fictício recebe 2 TB/dia de sensores, textos e imagens. Alertas precisam sair em até dez segundos; análises históricas usam meses de dados. Eventos podem chegar repetidos ou fora de ordem, e dados pessoais exigem controle de acesso e retenção.",
+      "context": "Um projeto fictício recebe 2 TB/dia de sensores, textos e imagens. Alertas precisam sair em até dez segundos; análises históricas usam meses de dados. Eventos podem chegar repetidos ou fora de ordem, e dados pessoais exigem controle de acesso e retenção.",
       "prompt": "Qual desenho atende melhor ao conjunto?",
       "options": [
         {
@@ -16747,7 +16747,7 @@
       "id": "E26-Q-SI-63",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M06; área “Maturidade e melhoria de processos”; advanced. Objetivo: aplicar princípios comuns de institucionalização sem afirmar equivalência automática entre CMMI V3.0 e MPS-SW:2024. Uma fábrica fictícia trabalha de forma diferente em cada projeto; estimativas e defeitos não são registrados de modo comparável. A direção quer usar CMMI ou MPS.BR, mas ainda não escolheu modelo, escopo ou avaliação.",
+      "context": "Uma fábrica fictícia trabalha de forma diferente em cada projeto; estimativas e defeitos não são registrados de modo comparável. A direção quer usar CMMI ou MPS.BR, mas ainda não escolheu modelo, escopo ou avaliação.",
       "prompt": "Qual primeiro programa é mais defensável?",
       "options": [
         {
@@ -16824,7 +16824,7 @@
       "id": "E26-Q-SI-64",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M06; área “Modelagem UML”; intermediate. Objetivo: interpretar generalização e associação em diagrama de classes. Regra: Usuário possui nome e autenticação comuns. Estudante acrescenta curso; Docente acrescenta área de atuação. Ambos podem criar Reserva; cada reserva tem exatamente um autor, e um usuário pode criar várias.",
+      "context": "Regra: Usuário possui nome e autenticação comuns. Estudante acrescenta curso; Docente acrescenta área de atuação. Ambos podem criar Reserva; cada reserva tem exatamente um autor, e um usuário pode criar várias.",
       "prompt": "Qual modelo UML representa melhor as regras?",
       "options": [
         {
@@ -16901,7 +16901,7 @@
       "id": "E26-Q-SI-65",
       "version": 1,
       "classification": "SI",
-      "context": "Ficha: SI-M05; área “Virtualização”; advanced. Objetivo: calcular capacidade física e distinguir isolamento, virtualização e proteção de dados. Um host possui 64 GB de RAM. Hipervisor e reserva operacional consomem 8 GB. Três VMs têm 12, 16 e 20 GB garantidos. Uma nova VM requer 10 GB garantidos. O ambiente não permite sobrecompromisso; snapshots ficam no mesmo armazenamento do host e não substituem cópia independente.",
+      "context": "Um host possui 64 GB de RAM. Hipervisor e reserva operacional consomem 8 GB. Três VMs têm 12, 16 e 20 GB garantidos. Uma nova VM requer 10 GB garantidos. O ambiente não permite sobrecompromisso; snapshots ficam no mesmo armazenamento do host e não substituem cópia independente.",
       "prompt": "Qual plano respeita as premissas?",
       "options": [
         {
@@ -20432,7 +20432,7 @@
       "id": "E26-Q-TRC-21",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Redes sem fio”; introductory; validationStatus: under-ai-review. Três pontos de acesso de 2,4 GHz atendem salas vizinhas. No modelo do exercício, os canais 1, 6 e 11 não se sobrepõem. Usar o mesmo canal em salas vizinhas aumenta a disputa.",
+      "context": "Três pontos de acesso de 2,4 GHz atendem salas vizinhas. No modelo do exercício, os canais 1, 6 e 11 não se sobrepõem. Usar o mesmo canal em salas vizinhas aumenta a disputa.",
       "presentation": {
         "blocks": [
           {
@@ -20509,7 +20509,7 @@
       "id": "E26-Q-TRC-22",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Redes sem fio”; intermediate; validationStatus: under-ai-review. Dois APs possuem retorno cabeado e áreas de cobertura parcialmente sobrepostas. O requisito é permitir deslocamento mantendo a mesma rede corporativa. A política exige mesmo SSID e segurança, canais distintos e potência ajustada por medição.",
+      "context": "Dois APs possuem retorno cabeado e áreas de cobertura parcialmente sobrepostas. O requisito é permitir deslocamento mantendo a mesma rede corporativa. A política exige mesmo SSID e segurança, canais distintos e potência ajustada por medição.",
       "prompt": "Qual configuração atende ao requisito?",
       "options": [
         {
@@ -20576,7 +20576,7 @@
       "id": "E26-Q-TRC-23",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Cabeamento estruturado”; introductory; validationStatus: under-ai-review. A política deste projeto limita o enlace permanente a 90 m e o canal completo, incluindo cordões, a 100 m.",
+      "context": "A política deste projeto limita o enlace permanente a 90 m e o canal completo, incluindo cordões, a 100 m.",
       "presentation": {
         "blocks": [
           {
@@ -20689,7 +20689,7 @@
       "id": "E26-Q-TRC-24",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Cabeamento estruturado”; intermediate; validationStatus: under-ai-review. Um laboratório terá 18 posições agora e seis previstas. A sala técnica é central. O projeto exige topologia em estrela, identificação nas duas pontas, patch panel e caminhos separados da energia onde indicado na planta.",
+      "context": "Um laboratório terá 18 posições agora e seis previstas. A sala técnica é central. O projeto exige topologia em estrela, identificação nas duas pontas, patch panel e caminhos separados da energia onde indicado na planta.",
       "prompt": "Qual plano é mais coerente?",
       "options": [
         {
@@ -20756,7 +20756,7 @@
       "id": "E26-Q-TRC-25",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Programação e automação de redes”; intermediate; validationStatus: under-ai-review. Uma automação compara estado desejado e estado coletado. A política determina: validar antes, alterar somente diferenças, registrar ações e não reiniciar dispositivo já conforme.",
+      "context": "Uma automação compara estado desejado e estado coletado. A política determina: validar antes, alterar somente diferenças, registrar ações e não reiniciar dispositivo já conforme.",
       "prompt": "Qual fluxo implementa melhor essa política?",
       "options": [
         {
@@ -20823,7 +20823,7 @@
       "id": "E26-Q-TRC-26",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Programação e automação de redes”; intermediate; validationStatus: under-ai-review. Uma mudança de VLAN será aplicada a cem switches. Há validação sintática, cópia da configuração atual, grupo piloto de cinco equipamentos e teste de conectividade. A política manda interromper novos lotes se o piloto falhar.",
+      "context": "Uma mudança de VLAN será aplicada a cem switches. Há validação sintática, cópia da configuração atual, grupo piloto de cinco equipamentos e teste de conectividade. A política manda interromper novos lotes se o piloto falhar.",
       "prompt": "Qual sequência reduz o alcance de uma falha?",
       "options": [
         {
@@ -20890,7 +20890,7 @@
       "id": "E26-Q-TRC-27",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Projeto lógico e físico”; introductory; validationStatus: under-ai-review. Um novo laboratório exige 40 dispositivos, separação entre estudantes e administração, acesso sem fio para visitantes, continuidade do serviço central e crescimento de 20%. Ainda não há fabricante escolhido.",
+      "context": "Um novo laboratório exige 40 dispositivos, separação entre estudantes e administração, acesso sem fio para visitantes, continuidade do serviço central e crescimento de 20%. Ainda não há fabricante escolhido.",
       "prompt": "Qual deve ser o próximo artefato do projeto?",
       "options": [
         {
@@ -20957,7 +20957,7 @@
       "id": "E26-Q-TRC-28",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Projeto lógico e físico”; intermediate; validationStatus: under-ai-review. Um andar terá 42 pontos ativos. A política exige reserva mínima de 20%. As opções de acesso oferecem 24 ou 48 portas. Arredonde a necessidade para cima.",
+      "context": "Um andar terá 42 pontos ativos. A política exige reserva mínima de 20%. As opções de acesso oferecem 24 ou 48 portas. Arredonde a necessidade para cima.",
       "prompt": "Qual opção possui a menor capacidade que atende à política?",
       "options": [
         {
@@ -21024,7 +21024,7 @@
       "id": "E26-Q-TRC-29",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Configuração de dispositivos”; intermediate; validationStatus: under-ai-review. Neste equipamento, a lista é processada de cima para baixo e a primeira regra compatível encerra a decisão. A política deve permitir administração HTTPS apenas da rede 10.0.10.0/24 e negar as demais origens.",
+      "context": "Neste equipamento, a lista é processada de cima para baixo e a primeira regra compatível encerra a decisão. A política deve permitir administração HTTPS apenas da rede 10.0.10.0/24 e negar as demais origens.",
       "prompt": "Qual ordem implementa a política?",
       "options": [
         {
@@ -21091,7 +21091,7 @@
       "id": "E26-Q-TRC-30",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Configuração de dispositivos”; introductory; validationStatus: under-ai-review. O enlace entre dois switches deve transportar VLAN 10 (laboratório) e VLAN 20 (telefonia). A VLAN 30 (gerência local) não deve atravessar esse enlace. A política do equipamento permite declarar explicitamente as VLANs autorizadas no tronco.",
+      "context": "O enlace entre dois switches deve transportar VLAN 10 (laboratório) e VLAN 20 (telefonia). A VLAN 30 (gerência local) não deve atravessar esse enlace. A política do equipamento permite declarar explicitamente as VLANs autorizadas no tronco.",
       "prompt": "Qual configuração lógica atende ao requisito?",
       "options": [
         {
@@ -21158,7 +21158,7 @@
       "id": "E26-Q-TRC-31",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Fundamentos, componentes e topologias”; introductory; validationStatus: under-ai-review. Todos os enlaces estão íntegros antes do incidente. O switch S para completamente.",
+      "context": "Todos os enlaces estão íntegros antes do incidente. O switch S para completamente.",
       "presentation": {
         "blocks": [
           {
@@ -21235,7 +21235,7 @@
       "id": "E26-Q-TRC-32",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Comunicação e transmissão de dados”; introductory; validationStatus: under-ai-review. Um enlace permite que A transmita para B enquanto B transmite para A no mesmo intervalo, usando caminhos independentes. No modelo fornecido, isso não exige alternância de direção.",
+      "context": "Um enlace permite que A transmita para B enquanto B transmite para A no mesmo intervalo, usando caminhos independentes. No modelo fornecido, isso não exige alternância de direção.",
       "prompt": "Qual modo descreve o enlace?",
       "options": [
         {
@@ -21302,7 +21302,7 @@
       "id": "E26-Q-TRC-33",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Modelos de referência”; introductory; validationStatus: under-ai-review. Considere a simplificação: aplicação produz dados; transporte cria segmento; rede cria pacote; enlace cria quadro.",
+      "context": "Considere a simplificação: aplicação produz dados; transporte cria segmento; rede cria pacote; enlace cria quadro.",
       "prompt": "Qual ordem representa a encapsulação do envio?",
       "options": [
         {
@@ -21369,7 +21369,7 @@
       "id": "E26-Q-TRC-34",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Modelos de referência”; intermediate; validationStatus: under-ai-review. Host A envia um pacote IP ao host B por meio de um roteador. Ignore NAT e considere que o pacote não expirou. Em cada enlace, há um quadro próprio.",
+      "context": "Host A envia um pacote IP ao host B por meio de um roteador. Ignore NAT e considere que o pacote não expirou. Em cada enlace, há um quadro próprio.",
       "prompt": "Qual descrição é correta?",
       "options": [
         {
@@ -21436,7 +21436,7 @@
       "id": "E26-Q-TRC-35",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Algoritmos e protocolos de roteamento”; intermediate; validationStatus: under-ai-review. Filial P possui um único enlace para a matriz e sempre usa esse caminho. O campus Q possui quatro roteadores e enlaces redundantes cujos custos e estados mudam; deseja recalcular caminhos automaticamente.",
+      "context": "Filial P possui um único enlace para a matriz e sempre usa esse caminho. O campus Q possui quatro roteadores e enlaces redundantes cujos custos e estados mudam; deseja recalcular caminhos automaticamente.",
       "prompt": "Qual estratégia é mais coerente?",
       "options": [
         {
@@ -21503,7 +21503,7 @@
       "id": "E26-Q-TRC-36",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Padrões IEEE 802.x”; intermediate; validationStatus: under-ai-review. Um switch recebe na porta 1 um quadro com origem AA e destino unicast BB. Sua tabela MAC está vazia. No modelo do exercício, ele aprende a origem e inunda destino unicast desconhecido pelas demais portas da mesma VLAN.",
+      "context": "Um switch recebe na porta 1 um quadro com origem AA e destino unicast BB. Sua tabela MAC está vazia. No modelo do exercício, ele aprende a origem e inunda destino unicast desconhecido pelas demais portas da mesma VLAN.",
       "prompt": "Qual ação ocorre?",
       "options": [
         {
@@ -21570,7 +21570,7 @@
       "id": "E26-Q-TRC-37",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Padrões IEEE 802.x”; intermediate; validationStatus: under-ai-review. Três switches formam um triângulo de enlaces de camada 2. Sem controle, quadros broadcast podem circular e ser replicados. O requisito mantém redundância física, mas exige topologia lógica sem laço, liberando caminho alternativo após falha.",
+      "context": "Três switches formam um triângulo de enlaces de camada 2. Sem controle, quadros broadcast podem circular e ser replicados. O requisito mantém redundância física, mas exige topologia lógica sem laço, liberando caminho alternativo após falha.",
       "prompt": "Qual mecanismo atende ao requisito?",
       "options": [
         {
@@ -21637,7 +21637,7 @@
       "id": "E26-Q-TRC-38",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Cabeamento estruturado”; introductory; validationStatus: under-ai-review. Um relatório de teste mostra comprimento dentro do limite, mas o mapa de fios indica que os condutores associados aos pinos 3 e 6 foram trocados em uma terminação. A política exige correspondência correta entre as duas pontas.",
+      "context": "Um relatório de teste mostra comprimento dentro do limite, mas o mapa de fios indica que os condutores associados aos pinos 3 e 6 foram trocados em uma terminação. A política exige correspondência correta entre as duas pontas.",
       "prompt": "Qual ação é apropriada?",
       "options": [
         {
@@ -21704,7 +21704,7 @@
       "id": "E26-Q-TRC-39",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Serviços de redes”; introductory; validationStatus: under-ai-review. Um notebook deveria receber automaticamente endereço, máscara, gateway e DNS. A captura mostra solicitações de configuração, mas nenhuma oferta chega. Outros equipamentos com configuração manual acessam a rede.",
+      "context": "Um notebook deveria receber automaticamente endereço, máscara, gateway e DNS. A captura mostra solicitações de configuração, mas nenhuma oferta chega. Outros equipamentos com configuração manual acessam a rede.",
       "prompt": "Qual serviço deve ser investigado primeiro?",
       "options": [
         {
@@ -21771,7 +21771,7 @@
       "id": "E26-Q-TRC-40",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Configuração de dispositivos”; intermediate; validationStatus: under-ai-review. Uma LAN usa 192.168.10.0/24. O roteador da LAN é 192.168.10.1. O endereço 192.168.10.20 já pertence a outro host. O novo equipamento deve usar configuração estática única e alcançar outras redes.",
+      "context": "Uma LAN usa 192.168.10.0/24. O roteador da LAN é 192.168.10.1. O endereço 192.168.10.20 já pertence a outro host. O novo equipamento deve usar configuração estática única e alcançar outras redes.",
       "prompt": "Qual conjunto é coerente?",
       "options": [
         {
@@ -21838,7 +21838,7 @@
       "id": "E26-Q-TRC-41",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Redes de longa distância”; introductory; validationStatus: under-ai-review. Uma filial utilizará acesso à Internet para chegar à matriz. O requisito exige confidencialidade e integridade entre os dois roteadores, sem modificar cada aplicação interna.",
+      "context": "Uma filial utilizará acesso à Internet para chegar à matriz. O requisito exige confidencialidade e integridade entre os dois roteadores, sem modificar cada aplicação interna.",
       "presentation": {
         "blocks": [
           {
@@ -21915,7 +21915,7 @@
       "id": "E26-Q-TRC-42",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Redes de longa distância”; intermediate; validationStatus: under-ai-review. Uma unidade precisa continuar conectada após falha do enlace principal. Duas ofertas usam operadoras diferentes, mas passam pelo mesmo duto até o prédio. Uma terceira opção utiliza outra operadora e rota física independente. O roteador consegue monitorar o caminho e alterar a rota preferida.",
+      "context": "Uma unidade precisa continuar conectada após falha do enlace principal. Duas ofertas usam operadoras diferentes, mas passam pelo mesmo duto até o prédio. Uma terceira opção utiliza outra operadora e rota física independente. O roteador consegue monitorar o caminho e alterar a rota preferida.",
       "prompt": "Qual plano reduz melhor a falha comum descrita?",
       "options": [
         {
@@ -21982,7 +21982,7 @@
       "id": "E26-Q-TRC-43",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Redes de longa distância”; introductory; validationStatus: under-ai-review. Cinco filiais acessam somente sistemas do centro de dados. Não há requisito de comunicação direta entre filiais. Compare: - hub-and-spoke: cada filial mantém um enlace lógico com o centro; - malha completa: cada local mantém enlace direto com todos os demais.",
+      "context": "Cinco filiais acessam somente sistemas do centro de dados. Não há requisito de comunicação direta entre filiais. Compare: - hub-and-spoke: cada filial mantém um enlace lógico com o centro; - malha completa: cada local mantém enlace direto com todos os demais.",
       "prompt": "Qual escolha atende ao padrão de comunicação com menor número de enlaces lógicos neste caso?",
       "options": [
         {
@@ -22049,7 +22049,7 @@
       "id": "E26-Q-TRC-44",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Tecnologias emergentes”; intermediate; validationStatus: under-ai-review. Uma rede definida por software usa um controlador para calcular políticas e dispositivos para encaminhar pacotes conforme regras instaladas. A equipe quer alterar centralmente o caminho de uma classe de tráfego.",
+      "context": "Uma rede definida por software usa um controlador para calcular políticas e dispositivos para encaminhar pacotes conforme regras instaladas. A equipe quer alterar centralmente o caminho de uma classe de tráfego.",
       "prompt": "Qual ação corresponde ao modelo apresentado?",
       "options": [
         {
@@ -22116,7 +22116,7 @@
       "id": "E26-Q-TRC-45",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Tecnologias emergentes”; introductory; validationStatus: under-ai-review. Uma organização executará firewall e balanceador como funções de software em infraestrutura virtualizada homologada. A política exige capacidade, isolamento, monitoramento e recuperação.",
+      "context": "Uma organização executará firewall e balanceador como funções de software em infraestrutura virtualizada homologada. A política exige capacidade, isolamento, monitoramento e recuperação.",
       "prompt": "Qual afirmação é adequada?",
       "options": [
         {
@@ -22183,7 +22183,7 @@
       "id": "E26-Q-TRC-46",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Tecnologias emergentes”; intermediate; validationStatus: under-ai-review. Câmeras geram grande volume de vídeo. Um alerta local precisa ocorrer em até 50 ms; a nuvem recebe apenas eventos e amostras para análise histórica. A conexão externa pode oscilar.",
+      "context": "Câmeras geram grande volume de vídeo. Um alerta local precisa ocorrer em até 50 ms; a nuvem recebe apenas eventos e amostras para análise histórica. A conexão externa pode oscilar.",
       "prompt": "Qual arquitetura atende melhor às condições?",
       "options": [
         {
@@ -22250,7 +22250,7 @@
       "id": "E26-Q-TRC-47",
       "version": 1,
       "classification": "TRC",
-      "context": "Ficha: courses: [TRC]; área “Sustentabilidade e meio ambiente”; intermediate; validationStatus: under-ai-review. Um laboratório mede quatro equipamentos: dois são necessários para redundância; um terceiro permanece ligado com 3% de uso e não participa do failover; o quarto está desligado e pode ser reaproveitado. A política exige medir resultado, preservar continuidade, sanitizar dados antes de reuso e destinar corretamente o que não puder ser reutilizado.",
+      "context": "Um laboratório mede quatro equipamentos: dois são necessários para redundância; um terceiro permanece ligado com 3% de uso e não participa do failover; o quarto está desligado e pode ser reaproveitado. A política exige medir resultado, preservar continuidade, sanitizar dados antes de reuso e destinar corretamente o que não puder ser reutilizado.",
       "prompt": "Qual plano é mais coerente?",
       "options": [
         {
