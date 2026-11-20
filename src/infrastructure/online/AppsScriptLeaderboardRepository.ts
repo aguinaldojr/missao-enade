@@ -61,6 +61,7 @@ export class AppsScriptLeaderboardRepository implements OnlineLeaderboardReposit
 }
 
 export function configuredOnlineLeaderboard(): OnlineLeaderboardRepository | null {
+  if (import.meta.env.MODE === 'test') return null;
   const endpoint = import.meta.env.VITE_RANKING_API_URL?.trim();
   return endpoint ? new AppsScriptLeaderboardRepository(endpoint) : null;
 }

@@ -83,7 +83,7 @@ A versão atual mede a duração entre o início e a conclusão da jornada na se
 
 O fluxo inicial solicita criação ou escolha de um apelido. O jogador atual fica indicado nas telas e pode ser trocado antes de uma nova missão.
 
-O ranking possui filtros nativos por curso e tamanho, tabela com posição, apelido, desempenho, acertos e pontuação, marca textual “(você)” para o jogador atual e mensagem quando não há resultados. O resultado da missão mostra imediatamente o ranking correspondente.
+A interface atual prioriza o ranking online das jornadas de 25 desafios e oferece somente o filtro por curso. O histórico local de 25 desafios permanece em uma seção secundária, com posição, apelido, desempenho, acertos e pontuação. Registros antigos de outros tamanhos continuam preservados no armazenamento, mas seus seletores não são apresentados porque esses modos não fazem parte da versão atual do jogo.
 
 Controles nativos, rótulos associados, foco visível, cabeçalhos de tabela, região de status e diálogo de confirmação permitem uso por teclado, toque, mouse e tecnologia assistiva. O destaque do jogador atual combina texto, peso e contorno; não depende somente de cor.
 

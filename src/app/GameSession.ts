@@ -145,7 +145,7 @@ export class GameSession {
       profiles, profileSaveStatus,
       profileError: null, profileNextScreen: 'course-select',
       leaderboard: leaderboardLoad.leaderboard ?? emptyLeaderboard(), leaderboardSaveStatus: leaderboardLoad.status,
-      rankingCourse: 'CC', rankingQuestionCount: 10, rankingReturnScreen: 'home', rankingDeletePending: false,
+      rankingCourse: 'CC', rankingQuestionCount: 25, rankingReturnScreen: 'home', rankingDeletePending: false,
     });
   }
 

@@ -107,7 +107,8 @@ describe('interface local acessível', () => {
     dispatch({ type: 'home' });
     [...root.querySelectorAll('button')].find((node) => node.textContent === 'Ranking')!.click();
     expect(root.querySelector('h1')?.textContent).toBe('Ranking');
-    expect(root.querySelectorAll('select')).toHaveLength(2);
+    expect(root.querySelectorAll('select')).toHaveLength(1);
+    expect(root.querySelector('#ranking-size')).toBeNull();
     expect(root.textContent).toContain('Ranking salvo somente neste dispositivo.');
     const remove = [...root.querySelectorAll('button')].find((node) => node.textContent?.includes('Excluir dados'))!;
     expect(remove.disabled).toBe(true);

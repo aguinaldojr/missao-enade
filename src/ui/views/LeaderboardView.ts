@@ -2,7 +2,7 @@ import { courses } from '../../app/courses';
 import type { Command, SessionState } from '../../app/GameSession';
 import { gameConfig } from '../../config/game';
 import { activePlayer } from '../../domain/models/PlayerProfile';
-import { rankingFor, RANKING_QUESTION_COUNTS, type LeaderboardEntry } from '../../domain/models/Leaderboard';
+import { rankingFor, type LeaderboardEntry } from '../../domain/models/Leaderboard';
 import { button, element } from '../components/elements';
 import { onlineLeaderboardPanel } from '../components/OnlineLeaderboardPanel';
 
@@ -52,6 +52,11 @@ export function leaderboardView(state: SessionState, dispatch: (command: Command
   view.append(back, element('p', 'eyebrow', gameConfig.copy.rankingEyebrow), title,
     element('p', 'privacy-notice', gameConfig.copy.rankingPrivacy));
 
+  view.append(onlineLeaderboardPanel(state.rankingCourse));
+
+  view.append(element('h2', 'subsection-title', 'Resultados neste dispositivo'),
+    element('p', 'helper', 'Histórico local preservado para compatibilidade. Ele não é enviado para a planilha automaticamente.'));
+
   const filters = element('div', 'ranking-filters');
   const courseLabel = element('label', 'field-label', 'Curso');
   courseLabel.htmlFor = 'ranking-course';
@@ -64,21 +69,9 @@ export function leaderboardView(state: SessionState, dispatch: (command: Command
     course.append(option);
   }
   course.addEventListener('change', () => dispatch({ type: 'select-ranking-course', course: course.value }), { signal });
-  const sizeLabel = element('label', 'field-label', 'Tamanho da missão');
-  sizeLabel.htmlFor = 'ranking-size';
-  const size = element('select', 'select-input');
-  size.id = 'ranking-size';
-  for (const count of RANKING_QUESTION_COUNTS) {
-    const option = element('option', '', count + ' desafios');
-    option.value = String(count);
-    option.selected = count === state.rankingQuestionCount;
-    size.append(option);
-  }
-  size.addEventListener('change', () => dispatch({ type: 'select-ranking-size', questionCount: Number(size.value) }), { signal });
-  filters.append(courseLabel, course, sizeLabel, size);
-  view.append(filters, leaderboardTable(rankingFor(state.leaderboard, state.rankingCourse, state.rankingQuestionCount),
+  filters.append(courseLabel, course);
+  view.append(filters, leaderboardTable(rankingFor(state.leaderboard, state.rankingCourse, 25),
     activePlayer(state.profiles)?.id ?? null));
-  if (state.rankingQuestionCount === 25) view.append(onlineLeaderboardPanel(state.rankingCourse));
 
   if (state.leaderboardSaveStatus === 'failed' || state.leaderboardSaveStatus === 'unavailable') {
     view.append(element('p', 'profile-error', gameConfig.copy.rankingStorageFailed));

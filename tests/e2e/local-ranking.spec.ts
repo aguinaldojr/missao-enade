@@ -21,6 +21,8 @@ async function finishMission(page: Page, info: TestInfo) {
 
 test('perfil, ranking, persistência, troca e exclusão confirmada permanecem locais', async ({ page }, info) => {
   const external: string[] = [];
+  await page.route('https://script.google.com/**', (route) => route.fulfill({ status: 200,
+    contentType: 'application/json', body: JSON.stringify({ ok: true, entries: [] }) }));
   page.on('request', (request) => {
     if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('data:')) external.push(request.url());
   });
@@ -55,7 +57,7 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   await page.reload();
   await expect(page.getByText('Jogador atual: Nina Byte', { exact: true })).toBeVisible();
   await press(page, 'Ranking', info);
-  await page.getByLabel('Tamanho da missão').selectOption('25');
+  await expect(page.locator('#ranking-size')).toHaveCount(0);
   await expect(page.getByRole('table')).toContainText('Nina Byte (você)');
   const rankingRegion = page.getByRole('region', { name: 'Tabela do ranking com rolagem horizontal' });
   await rankingRegion.focus();
@@ -68,7 +70,6 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   await expect(page.getByText('Jogador atual: Caio', { exact: true })).toBeVisible();
 
   await press(page, 'Ranking', info);
-  await page.getByLabel('Tamanho da missão').selectOption('25');
   await press(page, 'Excluir dados locais do ranking', info);
   const dialog = page.getByRole('alertdialog');
   await expect(dialog).toBeVisible();
@@ -80,7 +81,7 @@ test('perfil, ranking, persistência, troca e exclusão confirmada permanecem lo
   await expect(page.getByText('Ainda não há resultados concluídos', { exact: false })).toBeVisible();
   expect(await page.evaluate((key) => localStorage.getItem(key), RANKING_KEY)).toBeNull();
   expect(await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!).players.length, PROFILE_KEY)).toBe(2);
-  expect(external).toEqual([]);
+  expect(external.every((url) => url.startsWith('https://script.google.com/'))).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
