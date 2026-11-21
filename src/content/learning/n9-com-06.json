@@ -1,0 +1,1584 @@
+{
+  "schemaVersion": 1,
+  "batchId": "N9-COM-06",
+  "activities": [
+    {
+      "id": "N9-COM-101",
+      "title": "Compromisso entre Leitura e Escrita com Índices",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Banco de Dados e Desempenho",
+      "conceptId": "DB-IDX-01",
+      "difficulty": "intermediate",
+      "context": "No Sistema de Gerenciamento de Banco de Dados (SGBD) relacional do portal acadêmico N9, a tabela HISTORICO_ACESSO recebe milhares de inserções por minuto e possui doze índices secundários criados sobre quase todas as colunas.",
+      "instruction": "Selecione a avaliação técnica correta sobre o efeito dos índices no desempenho de consultas e modificações de dados.",
+      "xp": 75,
+      "help": {
+        "hint": "Compare o ganho obtido ao localizar linhas rapidamente em buscas seletivas com o trabalho extra exigido a cada inserção, atualização ou remoção.",
+        "concept": "Índices aceleram consultas seletivas e junções ao evitar varreduras completas da tabela, mas ocupam armazenamento e exigem atualização estrutural durante operações de escrita.",
+        "example": "Criar índice na coluna CPF acelera buscas pontuais por estudante, mas criar índices em colunas raramente filtradas apenas encarece cada INSERT."
+      },
+      "explanation": "Índices estruturados (como árvores B+) reduzem drasticamente o custo de localizar registros em consultas seletivas com filtros e junções. Contudo, eles não melhoram todas as operações indiscriminadamente: cada índice adicional consome espaço em disco e precisa ser atualizado a cada operação de inserção, atualização de coluna indexada ou exclusão, degradando a vazão de escrita quando criados em excesso.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Compromisso entre Leitura e Escrita com Índices (DB-IDX-01)",
+        "objective": "Avaliar o compromisso de desempenho entre aceleração de leitura seletiva e sobrecarga de manutenção em escrita causada por índices em bancos de dados.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC 9075 — Database languages — SQL"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Índices aceleram buscas seletivas, mas aumentam o custo de inserções, atualizações e armazenamento por exigirem manutenção contínua.",
+            "feedback": "Correto. O ganho nas leituras filtradas tem como contrapartida o custo de atualizar cada estrutura de índice nas operações de escrita."
+          },
+          {
+            "id": "opt-b",
+            "text": "Criar índices em todas as colunas acelera simultaneamente qualquer consulta e qualquer operação de inserção em lote.",
+            "feedback": "Incorreto. Cada índice adicional precisa ser reorganizado nas escritas, reduzindo a velocidade de inserção e ocupando mais espaço."
+          },
+          {
+            "id": "opt-c",
+            "text": "Índices eliminam a necessidade de chave primária e dispensam qualquer planejamento de consultas no banco.",
+            "feedback": "Incorreto. Índices auxiliam o plano de execução, mas não substituem restrições de integridade nem boas consultas."
+          },
+          {
+            "id": "opt-d",
+            "text": "O uso de índices traz benefício apenas quando a consulta precisa retornar 100% das linhas da tabela sem filtro.",
+            "feedback": "Incorreto. Quando quase toda a tabela é lida, o otimizador costuma preferir varredura sequencial em vez de navegar pelo índice."
+          },
+          {
+            "id": "opt-e",
+            "text": "Índices ocupam apenas memória volátil temporária e são reconstruídos do zero a cada comando SELECT executado.",
+            "feedback": "Incorreto. Índices são estruturas persistentes armazenadas no banco e mantidas incrementalmente pelo motor."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-102",
+      "title": "Ordenação Eficiente para Lista Quase Ordenada",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Algoritmos e Estruturas de Dados",
+      "conceptId": "AED-SRT-01",
+      "difficulty": "intermediate",
+      "context": "No módulo de fila de atendimento do campus N9, uma lista com 25 senhas já está quase toda em ordem crescente de horário, contendo apenas dois registros inseridos recentemente fora de posição.",
+      "instruction": "Qual estratégia de ordenação é mais adequada para reorganizar essa lista pequena e quase ordenada com baixa sobrecarga?",
+      "xp": 75,
+      "help": {
+        "hint": "Considere qual algoritmo insere cada elemento na posição correta à esquerda e realiza pouquíssimas trocas quando os dados já estão quase ordenados.",
+        "concept": "A Ordenação por Inserção (Insertion Sort) possui baixa sobrecarga de memória e atinge tempo linear O(n) no melhor caso quando a entrada já está ordenada ou quase ordenada.",
+        "example": "Organizar cartas na mão deslocando apenas uma carta recém-chegada até sua posição correta exige poucas comparações."
+      },
+      "explanation": "A Ordenação por Inserção (Insertion Sort) percorre a lista inserindo cada elemento na porção já ordenada à esquerda. Em listas pequenas e quase ordenadas, o laço interno interrompe assim que encontra um elemento menor ou igual, aproximando-se de tempo linear O(n) e sem memória auxiliar adicional. Algoritmos como Seleção (Selection Sort) executam sempre comparações quadráticas mesmo em listas já ordenadas, enquanto Merge Sort aloca vetores auxiliares desnecessários para 25 elementos.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ordenação Eficiente para Lista Quase Ordenada (AED-SRT-01)",
+        "objective": "Selecionar o algoritmo de Ordenação por Inserção (Insertion Sort) para conjuntos pequenos ou quase ordenados.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Ordenação por Inserção (Insertion Sort), pois aproveita a ordem existente e realiza poucas comparações e deslocamentos.",
+            "feedback": "Correto. Em entradas pequenas e quase ordenadas, a Ordenação por Inserção opera próximo de O(n) sem memória extra."
+          },
+          {
+            "id": "opt-b",
+            "text": "Ordenação por Seleção (Selection Sort), pois reduz automaticamente as comparações quando o vetor já está ordenado.",
+            "feedback": "Incorreto. A Ordenação por Seleção varre todo o restante do vetor em cada passo independentemente da ordem inicial."
+          },
+          {
+            "id": "opt-c",
+            "text": "Ordenação por Intercalação (Merge Sort) recursiva com alocação de múltiplos subvetores externos.",
+            "feedback": "Incorreto. Embora assintoticamente eficiente para grandes volumes, adiciona alocação de memória auxiliar desnecessária para 25 itens quase ordenados."
+          },
+          {
+            "id": "opt-d",
+            "text": "Embaralhamento aleatório sucessivo até verificar que todos os elementos ficaram em ordem crescente.",
+            "feedback": "Incorreto. Tentativa e erro aleatória possui tempo fatorial inviável e não aproveita a ordenação parcial existente."
+          },
+          {
+            "id": "opt-e",
+            "text": "Construção de uma tabela hash sem ordenação para substituir a sequência cronológica dos horários.",
+            "feedback": "Incorreto. Tabelas hash não mantêm ordenação sequencial dos elementos."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-103",
+      "title": "Polimorfismo no Cálculo de Descontos Acadêmicos",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Programação Orientada a Objetos",
+      "conceptId": "OOP-PLY-01",
+      "difficulty": "introductory",
+      "context": "No sistema financeiro N9, uma função verifica o tipo de vínculo ('BOLSISTA', 'CONVENIO', 'MONITOR') por meio de vários blocos condicionais repetidos em três telas diferentes para calcular o valor da mensalidade.",
+      "instruction": "Como aplicar polimorfismo orientado a objetos para eliminar essas condicionais repetidas e facilitar a inclusão de novos vínculos?",
+      "xp": 50,
+      "help": {
+        "hint": "Em vez de perguntar qual é o tipo do objeto para decidir a fórmula, delegue o cálculo a um contrato comum implementado por cada classe.",
+        "concept": "O polimorfismo permite que objetos de diferentes classes respondam à mesma mensagem (interface) com comportamentos específicos, substituindo condicionais por tipo.",
+        "example": "Cada classe de frete implementa calcularValor(), permitindo que o pedido invoque frete.calcularValor() sem testar o tipo."
+      },
+      "explanation": "Ao definir uma interface comum (por exemplo, PoliticaDesconto com o método calcularValorFinal) e criar uma classe concreta para cada modalidade de vínculo, o código cliente passa a invocar o método polimorficamente sem blocos condicionais por tipo. Para adicionar um novo vínculo, basta implementar a interface sem alterar as classes existentes.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Polimorfismo no Cálculo de Descontos Acadêmicos (OOP-PLY-01)",
+        "objective": "Substituir estruturas condicionais repetidas por tipo concreto mediante polimorfismo baseado em interface.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Definir uma interface PoliticaDesconto e implementar uma classe específica para cada vínculo, invocando o método comum.",
+            "feedback": "Correto. O despacho polimórfico delega o cálculo a cada implementação concreta e elimina condicionais espalhadas."
+          },
+          {
+            "id": "opt-b",
+            "text": "Concentrar todas as cadeias de if/else em uma única variável global textual compartilhada entre as telas.",
+            "feedback": "Incorreto. Variáveis globais aumentam o acoplamento e mantêm a necessidade de editar condicionais a cada novo vínculo."
+          },
+          {
+            "id": "opt-c",
+            "text": "Usar o operador instanceof antes de cada chamada para converter o objeto ao tipo concreto e chamar métodos diferentes.",
+            "feedback": "Incorreto. Testar tipos explícitos com instanceof reproduz o mesmo acoplamento das condicionais repetidas."
+          },
+          {
+            "id": "opt-d",
+            "text": "Duplicar a classe Estudante para cada modalidade de bolsa sem compartilhar contrato ou abstração.",
+            "feedback": "Incorreto. Duplicar classes inteiras gera redundância de atributos e quebra a uniformidade de tratamento."
+          },
+          {
+            "id": "opt-e",
+            "text": "Armazenar a fórmula matemática como texto livre no banco e interpretá-la sem validação na interface.",
+            "feedback": "Incorreto. Executar expressões dinâmicas não validadas compromete segurança e encapsulamento do domínio."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-104",
+      "title": "Validação de Hipótese com Produto Mínimo Viável",
+      "mechanic": "single-choice",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Engenharia de Produto e Inovação",
+      "conceptId": "PRD-MVP-01",
+      "difficulty": "introductory",
+      "context": "A equipe digital N9 planeja criar um aplicativo de agendamento de mentorias entre veteranos e calouros, mas ainda não há evidência de que os estudantes utilizarão o serviço regularmente.",
+      "instruction": "Qual abordagem aplica o conceito de Produto Mínimo Viável (MVP — Minimum Viable Product) antes de investir no desenvolvimento completo?",
+      "xp": 50,
+      "help": {
+        "hint": "Busque a menor entrega funcional capaz de testar a hipótese central de uso com estudantes reais e coletar métricas objetivas.",
+        "concept": "Um Produto Mínimo Viável (MVP) entrega o conjunto mínimo de funcionalidades necessário para validar hipóteses de valor junto a usuários reais com o menor esforço.",
+        "example": "Disponibilizar agendamento simples para dois cursos durante duas semanas e medir taxa de comparecimento antes de construir aplicativos nativos completos."
+      },
+      "explanation": "O Produto Mínimo Viável (MVP — Minimum Viable Product) foca em testar a hipótese principal de valor com o mínimo de recursos necessários, coletando evidências reais de adesão e satisfação antes de ampliar o investimento. Desenvolver todas as funcionalidades secundárias antecipadamente ou basear-se apenas em opiniões internas sem experimento real eleva o risco de desperdício.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Validação de Hipótese com Produto Mínimo Viável (PRD-MVP-01)",
+        "objective": "Aplicar o conceito de Produto Mínimo Viável (MVP) para validar hipóteses de valor com evidências empíricas antes de escalar investimentos.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Lançar um fluxo simples de agendamento para um grupo piloto, medindo adesão e conclusão real das sessões antes de expandir o escopo.",
+            "feedback": "Correto. O experimento enxuto gera aprendizado validado com usuários reais e orienta decisões de investimento."
+          },
+          {
+            "id": "opt-b",
+            "text": "Desenvolver durante oito meses todas as funções avançadas, incluindo gamificação e rede social, antes do primeiro teste com estudantes.",
+            "feedback": "Incorreto. Construir o produto completo sem validar a demanda inicial aumenta o risco de esforço perdido."
+          },
+          {
+            "id": "opt-c",
+            "text": "Publicar uma versão inacabada sem critérios de qualidade nem medição de resultados apenas para cumprir o calendário.",
+            "feedback": "Incorreto. MVP não significa produto defeituoso ou sem métricas, mas sim escopo mínimo com qualidade para aprendizagem validada."
+          },
+          {
+            "id": "opt-d",
+            "text": "Aprovar o orçamento integral com base apenas na opinião otimista da equipe técnica sem consultar usuários.",
+            "feedback": "Incorreto. Suposições internas não substituem evidências empíricas obtidas no uso real."
+          },
+          {
+            "id": "opt-e",
+            "text": "Contratar campanha massiva de divulgação para todos os campi antes de existir qualquer fluxo funcional de agendamento.",
+            "feedback": "Incorreto. Escalar divulgação antes de validar a proposta de valor frustra usuários e desperdiça recursos."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-105",
+      "title": "Objetivo e Limite da Refatoração de Código",
+      "mechanic": "binary-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Engenharia e Manutenção de Software",
+      "conceptId": "ENG-REF-01",
+      "difficulty": "introductory",
+      "context": "Durante a evolução do módulo de notas N9, um desenvolvedor extraiu métodos menores e renomeou variáveis confusas em uma classe de cálculo sem alterar suas entradas nem suas saídas.",
+      "instruction": "Avalie se a afirmação sobre o conceito técnico de refatoração está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Diferencie melhorar a legibilidade e estrutura interna do código de criar novas regras de negócio para o usuário final.",
+        "concept": "Refatoração é o processo de reestruturar o código interno para melhorar legibilidade, coesão e manutenibilidade sem alterar seu comportamento observável externo.",
+        "example": "Dividir uma função longa em três funções coesas mantendo os mesmos resultados nos testes automatizados é refatoração."
+      },
+      "explanation": "A afirmação está incorreta. Por definição, refatorar consiste em melhorar a estrutura interna do software (legibilidade, modularidade e redução de duplicação) preservando integralmente seu comportamento observável externo. Adicionar novas funcionalidades ou corrigir regras de negócio altera o comportamento externo e deve ser tratado separadamente da refatoração.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Objetivo e Limite da Refatoração de Código (ENG-REF-01)",
+        "objective": "Distinguir refatoração estrutural (que preserva comportamento observável) de adição de novas funcionalidades.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Refatorar um módulo significa alterar suas regras de negócio para entregar novas funcionalidades ao usuário final, tornando dispensável preservar o comportamento observável anterior.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. A refatoração reorganiza a estrutura interna sem mudar o comportamento observável; novas funcionalidades constituem evolução de escopo distinta.",
+        "feedbackFalse": "Correto. Refatoração melhora clareza e manutenibilidade interna preservando o comportamento externo esperado pelo sistema e seus testes."
+      }
+    },
+    {
+      "id": "N9-COM-106",
+      "title": "Confiabilidade em Filas de Mensagens Assíncronas",
+      "mechanic": "binary-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Arquitetura e Sistemas Distribuídos",
+      "conceptId": "SYS-MSG-01",
+      "difficulty": "introductory",
+      "context": "No ecossistema N9, o serviço de matrículas publica eventos em uma fila de mensagens assíncrona para que o serviço de emissão de carteirinhas processe as solicitações em segundo plano.",
+      "instruction": "Avalie se a afirmação sobre o uso de mensageria assíncrona em sistemas distribuídos está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Pense no que ocorre quando um consumidor cai no meio do processamento ou quando a rede reenvia uma mesma mensagem.",
+        "concept": "Filas assíncronas desacoplam produtores e consumidores no tempo, mas exigem tratamento de falhas (retentativas, filas de mensagens mortas) e idempotência para lidar com entregas duplicadas.",
+        "example": "Se o evento 'emitir carteira 102' for entregue duas vezes, o consumidor idempotente evita gerar duas carteiras duplicadas."
+      },
+      "explanation": "A afirmação está incorreta. Embora a fila de mensagens reduza o acoplamento temporal — permitindo que o produtor publique sem esperar o processamento imediato do consumidor —, ela não elimina a necessidade de tratar falhas parciais nem duplicidades. Em sistemas distribuídos com garantia de entrega pelo menos uma vez, o consumidor precisa ser idempotente e prever tratamento de mensagens com falha.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Confiabilidade em Filas de Mensagens Assíncronas (SYS-MSG-01)",
+        "objective": "Reconhecer que mensageria assíncrona desacopla no tempo, mas continua exigindo idempotência e tratamento de falhas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Adotar uma fila de mensagens assíncrona reduz o acoplamento temporal entre serviços, mas torna desnecessário tratar falhas de processamento ou mensagens entregues em duplicidade.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. Mesmo com filas assíncronas, consumidores podem falhar ou receber mensagens repetidas, exigindo idempotência e políticas de reprocessamento.",
+        "feedbackFalse": "Correto. O desacoplamento temporal não elimina falhas de rede ou reentregas, sendo indispensável projetar consumidores idempotentes e tratamento de erros."
+      }
+    },
+    {
+      "id": "N9-COM-107",
+      "title": "Práticas Efetivas de TI Sustentável no Campus",
+      "mechanic": "multiple-select",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Sustentabilidade e Computação Verde",
+      "conceptId": "SUS-GRN-01",
+      "difficulty": "intermediate",
+      "context": "A diretoria de Tecnologia da Informação (TI) da instituição N9 está elaborando um plano de sustentabilidade digital para reduzir consumo elétrico, resíduo eletrônico e desperdício de recursos computacionais.",
+      "instruction": "Selecione exatamente 3 ações efetivas de TI sustentável articulando medição, eficiência energética, extensão de vida útil e destinação responsável.",
+      "xp": 80,
+      "help": {
+        "hint": "Busque ações mensuráveis que economizem energia, prolonguem o ciclo de vida do hardware e garantam logística reversa ambientalmente adequada.",
+        "concept": "TI sustentável (Green IT) abrange eficiência energética em operação, prolongamento da vida útil de equipamentos, medição contínua de indicadores e descarte certificado de resíduos eletrônicos.",
+        "example": "Monitorar o consumo energético por rack e destinar computadores obsoletos a programas certificados de reciclagem."
+      },
+      "explanation": "Uma política consistente de Tecnologia da Informação (TI) sustentável combina: monitoramento contínuo do consumo energético e da ociosidade para orientar ajustes reais; extensão da vida útil de estações e servidores por meio de manutenção preventiva, atualização de componentes e reaproveitamento interno; e logística reversa com descarte certificado de resíduos eletroeletrônicos conforme normas ambientais.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Práticas Efetivas de TI Sustentável no Campus (SUS-GRN-01)",
+        "objective": "Selecionar práticas efetivas de TI sustentável envolvendo medição energética, extensão de vida útil de hardware e descarte responsável.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 4º–6º",
+          "Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Medir periodicamente o consumo elétrico e a taxa de ociosidade dos servidores para ajustar perfis de energia e consolidação.",
+            "feedback": "Correto. Sem medição objetiva não é possível identificar desperdícios nem comprovar ganhos de eficiência energética.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Estender a vida útil de estações de trabalho mediante manutenção preventiva, expansão de memória e realocação interna.",
+            "feedback": "Correto. Prolongar o ciclo de uso reduz a demanda por fabricação de novos equipamentos e o impacto ambiental associado.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Encaminhar equipamentos inservíveis e baterias para operadores certificados de logística reversa e reciclagem eletrônica.",
+            "feedback": "Correto. A destinação ambientalmente adequada evita contaminação por metais pesados e recupera materiais.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Substituir todos os computadores dos laboratórios a cada doze meses mesmo quando atendem plenamente às aulas.",
+            "feedback": "Incorreto. A troca prematura acelera a geração de lixo eletrônico e o consumo de recursos na manufatura.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Descartar monitores e placas antigas no lixo comum da coleta urbana para liberar espaço rapidamente no almoxarifado.",
+            "feedback": "Incorreto. Resíduos eletroeletrônicos contêm substâncias tóxicas e exigem destinação especializada.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Manter servidores ociosos em potência máxima durante fins de semana sem medir consumo para evitar configurar políticas de energia.",
+            "feedback": "Incorreto. Desperdiça eletricidade e eleva a carga térmica da refrigeração sem ganho operacional.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-108",
+      "title": "Propriedades de um Indicador Gerencial Útil",
+      "mechanic": "multiple-select",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Governança e Indicadores de Desempenho",
+      "conceptId": "GOV-KPI-01",
+      "difficulty": "intermediate",
+      "context": "A coordenação de sistemas da rede N9 está revisando seu conjunto de Indicadores-Chave de Desempenho (KPI — Key Performance Indicators) para evitar métricas de vaidade que não orientam decisões.",
+      "instruction": "Selecione exatamente 3 propriedades indispensáveis para que um indicador seja efetivamente útil à gestão.",
+      "xp": 80,
+      "help": {
+        "hint": "Um bom indicador está ligado a um objetivo claro, possui fórmula e frequência definidas e permite agir quando o resultado desvia da meta.",
+        "concept": "Indicadores úteis são alinhados aos objetivos organizacionais, objetivamente mensuráveis, coletados com periodicidade definida e acionáveis pela equipe responsável.",
+        "example": "Acompanhar semanalmente a taxa de chamados reabertos orienta melhorias no diagnóstico técnico."
+      },
+      "explanation": "Para apoiar a governança e a melhoria contínua, um indicador precisa: estar diretamente alinhado a um objetivo institucional ou operacional relevante; possuir fórmula de cálculo clara, reproduzível e auditável; e ter periodicidade definida associada a responsáveis capazes de tomar ações corretivas quando houver desvio.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Propriedades de um Indicador Gerencial Útil (GOV-KPI-01)",
+        "objective": "Identificar atributos essenciais de qualidade de indicadores de desempenho: alinhamento, mensurabilidade, periodicidade e acionabilidade.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Alinhamento explícito a um objetivo estratégico ou operacional relevante da instituição.",
+            "feedback": "Correto. Medir algo desconectado dos objetivos gera esforço sem impacto nas decisões.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Definição mensurável e fórmula padronizada que produza o mesmo resultado sob os mesmos dados.",
+            "feedback": "Correto. Critérios objetivos garantem comparabilidade ao longo do tempo e entre equipes.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Periodicidade de apuração definida e vínculo com decisões ou ações concretas em caso de desvio.",
+            "feedback": "Correto. Um indicador acionável permite intervir tempestivamente quando o desempenho sai da faixa esperada.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Crescimento contínuo automático (como total acumulado de acessos desde a fundação) mesmo quando o serviço piora.",
+            "feedback": "Incorreto. Números cumulativos que só sobem funcionam como métricas de vaidade e mascaram quedas de qualidade.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Fórmula subjetiva ajustada manualmente a cada reunião conforme a impressão pessoal do apresentador.",
+            "feedback": "Incorreto. Critérios variáveis inviabilizam séries históricas confiáveis e auditoria.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Coleta anual única para processos críticos que exigem resposta operacional diária.",
+            "feedback": "Incorreto. Periodicidade incompatível com o ritmo do processo impede qualquer ação corretiva oportuna.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-109",
+      "title": "Ciclo Centrado no Usuário para Redesenho de Tela",
+      "mechanic": "sequence-order",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Interação Humano-Computador e Experiência do Usuário",
+      "conceptId": "IHC-UXP-01",
+      "difficulty": "intermediate",
+      "context": "A equipe de Experiência do Usuário (UX — User Experience) do portal N9 vai redesenhar o fluxo de solicitação de aproveitamento de estudos após relatos de abandono no preenchimento.",
+      "instruction": "Ordene as 5 etapas do processo centrado no usuário desde a investigação inicial até o refinamento da solução.",
+      "xp": 80,
+      "help": {
+        "hint": "Primeiro compreenda quem usa o sistema e em que contexto, depois delimite o problema antes de criar protótipos, testar com usuários e ajustar.",
+        "concept": "O design centrado no usuário segue um ciclo iterativo: compreender pessoas e contexto, definir o problema, prototipar soluções, testar com usuários reais e iterar.",
+        "example": "Observar estudantes tentando preencher o formulário revela onde travam antes de desenhar novas telas."
+      },
+      "explanation": "O processo inicia pela compreensão das pessoas usuárias, suas necessidades e seu contexto real de uso. Em seguida, sintetizam-se os achados para definir claramente o problema a resolver. Com o foco delimitado, constroem-se protótipos de baixa ou média fidelidade, que são então testados com usuários reais para observar dificuldades e, por fim, iterar o projeto com base nas evidências coletadas.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO 9241-210 — Ergonomics of human-system interaction — Part 210: Human-centred design for interactive systems."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ciclo Centrado no Usuário para Redesenho de Tela (IHC-UXP-01)",
+        "objective": "Ordenar as etapas fundamentais do processo de design centrado no usuário: compreender, definir, prototipar, testar e iterar.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO 9241-210 — Human-centred design for interactive systems"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "ux-1",
+            "text": "Compreender as pessoas usuárias, suas tarefas e o contexto real em que acessam o formulário."
+          },
+          {
+            "id": "ux-2",
+            "text": "Sintetizar as evidências coletadas para definir com precisão os pontos de atrito e o problema prioritário."
+          },
+          {
+            "id": "ux-3",
+            "text": "Prototipar fluxos e telas alternativas com foco na clareza da navegação e dos rótulos."
+          },
+          {
+            "id": "ux-4",
+            "text": "Testar o protótipo em tarefas guiadas com estudantes reais observando erros e dúvidas."
+          },
+          {
+            "id": "ux-5",
+            "text": "Iterar e refinar a proposta de interface incorporando os aprendizados observados nos testes."
+          }
+        ],
+        "correctOrder": [
+          "ux-1",
+          "ux-2",
+          "ux-3",
+          "ux-4",
+          "ux-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-110",
+      "title": "Sequência Estruturada de Planejamento de Projeto",
+      "mechanic": "sequence-order",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Gerência de Projetos",
+      "conceptId": "PRJ-PLN-01",
+      "difficulty": "intermediate",
+      "context": "A coordenação de sistemas N9 vai estruturar o plano inicial de implantação do novo módulo de estágios antes de autorizar o início da execução.",
+      "instruction": "Ordene as 5 etapas lógicas do planejamento desde a decomposição do escopo até a aprovação da linha de base.",
+      "xp": 80,
+      "help": {
+        "hint": "Não é possível sequenciar dependências nem estimar datas antes de decompor o que precisa ser entregue.",
+        "concept": "O planejamento estruturado parte da decomposição de entregas (EAP), identifica precedências, estima durações para montar o cronograma, analisa riscos e congela a linha de base.",
+        "example": "Primeiro listam-se os pacotes de trabalho; depois identifica-se qual pacote depende de outro antes de definir datas."
+      },
+      "explanation": "O planejamento inicia pela decomposição do escopo em entregas e pacotes de trabalho gerenciáveis na Estrutura Analítica do Projeto (EAP). Em seguida, identificam-se as dependências lógicas entre as atividades para estabelecer sua sequência. Depois, estimam-se esforços e recursos para elaborar o cronograma, analisam-se os riscos associados às premissas e prazos e, por fim, aprova-se a linha de base de referência para controle.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Sequência Estruturada de Planejamento de Projeto (PRJ-PLN-01)",
+        "objective": "Ordenar as etapas de decomposição de escopo, sequenciamento, cronograma, análise de riscos e estabelecimento de linha de base.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "pln-1",
+            "text": "Decompor o escopo aprovado em entregas menores e pacotes de trabalho gerenciáveis."
+          },
+          {
+            "id": "pln-2",
+            "text": "Identificar as dependências e precedências técnicas entre as atividades definidas."
+          },
+          {
+            "id": "pln-3",
+            "text": "Estimar esforço e duração das atividades para organizar o cronograma integrado."
+          },
+          {
+            "id": "pln-4",
+            "text": "Analisar riscos técnicos e operacionais do plano e definir respostas preventivas."
+          },
+          {
+            "id": "pln-5",
+            "text": "Estabelecer e formalizar a linha de base de escopo, prazo e custo para acompanhamento."
+          }
+        ],
+        "correctOrder": [
+          "pln-1",
+          "pln-2",
+          "pln-3",
+          "pln-4",
+          "pln-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-111",
+      "title": "Tipos de Manutenção de Software na Prática",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Manutenção e Evolução de Software",
+      "conceptId": "ENG-MNT-01",
+      "difficulty": "introductory",
+      "context": "Ao longo do ciclo de operação do sistema acadêmico N9, a equipe de sustentação atende quatro demandas distintas registradas no controle de evolução.",
+      "instruction": "Relacione cada categoria clássica de manutenção de software à situação profissional correspondente.",
+      "xp": 60,
+      "help": {
+        "hint": "Corretiva repara defeito; adaptativa ajusta a mudanças externas de ambiente/lei; perfectiva melhora desempenho ou funcionalidade; preventiva reduz riscos futuros.",
+        "concept": "Segundo a norma ISO/IEC 14764, a manutenção de software divide-se em corretiva, adaptativa, perfectiva e preventiva conforme o gatilho e o objetivo da alteração.",
+        "example": "Atualizar o sistema para suportar uma nova versão do banco de dados caracteriza manutenção adaptativa."
+      },
+      "explanation": "Na engenharia de manutenção de software: corrigir uma falha que calcula errado a média final é manutenção corretiva; adequar o sistema a uma nova portaria regulatória ou mudança de sistema operacional é manutenção adaptativa; otimizar o tempo de geração de relatórios ou acrescentar filtro solicitado pelos usuários é manutenção perfectiva; e reestruturar módulos frágeis para evitar falhas futuras é manutenção preventiva.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC/IEEE 14764 — Software engineering — Software life cycle processes — Maintenance."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Tipos de Manutenção de Software na Prática (ENG-MNT-01)",
+        "objective": "Associar manutenção corretiva, adaptativa, perfectiva e preventiva a cenários reais de evolução de software.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC/IEEE 14764 — Software Maintenance"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Manutenção Corretiva",
+            "right": "Corrigir um defeito em produção que impedia estudantes com nome composto de concluir a matrícula."
+          },
+          {
+            "id": "pair-2",
+            "left": "Manutenção Adaptativa",
+            "right": "Atualizar o módulo de integração fiscal após mudança obrigatória no leiaute exigido pelo órgão regulador."
+          },
+          {
+            "id": "pair-3",
+            "left": "Manutenção Perfectiva",
+            "right": "Reduzir pela metade o tempo de carregamento do painel de notas e incluir exportação em planilha."
+          },
+          {
+            "id": "pair-4",
+            "left": "Manutenção Preventiva",
+            "right": "Refatorar um componente legado com alta dívida técnica para evitar falhas antes do próximo período letivo."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-112",
+      "title": "Intenção dos Padrões de Projeto de Software",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Arquitetura e Projeto de Software",
+      "conceptId": "OOP-PAT-01",
+      "difficulty": "introductory",
+      "context": "Durante o desenho orientado a objetos dos módulos do sistema N9, a equipe aplica quatro padrões clássicos para isolar algoritmos intercambiáveis, notificar interessados, encapsular criação de objetos e abstrair persistência.",
+      "instruction": "Associe cada padrão de projeto à intenção arquitetural correspondente.",
+      "xp": 60,
+      "help": {
+        "hint": "Relacione Strategy à troca de algoritmos, Observer à reação a eventos, Factory à criação encapsulada e Repository ao acesso a coleções persistidas.",
+        "concept": "Padrões de projeto oferecem soluções reutilizáveis para problemas recorrentes de acoplamento, criação e organização de responsabilidades.",
+        "example": "Usar Repository permite que a regra de negócio consulte estudantes sem depender diretamente de comandos SQL."
+      },
+      "explanation": "Cada padrão atende a uma intenção específica: Strategy encapsula uma família de algoritmos intercambiáveis em tempo de execução; Observer define uma dependência um-para-muitos para notificar automaticamente componentes interessados quando um estado muda; Factory encapsula a lógica de instanciação sem expor classes concretas ao cliente; e Repository media entre o domínio e a camada de dados oferecendo uma interface semelhante a uma coleção em memória.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Intenção dos Padrões de Projeto de Software (OOP-PAT-01)",
+        "objective": "Correlacionar os padrões Strategy, Observer, Factory e Repository às suas respectivas intenções de projeto.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Padrão Strategy",
+            "right": "Encapsular diferentes regras intercambiáveis de cálculo de taxa ou frete, permitindo alterná-las sem alterar o cliente."
+          },
+          {
+            "id": "pair-2",
+            "left": "Padrão Observer",
+            "right": "Notificar automaticamente múltiplos serviços interessados sempre que o estado de uma matrícula for atualizado."
+          },
+          {
+            "id": "pair-3",
+            "left": "Padrão Factory",
+            "right": "Centralizar e encapsular a criação de objetos concretos adequados sem acoplar o código chamador à instanciação."
+          },
+          {
+            "id": "pair-4",
+            "left": "Padrão Repository",
+            "right": "Isolar a lógica de acesso e consulta ao banco de dados atrás de uma abstração orientada ao domínio."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-113",
+      "title": "Métricas de Avaliação em Modelos de Classificação",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Inteligência Artificial e Avaliação de Modelos",
+      "conceptId": "ML-MTR-01",
+      "difficulty": "intermediate",
+      "context": "A equipe de ciência de dados N9 avalia um classificador que identifica estudantes com risco de evasão e precisa comunicar o significado de cada métrica à coordenação pedagógica.",
+      "instruction": "Relacione cada métrica de classificação ao seu significado prático na avaliação do modelo.",
+      "xp": 75,
+      "help": {
+        "hint": "Diferencie acertos globais (acurácia), confiabilidade dos alertas emitidos (precisão), capacidade de encontrar os casos reais (revocação) e equilíbrio entre ambos (F1).",
+        "concept": "Acurácia mede acertos totais; Precisão mede a proporção de positivos previstos que são realmente positivos; Revocação (Recall) mede a proporção de positivos reais capturados; F1 combina precisão e revocação.",
+        "example": "Alta revocação significa que quase todos os casos reais de risco foram detectados pelo modelo."
+      },
+      "explanation": "Na avaliação de classificadores: a acurácia expressa a proporção global de previsões corretas sobre o total de casos; a precisão (precision) indica quantos dos casos apontados como positivos pelo modelo são verdadeiramente positivos (evitando falsos alarmes); a revocação (recall ou sensibilidade) mede quantos dos casos positivos reais foram efetivamente encontrados (evitando omissões); e a pontuação F1 (F1-score) sintetiza precisão e revocação por meio de sua média harmônica.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Métricas de Avaliação em Modelos de Classificação (ML-MTR-01)",
+        "objective": "Distinguir o significado conceitual e operacional de acurácia, precisão, revocação (recall) e pontuação F1.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Acurácia (Accuracy)",
+            "right": "Proporção geral de previsões corretas (positivas e negativas) em relação ao total de registros avaliados."
+          },
+          {
+            "id": "pair-2",
+            "left": "Precisão (Precision)",
+            "right": "Proporção de alertas positivos emitidos pelo modelo que correspondem de fato a casos positivos reais."
+          },
+          {
+            "id": "pair-3",
+            "left": "Revocação (Recall)",
+            "right": "Proporção de todos os casos positivos realmente existentes na base que o modelo conseguiu detectar."
+          },
+          {
+            "id": "pair-4",
+            "left": "Pontuação F1 (F1-score)",
+            "right": "Média harmônica que equilibra precisão e revocação em um único indicador, penalizando desequilíbrios extremos."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-114",
+      "title": "Comunicação Síncrona e Assíncrona em Serviços",
+      "mechanic": "categorize",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Arquitetura e Sistemas Distribuídos",
+      "conceptId": "SYS-COM-01",
+      "difficulty": "introductory",
+      "context": "A arquitetura distribuída do campus N9 emprega diferentes estilos de troca de mensagens entre serviços conforme a necessidade de resposta imediata ou processamento desacoplado.",
+      "instruction": "Classifique cada interação entre Comunicação Síncrona ou Comunicação Assíncrona.",
+      "xp": 60,
+      "help": {
+        "hint": "Verifique se o chamador fica aguardando a resposta imediata para continuar o fluxo ou se envia a mensagem/evento e segue sem bloqueio.",
+        "concept": "Na comunicação síncrona, o remetente aguarda resposta imediata do destinatário; na comunicação assíncrona, envio e processamento ocorrem de forma desacoplada no tempo.",
+        "example": "Consultar saldo em tempo real é síncrono; enfileirar geração de certificado em PDF é assíncrono."
+      },
+      "explanation": "Chamadas diretas de consulta de vaga, autenticação imediata no login e validação de pré-requisito no ato da inscrição exigem resposta imediata antes de prosseguir, sendo síncronas. Já publicar evento de matrícula concluída em fila, despachar e-mails de boas-vindas por corretor de mensagens e agendar processamento noturno de estatísticas ocorrem de maneira desacoplada no tempo, sendo assíncronas.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Comunicação Síncrona e Assíncrona em Serviços (SYS-COM-01)",
+        "objective": "Classificar interações entre sistemas distribuídos como comunicação síncrona ou assíncrona.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-sync",
+            "label": "Comunicação Síncrona",
+            "description": "O serviço solicitante envia a requisição e aguarda resposta imediata antes de concluir sua operação."
+          },
+          {
+            "id": "cat-async",
+            "label": "Comunicação Assíncrona",
+            "description": "O emissor publica mensagem ou evento e prossegue sem esperar a conclusão imediata pelo consumidor."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Validar em tempo real junto ao serviço financeiro se o estudante está apto antes de liberar a tela de escolha de disciplinas.",
+            "categoryId": "cat-sync"
+          },
+          {
+            "id": "item-2",
+            "text": "Publicar o evento MatriculaConfirmada em um tópico de mensageria para que o serviço de biblioteca libere o acesso posteriormente.",
+            "categoryId": "cat-async"
+          },
+          {
+            "id": "item-3",
+            "text": "Consultar via chamada direta o serviço de identidade para autenticar credenciais no momento do login.",
+            "categoryId": "cat-sync"
+          },
+          {
+            "id": "item-4",
+            "text": "Enfileirar pedidos de geração de declarações em PDF para processamento em segundo plano com notificação posterior.",
+            "categoryId": "cat-async"
+          },
+          {
+            "id": "item-5",
+            "text": "Verificar na hora da reserva se o laboratório escolhido possui disponibilidade imediata no horário solicitado.",
+            "categoryId": "cat-sync"
+          },
+          {
+            "id": "item-6",
+            "text": "Enviar registros de auditoria para uma fila persistente consumida continuamente pelo serviço de monitoramento.",
+            "categoryId": "cat-async"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-115",
+      "title": "Dimensões de Qualidade de Dados na Base Acadêmica",
+      "mechanic": "categorize",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Governança e Qualidade de Dados",
+      "conceptId": "DAT-QLT-01",
+      "difficulty": "intermediate",
+      "context": "Durante a auditoria da base institucional N9 antes da geração de relatórios oficiais, a equipe identificou seis problemas distintos nos cadastros.",
+      "instruction": "Classifique cada problema encontrado entre Completude, Consistência ou Atualidade/Tempestividade.",
+      "xp": 75,
+      "help": {
+        "hint": "Completude verifica ausência de campos obrigatórios; Consistência verifica contradições entre registros; Atualidade verifica se o dado reflete o estado vigente no tempo esperado.",
+        "concept": "Qualidade de dados envolve dimensões complementares: completude (preenchimento esperado), consistência (coerência sem contradições entre fontes) e atualidade/tempestividade (dados atualizados no momento necessário).",
+        "example": "Um estudante constar como 'Ativo' no portal e 'Cancelado' no financeiro viola a consistência."
+      },
+      "explanation": "A ausência de preenchimento de campos obrigatórios (como e-mail ou data de nascimento em branco) caracteriza falha de completude. Divergências entre sistemas ou regras contraditórias (como status conflitantes ou data de término anterior ao início) violam a consistência. Manter endereços antigos não atualizados ou atrasar a sincronização de notas além do prazo operacional compromete a atualidade/tempestividade.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 25012 — Software engineering — Software product Quality Requirements and Evaluation (SQuaRE) — Data quality model."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Dimensões de Qualidade de Dados na Base Acadêmica (DAT-QLT-01)",
+        "objective": "Categorizar falhas de qualidade de dados segundo as dimensões de completude, consistência e atualidade/tempestividade.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 25012 — Data quality model"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-comp",
+            "label": "Completude",
+            "description": "Grau em que todos os atributos e registros obrigatórios esperados estão efetivamente preenchidos."
+          },
+          {
+            "id": "cat-cons",
+            "label": "Consistência",
+            "description": "Ausência de contradições entre valores relacionados dentro da mesma base ou entre sistemas distintos."
+          },
+          {
+            "id": "cat-atua",
+            "label": "Atualidade / Tempestividade",
+            "description": "Disponibilidade de informações atualizadas no tempo adequado para refletir a realidade vigente."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Cerca de 18% dos cadastros de ingressantes estão com o campo obrigatório de telefone de emergência em branco.",
+            "categoryId": "cat-comp"
+          },
+          {
+            "id": "item-2",
+            "text": "O mesmo estudante aparece com situação 'Formado' no sistema acadêmico e 'Trancado' no cadastro da biblioteca.",
+            "categoryId": "cat-cons"
+          },
+          {
+            "id": "item-3",
+            "text": "As transferências de turma aprovadas na sexta-feira só são refletidas no painel da secretaria quatro dias depois.",
+            "categoryId": "cat-atua"
+          },
+          {
+            "id": "item-4",
+            "text": "Registros de estágio possuem data de encerramento anterior à própria data de início do contrato.",
+            "categoryId": "cat-cons"
+          },
+          {
+            "id": "item-5",
+            "text": "Relatório de bolsas omitiu a coluna de campus em dezenas de linhas importadas de planilha externa.",
+            "categoryId": "cat-comp"
+          },
+          {
+            "id": "item-6",
+            "text": "O cadastro de docentes exibe titulações e vínculos referentes ao ano anterior por falta de sincronização periódica.",
+            "categoryId": "cat-atua"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-116",
+      "title": "Percurso em Lista Simplesmente Encadeada em C",
+      "mechanic": "fill-slot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Algoritmos e Estruturas de Dados",
+      "conceptId": "C-LST-01",
+      "difficulty": "intermediate",
+      "context": "No programa em linguagem C abaixo, três nós de uma lista simplesmente encadeada (n1 com valor 10, n2 com valor 20 e n3 com valor 30 apontando para NULL) são percorridos a partir de atual = &n1, devendo somar todos os elementos e imprimir 60 sem acesso inválido de memória.",
+      "instruction": "Selecione a instrução em C que avança o ponteiro atual para o próximo nó da lista encadeada com segurança.",
+      "xp": 80,
+      "help": {
+        "hint": "Em uma lista simplesmente encadeada, cada nó guarda o endereço do nó seguinte no campo ponteiro prox.",
+        "concept": "Para percorrer uma lista simplesmente encadeada até NULL, atualiza-se o ponteiro cursor com atual = atual->prox a cada iteração.",
+        "example": "Se atual aponta para n1 e n1.prox aponta para n2, executar atual = atual->prox faz atual apontar para n2."
+      },
+      "explanation": "A instrução atual = atual->prox; avança o ponteiro cursor de n1 (&n2) para n2 (&n3), depois para n3 (NULL) e encerra o laço while (atual != NULL) após somar 10 + 20 + 30 = 60. Usar atual = atual->prox->prox; pula n2 e provoca desreferência de ponteiro nulo (n3.prox->prox) na segunda iteração; usar atual++; realiza aritmética de vetor em nós não contíguos (acesso inválido); e atual->prox = atual; cria um ciclo infinito em n1.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 9899 — Information technology — Programming languages — C."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Percurso em Lista Simplesmente Encadeada em C (C-LST-01)",
+        "objective": "Percorrer uma lista simplesmente encadeada em C avançando o ponteiro via campo prox sem desreferência nula.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC 9899 — Programming languages — C"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "c",
+        "contentBefore": "#include <stdio.h>\n\ntypedef struct No {\n    int valor;\n    struct No *prox;\n} No;\n\nint main(void) {\n    No n3 = {30, NULL};\n    No n2 = {20, &n3};\n    No n1 = {10, &n2};\n\n    No *atual = &n1;\n    int soma = 0;\n\n    while (atual != NULL) {\n        soma += atual->valor;\n        ",
+        "contentAfter": "\n    }\n\n    printf(\"%d\\n\", soma);\n    return 0;\n}",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "atual = atual->prox;",
+            "feedback": "Correto. Avança de n1 para n2, depois n3 e encerra em NULL, somando 10 + 20 + 30 = 60 com segurança."
+          },
+          {
+            "id": "tok-2",
+            "text": "atual = atual->prox->prox;",
+            "feedback": "Incorreto. Pula o nó n2 e tenta acessar NULL->prox quando atual chega em n3, gerando falha de segmentação."
+          },
+          {
+            "id": "tok-3",
+            "text": "atual++;",
+            "feedback": "Incorreto. Incrementa o endereço como se os nós estivessem em vetor contíguo, acessando memória inválida."
+          },
+          {
+            "id": "tok-4",
+            "text": "atual->prox = atual;",
+            "feedback": "Incorreto. Aponta o próximo do nó atual para ele mesmo sem avançar o cursor, provocando laço infinito."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-117",
+      "title": "Tratamento Específico na Conversão de Entrada em Python 3",
+      "mechanic": "fill-slot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Algoritmos e Programação",
+      "conceptId": "PY-EXC-01",
+      "difficulty": "introductory",
+      "context": "No utilitário Python 3 do portal N9, a função ler_limite_vagas recebe uma string digitada no formulário. Para a entrada \"45\", deve retornar e imprimir 45; para a entrada inválida \"abc\", deve tratar apenas a falha de conversão numérica e retornar 0 sem ocultar outros erros inesperados.",
+      "instruction": "Selecione a cláusula de tratamento de exceção em Python 3 que captura especificamente o erro gerado por int() diante de texto não numérico.",
+      "xp": 55,
+      "help": {
+        "hint": "Quando int(texto) recebe caracteres que não representam um número inteiro válido, a biblioteca padrão lança uma exceção de valor inválido.",
+        "concept": "Capturar exceções específicas (como ValueError na conversão com int()) evita mascarar falhas inesperadas de programação ou interrupções do sistema.",
+        "example": "try:\n    numero = int(texto)\nexcept ValueError:\n    numero = 0"
+      },
+      "explanation": "Em Python 3, a função int(\"abc\") lança ValueError quando a string não representa um inteiro válido. Usar except ValueError: captura exclusivamente essa falha esperada e retorna 0, mantendo 45 para entradas válidas como \"45\" e permitindo que erros imprevistos (como TypeError ou interrupções) não sejam ocultados. Usar except: genérico silencia qualquer exceção indiscriminadamente, enquanto ZeroDivisionError e IndexError não tratam falhas de conversão.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "Python 3 Language Reference — Built-in Exceptions (ValueError)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Tratamento Específico na Conversão de Entrada em Python 3 (PY-EXC-01)",
+        "objective": "Capturar especificamente ValueError na conversão de string para inteiro em Python 3 sem silenciar exceções genéricas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Python 3 Language Reference — ValueError"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "python",
+        "contentBefore": "def ler_limite_vagas(entrada: str) -> int:\n    try:\n        return int(entrada.strip())\n    ",
+        "contentAfter": "\n        return 0\n\nprint(ler_limite_vagas(\"45\"))\nprint(ler_limite_vagas(\"abc\"))",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "except ValueError:",
+            "feedback": "Correto. Captura especificamente a falha de conversão de \"abc\" para inteiro (retornando 0) sem ocultar falhas inesperadas."
+          },
+          {
+            "id": "tok-2",
+            "text": "except:",
+            "feedback": "Incorreto. Uma cláusula except vazia captura indiscriminadamente qualquer exceção, inclusive interrupções e falhas internas."
+          },
+          {
+            "id": "tok-3",
+            "text": "except ZeroDivisionError:",
+            "feedback": "Incorreto. A função int(\"abc\") não realiza divisão; ela lança ValueError, que continuaria sem tratamento."
+          },
+          {
+            "id": "tok-4",
+            "text": "except IndexError:",
+            "feedback": "Incorreto. IndexError ocorre em acesso fora de faixa em sequências, não na conversão de texto inválido."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-118",
+      "title": "Transição de Aceitação em Autômato Finito",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "CC"
+      ],
+      "area": "Linguagens Formais e Autômatos",
+      "conceptId": "LFA-AFD-01",
+      "difficulty": "introductory",
+      "context": "O Autômato Finito Determinístico (AFD) representado no diagrama reconhece cadeias sobre o alfabeto {a, b} que começam com 'a' e terminam com 'b', partindo do estado inicial S0, passando pelo estado intermediário S1 e alcançando o estado de aceitação S2.",
+      "instruction": "Ao processar a cadeia curta \"aab\" a partir do estado inicial S0, selecione a transição que conduz o autômato ao estado de aceitação S2 no último símbolo.",
+      "xp": 55,
+      "help": {
+        "hint": "Acompanhe cada caractere de \"aab\" passo a passo: o primeiro 'a' sai de S0 para S1, o segundo 'a' permanece em S1 e o 'b' final avança para o estado de aceitação.",
+        "concept": "Em um Autômato Finito Determinístico (AFD), uma cadeia é aceita se, após consumir todos os seus símbolos a partir do estado inicial, a computação termina em um estado de aceitação.",
+        "example": "Na cadeia \"ab\", 'a' leva de S0 para S1 e 'b' leva de S1 para o estado de aceitação S2."
+      },
+      "explanation": "Rastreando a cadeia \"aab\" a partir do estado inicial S0: o primeiro símbolo 'a' aciona a transição de S0 para S1; o segundo símbolo 'a' aciona o auto-laço em S1; e o terceiro símbolo 'b' aciona a transição de S1 para S2 (estado final de aceitação com círculo duplo), aceitando a cadeia.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Transição de Aceitação em Autômato Finito (LFA-AFD-01)",
+        "objective": "Rastrear uma cadeia curta em um Autômato Finito Determinístico e identificar a transição que alcança o estado de aceitação.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama de estados de Autômato Finito Determinístico com três estados principais em linha: à esquerda, círculo simples S0 com seta de entrada inicial; ao centro, círculo simples S1 com auto-laço superior rotulado com 'a'; à direita, círculo duplo S2 (estado de aceitação). Uma seta rotulada com 'a' liga S0 a S1, uma seta rotulada com 'b' liga S1 a S2, e uma seta inferior rotulada com 'a' retorna de S2 para S1.",
+        "accessibleDescription": "Transições apresentadas no diagrama do autômato finito: (1) Transição de S0 para S1 com símbolo 'a': seta que parte do estado inicial S0 e chega ao estado intermediário S1 ao ler 'a'; (2) Auto-laço em S1 com símbolo 'a': seta circular sobre o estado intermediário S1 que mantém o autômato em S1 ao ler 'a'; (3) Transição de S1 para S2 com símbolo 'b': seta que parte do estado intermediário S1 e chega ao estado de aceitação S2 (círculo duplo) ao ler 'b'; (4) Transição de retorno de S2 para S1 com símbolo 'a': seta inferior que retorna do estado de aceitação S2 para S1 caso outro símbolo 'a' seja lido.",
+        "nodes": [
+          {
+            "id": "node-s0-to-s1-a",
+            "label": "Transição de S0 para S1 com símbolo 'a'",
+            "detail": "Consome o primeiro caractere 'a' da cadeia e move a computação do estado inicial S0 para S1."
+          },
+          {
+            "id": "node-s1-loop-a",
+            "label": "Auto-laço em S1 com símbolo 'a'",
+            "detail": "Consome o segundo caractere 'a' da cadeia mantendo a computação no estado intermediário S1."
+          },
+          {
+            "id": "node-s1-to-s2-b",
+            "label": "Transição de S1 para S2 com símbolo 'b'",
+            "detail": "Consome o último símbolo 'b' de \"aab\" e conduz diretamente ao estado de aceitação S2."
+          },
+          {
+            "id": "node-s2-to-s1-a",
+            "label": "Transição de retorno de S2 para S1 com símbolo 'a'",
+            "detail": "Retorna do estado de aceitação S2 para S1 quando um símbolo 'a' aparece após um 'b'."
+          }
+        ],
+        "correctNodeId": "node-s1-to-s2-b"
+      }
+    },
+    {
+      "id": "N9-COM-119",
+      "title": "Identificação de Atividade Crítica com Folga Zero",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Gerência de Projetos",
+      "conceptId": "PRJ-CPM-01",
+      "difficulty": "intermediate",
+      "context": "Na rede de precedência do Método do Caminho Crítico (CPM — Critical Path Method) da implantação N9, duas atividades paralelas ocorrem entre o Marco Início (Dia 0) e o Marco Entrega Final (Dia 5): o Desenvolvimento do Núcleo (duração de 5 dias, início no Dia 0, término no Dia 5, folga total de 0 dias) e a Redação do Manual (duração de 2 dias, início mais cedo no Dia 0, início mais tarde no Dia 3, folga total de 3 dias).",
+      "instruction": "Selecione no diagrama a atividade que possui folga zero e integra o caminho crítico, de modo que qualquer atraso nela atrasa a entrega final do projeto.",
+      "xp": 75,
+      "help": {
+        "hint": "Atividades pertencentes ao caminho crítico não possuem margem de atraso (folga total igual a zero) entre seu início mais cedo e seu início mais tarde.",
+        "concept": "No Método do Caminho Crítico (CPM), o caminho crítico é a sequência mais longa de atividades dependentes que determina a duração mínima do projeto, caracterizada por folga zero.",
+        "example": "Se o prazo total é 5 dias e uma atividade dura os 5 dias inteiros, sua folga é zero."
+      },
+      "explanation": "A atividade Desenvolvimento do Núcleo possui duração de 5 dias em uma janela total de 5 dias (folga total = 0 dias), definindo o caminho crítico do projeto: qualquer atraso em sua execução impacta diretamente o Marco Entrega Final. Já a Redação do Manual dura 2 dias e dispõe de 3 dias de folga, enquanto os marcos representam apenas instantes de início e término.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Identificação de Atividade Crítica com Folga Zero (PRJ-CPM-01)",
+        "objective": "Identificar a atividade de folga zero (caminho crítico) em uma rede de precedência com dois ramos paralelos.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Rede de precedência horizontal com quatro nós: à esquerda, Marco Início (Dia 0) ramificando-se para dois blocos paralelos no centro — ramo superior com Atividade: Desenvolvimento do Núcleo (Duração: 5 dias | Folga: 0 dias) e ramo inferior com Atividade: Redação do Manual (Duração: 2 dias | Folga: 3 dias) — ambos convergindo à direita no Marco Entrega Final (Dia 5).",
+        "accessibleDescription": "Elementos da rede de precedência do projeto: (1) Marco Início (Dia 0): evento inicial sem duração que dispara os dois ramos paralelos; (2) Atividade: Desenvolvimento do Núcleo (Duração: 5 dias | Folga: 0 dias): atividade do ramo superior com início mais cedo no Dia 0, término no Dia 5 e folga zero; (3) Atividade: Redação do Manual (Duração: 2 dias | Folga: 3 dias): atividade do ramo inferior com duração de 2 dias e folga de 3 dias antes do Dia 5; (4) Marco Entrega Final (Dia 5): evento de encerramento condicionado à conclusão de ambas as atividades.",
+        "nodes": [
+          {
+            "id": "node-start-milestone",
+            "label": "Marco Início (Dia 0)",
+            "detail": "Evento de partida do cronograma com duração zero."
+          },
+          {
+            "id": "node-critical-core",
+            "label": "Atividade: Desenvolvimento do Núcleo (5 dias | Folga: 0 dias)",
+            "detail": "Atividade crítica sem margem de atraso entre o Dia 0 e o Dia 5."
+          },
+          {
+            "id": "node-noncritical-manual",
+            "label": "Atividade: Redação do Manual (2 dias | Folga: 3 dias)",
+            "detail": "Atividade paralela com 3 dias de folga que pode ser deslocada sem afetar o Dia 5."
+          },
+          {
+            "id": "node-end-milestone",
+            "label": "Marco Entrega Final (Dia 5)",
+            "detail": "Evento conclusivo do cronograma após a finalização das atividades precedentes."
+          }
+        ],
+        "correctNodeId": "node-critical-core"
+      }
+    },
+    {
+      "id": "N9-COM-120",
+      "title": "Equilíbrio entre Valor, Acessibilidade e Dívida Técnica",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Engenharia de Produto e Qualidade",
+      "conceptId": "PRD-QLT-01",
+      "difficulty": "advanced",
+      "context": "A equipe do portal N9 prepara a liberação semestral do módulo de renovação de matrícula. O backlog reúne pedidos de novos filtros visuais, correção de barreiras de leitura por teclado e leitores de tela segundo as Diretrizes de Acessibilidade para Conteúdo Web (WCAG — Web Content Accessibility Guidelines) e refatoração de um serviço de cálculo de mensalidade com alta dívida técnica.",
+      "instruction": "Conduza as três decisões de produto e engenharia conciliando valor ao usuário, inclusão, sustentabilidade técnica, prazo e qualidade mínima.",
+      "xp": 100,
+      "help": {
+        "hint": "Garanta requisitos essenciais de inclusão e estabilidade técnica antes de expandir recursos secundários, negociando escopo sem sacrificar qualidade mínima.",
+        "concept": "Decisões maduras de produto tratam acessibilidade e qualidade mínima como critérios inegociáveis da entrega e gerenciam dívida técnica de forma incremental e transparente.",
+        "example": "Priorizar correções de navegação por teclado e amortizar dívida técnica crítica antes de adicionar melhorias estéticas secundárias."
+      },
+      "explanation": "A gestão equilibrada de produto não trata acessibilidade nem qualidade estrutural como itens opcionais descartáveis sob pressão de prazo. A condução adequada prioriza eliminar barreiras de acesso que impedem estudantes com deficiência de renovar matrícula, negocia a postergação de filtros secundários para amortizar dívida técnica crítica no cálculo financeiro e exige critérios objetivos de qualidade antes da liberação.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "W3C Web Content Accessibility Guidelines (WCAG) 2.1."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Equilíbrio entre Valor, Acessibilidade e Dívida Técnica (PRD-QLT-01)",
+        "objective": "Conduzir decisões integradas de priorização de produto conciliando valor ao usuário, acessibilidade, amortização de dívida técnica, prazo e qualidade mínima.",
+        "locators": [
+          "Portaria Inep nº 154/2026 (Formação Geral), arts. 4º–6º",
+          "Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º",
+          "W3C WCAG 2.1"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Especialista em Acessibilidade",
+            "message": "Detectamos que estudantes que navegam apenas por teclado ou leitor de tela não conseguem concluir o botão de confirmação da renovação, mas a área comercial pediu novos filtros visuais no mesmo prazo. Como você prioriza?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Priorizar a correção da barreira de acessibilidade na renovação e negociar o adiamento dos filtros visuais secundários.",
+                "reaction": "Decisão adequada: Garante o direito de acesso ao serviço essencial para todos os estudantes dentro do prazo disponível.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Entregar primeiro os filtros visuais e deixar a correção de teclado para o semestre seguinte porque atende a um grupo menor.",
+                "reaction": "Consequência: Impedir estudantes com deficiência de renovar matrícula viola princípios de inclusão e gera exclusão imediata.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Tentar entregar filtros novos e correções de acessibilidade sem ajustar prazo nem escopo, pulando os testes de leitura de tela.",
+                "reaction": "Consequência: Sem validação assistiva, o botão permanece inacessível e o código entra com defeitos em produção.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Arquiteto de Software",
+            "message": "O componente de cálculo de mensalidade está acoplado à tela e apresenta falhas intermitentes sempre que mudamos regras de bolsa. Qual estratégia adotar nesta sprint?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Adicionar mais desvios condicionais diretamente na tela para resolver rápido e prometer limpar o código algum dia sem prazo.",
+                "reaction": "Consequência: O acúmulo contínuo de dívida técnica torna cada alteração futura mais lenta e propensa a erros graves.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Paralisar todas as entregas de valor aos usuários por três meses para reescrever o sistema inteiro do zero.",
+                "reaction": "Consequência: Uma reescrita total sem entregas incrementais bloqueia evoluções urgentes e introduz novos riscos.",
+                "correct": false
+              },
+              {
+                "id": "s2-c3",
+                "text": "Reservar capacidade explícita da sprint para extrair e testar a regra de cálculo, amortizando a dívida técnica crítica de forma incremental.",
+                "reaction": "Decisão adequada: Equilibra entrega contínua de valor com saneamento estrutural protegido por testes automatizados.",
+                "correct": true
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Gerente de Produto",
+            "message": "Faltam dois dias para a publicação. Uma melhoria secundária de relatório ainda está instável, enquanto o fluxo acessível de renovação e os cálculos passaram nos testes. Como encerrar a liberação?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Publicar o fluxo de renovação validado, manter a melhoria instável desativada por chave de recurso e registrar critérios mínimos de qualidade.",
+                "reaction": "Decisão adequada: Entrega valor seguro e inclusivo no prazo sem comprometer a estabilidade da operação.",
+                "correct": true
+              },
+              {
+                "id": "s3-c2",
+                "text": "Ativar também o relatório instável em produção para parecer que todo o backlog planejado foi entregue.",
+                "reaction": "Consequência: Publicar código instável degrada a confiabilidade do portal e sobrecarrega o suporte.",
+                "correct": false
+              },
+              {
+                "id": "s3-c3",
+                "text": "Reter todo o pacote validado por mais duas semanas apenas para incluir o relatório secundário na mesma data.",
+                "reaction": "Consequência: Atrasa sem necessidade a correção crítica de acessibilidade que já está pronta para beneficiar os estudantes.",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
