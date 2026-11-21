@@ -377,7 +377,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Sistemas Operacionais e Infraestrutura",
       "conceptId": "INF-CNT-01",
@@ -520,7 +521,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Segurança da Informação",
       "conceptId": "SEC-CTL-01",
@@ -769,7 +771,8 @@
       "courses": [
         "CC",
         "SI",
-        "TADS"
+        "TADS",
+        "TRC"
       ],
       "area": "Desenvolvimento Web e Sistemas Distribuídos",
       "conceptId": "WEB-RST-01",
@@ -840,7 +843,8 @@
       "courses": [
         "CC",
         "SI",
-        "TADS"
+        "TADS",
+        "TRC"
       ],
       "area": "Algoritmos e Estruturas de Dados",
       "conceptId": "AED-BIGO-01",
@@ -911,7 +915,8 @@
       "courses": [
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Gerência de Projetos",
       "conceptId": "PRJ-ART-01",
@@ -1078,7 +1083,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Segurança da Informação",
       "conceptId": "SEC-CTL-02",
@@ -1476,7 +1482,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Ética, Privacidade e Segurança",
       "conceptId": "PRV-INC-01",

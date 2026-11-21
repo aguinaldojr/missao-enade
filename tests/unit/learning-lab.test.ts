@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SI_LEARNING_LAB } from '../../src/content/learning-lab';
+import { learningActivitiesForCourse, SI_LEARNING_LAB } from '../../src/content/learning-lab';
 
 describe('laboratório de mecânicas compartilhadas', () => {
   it('carrega os seis lotes e cobre as nove mecânicas', () => {
@@ -10,6 +10,21 @@ describe('laboratório de mecânicas compartilhadas', () => {
     ]));
     expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(120);
     expect(SI_LEARNING_LAB.every((activity) => activity.xp > 0 && activity.explanation.length > 40)).toBe(true);
+  });
+
+  it('habilita para TRC somente as atividades auditadas como diretamente compatíveis', () => {
+    const trc = learningActivitiesForCourse('TRC');
+    expect(trc).toHaveLength(43);
+    expect(trc.map((activity) => activity.id)).toEqual([
+      'N9-COM-001', 'N9-COM-004', 'N9-COM-007', 'N9-COM-009', 'N9-COM-011', 'N9-COM-012',
+      'N9-COM-019', 'N9-COM-020', 'N9-COM-026', 'N9-COM-032', 'N9-COM-035', 'N9-COM-046',
+      'N9-COM-048', 'N9-COM-051', 'N9-COM-052', 'N9-COM-053', 'N9-COM-055', 'N9-COM-060',
+      'N9-COM-061', 'N9-COM-063', 'N9-COM-065', 'N9-COM-066', 'N9-COM-067', 'N9-COM-068',
+      'N9-COM-069', 'N9-COM-070', 'N9-COM-071', 'N9-COM-072', 'N9-COM-075', 'N9-COM-077',
+      'N9-COM-079', 'N9-COM-080', 'N9-COM-085', 'N9-COM-088', 'N9-COM-090', 'N9-COM-093',
+      'N9-COM-100', 'N9-COM-106', 'N9-COM-107', 'N9-COM-108', 'N9-COM-110', 'N9-COM-114',
+      'N9-COM-119',
+    ]);
   });
 
   it('mantém respostas únicas e exemplos técnicos completos', () => {

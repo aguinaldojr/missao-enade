@@ -314,7 +314,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Organização e Arquitetura de Computadores",
       "conceptId": "ARQ-CCH-01",
@@ -511,7 +512,8 @@
       "courses": [
         "CC",
         "SI",
-        "TADS"
+        "TADS",
+        "TRC"
       ],
       "area": "Engenharia de Software e Sistemas Distribuídos",
       "conceptId": "API-HTP-01",
@@ -673,7 +675,8 @@
       "courses": [
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Gestão de Serviços de TI",
       "conceptId": "ITSM-INC-01",
@@ -894,7 +897,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Organização e Arquitetura de Computadores",
       "conceptId": "ARQ-MEM-01",
@@ -1459,7 +1463,8 @@
       "courses": [
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Gestão e Governança de Serviços de TI",
       "conceptId": "ITSM-SLA-01",

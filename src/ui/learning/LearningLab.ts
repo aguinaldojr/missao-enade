@@ -107,7 +107,7 @@ export class LearningLab {
     const title = el('h1', 'lab-title');
     title.tabIndex = -1;
     title.append('TREINE. ', el('span', '', 'DESCUBRA.'), ' AVANCE.');
-    copy.append(title, el('p', 'lab-lead', this.activities.length + ' atividades na missão de hoje, compartilhadas por CC, SI, TADS e TGTI e ligadas a situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
+    copy.append(title, el('p', 'lab-lead', this.activities.length + ' atividades na missão de hoje, compartilhadas entre CC, SI, TADS, TGTI e TRC e ligadas a situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
     const start = action('Começar laboratório  →', 'lab-button lab-button--primary');
     start.addEventListener('click', () => { this.index = 0; this.prepareActivity(); this.sound.play('tap'); this.render(); });
     copy.append(start, el('p', 'lab-note', 'Duração estimada: 15 a 20 minutos · Funciona com teclado, mouse e toque'));

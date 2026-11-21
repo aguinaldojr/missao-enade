@@ -10,7 +10,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Segurança da Informação",
       "conceptId": "SEC-AUTH-01",
@@ -242,7 +243,8 @@
       "courses": [
         "CC",
         "SI",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Sustentabilidade Tecnológica",
       "conceptId": "SUS-INFRA-01",
@@ -420,7 +422,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Computação em Nuvem",
       "conceptId": "CLD-SEC-01",
@@ -594,7 +597,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Segurança da Informação",
       "conceptId": "SEC-INC-01",
@@ -750,7 +754,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Computação em Nuvem",
       "conceptId": "CLD-MOD-01",
@@ -818,7 +823,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Projetos e Riscos",
       "conceptId": "PRJ-RSK-01",
@@ -1348,7 +1354,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Computação em Nuvem",
       "conceptId": "CLD-HA-01",
@@ -1424,7 +1431,8 @@
         "CC",
         "SI",
         "TADS",
-        "TGTI"
+        "TGTI",
+        "TRC"
       ],
       "area": "Projetos e Riscos",
       "conceptId": "PRJ-GOV-01",

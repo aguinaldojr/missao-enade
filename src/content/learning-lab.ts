@@ -14,6 +14,7 @@ interface ActivityBase {
   readonly id: string;
   readonly type: LearningActivityType;
   readonly title: string;
+  readonly courses: CatalogLearningActivity['courses'];
   readonly area: string;
   readonly instruction: string;
   readonly context: string;
@@ -104,6 +105,7 @@ function base(activity: CatalogLearningActivity): Omit<ActivityBase, 'type'> {
   return {
     id: activity.id,
     title: activity.title,
+    courses: activity.courses,
     area: activity.area,
     instruction: activity.instruction,
     context: activity.context,
@@ -142,6 +144,11 @@ if (new Set(activities.map((activity) => activity.id)).size !== activities.lengt
 
 /** Lote compartilhado validado pelo contrato editorial antes de chegar à interface. */
 export const N9_SHARED_LEARNING_LAB: readonly LearningActivity[] = Object.freeze(activities.map(toLearningActivity));
+
+/** Retorna apenas atividades cuja elegibilidade editorial inclui o curso informado. */
+export function learningActivitiesForCourse(course: CatalogLearningActivity['courses'][number]): readonly LearningActivity[] {
+  return Object.freeze(N9_SHARED_LEARNING_LAB.filter((activity) => activity.courses.includes(course)));
+}
 
 /** Alias temporário para consumidores do protótipo anterior. */
 export const SI_LEARNING_LAB = N9_SHARED_LEARNING_LAB;

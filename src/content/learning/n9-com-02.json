@@ -374,7 +374,8 @@
 "mechanic": "binary-choice",
 "courses": [
 "SI",
-"TGTI"
+"TGTI",
+"TRC"
 ],
 "area": "Governança e Gestão de Serviços de TI",
 "conceptId": "GOV-COB-01",
@@ -827,7 +828,8 @@
 "courses": [
 "CC",
 "SI",
-"TADS"
+"TADS",
+"TRC"
 ],
 "area": "Algoritmos e Estruturas de Dados",
 "conceptId": "AED-STR-01",
@@ -1053,7 +1055,8 @@
 "CC",
 "SI",
 "TADS",
-"TGTI"
+"TGTI",
+"TRC"
 ],
 "area": "Segurança da Informação",
 "conceptId": "SEC-CIA-01",
