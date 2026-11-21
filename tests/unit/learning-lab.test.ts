@@ -1,20 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import { learningActivitiesForCourse, SI_LEARNING_LAB } from '../../src/content/learning-lab';
+import { learningActivitiesForCourse, N9_SHARED_LEARNING_LAB, SI_LEARNING_LAB } from '../../src/content/learning-lab';
 
 describe('laboratório de mecânicas compartilhadas', () => {
   it('carrega os seis lotes e cobre as nove mecânicas', () => {
-    expect(SI_LEARNING_LAB).toHaveLength(120);
+    expect(SI_LEARNING_LAB).toHaveLength(140);
+    expect(N9_SHARED_LEARNING_LAB).toHaveLength(120);
     expect(new Set(SI_LEARNING_LAB.map((activity) => activity.type))).toEqual(new Set([
       'choice', 'binary-choice', 'multiple-select', 'order', 'match', 'categorize', 'complete-code',
       'hotspot', 'decision-dialogue',
     ]));
-    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(120);
+    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(140);
     expect(SI_LEARNING_LAB.every((activity) => activity.xp > 0 && activity.explanation.length > 40)).toBe(true);
   });
 
   it('habilita para TRC somente as atividades auditadas como diretamente compatíveis', () => {
     const trc = learningActivitiesForCourse('TRC');
-    expect(trc).toHaveLength(43);
+    expect(trc).toHaveLength(63);
     expect(trc.map((activity) => activity.id)).toEqual([
       'N9-COM-001', 'N9-COM-004', 'N9-COM-007', 'N9-COM-009', 'N9-COM-011', 'N9-COM-012',
       'N9-COM-019', 'N9-COM-020', 'N9-COM-026', 'N9-COM-032', 'N9-COM-035', 'N9-COM-046',
@@ -24,7 +25,21 @@ describe('laboratório de mecânicas compartilhadas', () => {
       'N9-COM-079', 'N9-COM-080', 'N9-COM-085', 'N9-COM-088', 'N9-COM-090', 'N9-COM-093',
       'N9-COM-100', 'N9-COM-106', 'N9-COM-107', 'N9-COM-108', 'N9-COM-110', 'N9-COM-114',
       'N9-COM-119',
+      'N9-TRC-001', 'N9-TRC-002', 'N9-TRC-003', 'N9-TRC-004', 'N9-TRC-005',
+      'N9-TRC-006', 'N9-TRC-007', 'N9-TRC-008', 'N9-TRC-009', 'N9-TRC-010',
+      'N9-TRC-011', 'N9-TRC-012', 'N9-TRC-013', 'N9-TRC-014', 'N9-TRC-015',
+      'N9-TRC-016', 'N9-TRC-017', 'N9-TRC-018', 'N9-TRC-019', 'N9-TRC-020',
     ]);
+  });
+
+  it('preserva as cotas estruturais do primeiro lote específico de TRC', () => {
+    const trcOne = SI_LEARNING_LAB.filter((activity) => activity.id.startsWith('N9-TRC-'));
+    expect(trcOne).toHaveLength(20);
+    expect(Object.fromEntries([...new Set(trcOne.map((activity) => activity.type))]
+      .map((type) => [type, trcOne.filter((activity) => activity.type === type).length]))).toEqual({
+      categorize: 3, 'binary-choice': 3, hotspot: 4, order: 3,
+      'decision-dialogue': 3, match: 1, 'multiple-select': 2, 'complete-code': 1,
+    });
   });
 
   it('mantém respostas únicas e exemplos técnicos completos', () => {

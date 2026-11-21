@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { SI_LEARNING_LAB } from '../../src/content/learning-lab';
+import { N9_SHARED_LEARNING_LAB } from '../../src/content/learning-lab';
 import { selectDailyLearningActivities } from '../../src/domain/services/DailyLearningSelector';
 import { LearningLab } from '../../src/ui/learning/LearningLab';
 
@@ -16,7 +16,7 @@ describe('experiência do laboratório rápido', () => {
   it('carrega a missão diária, oferece ajuda e preserva o jogo principal', () => {
     localStorage.clear();
     const date = new Date(2026, 10, 23);
-    const session = selectDailyLearningActivities(SI_LEARNING_LAB, date);
+    const session = selectDailyLearningActivities(N9_SHARED_LEARNING_LAB, date);
     const root = document.createElement('div'); document.body.append(root);
     const exit = vi.fn(); lab = new LearningLab(root, exit, date);
     expect(root.textContent).toContain('15 atividades na missão de hoje');

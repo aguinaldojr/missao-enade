@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { JsonLearningActivityRepository } from '../../src/infrastructure/content/JsonLearningActivityRepository';
 import { validateLearningActivities } from '../../src/infrastructure/content/validateLearningActivities';
+import trcCatalogOne from '../../src/content/learning/n9-trc-01.json';
 
 const base = {
   courses: ['CC', 'SI'], area: 'Área de exemplo', conceptId: 'conceito-exemplo', difficulty: 'introductory',
@@ -59,6 +60,21 @@ function activities(data: Record<string, unknown>): Record<string, unknown>[] {
 }
 
 describe('contrato de atividades do modo aprender', () => {
+  it('valida IDs e cotas editoriais do primeiro lote de TRC', () => {
+    const validated = validateLearningActivities(trcCatalogOne);
+    expect(validated.activities.map((activity) => activity.id)).toEqual(
+      Array.from({ length: 20 }, (_, index) => 'N9-TRC-' + String(index + 1).padStart(3, '0')),
+    );
+    expect(validated.activities.every((activity) => activity.courses.length === 1 && activity.courses[0] === 'TRC')).toBe(true);
+    expect(Object.fromEntries(['introductory', 'intermediate', 'advanced'].map((difficulty) => [difficulty,
+      validated.activities.filter((activity) => activity.difficulty === difficulty).length]))).toEqual({
+      introductory: 8, intermediate: 10, advanced: 2,
+    });
+    expect(validated.activities.every((activity) => activity.sources.filter((source) => source.role === 'primary').length === 1)).toBe(true);
+    expect(validated.activities.filter((activity) => activity.sourceVerificationNeeded).map((activity) => activity.id))
+      .toEqual(['N9-TRC-013', 'N9-TRC-017']);
+  });
+
   it('aceita as nove mecânicas e oferece filtros imutáveis', () => {
     const data = catalog();
     expect(validateLearningActivities(data).activities).toHaveLength(9);

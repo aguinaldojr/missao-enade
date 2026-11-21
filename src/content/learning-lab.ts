@@ -4,6 +4,7 @@ import catalogThree from './learning/n9-com-03.json';
 import catalogFour from './learning/n9-com-04.json';
 import catalogFive from './learning/n9-com-05.json';
 import catalogSix from './learning/n9-com-06.json';
+import catalogTrcOne from './learning/n9-trc-01.json';
 import type { CatalogLearningActivity } from '../domain/models/LearningActivityCatalog';
 import { JsonLearningActivityRepository } from '../infrastructure/content/JsonLearningActivityRepository';
 
@@ -136,19 +137,24 @@ function toLearningActivity(activity: CatalogLearningActivity): LearningActivity
   }
 }
 
-const activities = [catalogOne, catalogTwo, catalogThree, catalogFour, catalogFive, catalogSix]
+const activities = [catalogOne, catalogTwo, catalogThree, catalogFour, catalogFive, catalogSix, catalogTrcOne]
   .flatMap((catalog) => new JsonLearningActivityRepository(catalog).all());
 if (new Set(activities.map((activity) => activity.id)).size !== activities.length) {
   throw new Error('IDs duplicados entre lotes de aprendizagem.');
 }
 
-/** Lote compartilhado validado pelo contrato editorial antes de chegar à interface. */
-export const N9_SHARED_LEARNING_LAB: readonly LearningActivity[] = Object.freeze(activities.map(toLearningActivity));
+/** Catálogo completo validado pelo contrato editorial antes de chegar à interface. */
+export const N9_LEARNING_CATALOG: readonly LearningActivity[] = Object.freeze(activities.map(toLearningActivity));
+
+/** Lotes compartilhados originais, usados na sessão geral enquanto não há filtro de trilha. */
+export const N9_SHARED_LEARNING_LAB: readonly LearningActivity[] = Object.freeze(
+  N9_LEARNING_CATALOG.filter((activity) => activity.id.startsWith('N9-COM-')),
+);
 
 /** Retorna apenas atividades cuja elegibilidade editorial inclui o curso informado. */
 export function learningActivitiesForCourse(course: CatalogLearningActivity['courses'][number]): readonly LearningActivity[] {
-  return Object.freeze(N9_SHARED_LEARNING_LAB.filter((activity) => activity.courses.includes(course)));
+  return Object.freeze(N9_LEARNING_CATALOG.filter((activity) => activity.courses.includes(course)));
 }
 
 /** Alias temporário para consumidores do protótipo anterior. */
-export const SI_LEARNING_LAB = N9_SHARED_LEARNING_LAB;
+export const SI_LEARNING_LAB = N9_LEARNING_CATALOG;

@@ -1,4 +1,4 @@
-import { SI_LEARNING_LAB, type LearningActivity } from '../../content/learning-lab';
+import { N9_SHARED_LEARNING_LAB, type LearningActivity } from '../../content/learning-lab';
 import { selectDailyLearningActivities } from '../../domain/services/DailyLearningSelector';
 import { LabSound } from './LabSound';
 
@@ -72,7 +72,7 @@ export class LearningLab {
   private guide = 'Eu sou a Lia. Vamos treinar com atividades rápidas e variadas?';
 
   constructor(private readonly root: HTMLElement, private readonly onExit: () => void, date = new Date()) {
-    this.activities = selectDailyLearningActivities(SI_LEARNING_LAB, date);
+    this.activities = selectDailyLearningActivities(N9_SHARED_LEARNING_LAB, date);
     this.render();
   }
 

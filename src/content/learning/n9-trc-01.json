@@ -1,0 +1,1659 @@
+{
+  "schemaVersion": 1,
+  "batchId": "N9-TRC-01",
+  "activities": [
+    {
+      "id": "N9-TRC-001",
+      "title": "Unidades de Dados no Encapsulamento TCP/IP",
+      "mechanic": "categorize",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Arquitetura TCP/IP e Protocolos de Rede",
+      "conceptId": "TRC01-ENC-01",
+      "difficulty": "introductory",
+      "context": "Durante uma análise de captura de tráfego no laboratório de redes do campus, você inspeciona os cabeçalhos adicionados em cada camada da pilha TCP/IP antes da transmissão pelo meio físico.",
+      "instruction": "Classifique cada unidade de dados de protocolo (PDU) na camada TCP/IP responsável por construí-la.",
+      "xp": 60,
+      "help": {
+        "hint": "Relacione portas TCP/UDP à camada de Transporte, endereçamento lógico IP à camada de Internet e endereços MAC físicos à camada de Acesso à Rede.",
+        "concept": "No encapsulamento TCP/IP, os dados da aplicação recebem cabeçalhos sucessivos: Segmentos/Datagramas no Transporte, Pacotes na Internet e Quadros no Acesso à Rede.",
+        "example": "O protocolo Ethernet adiciona endereços MAC de origem e destino e sequência de verificação (FCS), formando um Quadro."
+      },
+      "explanation": "Na arquitetura TCP/IP, a camada de Transporte segmenta os dados da aplicação e acrescenta portas de origem e destino (formando segmentos TCP ou datagramas UDP). A camada de Internet insere endereços lógicos IPv4 ou IPv6 para roteamento fim a fim (formando pacotes IP). Por fim, a camada de Acesso à Rede adiciona endereços físicos MAC e trailer de detecção de erros para transmissão no enlace local (formando quadros Ethernet).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 1122 — Requirements for Internet Hosts — Communication Layers."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 791 — Internet Protocol."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Unidades de Dados no Encapsulamento TCP/IP (TRC01-ENC-01)",
+        "objective": "Classificar as unidades de dados de protocolo (segmento/datagrama, pacote e quadro) nas camadas Transporte, Internet e Acesso à Rede da arquitetura TCP/IP.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Modelos, TCP/IP e protocolos",
+          "RFC 1122 — Communication Layers"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-transporte",
+            "label": "Camada de Transporte",
+            "description": "Controla a comunicação processo a processo por meio de portas TCP ou UDP."
+          },
+          {
+            "id": "cat-internet",
+            "label": "Camada de Internet",
+            "description": "Realiza o endereçamento lógico IP e o encaminhamento de pacotes entre redes."
+          },
+          {
+            "id": "cat-acesso",
+            "label": "Camada de Acesso à Rede",
+            "description": "Prepara a transmissão física no enlace local usando endereços MAC e detecção de erros."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Segmento TCP com portas de origem e destino e número de sequência para controle de fluxo.",
+            "categoryId": "cat-transporte"
+          },
+          {
+            "id": "item-2",
+            "text": "Datagrama UDP leve contendo portas de origem e destino sem estabelecimento prévio de sessão.",
+            "categoryId": "cat-transporte"
+          },
+          {
+            "id": "item-3",
+            "text": "Pacote IPv4 contendo endereços lógicos de origem e destino e campo TTL (Time to Live).",
+            "categoryId": "cat-internet"
+          },
+          {
+            "id": "item-4",
+            "text": "Pacote IPv6 com cabeçalho fixo de 40 bytes e campo Limite de Saltos (Hop Limit).",
+            "categoryId": "cat-internet"
+          },
+          {
+            "id": "item-5",
+            "text": "Quadro Ethernet II com endereços MAC de 48 bits e sequência de verificação de quadro (FCS).",
+            "categoryId": "cat-acesso"
+          },
+          {
+            "id": "item-6",
+            "text": "Quadro com etiqueta IEEE 802.1Q inserida para transporte em enlace tronco entre switches.",
+            "categoryId": "cat-acesso"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-002",
+      "title": "Capacidade de Hosts Úteis em Sub-rede IPv4 /26",
+      "mechanic": "binary-choice",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Endereçamento IP e Sub-redes",
+      "conceptId": "TRC01-CIDR-01",
+      "difficulty": "introductory",
+      "context": "No dimensionamento de uma rede local para um laboratório com 63 estações de trabalho, um técnico propôs utilizar exatamente o bloco IPv4 192.168.10.0/26.",
+      "instruction": "Avalie se a afirmação sobre o aproveitamento de endereços no bloco 192.168.10.0/26 está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Calcule quantos bits sobram para host em /26 (32 - 26 = 6 bits) e lembre-se dos dois endereços reservados em toda sub-rede IPv4 convencional.",
+        "concept": "Em uma sub-rede IPv4 com n bits de host, existem 2^n endereços totais, mas 2^n - 2 endereços utilizáveis por interfaces de hosts (excluindo rede e broadcast).",
+        "example": "Em /26 (máscara 255.255.255.192), há 64 endereços totais (192.168.10.0 a .63), mas apenas 62 úteis (.1 a .62)."
+      },
+      "explanation": "A afirmação está incorreta. O prefixo /26 reserva 26 bits para a rede e deixa 6 bits para identificação de hosts, totalizando 2^6 = 64 endereços (de 192.168.10.0 a 192.168.10.63). Contudo, em redes Ethernet IPv4 convencionais, o primeiro endereço (192.168.10.0) identifica a própria sub-rede e o último (192.168.10.63) é reservado ao broadcast dirigido, restando apenas 62 endereços atribuíveis a interfaces.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 4632 — Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Capacidade de Hosts Úteis em Sub-rede IPv4 /26 (TRC01-CIDR-01)",
+        "objective": "Calcular a quantidade de endereços IPv4 atribuíveis a interfaces de hosts em um bloco CIDR /26, descontando rede e broadcast.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Endereçamento IPv4 e CIDR",
+          "RFC 4632 — CIDR"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Na sub-rede IPv4 192.168.10.0/26, todos os 64 endereços do bloco podem ser atribuídos simultaneamente a interfaces de computadores e impressoras em uma LAN Ethernet convencional.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. O endereço 192.168.10.0 (rede) e o endereço 192.168.10.63 (broadcast) são reservados, restando 62 endereços úteis.",
+        "feedbackFalse": "Correto. Descontando o endereço de rede (.0) e o endereço de broadcast (.63), o bloco /26 oferece exatamente 62 endereços úteis."
+      }
+    },
+    {
+      "id": "N9-TRC-003",
+      "title": "Diagnóstico de Enlace Trunk IEEE 802.1Q entre Switches",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Comutação Ethernet e Redes Virtuais (VLAN)",
+      "conceptId": "TRC01-VLAN-01",
+      "difficulty": "intermediate",
+      "context": "Após uma manutenção no switch de acesso SW-ACESSO-02, as estações da VLAN 10 (Administrativo) continuam acessando o servidor central normalmente, mas todas as estações da VLAN 20 (Laboratório) perderam conectividade com seu gateway padrão 10.20.0.1/24 configurado no switch núcleo SW-CORE-01.",
+      "instruction": "Selecione na topologia o elemento cuja configuração explica o isolamento exclusivo da VLAN 20 entre os dois switches.",
+      "xp": 75,
+      "help": {
+        "hint": "Compare o estado das portas de acesso locais com a lista de VLANs permitidas no enlace trunk que interliga o switch de acesso ao switch núcleo.",
+        "concept": "Um enlace trunk IEEE 802.1Q transporta quadros etiquetados de múltiplas VLANs; se uma VLAN for omitida da lista permitida (allowed VLANs), seu tráfego é descartado na travessia.",
+        "example": "Se o tronco permite apenas a VLAN 10, quadros da VLAN 20 não atravessam do switch de acesso para o roteador ou switch núcleo."
+      },
+      "explanation": "O enlace trunk Gi0/24 entre SW-ACESSO-02 e SW-CORE-01 está configurado para permitir apenas a VLAN 10 (allowed vlans: 10), bloqueando os quadros etiquetados da VLAN 20. Como as portas de acesso dos laboratórios estão ativas na VLAN 20 e a interface roteada SVI VLAN 20 está ativa no núcleo, incluir a VLAN 20 na lista permitida do trunk restaura imediatamente a comunicação.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "IEEE Std 802.1Q — IEEE Standard for Local and Metropolitan Area Networks — Bridges and Bridged Networks."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Diagnóstico de Enlace Trunk IEEE 802.1Q entre Switches (TRC01-VLAN-01)",
+        "objective": "Diagnosticar falha de comunicação inter-switch causada por restrição de VLAN permitida em enlace trunk IEEE 802.1Q.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Switching e VLANs",
+          "IEEE Std 802.1Q"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama lógico de comutação em duas camadas: à esquerda, SW-ACESSO-02 com porta access Gi0/1 (VLAN 10 — Administrativo, estado UP) ligada ao host PC-ADM-01 e porta access Gi0/2 (VLAN 20 — Laboratório, estado UP) ligada ao host PC-LAB-01; ao centro, enlace trunk IEEE 802.1Q (porta Gi0/24) conectando SW-ACESSO-02 a SW-CORE-01 com filtro 'allowed vlans: 10'; à direita, SW-CORE-01 com interfaces virtuais roteadas SVI VLAN 10 (10.10.0.1/24, UP) e SVI VLAN 20 (10.20.0.1/24, UP).",
+        "accessibleDescription": "Componentes da topologia de comutação: (1) Porta access Gi0/1 — VLAN 10 (PC-ADM-01): porta de acesso operacional na VLAN 10 no SW-ACESSO-02; (2) Porta access Gi0/2 — VLAN 20 (PC-LAB-01): porta de acesso operacional na VLAN 20 no SW-ACESSO-02; (3) Enlace Trunk Gi0/24 (allowed vlans: 10): interligação IEEE 802.1Q entre SW-ACESSO-02 e SW-CORE-01 configurada para transportar exclusivamente a VLAN 10; (4) Interface SVI VLAN 20 no SW-CORE-01 (10.20.0.1/24): gateway padrão ativo da VLAN 20 no switch núcleo.",
+        "nodes": [
+          {
+            "id": "node-access-vlan10",
+            "label": "Porta access Gi0/1 — VLAN 10 (PC-ADM-01)",
+            "detail": "Porta de acesso ativa na VLAN 10 no SW-ACESSO-02 com tráfego fluindo normalmente."
+          },
+          {
+            "id": "node-access-vlan20",
+            "label": "Porta access Gi0/2 — VLAN 20 (PC-LAB-01)",
+            "detail": "Porta de acesso ativa na VLAN 20 no SW-ACESSO-02, enviando quadros localmente."
+          },
+          {
+            "id": "node-trunk-gi024",
+            "label": "Enlace Trunk Gi0/24 (allowed vlans: 10)",
+            "detail": "Tronco IEEE 802.1Q entre SW-ACESSO-02 e SW-CORE-01 permitindo apenas a VLAN 10 e descartando a VLAN 20."
+          },
+          {
+            "id": "node-svi-vlan20",
+            "label": "Interface SVI VLAN 20 no SW-CORE-01 (10.20.0.1/24)",
+            "detail": "Interface roteada ativa no switch núcleo atuando como gateway padrão da VLAN 20."
+          }
+        ],
+        "correctNodeId": "node-trunk-gi024"
+      }
+    },
+    {
+      "id": "N9-TRC-004",
+      "title": "Fluxo de Envio IP para Destino em Outra Sub-rede",
+      "mechanic": "sequence-order",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Protocolos de Rede e Resolução de Endereços",
+      "conceptId": "TRC01-ARP-01",
+      "difficulty": "intermediate",
+      "context": "Uma estação recém-inicializada (192.168.1.50/24, gateway 192.168.1.1) precisa enviar seu primeiro pacote TCP para um servidor remoto em 172.16.40.10. Seu cache ARP local está inicialmente vazio.",
+      "instruction": "Ordene as 5 etapas executadas pela estação desde a verificação do endereço de destino até a transmissão do quadro Ethernet ao roteador.",
+      "xp": 80,
+      "help": {
+        "hint": "Antes de enviar ARP, o host precisa descobrir que o destino está fora da sub-rede local e consultar qual é o IP do próximo salto (gateway).",
+        "concept": "Para alcançar um destino remoto, o host resolve por ARP o endereço MAC do gateway padrão — nunca o MAC do servidor remoto — e encapsula o pacote IP nesse quadro.",
+        "example": "O pacote IP mantém o IP de destino final (172.16.40.10), mas o quadro Ethernet leva o MAC do roteador 192.168.1.1."
+      },
+      "explanation": "Primeiro, a estação aplica sua máscara /24 sobre 172.16.40.10 e conclui que o destino pertence a outra sub-rede. Em seguida, consulta sua tabela de rotas e identifica o gateway padrão 192.168.1.1 como próximo salto. Como o cache ARP está vazio, transmite uma requisição ARP em broadcast perguntando quem possui 192.168.1.1. O roteador responde em unicast informando seu endereço MAC, permitindo à estação encapsular o pacote IP no quadro Ethernet e transmiti-lo.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 826 — An Ethernet Address Resolution Protocol (ARP)."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 791 — Internet Protocol."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Fluxo de Envio IP para Destino em Outra Sub-rede (TRC01-ARP-01)",
+        "objective": "Ordenar a interação entre roteamento local e resolução de endereços ARP no envio de pacotes IP para redes remotas.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Protocolos e roteamento",
+          "RFC 826 — ARP"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "arp-1",
+            "text": "A estação aplica sua máscara de sub-rede ao IP 172.16.40.10 e verifica que o destino está fora da rede local."
+          },
+          {
+            "id": "arp-2",
+            "text": "A estação consulta sua tabela de roteamento local e seleciona o gateway padrão 192.168.1.1 como próximo salto."
+          },
+          {
+            "id": "arp-3",
+            "text": "Sem entrada no cache ARP, a estação envia uma requisição ARP em broadcast perguntando o MAC de 192.168.1.1."
+          },
+          {
+            "id": "arp-4",
+            "text": "O roteador gateway responde em unicast informando o endereço MAC físico de sua interface local."
+          },
+          {
+            "id": "arp-5",
+            "text": "A estação encapsula o pacote IP em um quadro Ethernet destinado ao MAC do gateway e o transmite no enlace."
+          }
+        ],
+        "correctOrder": [
+          "arp-1",
+          "arp-2",
+          "arp-3",
+          "arp-4",
+          "arp-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-005",
+      "title": "Contenção de Loop de Camada 2 e Convergência em Núcleo",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Roteamento Dinâmico e Comutação em Camada 2/3",
+      "conceptId": "TRC01-RTE-01",
+      "difficulty": "advanced",
+      "context": "Durante a interligação de um novo enlace redundante de fibra entre dois switches de distribuição do campus, o consumo de CPU dos switches atingiu 99%, os indicadores de atividade das portas piscam continuamente e o tráfego OSPF entre o núcleo e os blocos começou a oscilar.",
+      "instruction": "Conduza as três decisões operacionais para conter a tempestade de broadcast, restabelecer a convergência e blindar as portas de borda.",
+      "xp": 100,
+      "help": {
+        "hint": "Em tempestades de broadcast causadas por anel físico sem bloqueio lógico, isole primeiro o enlace redundante recém-conectado, valide o Spanning Tree antes de reativá-lo e proteja portas de acesso.",
+        "concept": "Loops de Camada 2 replicam quadros broadcast indefinidamente; o protocolo RSTP (IEEE 802.1w) bloqueia caminhos redundantes e o recurso BPDU Guard impede anéis acidentais nas bordas.",
+        "example": "Desativar administrativamente a segunda porta do enlace recém-ligado interrompe imediatamente a circulação infinita de quadros ARP."
+      },
+      "explanation": "Diante de uma tempestade de broadcast em Camada 2, a contenção imediata exige interromper o laço físico recém-introduzido para aliviar a CPU e permitir que as adjacências OSPF estabilizem. Antes de restaurar a redundância, é indispensável ativar o RSTP com definição explícita da ponte raiz (Root Bridge) no núcleo. Por fim, habilitar PortFast/Edge e BPDU Guard nas portas de acesso impede que switches não gerenciados conectados por usuários provoquem novos loops.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "IEEE Std 802.1Q / 802.1w — Rapid Spanning Tree Protocol (RSTP)."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 2328 — OSPF Version 2."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Contenção de Loop de Camada 2 e Convergência em Núcleo (TRC01-RTE-01)",
+        "objective": "Conduzir resposta operacional integrada para conter tempestade de broadcast em Camada 2, restabelecer convergência de roteamento e proteger portas de acesso.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Switching, redundância e roteamento",
+          "IEEE Std 802.1Q / 802.1w"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Técnico de Campo no Rack",
+            "message": "Acabei de conectar o segundo cabo de fibra entre os switches de distribuição e a rede inteira ficou lenta. Os contadores de broadcast estão disparando. O que faço agora?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Desativar imediatamente a porta do enlace redundante recém-conectado para interromper o loop de Camada 2 e estabilizar a CPU.",
+                "reaction": "Decisão adequada: Quebrar o anel físico cessa instantaneamente a tempestade de broadcast e permite a recuperação do plano de controle.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Conectar um terceiro cabo paralelo entre os mesmos switches para tentar dividir a carga de tráfego.",
+                "reaction": "Consequência: Adicionar outro caminho sem agregação ou Spanning Tree agrava ainda mais a multiplicação de quadros.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Reiniciar apenas o servidor DNS central mantendo os dois enlaces de fibra ativos entre os switches.",
+                "reaction": "Consequência: O problema está na saturação da Camada 2; reiniciar o DNS não interrompe o loop de quadros.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Analista de Redes",
+            "message": "Com o enlace secundário desligado, a CPU normalizou e as vizinhanças OSPF voltaram. Descobrimos que o Spanning Tree estava desabilitado nesses switches. Como reativar a redundância?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Religar o cabo imediatamente e deixar o Spanning Tree desativado para economizar processamento.",
+                "reaction": "Consequência: Religar o enlace sem protocolo de prevenção reproduzirá a mesma tempestade de broadcast.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Habilitar RSTP (IEEE 802.1w), fixar a prioridade da Root Bridge no switch núcleo e só então reativar o enlace verificando o estado Blocking.",
+                "reaction": "Decisão adequada: Garante topologia lógica livre de loops com convergência rápida e caminho raiz previsível.",
+                "correct": true
+              },
+              {
+                "id": "s2-c3",
+                "text": "Aumentar o temporizador Hello do OSPF para 60 segundos sem alterar nada na configuração de Camada 2.",
+                "reaction": "Consequência: Alterar temporizadores de roteamento não evita loops de encaminhamento Ethernet.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Coordenador de Infraestrutura",
+            "message": "Para evitar que um usuário conecte um pequeno switch não gerenciado em duas tomadas de laboratório e derrube o andar novamente, qual medida devemos padronizar nas portas de acesso?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Configurar todas as tomadas de usuário como portas trunk permitindo todas as VLANs do campus.",
+                "reaction": "Consequência: Expor VLANs internas em portas de acesso amplia a superfície de ataque e o domínio de falha.",
+                "correct": false
+              },
+              {
+                "id": "s3-c2",
+                "text": "Desativar o protocolo ARP nos switches de acesso para impedir que estações descubram vizinhos.",
+                "reaction": "Consequência: Sem ARP, hosts IPv4 não conseguem resolver endereços MAC na rede local.",
+                "correct": false
+              },
+              {
+                "id": "s3-c3",
+                "text": "Ativar modo porta de borda (Edge/PortFast) combinado com BPDU Guard para bloquear automaticamente a porta se receber BPDUs.",
+                "reaction": "Decisão adequada: Mantém transição rápida para estações finais e isola imediatamente qualquer switch indevido ligado à borda.",
+                "correct": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-006",
+      "title": "Subsistemas do Cabeamento Estruturado Predial",
+      "mechanic": "pair-match",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Cabeamento Estruturado e Subsistemas",
+      "conceptId": "TRC02-CAB-01",
+      "difficulty": "introductory",
+      "context": "Durante a vistoria de implantação da infraestrutura física de um edifício administrativo de quatro andares, você precisa conferir a documentação técnica de cada subsistema de cabeamento.",
+      "instruction": "Relacione cada subsistema clássico do cabeamento estruturado à sua função arquitetural.",
+      "xp": 60,
+      "help": {
+        "hint": "Diferencie o cordão do usuário (Área de Trabalho), o lance fixo do andar (Horizontal), a sala técnica do pavimento (Armário de Telecomunicações) e a ligação entre andares (Backbone).",
+        "concept": "Normas de cabeamento estruturado organizam a planta física em subsistemas hierárquicos padronizados para facilitar manutenção e escalabilidade.",
+        "example": "O cabeamento horizontal liga a tomada RJ-45 da sala ao patch panel do armário do mesmo pavimento."
+      },
+      "explanation": "Na estrutura hierárquica definida pela norma ANSI/TIA-568: a Área de Trabalho conecta o equipamento do usuário à tomada de telecomunicações por meio de patch cords; o Cabeamento Horizontal compreende os cabos fixos do pavimento até o painel de distribuição (até 90 m de lance permanente); o Armário de Telecomunicações concentra a terminação horizontal e os switches de acesso do andar; e o Cabeamento Vertical (Backbone) interliga os armários de telecomunicações à sala de equipamentos principal.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ANSI/TIA-568 — Commercial Building Telecommunications Cabling Standard."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Subsistemas do Cabeamento Estruturado Predial (TRC02-CAB-01)",
+        "objective": "Correlacionar Área de Trabalho, Cabeamento Horizontal, Armário de Telecomunicações e Cabeamento Vertical (Backbone) às suas definições técnicas.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Cabeamento estruturado",
+          "ANSI/TIA-568"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Área de Trabalho (Work Area)",
+            "right": "Interliga a tomada de telecomunicações na parede ao equipamento final do usuário por meio de cordão de manobra."
+          },
+          {
+            "id": "pair-2",
+            "left": "Cabeamento Horizontal",
+            "right": "Abrange os enlaces permanentes instalados no pavimento entre a tomada da sala e o patch panel do andar (limite de 90 m)."
+          },
+          {
+            "id": "pair-3",
+            "left": "Armário de Telecomunicações (TR)",
+            "right": "Espaço técnico do pavimento que aloja painéis de manobra e switches de acesso para conectar o andar ao backbone."
+          },
+          {
+            "id": "pair-4",
+            "left": "Cabeamento Vertical (Backbone)",
+            "right": "Fornece a interligação principal entre a sala de equipamentos e os armários de telecomunicações dos pavimentos."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-007",
+      "title": "Escolha de Meio Físico para Enlace entre Prédios",
+      "mechanic": "binary-choice",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Meios de Transmissão e Fibra Óptica",
+      "conceptId": "TRC02-FIB-01",
+      "difficulty": "introductory",
+      "context": "No projeto de expansão do campus, é necessário interligar o switch do Bloco A ao switch do Bloco B por meio de uma tubulação subterrânea de 280 metros que passa próxima a alimentadores elétricos.",
+      "instruction": "Avalie se a afirmação sobre o uso de cabo de par trançado UTP nesse enlace externo de 280 metros está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Lembre-se do limite normativo de comprimento do canal de par trançado (100 metros) e da imunidade eletromagnética e galvânica da fibra óptica.",
+        "concept": "Cabos de par trançado metálico (UTP) são limitados a 100 metros de canal e conduzem corrente elétrica; enlaces entre edifícios exigem fibra óptica.",
+        "example": "Fibra óptica transmite pulsos de luz em núcleo dielétrico, alcançando quilômetros sem sofrer interferência eletromagnética nem surtos de aterramento."
+      },
+      "explanation": "A afirmação está incorreta. O comprimento máximo normativo de um canal Ethernet sobre par trançado (UTP Cat6) é de 100 metros (90 m de lance permanente mais 10 m de cordões), tornando inviável um enlace de 280 metros sem repetição. Além disso, cabos metálicos sofrem interferência eletromagnética de circuitos de energia próximos e criam risco de diferenças de potencial de aterramento entre prédios; por isso, fibra óptica é o meio adequado.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ANSI/TIA-568 e ISO/IEC 11801 — Generic cabling for customer premises."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Escolha de Meio Físico para Enlace entre Prédios (TRC02-FIB-01)",
+        "objective": "Avaliar limitações de distância, interferência eletromagnética e isolação elétrica entre par trançado UTP e fibra óptica em enlaces externos.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Meios físicos de transmissão",
+          "ISO/IEC 11801"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Para interligar dois prédios separados por 280 metros em duto subterrâneo próximo a cabos elétricos, o cabo de par trançado não blindado (UTP Cat6) é o meio indicado por operar sem atenuação excessiva até 300 metros e garantir isolação elétrica natural.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. O par trançado tem limite normativo de 100 metros, sofre interferência eletromagnética e não oferece isolação galvânica como a fibra óptica.",
+        "feedbackFalse": "Correto. Acima de 100 metros e entre edifícios distintos, utiliza-se fibra óptica pelo maior alcance, imunidade eletromagnética e isolação elétrica."
+      }
+    },
+    {
+      "id": "N9-TRC-008",
+      "title": "Propriedades das Topologias Estrela, Anel e Malha",
+      "mechanic": "categorize",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Topologias Físicas e Lógicas de Redes",
+      "conceptId": "TRC02-TOP-01",
+      "difficulty": "intermediate",
+      "context": "Durante o estudo de viabilidade de novas redes locais e backbones regionais, a equipe técnica compara o comportamento operacional de três topologias clássicas diante de expansão e falhas de enlace.",
+      "instruction": "Classifique cada característica técnica na topologia correspondente: Estrela, Anel ou Malha.",
+      "xp": 75,
+      "help": {
+        "hint": "Estrela concentra cabos em um nó central; Anel encadeia nós em circuito fechado; Malha cria caminhos redundantes diretos entre múltiplos nós.",
+        "concept": "Cada topologia equilibra custo de enlaces, facilidade de gerenciamento e tolerância a falhas de maneira distinta.",
+        "example": "Em uma LAN com switch central, o rompimento de um cabo afeta apenas a estação ligada àquela porta (topologia em Estrela)."
+      },
+      "explanation": "Na topologia em Estrela, todos os dispositivos conectam-se a um concentrador ou switch central, facilitando o diagnóstico e isolando falhas de cabos individuais, embora o nó central represente ponto crítico se não houver redundância. Na topologia em Anel, cada nó conecta-se exatamente a dois vizinhos formando um percurso fechado sequencial. Na topologia em Malha (Mesh), múltiplos caminhos interligam os nós, oferecendo alta tolerância a falhas de enlaces ao custo de maior número de portas e cabeamento.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "IEEE Std 802 — IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Propriedades das Topologias Estrela, Anel e Malha (TRC02-TOP-01)",
+        "objective": "Distinguir propriedades estruturais e de resiliência das topologias Estrela, Anel e Malha.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Topologias de redes",
+          "IEEE Std 802"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-estrela",
+            "label": "Topologia em Estrela",
+            "description": "Nós finais conectados individualmente a um equipamento concentrador central."
+          },
+          {
+            "id": "cat-anel",
+            "label": "Topologia em Anel",
+            "description": "Nós interligados ponto a ponto formando um circuito fechado sequencial."
+          },
+          {
+            "id": "cat-malha",
+            "label": "Topologia em Malha",
+            "description": "Múltiplas interconexões redundantes entre nós para rotas alternativas."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "O rompimento de um cabo de acesso afeta apenas a estação conectada àquela porta do switch central.",
+            "categoryId": "cat-estrela"
+          },
+          {
+            "id": "item-2",
+            "text": "A falha do equipamento concentrador único interrompe simultaneamente todas as estações ligadas a ele.",
+            "categoryId": "cat-estrela"
+          },
+          {
+            "id": "item-3",
+            "text": "Cada estação possui ligação direta apenas com seu vizinho anterior e seu vizinho sucessor em percurso fechado.",
+            "categoryId": "cat-anel"
+          },
+          {
+            "id": "item-4",
+            "text": "Em configuração simples unidirecional sem contra-anel, a ruptura de um único enlace interrompe o circuito.",
+            "categoryId": "cat-anel"
+          },
+          {
+            "id": "item-5",
+            "text": "Oferece múltiplos caminhos independentes entre roteadores, mantendo a comunicação mesmo após queda de um enlace.",
+            "categoryId": "cat-malha"
+          },
+          {
+            "id": "item-6",
+            "text": "Exige maior quantidade de interfaces e cabeamento em troca de elevada resiliência e disponibilidade.",
+            "categoryId": "cat-malha"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-009",
+      "title": "Interferência Co-Canal em Planta de Pontos de Acesso Wi-Fi",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Redes Sem Fio (Wi-Fi) e Radiofrequência",
+      "conceptId": "TRC02-WIF-01",
+      "difficulty": "intermediate",
+      "context": "No corredor de salas de aula do pavimento térreo, quatro pontos de acesso Wi-Fi (AP-01 a AP-04) operam na faixa de 2,4 GHz em salas vizinhas. Estudantes nas salas centrais relatam queda acentuada de vazão e altas taxas de retransmissão.",
+      "instruction": "Selecione no mapa de cobertura qual ponto de acesso gera interferência co-canal direta com seu vizinho imediato e deve ser ajustado para o canal não sobreposto 11.",
+      "xp": 75,
+      "help": {
+        "hint": "Na faixa de 2,4 GHz, os três canais não sobrepostos são 1, 6 e 11. Verifique qual par de pontos de acesso vizinhos está operando exatamente no mesmo canal.",
+        "concept": "Pontos de acesso adjacentes operando no mesmo canal competem pelo mesmo meio de rádio (interferência co-canal), reduzindo a vazão agregada.",
+        "example": "Se AP-01 usa canal 1, AP-02 usa canal 6 e AP-04 usa canal 1, então AP-03 entre eles deve usar o canal 11."
+      },
+      "explanation": "Na faixa de 2,4 GHz, os canais 1, 6 e 11 não se sobrepõem. Na planta apresentada, AP-02 (Sala 103) e AP-03 (Sala 105) são vizinhos imediatos operando ambos no Canal 6, causando contenção co-canal severa. Como AP-02 faz fronteira com AP-01 (Canal 1), AP-02 deve permanecer no Canal 6, enquanto AP-03 — posicionado entre o Canal 6 de AP-02 e o Canal 1 de AP-04 — deve ser reconfigurado para o Canal 11.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "IEEE Std 802.11 — Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Interferência Co-Canal em Planta de Pontos de Acesso Wi-Fi (TRC02-WIF-01)",
+        "objective": "Identificar ponto de acesso com conflito co-canal em 2,4 GHz e aplicar reutilização dos canais não sobrepostos 1, 6 e 11.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Redes sem fio Wi-Fi",
+          "IEEE Std 802.11"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Planta linear de corredor acadêmico com quatro células Wi-Fi adjacentes em 2,4 GHz: à esquerda, AP-01 (Sala 101 — Canal 1); no segundo setor, AP-02 (Sala 103 — Canal 6); no terceiro setor, AP-03 (Sala 105 — Canal 6, sobrepondo o mesmo canal do vizinho AP-02); à direita, AP-04 (Sala 107 — Canal 1).",
+        "accessibleDescription": "Pontos de acesso distribuídos sequencialmente ao longo do corredor em 2,4 GHz: (1) AP-01 (Sala 101 — Canal 1): célula no extremo esquerdo operando no canal 1, adjacente apenas ao AP-02; (2) AP-02 (Sala 103 — Canal 6): segunda célula operando no canal 6, entre AP-01 (canal 1) e AP-03 (canal 6); (3) AP-03 (Sala 105 — Canal 6): terceira célula operando no canal 6 em conflito direto com seu vizinho imediato AP-02, situada entre AP-02 (canal 6) e AP-04 (canal 1); (4) AP-04 (Sala 107 — Canal 1): célula no extremo direito operando no canal 1, adjacente apenas ao AP-03.",
+        "nodes": [
+          {
+            "id": "node-ap-01",
+            "label": "AP-01 (Sala 101 — Canal 1)",
+            "detail": "Opera no canal 1 no extremo oeste do corredor, sem vizinho imediato no mesmo canal."
+          },
+          {
+            "id": "node-ap-02",
+            "label": "AP-02 (Sala 103 — Canal 6)",
+            "detail": "Opera no canal 6 entre AP-01 (canal 1) e AP-03 (canal 6)."
+          },
+          {
+            "id": "node-ap-03",
+            "label": "AP-03 (Sala 105 — Canal 6)",
+            "detail": "Opera no canal 6 colidindo diretamente com o vizinho AP-02, devendo migrar para o canal 11."
+          },
+          {
+            "id": "node-ap-04",
+            "label": "AP-04 (Sala 107 — Canal 1)",
+            "detail": "Opera no canal 1 no extremo leste do corredor, adjacente apenas ao AP-03."
+          }
+        ],
+        "correctNodeId": "node-ap-03"
+      }
+    },
+    {
+      "id": "N9-TRC-010",
+      "title": "Projeto de Wi-Fi Corporativo para Alta Densidade",
+      "mechanic": "multiple-select",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Redes Sem Fio Corporativas e Desempenho",
+      "conceptId": "TRC02-WIF-02",
+      "difficulty": "intermediate",
+      "context": "A equipe de infraestrutura vai implantar cobertura Wi-Fi em um auditório que recebe 250 estudantes simultaneamente com notebooks e smartphones durante eventos acadêmicos.",
+      "instruction": "Selecione exatamente 3 decisões técnicas recomendadas para garantir estabilidade e capacidade em ambientes Wi-Fi de alta densidade.",
+      "xp": 80,
+      "help": {
+        "hint": "Em ambientes densos, priorize mais canais limpos na faixa de 5 GHz, células menores com potência controlada e interligação cabeada dedicada para cada ponto de acesso.",
+        "concept": "O desempenho em Wi-Fi de alta densidade depende de reduzir o domínio de contenção por rádio, evitar sobreposição de canais e garantir backhaul cabeado dedicado.",
+        "example": "Usar canais de 20 MHz em 5 GHz aumenta o número de canais independentes disponíveis para pontos de acesso próximos."
+      },
+      "explanation": "Em ambientes de alta densidade de clientes, a capacidade compartilhada do meio sem fio é o principal gargalo. Priorizar a faixa de 5 GHz com largura de canal de 20 MHz amplia o número de canais não sobrepostos; ajustar a potência de transmissão em níveis moderados cria células menores que incentivam o roaming e reduzem interferência mútua; e alimentar cada ponto de acesso por cabo Ethernet Gigabit/PoE evita a perda de vazão provocada por repetidores sem fio.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "IEEE Std 802.11 — Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Projeto de Wi-Fi Corporativo para Alta Densidade (TRC02-WIF-02)",
+        "objective": "Selecionar práticas adequadas de planejamento de rádio e infraestrutura para ambientes Wi-Fi de alta densidade de usuários.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Redes sem fio corporativas",
+          "IEEE Std 802.11"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Priorizar a banda de 5 GHz com canais de 20 MHz para disponibilizar maior quantidade de canais não sobrepostos.",
+            "feedback": "Correto. Canais de 20 MHz em 5 GHz maximizam o reúso espectral e reduzem colisões entre células vizinhas.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Ajustar a potência de transmissão em níveis moderados para delimitar células menores e estimular o roaming adequado.",
+            "feedback": "Correto. Potência controlada evita que clientes fiquem presos a pontos de acesso distantes e diminui interferência co-canal.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Conectar cada ponto de acesso diretamente a switches via cabeamento estruturado Gigabit Ethernet com PoE.",
+            "feedback": "Correto. O backhaul cabeado dedicado preserva a capacidade total de rádio para os clientes do auditório.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Configurar todos os pontos de acesso em potência máxima para que cada estação enxergue todos os rádios da sala.",
+            "feedback": "Incorreto. Potência máxima amplia a área de interferência mútua e prejudica a transição entre células.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Operar exclusivamente na faixa de 2,4 GHz com canais de 40 MHz para concentrar todo o tráfego em um único canal largo.",
+            "feedback": "Incorreto. Canais de 40 MHz em 2,4 GHz ocupam quase toda a banda e provocam forte sobreposição entre APs.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Interligar os pontos de acesso do auditório em cascata por repetição sem fio (mesh wireless) para dispensar cabeamento.",
+            "feedback": "Incorreto. Cada salto de repetição sem fio consome tempo de rádio e reduz drasticamente a vazão efetiva.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-011",
+      "title": "Processo DORA de Concessão de Endereço via DHCP",
+      "mechanic": "sequence-order",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Serviços Essenciais de Rede (DHCP e DNS)",
+      "conceptId": "TRC03-DHC-01",
+      "difficulty": "introductory",
+      "context": "Ao conectar uma nova estação de trabalho em uma VLAN de usuários com configuração automática de rede, você captura a troca inicial de mensagens DHCPv4 entre o cliente e o servidor da sub-rede.",
+      "instruction": "Ordene as 4 mensagens do ciclo clássico DORA desde a descoberta inicial até a confirmação da concessão do endereço IP.",
+      "xp": 60,
+      "help": {
+        "hint": "Lembre-se do acrônimo DORA: Discover (cliente procura), Offer (servidor oferece), Request (cliente solicita a oferta) e Acknowledge (servidor confirma).",
+        "concept": "A negociação padrão do DHCPv4 ocorre em quatro etapas (Discover, Offer, Request, Acknowledge) para evitar conflitos quando há mais de um servidor na rede.",
+        "example": "Mesmo recebendo oferta de um servidor, o cliente precisa enviar DHCPREQUEST para confirmar qual proposta aceitou."
+      },
+      "explanation": "O ciclo padrão de alocação dinâmica via DHCPv4 segue a ordem DORA: primeiro, o cliente sem endereço IP envia DHCPDISCOVER em broadcast; segundo, servidores DHCP respondem com DHCPOFFER propondo parâmetros de rede; terceiro, o cliente escolhe uma proposta e envia DHCPREQUEST informando formalmente sua escolha; quarto, o servidor selecionado grava a concessão (lease) e finaliza com DHCPACK.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 2131 — Dynamic Host Configuration Protocol."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Processo DORA de Concessão de Endereço via DHCP (TRC03-DHC-01)",
+        "objective": "Ordenar as quatro mensagens do protocolo DHCPv4 (Discover, Offer, Request e Acknowledge) durante a obtenção de configuração IP.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-03 — Serviços de rede",
+          "RFC 2131 — DHCP"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "dhcp-1",
+            "text": "DHCPDISCOVER: O cliente recém-conectado transmite solicitação em broadcast para localizar servidores DHCP na rede."
+          },
+          {
+            "id": "dhcp-2",
+            "text": "DHCPOFFER: O servidor DHCP reserva temporariamente um endereço IP livre e envia uma proposta com máscara, gateway e DNS."
+          },
+          {
+            "id": "dhcp-3",
+            "text": "DHCPREQUEST: O cliente difunde a aceitação formal da proposta selecionada para confirmar o uso daquele endereço."
+          },
+          {
+            "id": "dhcp-4",
+            "text": "DHCPACK: O servidor selecionado confirma a concessão (lease) e registra o vínculo entre o MAC do cliente e o IP."
+          }
+        ],
+        "correctOrder": [
+          "dhcp-1",
+          "dhcp-2",
+          "dhcp-3",
+          "dhcp-4"
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-012",
+      "title": "Função dos Registros A e CNAME no DNS",
+      "mechanic": "binary-choice",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Serviços de Nomes e Resolução DNS",
+      "conceptId": "TRC03-DNS-01",
+      "difficulty": "introductory",
+      "context": "Durante a publicação de um novo portal institucional (portal.campus.edu.br), um estagiário de infraestrutura revisa os tipos de registros de recursos na zona DNS autoritativa.",
+      "instruction": "Avalie se a afirmação sobre o funcionamento dos registros CNAME e A no DNS está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Diferencie o registro que associa um nome a um endereço IPv4 (registro A) daquele que cria um apelido apontando para outro nome canônico (CNAME).",
+        "concept": "O registro A mapeia um nome de host a um endereço IPv4; o registro CNAME mapeia um apelido (alias) a outro nome de domínio canônico, que ainda precisará ser resolvido.",
+        "example": "www.campus.edu.br pode ser um CNAME para web01.campus.edu.br, e web01.campus.edu.br possui o registro A com o IPv4."
+      },
+      "explanation": "A afirmação está incorreta. No DNS, um registro do tipo CNAME (Canonical Name) associa um nome alternativo (apelido) a outro nome de domínio canônico — nunca diretamente a um endereço numérico IPv4. Quem realiza o mapeamento direto entre um nome de domínio e um endereço IPv4 de 32 bits é o registro do tipo A (ou AAAA para endereços IPv6 de 128 bits).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 1034 — Domain Names — Concepts and Facilities e RFC 1035 — Domain Names — Implementation and Specification."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Função dos Registros A e CNAME no DNS (TRC03-DNS-01)",
+        "objective": "Distinguir o papel do registro A (resolução para IPv4) e do registro CNAME (apelido para nome canônico) em zonas DNS.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-03 — Serviços de nomes DNS",
+          "RFC 1035 — Domain Names"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "No Sistema de Nomes de Domínio (DNS), um registro do tipo CNAME aponta um nome alternativo diretamente para um endereço numérico IPv4 de 32 bits, dispensando a existência de qualquer registro do tipo A.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. O registro CNAME aponta para outro nome de domínio canônico; o mapeamento direto para endereço IPv4 é feito pelo registro A.",
+        "feedbackFalse": "Correto. O CNAME define um apelido para outro nome canônico, enquanto o registro A resolve o nome para o endereço IPv4."
+      }
+    },
+    {
+      "id": "N9-TRC-013",
+      "title": "Modos de Rede em Hipervisores de Virtualização",
+      "mechanic": "categorize",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Virtualização de Servidores e Redes",
+      "conceptId": "TRC03-VRT-01",
+      "difficulty": "intermediate",
+      "context": "No servidor de virtualização do laboratório de infraestrutura, você precisa configurar a interface virtual de seis máquinas virtuais (VMs) conforme o grau de exposição e comunicação exigido por cada atividade.",
+      "instruction": "Classifique cada cenário operacional no modo de rede virtual adequado: Modo Ponte (Bridged), Modo NAT ou Rede Interna Isolada.",
+      "xp": 75,
+      "help": {
+        "hint": "Bridged integra a VM diretamente à LAN física; NAT permite saída à Internet compartilhando o IP do hospedeiro; Rede Interna Isolada restringe o tráfego apenas entre VMs locais.",
+        "concept": "Comutadores virtuais em hipervisores oferecem diferentes níveis de isolamento entre máquinas virtuais, o sistema hospedeiro e a rede física externa.",
+        "example": "Um laboratório de testes de captura de pacotes e simulação de ataques deve rodar em Rede Interna Isolada para não afetar a rede do campus."
+      },
+      "explanation": "No Modo Ponte (Bridged), a placa virtual liga-se diretamente ao adaptador físico do servidor, permitindo que a VM receba endereço IP do DHCP da LAN e ofereça serviços diretamente a outros computadores da rede local. No Modo NAT, o hipervisor traduz endereços para que a VM acesse repositórios externos na Internet sem ficar diretamente acessível a conexões iniciadas de fora. Na Rede Interna Isolada, o tráfego circula exclusivamente entre VMs do mesmo comutador virtual, sem contato com a rede física.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XI."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Documentação institucional de referência sobre comutadores virtuais e modos de rede em hipervisores."
+        }
+      ],
+      "sourceVerificationNeeded": true,
+      "traceability": {
+        "title": "Modos de Rede em Hipervisores de Virtualização (TRC03-VRT-01)",
+        "objective": "Classificar cenários de conectividade de máquinas virtuais entre Modo Ponte (Bridged), Modo NAT e Rede Interna Isolada.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XI",
+          "Núcleo TRC-03 — Virtualização de redes e servidores",
+          "Documentação institucional de virtualização"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-bridged",
+            "label": "Modo Ponte (Bridged)",
+            "description": "Conecta a VM diretamente à rede física local como um host independente na mesma sub-rede."
+          },
+          {
+            "id": "cat-nat",
+            "label": "Modo NAT",
+            "description": "Permite acesso externo compartilhando o endereço IP do hospedeiro sem expor diretamente a VM."
+          },
+          {
+            "id": "cat-isolada",
+            "label": "Rede Interna Isolada",
+            "description": "Restringe a comunicação exclusivamente às máquinas virtuais conectadas ao mesmo switch virtual."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Servidor virtual de arquivos que precisa obter IP direto do servidor DHCP do campus e responder às estações da LAN.",
+            "categoryId": "cat-bridged"
+          },
+          {
+            "id": "item-2",
+            "text": "Controlador de domínio virtualizado que deve autenticar estações físicas conectadas aos switches dos laboratórios.",
+            "categoryId": "cat-bridged"
+          },
+          {
+            "id": "item-3",
+            "text": "VM de atualização de pacotes que precisa baixar repositórios da Internet sem receber conexões externas diretas.",
+            "categoryId": "cat-nat"
+          },
+          {
+            "id": "item-4",
+            "text": "Estação virtual de testes temporários que acessa APIs externas usando o próprio endereço IP do servidor hospedeiro.",
+            "categoryId": "cat-nat"
+          },
+          {
+            "id": "item-5",
+            "text": "Ambiente controlado com duas VMs para simular um servidor DHCP próprio sem interferir no DHCP da rede física.",
+            "categoryId": "cat-isolada"
+          },
+          {
+            "id": "item-6",
+            "text": "Laboratório fechado de análise de pacotes e simulação de varreduras que não pode vazar tráfego para a rede externa.",
+            "categoryId": "cat-isolada"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-014",
+      "title": "Ponto Único de Falha em Arquitetura Web Redundante",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Alta Disponibilidade e Tolerância a Falhas",
+      "conceptId": "TRC03-HA-01",
+      "difficulty": "intermediate",
+      "context": "A topologia abaixo representa a infraestrutura de hospedagem do portal acadêmico, projetada para suportar falhas isoladas de hardware ou enlaces sem interrupção do atendimento aos usuários.",
+      "instruction": "Selecione no diagrama o componente que ainda constitui um Ponto Único de Falha (SPOF) capaz de paralisar todo o serviço caso sofra pane.",
+      "xp": 75,
+      "help": {
+        "hint": "Observe cada camada da arquitetura (WAN, balanceamento, servidores web e banco de dados) e verifique qual delas possui apenas uma instância sem réplica.",
+        "concept": "Um Ponto Único de Falha (SPOF — Single Point of Failure) é qualquer componente sem redundância cuja indisponibilidade interrompe o funcionamento de todo o sistema.",
+        "example": "Ter três servidores web em cluster não impede a queda total se todos dependerem de um único servidor de banco de dados sem failover."
+      },
+      "explanation": "Embora os enlaces WAN, o par de balanceadores de carga em VRRP e o grupo de três servidores de aplicação possuam redundância ativa, a camada de persistência opera em uma instância única de banco de dados (DB-PRIMARY) sem réplica síncrona nem mecanismo de failover. Qualquer falha de hardware, armazenamento ou sistema operacional nesse nó derrubará todo o portal.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 27031 — Information technology — Security techniques — Guidelines for ICT readiness for business continuity."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ponto Único de Falha em Arquitetura Web Redundante (TRC03-HA-01)",
+        "objective": "Identificar o Ponto Único de Falha (SPOF) em uma topologia multicamada parcialmente redundante.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-03 — Disponibilidade e redundância",
+          "ISO/IEC 27031"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama em quatro camadas verticais: no topo, Dupla Abordagem WAN (Operadora A e Operadora B com BGP redundante); na segunda camada, Par de Balanceadores LB-01 e LB-02 em cluster ativo-passivo com IP virtual VRRP; na terceira camada, Pool de Servidores Web (WEB-01, WEB-02 e WEB-03 em dois hosts físicos); na base, Instância Única de Banco de Dados (DB-PRIMARY em servidor único sem réplica nem failover).",
+        "accessibleDescription": "Camadas da arquitetura de hospedagem representadas no diagrama: (1) Dupla Abordagem WAN (Operadora A e Operadora B): dois enlaces independentes de entrada com roteamento redundante; (2) Par de Balanceadores LB-01 e LB-02 (Cluster VRRP): dois balanceadores de carga configurados em modo ativo-passivo com endereço IP virtual flutuante; (3) Pool de Servidores Web (WEB-01, WEB-02 e WEB-03): três instâncias web distribuídas em dois servidores físicos distintos; (4) Instância Única DB-PRIMARY (Sem Réplica): servidor isolado de banco de dados sem replicação nem failover automático.",
+        "nodes": [
+          {
+            "id": "node-wan-dual",
+            "label": "Dupla Abordagem WAN (Operadora A e Operadora B)",
+            "detail": "Dois circuitos independentes de operadoras distintas na borda Internet."
+          },
+          {
+            "id": "node-lb-cluster",
+            "label": "Par de Balanceadores LB-01 e LB-02 (Cluster VRRP)",
+            "detail": "Dois balanceadores com comutação automática de IP virtual em caso de falha."
+          },
+          {
+            "id": "node-web-pool",
+            "label": "Pool de Servidores Web (WEB-01, WEB-02 e WEB-03)",
+            "detail": "Três servidores de aplicação distribuídos em múltiplos hosts físicos."
+          },
+          {
+            "id": "node-db-single",
+            "label": "Instância Única DB-PRIMARY (Sem Réplica)",
+            "detail": "Servidor único de banco de dados sem redundância nem failover automático."
+          }
+        ],
+        "correctNodeId": "node-db-single"
+      }
+    },
+    {
+      "id": "N9-TRC-015",
+      "title": "Plano de Continuidade, RPO/RTO e Política de Backup",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Continuidade de Negócios, Backup e Recuperação",
+      "conceptId": "TRC03-BKP-01",
+      "difficulty": "intermediate",
+      "context": "Você foi designado para revisar o plano de continuidade operacional dos servidores de autenticação e registros acadêmicos da instituição após uma auditoria apontar falhas na rotina atual de cópias de segurança.",
+      "instruction": "Tome as três decisões técnicas para alinhar a frequência de backup aos objetivos de recuperação, isolar as cópias contra incidentes locais e validar a restauração.",
+      "xp": 85,
+      "help": {
+        "hint": "RPO define a perda máxima aceitável de dados no tempo; a regra 3-2-1 protege contra falhas físicas e ransomware; e um backup só é confiável após teste real de restauração.",
+        "concept": "Continuidade operacional articula RPO (Objetivo de Ponto de Recuperação), RTO (Objetivo de Tempo de Recuperação), armazenamento isolado/imutável e testes periódicos de restore.",
+        "example": "Se o RPO máximo tolerado é de 4 horas, realizar apenas um backup diário à meia-noite não atende ao requisito."
+      },
+      "explanation": "Um plano consistente de continuidade exige adequar o intervalo entre cópias ao RPO definido (por exemplo, snapshots/backups incrementais a cada 2 ou 4 horas para cumprir RPO de 4 horas), manter cópias em mídia e local externo isolados ou imutáveis conforme a regra 3-2-1 para resistir a falhas de rack e ataques de ransomware, e executar testes periódicos de restauração em ambiente isolado para comprovar que o RTO é alcançável na prática.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO 22301 — Security and resilience — Business continuity management systems."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-34 — Contingency Planning Guide for Federal Information Systems."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Plano de Continuidade, RPO/RTO e Política de Backup (TRC03-BKP-01)",
+        "objective": "Conduzir decisões operacionais de continuidade envolvendo dimensionamento por RPO/RTO, isolamento 3-2-1 e validação periódica de restauração.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-03 — Continuidade e recuperação",
+          "ISO 22301 / NIST SP 800-34"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Gestor de Serviços de TI",
+            "message": "A direção definiu que, em caso de falha grave, o sistema acadêmico pode perder no máximo 4 horas de transações recentes (RPO = 4h) e deve voltar ao ar em até 2 horas (RTO = 2h). Hoje fazemos apenas um backup completo uma vez por dia à 01h00. O que ajustar?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Manter apenas o backup diário às 01h00, pois backup completo uma vez ao dia já garante RPO de 4 horas.",
+                "reaction": "Consequência: Uma falha às 23h00 provocaria perda de até 22 horas de dados, violando o RPO de 4 horas.",
+                "correct": false
+              },
+              {
+                "id": "s1-c2",
+                "text": "Combinar backup completo periódico com cópias incrementais ou snapshots a cada 2 horas, garantindo janela de perda inferior ao RPO de 4 horas.",
+                "reaction": "Decisão adequada: Alinha a frequência de captura de alterações ao limite máximo de perda de dados aceito.",
+                "correct": true
+              },
+              {
+                "id": "s1-c3",
+                "text": "Aumentar a retenção dos backups diários de 30 para 365 dias sem alterar o intervalo de 24 horas entre cópias.",
+                "reaction": "Consequência: Reter cópias por mais tempo aumenta o histórico, mas não reduz a janela de perda entre um backup e outro.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Especialista em Segurança",
+            "message": "Atualmente os arquivos de backup ficam gravados apenas em uma pasta compartilhada montada permanentemente nos próprios servidores de produção. Como proteger essas cópias contra falha física do rack ou ransomware?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Aplicar a regra 3-2-1 mantendo cópias em armazenamento distinto e uma cópia externa/imutável sem escrita direta pelos servidores de produção.",
+                "reaction": "Decisão adequada: Isola as cópias contra sinistros locais no datacenter e impede alteração ou cifragem maliciosa.",
+                "correct": true
+              },
+              {
+                "id": "s2-c2",
+                "text": "Duplicar a pasta de backup em outra partição do mesmo arranjo de discos dentro do mesmo servidor físico.",
+                "reaction": "Consequência: Uma única falha de controladora, incêndio local ou comprometimento do servidor destruiria produção e backup juntos.",
+                "correct": false
+              },
+              {
+                "id": "s2-c3",
+                "text": "Conceder permissão total de escrita a todos os administradores da rede na pasta de backups para facilitar limpeza manual.",
+                "reaction": "Consequência: Credenciais administrativas comprometidas poderiam apagar ou criptografar todas as cópias de segurança.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Operador de Infraestrutura",
+            "message": "Os logs da rotina automatizada mostram status 'Concluído com sucesso' há seis meses, mas nunca restauramos nenhum arquivo desde a implantação. Qual procedimento incluir na operação?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Dispensar testes de restauração porque o status 'Concluído' já comprova integridade dos dados e tempo de recuperação.",
+                "reaction": "Consequência: Arquivos corrompidos ou dependências ausentes só seriam descobertos durante uma crise real.",
+                "correct": false
+              },
+              {
+                "id": "s3-c2",
+                "text": "Testar a restauração diretamente sobre o servidor de produção em horário de aula para economizar máquinas virtuais.",
+                "reaction": "Consequência: Sobrescrever o ambiente ativo durante o expediente interrompe o serviço e pode destruir dados recentes.",
+                "correct": false
+              },
+              {
+                "id": "s3-c3",
+                "text": "Agendar simulações periódicas de restauração em ambiente isolado de homologação, medindo integridade dos dados e tempo frente ao RTO.",
+                "reaction": "Decisão adequada: Valida a recuperabilidade real das cópias e comprova que a equipe consegue cumprir o RTO de 2 horas.",
+                "correct": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-016",
+      "title": "Regra de Firewall para Administração Remota Segura via SSH",
+      "mechanic": "fill-slot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Segurança da Informação e Controle de Acesso",
+      "conceptId": "TRC04-SEC-01",
+      "difficulty": "introductory",
+      "context": "Na tabela declarativa de filtragem de pacotes de um servidor Linux (10.10.20.50), você precisa liberar o acesso administrativo remoto via protocolo SSH (TCP porta 22) exclusivamente para os terminais da sub-rede de gerência 10.99.0.0/24, antes da regra geral de bloqueio.",
+      "instruction": "Selecione a regra de firewall que autoriza corretamente o tráfego SSH apenas a partir da rede de gerência 10.99.0.0/24.",
+      "xp": 55,
+      "help": {
+        "hint": "Verifique quatro parâmetros: ação de permissão (allow), protocolo de transporte do SSH (TCP), origem restrita à rede de gerência (10.99.0.0/24) e porta padrão do SSH (22).",
+        "concept": "Regras de firewall baseadas no princípio do menor privilégio especificam origem, destino, protocolo de transporte e porta exatos, bloqueando serviços em texto claro como Telnet (TCP/23).",
+        "example": "O protocolo SSH utiliza TCP na porta 22 para estabelecer canal administrativo criptografado."
+      },
+      "explanation": "A regra action=allow proto=tcp src=10.99.0.0/24 dst=10.10.20.50 dport=22 aplica o princípio do menor privilégio: libera exclusivamente o protocolo criptografado SSH (TCP/22) originado da sub-rede autorizada de gerência (10.99.0.0/24) com destino ao servidor 10.10.20.50. As demais alternativas expõem o acesso a qualquer origem (0.0.0.0/0), utilizam protocolo de transporte incorreto (UDP) ou liberam Telnet sem criptografia (porta 23).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XIII."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 4251 — The Secure Shell (SSH) Protocol Architecture."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-41 Rev. 1 — Guidelines on Firewalls and Firewall Policy."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Regra de Firewall para Administração Remota Segura via SSH (TRC04-SEC-01)",
+        "objective": "Configurar regra declarativa de filtragem de pacotes aplicando menor privilégio para administração remota via SSH (TCP/22).",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
+          "Núcleo TRC-04 — Segurança da informação",
+          "RFC 4251 / NIST SP 800-41"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "text",
+        "contentBefore": "# Política Declarativa de Filtragem de Entrada — Servidor 10.10.20.50\n# Regra 10: Liberar administração remota criptografada apenas para a sub-rede de gerência\n",
+        "contentAfter": "\n# Regra 20: Bloquear qualquer outra tentativa de acesso administrativo\naction=deny proto=tcp src=0.0.0.0/0 dst=10.10.20.50 dport=22,23",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "action=allow proto=tcp src=10.99.0.0/24 dst=10.10.20.50 dport=22",
+            "feedback": "Correto. Autoriza exclusivamente SSH (TCP/22) proveniente da sub-rede de gerência 10.99.0.0/24."
+          },
+          {
+            "id": "tok-2",
+            "text": "action=allow proto=tcp src=0.0.0.0/0 dst=10.10.20.50 dport=22",
+            "feedback": "Incorreto. A origem 0.0.0.0/0 expõe a porta SSH para qualquer rede externa em vez de restringir à gerência."
+          },
+          {
+            "id": "tok-3",
+            "text": "action=allow proto=udp src=10.99.0.0/24 dst=10.10.20.50 dport=22",
+            "feedback": "Incorreto. O serviço SSH opera sobre transporte confiável TCP, não sobre UDP."
+          },
+          {
+            "id": "tok-4",
+            "text": "action=allow proto=tcp src=10.99.0.0/24 dst=10.10.20.50 dport=23",
+            "feedback": "Incorreto. A porta TCP/23 corresponde ao protocolo Telnet, que transmite credenciais em texto claro sem criptografia."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-TRC-017",
+      "title": "Fluxo Seguro de Automação de Mudanças em Switches",
+      "mechanic": "sequence-order",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Automação e Gerenciamento de Configurações de Rede",
+      "conceptId": "TRC04-AUT-01",
+      "difficulty": "introductory",
+      "context": "A equipe de redes vai utilizar uma ferramenta declarativa de automação (como Ansible) para criar três novas VLANs de laboratório em 15 switches de acesso do campus durante uma janela programada.",
+      "instruction": "Ordene as 5 etapas operacionais seguras para conduzir a automação de configurações desde a preparação do inventário até a verificação final.",
+      "xp": 60,
+      "help": {
+        "hint": "Antes de alterar equipamentos em produção, versiona-se o inventário e simula-se o plano (dry-run), salvam-se backups, valida-se em homologação e só depois aplica-se em produção com testes finais.",
+        "concept": "Automação de redes segura combina código versionado, verificação prévia sem alterações (check/dry-run), backup de rollback, homologação e validação pós-mudança.",
+        "example": "Executar o playbook em modo de simulação (--check) revela diferenças de configuração antes de tocar nos switches reais."
+      },
+      "explanation": "A automação responsável de infraestrutura começa pela definição versionada do estado desejado e simulação prévia (dry-run) para conferir as mudanças previstas. Em seguida, realizam-se backups das configurações vigentes e define-se o plano de reversão. Antes de atingir o campus inteiro, valida-se o fluxo em um switch de homologação. Depois, aplica-se a configuração idempotente em lotes controlados na produção e executam-se testes pós-mudança para confirmar a conectividade.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Documentação institucional de boas práticas para automação declarativa e gestão de mudanças em redes."
+        }
+      ],
+      "sourceVerificationNeeded": true,
+      "traceability": {
+        "title": "Fluxo Seguro de Automação de Mudanças em Switches (TRC04-AUT-01)",
+        "objective": "Ordenar as etapas operacionais de automação de configurações de rede com controle de versão, simulação, backup, homologação e validação.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-04 — Automação e configuração de redes",
+          "Documentação institucional de automação de redes"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "aut-1",
+            "text": "Versionar o inventário e os parâmetros das VLANs em repositório e executar simulação prévia (dry-run) para revisar as alterações."
+          },
+          {
+            "id": "aut-2",
+            "text": "Extrair backup atualizado das configurações vigentes dos 15 switches e registrar o procedimento de reversão (rollback)."
+          },
+          {
+            "id": "aut-3",
+            "text": "Aplicar e validar a automação primeiro em um switch de homologação isolado antes de executar em produção."
+          },
+          {
+            "id": "aut-4",
+            "text": "Executar a automação idempotente nos switches de produção em lotes controlados registrando os logs de saída."
+          },
+          {
+            "id": "aut-5",
+            "text": "Realizar testes pós-mudança de conectividade nas portas e enlaces trunk para confirmar o funcionamento esperado."
+          }
+        ],
+        "correctOrder": [
+          "aut-1",
+          "aut-2",
+          "aut-3",
+          "aut-4",
+          "aut-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-018",
+      "title": "Instrumentação Segura com SNMPv3, Syslog e NTP",
+      "mechanic": "multiple-select",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Monitoramento, Telemetria e Diagnóstico de Redes",
+      "conceptId": "TRC04-MON-01",
+      "difficulty": "intermediate",
+      "context": "Durante a auditoria do sistema de gerenciamento FCAPS (Falhas, Configuração, Contabilização, Desempenho e Segurança) do datacenter, a equipe precisa endurecer a coleta de telemetria e registros de eventos dos roteadores e switches.",
+      "instruction": "Selecione exatamente 3 práticas recomendadas de monitoramento seguro e correlação de eventos em redes.",
+      "xp": 80,
+      "help": {
+        "hint": "Busque autenticação e criptografia na consulta de métricas (SNMPv3), relógios sincronizados entre todos os ativos (NTP) e armazenamento centralizado dos logs (Syslog).",
+        "concept": "O gerenciamento seguro de redes exige proteger canais de telemetria contra leitura não autorizada, sincronizar carimbos de tempo e centralizar registros fora dos ativos locais.",
+        "example": "Sem NTP sincronizado, comparar o horário de queda de uma interface no roteador com um alerta no servidor torna-se impreciso."
+      },
+      "explanation": "Um ambiente maduro de gerenciamento e monitoramento adota: SNMPv3 com autenticação e privacidade (authPriv) para impedir captura em texto claro ou alterações não autorizadas via comunidades simples; NTP (Network Time Protocol) em todos os ativos para garantir carimbos de data/hora consistentes na investigação de incidentes; e encaminhamento contínuo de mensagens Syslog para um coletor centralizado protegido, preservando evidências mesmo se um equipamento reiniciar.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 3411 — An Architecture for Describing Simple Network Management Protocol (SNMP) Management Frameworks."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 5424 — The Syslog Protocol e RFC 5905 — Network Time Protocol Version 4 (NTP)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Instrumentação Segura com SNMPv3, Syslog e NTP (TRC04-MON-01)",
+        "objective": "Selecionar práticas recomendadas de gerenciamento seguro de redes envolvendo SNMPv3, sincronização NTP e centralização Syslog.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-04 — Monitoramento e gerenciamento",
+          "RFC 3411 / RFC 5424 / RFC 5905"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Adotar SNMPv3 com autenticação e criptografia (authPriv) restringindo consultas apenas ao endereço do servidor de monitoramento.",
+            "feedback": "Correto. O SNMPv3 elimina o tráfego de comunidades em texto claro presente no SNMPv1/v2c e controla o acesso.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Sincronizar todos os roteadores, switches e servidores via NTP com fontes horárias confiáveis para correlacionar eventos.",
+            "feedback": "Correto. Carimbos de tempo uniformes permitem reconstruir com precisão a sequência de incidentes entre múltiplos ativos.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Encaminhar os eventos Syslog em tempo real para um servidor centralizado de logs fora da memória volátil dos equipamentos.",
+            "feedback": "Correto. A centralização preserva o histórico para auditoria e análise mesmo após reinicialização ou falha do ativo.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Habilitar SNMPv1 com a comunidade padrão 'public' em modo leitura e escrita para facilitar descoberta automática por qualquer host.",
+            "feedback": "Incorreto. Comunidades padrão em SNMPv1 trafegam sem criptografia e permitem alterações indevidas de configuração.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Armazenar os registros de eventos exclusivamente no buffer local de memória RAM dos switches para economizar tráfego de rede.",
+            "feedback": "Incorreto. O buffer local possui capacidade limitada e é perdido completamente em caso de queda de energia ou reinício.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Ajustar manualmente o relógio de cada equipamento uma vez por ano sem protocolo de sincronização automática.",
+            "feedback": "Incorreto. O desvio natural dos relógios internos inviabiliza a correlação cronológica de falhas e ataques.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-019",
+      "title": "Posicionamento de Servidor Web Público em Arquitetura DMZ",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Segurança de Perímetro e Segmentação DMZ",
+      "conceptId": "TRC04-DMZ-01",
+      "difficulty": "intermediate",
+      "context": "A instituição vai hospedar localmente seu novo portal público acessível por estudantes e visitantes na Internet via HTTPS (TCP/443), mantendo protegidos o controlador de domínio e o servidor de arquivos internos.",
+      "instruction": "Selecione na topologia de perímetro a zona de rede em que o servidor web público deve ser instalado para atender à Internet sem comprometer o isolamento da rede interna.",
+      "xp": 75,
+      "help": {
+        "hint": "Servidores expostos a conexões vindas da Internet não devem ficar na mesma sub-rede dos servidores internos sensíveis nem diretamente fora do firewall.",
+        "concept": "A Zona Desmilitarizada (DMZ) é um segmento isolado pelo firewall de perímetro destinado a serviços acessíveis externamente, impedindo movimento lateral direto para a LAN interna.",
+        "example": "O firewall permite HTTPS (443) da WAN para a DMZ, mas bloqueia conexões iniciadas da DMZ para a LAN interna."
+      },
+      "explanation": "Posicionar o servidor web público na Zona Desmilitarizada (DMZ) permite que o firewall libere conexões externas apenas na porta HTTPS (TCP/443) para esse segmento isolado, enquanto bloqueia qualquer tentativa de conexão iniciada da DMZ em direção à LAN Corporativa Interna. Assim, mesmo que a aplicação web sofra comprometimento, a rede administrativa interna permanece segmentada.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XIII."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-41 Rev. 1 — Guidelines on Firewalls and Firewall Policy."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Posicionamento de Servidor Web Público em Arquitetura DMZ (TRC04-DMZ-01)",
+        "objective": "Posicionar servidor público em Zona Desmilitarizada (DMZ) de arquitetura firewall de três pernas para isolar a LAN interna.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
+          "Núcleo TRC-04 — Segurança de perímetro e segmentação",
+          "NIST SP 800-41 Rev. 1"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Arquitetura de firewall de perímetro com três interfaces: à esquerda, Segmento Externo (Internet / WAN pública não confiável); ao centro, Firewall de Perímetro inspecionando fluxos entre as três zonas; abaixo do firewall, Zona Desmilitarizada (DMZ — sub-rede isolada para serviços públicos); à direita, LAN Corporativa Interna (sub-rede restrita com controlador de domínio, servidor de arquivos e estações administrativas).",
+        "accessibleDescription": "Zonas e elementos da arquitetura de perímetro: (1) Segmento Externo (Internet / WAN): rede pública externa não confiável de onde partem os acessos dos usuários; (2) Firewall de Perímetro: equipamento central com três interfaces segmentadas que filtra o tráfego entre WAN, DMZ e LAN; (3) Zona Desmilitarizada (DMZ): sub-rede intermediária isolada onde conexões externas HTTPS são permitidas sem acesso direto à rede interna; (4) LAN Corporativa Interna: rede privada administrativa que abriga serviços críticos internos e não deve receber conexões diretas da Internet.",
+        "nodes": [
+          {
+            "id": "node-wan-publica",
+            "label": "Segmento Externo (Internet / WAN)",
+            "detail": "Rede pública externa sem controle de perímetro, de onde chegam as requisições HTTPS."
+          },
+          {
+            "id": "node-firewall-perimetro",
+            "label": "Firewall de Perímetro",
+            "detail": "Dispositivo de filtragem de estado que separa e controla o tráfego entre WAN, DMZ e LAN."
+          },
+          {
+            "id": "node-dmz",
+            "label": "Zona Desmilitarizada (DMZ)",
+            "detail": "Segmento isolado adequado para hospedar servidores públicos com regras restritas e sem acesso livre à LAN."
+          },
+          {
+            "id": "node-lan-interna",
+            "label": "LAN Corporativa Interna",
+            "detail": "Rede interna restrita contendo controlador de domínio, arquivos institucionais e estações administrativas."
+          }
+        ],
+        "correctNodeId": "node-dmz"
+      }
+    },
+    {
+      "id": "N9-TRC-020",
+      "title": "Modernização Sustentável e Segura de Sala Técnica",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Projeto de Infraestrutura, Eficiência Energética e Operação",
+      "conceptId": "TRC04-PRJ-01",
+      "difficulty": "advanced",
+      "context": "Você lidera o projeto de modernização da sala técnica de um bloco acadêmico que passará a alimentar pontos de acesso Wi-Fi, câmeras IP e estações administrativas via PoE+, com metas institucionais de segurança, eficiência energética e documentação operacional.",
+      "instruction": "Conduza as três decisões integradas de projeto conciliando orçamento elétrico/térmico, segmentação de segurança e entrega documental.",
+      "xp": 100,
+      "help": {
+        "hint": "Dimensione potência PoE+ e climatização com folga e gestão energética inteligente; segmente dispositivos IoT prediais em VLAN isolada; e entregue topologia as-built atualizada.",
+        "concept": "Projetos maduros de infraestrutura de redes integram dimensionamento elétrico/sustentabilidade, segmentação de segurança e governança documental desde a implantação.",
+        "example": "Câmeras IP e sensores prediais devem operar em VLAN dedicada com regras restritas, nunca na mesma rede dos servidores administrativos."
+      },
+      "explanation": "Na modernização de salas técnicas, dimensionar o orçamento total de potência PoE+ e o sistema de nobreak/climatização com políticas de economia de energia (como desligamento programado de rádios ou portas não essenciais fora do expediente sem interromper monitoramento crítico) reduz desperdício elétrico. Segmentar dispositivos IoT prediais em VLAN isolada com ACLs protege a rede administrativa, e entregar a documentação as-built com inventário e telemetria garante continuidade operacional.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º (incluindo incisos XI e XIII)."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ANSI/TIA-568 e IEEE Std 802.3at/bt (Power over Ethernet — PoE)."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 27001 — Information security, cybersecurity and privacy protection — Information security management systems."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Modernização Sustentável e Segura de Sala Técnica (TRC04-PRJ-01)",
+        "objective": "Conduzir decisões integradas de projeto de redes articulando eficiência energética/PoE, segmentação de dispositivos IoT e governança documental.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-04 — Projeto, sustentabilidade e gerenciamento de redes",
+          "IEEE Std 802.3at/bt / ISO/IEC 27001"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Engenheiro de Instalações",
+            "message": "Os novos switches PoE+ vão alimentar 24 pontos de acesso e 16 câmeras. A diretoria pediu redução do consumo elétrico e térmico sem afetar a segurança patrimonial noturna. Como projetar a alimentação e a operação?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Dimensionar o orçamento PoE+ e o nobreak com margem de segurança, organizando fluxo de ar quente/frio e agendando economia de energia apenas nos APs das salas vazias à noite.",
+                "reaction": "Decisão adequada: Garante estabilidade elétrica e térmica enquanto reduz consumo ocioso sem desligar câmeras nem monitoramento.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Desligar totalmente o nobreak e todos os switches do rack todas as noites às 22h para zerar o consumo energético.",
+                "reaction": "Consequência: Desligar os switches interrompe câmeras IP, monitoramento e serviços essenciais durante toda a madrugada.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Conectar todos os dispositivos PoE+ no limite máximo de 100% da capacidade nominal da fonte sem previsão de climatização.",
+                "reaction": "Consequência: Operar sem margem provoca sobrecarga térmica e desligamento inesperado de portas por exceder o orçamento PoE.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Analista de Segurança de Redes",
+            "message": "As 16 câmeras IP e os controladores de acesso físico do prédio usam firmware embarcado do fabricante. Em qual segmento lógico devemos conectá-los?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Na mesma VLAN dos servidores administrativos para facilitar o acesso direto de qualquer estação ao painel das câmeras.",
+                "reaction": "Consequência: Qualquer vulnerabilidade em um dispositivo IoT permitiria movimento lateral direto para servidores internos.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Em uma VLAN dedicada para IoT/Segurança Predial com listas de controle de acesso permitindo comunicação apenas com o servidor gravador (NVR) e gerência.",
+                "reaction": "Decisão adequada: Isola o tráfego dos dispositivos embarcados e aplica menor privilégio entre segmentos.",
+                "correct": true
+              },
+              {
+                "id": "s2-c3",
+                "text": "Com endereços IP públicos diretos sem firewall para que a equipe de vigilância acesse as câmeras de casa sem VPN.",
+                "reaction": "Consequência: Expor dispositivos IoT diretamente na Internet facilita varreduras e comprometimento remoto.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Coordenador de Operações",
+            "message": "A instalação física e lógica foi concluída dentro do prazo. O que é indispensável exigir antes de encerrar formalmente o projeto e transferir a sala técnica para a operação diária?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Entregar a documentação as-built (mapa de portas, diagrama lógico, endereçamento VLAN), certificação dos pontos, backups e inclusão no monitoramento.",
+                "reaction": "Decisão adequada: Assegura rastreabilidade operacional, diagnóstico ágil de incidentes e governança técnica contínua.",
+                "correct": true
+              },
+              {
+                "id": "s3-c2",
+                "text": "Encerrar o projeto imediatamente sem atualizar plantas nem cadastrar os switches no monitoramento para ganhar tempo.",
+                "reaction": "Consequência: A falta de documentação as-built e telemetria prolonga futuras manutenções e oculta falhas.",
+                "correct": false
+              },
+              {
+                "id": "s3-c3",
+                "text": "Manter as senhas padrão de fábrica nos switches documentadas em uma planilha pública compartilhada para facilitar suporte.",
+                "reaction": "Consequência: Credenciais padrão e exposição aberta violam controles básicos de segurança da informação.",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
