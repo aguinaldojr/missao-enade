@@ -61,12 +61,13 @@ function activities(data: Record<string, unknown>): Record<string, unknown>[] {
 }
 
 describe('contrato de atividades do modo aprender', () => {
-  it('valida IDs e cotas editoriais do primeiro lote de TRC', () => {
+  it('valida IDs, cotas e elegibilidade ampliada do primeiro lote de TRC', () => {
     const validated = validateLearningActivities(trcCatalogOne);
     expect(validated.activities.map((activity) => activity.id)).toEqual(
       Array.from({ length: 20 }, (_, index) => 'N9-TRC-' + String(index + 1).padStart(3, '0')),
     );
-    expect(validated.activities.every((activity) => activity.courses.length === 1 && activity.courses[0] === 'TRC')).toBe(true);
+    expect(Object.fromEntries([1, 4, 5].map((count) => [count,
+      validated.activities.filter((activity) => activity.courses.length === count).length]))).toEqual({ 1: 2, 4: 1, 5: 17 });
     expect(Object.fromEntries(['introductory', 'intermediate', 'advanced'].map((difficulty) => [difficulty,
       validated.activities.filter((activity) => activity.difficulty === difficulty).length]))).toEqual({
       introductory: 8, intermediate: 10, advanced: 2,
@@ -76,12 +77,13 @@ describe('contrato de atividades do modo aprender', () => {
       .toEqual(['N9-TRC-013', 'N9-TRC-017']);
   });
 
-  it('valida IDs e cotas editoriais do segundo lote de TRC', () => {
+  it('valida IDs, cotas e elegibilidade ampliada do segundo lote de TRC', () => {
     const validated = validateLearningActivities(trcCatalogTwo);
     expect(validated.activities.map((activity) => activity.id)).toEqual(
       Array.from({ length: 20 }, (_, index) => 'N9-TRC-' + String(index + 21).padStart(3, '0')),
     );
-    expect(validated.activities.every((activity) => activity.courses.length === 1 && activity.courses[0] === 'TRC')).toBe(true);
+    expect(Object.fromEntries([1, 4, 5].map((count) => [count,
+      validated.activities.filter((activity) => activity.courses.length === count).length]))).toEqual({ 1: 5, 4: 1, 5: 14 });
     expect(Object.fromEntries(['introductory', 'intermediate', 'advanced'].map((difficulty) => [difficulty,
       validated.activities.filter((activity) => activity.difficulty === difficulty).length]))).toEqual({
       introductory: 8, intermediate: 10, advanced: 2,

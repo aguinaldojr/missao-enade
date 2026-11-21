@@ -36,6 +36,20 @@ describe('laboratório de mecânicas compartilhadas', () => {
     ]);
   });
 
+  it('compartilha conceitos de redes previstos nas matrizes sem expor a infraestrutura física especializada', () => {
+    expect(Object.fromEntries((['CC', 'SI', 'TADS', 'TGTI', 'TRC'] as const)
+      .map((course) => [course, learningActivitiesForCourse(course).length]))).toEqual({
+      CC: 128, SI: 151, TADS: 145, TGTI: 104, TRC: 83,
+    });
+    const exclusive = ['N9-TRC-006', 'N9-TRC-007', 'N9-TRC-026', 'N9-TRC-027',
+      'N9-TRC-028', 'N9-TRC-029', 'N9-TRC-030'];
+    for (const id of exclusive) {
+      expect(learningActivitiesForCourse('TRC').some((activity) => activity.id === id)).toBe(true);
+      expect((['CC', 'SI', 'TADS', 'TGTI'] as const).every((course) =>
+        !learningActivitiesForCourse(course).some((activity) => activity.id === id))).toBe(true);
+    }
+  });
+
   it('preserva as cotas estruturais dos dois lotes específicos de TRC', () => {
     const trcSpecific = SI_LEARNING_LAB.filter((activity) => activity.id.startsWith('N9-TRC-'));
     expect(trcSpecific).toHaveLength(40);

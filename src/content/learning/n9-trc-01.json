@@ -7,6 +7,10 @@
       "title": "Unidades de Dados no Encapsulamento TCP/IP",
       "mechanic": "categorize",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Arquitetura TCP/IP e Protocolos de Rede",
@@ -25,7 +29,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -45,7 +49,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Modelos, TCP/IP e protocolos",
-          "RFC 1122 — Communication Layers"
+          "RFC 1122 — Communication Layers",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -107,6 +115,10 @@
       "title": "Capacidade de Hosts Úteis em Sub-rede IPv4 /26",
       "mechanic": "binary-choice",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Endereçamento IP e Sub-redes",
@@ -125,7 +137,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -140,7 +152,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Endereçamento IPv4 e CIDR",
-          "RFC 4632 — CIDR"
+          "RFC 4632 — CIDR",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -157,6 +173,10 @@
       "title": "Diagnóstico de Enlace Trunk IEEE 802.1Q entre Switches",
       "mechanic": "visual-hotspot",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Comutação Ethernet e Redes Virtuais (VLAN)",
@@ -175,7 +195,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -190,7 +210,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Switching e VLANs",
-          "IEEE Std 802.1Q"
+          "IEEE Std 802.1Q",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -228,6 +252,10 @@
       "title": "Fluxo de Envio IP para Destino em Outra Sub-rede",
       "mechanic": "sequence-order",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Protocolos de Rede e Resolução de Endereços",
@@ -246,7 +274,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -266,7 +294,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Protocolos e roteamento",
-          "RFC 826 — ARP"
+          "RFC 826 — ARP",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -308,6 +340,10 @@
       "title": "Contenção de Loop de Camada 2 e Convergência em Núcleo",
       "mechanic": "decision-dialogue",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Roteamento Dinâmico e Comutação em Camada 2/3",
@@ -326,7 +362,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -346,7 +382,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Switching, redundância e roteamento",
-          "IEEE Std 802.1Q / 802.1w"
+          "IEEE Std 802.1Q / 802.1w",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -554,6 +594,10 @@
       "title": "Propriedades das Topologias Estrela, Anel e Malha",
       "mechanic": "categorize",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Topologias Físicas e Lógicas de Redes",
@@ -572,7 +616,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -587,7 +631,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-02 — Topologias de redes",
-          "IEEE Std 802"
+          "IEEE Std 802",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -649,6 +697,10 @@
       "title": "Interferência Co-Canal em Planta de Pontos de Acesso Wi-Fi",
       "mechanic": "visual-hotspot",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Redes Sem Fio (Wi-Fi) e Radiofrequência",
@@ -667,7 +719,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -682,7 +734,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-02 — Redes sem fio Wi-Fi",
-          "IEEE Std 802.11"
+          "IEEE Std 802.11",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -720,6 +776,10 @@
       "title": "Projeto de Wi-Fi Corporativo para Alta Densidade",
       "mechanic": "multiple-select",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Redes Sem Fio Corporativas e Desempenho",
@@ -738,7 +798,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -753,7 +813,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-02 — Redes sem fio corporativas",
-          "IEEE Std 802.11"
+          "IEEE Std 802.11",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -805,6 +869,10 @@
       "title": "Processo DORA de Concessão de Endereço via DHCP",
       "mechanic": "sequence-order",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Serviços Essenciais de Rede (DHCP e DNS)",
@@ -823,7 +891,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -838,7 +906,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-03 — Serviços de rede",
-          "RFC 2131 — DHCP"
+          "RFC 2131 — DHCP",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -875,6 +947,10 @@
       "title": "Função dos Registros A e CNAME no DNS",
       "mechanic": "binary-choice",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Serviços de Nomes e Resolução DNS",
@@ -893,7 +969,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -908,7 +984,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-03 — Serviços de nomes DNS",
-          "RFC 1035 — Domain Names"
+          "RFC 1035 — Domain Names",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -925,6 +1005,10 @@
       "title": "Modos de Rede em Hipervisores de Virtualização",
       "mechanic": "categorize",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Virtualização de Servidores e Redes",
@@ -943,7 +1027,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XI."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -958,7 +1042,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), art. 6º, XI",
           "Núcleo TRC-03 — Virtualização de redes e servidores",
-          "Documentação institucional de virtualização"
+          "Documentação institucional de virtualização",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1020,6 +1108,10 @@
       "title": "Ponto Único de Falha em Arquitetura Web Redundante",
       "mechanic": "visual-hotspot",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Alta Disponibilidade e Tolerância a Falhas",
@@ -1038,7 +1130,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1053,7 +1145,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-03 — Disponibilidade e redundância",
-          "ISO/IEC 27031"
+          "ISO/IEC 27031",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1091,6 +1187,10 @@
       "title": "Plano de Continuidade, RPO/RTO e Política de Backup",
       "mechanic": "decision-dialogue",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Continuidade de Negócios, Backup e Recuperação",
@@ -1109,7 +1209,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1129,7 +1229,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-03 — Continuidade e recuperação",
-          "ISO 22301 / NIST SP 800-34"
+          "ISO 22301 / NIST SP 800-34",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1219,6 +1323,10 @@
       "title": "Regra de Firewall para Administração Remota Segura via SSH",
       "mechanic": "fill-slot",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Segurança da Informação e Controle de Acesso",
@@ -1237,7 +1345,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XIII."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1257,7 +1365,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
           "Núcleo TRC-04 — Segurança da informação",
-          "RFC 4251 / NIST SP 800-41"
+          "RFC 4251 / NIST SP 800-41",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1296,6 +1408,10 @@
       "title": "Fluxo Seguro de Automação de Mudanças em Switches",
       "mechanic": "sequence-order",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Automação e Gerenciamento de Configurações de Rede",
@@ -1314,7 +1430,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1329,7 +1445,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-04 — Automação e configuração de redes",
-          "Documentação institucional de automação de redes"
+          "Documentação institucional de automação de redes",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1371,6 +1491,10 @@
       "title": "Instrumentação Segura com SNMPv3, Syslog e NTP",
       "mechanic": "multiple-select",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Monitoramento, Telemetria e Diagnóstico de Redes",
@@ -1389,7 +1513,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1409,7 +1533,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-04 — Monitoramento e gerenciamento",
-          "RFC 3411 / RFC 5424 / RFC 5905"
+          "RFC 3411 / RFC 5424 / RFC 5905",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1461,6 +1589,10 @@
       "title": "Posicionamento de Servidor Web Público em Arquitetura DMZ",
       "mechanic": "visual-hotspot",
       "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Segurança de Perímetro e Segmentação DMZ",
@@ -1479,7 +1611,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XIII."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1494,7 +1626,11 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
           "Núcleo TRC-04 — Segurança de perímetro e segmentação",
-          "NIST SP 800-41 Rev. 1"
+          "NIST SP 800-41 Rev. 1",
+          "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1532,6 +1668,9 @@
       "title": "Modernização Sustentável e Segura de Sala Técnica",
       "mechanic": "decision-dialogue",
       "courses": [
+        "SI",
+        "TADS",
+        "TGTI",
         "TRC"
       ],
       "area": "Projeto de Infraestrutura, Eficiência Energética e Operação",
@@ -1550,7 +1689,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º (incluindo incisos XI e XIII)."
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1570,7 +1709,10 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-04 — Projeto, sustentabilidade e gerenciamento de redes",
-          "IEEE Std 802.3at/bt / ISO/IEC 27001"
+          "IEEE Std 802.3at/bt / ISO/IEC 27001",
+          "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",

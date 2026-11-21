@@ -106,3 +106,5 @@ Após o recebimento, o lote foi validado pelo contrato TypeScript e pelo pipelin
 - testes de conteúdo e contratos: 138 aprovados;
 - lint, TypeScript, build de produção e `git diff --check`: aprovados;
 - `N9-TRC-035` e `N9-TRC-038` permanecem corretamente marcadas para conferência posterior de suas fontes técnicas.
+
+Após essa validação, a elegibilidade de 16 itens deste lote foi ampliada conforme o documento `compartilhamento-atividades-trc.md`: 14 passaram a atender os cinco cursos e dois passaram a atender SI, TADS, TGTI e TRC. O relatório acima preserva o registro da entrega original do Gemini; o documento de compartilhamento registra a evolução posterior dos metadados.
