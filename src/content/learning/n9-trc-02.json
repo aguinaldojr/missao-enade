@@ -1,0 +1,1677 @@
+{
+  "schemaVersion": 1,
+  "batchId": "N9-TRC-02",
+  "activities": [
+    {
+      "id": "N9-TRC-021",
+      "title": "Endereçamento IPv6 Link-Local e Autoconfiguração SLAAC",
+      "mechanic": "sequence-order",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Endereçamento IPv6 e Protocolos de Descoberta",
+      "conceptId": "TRC01-IPV6-01",
+      "difficulty": "introductory",
+      "context": "Uma estação Linux recém-conectada a uma VLAN de laboratório com pilha dupla ativada precisa obter automaticamente um endereço IPv6 Global Unicast (GUA) por meio de autoconfiguração sem estado (SLAAC) com apoio do protocolo Neighbor Discovery (NDP).",
+      "instruction": "Ordene as 5 etapas executadas pelo host IPv6 desde a criação de seu endereço local de enlace até a ativação do endereço global.",
+      "xp": 60,
+      "help": {
+        "hint": "Todo host IPv6 gera primeiro um endereço fe80::/10, verifica se não há duplicidade no enlace e só depois solicita anúncios ao roteador local.",
+        "concept": "No IPv6, o SLAAC combina um endereço Link-Local (fe80::/10) com o prefixo /64 anunciado via mensagem Router Advertisement (RA) após validação de unicidade (DAD).",
+        "example": "O host envia Router Solicitation para o grupo multicast de todos os roteadores (ff02::2) e recebe o prefixo 2001:db8:10::/64 no Router Advertisement."
+      },
+      "explanation": "No IPv6, o host inicia formando um endereço Link-Local provisório no bloco fe80::/10 e executa a Detecção de Endereço Duplicado (DAD) enviando uma mensagem Neighbor Solicitation (NS) para confirmar que nenhum outro nó usa o mesmo identificador. Com o endereço Link-Local ativo, o host transmite um Router Solicitation (RS) em multicast (ff02::2). O roteador responde com um Router Advertisement (RA) contendo o prefixo /64 da rede, permitindo ao host compor seu endereço Global Unicast (GUA) e validá-lo por DAD antes do uso.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 4861 — Neighbor Discovery for IP version 6 (IPv6) e RFC 4862 — IPv6 Stateless Address Autoconfiguration."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Endereçamento IPv6 Link-Local e Autoconfiguração SLAAC (TRC01-IPV6-01)",
+        "objective": "Ordenar o fluxo de formação de endereço Link-Local, detecção de duplicidade (DAD) e autoconfiguração SLAAC via Neighbor Discovery no IPv6.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Endereçamento IPv6 e protocolos",
+          "RFC 4861 / RFC 4862"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "ipv6-1",
+            "text": "A interface gera um endereço Link-Local provisório no prefixo fe80::/10 derivado de seu identificador de interface."
+          },
+          {
+            "id": "ipv6-2",
+            "text": "O host executa a Detecção de Endereço Duplicado (DAD) enviando Neighbor Solicitation (NS) para validar o endereço Link-Local."
+          },
+          {
+            "id": "ipv6-3",
+            "text": "Com o Link-Local ativo, o host envia uma mensagem Router Solicitation (RS) ao grupo multicast de roteadores ff02::2."
+          },
+          {
+            "id": "ipv6-4",
+            "text": "O roteador responde com Router Advertisement (RA) informando o prefixo /64 da sub-rede e o gateway padrão."
+          },
+          {
+            "id": "ipv6-5",
+            "text": "O host combina o prefixo /64 recebido ao identificador de interface, valida o novo endereço Global Unicast (GUA) e inicia o tráfego."
+          }
+        ],
+        "correctOrder": [
+          "ipv6-1",
+          "ipv6-2",
+          "ipv6-3",
+          "ipv6-4",
+          "ipv6-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-022",
+      "title": "Seleção de Rota pelo Maior Prefixo (Longest Prefix Match)",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Roteamento IP e Encaminhamento de Pacotes",
+      "conceptId": "TRC01-ROT-01",
+      "difficulty": "intermediate",
+      "context": "Um roteador de distribuição recebe um pacote IPv4 destinado ao servidor interno 10.40.14.85 e consulta sua tabela de roteamento ativa para decidir por qual próximo salto encaminhá-lo.",
+      "instruction": "Selecione na tabela de roteamento a entrada que será escolhida pelo roteador segundo a regra do maior prefixo (Longest Prefix Match).",
+      "xp": 75,
+      "help": {
+        "hint": "Verifique quais prefixos cobrem o endereço 10.40.14.85 e escolha aquele com o maior comprimento de máscara (/24 vence /22, /16 e /0).",
+        "concept": "Quando múltiplas rotas coincidem com o endereço IP de destino, o roteador seleciona sempre a rota mais específica, ou seja, a que possui o maior número de bits na máscara de sub-rede.",
+        "example": "Para o destino 192.168.5.10, uma rota 192.168.5.0/24 tem prioridade sobre 192.168.0.0/16, independentemente da métrica."
+      },
+      "explanation": "O endereço de destino 10.40.14.85 pertence simultaneamente às quatro entradas da tabela: 0.0.0.0/0 (qualquer destino), 10.40.0.0/16 (10.40.0.0 a 10.40.255.255), 10.40.12.0/22 (10.40.12.0 a 10.40.15.255) e 10.40.14.0/24 (10.40.14.0 a 10.40.14.255). Pela regra do Longest Prefix Match, o roteador escolhe a entrada 10.40.14.0/24 via 172.16.1.14 por possuir a máscara mais específica (/24).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 4632 — Classless Inter-domain Routing (CIDR) e RFC 1812 — Requirements for IP Version 4 Routers."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Seleção de Rota pelo Maior Prefixo (Longest Prefix Match) (TRC01-ROT-01)",
+        "objective": "Aplicar o critério de maior prefixo (Longest Prefix Match) na consulta a uma tabela de roteamento IPv4 com prefixos sobrepostos.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Tabela de rotas e encaminhamento IP",
+          "RFC 4632 / RFC 1812"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Quadro da tabela de roteamento IPv4 do roteador RTR-DIST-01 exibindo quatro rotas ativas para consulta do destino 10.40.14.85: linha 1 com rota padrão 0.0.0.0/0 via 203.0.113.1; linha 2 com rota sumarizada 10.40.0.0/16 via 172.16.1.2; linha 3 com bloco intermediário 10.40.12.0/22 via 172.16.1.6; linha 4 com sub-rede específica 10.40.14.0/24 via 172.16.1.14.",
+        "accessibleDescription": "Entradas da tabela de roteamento do RTR-DIST-01 avaliadas para o IP de destino 10.40.14.85: (1) Rota 0.0.0.0/0 via 203.0.113.1 (Rota Padrão): prefixo de 0 bits que corresponde a qualquer endereço IPv4; (2) Rota 10.40.0.0/16 via 172.16.1.2: prefixo de 16 bits cobrindo de 10.40.0.0 a 10.40.255.255; (3) Rota 10.40.12.0/22 via 172.16.1.6: prefixo de 22 bits cobrindo de 10.40.12.0 a 10.40.15.255; (4) Rota 10.40.14.0/24 via 172.16.1.14: prefixo de 24 bits cobrindo de 10.40.14.0 a 10.40.14.255.",
+        "nodes": [
+          {
+            "id": "node-rota-default",
+            "label": "0.0.0.0/0 via 203.0.113.1 (Rota Padrão /0)",
+            "detail": "Prefixo de 0 bits usado apenas quando nenhuma rota mais específica corresponde ao destino."
+          },
+          {
+            "id": "node-rota-16",
+            "label": "10.40.0.0/16 via 172.16.1.2 (Prefixo /16)",
+            "detail": "Rota sumarizada de 16 bits que abrange todo o bloco 10.40.0.0 a 10.40.255.255."
+          },
+          {
+            "id": "node-rota-22",
+            "label": "10.40.12.0/22 via 172.16.1.6 (Prefixo /22)",
+            "detail": "Rota agregada de 22 bits que abrange as redes de 10.40.12.0 a 10.40.15.255."
+          },
+          {
+            "id": "node-rota-24",
+            "label": "10.40.14.0/24 via 172.16.1.14 (Prefixo /24)",
+            "detail": "Rota mais específica de 24 bits que cobre exatamente a sub-rede 10.40.14.0 a 10.40.14.255."
+          }
+        ],
+        "correctNodeId": "node-rota-24"
+      }
+    },
+    {
+      "id": "N9-TRC-023",
+      "title": "Função do NAT/PAT e Limitações Frente a Políticas de Segurança",
+      "mechanic": "binary-choice",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Tradução de Endereços (NAT/PAT) e Arquitetura IP",
+      "conceptId": "TRC01-NAT-01",
+      "difficulty": "introductory",
+      "context": "Durante a revisão da borda Internet de uma empresa, um técnico propôs dispensar regras de filtragem de firewall sob o argumento de que o roteador já realiza tradução dinâmica de endereços e portas (PAT/NAPT) para a rede interna 192.168.0.0/16.",
+      "instruction": "Avalie se a afirmação sobre o papel técnico do NAT/PAT em relação à segurança de perímetro está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Diferencie tradução de cabeçalhos IP/porta (conservação de endereços IPv4) de inspeção de políticas de acesso, controle de saída e prevenção contra ameaças.",
+        "concept": "O NAT/PAT traduz endereços privados (RFC 1918) e portas de transporte para um endereço IP público, mas não realiza inspeção de conteúdo nem substitui um firewall.",
+        "example": "Mesmo com PAT ativo, um malware interno pode abrir conexões livres para servidores externos maliciosos se não houver regras de saída no firewall."
+      },
+      "explanation": "A afirmação está incorreta. A finalidade primária do NAT/PAT (NAPT) é conservar endereços IPv4 públicos permitindo que múltiplos hosts privados compartilhem um IP externo por meio do mapeamento de portas TCP/UDP. Embora o PAT impeça incidentalmente conexões externas não solicitadas quando não há redirecionamento de portas, ele não inspeciona cargas úteis, não filtra tráfego malicioso de saída e não controla fluxos entre segmentos internos, não substituindo um firewall.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 3022 — Traditional IP Network Address Translator (Traditional NAT) e RFC 1918 — Address Allocation for Private Internets."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Função do NAT/PAT e Limitações Frente a Políticas de Segurança (TRC01-NAT-01)",
+        "objective": "Distinguir a função de tradução de endereços e portas (NAT/PAT) dos controles de filtragem e segurança executados por um firewall.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Tradução de endereços NAT/PAT",
+          "RFC 3022 / RFC 1918"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "A ativação de NAT/PAT (tradução de endereços e portas) no roteador de borda torna desnecessária a configuração de regras de firewall, pois o NAT inspeciona profundamente os pacotes e bloqueia tráfego malicioso originado na rede interna.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. O NAT/PAT apenas reescreve endereços IP e portas na tabela de tradução; ele não inspeciona tráfego de saída nem aplica políticas de segurança.",
+        "feedbackFalse": "Correto. O NAT/PAT resolve a escassez de IPv4 traduzindo endereços e portas, mas não substitui a filtragem e o controle de políticas de um firewall."
+      }
+    },
+    {
+      "id": "N9-TRC-024",
+      "title": "Escolha entre TCP e UDP Segundo Requisitos da Aplicação",
+      "mechanic": "categorize",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Protocolos da Camada de Transporte (TCP e UDP)",
+      "conceptId": "TRC01-TRP-01",
+      "difficulty": "introductory",
+      "context": "No planejamento de tráfego da rede institucional, você precisa documentar qual protocolo da camada de transporte sustenta seis serviços distintos com requisitos opostos de integridade e latência.",
+      "instruction": "Classifique cada cenário de comunicação no protocolo de transporte utilizado: TCP ou UDP.",
+      "xp": 60,
+      "help": {
+        "hint": "TCP garante entrega ordenada, controle de fluxo e retransmissão; UDP prioriza baixa sobrecarga e envio imediato sem handshake ou retransmissão automática.",
+        "concept": "Aplicações que não toleram perda de bytes escolhem TCP; aplicações sensíveis a atraso em tempo real ou transações curtas de requisição/resposta costumam empregar UDP.",
+        "example": "Em chamadas de voz (VoIP), retransmitir um pacote de áudio atrasado prejudica mais a conversa do que descartá-lo, favorecendo UDP."
+      },
+      "explanation": "O TCP estabelece sessão por handshake de três vias, numera bytes, confirma recebimento e retransmite segmentos perdidos, sendo indispensável para administração remota via SSH, transferência de páginas e arquivos via HTTPS e replicação íntegra de dados. O UDP envia datagramas sem conexão prévia e sem retransmissão embutida, sendo preferido para chamadas de voz em tempo real (VoIP/RTP), consultas rápidas de resolução de nomes DNS e envio leve de telemetria periódica.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 9293 — Transmission Control Protocol (TCP) e RFC 768 — User Datagram Protocol (UDP)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Escolha entre TCP e UDP Segundo Requisitos da Aplicação (TRC01-TRP-01)",
+        "objective": "Classificar aplicações e fluxos de rede entre os protocolos TCP e UDP com base em requisitos de confiabilidade, ordenação e latência.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Camada de transporte TCP/UDP",
+          "RFC 9293 / RFC 768"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-tcp",
+            "label": "Protocolo TCP",
+            "description": "Orientado à conexão, com entrega confiável, ordenação de segmentos, controle de fluxo e retransmissão."
+          },
+          {
+            "id": "cat-udp",
+            "label": "Protocolo UDP",
+            "description": "Sem conexão, com cabeçalho mínimo de 8 bytes, baixa latência e sem retransmissão na camada de transporte."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Sessão interativa de terminal administrativo seguro via SSH em que nenhum caractere pode ser perdido ou reordenado.",
+            "categoryId": "cat-tcp"
+          },
+          {
+            "id": "item-2",
+            "text": "Download de imagens de máquinas virtuais via HTTPS exigindo integridade total de todos os blocos transferidos.",
+            "categoryId": "cat-tcp"
+          },
+          {
+            "id": "item-3",
+            "text": "Transferência de registros de transações bancárias entre servidor de aplicação e banco de dados relacional.",
+            "categoryId": "cat-tcp"
+          },
+          {
+            "id": "item-4",
+            "text": "Fluxo de áudio em tempo real (VoIP/RTP) em que atrasos de retransmissão degradam mais a experiência do que perdas pontuais.",
+            "categoryId": "cat-udp"
+          },
+          {
+            "id": "item-5",
+            "text": "Consulta rápida de resolução de nome DNS composta por um único pacote de pergunta e um pacote de resposta.",
+            "categoryId": "cat-udp"
+          },
+          {
+            "id": "item-6",
+            "text": "Envio contínuo de amostras periódicas de sensores ambientais em que o valor mais recente substitui amostras perdidas.",
+            "categoryId": "cat-udp"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-025",
+      "title": "Agregação de Enlaces LACP entre Switch de Distribuição e Núcleo",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Comutação Ethernet e Agregação de Enlaces",
+      "conceptId": "TRC01-LAG-01",
+      "difficulty": "intermediate",
+      "context": "Um switch de distribuição possui dois enlaces de fibra de 10 Gbps ligados ao switch núcleo, mas o Spanning Tree mantém um deles bloqueado. Você precisa configurar agregação de enlaces (Port-Channel/EtherChannel) para somar a capacidade e manter tolerância a falhas.",
+      "instruction": "Conduza as três decisões técnicas para configurar corretamente a agregação de enlaces com LACP (IEEE 802.1AX) e otimizar o balanceamento.",
+      "xp": 85,
+      "help": {
+        "hint": "Use negociação LACP em vez de modo estático cego, garanta atributos idênticos nas portas físicas antes de agrupá-las e verifique o critério de hash do balanceamento.",
+        "concept": "A agregação de enlaces (IEEE 802.1AX) combina múltiplas portas físicas em uma única interface lógica de Camada 2, usando LACP para detectar falhas de cabeamento e distribuição por hash.",
+        "example": "Se uma porta membro tiver VLANs permitidas diferentes da outra, o LACP suspende a porta incompatível."
+      },
+      "explanation": "Para agregar enlaces com segurança operacional, recomenda-se ativar o protocolo LACP (modo active em pelo menos um lado e active/passive no outro), pois ele troca quadros LACPDU que detectam falhas unidirecionais e evitam loops causados por cabeamento trocado. Todas as interfaces físicas integrantes devem compartilhar exatamente a mesma velocidade, duplex, VLAN nativa e lista de VLANs permitidas. Por fim, o balanceamento de quadros ocorre por algoritmo de hash (como origem e destino IP/porta), nunca dividindo um mesmo fluxo TCP entre dois cabos para evitar reordenação.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "IEEE Std 802.1AX — IEEE Standard for Local and Metropolitan Area Networks — Link Aggregation."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Agregação de Enlaces LACP entre Switch de Distribuição e Núcleo (TRC01-LAG-01)",
+        "objective": "Conduzir decisões de configuração e ajuste de agregação de enlaces LACP (IEEE 802.1AX), compatibilidade de membros e algoritmo de hash.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-01 — Switching e agregação de enlaces",
+          "IEEE Std 802.1AX"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Analista de Comutação",
+            "message": "Vamos agrupar as interfaces Te1/0/1 e Te1/0/2 no Port-Channel 10 entre distribuição e núcleo. Qual modo de operação devemos configurar nas portas físicas?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Configurar negociação dinâmica LACP (modo active nos dois lados ou active/passive) para validar a identidade do vizinho antes de formar o grupo.",
+                "reaction": "Decisão adequada: O protocolo LACP troca LACPDUs que confirmam a ligação correta entre os pares e isolam falhas unidirecionais.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Forçar o modo estático 'on' sem protocolo de negociação e desativar o monitoramento de estado das portas.",
+                "reaction": "Consequência: Sem LACP, um cabo conectado na porta errada ou com falha apenas na recepção pode provocar loop ou descarte silencioso.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Atribuir endereços IP diferentes em cada uma das duas portas físicas mantendo ambas como portas de acesso na VLAN 1.",
+                "reaction": "Consequência: Interfaces com IPs individuais distintos não formam uma interface lógica única de agregação L2.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Técnico de Configuração",
+            "message": "Após criar o Port-Channel 10, a primeira porta entrou em estado Bundled (P), mas a segunda ficou em estado Suspended (s). Os logs apontam divergência de configuração de tronco. Como corrigir?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Configurar VLAN nativa 10 na primeira porta e VLAN nativa 20 na segunda para separar o tráfego de gerência por cabo.",
+                "reaction": "Consequência: Portas membros de um mesmo grupo de agregação não podem ter VLANs nativas diferentes.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Igualar velocidade, duplex, modo trunk, VLAN nativa e lista de VLANs permitidas nas duas interfaces físicas através da interface Port-Channel.",
+                "reaction": "Decisão adequada: A consistência total de parâmetros físicos e lógicos entre os membros é requisito obrigatório do padrão IEEE 802.1AX.",
+                "correct": true
+              },
+              {
+                "id": "s2-c3",
+                "text": "Forçar a segunda porta a operar em 1 Gbps enquanto a primeira permanece em 10 Gbps.",
+                "reaction": "Consequência: Velocidades diferentes impedem a inclusão da porta no mesmo canal agregado.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Operador do NOC",
+            "message": "O Port-Channel 10 subiu com 20 Gbps agregados, mas notamos que o tráfego entre o servidor de backup e o storage usa quase todo o primeiro cabo enquanto o segundo fica ocioso. O algoritmo atual está em 'src-dst-mac'. O que ajustar?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Alterar o método de balanceamento de hash do Port-Channel para incluir endereços IP e portas TCP/UDP (src-dst-ip-port).",
+                "reaction": "Decisão adequada: Ampliar os campos do hash distribui múltiplas sessões entre os mesmos dois hosts pelos dois enlaces físicos sem reordenar pacotes.",
+                "correct": true
+              },
+              {
+                "id": "s3-c2",
+                "text": "Dividir cada quadro Ethernet ao meio enviando os primeiros bytes por um cabo e os restantes pelo outro.",
+                "reaction": "Consequência: Switches Ethernet encaminham quadros inteiros e mantêm fluxos por hash para evitar entrega fora de ordem.",
+                "correct": false
+              },
+              {
+                "id": "s3-c3",
+                "text": "Desligar manualmente a porta mais carregada a cada cinco minutos para alternar o tráfego entre os transceptores.",
+                "reaction": "Consequência: Alternar portas manualmente causa microinterrupções constantes e reduz a capacidade disponível pela metade.",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-026",
+      "title": "Fibra Óptica Monomodo (OS2) versus Multimodo (OM3/OM4)",
+      "mechanic": "categorize",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Meios Ópticos e Transmissão de Alta Velocidade",
+      "conceptId": "TRC02-OPT-01",
+      "difficulty": "introductory",
+      "context": "Na especificação técnica do backbone do datacenter e dos enlaces de longa distância do campus, a equipe precisa separar corretamente as propriedades físicas e aplicações das fibras monomodo e multimodo.",
+      "instruction": "Classifique cada característica ou cenário na categoria correspondente: Fibra Monomodo (OS2) ou Fibra Multimodo (OM3/OM4).",
+      "xp": 60,
+      "help": {
+        "hint": "Monomodo possui núcleo estreito (~9 µm), usa laser e vence quilômetros; Multimodo possui núcleo mais largo (50 µm), usa fontes VCSEL de menor custo e atende curtas distâncias internas.",
+        "concept": "A diferença fundamental entre fibra monomodo e multimodo está no diâmetro do núcleo e na propagação de um único modo ou múltiplos modos de luz.",
+        "example": "Interligações entre racks na mesma sala de servidores costumam usar cordões multimodo OM4 com transceptores SR."
+      },
+      "explanation": "A fibra monomodo (OS2) possui núcleo reduzido de cerca de 9 µm por onde se propaga um único modo de luz gerado por laser em comprimentos de onda de 1310 nm ou 1550 nm, eliminando a dispersão modal e alcançando dezenas de quilômetros em backbones de campus e redes metropolitanas. Já a fibra multimodo (OM3/OM4) tem núcleo de 50 µm excitado por emissores VCSEL em 850 nm, oferecendo transceptores ópticos mais econômicos para conexões internas de datacenter e salas técnicas até poucas centenas de metros.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 11801 e ANSI/TIA-568 — Optical Fiber Cabling Components Standard."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Fibra Óptica Monomodo (OS2) versus Multimodo (OM3/OM4) (TRC02-OPT-01)",
+        "objective": "Distinguir propriedades físicas, fontes ópticas, alcance e aplicações entre fibra óptica monomodo (OS2) e multimodo (OM3/OM4).",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Meios físicos e fibra óptica",
+          "ISO/IEC 11801 / ANSI/TIA-568"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-monomodo",
+            "label": "Fibra Monomodo (OS2)",
+            "description": "Núcleo de ~9 µm com fonte laser para longas distâncias e ausência de dispersão modal."
+          },
+          {
+            "id": "cat-multimodo",
+            "label": "Fibra Multimodo (OM3/OM4)",
+            "description": "Núcleo de 50 µm com fonte VCSEL em 850 nm para curtas distâncias internas e menor custo de transceptores."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Diâmetro de núcleo de aproximadamente 9 µm que conduz apenas um caminho óptico axial sem dispersão modal.",
+            "categoryId": "cat-monomodo"
+          },
+          {
+            "id": "item-2",
+            "text": "Indicada para interligar pontos remotos a 8 km de distância utilizando transceptores laser em 1310 nm.",
+            "categoryId": "cat-monomodo"
+          },
+          {
+            "id": "item-3",
+            "text": "Padrão adotado em backbones metropolitanos e enlaces externos de longa distância entre unidades distantes.",
+            "categoryId": "cat-monomodo"
+          },
+          {
+            "id": "item-4",
+            "text": "Diâmetro de núcleo de 50 µm permitindo a propagação simultânea de múltiplos raios luminosos em ângulos distintos.",
+            "categoryId": "cat-multimodo"
+          },
+          {
+            "id": "item-5",
+            "text": "Utiliza fontes ópticas VCSEL em 850 nm com transceptores de menor custo para enlaces curtos intra-datacenter.",
+            "categoryId": "cat-multimodo"
+          },
+          {
+            "id": "item-6",
+            "text": "Aplicada na interligação entre switches top-of-rack e núcleo dentro da mesma sala de equipamentos até 150 metros.",
+            "categoryId": "cat-multimodo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-027",
+      "title": "Verificação Conceitual de Orçamento de Potência Óptica",
+      "mechanic": "binary-choice",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Projeto Óptico e Atenuação de Sinal",
+      "conceptId": "TRC02-OPT-02",
+      "difficulty": "intermediate",
+      "context": "No projeto de um enlace monomodo de 4 km, a atenuação do cabo é de 0,4 dB/km (totalizando 1,6 dB), há dois pares de conectores com perda de 0,5 dB cada (1,0 dB), duas emendas por fusão com perda de 0,1 dB cada (0,2 dB) e margem operacional de segurança de 3,0 dB (totalizando 5,8 dB de perda prevista). Os transceptores escolhidos têm potência média de transmissão de -3 dBm e sensibilidade mínima de recepção de -11 dBm (orçamento disponível de 8,0 dB).",
+      "instruction": "Avalie se a afirmação sobre a viabilidade do orçamento de potência óptica desse enlace está correta ou incorreta.",
+      "xp": 75,
+      "help": {
+        "hint": "Compare o orçamento disponível do par de transceptores (potência TX menos sensibilidade RX = 8,0 dB) com a soma de todas as perdas e a margem de segurança (5,8 dB).",
+        "concept": "Um enlace óptico é viável quando o orçamento de potência disponível (P_TX - S_RX) é maior ou igual à atenuação total do trecho somada à margem de segurança.",
+        "example": "Se o transmissor emite -3 dBm e o receptor exige no mínimo -11 dBm, o enlace suporta até 8,0 dB de atenuação total."
+      },
+      "explanation": "A afirmação está correta. O orçamento de potência óptica disponível entre o transmissor (-3 dBm) e a sensibilidade mínima do receptor (-11 dBm) é de (-3) - (-11) = 8,0 dB. Somando todas as perdas passivas do enlace — 1,6 dB da fibra (4 km × 0,4 dB/km), 1,0 dB dos dois pares de conectores (2 × 0,5 dB), 0,2 dB das duas fusões (2 × 0,1 dB) — mais a margem de segurança de 3,0 dB, obtém-se 5,8 dB, valor inferior aos 8,0 dB disponíveis (restando ainda 2,2 dB de folga adicional).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ANSI/TIA-568 e ITU-T G.652 — Characteristics of a single-mode optical fibre and cable."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Verificação Conceitual de Orçamento de Potência Óptica (TRC02-OPT-02)",
+        "objective": "Avaliar a viabilidade de um enlace óptico comparando o orçamento de potência dos transceptores à atenuação acumulada de fibra, conectores, emendas e margem.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Meios ópticos e orçamento de potência",
+          "ANSI/TIA-568 / ITU-T G.652"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Como o orçamento óptico disponível entre o transmissor e o receptor (8,0 dB) supera a soma das perdas de fibra, conectores, fusões e margem de segurança (5,8 dB), o enlace atende ao critério conceitual de potência óptica.",
+        "correctValue": true,
+        "feedbackTrue": "Correto. O orçamento de 8,0 dB absorve integralmente os 2,8 dB de perdas passivas e os 3,0 dB de margem de segurança, mantendo folga positiva.",
+        "feedbackFalse": "Incorreto. Subtraindo a sensibilidade RX (-11 dBm) da potência TX (-3 dBm) obtém-se 8,0 dB de orçamento, que supera os 5,8 dB totais exigidos."
+      }
+    },
+    {
+      "id": "N9-TRC-028",
+      "title": "Atenuação por Barreiras Físicas e Lacuna de Roaming Wi-Fi",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Planejamento de Cobertura Wi-Fi, RSSI e Roaming",
+      "conceptId": "TRC02-WIF-03",
+      "difficulty": "intermediate",
+      "context": "Usuários de telefones VoIP Wi-Fi relatam cortes bruscos de áudio sempre que caminham pelo corredor central entre a Ala Norte e a Ala Sul do edifício administrativo, mesmo com os dois pontos de acesso operando em 5 GHz sem interferência.",
+      "instruction": "Selecione na planta de levantamento de sinal (site survey) o ponto que explica a falha de transição (roaming) dos dispositivos móveis durante o deslocamento.",
+      "xp": 75,
+      "help": {
+        "hint": "Para roaming contínuo de voz em 5 GHz, as células vizinhas precisam manter sobreposição com nível de sinal RSSI em torno de -67 dBm ou melhor na fronteira.",
+        "concept": "Barreiras densas como paredes corta-fogo e portas metálicas atenuam fortemente sinais de 5 GHz, criando zonas de sombra onde o RSSI cai abaixo de -80 dBm antes do cliente associar ao próximo AP.",
+        "example": "Se o sinal do AP atual cai para -84 dBm no corredor enquanto o próximo AP ainda está encoberto, a chamada VoIP sofre perda de pacotes."
+      },
+      "explanation": "O levantamento de sinal mostra que tanto o AP-NORTE (canal 36) quanto o AP-SUL (canal 44) entregam sinal forte (-46 a -48 dBm) dentro de suas respectivas alas, e a controladora já possui 802.11r/k/v habilitado. Contudo, a parede estrutural com porta corta-fogo metálica no corredor central atenua o sinal de 5 GHz para -84 dBm (SNR de 8 dB), eliminando a sobreposição mínima de -67 dBm necessária para um roaming suave e exigindo a instalação de um ponto de acesso intermediário.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "IEEE Std 802.11 — Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Atenuação por Barreiras Físicas e Lacuna de Roaming Wi-Fi (TRC02-WIF-03)",
+        "objective": "Diagnosticar falha de roaming Wi-Fi em 5 GHz causada por atenuação de barreira física e ausência de sobreposição mínima de RSSI.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Planejamento Wi-Fi, RSSI e roaming",
+          "IEEE Std 802.11"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Mapa de levantamento de cobertura Wi-Fi em 5 GHz de um andar administrativo: à esquerda, Sala Norte com AP-NORTE (Canal 36, RSSI local -48 dBm); ao centro, Corredor Central bloqueado por parede estrutural e porta corta-fogo metálica onde o RSSI cai para -84 dBm e o SNR para 8 dB; à direita, Sala Sul com AP-SUL (Canal 44, RSSI local -46 dBm); no topo, Controladora WLAN com padrões 802.11r/k/v habilitados.",
+        "accessibleDescription": "Elementos representados no levantamento de cobertura Wi-Fi em 5 GHz: (1) AP-NORTE (Sala Norte — Canal 36, RSSI -48 dBm): ponto de acesso operacional na ala norte com excelente nível de sinal local; (2) Corredor Central com Porta Corta-Fogo (RSSI -84 dBm / SNR 8 dB): região intermediária com atenuação severa por barreira metálica e estrutural, sem sobreposição mínima de -67 dBm entre células; (3) AP-SUL (Sala Sul — Canal 44, RSSI -46 dBm): ponto de acesso operacional na ala sul com excelente nível de sinal local; (4) Controladora WLAN (802.11r/k/v ativo): gerenciador sem fio com protocolos de transição rápida habilitados.",
+        "nodes": [
+          {
+            "id": "node-ap-norte",
+            "label": "AP-NORTE (Sala Norte — Canal 36, RSSI -48 dBm)",
+            "detail": "Ponto de acesso ativo operando em canal limpo com excelente cobertura dentro da ala norte."
+          },
+          {
+            "id": "node-zona-sombra",
+            "label": "Corredor Central com Porta Corta-Fogo (RSSI -84 dBm)",
+            "detail": "Zona de atenuação acentuada onde o sinal cai abaixo do limiar de roaming de voz e interrompe a sessão."
+          },
+          {
+            "id": "node-ap-sul",
+            "label": "AP-SUL (Sala Sul — Canal 44, RSSI -46 dBm)",
+            "detail": "Ponto de acesso ativo operando em canal distinto com excelente cobertura dentro da ala sul."
+          },
+          {
+            "id": "node-controladora",
+            "label": "Controladora WLAN (802.11r/k/v ativo)",
+            "detail": "Controladora configurada com suporte a fast roaming e relatórios de vizinhança."
+          }
+        ],
+        "correctNodeId": "node-zona-sombra"
+      }
+    },
+    {
+      "id": "N9-TRC-029",
+      "title": "Padronização de Conectores Ópticos e Metálicos",
+      "mechanic": "pair-match",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Conectividade Física e Terminações de Rede",
+      "conceptId": "TRC02-CON-01",
+      "difficulty": "introductory",
+      "context": "Durante a conferência de materiais para montagem de patch panels metálicos, distribuidores internos ópticos (DIO) e transceptores de switches, você precisa validar cada tipo de conector especificado.",
+      "instruction": "Associe cada conector padronizado à sua aplicação física correspondente.",
+      "xp": 60,
+      "help": {
+        "hint": "Diferencie o conector modular metálico de 8 posições (RJ-45) dos conectores ópticos de ferrolho 1,25 mm (LC), 2,5 mm (SC) e polimento angular verde (APC).",
+        "concept": "A escolha correta do conector garante compatibilidade mecânica com transceptores e painéis além de controlar a perda de inserção e reflexão.",
+        "example": "Transceptores SFP e SFP+ utilizam conectores compactos LC Duplex."
+      },
+      "explanation": "O conector RJ-45 (8P8C) realiza a terminação de cabos de par trançado metálico em tomadas e patch panels Ethernet. O conector LC Duplex possui formato compacto com ferrolho de 1,25 mm, sendo o padrão para transceptores SFP/SFP+ de alta densidade. O conector SC apresenta corpo quadrado com travamento push-pull e ferrolho de 2,5 mm muito usado em distribuidores ópticos (DIO). Por fim, o conector com polimento angular APC (identificado pela cor verde) reduz a reflexão de retorno em enlaces monomodo.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ANSI/TIA-568 e IEC 61754 — Fibre optic interconnecting devices and passive components — Fibre optic connector interfaces."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Padronização de Conectores Ópticos e Metálicos (TRC02-CON-01)",
+        "objective": "Correlacionar conectores RJ-45, LC Duplex, SC e polimento angular APC às suas características e aplicações na planta física.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Cabeamento e conectores",
+          "ANSI/TIA-568 / IEC 61754"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "RJ-45 (8P8C)",
+            "right": "Conector modular de 8 posições empregado na terminação de cabos de par trançado metálico Ethernet."
+          },
+          {
+            "id": "pair-2",
+            "left": "LC Duplex",
+            "right": "Conector óptico compacto de ferrolho de 1,25 mm padrão para transceptores SFP e SFP+."
+          },
+          {
+            "id": "pair-3",
+            "left": "SC (Subscriber Connector)",
+            "right": "Conector óptico quadrado de travamento push-pull e ferrolho de 2,5 mm comum em distribuidores ópticos (DIO)."
+          },
+          {
+            "id": "pair-4",
+            "left": "Polimento Angular APC (Verde)",
+            "right": "Acabamento óptico inclinado a 8 graus que minimiza a reflexão de retorno em enlaces monomodo."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-030",
+      "title": "Normas de Infraestrutura Física, Aterramento e Racks",
+      "mechanic": "multiple-select",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Infraestrutura Física de Salas Técnicas e Aterramento",
+      "conceptId": "TRC02-INF-01",
+      "difficulty": "introductory",
+      "context": "Antes da entrega da nova sala de equipamentos do datacenter acadêmico, você realiza uma inspeção física de conformidade na instalação dos racks, encaminhamentos e aterramento.",
+      "instruction": "Selecione exatamente 3 práticas recomendadas pelas normas de infraestrutura física de telecomunicações.",
+      "xp": 60,
+      "help": {
+        "hint": "Considere proteção mecânica contra dobras excessivas nos cabos, equipotencialização elétrica dos racks e separação entre caminhos de dados e energia.",
+        "concept": "Boas práticas físicas preservam o desempenho elétrico/óptico dos enlaces, evitam interferência eletromagnética e protegem equipamentos e operadores contra surtos.",
+        "example": "Cabos ópticos dobrados além do raio mínimo sofrem macrocurvatura e elevam a atenuação do sinal."
+      },
+      "explanation": "A conformidade física de salas técnicas exige: respeitar o raio mínimo de curvatura dos cabos ópticos e metálicos por meio de organizadores horizontais e verticais; interligar todos os racks metálicos, calhas e barras ao sistema de aterramento e equipotencialização de telecomunicações (ANSI/TIA-607); e manter separação física ou distanciamento normativo entre eletrocalhas de cabos UTP e circuitos elétricos de potência (ANSI/TIA-569) para mitigar interferência eletromagnética.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ANSI/TIA-569 — Telecommunications Pathways and Spaces e ANSI/TIA-607 — Generic Telecommunications Bonding and Grounding."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Normas de Infraestrutura Física, Aterramento e Racks (TRC02-INF-01)",
+        "objective": "Selecionar práticas normativas de organização de cabos, aterramento de telecomunicações e encaminhamento físico em racks.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-02 — Infraestrutura física e aterramento",
+          "ANSI/TIA-569 / ANSI/TIA-607"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Utilizar guias horizontais e verticais que preservem o raio mínimo de curvatura dos patch cords ópticos e metálicos.",
+            "feedback": "Correto. Preservar o raio mínimo evita macrocurvaturas na fibra óptica e degradação de diafonia/perda de retorno em pares trançados.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Conectar os racks metálicos e eletrocalhas à barra principal de aterramento de telecomunicações (equipotencialização).",
+            "feedback": "Correto. A equipotencialização reduz diferenças de potencial perigosas e protege os ativos contra descargas e surtos.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Separar os encaminhamentos de cabos de dados UTP dos alimentadores elétricos em corrente alternada conforme norma.",
+            "feedback": "Correto. O distanciamento físico reduz o acoplamento eletromagnético induzido pelos condutores de energia.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Apertar ao máximo abraçadeiras plásticas rígidas ao redor de feixes de cabos UTP Cat6A para comprimir o revestimento.",
+            "feedback": "Incorreto. O esmagamento da capa altera a geometria dos pares trançados e prejudica a transmissão em altas frequências.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Enrolar sobras de cordões ópticos em espiras fechadas de 2 centímetros de diâmetro para escondê-las atrás das fontes.",
+            "feedback": "Incorreto. Dobras de 2 cm violam o raio mínimo de curvatura da fibra e provocam fuga de luz e atenuação severa.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Instalar switches com exaustão traseira voltados diretamente contra a entrada de ar frio de servidores adjacentes.",
+            "feedback": "Incorreto. Misturar ar quente de exaustão com ar frio de admissão provoca superaquecimento nos equipamentos.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-031",
+      "title": "Encaminhamento de Requisições pelo Agente DHCP Relay",
+      "mechanic": "sequence-order",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Serviços de Rede Centralizados (DHCP Relay)",
+      "conceptId": "TRC03-DHC-02",
+      "difficulty": "intermediate",
+      "context": "Em um campus segmentado em dezenas de VLANs, o servidor DHCP centralizado reside na VLAN de Servidores (10.100.0.20/24). Para evitar instalar um servidor DHCP em cada sub-rede, a interface roteada da VLAN 30 (10.30.0.1/24) opera como agente DHCP Relay.",
+      "instruction": "Ordene as 4 etapas desde a transmissão inicial em broadcast pelo cliente na VLAN 30 até a entrega da oferta IP pelo roteador relay.",
+      "xp": 80,
+      "help": {
+        "hint": "Roteadores não encaminham broadcasts por padrão; o DHCP Relay converte o broadcast local em pacote unicast preenchendo o campo giaddr com o IP da interface da VLAN.",
+        "concept": "O campo giaddr (Gateway IP Address) permite que um servidor DHCP remoto identifique exatamente de qual sub-rede partiu a solicitação e escolha o escopo correto.",
+        "example": "Quando o servidor DHCP recebe um pacote com giaddr = 10.30.0.1, ele aloca um IP livre do escopo 10.30.0.0/24."
+      },
+      "explanation": "Primeiro, o cliente na VLAN 30 transmite um DHCPDISCOVER em broadcast local (255.255.255.255). Segundo, o roteador gateway da VLAN 30 intercepta o quadro, insere seu próprio endereço 10.30.0.1 no campo giaddr do cabeçalho DHCP e encaminha o pacote em unicast ao servidor 10.100.0.20. Terceiro, o servidor DHCP usa o valor de giaddr para selecionar o escopo 10.30.0.0/24 e responde com DHCPOFFER em unicast para 10.30.0.1. Quarto, o roteador relay retransmite o DHCPOFFER ao cliente na VLAN 30.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 2131 — Dynamic Host Configuration Protocol e RFC 1542 — Clarifications and Extensions for the Bootstrap Protocol."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Encaminhamento de Requisições pelo Agente DHCP Relay (TRC03-DHC-02)",
+        "objective": "Ordenar a operação de retransmissão DHCP Relay entre sub-redes distintas por meio do preenchimento do campo giaddr.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-03 — Serviços de rede e DHCP Relay",
+          "RFC 2131 / RFC 1542"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "rel-1",
+            "text": "O cliente na VLAN 30 envia uma mensagem DHCPDISCOVER em broadcast local com endereço IP de origem 0.0.0.0."
+          },
+          {
+            "id": "rel-2",
+            "text": "O roteador gateway da VLAN 30 preenche o campo giaddr com 10.30.0.1 e encaminha o pacote em unicast ao servidor DHCP 10.100.0.20."
+          },
+          {
+            "id": "rel-3",
+            "text": "O servidor DHCP identifica o escopo 10.30.0.0/24 pelo campo giaddr e responde com DHCPOFFER em unicast para 10.30.0.1."
+          },
+          {
+            "id": "rel-4",
+            "text": "O agente DHCP Relay recebe a oferta e a entrega ao cliente na VLAN 30 para prosseguir com a aceitação da concessão."
+          }
+        ],
+        "correctOrder": [
+          "rel-1",
+          "rel-2",
+          "rel-3",
+          "rel-4"
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-032",
+      "title": "Papéis na Resolução DNS Recursiva e Autoritativa",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Infraestrutura de Serviços DNS",
+      "conceptId": "TRC03-DNS-02",
+      "difficulty": "intermediate",
+      "context": "Uma estação do laboratório solicita o endereço IP do domínio biblioteca.instituicao.edu.br, que ainda não está armazenado em cache local. O diagrama representa os quatro atores envolvidos na consulta completa.",
+      "instruction": "Selecione no diagrama o componente que recebe a consulta recursiva da estação, percorre iterativamente a hierarquia DNS e armazena o resultado em cache conforme o TTL.",
+      "xp": 75,
+      "help": {
+        "hint": "Diferencie o servidor que guarda a zona original do domínio (autoritativo) daquele configurado na placa de rede dos clientes para pesquisar qualquer nome na Internet (recursivo).",
+        "concept": "Um resolvedor DNS recursivo atua como intermediário para os clientes da rede: realiza consultas iterativas aos servidores Raiz, TLD e Autoritativos e mantém cache pelo tempo do TTL.",
+        "example": "Quando dois usuários acessam o mesmo site em sequência, o segundo recebe a resposta diretamente do cache do servidor DNS recursivo local."
+      },
+      "explanation": "O Servidor DNS Recursivo Local (Resolver) é o componente configurado nas estações clientes para receber consultas recursivas (flag RD=1). Quando o registro não está em seu cache, ele próprio executa consultas iterativas junto ao Servidor Raiz, aos servidores de domínio de topo (.br/.edu.br) e ao Servidor DNS Autoritativo de instituicao.edu.br, armazenando a resposta em memória pelo prazo definido no campo TTL.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 1034 — Domain Names — Concepts and Facilities e RFC 1035 — Domain Names — Implementation and Specification."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Papéis na Resolução DNS Recursiva e Autoritativa (TRC03-DNS-02)",
+        "objective": "Identificar o papel do servidor DNS recursivo (resolver com cache) em contraste com o cliente stub, servidores raiz e servidor autoritativo.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-03 — Resolução de nomes DNS",
+          "RFC 1034 / RFC 1035"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama de arquitetura DNS em quatro blocos: à esquerda, Estação Cliente (Stub Resolver) enviando consulta com flag RD=1; ao centro, Servidor DNS Recursivo Local (Resolver com Cache) realizando consultas iterativas; no topo direito, Servidor Raiz (Root Name Server) indicando delegação TLD; na base direita, Servidor DNS Autoritativo (Zona instituicao.edu.br) detendo os registros oficiais.",
+        "accessibleDescription": "Componentes da infraestrutura de resolução DNS representados no diagrama: (1) Estação Cliente (Stub Resolver): dispositivo do usuário que envia uma única pergunta recursiva ao DNS configurado em sua interface; (2) Servidor DNS Recursivo Local (Resolver): servidor intermediário da rede que percorre iterativamente os níveis da árvore DNS em nome do cliente e armazena respostas em cache pelo TTL; (3) Servidor Raiz (Root Name Server): topo da hierarquia DNS que responde com referências aos servidores de domínio de topo; (4) Servidor DNS Autoritativo (Zona instituicao.edu.br): servidor que armazena os registros originais da zona institucional e responde com autoridade pelo domínio.",
+        "nodes": [
+          {
+            "id": "node-stub-client",
+            "label": "Estação Cliente (Stub Resolver)",
+            "detail": "Cliente final que envia consulta recursiva simples e aguarda a resposta pronta."
+          },
+          {
+            "id": "node-dns-recursivo",
+            "label": "Servidor DNS Recursivo Local (Resolver)",
+            "detail": "Recebe a consulta do cliente, executa perguntas iterativas na hierarquia DNS e guarda o resultado em cache."
+          },
+          {
+            "id": "node-dns-root",
+            "label": "Servidor Raiz (Root Name Server)",
+            "detail": "Nível inicial da hierarquia global que indica os servidores responsáveis pelo domínio de topo."
+          },
+          {
+            "id": "node-dns-autoritativo",
+            "label": "Servidor DNS Autoritativo (instituicao.edu.br)",
+            "detail": "Detém os registros definitivos da zona institucional sem realizar pesquisas para domínios externos."
+          }
+        ],
+        "correctNodeId": "node-dns-recursivo"
+      }
+    },
+    {
+      "id": "N9-TRC-033",
+      "title": "Containers versus Máquinas Virtuais na Infraestrutura",
+      "mechanic": "categorize",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Virtualização de Servidores e Orquestração de Ambientes",
+      "conceptId": "TRC03-CNT-01",
+      "difficulty": "introductory",
+      "context": "Na modernização dos serviços de infraestrutura do campus, a equipe avalia quais cargas de trabalho devem ser implantadas em máquinas virtuais tradicionais sobre hipervisor e quais se beneficiam de empacotamento em containers.",
+      "instruction": "Classifique cada característica técnica na tecnologia de virtualização correspondente: Máquinas Virtuais (VMs) ou Containers.",
+      "xp": 60,
+      "help": {
+        "hint": "Máquinas virtuais virtualizam hardware e rodam um kernel próprio por instância; containers compartilham o kernel do hospedeiro isolando processos por namespaces e cgroups.",
+        "concept": "Enquanto VMs oferecem isolamento completo de sistema operacional e suporte a kernels distintos, containers oferecem empacotamento leve e inicialização rápida sobre o mesmo kernel.",
+        "example": "Executar um servidor Windows Server e um servidor Linux no mesmo host físico requer máquinas virtuais sobre um hipervisor."
+      },
+      "explanation": "As Máquinas Virtuais (VMs) operam sobre um hipervisor que abstrai o hardware físico, permitindo que cada VM execute seu próprio núcleo (kernel) de sistema operacional — inclusive sistemas heterogêneos como Linux e Windows no mesmo servidor —, porém com maior sobrecarga de memória e tempo de inicialização. Já os Containers isolam processos de aplicação no espaço de usuário por meio de recursos do kernel hospedeiro (como namespaces e cgroups no Linux), resultando em imagens compactas e inicialização em frações de segundo.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XI."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-190 — Application Container Security Guide e NIST SP 800-125 — Guide to Security for Full Virtualization Technologies."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Containers versus Máquinas Virtuais na Infraestrutura (TRC03-CNT-01)",
+        "objective": "Distinguir arquitetura, isolamento de kernel, consumo de recursos e compatibilidade entre máquinas virtuais e containers.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XI",
+          "Núcleo TRC-03 — Virtualização e containers",
+          "NIST SP 800-190 / NIST SP 800-125"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-vm",
+            "label": "Máquinas Virtuais (VMs)",
+            "description": "Virtualização em nível de hardware sobre hipervisor, com kernel convidado independente por instância."
+          },
+          {
+            "id": "cat-container",
+            "label": "Containers",
+            "description": "Isolamento de processos no nível de sistema operacional compartilhando o kernel do hospedeiro."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Cada instância executa um núcleo (kernel) de sistema operacional completo e independente sobre hardware virtualizado.",
+            "categoryId": "cat-vm"
+          },
+          {
+            "id": "item-2",
+            "text": "Permite executar simultaneamente sistemas operacionais heterogêneos, como Windows Server e Linux, no mesmo servidor físico.",
+            "categoryId": "cat-vm"
+          },
+          {
+            "id": "item-3",
+            "text": "Apresenta maior reserva fixa de memória RAM e armazenamento em disco devido ao sistema operacional convidado completo.",
+            "categoryId": "cat-vm"
+          },
+          {
+            "id": "item-4",
+            "text": "Compartilha o kernel do sistema operacional hospedeiro e isola recursos por meio de namespaces e grupos de controle (cgroups).",
+            "categoryId": "cat-container"
+          },
+          {
+            "id": "item-5",
+            "text": "Empacota a aplicação e suas dependências em imagens leves com inicialização quase instantânea em frações de segundo.",
+            "categoryId": "cat-container"
+          },
+          {
+            "id": "item-6",
+            "text": "Exige compatibilidade direta entre o kernel do sistema operacional hospedeiro e a arquitetura da imagem executada.",
+            "categoryId": "cat-container"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-034",
+      "title": "Política de Qualidade de Serviço (QoS) para Voz e Vídeo em WAN",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Desempenho de Redes e Qualidade de Serviço (QoS)",
+      "conceptId": "TRC03-QOS-01",
+      "difficulty": "intermediate",
+      "context": "O enlace WAN de 100 Mbps que interliga a sede a um campus avançado sofre congestionamento recorrente durante transferências de backups e atualizações, provocando cortes de voz em chamadas VoIP e atrasos em videoconferências.",
+      "instruction": "Conduza as três decisões de engenharia de tráfego para implantar uma política de QoS com Serviços Diferenciados (DiffServ) sem causar inanição nas filas de dados.",
+      "xp": 85,
+      "help": {
+        "hint": "Classifique e marque pacotes com DSCP na borda confiável, aplique fila de baixa latência (LLQ) policiada para voz e reserve bandas proporcionais às demais classes.",
+        "concept": "A arquitetura DiffServ marca pacotes no campo DSCP (ex.: EF para voz, AF41 para vídeo) e aplica escalonamento de filas na saída congestionada para controlar latência, jitter e perda.",
+        "example": "Uma fila de prioridade estrita (LLQ) para voz deve ter teto de banda policiado para impedir que um fluxo anômalo sufoque todo o enlace."
+      },
+      "explanation": "Em enlaces WAN sujeitos a congestionamento, a implantação eficaz de QoS começa pela classificação e marcação DSCP na borda confiável (telefones IP e switches de acesso), atribuindo Expedited Forwarding (EF) ao áudio em tempo real e Assured Forwarding (AF41) ao vídeo interativo. No roteador de borda WAN, configura-se Low Latency Queueing (LLQ) com policiamento de banda máxima para a voz, reservando percentuais garantidos para vídeo e dados corporativos sem provocar starvation. Por fim, portas não confiáveis de estações comuns devem ter marcações DSCP externas reclassificadas na entrada.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 2474 — Definition of the Differentiated Services Field (DS Field) e RFC 3246 — An Expedited Forwarding PHB."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Política de Qualidade de Serviço (QoS) para Voz e Vídeo em WAN (TRC03-QOS-01)",
+        "objective": "Conduzir decisões de classificação DSCP, enfileiramento de baixa latência (LLQ) e fronteira de confiança em políticas de QoS.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-03 — Desempenho e Qualidade de Serviço (QoS)",
+          "RFC 2474 / RFC 3246"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Engenheiro de Tráfego",
+            "message": "Precisamos diferenciar o tráfego de telefonia VoIP, videoconferência e transferências comuns antes que cheguem ao roteador WAN. Como estruturar a marcação na arquitetura DiffServ?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Classificar e marcar os pacotes na borda confiável atribuindo DSCP EF (Expedited Forwarding) para voz, AF41 para vídeo interativo e Best-Effort para downloads.",
+                "reaction": "Decisão adequada: Padroniza os valores DSCP conforme o comportamento por salto (PHB) exigido por cada classe de atraso.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Marcar 100% de todo o tráfego da rede, incluindo backups e atualizações de sistema, com prioridade máxima DSCP EF.",
+                "reaction": "Consequência: Quando todo o tráfego recebe prioridade máxima, nenhuma aplicação é realmente priorizada durante congestionamentos.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Manter apenas enfileiramento FIFO padrão no roteador WAN e aumentar o tamanho do buffer de saída para 2 segundos.",
+                "reaction": "Consequência: Buffers gigantes em fila FIFO única elevam a latência (bufferbloat) e inviabilizam chamadas de voz.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Especialista WAN",
+            "message": "Na interface de saída de 100 Mbps do roteador WAN, como configurar o escalonamento de filas para atender às chamadas VoIP sem paralisar os sistemas administrativos?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Criar uma fila de prioridade ilimitada sem policiamento para voz e descartar automaticamente todo o tráfego TCP quando houver áudio.",
+                "reaction": "Consequência: Prioridade estrita sem limite de banda pode causar inanição (starvation) completa das aplicações TCP em caso de anomalia.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Configurar Low Latency Queueing (LLQ) policiada em 15% para voz, reserva garantida de 25% para vídeo e banda mínima assegurada para dados críticos.",
+                "reaction": "Decisão adequada: Garante escoamento imediato de baixa latência para voz enquanto protege as demais filas contra inanição.",
+                "correct": true
+              },
+              {
+                "id": "s2-c3",
+                "text": "Aplicar descarte aleatório (WRED) exclusivamente sobre os pacotes de voz para reduzir a taxa de bits dos telefones IP.",
+                "reaction": "Consequência: Descartar pacotes de voz em tempo real degrada imediatamente a inteligibilidade das chamadas.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Analista de Segurança de Redes",
+            "message": "Notamos que alguns aplicativos instalados em estações de usuários marcam seus próprios pacotes com DSCP EF para tentar ganhar prioridade na WAN. Como tratar a fronteira de confiança (trust boundary)?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Confiar nas marcações DSCP provenientes de qualquer porta de usuário final sem inspeção.",
+                "reaction": "Consequência: Permite abuso de prioridade por estações comuns, congestionando a fila de tempo real.",
+                "correct": false
+              },
+              {
+                "id": "s3-c2",
+                "text": "Estender a confiança DSCP apenas aos telefones IP autenticados e reclassificar na porta do switch de acesso o tráfego vindo de estações comuns.",
+                "reaction": "Decisão adequada: Impede falsificação de prioridade pelos hosts finais e mantém a integridade das classes de serviço.",
+                "correct": true
+              },
+              {
+                "id": "s3-c3",
+                "text": "Desativar o QoS nos switches de acesso e bloquear todo tráfego UDP na rede interna.",
+                "reaction": "Consequência: Bloquear UDP interrompe DNS, VoIP e videoconferências em todo o campus.",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-035",
+      "title": "Diagnóstico de Serviço Web, Portas e Permissões em Linux",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Administração de Sistemas Operacionais Linux e Serviços",
+      "conceptId": "TRC03-LNX-01",
+      "difficulty": "advanced",
+      "context": "Após uma manutenção emergencial em um servidor Linux de aplicação interna (systemd + servidor web Nginx na porta TCP 8080), o serviço falhou ao iniciar e a auditoria detectou permissões inseguras na chave privada TLS.",
+      "instruction": "Conduza as três decisões técnicas para diagnosticar a falha pelos registros do sistema, liberar o conflito de porta e endurecer as permissões.",
+      "xp": 100,
+      "help": {
+        "hint": "Inspecione os logs do systemd (journalctl), verifique qual processo ocupa o socket TCP 8080 (ss) e aplique permissão restrita (chmod 600/640) na chave privada.",
+        "concept": "A administração segura de serviços Linux apoia-se na leitura estruturada de logs do systemd, verificação de sockets ativos e aplicação do menor privilégio no sistema de arquivos.",
+        "example": "Chaves privadas TLS nunca devem ter leitura global (world-readable) nem permissões 777."
+      },
+      "explanation": "Diante de uma falha de inicialização no systemd, o primeiro passo técnico é consultar systemctl status e journalctl -u nginx -xe para identificar a causa raiz registrada pelo daemon. Ao constatar erro de bind na porta 8080, o comando ss -tulpn revela o PID de um processo legado que ainda ocupa o socket, permitindo encerrá-lo e validar a configuração com nginx -t antes de iniciar o serviço. Por fim, a chave privada TLS deve pertencer a root com permissão restrita (chmod 600 ou 640 para o grupo do serviço), aplicando o menor privilégio.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Documentação oficial do gerenciador de serviços systemd e manuais do kernel Linux sobre sockets e permissões POSIX."
+        }
+      ],
+      "sourceVerificationNeeded": true,
+      "traceability": {
+        "title": "Diagnóstico de Serviço Web, Portas e Permissões em Linux (TRC03-LNX-01)",
+        "objective": "Conduzir diagnóstico de serviço Linux via systemd/journalctl, resolução de conflito de socket TCP e ajuste de permissões de chave privada.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-03 — Sistemas operacionais e serviços",
+          "Documentação técnica de systemd e Linux"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Operador de Plantão",
+            "message": "O serviço nginx falhou após o comando de reinicialização e o portal interno está fora do ar. Qual comando executar primeiro para obter a causa exata do erro?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Consultar 'systemctl status nginx' e 'journalctl -u nginx -xe' para ler a mensagem exata de falha registrada pelo gerenciador de serviços.",
+                "reaction": "Decisão adequada: Os logs estruturados do systemd apontam imediatamente se o erro decorre de sintaxe, permissão ou conflito de porta.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Apagar todos os arquivos da pasta /etc/nginx e reinstalar o sistema operacional inteiro do servidor.",
+                "reaction": "Consequência: Reinstalar o servidor destrói configurações válidas e prolonga desnecessariamente a indisponibilidade.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Desabilitar o firewall local do servidor e reiniciar a máquina três vezes seguidas sem ler os registros.",
+                "reaction": "Consequência: Reiniciar sem diagnóstico não resolve conflitos de configuração nem erros de vinculação de socket.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Analista de Sistemas Linux",
+            "message": "O journalctl informou 'bind() to 0.0.0.0:8080 failed (98: Address already in use)'. Como confirmar o processo que ocupa a porta e restabelecer o serviço com segurança?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Mudar o servidor web para uma porta aleatória não documentada sem avisar o balanceador de carga.",
+                "reaction": "Consequência: Alterar a porta de escuta quebra o encaminhamento do balanceador e das regras de firewall.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Identificar o processo órfão com 'ss -tulpn | grep :8080', encerrar o PID indevido, validar a configuração com 'nginx -t' e iniciar o serviço.",
+                "reaction": "Decisão adequada: Libera o socket TCP 8080 de forma controlada e garante sintaxe íntegra antes de subir o daemon.",
+                "correct": true
+              },
+              {
+                "id": "s2-c3",
+                "text": "Executar 'kill -9 1' para encerrar todos os processos do sistema operacional simultaneamente.",
+                "reaction": "Consequência: O PID 1 é o próprio processo init/systemd; tentar encerrá-lo desestabiliza o sistema.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Especialista em Segurança",
+            "message": "O serviço voltou a responder na porta 8080, mas verificamos que o arquivo da chave privada TLS (/etc/ssl/private/intranet.key) ficou com permissão '-rwxrwxrwx' (777). Como corrigir?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Manter permissão 777 para garantir que qualquer script ou usuário do sistema consiga ler e modificar a chave sem erros.",
+                "reaction": "Consequência: Permissão 777 permite que qualquer conta comprometida no servidor leia ou altere a chave privada TLS.",
+                "correct": false
+              },
+              {
+                "id": "s3-c2",
+                "text": "Mover a chave privada para dentro da pasta pública /var/www/html para facilitar backups via navegador.",
+                "reaction": "Consequência: Expor uma chave privada no diretório raiz web permite seu download direto pela rede.",
+                "correct": false
+              },
+              {
+                "id": "s3-c3",
+                "text": "Ajustar propriedade para root ('chown root:root') e restringir leitura com 'chmod 600' (ou '640' para o grupo do serviço), removendo acesso de outros usuários.",
+                "reaction": "Decisão adequada: Aplica o princípio do menor privilégio, protegendo a confidencialidade e integridade da chave privada.",
+                "correct": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-036",
+      "title": "Falha de Negociação em Túnel VPN Site-to-Site IPsec",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Segurança de Comunicações e Redes Privadas Virtuais (VPN)",
+      "conceptId": "TRC04-VPN-01",
+      "difficulty": "intermediate",
+      "context": "A matriz (LAN 10.1.0.0/24) e a filial (LAN 10.2.0.0/24) possuem um túnel VPN Site-to-Site IPsec em modo túnel pela Internet. O canal de controle IKEv2 (Fase 1) estabelece normalmente, mas o túnel de dados (Fase 2 / Child SA) não sobe e as sub-redes não se comunicam.",
+      "instruction": "Selecione na topologia o parâmetro cuja configuração divergente impede o estabelecimento da Fase 2 (Child SA) do túnel IPsec.",
+      "xp": 75,
+      "help": {
+        "hint": "Na Fase 2 do IPsec (IKEv2 Child SA), os seletores de tráfego (Traffic Selectors / Crypto ACL) das duas pontas devem ser exatamente espelhados.",
+        "concept": "Enquanto a Fase 1 autentica os gateways e cria um canal seguro de gerência, a Fase 2 negocia quais sub-redes locais e remotas serão encapsuladas pelo protocolo ESP.",
+        "example": "Se a Matriz protege 10.1.0.0/24 <-> 10.2.0.0/24, a Filial deve configurar exatamente 10.2.0.0/24 <-> 10.1.0.0/24."
+      },
+      "explanation": "Embora o canal de controle IKEv2 (Fase 1) esteja estabelecido entre os gateways públicos e as portas UDP 500/4500 estejam liberadas, a Fase 2 (Child SA) falha porque os seletores de tráfego não são simétricos: o Gateway da Matriz declara 10.1.0.0/24 <-> 10.2.0.0/24, enquanto o Gateway da Filial declara 10.2.0.0/24 <-> 10.99.0.0/24. Ajustar o seletor remoto da filial para 10.1.0.0/24 permite concluir a associação de segurança ESP.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XIII."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 4301 — Security Architecture for the Internet Protocol e RFC 7296 — Internet Key Exchange Protocol Version 2 (IKEv2)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Falha de Negociação em Túnel VPN Site-to-Site IPsec (TRC04-VPN-01)",
+        "objective": "Diagnosticar falha na Fase 2 de túnel VPN Site-to-Site IPsec provocada por assimetria nos seletores de tráfego (Traffic Selectors).",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
+          "Núcleo TRC-04 — Segurança da informação e VPN IPsec",
+          "RFC 4301 / RFC 7296"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama de túnel VPN Site-to-Site IPsec entre Matriz e Filial: à esquerda, Gateway Matriz (IP 203.0.113.10) com Fase 1 IKEv2 (AES-256/SHA-256/DH14 — UP) e Seletor Fase 2 (10.1.0.0/24 <-> 10.2.0.0/24); ao centro, Rede Pública Internet transportando UDP 500 e UDP 4500; à direita, Gateway Filial (IP 198.51.100.20) com Seletor Fase 2 configurado como 10.2.0.0/24 <-> 10.99.0.0/24 (divergente da sub-rede real da Matriz).",
+        "accessibleDescription": "Parâmetros da interligação VPN Site-to-Site IPsec representados no diagrama: (1) Gateway Matriz — Fase 1 IKEv2 (AES-256/SHA-256/DH14): negociação inicial concluída com sucesso (estado UP); (2) Gateway Matriz — Seletor Fase 2 (10.1.0.0/24 <-> 10.2.0.0/24): política de criptografia configurada corretamente entre a LAN da Matriz e a LAN da Filial; (3) Transporte Internet (UDP 500 / UDP 4500 NAT-T): fluxo de controle e encapsulamento atravessando a rede pública sem bloqueio; (4) Gateway Filial — Seletor Fase 2 (10.2.0.0/24 <-> 10.99.0.0/24): política configurada com sub-rede remota incorreta (10.99.0.0/24 em vez de 10.1.0.0/24), impedindo a negociação da Child SA.",
+        "nodes": [
+          {
+            "id": "node-ike-fase1",
+            "label": "Gateway Matriz — Fase 1 IKEv2 (AES-256/SHA-256/DH14)",
+            "detail": "Associação de segurança IKEv2 estabelecida e autenticada com sucesso entre os dois gateways."
+          },
+          {
+            "id": "node-ts-matriz",
+            "label": "Gateway Matriz — Seletor Fase 2 (10.1.0.0/24 <-> 10.2.0.0/24)",
+            "detail": "Declara corretamente a sub-rede local da Matriz (10.1.0.0/24) e a sub-rede remota da Filial (10.2.0.0/24)."
+          },
+          {
+            "id": "node-wan-udp",
+            "label": "Transporte Internet (UDP 500 e UDP 4500)",
+            "detail": "Portas de negociação IKE e encapsulamento NAT-T operacionais entre os endereços públicos."
+          },
+          {
+            "id": "node-ts-filial",
+            "label": "Gateway Filial — Seletor Fase 2 (10.2.0.0/24 <-> 10.99.0.0/24)",
+            "detail": "Declara rede remota 10.99.0.0/24 em desacordo com o prefixo 10.1.0.0/24 anunciado pela Matriz."
+          }
+        ],
+        "correctNodeId": "node-ts-filial"
+      }
+    },
+    {
+      "id": "N9-TRC-037",
+      "title": "Ordenação de Entradas em Lista de Controle de Acesso (ACL)",
+      "mechanic": "sequence-order",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Controle de Acesso, ACLs e Menor Privilégio",
+      "conceptId": "TRC04-ACL-01",
+      "difficulty": "introductory",
+      "context": "Você precisa aplicar uma Lista de Controle de Acesso (ACL) estendida na interface de entrada da VLAN de Laboratório (10.50.0.0/24) para bloquear conexões SSH aos servidores internos (10.10.0.0/24), liberar apenas consultas DNS ao servidor 10.10.0.53 e permitir navegação HTTPS externa.",
+      "instruction": "Ordene as 4 regras da ACL na sequência correta de avaliação (top-down) para que todas as políticas funcionem sem sombreamento.",
+      "xp": 60,
+      "help": {
+        "hint": "ACLs são avaliadas de cima para baixo e param na primeira correspondência: regras mais específicas (host e sub-rede interna) devem vir antes de regras gerais e do bloqueio final.",
+        "concept": "O processamento sequencial (first-match) exige posicionar exceções pontuais e bloqueios específicos antes de permissões amplas e da regra final de negação.",
+        "example": "Se 'deny ip any any' for colocado no início da lista, nenhuma regra abaixo dele será avaliada."
+      },
+      "explanation": "Como roteadores e firewalls avaliam entradas de ACL sequencialmente de cima para baixo (first-match), primeiro deve-se bloquear explicitamente tentativas de SSH (TCP/22) da sub-rede 10.50.0.0/24 para os servidores internos 10.10.0.0/24; em seguida, autorizar a exceção pontual de DNS (UDP/53) para o host 10.10.0.53; depois, permitir o tráfego web HTTPS (TCP/443) de saída; e, por último, encerrar a lista com a regra residual explícita 'deny ip any any log' para registrar descartes.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), art. 6º, XIII."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-41 Rev. 1 — Guidelines on Firewalls and Firewall Policy."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ordenação de Entradas em Lista de Controle de Acesso (ACL) (TRC04-ACL-01)",
+        "objective": "Ordenar regras estendidas de Lista de Controle de Acesso (ACL) segundo o princípio first-match e menor privilégio.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
+          "Núcleo TRC-04 — Segurança da informação e controle de acesso",
+          "NIST SP 800-41 Rev. 1"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "acl-1",
+            "text": "10 deny tcp 10.50.0.0 0.0.0.255 10.10.0.0 0.0.0.255 eq 22 (Bloqueia SSH aos servidores internos)"
+          },
+          {
+            "id": "acl-2",
+            "text": "20 permit udp 10.50.0.0 0.0.0.255 host 10.10.0.53 eq 53 (Permite consultas DNS ao servidor interno 10.10.0.53)"
+          },
+          {
+            "id": "acl-3",
+            "text": "30 permit tcp 10.50.0.0 0.0.0.255 any eq 443 (Permite navegação segura HTTPS externa)"
+          },
+          {
+            "id": "acl-4",
+            "text": "40 deny ip any any log (Bloqueio final explícito com registro de pacotes não autorizados)"
+          }
+        ],
+        "correctOrder": [
+          "acl-1",
+          "acl-2",
+          "acl-3",
+          "acl-4"
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-038",
+      "title": "Auditoria Automatizada de Interfaces via Script Python",
+      "mechanic": "fill-slot",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Automação de Redes e Programação Aplicada",
+      "conceptId": "TRC04-AUT-02",
+      "difficulty": "intermediate",
+      "context": "No servidor Linux de automação (Python 3.12), você desenvolve um script que lê o inventário JSON retornado pela API REST do controlador de switches para identificar apenas as interfaces habilitadas administrativamente (admin_up == True) cujo enlace físico caiu (oper_status == \"down\").",
+      "instruction": "Selecione a expressão condicional em Python que filtra exclusivamente as interfaces com falha operacional não intencional.",
+      "xp": 75,
+      "help": {
+        "hint": "Uma porta desligada de propósito tem admin_up igual a False; uma falha real ocorre quando admin_up é True e oper_status é \"down\".",
+        "concept": "Scripts de auditoria de rede combinam o estado administrativo (admin_up) e o estado operacional (oper_status) usando conjunção lógica (and) para evitar falsos positivos.",
+        "example": "Se Gi0/10 está com admin_up = False, ela foi desativada pela equipe e não deve gerar alerta de falha."
+      },
+      "explanation": "A expressão iface[\"admin_up\"] and iface[\"oper_status\"] == \"down\" verifica simultaneamente que a porta está habilitada administrativamente (True) e que seu enlace operacional está caído (\"down\"), retornando apenas Gi0/24. O uso de 'or' incluiria interfaces saudáveis como Gi0/1 e portas desligadas intencionalmente como Gi0/10, enquanto 'not iface[\"admin_up\"]' selecionaria apenas interfaces desativadas pela gerência.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Documentação oficial da linguagem Python 3 (Python Software Foundation) — Expressões booleanas e compreensão de listas."
+        }
+      ],
+      "sourceVerificationNeeded": true,
+      "traceability": {
+        "title": "Auditoria Automatizada de Interfaces via Script Python (TRC04-AUT-02)",
+        "objective": "Construir condição booleana em Python 3.12 para detectar interfaces habilitadas administrativamente com queda operacional.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-04 — Automação de redes com Python",
+          "Documentação oficial Python 3"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "python",
+        "contentBefore": "# Ambiente: Python 3.12 — Auditoria de interfaces via API REST\ninterfaces = [\n    {\"nome\": \"Gi0/1\", \"admin_up\": True, \"oper_status\": \"up\"},\n    {\"nome\": \"Gi0/24\", \"admin_up\": True, \"oper_status\": \"down\"},\n    {\"nome\": \"Gi0/10\", \"admin_up\": False, \"oper_status\": \"down\"},\n]\n\nfalhas = [\n    iface[\"nome\"]\n    for iface in interfaces\n    if ",
+        "contentAfter": "\n]\nprint(\"Interfaces com falha:\", falhas)",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "iface[\"admin_up\"] and iface[\"oper_status\"] == \"down\"",
+            "feedback": "Correto. Filtra apenas interfaces habilitadas administrativamente (True) cujo estado operacional caiu para \"down\"."
+          },
+          {
+            "id": "tok-2",
+            "text": "iface[\"admin_up\"] or iface[\"oper_status\"] == \"down\"",
+            "feedback": "Incorreto. O operador 'or' inclui interfaces ativas normalmente (Gi0/1) e portas desligadas de propósito (Gi0/10)."
+          },
+          {
+            "id": "tok-3",
+            "text": "not iface[\"admin_up\"] and iface[\"oper_status\"] == \"down\"",
+            "feedback": "Incorreto. Seleciona apenas portas desativadas administrativamente de propósito, como Gi0/10."
+          },
+          {
+            "id": "tok-4",
+            "text": "iface[\"admin_up\"] and iface[\"oper_status\"] == \"up\"",
+            "feedback": "Incorreto. Lista as interfaces saudáveis em operação normal, e não as que sofreram queda."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-TRC-039",
+      "title": "Análise de Métricas, Capacidade e Alertas Proativos",
+      "mechanic": "multiple-select",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Gestão de Capacidade, Desempenho e Alertas",
+      "conceptId": "TRC04-CAP-01",
+      "difficulty": "intermediate",
+      "context": "Usuários relatam lentidão intermitente no acesso a sistemas em nuvem às 14h, embora o relatório mensal do enlace WAN de 1 Gbps mostre utilização média de apenas 38%. Você foi encarregado de revisar a análise de capacidade e os limiares de alerta.",
+      "instruction": "Selecione exatamente 3 práticas técnicas recomendadas para diagnosticar gargalos intermitentes e configurar alertas eficazes.",
+      "xp": 80,
+      "help": {
+        "hint": "Médias mensais escondem picos curtos; observe percentis P95/P99 em granularidade fina, correlacione descartes de fila e use histerese nos alertas.",
+        "concept": "O gerenciamento de capacidade combina amostragem de alta resolução, análise de percentis e correlação de perda/latência para evitar falsos diagnósticos baseados em médias.",
+        "example": "Um enlace pode ter média de 38% ao longo de 30 dias e atingir 98% durante 20 minutos todos os dias úteis às 14h."
+      },
+      "explanation": "Médias mensais diluem picos diários de horário comercial; por isso, a análise de capacidade exige avaliar percentis elevados (P95/P99) em intervalos curtos (1 a 5 minutos) para identificar saturações recorrentes. Correlacionar a taxa de bits com contadores de descarte de saída (output drops), latência (RTT) e jitter comprova o congestionamento real das filas. Por fim, alertas escalonados com janela de sustentação e histerese evitam ruído operacional e fadiga de alertas.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 20000-1 — Information technology — Service management — Part 1: Service management system requirements."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Análise de Métricas, Capacidade e Alertas Proativos (TRC04-CAP-01)",
+        "objective": "Selecionar práticas adequadas de análise de métricas de rede, dimensionamento de capacidade e calibração de alertas.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-04 — Capacidade, disponibilidade e alertas",
+          "ISO/IEC 20000-1"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Analisar percentis P95 e P99 em intervalos de coleta de 1 a 5 minutos em vez de basear a decisão apenas na média mensal.",
+            "feedback": "Correto. Percentis altos em janelas curtas revelam saturações diárias em horários de pico que a média mensal oculta.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Correlacionar utilização de banda com descartes de pacotes na interface (output drops), latência (RTT) e jitter.",
+            "feedback": "Correto. O aumento simultâneo de descartes e latência confirma fila cheia e degradação percebida pelos usuários.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Configurar limiares escalonados de aviso (75%) e crítico (90%) com tempo de sustentação e histerese para evitar fadiga de alertas.",
+            "feedback": "Correto. Limiares sustentados filtram rajadas transitórias inofensivas e destacam congestionamentos reais.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Encerrar a análise afirmando que não há gargalo porque a média mensal de 38% está abaixo de 50% da capacidade.",
+            "feedback": "Incorreto. Médias mensais longas mascaram completamente picos diários de 100% em horários específicos.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Aumentar o intervalo de coleta SNMP para uma amostra a cada 24 horas para suavizar os gráficos do painel.",
+            "feedback": "Incorreto. Reduzir a granularidade elimina a visibilidade de congestionamentos e atrasa a detecção de incidentes.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Gerar chamado crítico imediato a cada pico instantâneo de 1 segundo acima de 51% sem período de sustentação.",
+            "feedback": "Incorreto. Disparar alertas críticos em rajadas normais de 1 segundo provoca excesso de alarmes falsos.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-TRC-040",
+      "title": "Gestão de Mudanças, Recuperação de Configuração e Inventário",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "TRC"
+      ],
+      "area": "Governança Operacional, Gestão de Mudanças e Documentação",
+      "conceptId": "TRC04-GCM-01",
+      "difficulty": "advanced",
+      "context": "Você coordena uma janela de manutenção para atualizar filtros de roteamento BGP/OSPF em um roteador de núcleo do datacenter. Durante a aplicação, uma política de prefixos bloqueia indevidamente duas sub-redes internas.",
+      "instruction": "Conduza as três decisões de governança operacional para preparar a mudança, recuperar imediatamente o serviço e atualizar a documentação.",
+      "xp": 100,
+      "help": {
+        "hint": "Toda mudança em núcleo exige plano de rollback aprovado antes da janela, confirmação temporizada para reversão segura diante de falhas e atualização posterior do CMDB e diagramas.",
+        "concept": "A gestão de mudanças e configurações reduz riscos de indisponibilidade articulando planejamento formal, reversão rápida (rollback) e rastreabilidade documental.",
+        "example": "Usar confirmação temporizada (commit confirmed) reverte automaticamente a alteração caso a sessão de gerência seja perdida."
+      },
+      "explanation": "A governança madura de alterações em ativos críticos exige, antes da janela, uma Requisição de Mudança (RDM) aprovada contendo escopo, análise de impacto, critérios de teste e plano de reversão (rollback) validado. Durante a execução, o uso de confirmação temporizada e a reversão imediata para a configuração íntegra versionada restauram os prefixos em segundos sem improviso sob pressão. Por fim, o encerramento da mudança requer atualizar o inventário/CMDB, os diagramas lógicos e o registro pós-implementação.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º (incluindo inciso XIII)."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 20000-1 — Information technology — Service management — Part 1: Service management system requirements."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Gestão de Mudanças, Recuperação de Configuração e Inventário (TRC04-GCM-01)",
+        "objective": "Conduzir decisões de gestão de mudanças, recuperação de configuração (rollback) e atualização de inventário/documentação em ativo crítico.",
+        "locators": [
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "Núcleo TRC-04 — Gestão de mudanças, inventário e documentação",
+          "ISO/IEC 20000-1"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Coordenador de Mudanças",
+            "message": "A alteração dos filtros de roteamento no roteador de núcleo está marcada para hoje às 23h. O que deve estar formalizado e aprovado antes de iniciar qualquer comando?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Registrar e aprovar a Requisição de Mudança (RDM) com escopo, análise de impacto, plano de testes, janela definida e procedimento de rollback validado.",
+                "reaction": "Decisão adequada: Estabelece controle de risco, alinhamento entre equipes e caminho seguro de reversão antes da intervenção.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Aplicar os comandos diretamente em horário de pico sem registro formal para avaliar em tempo real se algum serviço reclama.",
+                "reaction": "Consequência: Mudanças não planejadas em horário comercial ampliam o impacto de falhas e impedem comunicação prévia.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Dispensar backup prévio e plano de reversão porque alterações de filtros de roteamento nunca causam perda de conectividade.",
+                "reaction": "Consequência: Erros em listas de prefixos ou mapas de rota podem isolar segmentos inteiros instantaneamente.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Engenheiro de Roteamento",
+            "message": "Aplicamos a nova política usando confirmação temporizada ('commit confirmed') e notamos que duas sub-redes internas sumiram da tabela global. O cronômetro de reversão ainda está rodando. Qual ação tomar?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Gravar imediatamente a configuração com defeito na memória não volátil ('write memory') e tentar corrigir criando rotas estáticas improvisadas.",
+                "reaction": "Consequência: Persistir uma configuração defeituosa elimina a reversão automática e introduz remendos não homologados.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Acionar o rollback imediato para a configuração estável anterior, confirmar a restauração das sub-redes e analisar o filtro em ambiente de teste.",
+                "reaction": "Decisão adequada: Restaura a disponibilidade operacional rapidamente e transfere a depuração do filtro para fora da janela crítica.",
+                "correct": true
+              },
+              {
+                "id": "s2-c3",
+                "text": "Reiniciar fisicamente o roteador de núcleo desligando suas fontes de alimentação sem reverter a alteração.",
+                "reaction": "Consequência: Desligar fontes abruptamente provoca interrupção total de todos os serviços do datacenter.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Analista de Governança",
+            "message": "Após corrigir o filtro em homologação e concluir a janela com sucesso na semana seguinte, o que é obrigatório para encerrar formalmente o ciclo da mudança?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Atualizar o repositório de configurações, o inventário/CMDB, o diagrama lógico de roteamento e registrar o relatório pós-implementação (PIR).",
+                "reaction": "Decisão adequada: Mantém a base documental fiel ao ambiente real e consolida o histórico de auditoria e melhoria contínua.",
+                "correct": true
+              },
+              {
+                "id": "s3-c2",
+                "text": "Manter os diagramas antigos desatualizados para evitar que outros técnicos saibam quais políticas estão ativas.",
+                "reaction": "Consequência: Documentação obsoleta induz erros em diagnósticos futuros e compromete a continuidade operacional.",
+                "correct": false
+              },
+              {
+                "id": "s3-c3",
+                "text": "Excluir o histórico da Requisição de Mudança e apagar os logs da janela para liberar espaço no sistema de chamados.",
+                "reaction": "Consequência: Apagar registros destrói a rastreabilidade exigida por auditorias e gestão de incidentes.",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

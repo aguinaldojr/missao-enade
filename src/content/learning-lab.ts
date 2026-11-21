@@ -5,6 +5,7 @@ import catalogFour from './learning/n9-com-04.json';
 import catalogFive from './learning/n9-com-05.json';
 import catalogSix from './learning/n9-com-06.json';
 import catalogTrcOne from './learning/n9-trc-01.json';
+import catalogTrcTwo from './learning/n9-trc-02.json';
 import type { CatalogLearningActivity } from '../domain/models/LearningActivityCatalog';
 import { JsonLearningActivityRepository } from '../infrastructure/content/JsonLearningActivityRepository';
 
@@ -137,7 +138,7 @@ function toLearningActivity(activity: CatalogLearningActivity): LearningActivity
   }
 }
 
-const activities = [catalogOne, catalogTwo, catalogThree, catalogFour, catalogFive, catalogSix, catalogTrcOne]
+const activities = [catalogOne, catalogTwo, catalogThree, catalogFour, catalogFive, catalogSix, catalogTrcOne, catalogTrcTwo]
   .flatMap((catalog) => new JsonLearningActivityRepository(catalog).all());
 if (new Set(activities.map((activity) => activity.id)).size !== activities.length) {
   throw new Error('IDs duplicados entre lotes de aprendizagem.');
