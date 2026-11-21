@@ -1,4 +1,5 @@
 import { SI_LEARNING_LAB, type LearningActivity } from '../../content/learning-lab';
+import { selectDailyLearningActivities } from '../../domain/services/DailyLearningSelector';
 import { LabSound } from './LabSound';
 
 const typeLabels = {
@@ -50,6 +51,7 @@ function characters(): HTMLElement {
 
 export class LearningLab {
   private readonly sound = new LabSound();
+  private readonly activities: readonly LearningActivity[];
   private index = -1;
   private xp = 0;
   private solved = false;
@@ -69,13 +71,16 @@ export class LearningLab {
   private feedback = '';
   private guide = 'Eu sou a Lia. Vamos treinar com atividades rápidas e variadas?';
 
-  constructor(private readonly root: HTMLElement, private readonly onExit: () => void) { this.render(); }
+  constructor(private readonly root: HTMLElement, private readonly onExit: () => void, date = new Date()) {
+    this.activities = selectDailyLearningActivities(SI_LEARNING_LAB, date);
+    this.render();
+  }
 
   destroy(): void { this.sound.close(); }
 
   private render(): void {
     this.root.className = 'learning-lab-root';
-    this.root.replaceChildren(this.index < 0 ? this.intro() : this.index >= SI_LEARNING_LAB.length ? this.result() : this.activity());
+    this.root.replaceChildren(this.index < 0 ? this.intro() : this.index >= this.activities.length ? this.result() : this.activity());
   }
 
   private header(): HTMLElement {
@@ -102,19 +107,19 @@ export class LearningLab {
     const title = el('h1', 'lab-title');
     title.tabIndex = -1;
     title.append('TREINE. ', el('span', '', 'DESCUBRA.'), ' AVANCE.');
-    copy.append(title, el('p', 'lab-lead', SI_LEARNING_LAB.length + ' atividades compartilhadas de CC, SI, TADS e TGTI com situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
+    copy.append(title, el('p', 'lab-lead', this.activities.length + ' atividades na missão de hoje, compartilhadas por CC, SI, TADS e TGTI e ligadas a situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
     const start = action('Começar laboratório  →', 'lab-button lab-button--primary');
     start.addEventListener('click', () => { this.index = 0; this.prepareActivity(); this.sound.play('tap'); this.render(); });
-    copy.append(start, el('p', 'lab-note', 'Duração estimada: 10 a 15 minutos · Funciona com teclado, mouse e toque'));
+    copy.append(start, el('p', 'lab-note', 'Duração estimada: 15 a 20 minutos · Funciona com teclado, mouse e toque'));
     const visual = el('aside', 'lab-hero-visual');
     const bubble = el('p', 'lab-speech', 'Oi! Eu sou a Lia. Cada acerto libera XP e uma nova reação.');
     visual.append(bubble, characters());
     hero.append(copy, visual);
     const deck = el('section', 'lab-deck');
     deck.setAttribute('aria-label', 'Mecânicas disponíveis');
-    SI_LEARNING_LAB.forEach((activity, itemIndex) => {
+    this.activities.forEach((activity, itemIndex) => {
       const card = el('article', 'lab-mechanic-card');
-      card.append(el('span', 'lab-card-number', String(itemIndex + 1).padStart(2, '0') + ' / ' + String(SI_LEARNING_LAB.length).padStart(2, '0')),
+      card.append(el('span', 'lab-card-number', String(itemIndex + 1).padStart(2, '0') + ' / ' + String(this.activities.length).padStart(2, '0')),
         el('strong', '', typeLabels[activity.type]), el('span', '', activity.area));
       deck.append(card);
     });
@@ -124,20 +129,20 @@ export class LearningLab {
   }
 
   private activity(): HTMLElement {
-    const activity = SI_LEARNING_LAB[this.index]!;
+    const activity = this.activities[this.index]!;
     const page = el('div', 'lab-page lab-play-screen');
     page.append(this.header());
     const status = el('section', 'lab-status');
     const statusCopy = el('div', 'lab-status-copy');
-    statusCopy.append(el('span', 'lab-level', 'ATIVIDADE ' + (this.index + 1) + ' DE ' + SI_LEARNING_LAB.length),
+    statusCopy.append(el('span', 'lab-level', 'ATIVIDADE ' + (this.index + 1) + ' DE ' + this.activities.length),
       el('strong', '', typeLabels[activity.type]));
     const meter = el('div', 'lab-progress');
     meter.setAttribute('role', 'progressbar');
     meter.setAttribute('aria-valuenow', String(this.index + (this.solved ? 1 : 0)));
     meter.setAttribute('aria-valuemin', '0');
-    meter.setAttribute('aria-valuemax', String(SI_LEARNING_LAB.length));
+    meter.setAttribute('aria-valuemax', String(this.activities.length));
     const fill = el('span', 'lab-progress-fill');
-    fill.style.width = ((this.index + (this.solved ? 1 : 0)) / SI_LEARNING_LAB.length * 100) + '%';
+    fill.style.width = ((this.index + (this.solved ? 1 : 0)) / this.activities.length * 100) + '%';
     meter.append(fill);
     status.append(statusCopy, meter, el('strong', 'lab-xp', '⚡ ' + this.xp + ' XP'));
 
@@ -158,7 +163,7 @@ export class LearningLab {
     feedback.setAttribute('aria-live', 'polite');
     if (this.solved) feedback.append(el('strong', '', 'Excelente! +' + activity.xp + ' XP'), el('span', '', activity.explanation));
     else feedback.append(el('strong', '', this.feedback || 'Sua vez!'), el('span', '', this.feedback ? 'Revise a situação e tente outra vez. Você não perde XP.' : 'Escolha, organize ou associe antes de verificar.'));
-    const verify = action(this.solved ? (this.index === SI_LEARNING_LAB.length - 1 ? 'Ver resultado  →' : 'Continuar  →') : 'Verificar', 'lab-button lab-button--primary');
+    const verify = action(this.solved ? (this.index === this.activities.length - 1 ? 'Ver resultado  →' : 'Continuar  →') : 'Verificar', 'lab-button lab-button--primary');
     verify.dataset.action = this.solved ? 'next' : 'check';
     verify.disabled = !this.solved && !this.ready(activity);
     verify.addEventListener('click', () => this.solved ? this.next() : this.check(activity));
@@ -428,8 +433,8 @@ export class LearningLab {
                   : activity.type === 'hotspot' && this.selectedNode === activity.correctNodeId;
     if (correct) {
       this.solved = true; this.xp += activity.xp; this.feedback = '';
-      this.guide = this.index === SI_LEARNING_LAB.length - 1 ? 'Sequência concluída! Você dominou nove maneiras de aprender.' : 'Mandou bem! O próximo desafio usa uma mecânica diferente.';
-      this.sound.play(this.index === SI_LEARNING_LAB.length - 1 ? 'complete' : 'correct');
+      this.guide = this.index === this.activities.length - 1 ? 'Sequência concluída! Você dominou nove maneiras de aprender.' : 'Mandou bem! Vamos para o próximo desafio.';
+      this.sound.play(this.index === this.activities.length - 1 ? 'complete' : 'correct');
     } else {
       this.feedback = activity.type === 'choice' ? activity.options.find((option) => option.id === this.selectedChoice)?.feedback ?? 'Revise a alternativa.'
         : activity.type === 'binary-choice' ? (this.selectedBinary ? activity.feedbackTrue : activity.feedbackFalse)
@@ -480,7 +485,7 @@ export class LearningLab {
     this.selectedMultiple.clear(); this.selectedLeft = null; this.matches.clear();
     this.activeCategoryItem = null; this.categories.clear(); this.selectedToken = null; this.selectedNode = null;
     this.dialogueStep = 0; this.selectedDialogueChoice = null; this.dialogueHistory.length = 0;
-    const current = SI_LEARNING_LAB[this.index];
+    const current = this.activities[this.index];
     this.order = current?.type === 'order' ? [...current.blocks].reverse().map((block) => block.id) : [];
     this.guide = current ? 'Novo desafio: ' + typeLabels[current.type] + '. Você consegue!' : 'Laboratório concluído!';
   }
@@ -501,9 +506,9 @@ export class LearningLab {
     const main = el('main', 'lab-result');
     const burst = el('div', 'lab-xp-burst', '⚡ +' + this.xp + ' XP');
     const title = el('h1', 'lab-title', 'LABORATÓRIO CONCLUÍDO!'); title.tabIndex = -1;
-    main.append(burst, title, el('p', 'lab-lead', 'Você concluiu ' + SI_LEARNING_LAB.length + ' atividades e experimentou nove formas de aprender conceitos reais de tecnologia.'), characters());
+    main.append(burst, title, el('p', 'lab-lead', 'Você concluiu as ' + this.activities.length + ' atividades de hoje e experimentou nove formas de aprender conceitos reais de tecnologia.'), characters());
     const stats = el('div', 'lab-result-stats');
-    stats.append(el('span', '', SI_LEARNING_LAB.length + ' atividades'), el('span', '', this.xp + ' XP'), el('span', '', 'Sem alterar o jogo atual'));
+    stats.append(el('span', '', this.activities.length + ' atividades'), el('span', '', this.xp + ' XP'), el('span', '', 'Missão diária concluída'));
     const restart = action('Jogar novamente', 'lab-button lab-button--primary');
     restart.addEventListener('click', () => { this.index = 0; this.xp = 0; this.prepareActivity(); this.render(); });
     const exit = action('Voltar ao N9 atual', 'lab-button lab-button--ghost'); exit.addEventListener('click', this.onExit);

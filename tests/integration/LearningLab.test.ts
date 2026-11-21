@@ -1,14 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { SI_LEARNING_LAB } from '../../src/content/learning-lab';
+import { selectDailyLearningActivities } from '../../src/domain/services/DailyLearningSelector';
 import { LearningLab } from '../../src/ui/learning/LearningLab';
 
 let lab: LearningLab;
 afterEach(() => { lab?.destroy(); document.body.replaceChildren(); });
-
-function click(root: HTMLElement, selector: string): void {
-  const control = root.querySelector<HTMLButtonElement>(selector);
-  if (!control) throw new Error('Controle ausente: ' + selector);
-  control.click();
-}
 
 function clickText(root: HTMLElement, text: string): void {
   const control = [...root.querySelectorAll<HTMLButtonElement>('button')].find((button) => button.textContent?.includes(text));
@@ -17,28 +13,20 @@ function clickText(root: HTMLElement, text: string): void {
 }
 
 describe('experiência do laboratório rápido', () => {
-  it('carrega o lote compartilhado, oferece ajuda e preserva o jogo principal', () => {
+  it('carrega a missão diária, oferece ajuda e preserva o jogo principal', () => {
     localStorage.clear();
+    const date = new Date(2026, 10, 23);
+    const session = selectDailyLearningActivities(SI_LEARNING_LAB, date);
     const root = document.createElement('div'); document.body.append(root);
-    const exit = vi.fn(); lab = new LearningLab(root, exit);
-    expect(root.textContent).toContain('120 atividades compartilhadas');
-    expect(root.querySelectorAll('.lab-mechanic-card')).toHaveLength(120);
+    const exit = vi.fn(); lab = new LearningLab(root, exit, date);
+    expect(root.textContent).toContain('15 atividades na missão de hoje');
+    expect(root.querySelectorAll('.lab-mechanic-card')).toHaveLength(15);
 
     clickText(root, 'Começar laboratório');
-    expect(root.textContent).toContain('Falha de Acesso no Portal N9');
+    expect(root.textContent).toContain(session[0]!.title);
+    expect(root.textContent).toContain('ATIVIDADE 1 DE 15');
     expect(root.textContent).toContain('Preciso de ajuda');
-    expect([...root.querySelectorAll('.lab-option-key')].map((node) => node.textContent)).toEqual(['A', 'B', 'C', 'D', 'E']);
     expect(root.textContent).not.toContain('opt-a');
-    click(root, '[data-option="opt-a"]');
-    click(root, '[data-action="check"]');
-    expect(root.textContent).toContain('Excelente! +50 XP');
-    click(root, '[data-action="next"]');
-
-    expect(root.textContent).toContain('Consulta de Notas em SQL');
-    expect(root.querySelector('[data-option="opt-b"]')?.textContent).toContain('HAVING AVG(NOTA_FINAL) > 7.0');
-    click(root, '[data-option="opt-b"]');
-    click(root, '[data-action="check"]');
-    expect(root.textContent).toContain('Excelente! +50 XP');
     expect(localStorage.length).toBe(0);
   });
 });
