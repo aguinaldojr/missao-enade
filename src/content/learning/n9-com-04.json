@@ -1,0 +1,1499 @@
+{
+  "schemaVersion": 1,
+  "batchId": "N9-COM-04",
+  "activities": [
+    {
+      "id": "N9-COM-061",
+      "title": "Metas de Continuidade: RTO e RPO",
+      "mechanic": "single-choice",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Continuidade de Serviços e Gestão de Riscos",
+      "conceptId": "CNT-RTO-01",
+      "difficulty": "introductory",
+      "context": "O plano de continuidade do portal acadêmico N9 estabelece RTO (Recovery Time Objective — Objetivo de Tempo de Recuperação) de 2 horas e RPO (Recovery Point Objective — Objetivo de Ponto de Recuperação) de 15 minutos após uma falha grave no servidor principal.",
+      "instruction": "Selecione a interpretação correta dessas duas métricas para a equipe de operação e suporte.",
+      "xp": 50,
+      "help": {
+        "hint": "Relacione RTO ao tempo máximo de parada tolerado e RPO ao intervalo máximo de dados que podem ser perdidos desde a última cópia.",
+        "concept": "RTO (Objetivo de Tempo de Recuperação) mede o prazo máximo aceitável para restabelecer o serviço após interrupção; RPO (Objetivo de Ponto de Recuperação) define a perda máxima de dados medida em tempo desde o último ponto de recuperação.",
+        "example": "Se o backup ocorre a cada 15 minutos, uma falha às 10h14 permite recuperar dados até 10h00 (RPO de 15 minutos)."
+      },
+      "explanation": "O RTO (Objetivo de Tempo de Recuperação) de 2 horas determina o limite máximo de tempo para restaurar a operação do portal após a interrupção, enquanto o RPO (Objetivo de Ponto de Recuperação) de 15 minutos define a janela máxima tolerável de perda de registros recentes entre o último backup ou replicação e o momento do incidente. As demais alternativas invertem os conceitos, tratam de retenção histórica ou confundem metas de recuperação com garantias absolutas sem perda.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO 22301 — Security and resilience — Business continuity management systems — Requirements."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Metas de Continuidade: RTO e RPO (CNT-RTO-01)",
+        "objective": "Distinguir Objetivo de Tempo de Recuperação (RTO) e Objetivo de Ponto de Recuperação (RPO) em planos de continuidade de serviços de TI.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO 22301 — Business continuity management systems"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "O serviço deve voltar a operar em até 2 horas, admitindo perda máxima dos últimos 15 minutos de transações.",
+            "feedback": "Correto. RTO limita o tempo de indisponibilidade (2 horas) e RPO limita a defasagem máxima dos dados recuperados (15 minutos)."
+          },
+          {
+            "id": "opt-b",
+            "text": "Os backups devem ser mantidos arquivados por 2 horas e apagados automaticamente a cada 15 minutos.",
+            "feedback": "Incorreto. RTO e RPO não definem prazo de descarte ou retenção histórica de mídias de backup."
+          },
+          {
+            "id": "opt-c",
+            "text": "O sistema pode perder até 2 horas de dados gravados, mas precisa reiniciar em no máximo 15 minutos.",
+            "feedback": "Incorreto. Essa leitura inverte as definições: tempo de retomada é o RTO (2 horas) e perda tolerável de dados é o RPO (15 minutos)."
+          },
+          {
+            "id": "opt-d",
+            "text": "Nenhuma transação pode ser perdida em hipótese alguma, desde que o servidor reinicie em 15 minutos.",
+            "feedback": "Incorreto. Perda zero exige RPO igual a zero (replicação síncrona), não um RPO de 15 minutos."
+          },
+          {
+            "id": "opt-e",
+            "text": "A equipe tem 15 minutos para detectar a falha e 2 horas adicionais para notificar os usuários afetados.",
+            "feedback": "Incorreto. RTO e RPO medem recuperação técnica de operação e dados, não prazos de comunicação institucional."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-062",
+      "title": "Dependência Funcional e Redundância Relacional",
+      "mechanic": "single-choice",
+      "courses": ["CC", "SI", "TADS"],
+      "area": "Banco de Dados e Modelagem Relacional",
+      "conceptId": "DB-NRM-01",
+      "difficulty": "intermediate",
+      "context": "Na tabela MATRICULA_CURSO(id_matricula, ra_estudante, nome_estudante, cod_curso, nome_curso), a chave primária é id_matricula. Observa-se que ra_estudante determina funcionalmente nome_estudante e cod_curso determina nome_curso.",
+      "instruction": "Qual decisão de modelagem elimina a redundância e as anomalias associadas a essas dependências parciais ou transitivas sem perder dados?",
+      "xp": 75,
+      "help": {
+        "hint": "Atributos que dependem apenas de um identificador próprio (como estudante ou curso) devem residir em suas respectivas entidades.",
+        "concept": "Na normalização relacional (Segunda Forma Normal — 2FN e Terceira Forma Normal — 3FN), atributos não chave devem depender exclusivamente da chave primária inteira, sem dependências transitivas.",
+        "example": "Separar nome_cliente para a tabela CLIENTE evita repetir o nome em cada pedido e impede inconsistências ao atualizá-lo."
+      },
+      "explanation": "Como nome_estudante depende apenas de ra_estudante e nome_curso depende apenas de cod_curso (dependências transitivas em relação à chave id_matricula), a solução adequada é decompor a relação em ESTUDANTE(ra_estudante, nome_estudante), CURSO(cod_curso, nome_curso) e MATRICULA(id_matricula, ra_estudante, cod_curso) com chaves estrangeiras, eliminando duplicações sem perda de informação.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Dependência Funcional e Redundância Relacional (DB-NRM-01)",
+        "objective": "Identificar dependências funcionais que causam redundância e escolher a decomposição relacional adequada.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Extrair ESTUDANTE(ra_estudante, nome_estudante) e CURSO(cod_curso, nome_curso), mantendo apenas as chaves estrangeiras em MATRICULA.",
+            "feedback": "Correto. Cada atributo descritivo passa a depender exclusivamente da chave de sua própria tabela, eliminando redundância."
+          },
+          {
+            "id": "opt-b",
+            "text": "Definir todas as cinco colunas juntas como chave primária composta da tabela MATRICULA_CURSO.",
+            "feedback": "Incorreto. Ampliar a chave primária não remove a repetição de nome_estudante e nome_curso em múltiplas matrículas."
+          },
+          {
+            "id": "opt-c",
+            "text": "Excluir nome_estudante e nome_curso do banco e exigir digitação manual a cada consulta.",
+            "feedback": "Incorreto. Normalizar reorganiza atributos sem descartar informações necessárias ao domínio."
+          },
+          {
+            "id": "opt-d",
+            "text": "Criar um índice único sobre nome_curso na própria tabela MATRICULA_CURSO.",
+            "feedback": "Incorreto. Um índice único impediria mais de um estudante de se matricular no mesmo curso."
+          },
+          {
+            "id": "opt-e",
+            "text": "Concatenar nome_estudante e nome_curso em uma única coluna textual para reduzir o número de campos.",
+            "feedback": "Incorreto. Concatenar valores viola a atomicidade da Primeira Forma Normal (1FN) e mantém a redundância."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-063",
+      "title": "Verificação de Assinatura Digital em Ata Acadêmica",
+      "mechanic": "single-choice",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-SIG-01",
+      "difficulty": "introductory",
+      "context": "A secretaria acadêmica N9 envia um documento eletrônico em formato PDF (Portable Document Format) assinado digitalmente com a chave privada institucional. O destinatário utiliza a chave pública correspondente para validar o arquivo recebido.",
+      "instruction": "O que a validação bem-sucedida dessa assinatura digital comprova sobre o documento?",
+      "xp": 50,
+      "help": {
+        "hint": "Considere o papel do resumo criptográfico (hash) combinado com a chave privada do remetente.",
+        "concept": "A assinatura digital cifra o resumo (hash) do documento com a chave privada do emissor, garantindo autenticidade, integridade e não repúdio.",
+        "example": "Se um único caractere do documento for alterado após a assinatura, o hash recalculado diverge e a verificação falha."
+      },
+      "explanation": "Na assinatura digital, o emissor gera um resumo criptográfico (hash) do conteúdo e o assina com sua chave privada. Ao verificar com a chave pública, o destinatário confirma tanto a autoria e autenticidade (apenas quem detém a chave privada gerou a assinatura) quanto a integridade (o conteúdo não foi modificado após a assinatura). Assinatura digital isolada não torna o texto ilegível (confidencialidade), nem substitui cópia de segurança.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Verificação de Assinatura Digital em Ata Acadêmica (SEC-SIG-01)",
+        "objective": "Identificar as propriedades de autenticidade e integridade garantidas pela verificação de assinatura digital com hash.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Autenticidade da origem e integridade do conteúdo, indicando que não houve alteração após a assinatura.",
+            "feedback": "Correto. A chave pública valida que o hash foi assinado pela chave privada correspondente e que o arquivo permanece íntegro."
+          },
+          {
+            "id": "opt-b",
+            "text": "Confidencialidade total do documento, impedindo que qualquer pessoa sem a chave pública leia o texto.",
+            "feedback": "Incorreto. Assinatura digital não cifra o conteúdo para sigilo; se a chave pública é aberta, qualquer um pode verificar um documento legível."
+          },
+          {
+            "id": "opt-c",
+            "text": "Possibilidade de recuperar o arquivo original a partir da assinatura caso o documento seja apagado.",
+            "feedback": "Incorreto. O hash assinado é um resumo unidirecional de tamanho fixo e não permite reconstruir o documento original."
+          },
+          {
+            "id": "opt-d",
+            "text": "Veracidade factual das informações redigidas pelo autor antes de assinar o arquivo.",
+            "feedback": "Incorreto. A assinatura prova quem assinou e que o arquivo não mudou, mas não audita se o conteúdo declarado era verdadeiro."
+          },
+          {
+            "id": "opt-e",
+            "text": "Disponibilidade contínua do servidor onde o documento fica armazenado para consulta.",
+            "feedback": "Incorreto. Assinatura digital protege integridade e autoria do artefato, sem relação com redundância ou disponibilidade de servidor."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-064",
+      "title": "Menor Número de Saltos em Grafo Não Ponderado",
+      "mechanic": "single-choice",
+      "courses": ["CC", "SI", "TADS"],
+      "area": "Algoritmos e Estruturas de Dados",
+      "conceptId": "GRF-BFS-01",
+      "difficulty": "intermediate",
+      "context": "No mapa lógico do campus N9, cada prédio é um vértice e cada enlace direto entre dois prédios é uma aresta sem peso (custo unitário). Deseja-se encontrar o caminho com a menor quantidade de enlaces entre a Biblioteca e o Laboratório Central.",
+      "instruction": "Qual estratégia de percurso garante encontrar o caminho com o menor número de arestas nesse grafo não ponderado?",
+      "xp": 75,
+      "help": {
+        "hint": "Explore todos os vértices a 1 aresta de distância antes de visitar os vértices a 2 arestas, usando uma fila FIFO (First In, First Out — Primeiro a Entrar, Primeiro a Sair).",
+        "concept": "A busca em largura (BFS — Breadth-First Search) visita vértices por camadas de distância crescente, garantindo o menor número de arestas em grafos não ponderados.",
+        "example": "Partindo da origem no nível 0, a busca em largura visita todos os vizinhos diretos (nível 1) antes de avançar para os vizinhos dos vizinhos (nível 2)."
+      },
+      "explanation": "Em um grafo não ponderado (todas as arestas têm custo igual a 1), a busca em largura (BFS — Breadth-First Search) expande os vértices em níveis concêntricos de distância a partir da origem usando uma fila FIFO (First In, First Out — Primeiro a Entrar, Primeiro a Sair). Assim, o primeiro encontro com o vértice de destino ocorre necessariamente pelo caminho com o menor número de arestas.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Menor Número de Saltos em Grafo Não Ponderado (GRF-BFS-01)",
+        "objective": "Justificar a escolha da busca em largura (BFS) para determinar caminhos mínimos em número de arestas em grafos não ponderados.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Busca em largura (BFS — Breadth-First Search), pois explora os vértices por camadas de distância crescente a partir da origem.",
+            "feedback": "Correto. Ao visitar todos os vértices a k arestas antes de k + 1, a busca em largura garante o menor número de saltos."
+          },
+          {
+            "id": "opt-b",
+            "text": "Busca em profundidade (DFS — Depth-First Search), pois avança sempre pelo primeiro ramo até encontrar o destino.",
+            "feedback": "Incorreto. A busca em profundidade (DFS) pode encontrar um caminho longo antes de explorar um atalho direto."
+          },
+          {
+            "id": "opt-c",
+            "text": "Ordenação topológica, pois organiza os prédios em sequência linear de menor distância.",
+            "feedback": "Incorreto. Ordenação topológica aplica-se apenas a grafos dirigidos acíclicos para precedência, não para menor caminho."
+          },
+          {
+            "id": "opt-d",
+            "text": "Busca binária na lista de adjacência, pois divide o grafo ao meio a cada passo.",
+            "feedback": "Incorreto. Busca binária exige vetor ordenado unidimensional e não percorre caminhos em grafos."
+          },
+          {
+            "id": "opt-e",
+            "text": "Percurso em pós-ordem, pois visita primeiro os nós folhas antes de retornar à origem.",
+            "feedback": "Incorreto. Pós-ordem é um percurso específico de árvores e não calcula menor quantidade de arestas em grafos gerais."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-065",
+      "title": "Compartilhamento de Memória entre Threads",
+      "mechanic": "binary-choice",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Sistemas Operacionais",
+      "conceptId": "SO-THR-01",
+      "difficulty": "introductory",
+      "context": "No servidor de aplicações N9, um único processo cria múltiplas threads (linhas de execução) para atender requisições simultâneas dos estudantes.",
+      "instruction": "Avalie se a afirmação sobre a organização de recursos entre processo e threads está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Diferencie o que é compartilhado pelo processo (código, heap, arquivos abertos) do que é próprio de cada thread (pilha e registradores).",
+        "concept": "Threads (linhas de execução) de um mesmo processo compartilham o mesmo espaço de endereçamento (código, dados globais e heap), mantendo pilha de execução e registradores individuais.",
+        "example": "Duas threads do mesmo servidor podem ler a mesma variável global na memória sem precisar de comunicação entre processos."
+      },
+      "explanation": "A afirmação está correta. Diferentemente de processos distintos — que possuem espaços de endereçamento isolados pelo sistema operacional —, threads (linhas de execução) pertencentes ao mesmo processo compartilham o espaço de memória (código, dados globais, heap) e descritores de arquivos abertos, enquanto cada thread mantém sua própria pilha de chamadas e conjunto de registradores.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Compartilhamento de Memória entre Threads (SO-THR-01)",
+        "objective": "Distinguir o compartilhamento de espaço de endereçamento entre threads de um mesmo processo e o isolamento entre processos distintos.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Threads criadas dentro de um mesmo processo compartilham o espaço de endereçamento (código, dados globais e heap) e arquivos abertos, enquanto cada thread conserva sua própria pilha de execução e registradores.",
+        "correctValue": true,
+        "feedbackTrue": "Correto. O compartilhamento de memória dentro do mesmo processo torna a troca de contexto entre threads mais leve, exigindo sincronização ao alterar dados compartilhados.",
+        "feedbackFalse": "Incorreto. Espaço de endereçamento isolado é característica de processos distintos; threads de um mesmo processo compartilham código, heap e recursos abertos."
+      }
+    },
+    {
+      "id": "N9-COM-066",
+      "title": "Escalabilidade Vertical vs. Alta Disponibilidade",
+      "mechanic": "binary-choice",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Infraestrutura e Arquitetura de Sistemas",
+      "conceptId": "INF-SCL-01",
+      "difficulty": "introductory",
+      "context": "Para suportar o pico de matrículas, a equipe N9 aumentou a memória RAM (Random Access Memory — Memória de Acesso Aleatório) e os núcleos de CPU (Central Processing Unit — Unidade Central de Processamento) de um único servidor de aplicação (escalabilidade vertical), mantendo apenas essa instância em operação.",
+      "instruction": "Avalie se a afirmação sobre o efeito dessa medida na disponibilidade do serviço está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Pergunte-se o que acontece se essa máquina única sofrer falha de hardware ou precisar reiniciar.",
+        "concept": "Escalabilidade amplia a capacidade de processar carga (verticalmente, reforçando um nó; horizontalmente, adicionando nós), mas disponibilidade exige redundância e tolerância a falhas.",
+        "example": "Um servidor muito potente continua sendo um ponto único de falha se não houver réplicas."
+      },
+      "explanation": "A afirmação está incorreta. Aumentar recursos em um único servidor (escalabilidade vertical ou scale-up) eleva sua capacidade de processamento, mas não elimina o ponto único de falha: se essa única máquina falhar ou passar por manutenção sem réplicas, o sistema ficará indisponível. Alta disponibilidade requer redundância e failover (chaveamento automático para nó reserva).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Escalabilidade Vertical vs. Alta Disponibilidade (INF-SCL-01)",
+        "objective": "Evitar a confusão conceitual entre escalabilidade (capacidade de carga) e alta disponibilidade (redundância contra falhas).",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Aplicar escalabilidade vertical em um único servidor garante automaticamente alta disponibilidade, pois o aumento de memória e CPU impede qualquer interrupção do serviço em caso de falha física.",
+        "correctValue": false,
+        "feedbackTrue": "Incorreto. Mais CPU e memória aumentam a capacidade de atendimento, mas uma instância única continua sujeita a paradas por falha de hardware ou sistema.",
+        "feedbackFalse": "Correto. Escalabilidade trata de capacidade de carga; alta disponibilidade exige redundância entre múltiplas instâncias e mecanismos de contingência."
+      }
+    },
+    {
+      "id": "N9-COM-067",
+      "title": "Prevenção de Deadlock em Recursos Compartilhados",
+      "mechanic": "multiple-select",
+      "courses": ["CC", "SI", "TADS"],
+      "area": "Sistemas Operacionais e Concorrência",
+      "conceptId": "SO-DLK-01",
+      "difficulty": "intermediate",
+      "context": "Dois serviços concorrentes do módulo financeiro N9 travaram mutuamente (deadlock — impasse) porque cada um bloqueou uma tabela diferente e aguardava indefinidamente pela liberação da tabela retida pelo outro.",
+      "instruction": "Selecione exatamente 3 medidas técnicas que evitam deadlock ao quebrar diretamente uma de suas quatro condições necessárias (exclusão mútua, posse e espera, não preempção e espera circular).",
+      "xp": 80,
+      "help": {
+        "hint": "Pense em como impedir espera circular (ordem global de aquisição), posse e espera (solicitar tudo antes) ou não preempção (liberar ao falhar).",
+        "concept": "Para ocorrer deadlock (impasse), as quatro condições de Coffman devem valer simultaneamente; basta impedir uma delas estruturalmente.",
+        "example": "Exigir que todo processo trave a tabela A antes da tabela B elimina ciclos de espera."
+      },
+      "explanation": "O deadlock (impasse) exige simultaneamente exclusão mútua, posse e espera, não preempção e espera circular. Impor uma ordem global única de aquisição de bloqueios quebra a espera circular; exigir que o processo solicite todos os recursos necessários de uma só vez antes de iniciar quebra a posse e espera; e liberar os bloqueios já obtidos caso um novo recurso não esteja disponível quebra a não preempção.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Prevenção de Deadlock em Recursos Compartilhados (SO-DLK-01)",
+        "objective": "Identificar medidas de prevenção de deadlock baseadas na quebra das condições necessárias de Coffman.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Estabelecer uma hierarquia numérica global obrigando todos os processos a adquirir bloqueios sempre na mesma ordem crescente.",
+            "feedback": "Correto. A ordenação global de recursos impede a formação de ciclos, quebrando a condição de espera circular.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Exigir que cada processo solicite e obtenha todos os recursos necessários antes de iniciar sua execução crítica.",
+            "feedback": "Correto. Quando o processo não retém um recurso enquanto aguarda outro, elimina-se a condição de posse e espera.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Determinar que, ao ter um pedido de recurso negado, o processo libere imediatamente os bloqueios já adquiridos para tentar depois.",
+            "feedback": "Correto. Permitir a liberação forçada de recursos retidos quebra a condição de não preempção.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Aumentar o tempo limite (timeout) das conexões para que os processos aguardem por mais horas sem erro.",
+            "feedback": "Incorreto. Aumentar o tempo de espera não resolve o impasse; apenas prolonga o travamento mútuo.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Permitir que cada serviço escolha livremente a ordem em que trava as tabelas conforme a chegada dos dados.",
+            "feedback": "Incorreto. Ordens arbitrárias de aquisição favorecem exatamente a espera circular entre processos concorrentes.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Desativar toda sincronização de escrita para que dois processos alterem o mesmo saldo simultaneamente.",
+            "feedback": "Incorreto. Remover exclusão mútua em escrita crítica gera condições de corrida e corrupção de dados.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-068",
+      "title": "Pilares de Controle de Acesso no Sistema N9",
+      "mechanic": "multiple-select",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-IAM-01",
+      "difficulty": "intermediate",
+      "context": "A equipe de segurança N9 está revisando o controle de acesso ao módulo de emissão de diplomas, onde estudantes, secretários e auditores possuem atribuições distintas.",
+      "instruction": "Selecione exatamente 3 práticas que aplicam corretamente autenticação, autorização, princípio do menor privilégio e registro de auditoria.",
+      "xp": 80,
+      "help": {
+        "hint": "Autenticação verifica identidade; autorização define permissões; menor privilégio restringe ao necessário; auditoria registra quem fez o quê.",
+        "concept": "Um controle de acesso robusto combina verificação de identidade (autenticação), concessão mínima de permissões (autorização e menor privilégio) e rastreabilidade (auditoria).",
+        "example": "Um estudante autenticado pode consultar seu histórico, mas não possui autorização para alterar notas."
+      },
+      "explanation": "O controle de acesso eficaz separa autenticação (confirmar quem é o usuário antes de conceder sessão), autorização com menor privilégio (conceder a cada papel apenas as operações estritamente necessárias às suas funções) e auditoria (registrar logs imutáveis com usuário, data/hora e ação executada). Compartilhar contas ou conceder perfil administrativo geral viola esses princípios.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 27002 — Information security, cybersecurity and privacy protection — Information security controls."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Pilares de Controle de Acesso no Sistema N9 (SEC-IAM-01)",
+        "objective": "Articular autenticação, autorização, princípio do menor privilégio e registro de auditoria em controles de acesso.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 27002 — Information security controls"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Conceder ao perfil de auditoria apenas permissão de leitura nos registros históricos, bloqueando alterações.",
+            "feedback": "Correto. Aplica autorização granular e o princípio do menor privilégio ao limitar o acesso ao necessário para auditar.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Verificar a identidade do usuário via autenticação antes de avaliar as permissões vinculadas ao seu papel.",
+            "feedback": "Correto. A autorização depende de uma autenticação prévia confiável para saber a quem aplicar as regras.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Registrar em log protegido a identidade do operador, o horário e o diploma emitido ou alterado.",
+            "feedback": "Correto. O registro de auditoria assegura rastreabilidade e responsabilização (accountability) das ações críticas.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Atribuir perfil de administrador total a toda a equipe de suporte para agilizar atendimentos emergenciais.",
+            "feedback": "Incorreto. Privilégios excessivos violam o princípio do menor privilégio e ampliam o impacto de falhas ou abusos.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Utilizar uma única credencial compartilhada entre todos os funcionários do balcão da secretaria.",
+            "feedback": "Incorreto. Credenciais compartilhadas impedem a identificação individual nos registros de auditoria.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Ocultar os botões restritos apenas na interface visual sem validar permissões no servidor.",
+            "feedback": "Incorreto. Ocultar elementos na tela não impede chamadas diretas às rotas da aplicação no servidor.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-069",
+      "title": "Tratamento de Falta de Página na Memória Virtual",
+      "mechanic": "sequence-order",
+      "courses": ["CC", "SI", "TADS"],
+      "area": "Sistemas Operacionais e Arquitetura",
+      "conceptId": "SO-VMM-01",
+      "difficulty": "intermediate",
+      "context": "Durante a execução de um programa no servidor N9, o hardware de gerenciamento de memória detecta uma falta de página (page fault) ao tentar acessar uma página válida que está armazenada apenas no disco.",
+      "instruction": "Ordene as 5 etapas executadas pelo hardware e pelo sistema operacional desde a detecção da página ausente até a retomada do processo.",
+      "xp": 80,
+      "help": {
+        "hint": "Primeiro ocorre a interrupção ao sistema operacional, depois localiza-se a página no disco, carrega-se em um quadro livre da memória principal, atualiza-se a tabela de páginas e reinicia-se a instrução.",
+        "concept": "No tratamento de falta de página (page fault), o sistema operacional suspende o processo, traz a página do armazenamento secundário para um quadro livre da memória principal, atualiza a tabela de páginas e reexecuta a instrução.",
+        "example": "Quando o bit de validade da tabela de páginas indica ausência na memória principal, o núcleo busca a página no disco antes de devolver o processador ao processo."
+      },
+      "explanation": "Ao referenciar uma página marcada como ausente na tabela de páginas, o hardware dispara uma exceção (interrupção de falta de página) para o sistema operacional. O núcleo valida a referência, localiza a página no armazenamento secundário, agenda sua leitura para um quadro livre na memória principal (RAM — Random Access Memory), atualiza a tabela de páginas marcando-a como presente e, por fim, recoloca o processo em estado pronto para reexecutar a instrução interrompida.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Tratamento de Falta de Página na Memória Virtual (SO-VMM-01)",
+        "objective": "Sequenciar as etapas de atendimento a uma falta de página (page fault) pelo hardware e sistema operacional.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "pf-1",
+            "text": "O hardware detecta o bit de ausência na tabela de páginas e gera uma interrupção de falta de página ao sistema operacional."
+          },
+          {
+            "id": "pf-2",
+            "text": "O sistema operacional verifica que a referência de memória é válida e localiza a página no armazenamento secundário."
+          },
+          {
+            "id": "pf-3",
+            "text": "O sistema operacional aloca um quadro livre na memória principal (RAM — Random Access Memory) e inicia a leitura da página a partir do disco."
+          },
+          {
+            "id": "pf-4",
+            "text": "Concluída a transferência do disco, o sistema operacional atualiza a tabela de páginas com o novo quadro e o bit de presença."
+          },
+          {
+            "id": "pf-5",
+            "text": "O processo retorna à fila de prontos e reexecuta a instrução que havia provocado a falta de página."
+          }
+        ],
+        "correctOrder": ["pf-1", "pf-2", "pf-3", "pf-4", "pf-5"]
+      }
+    },
+    {
+      "id": "N9-COM-070",
+      "title": "Fluxo Formal de Controle de Mudança",
+      "mechanic": "sequence-order",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Gerência de Configuração e Serviços de TI",
+      "conceptId": "CFG-CHG-01",
+      "difficulty": "intermediate",
+      "context": "A equipe N9 precisa alterar o cálculo de bolsa permanência em produção sem comprometer a estabilidade ou a rastreabilidade institucional.",
+      "instruction": "Ordene as 5 etapas do processo formal de controle de mudança desde o pedido inicial até o encerramento pós-implantação.",
+      "xp": 80,
+      "help": {
+        "hint": "Nenhuma mudança vai para produção antes de ser registrada, avaliada quanto a risco e impacto e formalmente aprovada.",
+        "concept": "O controle de mudança organiza solicitação, análise de impacto e risco, aprovação formal, implementação controlada e verificação pós-implantação.",
+        "example": "Uma requisição de mudança passa por avaliação técnica e aprovação antes de alterar a linha de base em produção."
+      },
+      "explanation": "Um processo disciplinado de controle de mudança inicia com o registro formal da solicitação (escopo e justificativa). Em seguida, avaliam-se impactos técnicos, riscos, custos e plano de reversão. Com base nessa análise, a instância competente decide pela aprovação. Somente após aprovada, a alteração é executada na linha de base controlada e, por fim, verificada em operação para confirmar conformidade antes do encerramento.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Fluxo Formal de Controle de Mudança (CFG-CHG-01)",
+        "objective": "Ordenar as etapas de solicitação, análise, aprovação, implementação e verificação no controle de mudanças e configuração.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "chg-1",
+            "text": "Registrar a solicitação formal de mudança descrevendo motivação, escopo e itens de configuração afetados."
+          },
+          {
+            "id": "chg-2",
+            "text": "Analisar impacto técnico, riscos operacionais, esforço necessário e plano de reversão (rollback)."
+          },
+          {
+            "id": "chg-3",
+            "text": "Submeter o parecer técnico à autoridade ou comitê responsável para decisão formal de aprovação."
+          },
+          {
+            "id": "chg-4",
+            "text": "Implementar e implantar a mudança aprovada atualizando a linha de base versionada."
+          },
+          {
+            "id": "chg-5",
+            "text": "Verificar os resultados em operação e encerrar o registro com evidências de conformidade."
+          }
+        ],
+        "correctOrder": ["chg-1", "chg-2", "chg-3", "chg-4", "chg-5"]
+      }
+    },
+    {
+      "id": "N9-COM-071",
+      "title": "Mecanismos Criptográficos e Autenticação",
+      "mechanic": "pair-match",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-CRP-01",
+      "difficulty": "introductory",
+      "context": "No projeto de segurança do ecossistema N9, quatro mecanismos distintos são aplicados para proteger dados, arquivos e acessos administrativos.",
+      "instruction": "Associe cada mecanismo de segurança à sua finalidade principal.",
+      "xp": 60,
+      "help": {
+        "hint": "Diferencie resumo unidirecional (hash), cifragem reversível (criptografia), vínculo de autoria (assinatura digital) e múltiplos fatores independentes (MFA).",
+        "concept": "Hash verifica integridade; criptografia protege confidencialidade; assinatura digital garante autoria e integridade; autenticação multifator (MFA — Multi-Factor Authentication) reforça a verificação de identidade.",
+        "example": "Usar senha e código temporário no aplicativo configura autenticação multifator."
+      },
+      "explanation": "Cada mecanismo cumpre um papel específico: a função hash gera um resumo de tamanho fixo para detectar modificações (integridade); a criptografia transforma dados legíveis em texto cifrado reversível mediante chave (confidencialidade); a assinatura digital vincula um hash à chave privada do emissor (autenticidade e não repúdio); e a autenticação multifator (MFA — Multi-Factor Authentication) exige evidências de categorias distintas (como senha e token) para validar o usuário.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 27002 — Information security, cybersecurity and privacy protection — Information security controls."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Mecanismos Criptográficos e Autenticação (SEC-CRP-01)",
+        "objective": "Correlacionar função hash, criptografia, assinatura digital e autenticação multifator às suas respectivas finalidades de segurança.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 27002 — Information security controls"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Função Hash Criptográfica",
+            "right": "Gerar um resumo digital de tamanho fixo para detectar qualquer alteração não autorizada nos dados."
+          },
+          {
+            "id": "pair-2",
+            "left": "Criptografia (Simétrica ou Assimétrica)",
+            "right": "Codificar informações para garantir confidencialidade, permitindo leitura apenas a quem possui a chave autorizada."
+          },
+          {
+            "id": "pair-3",
+            "left": "Assinatura Digital",
+            "right": "Comprovar a autoria do emissor e a integridade do documento por meio de chave privada e verificação pública."
+          },
+          {
+            "id": "pair-4",
+            "left": "Autenticação Multifator (MFA — Multi-Factor Authentication)",
+            "right": "Exigir duas ou mais evidências independentes (como senha e código temporário) para confirmar a identidade do usuário."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-072",
+      "title": "Protocolos Fundamentais na Conexão Web",
+      "mechanic": "pair-match",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Redes de Computadores",
+      "conceptId": "NET-PRT-01",
+      "difficulty": "introductory",
+      "context": "Quando um notebook recém-conectado à rede do campus N9 acessa o portal acadêmico seguro no navegador, quatro protocolos da arquitetura TCP/IP (Transmission Control Protocol / Internet Protocol) atuam em conjunto.",
+      "instruction": "Relacione cada protocolo à sua função fundamental nessa comunicação.",
+      "xp": 60,
+      "help": {
+        "hint": "Lembre-se de quem atribui IP (Internet Protocol) automático, traduz nomes de domínio, garante entrega ordenada e cifra o tráfego web.",
+        "concept": "DHCP configura parâmetros de rede dinamicamente; DNS resolve nomes em endereços IP; TCP provê transporte confiável orientado à conexão; HTTPS protege a comunicação web com TLS (Transport Layer Security).",
+        "example": "Antes de abrir o portal seguro, o cliente obtém seu endereço IP via DHCP e consulta o endereço do servidor via DNS."
+      },
+      "explanation": "Na pilha TCP/IP: o DHCP (Dynamic Host Configuration Protocol) atribui automaticamente endereço IP (Internet Protocol), máscara e gateway ao dispositivo; o DNS (Domain Name System) traduz nomes legíveis de domínio em endereços IP; o TCP (Transmission Control Protocol) estabelece conexão confiável com controle de fluxo e retransmissão ordenada de segmentos; e o HTTPS (Hypertext Transfer Protocol Secure) transporta requisições web com confidencialidade e integridade via TLS (Transport Layer Security).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Protocolos Fundamentais na Conexão Web (NET-PRT-01)",
+        "objective": "Associar DNS, DHCP, TCP e HTTPS às suas funções essenciais na comunicação em redes TCP/IP.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "DHCP (Dynamic Host Configuration Protocol)",
+            "right": "Atribuir dinamicamente endereço IP (Internet Protocol), máscara de sub-rede e gateway padrão ao dispositivo que ingressa na rede."
+          },
+          {
+            "id": "pair-2",
+            "left": "DNS (Domain Name System)",
+            "right": "Traduzir nomes de domínio legíveis por humanos nos endereços IP correspondentes dos servidores."
+          },
+          {
+            "id": "pair-3",
+            "left": "TCP (Transmission Control Protocol)",
+            "right": "Garantir entrega confiável, ordenada e com controle de fluxo dos pacotes entre origem e destino."
+          },
+          {
+            "id": "pair-4",
+            "left": "HTTPS (Hypertext Transfer Protocol Secure)",
+            "right": "Transmitir páginas e dados web sobre canal criptografado com autenticação do servidor."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-073",
+      "title": "Sistemas Organizacionais por Necessidade",
+      "mechanic": "pair-match",
+      "courses": ["SI", "TADS", "TGTI"],
+      "area": "Sistemas de Informação Organizacionais",
+      "conceptId": "SIS-ENT-01",
+      "difficulty": "introductory",
+      "context": "A diretoria administrativa da rede N9 recebeu quatro demandas distintas para integrar operações financeiras, relacionamento com candidatos, suprimentos dos campi e indicadores executivos.",
+      "instruction": "Relacione cada solução corporativa à necessidade organizacional correspondente.",
+      "xp": 60,
+      "help": {
+        "hint": "ERP integra processos internos (finanças, recursos humanos, estoque); CRM gerencia relacionamento com clientes e estudantes; SCM coordena fornecedores e logística; BI apoia decisões com indicadores.",
+        "concept": "Sistemas empresariais possuem escopos complementares: ERP (gestão interna integrada), CRM (relacionamento com público), SCM (cadeia de suprimentos) e BI (inteligência analítica).",
+        "example": "Acompanhar o histórico de atendimentos e campanhas de captação de estudantes é função típica de um sistema CRM."
+      },
+      "explanation": "O ERP (Enterprise Resource Planning — Planejamento de Recursos Empresariais) integra processos administrativos internos como contabilidade, compras e folha em uma base única; o CRM (Customer Relationship Management — Gestão de Relacionamento com o Cliente) centraliza interações, histórico e atendimento ao público; o SCM (Supply Chain Management — Gestão da Cadeia de Suprimentos) coordena fluxo de materiais, fornecedores e distribuição logística; e o BI (Business Intelligence — Inteligência de Negócio) consolida dados históricos em painéis e indicadores para tomada de decisão.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Sistemas Organizacionais por Necessidade (SIS-ENT-01)",
+        "objective": "Distinguir as finalidades organizacionais de ERP, CRM, SCM e BI.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "ERP (Enterprise Resource Planning — Planejamento de Recursos Empresariais)",
+            "right": "Integrar contabilidade, folha de pagamento, patrimônio e compras internas em uma base transacional única."
+          },
+          {
+            "id": "pair-2",
+            "left": "CRM (Customer Relationship Management — Gestão de Relacionamento com o Cliente)",
+            "right": "Registrar o histórico de contatos, preferências e atendimentos de candidatos e estudantes para fidelização."
+          },
+          {
+            "id": "pair-3",
+            "left": "SCM (Supply Chain Management — Gestão da Cadeia de Suprimentos)",
+            "right": "Coordenar pedidos a fornecedores, prazos de entrega e distribuição de insumos entre os almoxarifados dos campi."
+          },
+          {
+            "id": "pair-4",
+            "left": "BI (Business Intelligence — Inteligência de Negócio)",
+            "right": "Consolidar dados históricos em painéis analíticos e indicadores comparativos para apoiar decisões estratégicas."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-074",
+      "title": "Anomalias em Tabela Não Normalizada",
+      "mechanic": "categorize",
+      "courses": ["CC", "SI", "TADS"],
+      "area": "Banco de Dados e Modelagem Relacional",
+      "conceptId": "DB-ANM-01",
+      "difficulty": "introductory",
+      "context": "Na tabela única ALOCACAO_LAB(id_alocacao, cod_lab, predio_lab, capacidade_lab, id_turma), dados físicos do laboratório são repetidos a cada turma alocada.",
+      "instruction": "Classifique cada problema operacional causado por essa estrutura entre Anomalia de Inserção, Anomalia de Atualização ou Anomalia de Exclusão.",
+      "xp": 60,
+      "help": {
+        "hint": "Inserção impede cadastrar um fato sem outro; Atualização gera divergência ao alterar cópias repetidas; Exclusão apaga dados de uma entidade ao remover outra.",
+        "concept": "Tabelas não normalizadas misturam entidades distintas, provocando anomalias de inserção, atualização e exclusão.",
+        "example": "Apagar a última reserva de uma sala e perder junto o telefone do responsável pela sala é uma anomalia de exclusão."
+      },
+      "explanation": "Quando atributos de laboratório ficam misturados na tabela de alocação: não conseguir cadastrar um laboratório recém-inaugurado sem associá-lo a uma turma é anomalia de inserção; alterar a capacidade do laboratório em apenas algumas linhas deixando valores conflitantes é anomalia de atualização; e remover a única turma alocada a um laboratório apagando simultaneamente o registro da existência e localização do laboratório é anomalia de exclusão.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Anomalias em Tabela Não Normalizada (DB-ANM-01)",
+        "objective": "Classificar cenários práticos de anomalias de inserção, atualização e exclusão em relações não normalizadas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-ins",
+            "label": "Anomalia de Inserção",
+            "description": "Impossibilidade de registrar dados de uma entidade sem que exista registro vinculado de outra entidade."
+          },
+          {
+            "id": "cat-upd",
+            "label": "Anomalia de Atualização",
+            "description": "Inconsistência gerada quando um dado redundante é modificado em parte das linhas e mantido desatualizado nas demais."
+          },
+          {
+            "id": "cat-del",
+            "label": "Anomalia de Exclusão",
+            "description": "Perda não intencional de informações de uma entidade ao remover o último registro de outra entidade associada."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Não é possível cadastrar um novo laboratório no banco antes que a primeira turma seja alocada a ele.",
+            "categoryId": "cat-ins"
+          },
+          {
+            "id": "item-2",
+            "text": "Após uma reforma, a capacidade do laboratório LAB-04 foi alterada em três linhas, mas permaneceu antiga em outras duas.",
+            "categoryId": "cat-upd"
+          },
+          {
+            "id": "item-3",
+            "text": "Ao cancelar a única turma alocada ao LAB-09, o sistema perde também o prédio e a capacidade cadastrada desse laboratório.",
+            "categoryId": "cat-del"
+          },
+          {
+            "id": "item-4",
+            "text": "Para registrar um laboratório de reserva sem turmas no semestre, a equipe precisa inventar um código de turma fictício.",
+            "categoryId": "cat-ins"
+          },
+          {
+            "id": "item-5",
+            "text": "A mudança de prédio do LAB-02 exige editar dezenas de registros repetidos, causando divergência entre relatórios.",
+            "categoryId": "cat-upd"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-075",
+      "title": "Ameaça, Vulnerabilidade e Controle em Segurança",
+      "mechanic": "categorize",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Segurança da Informação",
+      "conceptId": "SEC-RSK-01",
+      "difficulty": "intermediate",
+      "context": "Durante a avaliação de riscos da infraestrutura N9, a equipe levantou seis ocorrências distintas envolvendo agentes externos, falhas técnicas e salvaguardas implantadas.",
+      "instruction": "Classifique cada ocorrência entre Ameaça, Vulnerabilidade ou Controle de Segurança.",
+      "xp": 75,
+      "help": {
+        "hint": "Ameaça é o evento ou agente potencial causador de dano; Vulnerabilidade é a fraqueza explorável do ativo; Controle é a medida que reduz o risco.",
+        "concept": "Na gestão de riscos de segurança, ameaças exploram vulnerabilidades de ativos, enquanto controles previnem, detectam ou mitigam esse risco.",
+        "example": "Um invasor enviando mensagens falsas é ameaça; senha fraca sem bloqueio é vulnerabilidade; autenticação multifator é controle."
+      },
+      "explanation": "Ameaças são causas potenciais de incidentes indesejados (como campanhas de phishing ou ataques de negação de serviço). Vulnerabilidades são fraquezas nos sistemas ou processos que podem ser exploradas (como servidor web desatualizado com falha conhecida ou repositório temporário exposto sem autenticação). Controles de segurança são salvaguardas implementadas para mitigar riscos (como bloqueio temporário após tentativas falhas e criptografia em repouso).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 27001 — Information security, cybersecurity and privacy protection — Information security management systems — Requirements."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Ameaça, Vulnerabilidade e Controle em Segurança (SEC-RSK-01)",
+        "objective": "Distinguir ameaça, vulnerabilidade e controle de segurança em cenários operacionais de gestão de riscos.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 27001 — Information security management systems"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-thr",
+            "label": "Ameaça",
+            "description": "Causa potencial de um incidente indesejado que pode resultar em dano a um sistema ou organização."
+          },
+          {
+            "id": "cat-vul",
+            "label": "Vulnerabilidade",
+            "description": "Fraqueza de um ativo ou controle que pode ser explorada por uma ou mais ameaças."
+          },
+          {
+            "id": "cat-ctl",
+            "label": "Controle de Segurança",
+            "description": "Medida técnica, administrativa ou física que modifica e reduz o risco de segurança."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Campanha externa de e-mails fraudulentos (phishing — engenharia social por mensagem) tentando capturar credenciais de docentes.",
+            "categoryId": "cat-thr"
+          },
+          {
+            "id": "item-2",
+            "text": "Serviço de aplicação operando com versão desatualizada que possui falha pública de execução remota.",
+            "categoryId": "cat-vul"
+          },
+          {
+            "id": "item-3",
+            "text": "Bloqueio automático de tentativas excessivas de login acompanhado de alerta ao monitoramento.",
+            "categoryId": "cat-ctl"
+          },
+          {
+            "id": "item-4",
+            "text": "Repositório de arquivos temporários configurado com permissão de leitura pública sem autenticação.",
+            "categoryId": "cat-vul"
+          },
+          {
+            "id": "item-5",
+            "text": "Ataque automatizado de negação de serviço distribuído (DDoS — Distributed Denial of Service) direcionado ao portal de inscrições.",
+            "categoryId": "cat-thr"
+          },
+          {
+            "id": "item-6",
+            "text": "Criptografia em repouso aplicada aos volumes de banco de dados com gestão segregada de chaves.",
+            "categoryId": "cat-ctl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-076",
+      "title": "Disciplinas sem Oferta no Semestre em SQL",
+      "mechanic": "fill-slot",
+      "courses": ["CC", "SI", "TADS"],
+      "area": "Banco de Dados e Linguagem SQL",
+      "conceptId": "DB-EXS-01",
+      "difficulty": "intermediate",
+      "context": "No banco relacional N9 (sintaxe compatível com MySQL 8 e Oracle 19c), existem as tabelas disciplinas(codigo, nome) com linhas ('ALG', 'Algoritmos'), ('BD1', 'Banco de Dados'), ('RC1', 'Redes') e ofertas(id_oferta, codigo_disc, semestre) com linhas (10, 'ALG', '2026.2') e (11, 'BD1', '2026.2'). A consulta deve retornar exclusivamente ('RC1', 'Redes'), ordenada por codigo.",
+      "instruction": "Selecione o operador SQL (Structured Query Language — Linguagem de Consulta Estruturada) que completa a cláusula WHERE para verificar a ausência de linha correspondente na subconsulta correlacionada.",
+      "xp": 80,
+      "help": {
+        "hint": "Para testar se uma subconsulta correlacionada não retorna nenhuma linha para o registro externo, utiliza-se o predicado unário de não existência.",
+        "concept": "O operador NOT EXISTS retorna verdadeiro quando a subconsulta correlacionada produz zero linhas, funcionando de forma idêntica em MySQL 8 e Oracle 19c sem exigir coluna à esquerda.",
+        "example": "SELECT c.id FROM clientes c WHERE NOT EXISTS (SELECT 1 FROM pedidos p WHERE p.cliente_id = c.id);"
+      },
+      "explanation": "O operador NOT EXISTS avalia se a subconsulta correlacionada retorna zero registros para cada linha de disciplinas d: para 'ALG' e 'BD1' há ofertas em '2026.2' (resultado falso), enquanto para 'RC1' não há oferta (resultado verdadeiro), retornando apenas ('RC1', 'Redes') ordenado por d.codigo. EXISTS inverte a lógica e retorna as disciplinas com oferta; NOT IN e ALL exigem uma expressão à esquerda do operador, causando erro de sintaxe nessa posição.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Disciplinas sem Oferta no Semestre em SQL (DB-EXS-01)",
+        "objective": "Construir consulta SQL determinística com NOT EXISTS e subconsulta correlacionada compatível com MySQL 8 e Oracle 19c.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC 9075 — Database languages — SQL"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "sql",
+        "contentBefore": "SELECT d.codigo, d.nome\nFROM disciplinas d\nWHERE ",
+        "contentAfter": " (\n  SELECT 1\n  FROM ofertas o\n  WHERE o.codigo_disc = d.codigo\n    AND o.semestre = '2026.2'\n)\nORDER BY d.codigo;",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "NOT EXISTS",
+            "feedback": "Correto. Verifica se a subconsulta retorna zero linhas para d.codigo em '2026.2', devolvendo exclusivamente ('RC1', 'Redes')."
+          },
+          {
+            "id": "tok-2",
+            "text": "EXISTS",
+            "feedback": "Incorreto. Retorna as disciplinas que possuem oferta em '2026.2' ('ALG' e 'BD1'), invertendo o critério solicitado."
+          },
+          {
+            "id": "tok-3",
+            "text": "NOT IN",
+            "feedback": "Incorreto. O operador NOT IN exige uma coluna ou expressão à esquerda (ex.: d.codigo NOT IN), gerando erro de sintaxe logo após WHERE."
+          },
+          {
+            "id": "tok-4",
+            "text": "ALL",
+            "feedback": "Incorreto. O quantificador ALL exige um operador de comparação à esquerda (como = ALL ou <> ALL) e não funciona isoladamente."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-077",
+      "title": "Percurso em Largura com deque em Python 3",
+      "mechanic": "fill-slot",
+      "courses": ["CC", "SI", "TADS"],
+      "area": "Algoritmos e Programação",
+      "conceptId": "PY-DEQ-01",
+      "difficulty": "intermediate",
+      "context": "No script Python 3 de roteamento lógico N9, o grafo dirigido é representado por listas ordenadas: grafo = {'A': ['B', 'C'], 'B': ['D'], 'C': ['D'], 'D': []}. Com estado inicial fila = deque(['A']) e visitados = ['A'], o programa deve realizar uma busca em largura FIFO (First In, First Out — Primeiro a Entrar, Primeiro a Sair) e imprimir exatamente ['A', 'B', 'C', 'D'].",
+      "instruction": "Selecione a chamada de método sobre collections.deque que remove e retorna o elemento mais antigo da frente da fila em tempo constante.",
+      "xp": 80,
+      "help": {
+        "hint": "Em collections.deque, append() insere na extremidade direita; para retirar da extremidade esquerda em O(1), usa-se o método específico de remoção à esquerda.",
+        "concept": "A estrutura collections.deque implementa uma fila duplamente terminada otimizada para inserção à direita com append() e remoção à esquerda com popleft().",
+        "example": "fila = deque([10, 20]); primeiro = fila.popleft()  # retorna 10 e deixa deque([20])"
+      },
+      "explanation": "Como os vizinhos são inseridos na extremidade direita com fila.append(vizinho), a operação complementar FIFO (First In, First Out — Primeiro a Entrar, Primeiro a Sair) para retirar o elemento mais antigo à esquerda em O(1) é fila.popleft(), produzindo a saída ['A', 'B', 'C', 'D']. Usar fila.pop() retira pela direita (comportamento de pilha LIFO — Last In, First Out); usar fila[0] lê sem remover e causa laço infinito; e fila.pop(0) lança TypeError porque deque.pop() não aceita índice.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "Python 3 Standard Library Reference — collections.deque."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Percurso em Largura com deque em Python 3 (PY-DEQ-01)",
+        "objective": "Implementar remoção FIFO determinística com collections.deque.popleft() em uma busca em largura em Python 3.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Python 3 Standard Library Reference — collections.deque"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "python",
+        "contentBefore": "from collections import deque\n\ngrafo = {\n    \"A\": [\"B\", \"C\"],\n    \"B\": [\"D\"],\n    \"C\": [\"D\"],\n    \"D\": []\n}\nfila = deque([\"A\"])\nvisitados = [\"A\"]\n\nwhile fila:\n    atual = ",
+        "contentAfter": "\n    for vizinho in grafo[atual]:\n        if vizinho not in visitados:\n            visitados.append(vizinho)\n            fila.append(vizinho)\n\nprint(visitados)",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "fila.popleft()",
+            "feedback": "Correto. Remove o vértice mais antigo da esquerda da deque em O(1), mantendo a ordem FIFO e imprimindo ['A', 'B', 'C', 'D']."
+          },
+          {
+            "id": "tok-2",
+            "text": "fila.pop()",
+            "feedback": "Incorreto. Remove da extremidade direita (pilha LIFO), alterando o percurso para profundidade em vez de largura."
+          },
+          {
+            "id": "tok-3",
+            "text": "fila[0]",
+            "feedback": "Incorreto. Apenas consulta o primeiro elemento sem removê-lo, fazendo com que while fila nunca termine."
+          },
+          {
+            "id": "tok-4",
+            "text": "fila.pop(0)",
+            "feedback": "Incorreto. Diferentemente de list, o método deque.pop() não aceita argumento de índice e gera TypeError."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-078",
+      "title": "Violação de Fronteira na Arquitetura em Camadas",
+      "mechanic": "visual-hotspot",
+      "courses": ["CC", "SI", "TADS"],
+      "area": "Arquitetura e Projeto de Software",
+      "conceptId": "ARC-LYR-01",
+      "difficulty": "intermediate",
+      "context": "No diagrama arquitetural do sistema de estágios N9, o projeto adota três camadas horizontais: Apresentação (telas e controladores), Domínio (regras de negócio) e Persistência (repositórios e banco de dados).",
+      "instruction": "Selecione o elemento do diagrama que representa a dependência que viola a separação de responsabilidades entre apresentação, domínio e persistência.",
+      "xp": 75,
+      "help": {
+        "hint": "Em uma arquitetura em camadas estrita, a camada de apresentação deve acionar regras de negócio no domínio, nunca acessar tabelas diretamente.",
+        "concept": "A arquitetura em camadas isola interface de usuário, regras de negócio e acesso a dados para facilitar manutenção, testes e evolução independente.",
+        "example": "Um formulário web disparando comandos SQL (Structured Query Language) diretamente acopla a tela ao esquema do banco e contorna validações do domínio."
+      },
+      "explanation": "A ligação direta da Camada de Apresentação para a Camada de Persistência (executando consultas diretamente a partir da tela) viola a separação em camadas ao contornar a Camada de Domínio. Isso espalha regras de negócio na interface, dificulta testes unitários e acopla a apresentação à estrutura física do banco de dados.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Violação de Fronteira na Arquitetura em Camadas (ARC-LYR-01)",
+        "objective": "Identificar acoplamento indevido entre apresentação e persistência em um diagrama de arquitetura em camadas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama vertical de três camadas retangulares: no topo, Camada de Apresentação; no meio, Camada de Domínio; na base, Camada de Persistência. À esquerda, uma seta desce da Apresentação para o Domínio e outra seta desce do Domínio para a Persistência. À direita, uma seta tracejada longa atravessa diretamente da Apresentação até a Persistência, contornando o Domínio.",
+        "accessibleDescription": "Componentes do diagrama de arquitetura em camadas: (1) Fluxo Apresentação para Domínio: seta descendente da Camada de Apresentação para os serviços da Camada de Domínio; (2) Núcleo da Camada de Domínio: bloco central contendo entidades e validações de negócio; (3) Fluxo Domínio para Persistência: seta descendente da Camada de Domínio para os repositórios da Camada de Persistência; (4) Atalho Direto Apresentação para Persistência: seta que liga diretamente a tela web às consultas da Camada de Persistência sem passar pelo Domínio.",
+        "nodes": [
+          {
+            "id": "node-pres-dom",
+            "label": "Dependência Apresentação → Domínio",
+            "detail": "Fluxo esperado em que os controladores da interface invocam casos de uso e regras na camada de domínio."
+          },
+          {
+            "id": "node-dom-core",
+            "label": "Camada de Domínio (Regras de Negócio)",
+            "detail": "Concentra entidades, políticas e validações independentes da tecnologia de tela ou banco."
+          },
+          {
+            "id": "node-dom-pers",
+            "label": "Dependência Domínio → Persistência",
+            "detail": "Fluxo esperado em que o domínio utiliza repositórios para armazenar e recuperar dados."
+          },
+          {
+            "id": "node-pres-pers-bypass",
+            "label": "Atalho Direto Apresentação → Persistência",
+            "detail": "Dependência que contorna a camada de domínio, executando consultas de dados diretamente a partir da interface."
+          }
+        ],
+        "correctNodeId": "node-pres-pers-bypass"
+      }
+    },
+    {
+      "id": "N9-COM-079",
+      "title": "Transição para Bloqueado no Ciclo de Processo",
+      "mechanic": "visual-hotspot",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Sistemas Operacionais",
+      "conceptId": "SO-PRC-01",
+      "difficulty": "introductory",
+      "context": "No diagrama clássico de cinco estados de processos do sistema operacional N9, um processo que estava em execução na CPU (Central Processing Unit — Unidade Central de Processamento) solicita a leitura de um arquivo em disco e precisa aguardar a conclusão dessa operação de entrada/saída (E/S).",
+      "instruction": "Selecione no diagrama o estado para o qual o processo é movido imediatamente após solicitar essa operação de entrada/saída.",
+      "xp": 55,
+      "help": {
+        "hint": "Um processo que aguarda um evento externo lento (como leitura em disco) não pode usar o processador imediatamente, mas também não foi encerrado.",
+        "concept": "No modelo de cinco estados (Novo, Pronto, Em Execução, Bloqueado, Finalizado), uma solicitação síncrona de entrada/saída (E/S) leva o processo de Em Execução para Bloqueado (Espera).",
+        "example": "Quando o disco termina a leitura e gera interrupção, o processo passa de Bloqueado para Pronto."
+      },
+      "explanation": "Quando um processo em execução solicita uma operação de entrada/saída (como leitura de arquivo em disco), ele não pode prosseguir até que os dados cheguem. O sistema operacional então o transfere do estado Em Execução para o estado Bloqueado (ou Espera), liberando o processador para outro processo da fila de Prontos. Somente após a conclusão da entrada/saída ele retornará ao estado Pronto.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Transição para Bloqueado no Ciclo de Processo (SO-PRC-01)",
+        "objective": "Identificar o estado Bloqueado (Espera) no ciclo de vida de processos diante de requisição de entrada/saída.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama de estados de processo com quatro nós principais em foco: à esquerda, Estado Pronto; no centro superior, Estado Em Execução (com seta de saída para entrada/saída); na base central, Estado Bloqueado (Espera); à direita, Estado Finalizado.",
+        "accessibleDescription": "Estados apresentados no diagrama do ciclo de vida de processos: (1) Estado Pronto: fila de processos aptos aguardando alocação do processador; (2) Estado Em Execução: processo utilizando ativamente o processador antes de solicitar leitura em disco; (3) Estado Bloqueado (Espera): processo suspenso aguardando a conclusão de evento de entrada/saída; (4) Estado Finalizado: processo que encerrou suas instruções e teve recursos liberados.",
+        "nodes": [
+          {
+            "id": "node-ready",
+            "label": "Estado Pronto",
+            "detail": "Processo carregado na memória e apto a executar assim que o escalonador atribuir o processador."
+          },
+          {
+            "id": "node-running",
+            "label": "Estado Em Execução",
+            "detail": "Processo cujas instruções estão sendo executadas atualmente pelo processador."
+          },
+          {
+            "id": "node-blocked",
+            "label": "Estado Bloqueado (Espera)",
+            "detail": "Processo suspenso temporariamente até a conclusão de operação de entrada/saída ou evento aguardado."
+          },
+          {
+            "id": "node-terminated",
+            "label": "Estado Finalizado",
+            "detail": "Processo que concluiu sua execução ou foi encerrado definitivamente pelo sistema operacional."
+          }
+        ],
+        "correctNodeId": "node-blocked"
+      }
+    },
+    {
+      "id": "N9-COM-080",
+      "title": "Adoção Estratégica de Serviço em Nuvem",
+      "mechanic": "decision-dialogue",
+      "courses": ["CC", "SI", "TADS", "TGTI"],
+      "area": "Computação em Nuvem e Governança de TI",
+      "conceptId": "CLD-DEC-01",
+      "difficulty": "advanced",
+      "context": "A instituição N9 avalia migrar seu ambiente de laboratórios virtuais e repositórios acadêmicos para um provedor de computação em nuvem pública, precisando equilibrar requisitos técnicos, segurança de dados, previsibilidade de custos e risco de dependência de fornecedor (vendor lock-in).",
+      "instruction": "Conduza as três decisões críticas de arquitetura, portabilidade e governança contratual para uma adoção responsável de serviços em nuvem.",
+      "xp": 100,
+      "help": {
+        "hint": "Articule levantamento de requisitos e custos variáveis (como transferência de saída), padrões abertos para portabilidade e cláusulas formais de SLA (Service Level Agreement — Acordo de Nível de Serviço) e saída.",
+        "concept": "Adotar serviços em nuvem exige avaliar custo total (armazenamento, processamento e tráfego de saída), requisitos de segurança e conformidade e estratégias contra dependência exclusiva de fornecedor.",
+        "example": "Empacotar aplicações em contêineres padronizados e usar interfaces abertas facilita migrar entre provedores se necessário."
+      },
+      "explanation": "A adoção madura de serviços em nuvem requer primeiro alinhar o modelo de serviço — IaaS (Infrastructure as a Service — Infraestrutura como Serviço), PaaS (Platform as a Service — Plataforma como Serviço) ou SaaS (Software as a Service — Software como Serviço) — aos requisitos funcionais, de segurança e ao custo total considerando consumo variável e tráfego de saída; em segundo lugar, reduzir a dependência de fornecedor (vendor lock-in) adotando padrões abertos, contêineres e infraestrutura como código declarativa; e, por fim, formalizar Acordos de Nível de Serviço (SLA), limites orçamentários e planos de portabilidade e saída de dados.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 22123-1 — Information technology — Cloud computing — Part 1: Vocabulary."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Adoção Estratégica de Serviço em Nuvem (CLD-DEC-01)",
+        "objective": "Conduzir decisões de adoção de nuvem articulando requisitos, segurança, custos variáveis, portabilidade e mitigação de vendor lock-in.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 22123-1 — Cloud computing"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Arquiteta de Soluções",
+            "message": "Temos cargas variáveis durante o semestre letivo e armazenamento crescente de vídeos e bases de pesquisa. Como devemos avaliar a viabilidade técnica e financeira inicial?",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Mapear requisitos de segurança e elasticidade e simular o custo total incluindo computação, armazenamento e tráfego de saída de dados.",
+                "reaction": "Decisão adequada: Considerar elasticidade, requisitos de proteção e custos de transferência de saída (egress) evita surpresas orçamentárias.",
+                "correct": true
+              },
+              {
+                "id": "s1-c2",
+                "text": "Comparar apenas o preço por hora da máquina virtual mais barata, ignorando custos de rede, backup e licenciamento.",
+                "reaction": "Consequência: O custo real de operação em nuvem costuma ser distorcido quando armazenamento, replicação e tráfego são omitidos.",
+                "correct": false
+              },
+              {
+                "id": "s1-c3",
+                "text": "Migrar imediatamente todos os bancos locais sem levantar requisitos de latência ou conformidade legal.",
+                "reaction": "Consequência: Migrar sem análise prévia expõe dados sensíveis a riscos regulatórios e gargalos de desempenho.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Engenheiro de Plataforma",
+            "message": "Um fornecedor ofereceu desconto se acoplarmos toda a aplicação a serviços proprietários exclusivos da plataforma dele. Como devemos tratar portabilidade e dependência de fornecedor (vendor lock-in)?",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Reescrever toda a lógica de negócio dentro de funções proprietárias do provedor para economizar no primeiro trimestre.",
+                "reaction": "Consequência: O alto custo de reescrita futura cria dependência severa e reduz o poder de negociação da instituição.",
+                "correct": false
+              },
+              {
+                "id": "s2-c2",
+                "text": "Priorizar padrões abertos, contêineres padronizados e interfaces desacopladas para preservar portabilidade entre ambientes.",
+                "reaction": "Decisão adequada: Padrões abertos e encapsulamento equilibram produtividade em nuvem com capacidade real de migração futura.",
+                "correct": true
+              },
+              {
+                "id": "s2-c3",
+                "text": "Proibir qualquer serviço gerenciado em nuvem e manter servidores físicos ociosos para evitar contratos externos.",
+                "reaction": "Consequência: Descartar totalmente a nuvem abre mão de elasticidade e escala onde ela traz ganho legítimo.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Gestora de Governança de TI",
+            "message": "Antes da contratação definitiva, quais salvaguardas de governança, segurança e continuidade devemos exigir para fechar a decisão?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Assinar o contrato padrão sem cláusulas de devolução de dados, confiando que o provedor manterá as condições indefinidamente.",
+                "reaction": "Consequência: Sem plano de saída e garantia de portabilidade de dados, o encerramento contratual torna-se arriscado.",
+                "correct": false
+              },
+              {
+                "id": "s3-c2",
+                "text": "Delegar integralmente a segurança dos dados ao provedor, dispensando controle de identidade e criptografia pela equipe interna.",
+                "reaction": "Consequência: Na nuvem, a segurança é compartilhada; configurações, acessos e dados continuam sob responsabilidade da instituição.",
+                "correct": false
+              },
+              {
+                "id": "s3-c3",
+                "text": "Formalizar Acordo de Nível de Serviço (SLA — Service Level Agreement), alertas de consumo financeiro, matriz de responsabilidade e plano de saída com exportação de dados.",
+                "reaction": "Decisão adequada: A governança contratual e financeira completa o ciclo de decisão com segurança, previsibilidade e autonomia institucional.",
+                "correct": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

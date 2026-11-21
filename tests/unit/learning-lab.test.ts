@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { SI_LEARNING_LAB } from '../../src/content/learning-lab';
 
 describe('laboratório de mecânicas compartilhadas', () => {
-  it('carrega os três lotes e cobre as nove mecânicas', () => {
-    expect(SI_LEARNING_LAB).toHaveLength(60);
+  it('carrega os quatro lotes e cobre as nove mecânicas', () => {
+    expect(SI_LEARNING_LAB).toHaveLength(80);
     expect(new Set(SI_LEARNING_LAB.map((activity) => activity.type))).toEqual(new Set([
       'choice', 'binary-choice', 'multiple-select', 'order', 'match', 'categorize', 'complete-code',
       'hotspot', 'decision-dialogue',
     ]));
-    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(60);
+    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(80);
     expect(SI_LEARNING_LAB.every((activity) => activity.xp > 0 && activity.explanation.length > 40)).toBe(true);
   });
 
@@ -68,6 +68,19 @@ describe('laboratório de mecânicas compartilhadas', () => {
     if (javascript?.type === 'complete-code') {
       expect(javascript.codeBefore + javascript.tokens[0]?.text + javascript.codeAfter)
         .toContain('avisos.filter(item => !item.lido)');
+    }
+  });
+
+  it('preserva os trechos funcionais de SQL e Python do quarto lote', () => {
+    const sql = SI_LEARNING_LAB.find((activity) => activity.id === 'N9-COM-076');
+    expect(sql?.type).toBe('complete-code');
+    if (sql?.type === 'complete-code') {
+      expect(sql.tokens.find((token) => token.id === sql.correctTokenId)?.text).toBe('NOT EXISTS');
+    }
+    const python = SI_LEARNING_LAB.find((activity) => activity.id === 'N9-COM-077');
+    expect(python?.type).toBe('complete-code');
+    if (python?.type === 'complete-code') {
+      expect(python.codeBefore + python.tokens[0]?.text + python.codeAfter).toContain('atual = fila.popleft()');
     }
   });
 });
