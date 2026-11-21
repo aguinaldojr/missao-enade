@@ -1,0 +1,1582 @@
+{
+  "schemaVersion": 1,
+  "batchId": "N9-COM-05",
+  "activities": [
+    {
+      "id": "N9-COM-081",
+      "title": "Negação de Regra Composta pela Lei de De Morgan",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Lógica Matemática e Fundamentos",
+      "conceptId": "LOG-DMG-01",
+      "difficulty": "introductory",
+      "context": "No regulamento da biblioteca N9, um estudante só está apto ao empréstimo domiciliar quando atende à conjunção: 'possui matrícula ativa E não possui multa pendente'. O sistema precisa disparar um alerta de bloqueio exatamente quando essa condição composta for falsa.",
+      "instruction": "Aplicando a equivalência lógica de De Morgan, selecione a expressão que descreve corretamente a condição de bloqueio do empréstimo.",
+      "xp": 50,
+      "help": {
+        "hint": "Ao negar uma conjunção (P e Q), cada proposição é negada e o conectivo E transforma-se em OU.",
+        "concept": "Pela Lei de De Morgan, a negação de (P ∧ Q) equivale logicamente a (¬P ∨ ¬Q), e a negação de (P ∨ Q) equivale a (¬P ∧ ¬Q).",
+        "example": "Negar 'tenho ingresso E cheguei no horário' equivale a 'não tenho ingresso OU não cheguei no horário'."
+      },
+      "explanation": "Seja P = 'possui matrícula ativa' e Q = 'não possui multa pendente'. A regra de liberação é (P ∧ Q). Sua negação ¬(P ∧ Q), pela Lei de De Morgan, equivale a (¬P ∨ ¬Q): 'não possui matrícula ativa OU possui multa pendente'. Basta que uma das duas falhas ocorra para bloquear o empréstimo.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Negação de Regra Composta pela Lei de De Morgan (LOG-DMG-01)",
+        "objective": "Aplicar a equivalência lógica de De Morgan na negação de regras de negócio conjuntivas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Não possui matrícula ativa OU possui multa pendente.",
+            "feedback": "Correto. A negação de (P ∧ Q) resulta na disjunção das negações: (¬P ∨ ¬Q)."
+          },
+          {
+            "id": "opt-b",
+            "text": "Não possui matrícula ativa E possui multa pendente.",
+            "feedback": "Incorreto. Exigir ambas as falhas simultaneamente deixaria passar quem tem matrícula inativa sem multa."
+          },
+          {
+            "id": "opt-c",
+            "text": "Possui matrícula ativa OU não possui multa pendente.",
+            "feedback": "Incorreto. Trocar E por OU sem negar as proposições enfraquece a regra original em vez de negá-la."
+          },
+          {
+            "id": "opt-d",
+            "text": "Não possui matrícula ativa E não possui multa pendente.",
+            "feedback": "Incorreto. Apenas a primeira proposição foi negada, mantendo o conectivo E e a segunda condição positiva."
+          },
+          {
+            "id": "opt-e",
+            "text": "Possui matrícula ativa E possui multa pendente.",
+            "feedback": "Incorreto. Essa condição captura apenas um dos casos de bloqueio e ignora estudantes com matrícula inativa."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-082",
+      "title": "Medida de Tendência Central Diante de Valor Extremo",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Probabilidade e Estatística",
+      "conceptId": "EST-MED-01",
+      "difficulty": "introductory",
+      "context": "A central de suporte N9 registrou os tempos de atendimento (em minutos) de cinco chamados consecutivos em uma manhã: 4, 5, 5, 6 e 80. O último chamado envolveu uma falha física atípica de rede.",
+      "instruction": "Qual medida estatística representa melhor o tempo típico de atendimento dessa amostra pequena e por quê?",
+      "xp": 50,
+      "help": {
+        "hint": "Compare o valor da média aritmética (soma dividida por 5) com o valor central da lista ordenada.",
+        "concept": "A mediana divide o conjunto ordenado ao meio e é resistente a valores extremos (outliers), enquanto a média aritmética é fortemente deslocada por eles.",
+        "example": "Na amostra ordenada [2, 3, 4, 4, 97], a mediana é 4, enquanto a média sobe para 22."
+      },
+      "explanation": "Ordenando os cinco valores [4, 5, 5, 6, 80], a mediana é o elemento central (5 minutos), que reflete fielmente o comportamento típico de quatro dos cinco atendimentos. Já a média aritmética resulta em (4 + 5 + 5 + 6 + 80) / 5 = 20 minutos, distorcida pelo único valor extremo (80 minutos).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Medida de Tendência Central Diante de Valor Extremo (EST-MED-01)",
+        "objective": "Escolher entre média e mediana na presença de valor discrepante em conjunto de dados pequeno.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "A mediana (5 minutos), pois não é distorcida pelo valor extremo de 80 minutos.",
+            "feedback": "Correto. A mediana preserva a posição central dos dados ordenados e permanece estável diante de ocorrências atípicas."
+          },
+          {
+            "id": "opt-b",
+            "text": "A média aritmética (20 minutos), pois distribui igualmente o impacto do chamado atípico entre todos os atendimentos.",
+            "feedback": "Incorreto. Justamente por absorver o valor extremo, a média (20 minutos) fica acima de quatro dos cinco valores observados."
+          },
+          {
+            "id": "opt-c",
+            "text": "A média aritmética (5 minutos), pois desconsidera automaticamente o maior e o menor valor da lista.",
+            "feedback": "Incorreto. A média aritmética simples considera todos os valores e vale 20 minutos, não 5."
+          },
+          {
+            "id": "opt-d",
+            "text": "A mediana (20 minutos), pois corresponde à soma dos extremos dividida pela quantidade de elementos.",
+            "feedback": "Incorreto. Mediana é o termo central do conjunto ordenado (5 minutos), não uma razão entre soma e contagem."
+          },
+          {
+            "id": "opt-e",
+            "text": "A amplitude total (76 minutos), pois indica o tempo médio gasto por cada analista.",
+            "feedback": "Incorreto. Amplitude (80 − 4 = 76) é medida de dispersão, não de tendência central."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-083",
+      "title": "Interpretação de Restrição em Programação Linear",
+      "mechanic": "single-choice",
+      "courses": [
+        "SI"
+      ],
+      "area": "Pesquisa Operacional e Apoio à Decisão",
+      "conceptId": "PO-LPR-01",
+      "difficulty": "intermediate",
+      "context": "No planejamento semanal dos laboratórios N9, x1 representa a quantidade de oficinas presenciais e x2 representa a quantidade de oficinas remotas. O modelo de programação linear inclui a restrição: 2·x1 + 1·x2 ≤ 40, com x1 ≥ 0 e x2 ≥ 0.",
+      "instruction": "Qual é o significado operacional correto dessa restrição no modelo de alocação?",
+      "xp": 75,
+      "help": {
+        "hint": "Observe os coeficientes que multiplicam x1 e x2 e o sinal de menor ou igual (≤ 40) do lado direito.",
+        "concept": "Em programação linear, uma restrição do tipo a1·x1 + a2·x2 ≤ b limita o consumo total de um recurso escasso (b) de acordo com o consumo unitário (a1, a2) de cada atividade.",
+        "example": "Se cada lote A consome 3 horas de máquina e cada lote B consome 2 horas, 3·xA + 2·xB ≤ 30 limita o uso total a 30 horas."
+      },
+      "explanation": "Na inequação 2·x1 + 1·x2 ≤ 40, o coeficiente 2 indica que cada oficina presencial (x1) consome 2 unidades do recurso compartilhado (como horas de apoio técnico), o coeficiente 1 indica que cada oficina remota (x2) consome 1 unidade, e o limite ≤ 40 estabelece que o consumo combinado não pode exceder a capacidade máxima disponível de 40 unidades.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Interpretação de Restrição em Programação Linear (PO-LPR-01)",
+        "objective": "Interpretar coeficientes tecnológicos e limite de disponibilidade em restrições lineares de capacidade.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Cada oficina presencial consome 2 unidades do recurso e cada remota consome 1 unidade, com limite total de até 40 unidades disponíveis.",
+            "feedback": "Correto. A combinação linear dos consumos unitários deve permanecer menor ou igual à disponibilidade máxima de 40."
+          },
+          {
+            "id": "opt-b",
+            "text": "Devem ser realizadas obrigatoriamente 2 oficinas presenciais e 1 oficina remota por semana, somando exatamente 40 participantes.",
+            "feedback": "Incorreto. Os números 2 e 1 são coeficientes de consumo por unidade de decisão, não quantidades fixas de oficinas."
+          },
+          {
+            "id": "opt-c",
+            "text": "O número de oficinas presenciais deve ser sempre o dobro do número de oficinas remotas.",
+            "feedback": "Incorreto. Proporcionalidade fixa exigiria uma igualdade como x1 = 2·x2, o que não está expresso na restrição."
+          },
+          {
+            "id": "opt-d",
+            "text": "A soma de oficinas realizadas precisa atingir no mínimo 40 sessões para que o plano seja viável.",
+            "feedback": "Incorreto. O operador ≤ indica teto máximo de capacidade disponível, não meta mínima de produção."
+          },
+          {
+            "id": "opt-e",
+            "text": "O modelo permite valores negativos para x1 caso x2 ultrapasse 40 oficinas na semana.",
+            "feedback": "Incorreto. As condições de não negatividade (x1 ≥ 0 e x2 ≥ 0) impedem quantidades negativas de oficinas."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-084",
+      "title": "Inversão de Dependência no Envio de Notificações",
+      "mechanic": "single-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Engenharia e Projeto de Software",
+      "conceptId": "OOP-DIP-01",
+      "difficulty": "intermediate",
+      "context": "No sistema acadêmico N9, a classe de regra de negócio ServicoMatricula instancia diretamente a classe concreta ClienteSmtpLegado dentro de seu método de confirmação. A instituição deseja suportar também envio por aplicativo móvel sem modificar ServicoMatricula.",
+      "instruction": "Qual refatoração aplica o Princípio da Inversão de Dependência (DIP — Dependency Inversion Principle) para resolver esse acoplamento?",
+      "xp": 75,
+      "help": {
+        "hint": "Módulos de alto nível (regras de negócio) e módulos de baixo nível (detalhes de entrega) devem depender de uma abstração comum.",
+        "concept": "O Princípio da Inversão de Dependência (DIP) estabelece que classes de negócio não devem depender diretamente de implementações concretas de infraestrutura, mas sim de interfaces ou abstrações.",
+        "example": "Ao receber uma interface CanalMensagem no construtor, a regra de negócio funciona tanto com e-mail quanto com notificação push."
+      },
+      "explanation": "Pelo Princípio da Inversão de Dependência (DIP — Dependency Inversion Principle), ServicoMatricula (módulo de alto nível) deve depender de uma interface abstrata como NotificadorEstudante, enquanto ClienteSmtpLegado e NotificadorPush (detalhes concretos) implementam essa interface e são injetados externamente. Assim, novos canais são adicionados sem alterar a lógica de matrícula.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Inversão de Dependência no Envio de Notificações (OOP-DIP-01)",
+        "objective": "Aplicar o Princípio da Inversão de Dependência desacoplando regras de negócio de implementações concretas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "single-choice",
+        "options": [
+          {
+            "id": "opt-a",
+            "text": "Definir uma interface NotificadorEstudante e injetar suas implementações concretas em ServicoMatricula.",
+            "feedback": "Correto. Tanto a regra de negócio quanto os canais concretos passam a depender da abstração NotificadorEstudante."
+          },
+          {
+            "id": "opt-b",
+            "text": "Copiar o código de ServicoMatricula para uma nova classe ServicoMatriculaMobile ligada ao novo canal.",
+            "feedback": "Incorreto. Duplicar a regra de negócio viola o reaproveitamento e multiplica pontos de manutenção."
+          },
+          {
+            "id": "opt-c",
+            "text": "Tornar todos os métodos de ClienteSmtpLegado estáticos para evitar o uso do operador de instanciação.",
+            "feedback": "Incorreto. Chamadas estáticas mantêm a dependência direta na classe concreta e dificultam substituição e testes."
+          },
+          {
+            "id": "opt-d",
+            "text": "Fazer ServicoMatricula herdar diretamente da classe ClienteSmtpLegado.",
+            "feedback": "Incorreto. Herança cria acoplamento ainda mais rígido e mistura conceitos de domínio com transporte de rede."
+          },
+          {
+            "id": "opt-e",
+            "text": "Adicionar estruturas condicionais (if/else) dentro de ServicoMatricula para cada novo protocolo de envio.",
+            "feedback": "Incorreto. Isso obriga a editar ServicoMatricula a cada novo canal, violando também o Princípio Aberto-Fechado."
+          }
+        ],
+        "correctId": "opt-a"
+      }
+    },
+    {
+      "id": "N9-COM-085",
+      "title": "Localidade de Referência e Efeito da Memória Cache",
+      "mechanic": "binary-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Organização e Arquitetura de Computadores",
+      "conceptId": "ARQ-CCH-01",
+      "difficulty": "introductory",
+      "context": "Durante o processamento de relatórios de notas no servidor N9, um laço percorre sequencialmente um vetor de registros na memória e atualiza repetidamente os mesmos acumuladores.",
+      "instruction": "Avalie se a afirmação sobre o princípio da localidade de referência e o comportamento esperado da memória cache está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Considere o que ocorre quando dados recém-usados (localidade temporal) e dados vizinhos (localidade espacial) são trazidos em blocos para uma memória mais rápida.",
+        "concept": "A localidade temporal (reuso próximo no tempo) e a localidade espacial (acesso a endereços contíguos) permitem que a memória cache atenda à maioria das requisições sem recorrer à memória principal.",
+        "example": "Ao ler o primeiro item de um vetor, o bloco carregado na cache já traz os elementos vizinhos seguintes."
+      },
+      "explanation": "A afirmação está correta. Os programas tendem a reutilizar variáveis acessadas recentemente (localidade temporal) e a percorrer posições adjacentes de memória (localidade espacial). Como a memória cache armazena blocos contíguos recém-referenciados em uma tecnologia muito mais rápida que a memória principal (RAM — Random Access Memory), a taxa de acertos reduz significativamente a latência média de acesso.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Localidade de Referência e Efeito da Memória Cache (ARQ-CCH-01)",
+        "objective": "Relacionar localidade temporal e espacial à redução do tempo médio de acesso proporcionada pela memória cache.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Em razão da localidade temporal (reacesso próximo a itens recentes) e da localidade espacial (acesso a endereços vizinhos), a memória cache reduz o tempo médio de acesso ao manter blocos recém-utilizados próximos ao processador.",
+        "correctValue": true,
+        "feedbackTrue": "Correto. O carregamento de blocos contíguos na cache explora tanto o reuso imediato quanto a leitura sequencial em memória.",
+        "feedbackFalse": "Incorreto. A memória cache baseia-se exatamente nas localidades temporal e espacial para evitar buscas lentas repetidas na memória principal."
+      }
+    },
+    {
+      "id": "N9-COM-086",
+      "title": "Limite de Trabalho em Progresso (WIP) no Kanban",
+      "mechanic": "binary-choice",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Engenharia de Software e Gestão de Processos",
+      "conceptId": "PRC-KBN-01",
+      "difficulty": "introductory",
+      "context": "A equipe de desenvolvimento e sustentação N9 adotou um quadro Kanban com limite explícito de trabalho em progresso (WIP — Work In Progress) na etapa de revisão técnica.",
+      "instruction": "Avalie se a afirmação sobre o papel do limite de trabalho em progresso (WIP) na fluidez e identificação de gargalos está correta ou incorreta.",
+      "xp": 45,
+      "help": {
+        "hint": "Pense no que acontece quando uma coluna atinge seu limite máximo e impede puxar novas tarefas antes de concluir as atuais.",
+        "concept": "Limitar o trabalho em progresso (WIP) reduz a multitarefa improdutiva, estabiliza o tempo de atravessamento (lead time) e torna gargalos visíveis imediatamente.",
+        "example": "Se a coluna de revisão comporta no máximo 3 itens e está cheia, a equipe colabora para destravar revisões em vez de iniciar novas demandas."
+      },
+      "explanation": "A afirmação está correta. Definir limites de trabalho em progresso (WIP — Work In Progress) no método Kanban impede que a equipe inicie continuamente novas tarefas sem concluir as anteriores, diminuindo trocas de contexto e filas ocultas. Quando uma coluna atinge seu limite, o bloqueio sinaliza visualmente o gargalo para que o time atue na resolução.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Limite de Trabalho em Progresso (WIP) no Kanban (PRC-KBN-01)",
+        "objective": "Compreender como o limite de trabalho em progresso (WIP) favorece o fluxo contínuo e evidencia gargalos no Kanban.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "binary-choice",
+        "statement": "Estabelecer limites de trabalho em progresso (WIP — Work In Progress) no Kanban favorece a conclusão contínua de demandas e evidencia gargalos no fluxo, pois impede o acúmulo de tarefas iniciadas e não finalizadas.",
+        "correctValue": true,
+        "feedbackTrue": "Correto. Ao restringir itens simultâneos por etapa, o fluxo ganha previsibilidade e qualquer retenção destaca o gargalo ativo.",
+        "feedbackFalse": "Incorreto. Limites de WIP não existem para reduzir a entrega, mas para evitar filas internas, retrabalho e sobrecarga simultânea."
+      }
+    },
+    {
+      "id": "N9-COM-087",
+      "title": "Heurísticas de Usabilidade no Portal Acadêmico",
+      "mechanic": "multiple-select",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Interação Humano-Computador",
+      "conceptId": "IHC-HEU-01",
+      "difficulty": "intermediate",
+      "context": "Durante a revisão de usabilidade do módulo de requerimentos N9, a equipe avalia melhorias para reduzir falhas de preenchimento e dúvidas dos estudantes.",
+      "instruction": "Selecione exatamente 3 práticas que aplicam corretamente heurísticas de visibilidade do estado do sistema, consistência e prevenção/recuperação de erros.",
+      "xp": 80,
+      "help": {
+        "hint": "Busque ações que informem o usuário sobre o que está ocorrendo, mantenham padrões uniformes e evitem ou permitam corrigir enganos.",
+        "concept": "Heurísticas de usabilidade incluem visibilidade do status do sistema (feedback imediato), consistência e padrões, prevenção de erros e diagnóstico/recuperação construtiva de falhas.",
+        "example": "Desabilitar o botão de envio duplicado enquanto a requisição processa previne submissões repetidas."
+      },
+      "explanation": "Boas práticas de usabilidade incluem: fornecer feedback claro e imediato sobre o andamento do envio (visibilidade do status do sistema), manter terminologia, ícones e fluxos uniformes em todas as telas (consistência e padrões), e solicitar confirmação antes de ações irreversíveis com mensagens objetivas que indiquem como corrigir entradas inválidas (prevenção e recuperação de erros).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO 9241-110 — Ergonomics of human-system interaction — Part 110: Interaction principles."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Heurísticas de Usabilidade no Portal Acadêmico (IHC-HEU-01)",
+        "objective": "Identificar decisões de interface coerentes com feedback de estado, consistência e prevenção/recuperação de erros.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO 9241-110 — Interaction principles"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Exibir barra de progresso e confirmação textual imediata durante e após o envio de comprovantes.",
+            "feedback": "Correto. Aplica a heurística de visibilidade do status do sistema, reduzindo incerteza e cliques repetidos.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Manter os mesmos rótulos, posições de ações principais e padrões visuais em todas as etapas do requerimento.",
+            "feedback": "Correto. Aplica consistência e padrões, diminuindo a carga cognitiva de aprendizado entre telas.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Solicitar confirmação antes de excluir um protocolo e explicar em linguagem simples como corrigir campos inválidos.",
+            "feedback": "Correto. Combina prevenção de erros críticos com suporte claro à recuperação de falhas.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Limpar todos os campos do formulário sempre que um único dado apresentar erro de digitação.",
+            "feedback": "Incorreto. Apagar dados válidos obriga retrabalho desnecessário e dificulta a recuperação do erro.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Exibir apenas códigos internos numéricos de exceção quando o servidor rejeitar uma solicitação.",
+            "feedback": "Incorreto. Códigos técnicos opacos não ajudam o usuário a diagnosticar nem corrigir o problema.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Alternar a posição e o nome dos botões de confirmar e cancelar entre telas para manter atenção.",
+            "feedback": "Incorreto. Quebrar a consistência induz erros operacionais por hábito motor.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-088",
+      "title": "Semântica e Idempotência em API HTTP",
+      "mechanic": "multiple-select",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Engenharia de Software e Sistemas Distribuídos",
+      "conceptId": "API-HTP-01",
+      "difficulty": "intermediate",
+      "context": "A equipe N9 está padronizando os contratos de uma API (Application Programming Interface — Interface de Programação de Aplicações) baseada em HTTP (Hypertext Transfer Protocol — Protocolo de Transferência de Hipertexto) para gestão de inscrições em eventos acadêmicos.",
+      "instruction": "Selecione exatamente 3 decisões de projeto coerentes com códigos de resposta HTTP, idempotência e validação de entrada.",
+      "xp": 80,
+      "help": {
+        "hint": "Considere códigos adequados para criação (201) e erro de validação (400/422), além da garantia de que repetir PUT ou DELETE não gera efeitos duplicados.",
+        "concept": "Em APIs HTTP bem projetadas, operações idempotentes (GET, PUT, DELETE) produzem o mesmo estado final se repetidas, e os códigos de status refletem semanticamente o resultado.",
+        "example": "Enviar duas vezes DELETE /inscricoes/42 resulta na ausência do recurso 42 sem duplicar efeitos colaterais."
+      },
+      "explanation": "O desenho coerente de APIs HTTP exige: retornar código 400 (Bad Request) ou 422 (Unprocessable Entity) com detalhes objetivos quando a entrada falha na validação do servidor; assegurar idempotência em métodos como PUT e DELETE para que retentativas de rede não corrompam o estado; e responder com 201 (Created) ao criar um recurso via POST, informando sua localização ou identificador.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 9110 — HTTP Semantics (IETF)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Semântica e Idempotência em API HTTP (API-HTP-01)",
+        "objective": "Aplicar códigos de status HTTP, validação no servidor e idempotência em contratos de serviços web.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "RFC 9110 — HTTP Semantics"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "multiple-select",
+        "requiredCount": 3,
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Retornar código 400 (Bad Request) ou 422 (Unprocessable Entity) com descrição dos campos inválidos quando a entrada violar regras de domínio.",
+            "feedback": "Correto. Códigos da família 4xx indicam erro na requisição do cliente e orientam a correção dos dados.",
+            "correct": true
+          },
+          {
+            "id": "opt-2",
+            "text": "Garantir que requisições PUT e DELETE repetidas para o mesmo identificador produzam o mesmo estado final no servidor (idempotência).",
+            "feedback": "Correto. A idempotência permite retentativas seguras em caso de falha momentânea de rede.",
+            "correct": true
+          },
+          {
+            "id": "opt-3",
+            "text": "Responder com código 201 (Created) e a referência do novo registro após criar uma inscrição válida via POST.",
+            "feedback": "Correto. O código 201 comunica explicitamente a criação bem-sucedida de um novo recurso.",
+            "correct": true
+          },
+          {
+            "id": "opt-4",
+            "text": "Retornar código 200 (OK) com mensagem de erro no corpo sempre que a validação falhar.",
+            "feedback": "Incorreto. Sinalizar falha de validação como sucesso (200) engana clientes automatizados e mecanismos de monitoramento.",
+            "correct": false
+          },
+          {
+            "id": "opt-5",
+            "text": "Utilizar requisições GET para excluir inscrições sempre que o parâmetro remover=true estiver na URL.",
+            "feedback": "Incorreto. GET deve ser um método seguro (somente leitura), sem efeitos destrutivos sobre o estado do servidor.",
+            "correct": false
+          },
+          {
+            "id": "opt-6",
+            "text": "Dispensar validação de tipos e intervalos na API quando o formulário web já verifica os campos.",
+            "feedback": "Incorreto. Clientes podem invocar a API diretamente sem passar pela interface web, exigindo validação no servidor.",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-089",
+      "title": "Fases Clássicas do Processo de Compilação",
+      "mechanic": "sequence-order",
+      "courses": [
+        "CC"
+      ],
+      "area": "Compiladores e Linguagens Formais",
+      "conceptId": "CMP-PHS-01",
+      "difficulty": "intermediate",
+      "context": "Um compilador traduz um programa escrito em linguagem de alto nível para código executável da máquina-alvo por meio de etapas encadeadas de análise e síntese.",
+      "instruction": "Ordene as 5 fases clássicas da compilação desde a leitura inicial do código-fonte até a produção do código-alvo.",
+      "xp": 80,
+      "help": {
+        "hint": "Primeiro os caracteres são agrupados em tokens, depois verifica-se a estrutura gramatical, em seguida os tipos e escopos, otimiza-se o código intermediário e gera-se o código final.",
+        "concept": "O front-end do compilador realiza análises léxica, sintática e semântica; o back-end realiza otimização e geração de código para a arquitetura-alvo.",
+        "example": "Um erro de tipo (somar texto a inteiro) é detectado na análise semântica, após a árvore sintática já estar formada."
+      },
+      "explanation": "A compilação inicia com a análise léxica, que converte o fluxo de caracteres em tokens; prossegue com a análise sintática, que valida a estrutura gramatical e constrói a árvore sintática; realiza a análise semântica para conferir tipos e declarações; aplica otimização sobre a representação intermediária para melhorar eficiência; e conclui com a geração de código final para a máquina-alvo.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Fases Clássicas do Processo de Compilação (CMP-PHS-01)",
+        "objective": "Sequenciar análise léxica, sintática, semântica, otimização e geração de código em um compilador.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "cmp-1",
+            "text": "Análise léxica: ler os caracteres do código-fonte e agrupá-los em unidades léxicas (tokens), removendo espaços e comentários."
+          },
+          {
+            "id": "cmp-2",
+            "text": "Análise sintática: verificar se a sequência de tokens respeita a gramática da linguagem e construir a árvore sintática."
+          },
+          {
+            "id": "cmp-3",
+            "text": "Análise semântica: conferir compatibilidade de tipos, escopos e declarações válidas de identificadores."
+          },
+          {
+            "id": "cmp-4",
+            "text": "Otimização de código intermediário: eliminar cálculos redundantes e melhorar o desempenho preservando o resultado do programa."
+          },
+          {
+            "id": "cmp-5",
+            "text": "Geração de código final: traduzir a representação otimizada em instruções da arquitetura-alvo e alocar registradores."
+          }
+        ],
+        "correctOrder": [
+          "cmp-1",
+          "cmp-2",
+          "cmp-3",
+          "cmp-4",
+          "cmp-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-090",
+      "title": "Fluxo Integrado de Incidente, Problema e Mudança",
+      "mechanic": "sequence-order",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Gestão de Serviços de TI",
+      "conceptId": "ITSM-INC-01",
+      "difficulty": "intermediate",
+      "context": "Durante o período de rematrícula na rede N9, o módulo de emissão de boletos apresenta lentidão recorrente que interrompe o atendimento dos estudantes.",
+      "instruction": "Ordene as 5 etapas da gestão de serviços de TI desde o registro inicial do incidente até a verificação pós-correção definitiva.",
+      "xp": 80,
+      "help": {
+        "hint": "Primeiro restaura-se o serviço para os usuários; depois investiga-se a causa raiz para propor e validar uma mudança estrutural.",
+        "concept": "A gestão de incidentes busca restaurar rapidamente a operação normal, enquanto a gestão de problemas investiga a causa raiz e aciona o controle de mudanças para eliminação definitiva.",
+        "example": "Reiniciar um serviço travado restaura o atendimento imediato, mas corrigir o vazamento de conexões exige análise de causa e mudança controlada."
+      },
+      "explanation": "Em boas práticas de gestão de serviços de TI, o fluxo inicia com o registro e priorização do incidente; segue para o diagnóstico imediato e restauração do serviço para minimizar impacto ao usuário; avança para a análise de causa raiz (gestão de problemas); formaliza e executa uma mudança corretiva controlada; e finaliza com a verificação operacional de que a recorrência foi eliminada.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 20000-1 — Information technology — Service management — Part 1: Service management system requirements."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Fluxo Integrado de Incidente, Problema e Mudança (ITSM-INC-01)",
+        "objective": "Ordenar o ciclo entre registro e restauração de incidente, análise de causa raiz, mudança e verificação.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 20000-1 — Service management"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "sequence-order",
+        "blocks": [
+          {
+            "id": "svc-1",
+            "text": "Registrar o incidente na central de serviços, classificando impacto e urgência para priorização."
+          },
+          {
+            "id": "svc-2",
+            "text": "Diagnosticar o sintoma imediato e aplicar contorno operacional para restaurar o atendimento aos usuários."
+          },
+          {
+            "id": "svc-3",
+            "text": "Conduzir análise de causa raiz em gestão de problemas para identificar a origem técnica da recorrência."
+          },
+          {
+            "id": "svc-4",
+            "text": "Submeter, aprovar e implantar uma proposta formal de mudança corretiva no ambiente controlado."
+          },
+          {
+            "id": "svc-5",
+            "text": "Verificar os indicadores de estabilidade em produção e encerrar os registros com documentação atualizada."
+          }
+        ],
+        "correctOrder": [
+          "svc-1",
+          "svc-2",
+          "svc-3",
+          "svc-4",
+          "svc-5"
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-091",
+      "title": "Características dos Paradigmas de Programação",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Linguagens e Paradigmas de Programação",
+      "conceptId": "PRG-PAR-01",
+      "difficulty": "introductory",
+      "context": "Diferentes módulos do ecossistema acadêmico N9 empregam estilos distintos de construção de software conforme a natureza do problema.",
+      "instruction": "Associe cada paradigma de programação à sua característica central.",
+      "xp": 60,
+      "help": {
+        "hint": "Relacione mutação explícita de estado ao imperativo, encapsulamento ao orientado a objetos, funções puras ao funcional e reação a sinais ao orientado a eventos.",
+        "concept": "Paradigmas de programação oferecem modelos conceituais distintos para estruturar dados, controle de fluxo e composição de módulos.",
+        "example": "Em interfaces gráficas, cliques e teclas disparam rotinas tratadoras no modelo orientado a eventos."
+      },
+      "explanation": "Cada paradigma enfatiza uma abstração própria: o paradigma imperativo descreve passos sequenciais que modificam variáveis em memória; o orientado a objetos encapsula estado e comportamento em instâncias que colaboram por mensagens; o funcional prioriza funções puras e imutabilidade sem efeitos colaterais; e o orientado a eventos organiza a execução em torno de ouvintes que reagem a ocorrências externas.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Características dos Paradigmas de Programação (PRG-PAR-01)",
+        "objective": "Correlacionar paradigmas imperativo, orientado a objetos, funcional e orientado a eventos às suas características.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "referencias-enade-2026.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Paradigma Imperativo",
+            "right": "Estruturar o programa como sequência de instruções que alteram explicitamente o estado das variáveis em memória."
+          },
+          {
+            "id": "pair-2",
+            "left": "Paradigma Orientado a Objetos",
+            "right": "Organizar o software em entidades que encapsulam atributos e métodos, colaborando por meio de mensagens."
+          },
+          {
+            "id": "pair-3",
+            "left": "Paradigma Funcional",
+            "right": "Compor funções puras sobre dados imutáveis, evitando estado compartilhado mutável e efeitos colaterais."
+          },
+          {
+            "id": "pair-4",
+            "left": "Paradigma Orientado a Eventos",
+            "right": "Disparar rotinas tratadoras (handlers) em resposta assíncrona a ações do usuário, mensagens ou notificações do ambiente."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-092",
+      "title": "Técnicas de Projeto de Casos de Teste Caixa-Preta",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Qualidade e Testes de Software",
+      "conceptId": "TST-BLK-01",
+      "difficulty": "introductory",
+      "context": "A equipe de qualidade N9 está elaborando casos de teste funcionais para validar regras de lançamento de notas e estados de matrícula sem depender do código interno.",
+      "instruction": "Relacione cada técnica de projeto de testes à sua estratégia de seleção de cenários.",
+      "xp": 60,
+      "help": {
+        "hint": "Associe grupos representativos à partição, extremos de intervalo ao valor-limite, combinações de regras à tabela de decisão e ciclos de vida à transição de estados.",
+        "concept": "Técnicas caixa-preta sistematizam a cobertura de entradas, fronteiras, combinações lógicas e mudanças de estado a partir da especificação.",
+        "example": "Para notas válidas de 0 a 10, testar -0,1, 0,0, 10,0 e 10,1 aplica análise de valor-limite."
+      },
+      "explanation": "Cada técnica ataca uma fonte específica de defeitos: a partição de equivalência agrupa entradas que recebem tratamento análogo; a análise de valor-limite testa exatamente as bordas dos intervalos válidos e inválidos; a tabela de decisão cruza múltiplas condições de negócio com suas ações resultantes; e o teste de transição de estados verifica sequências válidas e inválidas entre estados de uma entidade.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC/IEEE 29119-4 — Software and systems engineering — Software testing — Part 4: Test techniques."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Técnicas de Projeto de Casos de Teste Caixa-Preta (TST-BLK-01)",
+        "objective": "Distinguir partição de equivalência, valor-limite, tabela de decisão e transição de estados.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC/IEEE 29119-4 — Test techniques"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Partição de Equivalência",
+            "right": "Dividir os dados de entrada em classes com comportamento esperado equivalente e selecionar um representante por grupo."
+          },
+          {
+            "id": "pair-2",
+            "left": "Análise de Valor-Limite",
+            "right": "Exercitar exatamente as fronteiras mínimas e máximas de um intervalo permitido e seus valores imediatamente adjacentes."
+          },
+          {
+            "id": "pair-3",
+            "left": "Tabela de Decisão",
+            "right": "Cruzar combinações de múltiplas condições lógicas de negócio às ações correspondentes exigidas pela regra."
+          },
+          {
+            "id": "pair-4",
+            "left": "Teste de Transição de Estados",
+            "right": "Validar se eventos permitidos e proibidos conduzem uma entidade (como matrícula ativa, trancada ou concluída) aos estados corretos."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-093",
+      "title": "Hierarquia de Memória nos Computadores",
+      "mechanic": "pair-match",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Organização e Arquitetura de Computadores",
+      "conceptId": "ARQ-MEM-01",
+      "difficulty": "introductory",
+      "context": "Para dimensionar as estações e servidores dos laboratórios N9, a equipe revisa o compromisso entre velocidade de acesso, capacidade e persistência nos diferentes níveis de armazenamento.",
+      "instruction": "Associe cada nível da hierarquia de memória às suas características de velocidade, capacidade e finalidade.",
+      "xp": 60,
+      "help": {
+        "hint": "Quanto mais próximo do núcleo do processador, menor é a latência e menor é a capacidade de armazenamento.",
+        "concept": "A hierarquia de memória equilibra custo, velocidade e capacidade: registradores -> cache -> memória principal (RAM) -> armazenamento secundário.",
+        "example": "Dados que precisam sobreviver ao desligamento da máquina residem no armazenamento secundário."
+      },
+      "explanation": "Na hierarquia de memória: registradores ficam dentro da CPU (Central Processing Unit — Unidade Central de Processamento) com acesso em ciclo único e capacidade mínima; a memória cache atua como camada intermediária ultrarrápida para blocos frequentes; a memória principal (RAM — Random Access Memory) mantém programas e dados em execução de forma volátil; e o armazenamento secundário oferece alta capacidade não volátil para persistência duradoura.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Hierarquia de Memória nos Computadores (ARQ-MEM-01)",
+        "objective": "Correlacionar registradores, cache, memória principal e armazenamento secundário a velocidade, capacidade e finalidade.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "pair-match",
+        "pairs": [
+          {
+            "id": "pair-1",
+            "left": "Registradores do Processador",
+            "right": "Células internas à unidade central de processamento (CPU) com velocidade máxima e capacidade de poucos bytes para operandos imediatos."
+          },
+          {
+            "id": "pair-2",
+            "left": "Memória Cache",
+            "right": "Memória estática de baixíssima latência e pequena capacidade que guarda cópias de dados e instruções usados com frequência."
+          },
+          {
+            "id": "pair-3",
+            "left": "Memória Principal (RAM — Random Access Memory)",
+            "right": "Memória volátil de capacidade intermediária que armazena programas e dados ativos durante a execução pelo sistema operacional."
+          },
+          {
+            "id": "pair-4",
+            "left": "Armazenamento Secundário (SSD/HDD)",
+            "right": "Dispositivo não volátil de grande capacidade e maior latência destinado à gravação permanente de arquivos e bases de dados."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-094",
+      "title": "Coesão e Acoplamento na Modularização de Software",
+      "mechanic": "categorize",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Arquitetura e Projeto de Software",
+      "conceptId": "ARC-MOD-01",
+      "difficulty": "intermediate",
+      "context": "Durante uma revisão de arquitetura no sistema N9, a equipe analisou seis decisões de projeto envolvendo foco interno das classes e dependências entre módulos.",
+      "instruction": "Classifique cada exemplo entre Alta Coesão, Baixo Acoplamento ou Problema de Projeto (Baixa Coesão / Alto Acoplamento).",
+      "xp": 75,
+      "help": {
+        "hint": "Coesão avalia o quanto os elementos dentro de um mesmo módulo pertencem a um propósito único; acoplamento avalia o grau de dependência entre módulos distintos.",
+        "concept": "Sistemas manuteníveis buscam alta coesão interna em cada módulo e baixo acoplamento entre módulos por meio de contratos estáveis.",
+        "example": "Uma classe que mistura cálculo de juros, impressão de boleto e conexão de rede possui baixa coesão."
+      },
+      "explanation": "Alta coesão ocorre quando uma classe concentra apenas tarefas diretamente ligadas à sua responsabilidade única (como calcular médias ou validar documentos). Baixo acoplamento ocorre quando módulos colaboram via interfaces abstratas ou eventos sem conhecer detalhes internos alheios. Já concentrar responsabilidades desconexas em uma classe única ou manipular diretamente atributos internos de outro módulo caracteriza baixa coesão ou alto acoplamento.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Coesão e Acoplamento na Modularização de Software (ARC-MOD-01)",
+        "objective": "Classificar exemplos práticos de alta coesão, baixo acoplamento e falhas de modularização.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-coesao",
+            "label": "Alta Coesão",
+            "description": "Módulo ou classe concentra exclusivamente operações fortemente relacionadas a um propósito único."
+          },
+          {
+            "id": "cat-baixo-acop",
+            "label": "Baixo Acoplamento",
+            "description": "Módulos interagem por contratos ou interfaces estáveis, sem depender da implementação interna um do outro."
+          },
+          {
+            "id": "cat-problema",
+            "label": "Problema de Projeto (Baixa Coesão / Alto Acoplamento)",
+            "description": "Mistura de responsabilidades desconexas em um mesmo módulo ou dependência rígida de detalhes internos alheios."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Classe CalculadoraMediaSemestral dedicada exclusivamente ao cálculo e arredondamento de notas conforme o regimento.",
+            "categoryId": "cat-coesao"
+          },
+          {
+            "id": "item-2",
+            "text": "Componente ValidadorIdentificador responsável apenas por conferir formato e dígito verificador de registros acadêmicos.",
+            "categoryId": "cat-coesao"
+          },
+          {
+            "id": "item-3",
+            "text": "Serviço de emissão de histórico que depende apenas da interface RepositorioNotas, ignorando se os dados vêm de banco ou memória.",
+            "categoryId": "cat-baixo-acop"
+          },
+          {
+            "id": "item-4",
+            "text": "Módulo de matrícula que publica um evento padronizado MatriculaConcluida sem conhecer quais serviços irão reagir a ele.",
+            "categoryId": "cat-baixo-acop"
+          },
+          {
+            "id": "item-5",
+            "text": "Classe UtilitarioGeral que valida formulários, gera PDF, envia e-mails e executa consultas SQL em um mesmo arquivo.",
+            "categoryId": "cat-problema"
+          },
+          {
+            "id": "item-6",
+            "text": "Módulo de relatórios que lê e altera diretamente estruturas internas privadas da classe Turma para montar listagens.",
+            "categoryId": "cat-problema"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-095",
+      "title": "Variáveis Qualitativas e Quantitativas na Análise Acadêmica",
+      "mechanic": "categorize",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Estatística e Análise de Dados",
+      "conceptId": "EST-VAR-01",
+      "difficulty": "introductory",
+      "context": "A coordenação institucional da rede N9 coletou seis indicadores sobre as turmas do semestre para alimentar relatórios gerenciais e estudos estatísticos.",
+      "instruction": "Classifique cada variável coletada entre Dado Qualitativo (Categórico) ou Dado Quantitativo (Numérico).",
+      "xp": 55,
+      "help": {
+        "hint": "Verifique se o valor representa uma categoria/rótulo descritivo ou uma contagem/medida numérica com grandeza aritmética.",
+        "concept": "Dados qualitativos classificam observações em categorias nominais ou ordinais; dados quantitativos expressam contagens discretas ou mensurações contínuas.",
+        "example": "Curso matriculado é qualitativo; quantidade de disciplinas cursadas é quantitativo."
+      },
+      "explanation": "Variáveis qualitativas descrevem atributos ou categorias não numéricas, como modalidade de oferta, turno e grau de satisfação declarado. Variáveis quantitativas representam quantidades ou medições numéricas que admitem operações aritméticas e médias, como número de livros emprestados, tempo de resposta em milissegundos e percentual de frequência.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Variáveis Qualitativas e Quantitativas na Análise Acadêmica (EST-VAR-01)",
+        "objective": "Distinguir variáveis qualitativas (categóricas) e quantitativas (numéricas) em contexto de dados institucionais.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "categorize",
+        "categories": [
+          {
+            "id": "cat-qual",
+            "label": "Dado Qualitativo (Categórico)",
+            "description": "Expressa qualidades, rótulos, classificações ou níveis ordenados sem grandeza aritmética."
+          },
+          {
+            "id": "cat-quan",
+            "label": "Dado Quantitativo (Numérico)",
+            "description": "Expressa contagens ou mensurações numéricas sujeitas a operações aritméticas e escalas de medida."
+          }
+        ],
+        "items": [
+          {
+            "id": "item-1",
+            "text": "Modalidade de oferta da disciplina (Presencial, Híbrida ou Remota).",
+            "categoryId": "cat-qual"
+          },
+          {
+            "id": "item-2",
+            "text": "Nível de satisfação registrado na avaliação institucional (Insatisfeito, Neutro ou Satisfeito).",
+            "categoryId": "cat-qual"
+          },
+          {
+            "id": "item-3",
+            "text": "Turno de vínculo acadêmico do estudante (Matutino, Vespertino ou Noturno).",
+            "categoryId": "cat-qual"
+          },
+          {
+            "id": "item-4",
+            "text": "Quantidade de livros retirados na biblioteca por estudante durante o semestre.",
+            "categoryId": "cat-quan"
+          },
+          {
+            "id": "item-5",
+            "text": "Tempo de resposta do portal acadêmico medido em milissegundos.",
+            "categoryId": "cat-quan"
+          },
+          {
+            "id": "item-6",
+            "text": "Percentual de presença acumulado pelo estudante nas aulas do período.",
+            "categoryId": "cat-quan"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N9-COM-096",
+      "title": "Soma de Vetor com Aritmética de Ponteiros em C",
+      "mechanic": "fill-slot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Algoritmos e Programação",
+      "conceptId": "C-PTR-01",
+      "difficulty": "intermediate",
+      "context": "No programa em linguagem C abaixo, o vetor notas possui 4 elementos inteiros ({10, 20, 30, 40}) e o ponteiro ptr aponta para o início desse vetor. O laço percorre exatamente os índices válidos de 0 a 3 e deve imprimir a soma total 100.",
+      "instruction": "Selecione a expressão em C que desreferencia corretamente o elemento deslocado em i posições a partir de ptr sem ultrapassar os limites do vetor.",
+      "xp": 80,
+      "help": {
+        "hint": "Em C, ptr + i calcula o endereço do i-ésimo elemento após ptr; o operador unário * obtém o valor inteiro armazenado nesse endereço.",
+        "concept": "Na aritmética de ponteiros em C, a expressão *(ptr + i) equivale a ptr[i], acessando o conteúdo armazenado i elementos adiante.",
+        "example": "Se int v[2] = {5, 9}; int *p = v; então *(p + 1) resulta no inteiro 9."
+      },
+      "explanation": "Como ptr aponta para notas[0] (do tipo int *), ptr + i aponta para notas[i] para i de 0 a 3, e *(ptr + i) desreferencia cada valor inteiro (10, 20, 30 e 40), acumulando soma = 100 sem acessar memória fora do vetor. Usar *ptr + i lê apenas notas[0] (10) e soma i (resultando em 46); usar ptr + i tenta somar um ponteiro a um inteiro (erro de compilação); e *(ptr + i + 1) lê além do fim do vetor quando i = 3 (comportamento indefinido).",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 9899 — Information technology — Programming languages — C."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Soma de Vetor com Aritmética de Ponteiros em C (C-PTR-01)",
+        "objective": "Aplicar aritmética e desreferência segura de ponteiros em vetor de tamanho fixo na linguagem C.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC 9899 — Programming languages — C"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "c",
+        "contentBefore": "#include <stdio.h>\n\nint main(void) {\n    int notas[4] = {10, 20, 30, 40};\n    int *ptr = notas;\n    int soma = 0;\n\n    for (int i = 0; i < 4; i++) {\n        soma += ",
+        "contentAfter": ";\n    }\n\n    printf(\"%d\\n\", soma);\n    return 0;\n}",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "*(ptr + i)",
+            "feedback": "Correto. Desreferencia cada elemento de notas[0] a notas[3], acumulando 10 + 20 + 30 + 40 = 100 com segurança."
+          },
+          {
+            "id": "tok-2",
+            "text": "*ptr + i",
+            "feedback": "Incorreto. Desreferencia sempre o primeiro elemento (*ptr = 10) e soma o índice i, imprimindo 46 em vez de 100."
+          },
+          {
+            "id": "tok-3",
+            "text": "ptr + i",
+            "feedback": "Incorreto. A expressão ptr + i tem tipo ponteiro (int *) e não pode ser somada diretamente à variável inteira soma."
+          },
+          {
+            "id": "tok-4",
+            "text": "*(ptr + i + 1)",
+            "feedback": "Incorreto. Ignora notas[0] e acessa notas[4] na última iteração, provocando leitura fora dos limites do vetor."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-097",
+      "title": "Convergência da Busca Binária em Python 3",
+      "mechanic": "fill-slot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Algoritmos e Estruturas de Dados",
+      "conceptId": "PY-BSR-01",
+      "difficulty": "intermediate",
+      "context": "No script Python 3 abaixo, a lista ordenada numeros = [12, 18, 25, 31, 44, 59, 73] é pesquisada para localizar alvo = 44, devendo imprimir o índice 4. Quando numeros[meio] é estritamente menor que alvo, o algoritmo deve descartar toda a metade esquerda até meio.",
+      "instruction": "Selecione a atribuição em Python 3 que atualiza o limite inferior da busca binária garantindo progresso e término do laço.",
+      "xp": 80,
+      "help": {
+        "hint": "Como numeros[meio] já foi comparado e é menor que o alvo, a posição meio também deve ficar fora do novo intervalo de busca.",
+        "concept": "Na busca binária iterativa, cada comparação reduz estritamente o intervalo [inicio, fim] atualizando inicio = meio + 1 ou fim = meio - 1.",
+        "example": "Se meio = 3 e lista[3] < alvo, o próximo candidato só pode estar a partir do índice 4 (meio + 1)."
+      },
+      "explanation": "Quando numeros[meio] < alvo, nem meio nem qualquer índice à esquerda pode conter alvo, pois a lista está ordenada em ordem crescente. Atualizar inicio = meio + 1 reduz estritamente o intervalo de busca e leva o algoritmo a encontrar 44 no índice 4. Usar inicio = meio causa laço infinito quando fim == inicio + 1; usar fim = meio - 1 descarta a metade correta; e inicio = meio - 1 amplia o intervalo em vez de reduzi-lo.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "Python 3 Language Reference — Compound statements (while / if)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Convergência da Busca Binária em Python 3 (PY-BSR-01)",
+        "objective": "Atualizar corretamente o limite inferior na busca binária iterativa em Python 3 garantindo convergência.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Python 3 Language Reference"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "fill-slot",
+        "language": "python",
+        "contentBefore": "numeros = [12, 18, 25, 31, 44, 59, 73]\nalvo = 44\ninicio = 0\nfim = len(numeros) - 1\nindice_encontrado = -1\n\nwhile inicio <= fim:\n    meio = (inicio + fim) // 2\n    if numeros[meio] == alvo:\n        indice_encontrado = meio\n        break\n    elif numeros[meio] < alvo:\n        ",
+        "contentAfter": "\n    else:\n        fim = meio - 1\n\nprint(indice_encontrado)",
+        "tokens": [
+          {
+            "id": "tok-1",
+            "text": "inicio = meio + 1",
+            "feedback": "Correto. Descarta a metade esquerda incluindo meio, converge para o índice 4 e garante término mesmo se o alvo não existir."
+          },
+          {
+            "id": "tok-2",
+            "text": "inicio = meio",
+            "feedback": "Incorreto. Quando inicio e fim são consecutivos e numeros[inicio] < alvo, meio permanece igual a inicio e o laço nunca termina."
+          },
+          {
+            "id": "tok-3",
+            "text": "fim = meio - 1",
+            "feedback": "Incorreto. Descarta a metade direita onde valores maiores que numeros[meio] estão armazenados, impedindo localizar 44."
+          },
+          {
+            "id": "tok-4",
+            "text": "inicio = meio - 1",
+            "feedback": "Incorreto. Move inicio para trás, expandindo o intervalo de busca e causando loop infinito."
+          }
+        ],
+        "correctTokenId": "tok-1"
+      }
+    },
+    {
+      "id": "N9-COM-098",
+      "title": "Relacionamento Include e Extend em Casos de Uso UML",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS"
+      ],
+      "area": "Engenharia de Requisitos e Modelagem",
+      "conceptId": "UML-USC-01",
+      "difficulty": "intermediate",
+      "context": "No diagrama UML (Unified Modeling Language — Linguagem de Modelagem Unificada) de casos de uso do portal N9, toda solicitação de trancamento de disciplina executa obrigatoriamente a verificação do calendário acadêmico; já o anexo de atestado médico ocorre apenas opcionalmente em pedidos fora do prazo regular.",
+      "instruction": "Selecione no diagrama a relação que modela corretamente a inclusão obrigatória da verificação do calendário pelo caso de uso Solicitar Trancamento de Disciplina.",
+      "xp": 75,
+      "help": {
+        "hint": "Em UML, <<include>> parte do caso de uso base em direção ao caso de uso incluído obrigatório; <<extend>> parte da extensão opcional em direção ao caso de uso base.",
+        "concept": "O estereótipo <<include>> indica comportamento obrigatório reutilizado pelo caso de uso base, enquanto <<extend>> representa comportamento condicional ou opcional inserido em um ponto de extensão.",
+        "example": "Realizar Pagamento <<include>> Validar Saldo, pois o pagamento sempre exige essa validação."
+      },
+      "explanation": "A relação correta é a seta tracejada rotulada com <<include>> partindo do caso de uso base 'Solicitar Trancamento de Disciplina' para 'Validar Prazo do Calendário Acadêmico', indicando que essa verificação faz parte obrigatória de toda execução do trancamento. Usar <<extend>> tornaria a verificação opcional, e inverter a seta faria o trancamento ser incluído em toda consulta de calendário.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 19505-2 — Information technology — Object Management Group Unified Modeling Language (OMG UML) — Part 2: Superstructure."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Relacionamento Include e Extend em Casos de Uso UML (UML-USC-01)",
+        "objective": "Distinguir direção e semântica de <<include>> e <<extend>> em diagramas UML de casos de uso.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "ISO/IEC 19505-2 — OMG UML"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Diagrama UML de casos de uso com o ator Estudante à esquerda ligado ao caso de uso central Solicitar Trancamento de Disciplina. À direita aparecem duas ligações candidatas com Validar Prazo do Calendário Acadêmico e uma ligação inferior com Anexar Atestado Médico.",
+        "accessibleDescription": "Elementos apresentados no diagrama UML de casos de uso: (1) Relação <<include>> Base para Validação: seta tracejada com estereótipo <<include>> partindo de Solicitar Trancamento de Disciplina para Validar Prazo do Calendário Acadêmico; (2) Relação <<extend>> Base para Validação: seta tracejada com estereótipo <<extend>> partindo de Solicitar Trancamento de Disciplina para Validar Prazo do Calendário Acadêmico; (3) Relação <<include>> Invertida: seta tracejada com estereótipo <<include>> partindo de Validar Prazo do Calendário Acadêmico para Solicitar Trancamento de Disciplina; (4) Associação Direta do Ator: linha contínua ligando diretamente o ator Estudante ao caso de uso interno Validar Prazo do Calendário Acadêmico.",
+        "nodes": [
+          {
+            "id": "node-include-ok",
+            "label": "Seta <<include>>: Solicitar Trancamento → Validar Prazo",
+            "detail": "Dependência tracejada do caso de uso base para o caso de uso incluído, estabelecendo execução obrigatória da validação."
+          },
+          {
+            "id": "node-extend-wrong",
+            "label": "Seta <<extend>>: Solicitar Trancamento → Validar Prazo",
+            "detail": "Dependência com estereótipo de extensão opcional e sentido invertido em relação à semântica UML."
+          },
+          {
+            "id": "node-include-inv",
+            "label": "Seta <<include>>: Validar Prazo → Solicitar Trancamento",
+            "detail": "Dependência invertida que obrigaria toda verificação de calendário a executar um trancamento de disciplina."
+          },
+          {
+            "id": "node-actor-direct",
+            "label": "Associação Direta: Estudante — Validar Prazo",
+            "detail": "Ligação direta do ator à subetapa interna sem passar pelo caso de uso principal de negócio."
+          }
+        ],
+        "correctNodeId": "node-include-ok"
+      }
+    },
+    {
+      "id": "N9-COM-099",
+      "title": "Distorção Visual por Eixo Vertical Truncado",
+      "mechanic": "visual-hotspot",
+      "courses": [
+        "CC",
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Visualização e Análise de Dados",
+      "conceptId": "VIS-AXS-01",
+      "difficulty": "introductory",
+      "context": "No painel gerencial da instituição N9, um gráfico de colunas compara a taxa de retenção estudantil entre 2025.2 (92%) e 2026.1 (95%). Embora a diferença real seja de apenas 3 pontos percentuais, a segunda barra aparece quatro vezes mais alta que a primeira.",
+      "instruction": "Selecione no painel o componente visual que provoca essa interpretação desproporcional entre as duas colunas.",
+      "xp": 55,
+      "help": {
+        "hint": "Em gráficos de barras ou colunas, o comprimento da barra representa a magnitude total a partir da linha de base.",
+        "concept": "Truncar o eixo vertical de um gráfico de barras (iniciando acima de zero) exagera visualmente pequenas variações relativas entre categorias.",
+        "example": "Iniciar o eixo em 91% faz 92% ocupar 1 unidade visual e 95% ocupar 4 unidades visuais."
+      },
+      "explanation": "O eixo vertical truncado iniciando em 91% (em vez de 0%) distorce a proporção visual das colunas: a barra de 92% tem altura correspondente a 1 ponto acima da base (92 − 91 = 1), enquanto a de 95% tem altura correspondente a 4 pontos acima da base (95 − 91 = 4), aparentando um crescimento de 400% para um ganho real de 3 pontos percentuais.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Distorção Visual por Eixo Vertical Truncado (VIS-AXS-01)",
+        "objective": "Identificar o truncamento do eixo vertical como causa de distorção proporcional em gráficos de colunas.",
+        "locators": [
+          "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "mapeamento-questoes-cursos-disciplinas.md"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "visual-hotspot",
+        "visualDescription": "Gráfico de colunas verticais intitulado Taxa de Retenção Semestral, com eixo horizontal mostrando 2025.2 e 2026.1, rótulos numéricos 92% e 95% acima das barras e eixo vertical marcado de 91% a 96%.",
+        "accessibleDescription": "Componentes do painel gráfico: (1) Eixo Vertical com Origem em 91%: escala vertical graduada de 91% até 96% omitindo o intervalo de 0% a 91%; (2) Eixo Horizontal de Semestres: categorias discretas 2025.2 e 2026.1; (3) Rótulos Numéricos das Colunas: valores exatos 92% e 95% exibidos acima de cada barra; (4) Título do Painel: texto descritivo Taxa de Retenção Semestral.",
+        "nodes": [
+          {
+            "id": "node-yaxis-trunc",
+            "label": "Eixo Vertical Truncado (iniciando em 91%)",
+            "detail": "Linha de base deslocada para 91%, fazendo a diferença entre 92% e 95% parecer quatro vezes maior."
+          },
+          {
+            "id": "node-xaxis-cat",
+            "label": "Eixo Horizontal de Semestres (2025.2 e 2026.1)",
+            "detail": "Eixo categórico que identifica os dois períodos letivos comparados."
+          },
+          {
+            "id": "node-data-labels",
+            "label": "Rótulos Numéricos Diretos (92% e 95%)",
+            "detail": "Valores percentuais exatos impressos sobre o topo de cada coluna."
+          },
+          {
+            "id": "node-chart-title",
+            "label": "Título do Gráfico (Taxa de Retenção Semestral)",
+            "detail": "Cabeçalho informativo que nomeia o indicador acompanhado."
+          }
+        ],
+        "correctNodeId": "node-yaxis-trunc"
+      }
+    },
+    {
+      "id": "N9-COM-100",
+      "title": "Negociação de Acordo de Nível de Serviço (SLA) e Priorização",
+      "mechanic": "decision-dialogue",
+      "courses": [
+        "SI",
+        "TADS",
+        "TGTI"
+      ],
+      "area": "Gestão e Governança de Serviços de TI",
+      "conceptId": "ITSM-SLA-01",
+      "difficulty": "advanced",
+      "context": "A área de operações de TI da rede N9 revisa os Acordos de Nível de Serviço (SLA — Service Level Agreement) com as coordenações acadêmicas antes do início do período de matrículas, conciliando expectativas, capacidade da equipe, matriz de prioridade e comunicação transparente.",
+      "instruction": "Conduza as três decisões de negociação, priorização operacional e comunicação com os interessados.",
+      "xp": 100,
+      "help": {
+        "hint": "Metas de SLA devem refletir impacto de negócio e capacidade real; prioridades cruzam impacto e urgência; comunicação deve ser periódica e transparente.",
+        "concept": "Um Acordo de Nível de Serviço (SLA) eficaz diferencia níveis de atendimento conforme criticidade, alinha metas à capacidade operacional e estabelece rituais claros de comunicação.",
+        "example": "Falha que paralisa matrículas de milhares de alunos recebe SLA mais rígido do que alteração estética de relatório interno."
+      },
+      "explanation": "A gestão madura de níveis de serviço exige: primeiro, estruturar faixas diferenciadas de SLA (Acordo de Nível de Serviço) baseadas em criticidade e capacidade real da equipe, evitando promessas uniformes inexequíveis; segundo, priorizar incidentes combinando impacto abrangente e urgência temporal; e, terceiro, manter comunicação proativa durante incidentes e revisões periódicas de indicadores com os interessados.",
+      "sources": [
+        {
+          "role": "primary",
+          "type": "official-reference",
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ISO/IEC 20000-1 — Information technology — Service management — Part 1: Service management system requirements."
+        }
+      ],
+      "sourceVerificationNeeded": false,
+      "traceability": {
+        "title": "Negociação de Acordo de Nível de Serviço (SLA) e Priorização (ITSM-SLA-01)",
+        "objective": "Conduzir negociação de SLA equilibrando impacto, urgência, capacidade operacional e comunicação com interessados.",
+        "locators": [
+          "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
+          "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
+          "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
+          "ISO/IEC 20000-1 — Service management"
+        ]
+      },
+      "validationStatus": "under-ai-review",
+      "payload": {
+        "type": "decision-dialogue",
+        "steps": [
+          {
+            "id": "step-1",
+            "speaker": "Coordenadora Acadêmica",
+            "message": "Queremos que qualquer chamado aberto pelas secretarias tenha prazo máximo de resolução de 20 minutos, independentemente do tipo de solicitação e sem contratar novos analistas.",
+            "choices": [
+              {
+                "id": "s1-c1",
+                "text": "Aceitar o prazo único de 20 minutos para todos os chamados e cobrar horas extras contínuas da equipe se houver atrasos.",
+                "reaction": "Consequência: Prometer metas desconectadas da capacidade real gera descumprimento sistemático do acordo e desgaste da equipe.",
+                "correct": false
+              },
+              {
+                "id": "s1-c2",
+                "text": "Propor faixas escalonadas de Acordo de Nível de Serviço (SLA) conforme criticidade e impacto operacional, dimensionadas à capacidade atual de atendimento.",
+                "reaction": "Decisão adequada: Diferenciar níveis de serviço por criticidade garante atendimento rápido ao que é essencial sem comprometer a sustentabilidade operacional.",
+                "correct": true
+              },
+              {
+                "id": "s1-c3",
+                "text": "Recusar qualquer prazo formal de atendimento e atender os chamados apenas por ordem de chegada informal.",
+                "reaction": "Consequência: Sem metas pactuadas e critérios de classificação, demandas críticas ficam presas atrás de pedidos rotineiros.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-2",
+            "speaker": "Líder da Central de Serviços",
+            "message": "No primeiro dia de rematrícula, surgiram dois chamados ao mesmo tempo: uma falha que impede 8.000 estudantes de confirmar matrícula e um pedido de ajuste de cor em um relatório gerencial mensal.",
+            "choices": [
+              {
+                "id": "s2-c1",
+                "text": "Classificar a falha de rematrícula como prioridade crítica devido ao alto impacto e urgência imediata, direcionando a equipe principal para ela.",
+                "reaction": "Decisão adequada: A matriz de impacto e urgência concentra recursos onde a interrupção afeta diretamente a operação acadêmica.",
+                "correct": true
+              },
+              {
+                "id": "s2-c2",
+                "text": "Resolver primeiro o ajuste visual do relatório porque é uma tarefa rápida de cinco minutos e melhora o indicador de chamados fechados.",
+                "reaction": "Consequência: Otimizar quantidade de chamados simples enquanto milhares de usuários estão bloqueados viola a gestão orientada a valor.",
+                "correct": false
+              },
+              {
+                "id": "s2-c3",
+                "text": "Dividir a equipe ao meio para executar as duas demandas em paralelo com a mesma prioridade.",
+                "reaction": "Consequência: Reduzir o esforço na falha crítica atrasa a restauração de um serviço essencial sem necessidade.",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "step-3",
+            "speaker": "Diretor de Tecnologia e Operações",
+            "message": "Como devemos conduzir a comunicação durante incidentes relevantes e o acompanhamento contínuo desse acordo com as áreas acadêmicas?",
+            "choices": [
+              {
+                "id": "s3-c1",
+                "text": "Divulgar informações apenas depois que o incidente estiver totalmente resolvido para evitar questionamentos durante o diagnóstico.",
+                "reaction": "Consequência: O silêncio operacional multiplica ligações repetidas à central de suporte e reduz a confiança institucional.",
+                "correct": false
+              },
+              {
+                "id": "s3-c2",
+                "text": "Enviar boletins objetivos em intervalos definidos durante incidentes críticos e realizar revisões periódicas de indicadores com os interessados.",
+                "reaction": "Decisão adequada: A comunicação transparente durante crises e a governança periódica alinham expectativas e sustentam a melhoria contínua.",
+                "correct": true
+              },
+              {
+                "id": "s3-c3",
+                "text": "Compartilhar apenas os chamados resolvidos dentro do prazo, omitindo incidentes que estouraram o acordo.",
+                "reaction": "Consequência: Relatórios seletivos comprometem a transparência e impedem tratar causas reais de gargalo.",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

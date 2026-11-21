@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { SI_LEARNING_LAB } from '../../src/content/learning-lab';
 
 describe('laboratório de mecânicas compartilhadas', () => {
-  it('carrega os quatro lotes e cobre as nove mecânicas', () => {
-    expect(SI_LEARNING_LAB).toHaveLength(80);
+  it('carrega os cinco lotes e cobre as nove mecânicas', () => {
+    expect(SI_LEARNING_LAB).toHaveLength(100);
     expect(new Set(SI_LEARNING_LAB.map((activity) => activity.type))).toEqual(new Set([
       'choice', 'binary-choice', 'multiple-select', 'order', 'match', 'categorize', 'complete-code',
       'hotspot', 'decision-dialogue',
     ]));
-    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(80);
+    expect(new Set(SI_LEARNING_LAB.map((activity) => activity.id)).size).toBe(100);
     expect(SI_LEARNING_LAB.every((activity) => activity.xp > 0 && activity.explanation.length > 40)).toBe(true);
   });
 
@@ -81,6 +81,19 @@ describe('laboratório de mecânicas compartilhadas', () => {
     expect(python?.type).toBe('complete-code');
     if (python?.type === 'complete-code') {
       expect(python.codeBefore + python.tokens[0]?.text + python.codeAfter).toContain('atual = fila.popleft()');
+    }
+  });
+
+  it('preserva os trechos funcionais de C e Python do quinto lote', () => {
+    const c = SI_LEARNING_LAB.find((activity) => activity.id === 'N9-COM-096');
+    expect(c?.type).toBe('complete-code');
+    if (c?.type === 'complete-code') {
+      expect(c.tokens.find((token) => token.id === c.correctTokenId)?.text).toBe('*(ptr + i)');
+    }
+    const python = SI_LEARNING_LAB.find((activity) => activity.id === 'N9-COM-097');
+    expect(python?.type).toBe('complete-code');
+    if (python?.type === 'complete-code') {
+      expect(python.tokens.find((token) => token.id === python.correctTokenId)?.text).toBe('inicio = meio + 1');
     }
   });
 });
