@@ -1,6 +1,8 @@
 name: Publicar teste no GitHub Pages
 
 on:
+  push:
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -17,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Obter o código
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
