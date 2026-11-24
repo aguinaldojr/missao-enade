@@ -1,8 +1,6 @@
 name: Publicar teste no GitHub Pages
 
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
 
 permissions:
