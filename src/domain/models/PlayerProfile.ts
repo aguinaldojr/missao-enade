@@ -1,3 +1,5 @@
+import { validateVerifiedIdentity, type VerifiedStudentIdentity } from './StudentIdentity';
+
 export const NICKNAME_MIN_LENGTH = 3;
 export const NICKNAME_MAX_LENGTH = 20;
 
@@ -6,6 +8,29 @@ export interface PlayerProfile {
   readonly nickname: string;
   readonly createdAt: string;
   readonly lastUsedAt: string;
+  readonly academicId?: string;
+  readonly fullName?: string;
+  readonly course?: import('./Course').CourseId;
+  readonly modality?: import('./StudentIdentity').Modality;
+  readonly role?: import('./StudentIdentity').PlayerRole;
+  readonly publicCode?: string;
+  readonly verificationToken?: string;
+  readonly rankingEligible?: boolean;
+}
+
+export function createVerifiedPlayer(profiles: PlayerProfiles,
+  identity: VerifiedStudentIdentity, usedAt: string): PlayerProfiles {
+  identity = validateVerifiedIdentity(identity);
+  const player: PlayerProfile = Object.freeze({ id: 'verified-' + identity.academicId, nickname: identity.nickname,
+    academicId: identity.academicId, fullName: identity.fullName, course: identity.course,
+    modality: identity.modality, role: identity.role, publicCode: identity.publicCode,
+    verificationToken: identity.verificationToken, rankingEligible: identity.rankingEligible,
+    createdAt: usedAt, lastUsedAt: usedAt });
+  const previous = profiles.players.find((item) => item.academicId === identity.academicId);
+  const players = previous ? profiles.players.map((item) => item.id === previous.id ? { ...player, id: previous.id,
+    createdAt: previous.createdAt } : item) : [...profiles.players, player];
+  const active = previous?.id ?? player.id;
+  return Object.freeze({ schemaVersion: 1, activePlayerId: active, players: Object.freeze(players) });
 }
 
 export interface PlayerProfiles {

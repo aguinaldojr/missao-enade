@@ -114,7 +114,8 @@ describe('laboratório de mecânicas compartilhadas', () => {
     const javascript = SI_LEARNING_LAB.find((activity) => activity.id === 'N9-COM-057');
     expect(javascript?.type).toBe('complete-code');
     if (javascript?.type === 'complete-code') {
-      expect(javascript.codeBefore + javascript.tokens[0]?.text + javascript.codeAfter)
+      const answer = javascript.tokens.find((token) => token.id === javascript.correctTokenId);
+      expect(javascript.codeBefore + answer?.text + javascript.codeAfter)
         .toContain('avisos.filter(item => !item.lido)');
     }
   });
@@ -128,7 +129,8 @@ describe('laboratório de mecânicas compartilhadas', () => {
     const python = SI_LEARNING_LAB.find((activity) => activity.id === 'N9-COM-077');
     expect(python?.type).toBe('complete-code');
     if (python?.type === 'complete-code') {
-      expect(python.codeBefore + python.tokens[0]?.text + python.codeAfter).toContain('atual = fila.popleft()');
+      const answer = python.tokens.find((token) => token.id === python.correctTokenId);
+      expect(python.codeBefore + answer?.text + python.codeAfter).toContain('atual = fila.popleft()');
     }
   });
 

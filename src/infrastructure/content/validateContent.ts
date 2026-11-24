@@ -28,6 +28,10 @@ export function validateContent(data: unknown, collections: CollectionRepository
 }
 
 function validatePresentation(questionId: string, presentation: QuestionPresentation): void {
+  const blockSignatures = presentation.blocks.map((block) => JSON.stringify(block));
+  if (new Set(blockSignatures).size !== blockSignatures.length) {
+    throw new Error('Recurso de apresentação duplicado: ' + questionId);
+  }
   for (const block of presentation.blocks) {
     if (block.type === 'table') {
       const keys = block.columns.map((column) => column.key);

@@ -7,7 +7,7 @@ const WORLD_KEY = 'n9:exploration:v1';
 const PUZZLE_KEY = 'n9:puzzles:v1';
 const RESULT_KEY = 'n9:mission-result:v1';
 async function startWithPlayer(page: Page) {
-  await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  await page.getByRole('button', { name: 'Jogar Jornada N9' }).click();
   if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
     await page.getByLabel('Apelido').fill('Sequenciador');
     await page.getByRole('button', { name: 'Criar jogador' }).click();
@@ -61,7 +61,7 @@ test('teclado, dicas graduais, conclusão, retorno e replay sem XP adicional', a
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await start(page);
-  await expect(page.locator('.example-warning')).toContainText('EM REVISÃO EDITORIAL');
+  await expect(page.locator('.example-warning')).toHaveCount(0);
   await expect(page.locator('.common-terminal')).toHaveAttribute('data-state', 'recovering');
   await expect(page.getByRole('region', { name: 'Briefing completo da ocorrência' })).toContainText(catalog[0]!.narrative);
   await expect(page.locator('.common-terminal-item')).toHaveCount(4);

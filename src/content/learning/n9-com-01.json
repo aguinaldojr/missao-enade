@@ -29,12 +29,15 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI) e Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 8446 — The Transport Layer Security (TLS) Protocol Version 1.3."
+          "description": "RFC 9846 — The Transport Layer Security (TLS) Protocol Version 1.3.",
+          "url": "https://www.rfc-editor.org/info/rfc9846/",
+          "year": 2026,
+          "documentId": "RFC 9846"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -46,7 +49,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
-          "RFC 8446 — TLS Version 1.3"
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "RFC 9846 — TLS Version 1.3"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -113,7 +117,10 @@
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+          "description": "ISO/IEC 9075-2:2023 — Information technology — Database languages SQL — Part 2: Foundation (SQL/Foundation).",
+          "url": "https://www.iso.org/standard/76584.html",
+          "year": 2023,
+          "documentId": "ISO/IEC 9075-2:2023"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -125,7 +132,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
-          "ISO/IEC 9075 — Database languages — SQL"
+          "ISO/IEC 9075-2:2023 — SQL/Foundation"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -262,7 +269,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 154/2026 (Formação Geral), Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+          "description": "Portaria Inep nº 154/2026 (Formação Geral), Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 171/2026 (TGTI) e Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         }
       ],
       "sourceVerificationNeeded": false,
@@ -273,7 +280,8 @@
           "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -340,7 +348,10 @@
         {
           "role": "normative-complementary",
           "type": "official-reference",
-          "description": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), princípio da necessidade."
+          "description": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), princípio da necessidade.",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+          "year": 2018,
+          "documentId": "Lei nº 13.709/2018"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -392,7 +403,10 @@
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "W3C Web Content Accessibility Guidelines (WCAG) 2.1."
+          "description": "W3C Web Content Accessibility Guidelines (WCAG) 2.2.",
+          "url": "https://www.w3.org/TR/WCAG22/",
+          "year": 2023,
+          "documentId": "WCAG 2.2"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -402,7 +416,7 @@
         "locators": [
           "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
           "Portarias Inep nº 157, 168 e 169/2026 (IHC), arts. 5º e 6º",
-          "W3C WCAG 2.1"
+          "W3C WCAG 2.2"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -441,12 +455,15 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI) e Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "NIST SP 800-145 — The NIST Definition of Cloud Computing."
+          "description": "NIST SP 800-145 — The NIST Definition of Cloud Computing.",
+          "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
+          "year": 2011,
+          "documentId": "NIST SP 800-145"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -458,6 +475,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "NIST SP 800-145"
         ]
       },
@@ -536,7 +554,10 @@
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC/IEEE 29148 — Systems and software engineering — Life cycle processes — Requirements engineering."
+          "description": "ISO/IEC/IEEE 29148:2018 — Systems and software engineering — Life cycle processes — Requirements engineering.",
+          "url": "https://www.iso.org/standard/72089.html",
+          "year": 2018,
+          "documentId": "ISO/IEC/IEEE 29148:2018"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -548,7 +569,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
-          "ISO/IEC/IEEE 29148"
+          "ISO/IEC/IEEE 29148:2018"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -616,12 +637,15 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI) e Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "NIST SP 800-61 Rev. 2 — Computer Security Incident Handling Guide."
+          "description": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management.",
+          "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+          "year": 2025,
+          "documentId": "NIST SP 800-61 Rev. 3"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -633,7 +657,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
-          "NIST SP 800-61 Rev. 2"
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
+          "NIST SP 800-61 Rev. 3"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -773,12 +798,15 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI) e Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "NIST SP 800-145 — The NIST Definition of Cloud Computing."
+          "description": "NIST SP 800-145 — The NIST Definition of Cloud Computing.",
+          "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
+          "year": 2011,
+          "documentId": "NIST SP 800-145"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -790,6 +818,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "NIST SP 800-145"
         ]
       },
@@ -842,7 +871,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI) e Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         }
       ],
       "sourceVerificationNeeded": false,
@@ -853,7 +882,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -974,7 +1004,10 @@
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC/IEEE 29148 — Systems and software engineering — Life cycle processes — Requirements engineering."
+          "description": "ISO/IEC/IEEE 29148:2018 — Systems and software engineering — Life cycle processes — Requirements engineering.",
+          "url": "https://www.iso.org/standard/72089.html",
+          "year": 2018,
+          "documentId": "ISO/IEC/IEEE 29148:2018"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -986,7 +1019,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
-          "ISO/IEC/IEEE 29148"
+          "ISO/IEC/IEEE 29148:2018"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1064,7 +1097,10 @@
         {
           "role": "normative-complementary",
           "type": "official-reference",
-          "description": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), art. 5º, incisos I e II."
+          "description": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), art. 5º, incisos I e II.",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm",
+          "year": 2018,
+          "documentId": "Lei nº 13.709/2018"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1151,7 +1187,10 @@
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "PEP 249 — Python Database API Specification v2.0."
+          "description": "PEP 249 — Python Database API Specification v2.0.",
+          "url": "https://peps.python.org/pep-0249/",
+          "year": 1999,
+          "documentId": "PEP 249"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1227,7 +1266,10 @@
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+          "description": "ISO/IEC 9075-2:2023 — Information technology — Database languages SQL — Part 2: Foundation (SQL/Foundation).",
+          "url": "https://www.iso.org/standard/76584.html",
+          "year": 2023,
+          "documentId": "ISO/IEC 9075-2:2023"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1239,7 +1281,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
-          "ISO/IEC 9075 — Database languages — SQL"
+          "ISO/IEC 9075-2:2023 — SQL/Foundation"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1303,17 +1345,20 @@
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "W3C Web Content Accessibility Guidelines (WCAG) 2.1 — Critério 3.3.2 (Labels or Instructions)."
+          "description": "W3C Web Content Accessibility Guidelines (WCAG) 2.2 — Critério 3.3.2 (Labels or Instructions).",
+          "url": "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions",
+          "year": 2023,
+          "documentId": "WCAG 2.2 — SC 3.3.2"
         }
       ],
       "sourceVerificationNeeded": false,
       "traceability": {
         "title": "Barreira de Acessibilidade no Formulário (ACC-FORM-01)",
-        "objective": "Identificar falha de associação semântica de rótulos em formulários acessíveis conforme WCAG 2.1.",
+        "objective": "Identificar falha de associação semântica de rótulos em formulários acessíveis conforme WCAG 2.2.",
         "locators": [
           "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
           "Portarias Inep nº 157, 168 e 169/2026 (IHC), arts. 5º e 6º",
-          "W3C WCAG 2.1 — Critério 3.3.2"
+          "W3C WCAG 2.2 — Critério 3.3.2"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1373,7 +1418,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI) e Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1390,12 +1435,14 @@
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "plano-colecao-enade-2026.md"
         ]
       },
       "validationStatus": "under-ai-review",
       "payload": {
         "type": "visual-hotspot",
+        "visualKind": "cloud-architecture",
         "visualDescription": "Diagrama de arquitetura em nuvem com fluxo da esquerda para a direita: clientes apontam para um balanceador multi-zona, que distribui tráfego para duas instâncias web (Zona A e Zona B); ambas acessam uma única caixa de banco de dados na Zona A e um bucket de objetos replicado.",
         "accessibleDescription": "Topologia de componentes: [node-lb] Balanceador de carga multi-zona redundante; [node-web] Grupo de duas instâncias de aplicação web em Zona A e Zona B; [node-db] Instância única de banco de dados relacional na Zona A sem réplica standby; [node-storage] Serviço de armazenamento de objetos com replicação entre zonas.",
         "nodes": [
@@ -1450,7 +1497,7 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 5º e 6º."
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169, 171 e 172/2026, arts. 5º e 6º."
         },
         {
           "role": "technical",
@@ -1464,7 +1511,7 @@
         "objective": "Conduzir decisões técnicas e gerenciais de contenção, correção de autorização no servidor e validação automatizada diante de falha de segurança pré-lançamento.",
         "locators": [
           "Portaria Inep nº 154/2026 (Formação Geral), arts. 5º e 6º",
-          "Portarias Inep nº 157, 168, 169 e 171/2026, arts. 5º e 6º",
+          "Portarias Inep nº 157, 168, 169, 171 e 172/2026, arts. 5º e 6º",
           "mapeamento-questoes-cursos-disciplinas.md"
         ]
       },

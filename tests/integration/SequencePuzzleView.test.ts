@@ -49,7 +49,7 @@ describe('interface de sequências', () => {
   it('não inclui explicação antes de resolver e mostra dicas uma por vez', () => {
     const { session, view, dispatch } = setup();
     expect(view.element.textContent).not.toContain(session.snapshot.puzzles[0]!.explanation);
-    expect(view.element.textContent).toContain('EM REVISÃO EDITORIAL');
+    expect(view.element.textContent).not.toMatch(/experimental|revisão editorial/i);
     const id = session.snapshot.puzzleAttempt!.puzzleId;
     dispatch({ type: 'validate-puzzle', puzzleId: id });
     expect(view.element.querySelectorAll('.puzzle-hints li')).toHaveLength(1);

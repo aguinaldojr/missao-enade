@@ -16,7 +16,15 @@
           "id": { "type": "string", "minLength": 1 },
           "nickname": { "type": "string", "minLength": 3, "maxLength": 20 },
           "createdAt": { "type": "string", "minLength": 1 },
-          "lastUsedAt": { "type": "string", "minLength": 1 }
+          "lastUsedAt": { "type": "string", "minLength": 1 },
+          "academicId": { "type": "string", "pattern": "^[A-Z0-9]{4,20}$" },
+          "fullName": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "course": { "enum": ["CC", "SI", "TADS", "TGTI", "TRC"] },
+          "modality": { "enum": ["PRESENCIAL", "EAD"] },
+          "role": { "enum": ["student", "teacher"] },
+          "publicCode": { "type": "string", "pattern": "^N9-[A-Z0-9_-]{8}$" },
+          "verificationToken": { "type": "string", "minLength": 20 },
+          "rankingEligible": { "type": "boolean" }
         }
       }
     }

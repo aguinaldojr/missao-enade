@@ -28,12 +28,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "IBM · Big data e dimensões dos dados",
+          "url": "https://www.ibm.com/think/topics/big-data"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -45,18 +47,13 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "IBM · Big data e dimensões dos dados"
         ]
       },
       "validationStatus": "under-ai-review",
       "payload": {
         "type": "single-choice",
         "options": [
-          {
-            "id": "opt-a",
-            "text": "Veracidade, pois avalia a confiabilidade, consistência e ausência de ruídos nos dados.",
-            "feedback": "Correto. A veracidade trata da qualidade e confiabilidade dos registros para evitar decisões baseadas em dados falhos."
-          },
           {
             "id": "opt-b",
             "text": "Velocidade, pois mede o atraso causado pela limpeza manual das planilhas.",
@@ -66,6 +63,11 @@
             "id": "opt-c",
             "text": "Variedade, pois indica a mistura entre sensores defeituosos e sensores calibrados.",
             "feedback": "Incorreto. Variedade diz respeito aos diferentes formatos e fontes de dados (texto, áudio, tabelas, logs)."
+          },
+          {
+            "id": "opt-a",
+            "text": "Veracidade, pois avalia a confiabilidade, consistência e ausência de ruídos nos dados.",
+            "feedback": "Correto. A veracidade trata da qualidade e confiabilidade dos registros para evitar decisões baseadas em dados falhos."
           },
           {
             "id": "opt-d",
@@ -106,12 +108,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "AWS · What is a data lake?",
+          "url": "https://aws.amazon.com/what-is/data-lake/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -122,18 +126,13 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "AWS · What is a data lake?"
         ]
       },
       "validationStatus": "under-ai-review",
       "payload": {
         "type": "single-choice",
         "options": [
-          {
-            "id": "opt-a",
-            "text": "Data Lake, pois retém dados brutos em formatos diversos e aplica esquema apenas na leitura.",
-            "feedback": "Correto. O Data Lake suporta arquivos não estruturados, semiestruturados e estruturados sem exigir modelagem rígida na ingestão."
-          },
           {
             "id": "opt-b",
             "text": "Data Warehouse dimensional em esquema estrela, pois exige normalização prévia de áudios e imagens.",
@@ -153,6 +152,11 @@
             "id": "opt-e",
             "text": "Cache em memória chave-valor volátil, destinado apenas a sessões temporárias de usuários.",
             "feedback": "Incorreto. Caches em memória armazenam pares temporários de baixa latência, não repositórios históricos brutos."
+          },
+          {
+            "id": "opt-a",
+            "text": "Data Lake, pois retém dados brutos em formatos diversos e aplica esquema apenas na leitura.",
+            "feedback": "Correto. O Data Lake suporta arquivos não estruturados, semiestruturados e estruturados sem exigir modelagem rígida na ingestão."
           }
         ],
         "correctId": "opt-a"
@@ -184,15 +188,17 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "scikit-learn · Supervised learning",
+          "url": "https://scikit-learn.org/stable/supervised_learning.html"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Paradigma de Aprendizagem no Apoio Acadêmico (ML-SUP-01)",
         "objective": "Identificar o paradigma de aprendizagem supervisionada em problema profissional com base histórica rotulada.",
@@ -201,7 +207,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "scikit-learn · Supervised learning"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -214,14 +220,14 @@
             "feedback": "Correto. A existência de registros históricos rotulados ('Concluiu' ou 'Evadiu') define o treinamento supervisionado."
           },
           {
-            "id": "opt-b",
-            "text": "Aprendizado não supervisionado, pois o algoritmo ignora os rótulos históricos para criar grupos aleatórios.",
-            "feedback": "Incorreto. O aprendizado não supervisionado é empregado quando não há variável-alvo rotulada na base."
-          },
-          {
             "id": "opt-c",
             "text": "Aprendizado por reforço em tempo real, pois um robô aplica punições financeiras a cada falta.",
             "feedback": "Incorreto. Aprendizado por reforço baseia-se em políticas de ação-recompensa em ambientes dinâmicos, não em tabela histórica rotulada."
+          },
+          {
+            "id": "opt-b",
+            "text": "Aprendizado não supervisionado, pois o algoritmo ignora os rótulos históricos para criar grupos aleatórios.",
+            "feedback": "Incorreto. O aprendizado não supervisionado é empregado quando não há variável-alvo rotulada na base."
           },
           {
             "id": "opt-d",
@@ -263,12 +269,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "CMMI Institute · Maturity levels",
+          "url": "https://cmmiinstitute.com/learning/appraisals/levels"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Softex · Programa MPS.BR",
+          "url": "https://mpsbr.softex.br/cursos/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -280,7 +294,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "CMMI Institute · Maturity levels",
+          "Softex · Programa MPS.BR"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -288,14 +303,14 @@
         "type": "single-choice",
         "options": [
           {
-            "id": "opt-a",
-            "text": "Estabelecer evolução gradual de processos institucionalizados para aumentar previsibilidade, qualidade e melhoria contínua.",
-            "feedback": "Correto. CMMI e MPS.BR guiam a organização na consolidação de práticas mensuráveis e na redução do improviso."
-          },
-          {
             "id": "opt-b",
             "text": "Padronizar obrigatoriamente a linguagem de programação e o banco de dados de todos os projetos.",
             "feedback": "Incorreto. Modelos de maturidade tratam de processos de engenharia e gestão, independentemente de pilha tecnológica."
+          },
+          {
+            "id": "opt-a",
+            "text": "Estabelecer evolução gradual de processos institucionalizados para aumentar previsibilidade, qualidade e melhoria contínua.",
+            "feedback": "Correto. CMMI e MPS.BR guiam a organização na consolidação de práticas mensuráveis e na redução do improviso."
           },
           {
             "id": "opt-c",
@@ -341,12 +356,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+          "description": "ISO/IEC 9075-2:2023 - Information technology — Database languages SQL — Part 2: Foundation (SQL/Foundation)",
+          "url": "https://www.iso.org/standard/76584.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "PostgreSQL · Transactions",
+          "url": "https://www.postgresql.org/docs/current/tutorial-transactions.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -357,7 +380,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "ISO/IEC 9075 — Database languages — SQL"
+          "ISO/IEC 9075-2:2023 - Information technology — Database languages SQL — Part 2: Foundation (SQL/Foundation)",
+          "PostgreSQL · Transactions"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -396,12 +420,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, XI.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
-          "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "type": "official-reference",
+          "description": "NIST SP 800-190 · Application Container Security Guide",
+          "url": "https://csrc.nist.gov/pubs/sp/800/190/final"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -413,7 +439,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XI",
+          "NIST SP 800-190 · Application Container Security Guide"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -450,12 +477,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC/IEEE 29119 — Software and systems engineering — Software testing."
+          "description": "ISO/IEC/IEEE 29119-1:2022 · Software testing, general concepts",
+          "url": "https://www.iso.org/standard/81291.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "ISTQB · CTFL v4.0.1",
+          "url": "https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -466,7 +501,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "ISO/IEC/IEEE 29119"
+          "ISO/IEC/IEEE 29119-1:2022 · Software testing, general concepts",
+          "ISTQB · CTFL v4.0.1"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -483,7 +519,7 @@
           {
             "id": "opt-2",
             "text": "Verificar a comunicação e os contratos entre aplicação, banco de dados e APIs com testes de integração.",
-            "feedback": "Correto. Testes de integração garantem que os módulos cooperem corretamente nas fronteiras técnicas.",
+            "feedback": "Correto. Testes de integração exercitam as fronteiras entre módulos e ajudam a detectar incompatibilidades de contrato.",
             "correct": true
           },
           {
@@ -540,12 +576,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, XIII.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 27001 — Information security, cybersecurity and privacy protection — Information security management systems."
+          "description": "ISO/IEC 27001:2022 - Information security management systems",
+          "url": "https://www.iso.org/standard/27001"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-53 Rev. 5 · Security and Privacy Controls",
+          "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -557,7 +601,9 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "ISO/IEC 27001"
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
+          "ISO/IEC 27001:2022 - Information security management systems",
+          "NIST SP 800-53 Rev. 5 · Security and Privacy Controls"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -630,12 +676,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "GitLab · CI/CD pipelines",
+          "url": "https://docs.gitlab.com/ci/pipelines/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -647,7 +695,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "GitLab · CI/CD pipelines"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -705,20 +753,22 @@
         "concept": "Inspirado em metodologias como CRISP-DM, o ciclo de ciência de dados parte do entendimento do negócio/objetivo, passa pela preparação de dados, treinamento e validação do modelo, até implantação e monitoramento.",
         "example": "Primeiro define-se a métrica de sucesso do negócio; só depois limpam-se os dados e treinam-se algoritmos."
       },
-      "explanation": "O ciclo começa pela definição clara do objetivo de negócio e dos critérios de sucesso. Em seguida, realiza-se a coleta, limpeza e engenharia de atributos na preparação dos dados. Depois, treinam-se algoritmos sobre o conjunto de treino e valida-se o desempenho e a equidade em dados separados de teste. Por fim, implanta-se o modelo e monitora-se sua degradação ao longo do tempo.",
+      "explanation": "Defina a meta e separe os períodos antes de aprender transformações. Ajuste o pré-processamento no treino, escolha o modelo pela validação e use o teste reservado para estimar a generalização a um semestre posterior. Após implantar, acompanhe a deriva dos dados.",
       "sources": [
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "scikit-learn · Common pitfalls and data leakage",
+          "url": "https://scikit-learn.org/stable/common_pitfalls.html"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Ciclo de Vida em Ciência de Dados (DS-CYC-01)",
         "objective": "Ordenar as etapas de definição de objetivo, preparação de dados, treinamento, validação e monitoramento de modelos.",
@@ -727,7 +777,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "scikit-learn · Common pitfalls and data leakage"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -740,15 +790,15 @@
           },
           {
             "id": "ds-2",
-            "text": "Coletar, limpar valores ausentes, transformar variáveis e dividir os conjuntos de dados."
+            "text": "Coletar os dados e separar treino, validação e teste respeitando a ordem temporal dos semestres."
           },
           {
             "id": "ds-3",
-            "text": "Treinar modelos candidatos ajustando parâmetros sobre os dados de treinamento."
+            "text": "Ajustar o pré-processamento nos dados de treino, treinar candidatos e usar a validação para selecionar o modelo."
           },
           {
             "id": "ds-4",
-            "text": "Validar desempenho, generalização e possíveis vieses no conjunto de teste reservado."
+            "text": "Avaliar o modelo selecionado no teste reservado, aplicando as transformações aprendidas no treino."
           },
           {
             "id": "ds-5",
@@ -781,24 +831,26 @@
       "instruction": "Relacione cada método HTTP à intenção semântica correspondente na manipulação do recurso.",
       "xp": 60,
       "help": {
-        "hint": "Associe leitura sem efeitos colaterais ao GET, criação de novo recurso ao POST, substituição completa ao PUT e remoção ao DELETE.",
-        "concept": "APIs REST utilizam a semântica padronizada dos métodos HTTP: GET recupera, POST cria, PUT substitui/atualiza integralmente e DELETE remove.",
-        "example": "GET /livros/42 consulta os dados do livro 42 sem alterar o estado no servidor."
+        "hint": "Identifique a intenção do cliente ao consultar, criar, substituir ou remover o livro.",
+        "concept": "GET solicita uma representação. POST pede processamento pelo recurso e, nesta API, cria um livro. PUT envia o estado desejado ao URI do livro. DELETE solicita a remoção da associação entre o URI e o recurso.",
+        "example": "GET /livros/42 pode gerar um registro de acesso enquanto consulta o livro."
       },
       "explanation": "Em APIs REST alinhadas à RFC 9110, GET realiza leitura segura sem modificar o recurso; POST submete dados para criar um novo item na coleção; PUT substitui integralmente a representação de um recurso identificado de forma idempotente; e DELETE solicita a remoção do recurso especificado.",
       "sources": [
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, X.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 9110 — HTTP Semantics."
+          "description": "RFC 9110 · HTTP Semantics, §§9 e 15",
+          "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Métodos HTTP em uma API REST (WEB-RST-01)",
         "objective": "Correlacionar os métodos HTTP GET, POST, PUT e DELETE às suas respectivas intenções semânticas em APIs REST.",
@@ -806,7 +858,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "RFC 9110 — HTTP Semantics"
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, X (enquadramento indireto, conferir PPC)",
+          "RFC 9110 · HTTP Semantics, §§9 e 15"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -816,7 +869,7 @@
           {
             "id": "pair-1",
             "left": "GET /livros/15",
-            "right": "Consultar e recuperar a representação atual do livro 15 sem alterar dados no servidor."
+            "right": "Solicitar a representação do livro 15 sem pedir uma alteração no recurso."
           },
           {
             "id": "pair-2",
@@ -862,15 +915,17 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "Sedgewick e Wayne · Algorithms and Data Structures Cheatsheet",
+          "url": "https://algs4.cs.princeton.edu/cheatsheet/"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Ordens de Complexidade Assintótica (AED-BIGO-01)",
         "objective": "Associar as classes de complexidade O(1), O(log n), O(n) e O(n log n) a operações e algoritmos clássicos.",
@@ -878,7 +933,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º (enquadramento indireto, conferir PPC)",
+          "Sedgewick e Wayne · Algorithms and Data Structures Cheatsheet"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -934,12 +990,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, XX.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "NASA Systems Engineering Handbook · Crosscutting Technical Management",
+          "url": "https://www.nasa.gov/reference/6-0-crosscutting-technical-management/"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Schwaber e Sutherland · The Scrum Guide",
+          "url": "https://scrumguides.org/scrum-guide.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -950,7 +1014,9 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XX",
+          "NASA Systems Engineering Handbook · Crosscutting Technical Management",
+          "Schwaber e Sutherland · The Scrum Guide"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1006,15 +1072,23 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "scikit-learn · Supervised learning",
+          "url": "https://scikit-learn.org/stable/supervised_learning.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "scikit-learn · Clustering",
+          "url": "https://scikit-learn.org/stable/modules/clustering.html"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Classificação, Regressão e Agrupamento (ML-TSK-01)",
         "objective": "Categorizar problemas aplicados de aprendizagem de máquina entre classificação, regressão e agrupamento.",
@@ -1023,7 +1097,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "scikit-learn · Supervised learning",
+          "scikit-learn · Clustering"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1102,12 +1177,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, XIII.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 27001 — Information security, cybersecurity and privacy protection — Information security management systems."
+          "description": "ISO/IEC 27002:2022 - Information security, cybersecurity and privacy protection — Information security controls",
+          "url": "https://www.iso.org/standard/75652.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1119,7 +1196,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "ISO/IEC 27001"
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
+          "ISO/IEC 27002:2022 - Information security, cybersecurity and privacy protection — Information security controls"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1201,12 +1279,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
-          "type": "official-reference",
-          "description": "Python 3 Language Reference — Built-in Types (Mapping Types — dict)."
+          "type": "institutional",
+          "description": "Python · Mapping types (dict)",
+          "url": "https://docs.python.org/3/library/stdtypes.html#mapping-types-dict"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1217,7 +1297,7 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "Python 3 Language Reference — dict.get"
+          "Python · Mapping types (dict)"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1228,6 +1308,11 @@
         "contentAfter": "\n\nprint(contagem[\"rede\"])",
         "tokens": [
           {
+            "id": "tok-3",
+            "text": "contagem.get(categoria, 1) + 1",
+            "feedback": "Incorreto. O valor padrão 1 faz a primeira ocorrência valer 2, resultando em 4 para 'rede' em vez de 3."
+          },
+          {
             "id": "tok-1",
             "text": "contagem.get(categoria, 0) + 1",
             "feedback": "Correto. Retorna 0 quando a categoria ainda não existe no dicionário e soma 1 a cada ocorrência, imprimindo 3."
@@ -1236,11 +1321,6 @@
             "id": "tok-2",
             "text": "contagem[categoria] + 1",
             "feedback": "Incorreto. Como o dicionário inicia vazio, acessar contagem['rede'] na primeira iteração gera KeyError."
-          },
-          {
-            "id": "tok-3",
-            "text": "contagem.get(categoria, 1) + 1",
-            "feedback": "Incorreto. O valor padrão 1 faz a primeira ocorrência valer 2, resultando em 4 para 'rede' em vez de 3."
           },
           {
             "id": "tok-4",
@@ -1276,12 +1356,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ECMA-262 — ECMAScript Language Specification (Array.prototype.filter)."
+          "description": "ECMA-262 · Array.prototype.filter",
+          "url": "https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.filter"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1292,7 +1374,7 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "ECMA-262 — Array.prototype.filter"
+          "ECMA-262 · Array.prototype.filter"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1303,9 +1385,9 @@
         "contentAfter": "(item => !item.lido);",
         "tokens": [
           {
-            "id": "tok-1",
-            "text": "filter",
-            "feedback": "Correto. filter retorna um novo array contendo os 2 objetos de avisos não lidos (ids 2 e 3)."
+            "id": "tok-4",
+            "text": "forEach",
+            "feedback": "Incorreto. forEach apenas percorre a lista para efeitos colaterais e retorna undefined."
           },
           {
             "id": "tok-2",
@@ -1318,9 +1400,9 @@
             "feedback": "Incorreto. find retorna apenas o primeiro objeto correspondente (id 2), e não um array com todos os pendentes."
           },
           {
-            "id": "tok-4",
-            "text": "forEach",
-            "feedback": "Incorreto. forEach apenas percorre a lista para efeitos colaterais e retorna undefined."
+            "id": "tok-1",
+            "text": "filter",
+            "feedback": "Correto. filter retorna um novo array contendo os 2 objetos de avisos não lidos (ids 2 e 3)."
           }
         ],
         "correctTokenId": "tok-1"
@@ -1351,12 +1433,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "Purdue University · Enhanced Entity-Relationship Modeling",
+          "url": "https://www.cs.purdue.edu/homes/bb/cs448_Spring2014/lecture-files/pdf/ch04-Enhanced%20Entity-Relationship%20%28EER%29%20Modeling.pdf"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1367,7 +1451,7 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "Purdue University · Enhanced Entity-Relationship Modeling"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1425,12 +1509,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "OMG Business Process Model and Notation (BPMN) Version 2.0.2."
+          "description": "OMG · BPMN 2.0.2",
+          "url": "https://www.omg.org/spec/BPMN/2.0.2/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1441,7 +1527,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "OMG BPMN 2.0.2"
+          "OMG · BPMN 2.0.2"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1493,20 +1579,28 @@
       "xp": 100,
       "help": {
         "hint": "Priorize estancar a exposição imediatamente, preservar trilhas de auditoria sem apagar evidências e comunicar formalmente o encarregado (DPO), a autoridade competente e os titulares afetados quando houver risco relevante.",
-        "concept": "A gestão ética e legal de incidentes com dados pessoais (LGPD, art. 48) exige contenção imediata, preservação de registros técnicos e comunicação transparente aos órgãos de governança e titulares.",
+        "concept": "O art. 48 da LGPD atribui ao controlador a comunicação de incidente que possa acarretar risco ou dano relevante aos titulares.",
         "example": "Bloquear a rota exposta, preservar logs de acesso e notificar o encarregado de dados e os titulares com orientações de proteção."
       },
-      "explanation": "Diante de incidente de segurança que possa acarretar risco ou dano relevante aos titulares, a atuação responsável exige conter imediatamente a vulnerabilidade sem destruir evidências, registrar a extensão e os dados afetados por meio dos logs de auditoria, e acionar formalmente o encarregado pelo tratamento de dados pessoais (DPO) para comunicação à autoridade nacional e aos titulares afetados com medidas de mitigação.",
+      "explanation": "Conter a exposição e preservar os registros permite avaliar a extensão do incidente. No cenário há risco relevante de fraude. O controlador deve comunicar a ANPD e os titulares afetados, com apoio do encarregado e orientações para reduzir o dano.",
       "sources": [
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º."
+          "description": "Portaria Inep nº 154/2026 (Formação Geral) e Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, XIII.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "normative-complementary",
           "type": "official-reference",
-          "description": "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), art. 48."
+          "description": "Lei nº 13.709/2018, art. 48",
+          "url": "https://planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ANPD · Comunicação de incidente de segurança",
+          "url": "https://www.gov.br/anpd/pt-br/canais_atendimento/agente-de-tratamento/comunicado-de-incidente-de-seguranca-cis"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1516,7 +1610,9 @@
         "locators": [
           "Portaria Inep nº 154/2026 (Formação Geral), arts. 4º–6º",
           "Portarias Inep nº 157, 168, 169 e 171/2026, arts. 4º–6º",
-          "Lei nº 13.709/2018 (LGPD), art. 48"
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
+          "Lei nº 13.709/2018, art. 48",
+          "ANPD · Comunicação de incidente de segurança"
         ]
       },
       "validationStatus": "under-ai-review",

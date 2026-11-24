@@ -1,3 +1,4 @@
+import { enterEvaluationStation } from './evaluation-station';
 import { expect, test, type Page, type TestInfo } from '@playwright/test';
 import puzzleCatalog from '../../src/content/puzzles/enade-2026-provisional-sequences.json' with { type: 'json' };
 
@@ -26,7 +27,7 @@ async function seedPlayer(page: Page, position?: { x: number; y: number }): Prom
 }
 
 async function enterCentral(page: Page, course: string, mission = 'journey-25'): Promise<void> {
-  await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  await page.getByRole('button', { name: 'Jogar Jornada N9' }).click();
   await page.locator('input[name="course"][value="' + course + '"]').check();
   await page.locator('input[name="mission"][value="' + mission + '"]').check();
   await page.getByRole('button', { name: 'Entrar na Central Nexo' }).click();
@@ -53,6 +54,7 @@ test('textos longos preservam conteúdo, foco, toque e rolagem responsiva', asyn
   await enterCentral(page, 'CC');
   await page.getByRole('button', { name: 'Iniciar missão selecionada' }).click();
 
+  await enterEvaluationStation(page);
   const progress = page.getByRole('progressbar');
   await expect(progress).toHaveAttribute('aria-valuetext', 'Desafio 1 de 25');
   const context = page.getByRole('region', { name: 'Contexto do desafio' });

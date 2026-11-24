@@ -937,7 +937,13 @@ function genericQuestion(section: Section, inventory: Readonly<Record<string, st
     section.text.match(/\|\s*(?:Cursos\s*\/\s*courses|Cursos elegíveis)\s*\|\s*([^|\n]+)\|/i)?.[1] || '';
   const courses = origin === 'COM' ? ['CC', 'SI', 'TADS', 'TGTI', 'TRC'] :
     parseCourses(sectionCourses).length ? parseCourses(sectionCourses) : [origin];
-  const presentation = genericPresentation(resourceSegment(section, promptMatch.index) + '\n' + rawContext);
+  // Os lotes mais recentes repetem o recurso técnico tanto na seção editorial
+  // específica quanto no "Texto ao jogador". Usar as duas fontes ao mesmo
+  // tempo duplicava tabelas e trechos de código na projeção JSON. A seção de
+  // recurso é a fonte preferencial; o contexto continua sendo o fallback para
+  // documentos que não possuem essa seção explícita.
+  const rawResource = resourceSegment(section, promptMatch.index);
+  const presentation = genericPresentation(rawResource || rawContext);
   const context = playerContext(rawContext) || 'Analise os dados e o recurso apresentados para tomar a decisão solicitada.';
   if (options.length !== 5 || Object.keys(feedbackByOption).length !== 5 || !explanation ||
       !['introductory', 'intermediate', 'advanced'].includes(difficulty)) {

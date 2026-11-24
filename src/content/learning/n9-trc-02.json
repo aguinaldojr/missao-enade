@@ -16,12 +16,12 @@
       "area": "Endereçamento IPv6 e Protocolos de Descoberta",
       "conceptId": "TRC01-IPV6-01",
       "difficulty": "introductory",
-      "context": "Uma estação Linux recém-conectada a uma VLAN de laboratório com pilha dupla ativada precisa obter automaticamente um endereço IPv6 Global Unicast (GUA) por meio de autoconfiguração sem estado (SLAAC) com apoio do protocolo Neighbor Discovery (NDP).",
+      "context": "Uma estação Linux recém-conectada a uma VLAN de laboratório com pilha dupla ativada precisa obter automaticamente um endereço IPv6 Global Unicast (GUA) por meio de autoconfiguração sem estado (SLAAC) com apoio do protocolo Neighbor Discovery (NDP). Neste fluxo, a estação conclui o DAD do endereço local antes de solicitar um anúncio ao roteador.",
       "instruction": "Ordene as 5 etapas executadas pelo host IPv6 desde a criação de seu endereço local de enlace até a ativação do endereço global.",
       "xp": 60,
       "help": {
-        "hint": "Todo host IPv6 gera primeiro um endereço fe80::/10, verifica se não há duplicidade no enlace e só depois solicita anúncios ao roteador local.",
-        "concept": "No IPv6, o SLAAC combina um endereço Link-Local (fe80::/10) com o prefixo /64 anunciado via mensagem Router Advertisement (RA) após validação de unicidade (DAD).",
+        "hint": "Neste cenário, valide o endereço local de enlace, observe a solicitação e o anúncio do roteador e depois valide o endereço global.",
+        "concept": "Para formar o endereço global por SLAAC, o host usa o prefixo anunciado para configuração autônoma e um identificador de interface.",
         "example": "O host envia Router Solicitation para o grupo multicast de todos os roteadores (ff02::2) e recebe o prefixo 2001:db8:10::/64 no Router Advertisement."
       },
       "explanation": "No IPv6, o host inicia formando um endereço Link-Local provisório no bloco fe80::/10 e executa a Detecção de Endereço Duplicado (DAD) enviando uma mensagem Neighbor Solicitation (NS) para confirmar que nenhum outro nó usa o mesmo identificador. Com o endereço Link-Local ativo, o host transmite um Router Solicitation (RS) em multicast (ff02::2). O roteador responde com um Router Advertisement (RA) contendo o prefixo /64 da rede, permitindo ao host compor seu endereço Global Unicast (GUA) e validá-lo por DAD antes do uso.",
@@ -29,12 +29,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 4861 — Neighbor Discovery for IP version 6 (IPv6) e RFC 4862 — IPv6 Stateless Address Autoconfiguration."
+          "description": "RFC 4861 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc4861.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 4862 · IPv6 Stateless Address Autoconfiguration",
+          "url": "https://www.rfc-editor.org/rfc/rfc4862.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -44,11 +52,12 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Endereçamento IPv6 e protocolos",
-          "RFC 4861 / RFC 4862",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 4861 · RFC Editor",
+          "RFC 4862 · IPv6 Stateless Address Autoconfiguration"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -69,7 +78,7 @@
           },
           {
             "id": "ipv6-4",
-            "text": "O roteador responde com Router Advertisement (RA) informando o prefixo /64 da sub-rede e o gateway padrão."
+            "text": "O roteador anuncia um prefixo /64 com a flag A ativa e tempo de vida de roteador positivo. O host identifica o roteador padrão pelo endereço de origem do anúncio."
           },
           {
             "id": "ipv6-5",
@@ -112,12 +121,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 4632 — Classless Inter-domain Routing (CIDR) e RFC 1812 — Requirements for IP Version 4 Routers."
+          "description": "RFC 4632 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc4632.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 1812 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc1812.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -127,11 +144,12 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Tabela de rotas e encaminhamento IP",
-          "RFC 4632 / RFC 1812",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 4632 · RFC Editor",
+          "RFC 1812 · RFC Editor"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -191,12 +209,26 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 3022 — Traditional IP Network Address Translator (Traditional NAT) e RFC 1918 — Address Allocation for Private Internets."
+          "description": "RFC 3022 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc3022.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 1918 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc1918.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-41 Rev. 1 · Guidelines on Firewalls and Firewall Policy",
+          "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -206,11 +238,13 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Tradução de endereços NAT/PAT",
-          "RFC 3022 / RFC 1918",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 3022 · RFC Editor",
+          "RFC 1918 · RFC Editor",
+          "NIST SP 800-41 Rev. 1 · Guidelines on Firewalls and Firewall Policy"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -236,25 +270,45 @@
       "area": "Protocolos da Camada de Transporte (TCP e UDP)",
       "conceptId": "TRC01-TRP-01",
       "difficulty": "introductory",
-      "context": "No planejamento de tráfego da rede institucional, você precisa documentar qual protocolo da camada de transporte sustenta seis serviços distintos com requisitos opostos de integridade e latência.",
+      "context": "A equipe compara capturas de seis aplicações do campus. O terminal, o download e o banco mantêm uma conexão com confirmação e reordenação de bytes. Voz, consulta de nomes e sensores enviam datagramas independentes, sem estabelecer conexão de transporte.",
       "instruction": "Classifique cada cenário de comunicação no protocolo de transporte utilizado: TCP ou UDP.",
       "xp": 60,
       "help": {
         "hint": "TCP garante entrega ordenada, controle de fluxo e retransmissão; UDP prioriza baixa sobrecarga e envio imediato sem handshake ou retransmissão automática.",
-        "concept": "Aplicações que não toleram perda de bytes escolhem TCP; aplicações sensíveis a atraso em tempo real ou transações curtas de requisição/resposta costumam empregar UDP.",
+        "concept": "TCP oferece um fluxo ordenado de bytes. UDP entrega datagramas, e a aplicação pode acrescentar mecanismos de confiabilidade.",
         "example": "Em chamadas de voz (VoIP), retransmitir um pacote de áudio atrasado prejudica mais a conversa do que descartá-lo, favorecendo UDP."
       },
-      "explanation": "O TCP estabelece sessão por handshake de três vias, numera bytes, confirma recebimento e retransmite segmentos perdidos, sendo indispensável para administração remota via SSH, transferência de páginas e arquivos via HTTPS e replicação íntegra de dados. O UDP envia datagramas sem conexão prévia e sem retransmissão embutida, sendo preferido para chamadas de voz em tempo real (VoIP/RTP), consultas rápidas de resolução de nomes DNS e envio leve de telemetria periódica.",
+      "explanation": "No cenário, SSH, HTTP/2 e o banco usam o fluxo confiável de bytes do TCP. Voz, consulta DNS e telemetria usam datagramas UDP. A versão do protocolo importa: HTTP/3 utiliza QUIC sobre UDP, e DNS também admite TCP.",
       "sources": [
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 9293 — Transmission Control Protocol (TCP) e RFC 768 — User Datagram Protocol (UDP)."
+          "description": "RFC 9293 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc9293.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 768 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc768.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 9114 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc9114.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "DNS Transport over TCP - Implementation Requirements",
+          "url": "https://www.rfc-editor.org/info/rfc7766/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -264,11 +318,14 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Camada de transporte TCP/UDP",
-          "RFC 9293 / RFC 768",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 9293 · RFC Editor",
+          "RFC 768 · RFC Editor",
+          "RFC 9114 · RFC Editor",
+          "DNS Transport over TCP - Implementation Requirements"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -283,7 +340,7 @@
           {
             "id": "cat-udp",
             "label": "Protocolo UDP",
-            "description": "Sem conexão, com cabeçalho mínimo de 8 bytes, baixa latência e sem retransmissão na camada de transporte."
+            "description": "Envia datagramas sem conexão, com cabeçalho de 8 bytes e sem garantia de entrega ou de ordem."
           }
         ],
         "items": [
@@ -294,7 +351,7 @@
           },
           {
             "id": "item-2",
-            "text": "Download de imagens de máquinas virtuais via HTTPS exigindo integridade total de todos os blocos transferidos.",
+            "text": "Download de imagens de máquinas virtuais via HTTPS com HTTP/2.",
             "categoryId": "cat-tcp"
           },
           {
@@ -347,26 +404,35 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "IEEE Std 802.1AX — IEEE Standard for Local and Metropolitan Area Networks — Link Aggregation."
+          "description": "IEEE SA - IEEE Standard for Local and Metropolitan Area Networks--Link Aggregation",
+          "url": "https://standards.ieee.org/ieee/802.1AX/6768/"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Cisco · EtherChannel Load Balance and Redundancy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/etherchannel/12023-4.html"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Agregação de Enlaces LACP entre Switch de Distribuição e Núcleo (TRC01-LAG-01)",
         "objective": "Conduzir decisões de configuração e ajuste de agregação de enlaces LACP (IEEE 802.1AX), compatibilidade de membros e algoritmo de hash.",
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-01 — Switching e agregação de enlaces",
-          "IEEE Std 802.1AX",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "IEEE SA - IEEE Standard for Local and Metropolitan Area Networks--Link Aggregation",
+          "Cisco · EtherChannel Load Balance and Redundancy"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -474,12 +540,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 11801 e ANSI/TIA-568 — Optical Fiber Cabling Components Standard."
+          "description": "ISO/IEC 11801-1:2017 - Information technology — Generic cabling for customer premises — Part 1: General requirements",
+          "url": "https://www.iso.org/standard/66182.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Fiber Optic Association · Optical fiber",
+          "url": "https://www.thefoa.org/tech/ref/basic/fiber.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -489,7 +563,8 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-02 — Meios físicos e fibra óptica",
-          "ISO/IEC 11801 / ANSI/TIA-568"
+          "ISO/IEC 11801-1:2017 - Information technology — Generic cabling for customer premises — Part 1: General requirements",
+          "Fiber Optic Association · Optical fiber"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -510,7 +585,7 @@
         "items": [
           {
             "id": "item-1",
-            "text": "Diâmetro de núcleo de aproximadamente 9 µm que conduz apenas um caminho óptico axial sem dispersão modal.",
+            "text": "Núcleo de cerca de 9 µm projetado para guiar um único modo no comprimento de onda de operação, evitando dispersão entre modos.",
             "categoryId": "cat-monomodo"
           },
           {
@@ -535,7 +610,7 @@
           },
           {
             "id": "item-6",
-            "text": "Aplicada na interligação entre switches top-of-rack e núcleo dentro da mesma sala de equipamentos até 150 metros.",
+            "text": "Enlace de 150 m entre switches com transceptores 10GBASE-SR e cordões de núcleo de 50 µm.",
             "categoryId": "cat-multimodo"
           }
         ]
@@ -564,12 +639,26 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ANSI/TIA-568 e ITU-T G.652 — Characteristics of a single-mode optical fibre and cable."
+          "description": "TIA-568 Set – TIA",
+          "url": "https://tiaonline.org/standard/tia-568/"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "ITU-T G.652 · Single-mode optical fibre and cable",
+          "url": "https://www.itu.int/rec/T-REC-G.652-202408-I"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Fiber Optic Association · Optical loss budgets",
+          "url": "https://www.thefoa.org/tech/lossbudg.htm"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -579,7 +668,9 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-02 — Meios ópticos e orçamento de potência",
-          "ANSI/TIA-568 / ITU-T G.652"
+          "TIA-568 Set – TIA",
+          "ITU-T G.652 · Single-mode optical fibre and cable",
+          "Fiber Optic Association · Optical loss budgets"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -614,12 +705,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "IEEE Std 802.11 — Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications."
+          "description": "IEEE SA - IEEE Standard for Information Technology--Telecommunications and Information Exchange between Systems Local and Metropolitan Area Networks--Specific Requirements Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications",
+          "url": "https://standards.ieee.org/ieee/802.11/10548/"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Cisco · Wireless for Large Public Networks",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/222000-design-guide-cx-wireless-for-large-pub.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -629,7 +728,8 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-02 — Planejamento Wi-Fi, RSSI e roaming",
-          "IEEE Std 802.11"
+          "IEEE SA - IEEE Standard for Information Technology--Telecommunications and Information Exchange between Systems Local and Metropolitan Area Networks--Specific Requirements Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications",
+          "Cisco · Wireless for Large Public Networks"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -685,12 +785,26 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ANSI/TIA-568 e IEC 61754 — Fibre optic interconnecting devices and passive components — Fibre optic connector interfaces."
+          "description": "TIA-568 Set – TIA",
+          "url": "https://tiaonline.org/standard/tia-568/"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "IEC 61754-4:2022+AMD1:2026 CSV | IEC",
+          "url": "https://webstore.iec.ch/en/publication/114378"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Fiber Optic Connector Identifier",
+          "url": "https://www.thefoa.org/tech/connID.htm"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -700,7 +814,9 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-02 — Cabeamento e conectores",
-          "ANSI/TIA-568 / IEC 61754"
+          "TIA-568 Set – TIA",
+          "IEC 61754-4:2022+AMD1:2026 CSV | IEC",
+          "Fiber Optic Connector Identifier"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -753,22 +869,31 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º."
+          "description": "Portaria Inep nº 172/2026 (Tecnologia em Redes de Computadores), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ANSI/TIA-569 — Telecommunications Pathways and Spaces e ANSI/TIA-607 — Generic Telecommunications Bonding and Grounding."
+          "description": "TIA-569 · Telecommunications pathways and spaces",
+          "url": "https://tiaonline.org/standard/tia-569/"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "TIA-607 · Telecommunications bonding and grounding",
+          "url": "https://tiaonline.org/standard/tia-607/"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Normas de Infraestrutura Física, Aterramento e Racks (TRC02-INF-01)",
         "objective": "Selecionar práticas normativas de organização de cabos, aterramento de telecomunicações e encaminhamento físico em racks.",
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-02 — Infraestrutura física e aterramento",
-          "ANSI/TIA-569 / ANSI/TIA-607"
+          "TIA-569 · Telecommunications pathways and spaces",
+          "TIA-607 · Telecommunications bonding and grounding"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -842,12 +967,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 2131 — Dynamic Host Configuration Protocol e RFC 1542 — Clarifications and Extensions for the Bootstrap Protocol."
+          "description": "RFC 2131 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc2131.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 1542 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc1542.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -857,11 +990,12 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-03 — Serviços de rede e DHCP Relay",
-          "RFC 2131 / RFC 1542",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 2131 · RFC Editor",
+          "RFC 1542 · RFC Editor"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -920,12 +1054,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 1034 — Domain Names — Concepts and Facilities e RFC 1035 — Domain Names — Implementation and Specification."
+          "description": "RFC 1034 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc1034.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 1035 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc1035.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -935,11 +1077,12 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-03 — Resolução de nomes DNS",
-          "RFC 1034 / RFC 1035",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 1034 · RFC Editor",
+          "RFC 1035 · RFC Editor"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -994,17 +1137,25 @@
         "concept": "Enquanto VMs oferecem isolamento completo de sistema operacional e suporte a kernels distintos, containers oferecem empacotamento leve e inicialização rápida sobre o mesmo kernel.",
         "example": "Executar um servidor Windows Server e um servidor Linux no mesmo host físico requer máquinas virtuais sobre um hipervisor."
       },
-      "explanation": "As Máquinas Virtuais (VMs) operam sobre um hipervisor que abstrai o hardware físico, permitindo que cada VM execute seu próprio núcleo (kernel) de sistema operacional — inclusive sistemas heterogêneos como Linux e Windows no mesmo servidor —, porém com maior sobrecarga de memória e tempo de inicialização. Já os Containers isolam processos de aplicação no espaço de usuário por meio de recursos do kernel hospedeiro (como namespaces e cgroups no Linux), resultando em imagens compactas e inicialização em frações de segundo.",
+      "explanation": "As Máquinas Virtuais (VMs) operam sobre um hipervisor que abstrai o hardware físico, permitindo que cada VM execute seu próprio núcleo (kernel) de sistema operacional — inclusive sistemas heterogêneos como Linux e Windows no mesmo servidor —, porém com maior sobrecarga de memória e tempo de inicialização. Já os Containers isolam processos de aplicação no espaço de usuário por meio de recursos do kernel hospedeiro (como namespaces e cgroups no Linux), evitando a inicialização de um kernel convidado por aplicação.",
       "sources": [
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "NIST SP 800-190 — Application Container Security Guide e NIST SP 800-125 — Guide to Security for Full Virtualization Technologies."
+          "description": "NIST SP 800-190 · Application Container Security Guide",
+          "url": "https://csrc.nist.gov/pubs/sp/800/190/final"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "NIST SP 800-125 · Full Virtualization Technologies",
+          "url": "https://csrc.nist.gov/pubs/sp/800/125/final"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1014,11 +1165,12 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), art. 6º, XI",
           "Núcleo TRC-03 — Virtualização e containers",
-          "NIST SP 800-190 / NIST SP 800-125",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "NIST SP 800-190 · Application Container Security Guide",
+          "NIST SP 800-125 · Full Virtualization Technologies"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1049,7 +1201,7 @@
           },
           {
             "id": "item-3",
-            "text": "Apresenta maior reserva fixa de memória RAM e armazenamento em disco devido ao sistema operacional convidado completo.",
+            "text": "Mantém uma instância completa do sistema operacional convidado, cujo kernel e serviços consomem memória.",
             "categoryId": "cat-vm"
           },
           {
@@ -1059,7 +1211,7 @@
           },
           {
             "id": "item-5",
-            "text": "Empacota a aplicação e suas dependências em imagens leves com inicialização quase instantânea em frações de segundo.",
+            "text": "Inicia processos isolados da aplicação sem precisar inicializar um kernel convidado próprio.",
             "categoryId": "cat-container"
           },
           {
@@ -1097,26 +1249,42 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 2474 — Definition of the Differentiated Services Field (DS Field) e RFC 3246 — An Expedited Forwarding PHB."
+          "description": "RFC 2474 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc2474.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 3246 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc3246.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 4594 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc4594.html"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Política de Qualidade de Serviço (QoS) para Voz e Vídeo em WAN (TRC03-QOS-01)",
         "objective": "Conduzir decisões de classificação DSCP, enfileiramento de baixa latência (LLQ) e fronteira de confiança em políticas de QoS.",
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-03 — Desempenho e Qualidade de Serviço (QoS)",
-          "RFC 2474 / RFC 3246",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 2474 · RFC Editor",
+          "RFC 3246 · RFC Editor",
+          "RFC 4594 · RFC Editor"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1228,26 +1396,42 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Documentação oficial do gerenciador de serviços systemd e manuais do kernel Linux sobre sockets e permissões POSIX."
+          "description": "systemd · systemctl",
+          "url": "https://www.freedesktop.org/software/systemd/man/latest/systemctl.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Command-line parameters",
+          "url": "https://nginx.org/en/docs/switches.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "GNU coreutils · chmod(1)",
+          "url": "https://man7.org/linux/man-pages/man1/chmod.1.html"
         }
       ],
-      "sourceVerificationNeeded": true,
+      "sourceVerificationNeeded": false,
       "traceability": {
         "title": "Diagnóstico de Serviço Web, Portas e Permissões em Linux (TRC03-LNX-01)",
         "objective": "Conduzir diagnóstico de serviço Linux via systemd/journalctl, resolução de conflito de socket TCP e ajuste de permissões de chave privada.",
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-03 — Sistemas operacionais e serviços",
-          "Documentação técnica de systemd e Linux",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "systemd · systemctl",
+          "Command-line parameters",
+          "GNU coreutils · chmod(1)"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1359,26 +1543,35 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 4301 — Security Architecture for the Internet Protocol e RFC 7296 — Internet Key Exchange Protocol Version 2 (IKEv2)."
+          "description": "RFC 4301 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc4301.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "RFC 7296 · RFC Editor",
+          "url": "https://www.rfc-editor.org/rfc/rfc7296.html"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Falha de Negociação em Túnel VPN Site-to-Site IPsec (TRC04-VPN-01)",
         "objective": "Diagnosticar falha na Fase 2 de túnel VPN Site-to-Site IPsec provocada por assimetria nos seletores de tráfego (Traffic Selectors).",
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
           "Núcleo TRC-04 — Segurança da informação e VPN IPsec",
-          "RFC 4301 / RFC 7296",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "RFC 4301 · RFC Editor",
+          "RFC 7296 · RFC Editor"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1425,7 +1618,7 @@
       "area": "Controle de Acesso, ACLs e Menor Privilégio",
       "conceptId": "TRC04-ACL-01",
       "difficulty": "introductory",
-      "context": "Você precisa aplicar uma Lista de Controle de Acesso (ACL) estendida na interface de entrada da VLAN de Laboratório (10.50.0.0/24) para bloquear conexões SSH aos servidores internos (10.10.0.0/24), liberar apenas consultas DNS ao servidor 10.10.0.53 e permitir navegação HTTPS externa.",
+      "context": "A ACL de entrada da VLAN de Laboratório (10.50.0.0/24) deve permitir consultas DNS por UDP ao servidor 10.10.0.53, negar os demais acessos à única rede interna de destino (10.10.0.0/24), permitir HTTPS por TCP a destinos externos e registrar o bloqueio residual.",
       "instruction": "Ordene as 4 regras da ACL na sequência correta de avaliação (top-down) para que todas as políticas funcionem sem sombreamento.",
       "xp": 60,
       "help": {
@@ -1433,31 +1626,33 @@
         "concept": "O processamento sequencial (first-match) exige posicionar exceções pontuais e bloqueios específicos antes de permissões amplas e da regra final de negação.",
         "example": "Se 'deny ip any any' for colocado no início da lista, nenhuma regra abaixo dele será avaliada."
       },
-      "explanation": "Como roteadores e firewalls avaliam entradas de ACL sequencialmente de cima para baixo (first-match), primeiro deve-se bloquear explicitamente tentativas de SSH (TCP/22) da sub-rede 10.50.0.0/24 para os servidores internos 10.10.0.0/24; em seguida, autorizar a exceção pontual de DNS (UDP/53) para o host 10.10.0.53; depois, permitir o tráfego web HTTPS (TCP/443) de saída; e, por último, encerrar a lista com a regra residual explícita 'deny ip any any log' para registrar descartes.",
+      "explanation": "A exceção de DNS precisa vir antes da negação da rede interna. Essa negação deve preceder a permissão ampla de HTTPS para evitar liberar servidores internos na porta 443. O bloqueio residual fica por último.",
       "sources": [
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "NIST SP 800-41 Rev. 1 — Guidelines on Firewalls and Firewall Policy."
+          "description": "NIST SP 800-41 Rev. 1 · Guidelines on Firewalls and Firewall Policy",
+          "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Ordenação de Entradas em Lista de Controle de Acesso (ACL) (TRC04-ACL-01)",
         "objective": "Ordenar regras estendidas de Lista de Controle de Acesso (ACL) segundo o princípio first-match e menor privilégio.",
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
           "Núcleo TRC-04 — Segurança da informação e controle de acesso",
-          "NIST SP 800-41 Rev. 1",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "NIST SP 800-41 Rev. 1 · Guidelines on Firewalls and Firewall Policy"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1466,19 +1661,19 @@
         "blocks": [
           {
             "id": "acl-1",
-            "text": "10 deny tcp 10.50.0.0 0.0.0.255 10.10.0.0 0.0.0.255 eq 22 (Bloqueia SSH aos servidores internos)"
+            "text": "Permitir UDP da rede do laboratório ao host 10.10.0.53 na porta de destino 53."
           },
           {
             "id": "acl-2",
-            "text": "20 permit udp 10.50.0.0 0.0.0.255 host 10.10.0.53 eq 53 (Permite consultas DNS ao servidor interno 10.10.0.53)"
+            "text": "Negar todo tráfego IP da rede do laboratório para 10.10.0.0/24."
           },
           {
             "id": "acl-3",
-            "text": "30 permit tcp 10.50.0.0 0.0.0.255 any eq 443 (Permite navegação segura HTTPS externa)"
+            "text": "Permitir TCP da rede do laboratório para qualquer destino na porta 443."
           },
           {
             "id": "acl-4",
-            "text": "40 deny ip any any log (Bloqueio final explícito com registro de pacotes não autorizados)"
+            "text": "Negar os demais pacotes IP e registrar o descarte."
           }
         ],
         "correctOrder": [
@@ -1516,26 +1711,28 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Documentação oficial da linguagem Python 3 (Python Software Foundation) — Expressões booleanas e compreensão de listas."
+          "description": "Python · List comprehensions",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html"
         }
       ],
-      "sourceVerificationNeeded": true,
+      "sourceVerificationNeeded": false,
       "traceability": {
         "title": "Auditoria Automatizada de Interfaces via Script Python (TRC04-AUT-02)",
         "objective": "Construir condição booleana em Python 3.12 para detectar interfaces habilitadas administrativamente com queda operacional.",
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-04 — Automação de redes com Python",
-          "Documentação oficial Python 3",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "Python · List comprehensions"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1545,6 +1742,11 @@
         "contentBefore": "# Ambiente: Python 3.12 — Auditoria de interfaces via API REST\ninterfaces = [\n    {\"nome\": \"Gi0/1\", \"admin_up\": True, \"oper_status\": \"up\"},\n    {\"nome\": \"Gi0/24\", \"admin_up\": True, \"oper_status\": \"down\"},\n    {\"nome\": \"Gi0/10\", \"admin_up\": False, \"oper_status\": \"down\"},\n]\n\nfalhas = [\n    iface[\"nome\"]\n    for iface in interfaces\n    if ",
         "contentAfter": "\n]\nprint(\"Interfaces com falha:\", falhas)",
         "tokens": [
+          {
+            "id": "tok-4",
+            "text": "iface[\"admin_up\"] and iface[\"oper_status\"] == \"up\"",
+            "feedback": "Incorreto. Lista as interfaces saudáveis em operação normal, e não as que sofreram queda."
+          },
           {
             "id": "tok-1",
             "text": "iface[\"admin_up\"] and iface[\"oper_status\"] == \"down\"",
@@ -1559,11 +1761,6 @@
             "id": "tok-3",
             "text": "not iface[\"admin_up\"] and iface[\"oper_status\"] == \"down\"",
             "feedback": "Incorreto. Seleciona apenas portas desativadas administrativamente de propósito, como Gi0/10."
-          },
-          {
-            "id": "tok-4",
-            "text": "iface[\"admin_up\"] and iface[\"oper_status\"] == \"up\"",
-            "feedback": "Incorreto. Lista as interfaces saudáveis em operação normal, e não as que sofreram queda."
           }
         ],
         "correctTokenId": "tok-1"
@@ -1596,12 +1793,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 20000-1 — Information technology — Service management — Part 1: Service management system requirements."
+          "description": "ISO/IEC 20000-1:2018 - Information technology — Service management — Part 1: Service management system requirements",
+          "url": "https://www.iso.org/standard/70636.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Google SRE · Monitoring Distributed Systems",
+          "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1611,11 +1816,12 @@
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-04 — Capacidade, disponibilidade e alertas",
-          "ISO/IEC 20000-1",
           "Portaria Inep nº 157/2026 (CC), arts. 5º e 6º",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "ISO/IEC 20000-1:2018 - Information technology — Service management — Part 1: Service management system requirements",
+          "Google SRE · Monitoring Distributed Systems"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1688,25 +1894,34 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º."
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS), Portaria Inep nº 171/2026 (TGTI), Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 20000-1 — Information technology — Service management — Part 1: Service management system requirements."
+          "description": "ISO/IEC 20000-1:2018 - Information technology — Service management — Part 1: Service management system requirements",
+          "url": "https://www.iso.org/standard/70636.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "NASA Systems Engineering Handbook · Crosscutting Technical Management",
+          "url": "https://www.nasa.gov/reference/6-0-crosscutting-technical-management/"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Gestão de Mudanças, Recuperação de Configuração e Inventário (TRC04-GCM-01)",
         "objective": "Conduzir decisões de gestão de mudanças, recuperação de configuração (rollback) e atualização de inventário/documentação em ativo crítico.",
         "locators": [
           "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º",
           "Núcleo TRC-04 — Gestão de mudanças, inventário e documentação",
-          "ISO/IEC 20000-1",
           "Portaria Inep nº 168/2026 (SI), arts. 5º e 6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 5º e 6º",
-          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º"
+          "Portaria Inep nº 171/2026 (TGTI), arts. 5º e 6º",
+          "ISO/IEC 20000-1:2018 - Information technology — Service management — Part 1: Service management system requirements",
+          "NASA Systems Engineering Handbook · Crosscutting Technical Management"
         ]
       },
       "validationStatus": "under-ai-review",

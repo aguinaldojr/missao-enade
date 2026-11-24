@@ -20,31 +20,54 @@ export function homeView(actions: HomeActions, signal: AbortSignal, lastResult: 
   title.tabIndex = -1;
   title.append(document.createTextNode(gameConfig.copy.heroStart), element('span', 'accent', gameConfig.copy.heroAccent));
   view.append(title, element('p', 'intro', gameConfig.copy.homeIntro));
-  const start = button(gameConfig.copy.startMission);
-  start.append(element('span', 'button-arrow', '↗'));
+
+  const modes = element('section', 'game-mode-selector');
+  modes.setAttribute('aria-labelledby', 'game-mode-title');
+  const modesTitle = element('h2', 'game-mode-title', 'Escolha como jogar');
+  modesTitle.id = 'game-mode-title';
+  const modesIntro = element('p', 'game-mode-intro', 'São duas experiências diferentes. Escolha a que combina com o seu momento.');
+  const modeGrid = element('div', 'game-mode-grid');
+
+  const journeyMode = element('article', 'game-mode-card game-mode-card--journey');
+  journeyMode.append(element('span', 'game-mode-tag', 'MODO AVALIAÇÃO'),
+    element('h3', 'game-mode-name', 'Jornada N9'),
+    element('p', 'game-mode-description', 'Uma aventura completa com 25 questões, cinco fases e quebra-cabeças tecnológicos.'),
+    element('p', 'game-mode-meta', '25 questões · 5 fases · progresso e ranking'));
+  const start = button('Jogar Jornada N9');
+  start.classList.add('game-mode-action');
   start.addEventListener('click', actions.start, { signal });
+  journeyMode.append(start);
+
+  const verified = !!player?.verificationToken;
+  const quickMode = element('article', 'game-mode-card game-mode-card--quick');
+  quickMode.append(element('span', 'game-mode-tag', 'MODO RÁPIDO'),
+    element('h3', 'game-mode-name', 'Desafio Rápido'),
+    element('p', 'game-mode-description', 'Atividades curtas para treinar, acumular XP e participar da missão diária.'),
+    element('p', 'game-mode-meta', 'Partidas curtas · XP · ranking diário'));
+  const laboratory = button(verified ? 'Jogar Desafio Rápido' : 'Entrar para jogar');
+  laboratory.classList.add('game-mode-action', 'learning-lab-entry');
+  laboratory.addEventListener('click', verified ? actions.learningLab : actions.profile, { signal });
+  quickMode.append(laboratory);
+  modeGrid.append(journeyMode, quickMode);
+  modes.append(modesTitle, modesIntro, modeGrid);
+  view.append(modes);
+
+  const access = element('section', 'player-access');
+  access.setAttribute('aria-labelledby', 'player-access-title');
+  const accessCopy = element('div', 'player-access-copy');
+  const accessTitle = element('h2', 'player-access-title', 'Acesso do jogador');
+  accessTitle.id = 'player-access-title';
+  accessCopy.append(accessTitle, element('p', 'player-access-status', player
+    ? 'Conectado como ' + player.nickname + (player.course ? ' · ' + player.course : '')
+    : 'Identifique-se para salvar resultados e participar dos rankings.'));
   const secondaryActions = element('div', 'actions home-actions');
   const profile = button(player ? gameConfig.copy.changePlayer : gameConfig.copy.choosePlayer, true);
   profile.addEventListener('click', actions.profile, { signal });
   const ranking = button(gameConfig.copy.rankingTitle, true);
   ranking.addEventListener('click', actions.ranking, { signal });
-  const laboratory = button('Experimentar modo rápido', true);
-  laboratory.classList.add('learning-lab-entry');
-  laboratory.addEventListener('click', actions.learningLab, { signal });
-  secondaryActions.append(profile, ranking, laboratory);
-  view.append(start, secondaryActions, element('p', 'helper', gameConfig.copy.homeHint));
-  const steps = element('ol', 'journey');
-  for (const [number, name, detail] of [
-    ['01', gameConfig.copy.stepChoose, gameConfig.copy.stepCourse],
-    ['02', gameConfig.copy.stepExplore, gameConfig.copy.stepCentral],
-    ['03', gameConfig.copy.stepLearn, gameConfig.copy.stepChallenges],
-  ]) {
-    const item = element('li', 'journey-step');
-    item.append(element('span', 'step-number', number), element('strong', '', name), element('span', 'step-detail', detail));
-    steps.append(item);
-  }
-  view.append(steps);
-  view.append(element('p', 'example-warning', gameConfig.copy.homeExample));
+  secondaryActions.append(profile, ranking);
+  access.append(accessCopy, secondaryActions);
+  view.append(access);
   if (lastResult) {
     const summary = element('section', 'last-result');
     summary.append(element('h2', '', saveStatus === 'saved' ? gameConfig.copy.lastSaved : gameConfig.copy.lastUnsaved),

@@ -1,5 +1,7 @@
 import type { MapDefinition } from '../domain/exploration/World';
 
+import { EVALUATION_ROUTE, evaluationRooms } from './evaluationRooms';
+
 export const BASE_N9: MapDefinition = {
   id: 'base-n9', name: 'Base N9', width: 640, height: 400,
   bounds: { x: 32, y: 32, width: 576, height: 336 },
@@ -18,4 +20,8 @@ export const BASE_N9: MapDefinition = {
 };
 
 // Registro extensível, sem transições ou outros mapas implementados nesta entrega.
-export const MAPS: Readonly<Record<string, MapDefinition>> = { [BASE_N9.id]: BASE_N9 };
+export const MAPS: Readonly<Record<string, MapDefinition>> = {
+  [BASE_N9.id]: BASE_N9,
+  [EVALUATION_ROUTE.id]: EVALUATION_ROUTE,
+  ...Object.fromEntries(evaluationRooms.map(room => [room.id, room])),
+};

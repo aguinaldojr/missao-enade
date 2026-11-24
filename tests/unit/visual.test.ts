@@ -38,5 +38,16 @@ describe('identidade visual N9', () => {
     expect(base).toContain(':focus-visible');
     expect(visualTheme.motion.walkFrameMs).toBeGreaterThan(0);
   });
+
+  it('mantém os recursos web otimizados no projeto', () => {
+    const root = resolve(process.cwd(), 'src/assets/visual/n9');
+    const required = [
+      'sprites/estudante-spritesheet.png', 'sprites/lia-spritesheet.png',
+      'backgrounds/base-n9-topdown.jpg', 'backgrounds/laboratorio-desktop.jpg',
+      'backgrounds/laboratorio-mobile.jpg', 'characters/lia/lia-normal.png',
+      'characters/student/estudante-normal.png', 'characters/robot/robo-normal.png',
+    ];
+    for (const file of required) expect(readFileSync(resolve(root, file)).byteLength).toBeGreaterThan(1_000);
+  });
 });
 

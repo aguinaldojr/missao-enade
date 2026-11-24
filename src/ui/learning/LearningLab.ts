@@ -1,6 +1,12 @@
 import { N9_SHARED_LEARNING_LAB, type LearningActivity } from '../../content/learning-lab';
 import { selectDailyLearningActivities } from '../../domain/services/DailyLearningSelector';
 import { LabSound } from './LabSound';
+import { learningLabVisualAssets, type LabCharacterMood } from '../../config/visualAssets';
+import { configuredOnlineLeaderboard } from '../../infrastructure/online/AppsScriptLeaderboardRepository';
+import { LocalStoragePlayerProfileRepository } from '../../infrastructure/storage/LocalStoragePlayerProfileRepository';
+import { activePlayer, type PlayerProfile } from '../../domain/models/PlayerProfile';
+import type { OnlineLeaderboardRepository } from '../../ports/OnlineLeaderboardRepository';
+import { PROVISIONAL_PLAYABLE_COLLECTION } from '../../config/collections';
 
 const typeLabels = {
   choice: 'Escolha rápida', 'binary-choice': 'Verdadeiro ou falso', 'multiple-select': 'Seleção múltipla',
@@ -22,30 +28,18 @@ function action(text: string, className = 'lab-button'): HTMLButtonElement {
   return node;
 }
 
-function characters(): HTMLElement {
+function characters(mood: LabCharacterMood = 'neutral'): HTMLElement {
   const scene = el('div', 'lab-characters');
   scene.setAttribute('aria-hidden', 'true');
-  scene.innerHTML = `
-    <svg class="lab-student" viewBox="0 0 170 230">
-      <ellipse class="lab-shadow" cx="84" cy="216" rx="56" ry="10"/>
-      <g class="lab-character-body">
-        <path class="lab-leg" d="M60 164v43h22l6-43z"/><path class="lab-leg" d="M89 164l5 43h23l-5-43z"/>
-        <path class="lab-shoe" d="M54 207h29v12H44c0-7 4-11 10-12z"/><path class="lab-shoe" d="M95 207h25c7 1 10 5 10 12H95z"/>
-        <path class="lab-jacket" d="M48 99c12-11 24-15 37-15 18 0 35 7 45 22l-15 65H55z"/>
-        <path class="lab-shirt" d="M77 93h22l11 71H67z"/><path class="lab-accent" d="M83 97h10l4 47-9 12-9-12z"/>
-        <path class="lab-arm" d="M50 108c-14 20-18 42-7 54 9 8 21-3 29-19l-13-7 10-19z"/>
-        <path class="lab-arm" d="M124 107c16 13 24 30 20 45-3 12-15 12-29 1l8-14-14-16z"/>
-        <circle class="lab-skin" cx="88" cy="58" r="39"/><path class="lab-hair" d="M50 58c2-30 18-46 41-46 24 0 41 18 39 47-8-4-14-12-17-22-15 11-37 16-63 14z"/>
-        <circle class="lab-eye" cx="75" cy="60" r="3"/><circle class="lab-eye" cx="103" cy="60" r="3"/>
-        <path class="lab-smile" d="M78 75c8 7 16 7 24 0"/>
-      </g>
-    </svg>
-    <svg class="lab-bot" viewBox="0 0 110 120">
-      <ellipse class="lab-shadow" cx="55" cy="108" rx="35" ry="7"/>
-      <g class="lab-bot-body"><path class="lab-bot-antenna" d="M55 25V12"/><circle class="lab-bot-light" cx="55" cy="9" r="7"/>
-      <rect class="lab-bot-case" x="15" y="28" width="80" height="65" rx="25"/><rect class="lab-bot-face" x="27" y="42" width="56" height="35" rx="15"/>
-      <circle class="lab-bot-eye" cx="43" cy="58" r="5"/><circle class="lab-bot-eye" cx="67" cy="58" r="5"/><path class="lab-bot-smile" d="M45 69h20"/></g>
-    </svg>`;
+  const sources = learningLabVisualAssets.moods[mood];
+  for (const [className, source] of [['lab-lia', sources.lia], ['lab-student', sources.student], ['lab-bot', sources.robot]] as const) {
+    const image = el('img', className);
+    image.src = source;
+    image.alt = '';
+    image.decoding = 'async';
+    image.draggable = false;
+    scene.append(image);
+  }
   return scene;
 }
 
@@ -54,6 +48,18 @@ export class LearningLab {
   private readonly activities: readonly LearningActivity[];
   private index = -1;
   private xp = 0;
+  private firstTryCorrect = 0;
+  private missedCurrent = false;
+  private activityPenalty = 0;
+  private activityTimePenalty = 0;
+  private activityAward = 0;
+  private helpPenaltyApplied = false;
+  private activityActiveMs = 0;
+  private activityActiveSince = 0;
+  private attemptId = '';
+  private startedAt = 0;
+  private rankingSubmission: 'idle' | 'sending' | 'sent' | 'failed' = 'idle';
+  private rankingSubmissionError = '';
   private solved = false;
   private selectedChoice: string | null = null;
   private selectedBinary: boolean | null = null;
@@ -70,13 +76,25 @@ export class LearningLab {
   private readonly dialogueHistory: { readonly speaker: string; readonly text: string }[] = [];
   private feedback = '';
   private guide = 'Eu sou a Lia. Vamos treinar com atividades rápidas e variadas?';
+  private readonly visibilityHandler = (): void => {
+    const now = performance.now();
+    if (document.hidden && this.activityActiveSince > 0) {
+      this.activityActiveMs += now - this.activityActiveSince; this.activityActiveSince = 0;
+    } else if (!document.hidden && this.index >= 0 && !this.solved && this.activityActiveSince === 0) {
+      this.activityActiveSince = now;
+    }
+  };
 
-  constructor(private readonly root: HTMLElement, private readonly onExit: () => void, date = new Date()) {
+  constructor(private readonly root: HTMLElement, private readonly onExit: () => void, date = new Date(),
+    private readonly ranking: OnlineLeaderboardRepository | null = configuredOnlineLeaderboard(),
+    private readonly player: PlayerProfile | null = activePlayer(new LocalStoragePlayerProfileRepository().load().profiles ??
+      { schemaVersion: 1, activePlayerId: null, players: [] })) {
     this.activities = selectDailyLearningActivities(N9_SHARED_LEARNING_LAB, date);
+    document.addEventListener('visibilitychange', this.visibilityHandler);
     this.render();
   }
 
-  destroy(): void { this.sound.close(); }
+  destroy(): void { document.removeEventListener('visibilitychange', this.visibilityHandler); this.sound.close(); }
 
   private render(): void {
     this.root.className = 'learning-lab-root';
@@ -93,7 +111,9 @@ export class LearningLab {
     sound.addEventListener('click', () => { this.sound.toggle(); this.render(); });
     const exit = action('Voltar ao jogo', 'lab-icon-button');
     exit.addEventListener('click', this.onExit);
-    controls.append(sound, exit);
+    const regulation = el('a', 'lab-icon-button', 'Regulamento');
+    regulation.href = '#/regulamento';
+    controls.append(sound, regulation, exit);
     header.append(brand, controls);
     return header;
   }
@@ -103,17 +123,17 @@ export class LearningLab {
     page.append(this.header());
     const hero = el('main', 'lab-intro');
     const copy = el('section', 'lab-hero-copy');
-    copy.append(el('p', 'lab-pill', '⚡ PROTÓTIPO DE APRENDIZAGEM RÁPIDA'));
+    copy.append(el('p', 'lab-pill', '⚡ MISSÃO DE APRENDIZAGEM RÁPIDA'));
     const title = el('h1', 'lab-title');
     title.tabIndex = -1;
     title.append('TREINE. ', el('span', '', 'DESCUBRA.'), ' AVANCE.');
     copy.append(title, el('p', 'lab-lead', this.activities.length + ' atividades na missão de hoje, compartilhadas entre CC, SI, TADS, TGTI e TRC e ligadas a situações reais da área de TI. Sem nota e sem alterar seu progresso no jogo principal.'));
     const start = action('Começar laboratório  →', 'lab-button lab-button--primary');
-    start.addEventListener('click', () => { this.index = 0; this.prepareActivity(); this.sound.play('tap'); this.render(); });
+    start.addEventListener('click', () => { this.startAttempt(); this.sound.play('tap'); this.render(); });
     copy.append(start, el('p', 'lab-note', 'Duração estimada: 15 a 20 minutos · Funciona com teclado, mouse e toque'));
     const visual = el('aside', 'lab-hero-visual');
     const bubble = el('p', 'lab-speech', 'Oi! Eu sou a Lia. Cada acerto libera XP e uma nova reação.');
-    visual.append(bubble, characters());
+    visual.append(bubble, characters('neutral'));
     hero.append(copy, visual);
     const deck = el('section', 'lab-deck');
     deck.setAttribute('aria-label', 'Mecânicas disponíveis');
@@ -151,7 +171,7 @@ export class LearningLab {
     const speech = el('p', 'lab-speech', this.guide);
     speech.setAttribute('role', 'status');
     speech.setAttribute('aria-live', 'polite');
-    companion.append(speech, characters());
+    companion.append(speech, characters(this.solved ? 'success' : this.feedback ? 'retry' : 'thinking'));
     const challenge = el('section', 'lab-challenge');
     challenge.dataset.activityType = activity.type;
     challenge.append(el('p', 'lab-area', activity.area.toUpperCase()), el('h1', 'lab-question-title', activity.title),
@@ -161,8 +181,19 @@ export class LearningLab {
     const feedback = el('div', 'lab-feedback' + (this.solved ? ' lab-feedback--success' : this.feedback ? ' lab-feedback--retry' : ''));
     feedback.setAttribute('role', 'status');
     feedback.setAttribute('aria-live', 'polite');
-    if (this.solved) feedback.append(el('strong', '', 'Excelente! +' + activity.xp + ' XP'), el('span', '', activity.explanation));
-    else feedback.append(el('strong', '', this.feedback || 'Sua vez!'), el('span', '', this.feedback ? 'Revise a situação e tente outra vez. Você não perde XP.' : 'Escolha, organize ou associe antes de verificar.'));
+    if (this.solved) {
+      const award = this.activityAward > 0 ? 'Excelente! +' + this.activityAward + ' XP'
+        : 'Atividade concluída sem XP devido aos descontos acumulados.';
+      const discount = activity.xp - this.activityAward;
+      feedback.append(el('strong', '', award), el('span', '', discount > 0
+        ? 'Valor original: ' + activity.xp + ' XP · descontos: −' + discount + ' XP. ' + activity.explanation
+        : activity.explanation));
+    } else {
+      feedback.append(el('strong', '', this.feedback || 'Sua vez!'), el('span', '', this.feedback
+        ? 'Revise a situação e tente outra vez.' : 'Escolha, organize ou associe antes de verificar.'));
+      if (this.activityPenalty > 0) feedback.append(el('span', 'lab-current-penalty',
+        'Descontos acumulados nesta atividade: −' + this.activityPenalty + ' XP.'));
+    }
     const verify = action(this.solved ? (this.index === this.activities.length - 1 ? 'Ver resultado  →' : 'Continuar  →') : 'Verificar', 'lab-button lab-button--primary');
     verify.dataset.action = this.solved ? 'next' : 'check';
     verify.disabled = !this.solved && !this.ready(activity);
@@ -195,6 +226,17 @@ export class LearningLab {
       el('strong', '', 'Conceito'), el('p', '', activity.help.concept),
       el('strong', '', 'Exemplo'), el('pre', 'lab-help-example', activity.help.example));
     details.append(content);
+    details.addEventListener('toggle', () => {
+      if (!details.open || this.solved || this.helpPenaltyApplied) return;
+      this.helpPenaltyApplied = true; this.activityPenalty = Math.min(activity.xp, this.activityPenalty + 5);
+      const current = this.root.querySelector<HTMLElement>('.lab-current-penalty');
+      if (current) current.textContent = 'Descontos acumulados nesta atividade: −' + this.activityPenalty + ' XP.';
+      else {
+        const feedback = this.root.querySelector('.lab-feedback');
+        feedback?.append(el('span', 'lab-current-penalty',
+          'Ajuda utilizada: −5 XP. Descontos acumulados: −' + this.activityPenalty + ' XP.'));
+      }
+    });
     return details;
   }
 
@@ -293,19 +335,28 @@ export class LearningLab {
       button.dataset.left = pair.id;
       button.setAttribute('aria-pressed', String(this.selectedLeft === pair.id));
       if (this.matches.has(pair.id)) button.classList.add('is-paired');
-      button.addEventListener('click', () => { this.selectedLeft = pair.id; this.sound.play('tap'); this.render(); });
+      button.disabled = this.solved;
+      button.addEventListener('click', () => {
+        this.matches.delete(pair.id);
+        this.selectedLeft = this.selectedLeft === pair.id ? null : pair.id;
+        this.feedback = ''; this.sound.play('tap'); this.render();
+      });
       left.append(button);
     });
     [...activity.pairs].reverse().forEach((pair) => {
       const button = action(pair.right, 'lab-match-button lab-match-button--term');
       button.dataset.right = pair.id;
       const pairedLeft = [...this.matches].find(([, rightId]) => rightId === pair.id)?.[0];
-      if (pairedLeft) button.classList.add('is-paired');
-      button.disabled = this.selectedLeft === null;
+      if (pairedLeft) {
+        button.classList.add('is-paired');
+        const term = activity.pairs.find((candidate) => candidate.id === pairedLeft)!;
+        button.append(el('span', 'lab-assigned', 'Associado a ' + term.left));
+      }
+      button.disabled = this.solved || (this.selectedLeft === null && !pairedLeft);
       button.addEventListener('click', () => {
-        if (!this.selectedLeft) return;
-        for (const [key, value] of this.matches) if (value === pair.id) this.matches.delete(key);
-        this.matches.set(this.selectedLeft, pair.id); this.selectedLeft = null; this.sound.play('tap'); this.render();
+        if (pairedLeft) this.matches.delete(pairedLeft);
+        if (this.selectedLeft !== null) this.matches.set(this.selectedLeft, pair.id);
+        this.selectedLeft = null; this.feedback = ''; this.sound.play('tap'); this.render();
       });
       right.append(button);
     });
@@ -365,18 +416,76 @@ export class LearningLab {
 
   private hotspot(activity: Extract<LearningActivity, { type: 'hotspot' }>): HTMLElement {
     const figure = el('figure', 'lab-diagram');
-    const visual = el('div', 'lab-diagram-flow');
-    activity.nodes.forEach((node, index) => {
-      const button = action('', 'lab-diagram-node' + (node.id === 'relation' ? ' lab-diagram-relation' : ''));
+    if (activity.visualKind === 'truncated-bar-chart') {
+      const chart = el('div', 'lab-chart-preview');
+      chart.setAttribute('role', 'img'); chart.setAttribute('aria-label', activity.visualDescription);
+      chart.append(el('strong', 'lab-chart-title', 'Taxa de Retenção Semestral'));
+      const plot = el('div', 'lab-chart-plot');
+      const axis = el('div', 'lab-chart-axis');
+      for (const tick of ['96%', '95%', '94%', '93%', '92%', '91%']) axis.append(el('span', '', tick));
+      const bars = el('div', 'lab-chart-bars');
+      const first = el('div', 'lab-chart-column'); first.style.height = '20%'; first.append(el('strong', '', '92%'));
+      const second = el('div', 'lab-chart-column lab-chart-column--accent'); second.style.height = '80%';
+      second.append(el('strong', '', '95%'));
+      bars.append(first, second); plot.append(axis, bars); chart.append(plot);
+      const labels = el('div', 'lab-chart-labels'); labels.append(el('span', '', '2025.2'), el('span', '', '2026.1'));
+      chart.append(labels); figure.append(chart);
+    }
+    const nodeButton = (node: (typeof activity.nodes)[number], className = 'lab-diagram-node'): HTMLButtonElement => {
+      const button = action('', className);
       button.dataset.node = node.id;
       button.setAttribute('aria-pressed', String(this.selectedNode === node.id));
-      button.append(el('strong', '', node.label), el('span', '', node.detail));
+      button.setAttribute('aria-label', node.label + '. ' + node.detail);
       button.addEventListener('click', () => { this.selectedNode = node.id; this.sound.play('tap'); this.render(); });
-      visual.append(button);
-      if (index < activity.nodes.length - 1) visual.append(el('span', 'lab-diagram-arrow', '→'));
-    });
+      return button;
+    };
+    const nodeMap = new Map(activity.nodes.map((node) => [node.id, node]));
+    const umlIds = ['node-heranca', 'node-composicao', 'node-agregacao', 'node-classe-item'] as const;
+    if (activity.visualKind === 'uml-composition' && umlIds.every((id) => nodeMap.has(id))) {
+      const uml = el('div', 'lab-uml-diagram');
+      uml.setAttribute('role', 'img'); uml.setAttribute('aria-label', activity.visualDescription);
+      const classBox = (name: string, details = ''): HTMLElement => {
+        const box = el('div', 'lab-uml-class'); box.append(el('strong', '', name));
+        if (details) box.append(el('span', '', details));
+        return box;
+      };
+      const relation = (id: typeof umlIds[number], symbol: string, multiplicity: string, className: string): HTMLButtonElement => {
+        const button = nodeButton(nodeMap.get(id)!, 'lab-uml-relation ' + className);
+        button.append(el('span', 'lab-uml-symbol', symbol), el('span', 'lab-uml-line'), el('small', '', multiplicity));
+        return button;
+      };
+      const item = nodeButton(nodeMap.get('node-classe-item')!, 'lab-uml-class lab-uml-class--selectable');
+      item.append(el('strong', '', 'ItemMatricula'), el('span', '', 'codigoDisciplina\nturno'));
+      const branches = el('div', 'lab-uml-branches');
+      const composition = el('div', 'lab-uml-branch');
+      composition.append(relation('node-composicao', '◆', '1     1..*', 'lab-uml-relation--composition'), item);
+      const aggregation = el('div', 'lab-uml-branch');
+      aggregation.append(relation('node-agregacao', '◇', '1     0..*', 'lab-uml-relation--aggregation'),
+        classBox('AnexoOpcional', 'arquivo\ntipo'));
+      branches.append(composition, aggregation);
+      uml.append(classBox('DocumentoAcademico', 'id\ndataCriacao'),
+        relation('node-heranca', '△', '', 'lab-uml-relation--inheritance'),
+        classBox('PedidoMatricula', 'numero\nstatus'), branches);
+      figure.append(uml);
+    } else {
+      const visual = el('div', 'lab-diagram-flow lab-diagram-flow--' + (activity.visualKind ?? 'component-grid'));
+      const buttons = activity.nodes.map((node) => {
+        const button = nodeButton(node, 'lab-diagram-node' + (node.id === 'relation' ? ' lab-diagram-relation' : ''));
+        button.append(el('strong', '', node.label), el('span', '', node.detail));
+        return button;
+      });
+      if (activity.visualKind === 'cloud-architecture' && buttons.length === 4) {
+      buttons.forEach((button, index) => button.classList.add('lab-architecture-node-' + (index + 1)));
+      visual.append(buttons[0]!, el('span', 'lab-diagram-arrow lab-architecture-edge-1', '→'), buttons[1]!,
+        el('span', 'lab-diagram-arrow lab-architecture-edge-2', '→'), buttons[2]!,
+        el('span', 'lab-diagram-arrow lab-architecture-edge-3', '→'), buttons[3]!);
+      } else {
+        visual.append(...buttons);
+      }
+      figure.append(visual);
+    }
     const caption = el('figcaption', '', 'Descrição textual: ' + activity.accessibleDescription + ' Todos os elementos são selecionáveis por teclado.');
-    figure.append(visual, caption); return figure;
+    figure.append(caption); return figure;
   }
 
   private dialogue(activity: Extract<LearningActivity, { type: 'decision-dialogue' }>): HTMLElement {
@@ -432,15 +541,17 @@ export class LearningLab {
                 : activity.type === 'complete-code' ? this.selectedToken === activity.correctTokenId
                   : activity.type === 'hotspot' && this.selectedNode === activity.correctNodeId;
     if (correct) {
-      this.solved = true; this.xp += activity.xp; this.feedback = '';
+      if (!this.missedCurrent) this.firstTryCorrect += 1;
+      this.solved = true; this.activityAward = this.awardXp(activity); this.xp += this.activityAward; this.feedback = '';
       this.guide = this.index === this.activities.length - 1 ? 'Sequência concluída! Você dominou nove maneiras de aprender.' : 'Mandou bem! Vamos para o próximo desafio.';
       this.sound.play(this.index === this.activities.length - 1 ? 'complete' : 'correct');
     } else {
+      this.missedCurrent = true; this.activityPenalty = Math.min(activity.xp, this.activityPenalty + 10);
       this.feedback = activity.type === 'choice' ? activity.options.find((option) => option.id === this.selectedChoice)?.feedback ?? 'Revise a alternativa.'
         : activity.type === 'binary-choice' ? (this.selectedBinary ? activity.feedbackTrue : activity.feedbackFalse)
           : activity.type === 'complete-code' ? activity.tokens.find((token) => token.id === this.selectedToken)?.feedback ?? 'Revise o trecho.'
             : activity.type === 'order' ? 'A sequência ainda deixa uma ação acontecer cedo demais.'
-        : activity.type === 'match' ? 'Uma ou mais conexões não representam a finalidade do sistema.'
+        : activity.type === 'match' ? 'Revise os pares. Toque em um item associado para desfazer a ligação.'
           : activity.type === 'categorize' ? 'Há pelo menos um cenário no ambiente de dados incorreto.'
             : activity.type === 'multiple-select' ? this.multipleFeedback(activity)
             : 'Quase! Essa solução não atende completamente ao cenário.';
@@ -460,6 +571,7 @@ export class LearningLab {
     const step = activity.steps[this.dialogueStep]!;
     const choice = step.choices.find((candidate) => candidate.id === this.selectedDialogueChoice)!;
     if (!choice.correct) {
+      this.missedCurrent = true; this.activityPenalty = Math.min(activity.xp, this.activityPenalty + 10);
       this.feedback = choice.reaction;
       this.guide = 'Essa decisão pode criar um novo problema. Leia a reação e tente outra abordagem.';
       this.sound.play('wrong'); this.render(); return;
@@ -473,7 +585,8 @@ export class LearningLab {
       this.guide = 'Boa decisão! A conversa avançou para uma nova questão.';
       this.sound.play('correct'); this.render(); return;
     }
-    this.solved = true; this.xp += activity.xp; this.feedback = '';
+    if (!this.missedCurrent) this.firstTryCorrect += 1;
+    this.solved = true; this.activityAward = this.awardXp(activity); this.xp += this.activityAward; this.feedback = '';
     this.guide = 'Você equilibrou pessoas, processos, dados e tecnologia. Excelente análise!';
     this.sound.play('complete'); this.render();
   }
@@ -481,13 +594,32 @@ export class LearningLab {
   private next(): void { this.index += 1; this.prepareActivity(); this.sound.play('tap'); this.render(); }
 
   private prepareActivity(): void {
-    this.solved = false; this.feedback = ''; this.selectedChoice = null; this.selectedBinary = null;
+    this.solved = false; this.missedCurrent = false; this.feedback = ''; this.selectedChoice = null; this.selectedBinary = null;
+    this.activityPenalty = 0; this.activityTimePenalty = 0; this.activityAward = 0; this.helpPenaltyApplied = false;
+    this.activityActiveMs = 0; this.activityActiveSince = document.hidden ? 0 : performance.now();
     this.selectedMultiple.clear(); this.selectedLeft = null; this.matches.clear();
     this.activeCategoryItem = null; this.categories.clear(); this.selectedToken = null; this.selectedNode = null;
     this.dialogueStep = 0; this.selectedDialogueChoice = null; this.dialogueHistory.length = 0;
     const current = this.activities[this.index];
     this.order = current?.type === 'order' ? [...current.blocks].reverse().map((block) => block.id) : [];
     this.guide = current ? 'Novo desafio: ' + typeLabels[current.type] + '. Você consegue!' : 'Laboratório concluído!';
+  }
+
+  private awardXp(activity: LearningActivity): number {
+    if (this.activityActiveSince > 0) {
+      this.activityActiveMs += performance.now() - this.activityActiveSince; this.activityActiveSince = 0;
+    }
+    const completedIntervals = Math.floor(Math.max(0, this.activityActiveMs - 60_000) / 15_000);
+    this.activityTimePenalty = Math.min(Math.ceil(activity.xp * 0.1), completedIntervals);
+    return Math.max(0, activity.xp - this.activityPenalty - this.activityTimePenalty);
+  }
+
+  private startAttempt(): void {
+    this.index = 0; this.xp = 0; this.firstTryCorrect = 0;
+    this.startedAt = Date.now();
+    this.attemptId = 'quick-' + (globalThis.crypto?.randomUUID?.() ?? Date.now().toString(36));
+    this.rankingSubmission = 'idle'; this.rankingSubmissionError = '';
+    this.prepareActivity();
   }
 
   private moveOrder(from: number, to: number): void {
@@ -501,16 +633,60 @@ export class LearningLab {
     this.categories.set(itemId, categoryId); this.activeCategoryItem = null; this.feedback = ''; this.sound.play('tap'); this.render();
   }
 
+  private async submitQuickRanking(status: HTMLElement, retry: HTMLButtonElement): Promise<void> {
+    if (this.rankingSubmission === 'sending' || this.rankingSubmission === 'sent' || !this.ranking ||
+      !this.player?.verificationToken || !this.player.course || !this.player.rankingEligible) return;
+    this.rankingSubmission = 'sending'; this.rankingSubmissionError = '';
+    status.textContent = 'Enviando resultado automaticamente ao ranking diário…';
+    retry.hidden = true; retry.disabled = true;
+    try {
+      await this.ranking.submit({ verificationToken: this.player.verificationToken,
+        mode: 'quick', attemptId: this.attemptId, course: this.player.course,
+        questionCount: this.activities.length, correctCount: this.firstTryCorrect,
+        score: this.xp, maxScore: this.activities.reduce((total, activity) => total + activity.xp, 0),
+        durationMs: Math.max(0, Date.now() - this.startedAt), achievedAt: new Date().toISOString(),
+        collectionId: PROVISIONAL_PLAYABLE_COLLECTION.collectionId });
+      this.rankingSubmission = 'sent';
+      status.textContent = 'Resultado incluído automaticamente no ranking diário.';
+    } catch (error) {
+      this.rankingSubmission = 'failed';
+      this.rankingSubmissionError = error instanceof Error ? error.message : 'Não foi possível enviar o resultado.';
+      status.textContent = this.rankingSubmissionError;
+      retry.hidden = false; retry.disabled = false;
+    }
+  }
+
   private result(): HTMLElement {
     const page = el('div', 'lab-page lab-result-screen'); page.append(this.header());
     const main = el('main', 'lab-result');
     const burst = el('div', 'lab-xp-burst', '⚡ +' + this.xp + ' XP');
     const title = el('h1', 'lab-title', 'LABORATÓRIO CONCLUÍDO!'); title.tabIndex = -1;
-    main.append(burst, title, el('p', 'lab-lead', 'Você concluiu as ' + this.activities.length + ' atividades de hoje e experimentou nove formas de aprender conceitos reais de tecnologia.'), characters());
+    main.append(burst, title, el('p', 'lab-lead', 'Você concluiu as ' + this.activities.length + ' atividades de hoje e experimentou nove formas de aprender conceitos reais de tecnologia.'), characters('result'));
     const stats = el('div', 'lab-result-stats');
-    stats.append(el('span', '', this.activities.length + ' atividades'), el('span', '', this.xp + ' XP'), el('span', '', 'Missão diária concluída'));
+    stats.append(el('span', '', this.activities.length + ' atividades'), el('span', '', this.xp + ' XP'),
+      el('span', '', this.firstTryCorrect + ' acertos de primeira'));
+    const rankingStatus = el('p', 'lab-ranking-status');
+    rankingStatus.setAttribute('role', 'status');
+    rankingStatus.setAttribute('aria-live', 'polite');
+    if (this.ranking && this.player?.verificationToken && this.player.course && this.player.rankingEligible) {
+      const retry = action('Tentar enviar novamente', 'lab-button lab-button--ghost');
+      retry.hidden = this.rankingSubmission !== 'failed';
+      retry.addEventListener('click', () => { void this.submitQuickRanking(rankingStatus, retry); });
+      rankingStatus.textContent = this.rankingSubmission === 'sent'
+        ? 'Resultado incluído automaticamente no ranking diário.'
+        : this.rankingSubmission === 'failed' ? this.rankingSubmissionError
+          : 'O resultado será enviado automaticamente ao ranking diário.';
+      main.append(rankingStatus, retry);
+      if (this.rankingSubmission === 'idle') {
+        queueMicrotask(() => { void this.submitQuickRanking(rankingStatus, retry); });
+      }
+    } else if (this.player?.role === 'teacher') {
+      rankingStatus.textContent = 'Perfil de professor: este resultado não entra no ranking.'; main.append(rankingStatus);
+    } else {
+      rankingStatus.textContent = 'Valide seu cadastro no jogo principal para participar do ranking diário.'; main.append(rankingStatus);
+    }
     const restart = action('Jogar novamente', 'lab-button lab-button--primary');
-    restart.addEventListener('click', () => { this.index = 0; this.xp = 0; this.prepareActivity(); this.render(); });
+    restart.addEventListener('click', () => { this.startAttempt(); this.render(); });
     const exit = action('Voltar ao N9 atual', 'lab-button lab-button--ghost'); exit.addEventListener('click', this.onExit);
     const actions = el('div', 'lab-result-actions'); actions.append(restart, exit); main.append(stats, actions); page.append(main);
     queueMicrotask(() => title.focus()); return page;

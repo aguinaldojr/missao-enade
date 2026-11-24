@@ -108,6 +108,62 @@
 .puzzle-view[data-puzzle-mode="code"] .block-command { color: #0c5f6b; background: #cff0f3; }
 .puzzle-view[data-puzzle-mode="code"] .sequence-complete .block-text { color: #e9fff3; background: #103c38; }
 
+/* Portais da Jornada N9: o quebra-cabeça vira uma estação narrativa, sem alterar sua mecânica. */
+.puzzle-view[data-evaluation-gate] {
+  --puzzle-accent: #18b7da;
+  --puzzle-soft: #dff7ff;
+  max-width: 1040px;
+  border-color: rgb(63 211 235 / .48);
+  border-top-color: #18b7da;
+  background: linear-gradient(180deg, #f7fdff, #eef8ff 48%, #fff 100%);
+  box-shadow: 0 24px 60px rgb(2 25 65 / .24);
+}
+.evaluation-gate-hero {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  min-height: 250px;
+  margin: -24px -24px 26px;
+  overflow: hidden;
+  border-radius: calc(var(--radius-lg) - 2px) calc(var(--radius-lg) - 2px) var(--radius-md) var(--radius-md);
+  color: #f5fbff;
+  background:
+    radial-gradient(circle at 13% 30%, rgb(40 226 216 / .24), transparent 34%),
+    linear-gradient(120deg, #071d4d, #0b3470 58%, #075f7c);
+}
+.evaluation-gate-portrait {
+  position: relative;
+  display: grid;
+  min-height: 250px;
+  place-items: end center;
+  padding: 18px 12px 0;
+  background: linear-gradient(180deg, rgb(44 206 231 / .08), rgb(6 22 59 / .52));
+}
+.evaluation-gate-portrait::before {
+  position: absolute;
+  inset: 35px 24px;
+  border: 1px solid rgb(82 231 237 / .42);
+  border-radius: 50%;
+  box-shadow: 0 0 36px rgb(45 226 218 / .22), inset 0 0 28px rgb(45 226 218 / .13);
+  content: "";
+}
+.evaluation-gate-character { position: relative; z-index: 1; width: min(156px, 85%); max-height: 206px; object-fit: contain; object-position: bottom; filter: drop-shadow(0 15px 20px rgb(0 0 0 / .34)); }
+.evaluation-gate-signal { position: absolute; z-index: 2; right: 12px; bottom: 12px; padding: 5px 8px; border: 1px solid #48e1e7; border-radius: 99px; color: #8cfcf2; background: rgb(3 27 67 / .88); font-family: Consolas, monospace; font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+.evaluation-gate-copy { align-self: center; padding: 28px 30px 26px; }
+.evaluation-gate-copy .eyebrow { color: #63e9ee; }
+.evaluation-gate-copy h2 { margin: 5px 0 10px; color: #fff; font-size: clamp(25px, 4vw, 40px); line-height: 1.04; }
+.evaluation-gate-copy > p:not(.eyebrow) { max-width: 680px; margin: 0; color: #dcecff; line-height: 1.65; }
+.evaluation-gate-status { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 21px; }
+.evaluation-gate-status-item { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid rgb(119 219 238 / .3); border-radius: 10px; background: rgb(3 28 69 / .58); }
+.evaluation-gate-status-item span { color: #9fc7e8; font-size: 10px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.evaluation-gate-status-item strong { color: #fff; font-size: 13px; line-height: 1.3; }
+.evaluation-gate-status-item--state strong { color: #ffd163; }
+.puzzle-view[data-evaluation-gate][data-gate-state="released"] .evaluation-gate-hero { background: radial-gradient(circle at 13% 30%, rgb(53 234 174 / .3), transparent 34%), linear-gradient(120deg, #062d3c, #08705e 58%, #0b7d83); }
+.puzzle-view[data-evaluation-gate][data-gate-state="released"] .evaluation-gate-status-item--state strong { color: #7effc5; }
+.puzzle-view[data-evaluation-gate] .sequence-block { border-left-color: #18b7da; }
+.puzzle-view[data-evaluation-gate] .block-position { background: #0877a6; }
+.puzzle-view[data-evaluation-gate] .block-handle { color: #075f7c; background: #dff7ff; }
+.puzzle-view[data-evaluation-gate] .puzzle-success { border-color: #17a875; background: #e8fff4; }
+
 @media (max-width: 599px) {
   .puzzle-view { margin-inline: -8px; padding: 16px 10px; border-radius: var(--radius-md); }
   .puzzle-choices { display: grid; padding: 8px; }
@@ -125,6 +181,17 @@
   .puzzle-sequence-console .sequence-blocks { padding: 9px; }
   .puzzle-sequence-console-header { align-items: center; font-size: 10px; }
   .si-systems-grid { grid-template-columns: 1fr; }
+  .puzzle-view[data-evaluation-gate] { margin-inline: -8px; }
+  .evaluation-gate-hero { grid-template-columns: 108px minmax(0, 1fr); min-height: 210px; margin: -16px -10px 20px; }
+  .evaluation-gate-portrait { min-height: 210px; padding-inline: 2px; }
+  .evaluation-gate-portrait::before { inset: 46px 8px; }
+  .evaluation-gate-character { width: 104px; max-height: 158px; transform: scale(1.42); transform-origin: center bottom; }
+  .evaluation-gate-signal { right: 4px; bottom: 7px; font-size: 8px; }
+  .evaluation-gate-copy { padding: 20px 12px; }
+  .evaluation-gate-copy h2 { font-size: 23px; }
+  .evaluation-gate-copy > p:not(.eyebrow) { font-size: 13px; line-height: 1.5; }
+  .evaluation-gate-status { grid-template-columns: 1fr; gap: 6px; margin-top: 14px; }
+  .evaluation-gate-status-item { padding: 7px 9px; }
 }
 
 @media (prefers-reduced-motion: no-preference) {

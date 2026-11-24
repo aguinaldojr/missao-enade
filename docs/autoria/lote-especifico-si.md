@@ -887,7 +887,7 @@ Cinco cartões apresentados nesta ordem editorial, diferente da solução. Todos
 | consultar-disponibilidade | Agenda: usar a solicitação validada para verificar horário e capacidade, produzindo `DISP-204` com horário livre e capacidade para 20 pessoas. |
 | validar-solicitacao | Analista: conferir responsável, finalidade, intervalo e 12 participantes, produzindo a solicitação validada `PED-204`. |
 | autorizar-acesso | Coordenação: analisar a reserva provisória e sua finalidade, emitindo `AUT-204` para o intervalo reservado. |
-| criar-reserva | Serviço de reservas: consumir `DISP-204`, bloquear o horário atomicamente e gerar a reserva provisória `RES-204`. |
+| criar-reserva | Serviço de reservas: consumir `DISP-204`, bloquear o horário de forma atômica (em uma única operação indivisível) e gerar a reserva provisória `RES-204`. |
 
 ### Ordem correta e justificativa
 

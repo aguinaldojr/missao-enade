@@ -27,15 +27,17 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
 "type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"description": "Open University, Understanding operations management, §3.5 Feedback",
+"url": "https://www.open.edu/openlearn/money-business/leadership-management/understanding-operations-management/content-section-3.5"
 }
 ],
-"sourceVerificationNeeded": false,
+"sourceVerificationNeeded": true,
 "traceability": {
 "title": "Fronteira e Retroalimentação no Atendimento (SYS-TGS-01)",
 "objective": "Identificar o elemento de retroalimentação (feedback) em um sistema de informação organizacional segundo a Teoria Geral dos Sistemas.",
@@ -43,7 +45,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"Open University, Understanding operations management, §3.5 Feedback"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -104,15 +106,17 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
 "type": "institutional",
-"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+"description": "OpenStax, Foundations of Information Systems, §12.1, pirâmide DIKW",
+"url": "https://openstax.org/books/foundations-information-systems/pages/12-1-ethics-sustainability-and-use-of-information-systems"
 }
 ],
-"sourceVerificationNeeded": false,
+"sourceVerificationNeeded": true,
 "traceability": {
 "title": "Da Leitura Bruta à Ação na Biblioteca (INF-DIKW-01)",
 "objective": "Distinguir dado bruto de informação, conhecimento e decisão segundo a hierarquia DIKW.",
@@ -120,7 +124,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"referencias-enade-2026.md"
+"OpenStax, Foundations of Information Systems, §12.1, pirâmide DIKW"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -182,12 +186,14 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "Office for National Statistics, Data over time: Line chart",
+"url": "https://service-manual.ons.gov.uk/data-visualisation/chart-types/line-chart"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -199,7 +205,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"Office for National Statistics, Data over time: Line chart"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -256,17 +262,19 @@
 "concept": "O viés algorítmico ocorre quando dados históricos ou atributos proxies geram discriminação sistemática, exigindo auditoria de equidade e supervisão humana.",
 "example": "Se um histórico favorecia apenas um turno por regras antigas, o algoritmo aprende a penalizar os demais turnos."
 },
-"explanation": "A penalização sistemática de candidatos do turno noturno indica viés aprendido a partir de padrões históricos desbalanceados. A mitigação responsável exige auditar métricas de desempenho e equidade por subgrupo, revisar atributos e amostras de treinamento, e manter supervisão humana na decisão final. Ocultar variáveis sem avaliar proxies ou delegar aprovação automática sem revisão perpetua a discriminação.",
+"explanation": "A penalização sistemática de candidatos do turno noturno é um indício de possível viés que exige investigar os dados e o desempenho por turno. A mitigação responsável exige auditar métricas de desempenho e equidade por subgrupo, revisar atributos e amostras de treinamento, e manter supervisão humana na decisão final. Ocultar variáveis sem avaliar proxies ou delegar aprovação automática sem revisão perpetua a discriminação.",
 "sources": [
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 154/2026 (Formação Geral), Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 154/2026 (Formação Geral), Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+"type": "official-reference",
+"description": "NIST AI RMF 1.0, função MEASURE, métricas de equidade e viés",
+"url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -279,7 +287,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"referencias-enade-2026.md"
+"NIST AI RMF 1.0, função MEASURE, métricas de equidade e viés"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -289,7 +297,7 @@
 {
 "id": "opt-a",
 "text": "Auditar taxas de aprovação por turno, revisar os dados de treino e manter revisão humana das recomendações.",
-"feedback": "Correto. Avaliar equidade entre grupos, corrigir distorções na base e preservar supervisão humana evita decisões injustas."
+"feedback": "Correto. Avaliar equidade entre grupos, corrigir distorções na base e preservar supervisão humana ajuda a reduzir o risco de decisões injustas."
 },
 {
 "id": "opt-b",
@@ -340,15 +348,17 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
 "type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"description": "Porter e Millar, How Information Gives You Competitive Advantage",
+"url": "https://store.hbr.org/product/how-information-gives-you-competitive-advantage/85415"
 }
 ],
-"sourceVerificationNeeded": false,
+"sourceVerificationNeeded": true,
 "traceability": {
 "title": "TI na Cadeia de Valor de Porter (STR-PORT-01)",
 "objective": "Compreender a atuação transversal da Tecnologia da Informação nas atividades primárias e de apoio da cadeia de valor de Porter.",
@@ -356,7 +366,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"Porter e Millar, How Information Gives You Competitive Advantage"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -393,12 +403,14 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, XX.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "ISACA, Using ITIL 4 and COBIT 2019 to Create an Integrated I&T Framework Environment",
+"url": "https://www.isaca.org/resources/white-papers/using-itil-4-and-cobit-2019-to-create-an-integrated-i-and-t-framework-environment"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -408,7 +420,8 @@
 "locators": [
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"Portaria Inep nº 172/2026 (TRC), art. 6º, XX",
+"ISACA, Using ITIL 4 and COBIT 2019 to Create an Integrated I&T Framework Environment"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -445,12 +458,14 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "OMG BPMN 2.0.2, Parallel Gateway",
+"url": "https://www.omg.org/spec/BPMN/2.0.2/"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -461,7 +476,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"OMG BPMN 2.0.2, Parallel Gateway"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -528,17 +543,19 @@
 "concept": "Qualidade ágil combina testes automatizados (verificação) com critérios de aceitação claros e feedback frequente dos interessados (validação).",
 "example": "Revisar o incremento funcional com usuários reais ao fim da sprint valida se a regra de negócio foi compreendida."
 },
-"explanation": "Testes unitários e de integração garantem verificação técnica do código, mas não substituem a validação de valor junto aos usuários. Incluir critérios de aceitação testáveis antes da codificação, revisar incrementos funcionais com usuários-chave e automatizar testes de regressão assegura que o software funcione sem defeitos e atenda às regras reais do negócio.",
+"explanation": "Os testes automatizados verificam comportamentos cobertos pela suíte. Critérios de aceitação testáveis e a revisão do incremento com a secretaria ajudam a validar as regras de matrícula. Testes de regressão detectam falhas em comportamentos já cobertos quando o código muda.",
 "sources": [
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "ISTQB CTFL v4.0.1, §1.3, princípios de teste",
+"url": "https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -549,7 +566,7 @@
 "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"ISTQB CTFL v4.0.1, §1.3, princípios de teste"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -621,12 +638,14 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+"type": "official-reference",
+"description": "Oracle Database Concepts 19c, Data Warehousing and OLTP",
+"url": "https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/topics-for-database-administrators-and-developers.html"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -637,7 +656,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"referencias-enade-2026.md"
+"Oracle Database Concepts 19c, Data Warehousing and OLTP"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -699,12 +718,14 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "NASA Software Engineering Handbook, SWE-052, Bidirectional Traceability",
+"url": "https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -715,7 +736,7 @@
 "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"NASA Software Engineering Handbook, SWE-052, Bidirectional Traceability"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -769,19 +790,21 @@
 "help": {
 "hint": "Associe operações rotineiras ao SPT, relatórios periódicos ao SIG, simulações semiestruturadas ao SAD e visão estratégica ao SAE.",
 "concept": "SPT atende ao nível operacional; SIG e SAD apoiam o nível gerencial; SAE atende ao nível estratégico executivo.",
-"example": "O caixa de supermercado usa um SPT; o painel de cenários financeiros da diretoria é um SAE."
+"example": "O caixa de supermercado registra vendas em um SPT. Um painel que resume indicadores estratégicos para a diretoria exemplifica um SAE."
 },
 "explanation": "O Sistema de Processamento de Transações (SPT) registra eventos operacionais diários de forma padronizada. O Sistema de Informações Gerenciais (SIG) consolida dados do SPT em relatórios periódicos de acompanhamento. O Sistema de Apoio à Decisão (SAD) oferece modelos analíticos e simulações para problemas semiestruturados. O Sistema de Apoio ao Executivo (SAE) sintetiza indicadores internos e externos para decisões estratégicas de longo prazo.",
 "sources": [
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
 "type": "institutional",
-"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+"description": "OpenStax, Introduction to Business, §13.3 Management Information Systems",
+"url": "https://openstax.org/books/introduction-business-2e/pages/13-3-management-information-systems"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -791,7 +814,7 @@
 "locators": [
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"referencias-enade-2026.md"
+"OpenStax, Introduction to Business, §13.3 Management Information Systems"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -842,20 +865,22 @@
 "concept": "A escolha da estrutura de dados depende da ordem de inserção/remoção, da necessidade de busca rápida por chave ou da modelagem de conexões.",
 "example": "Desfazer ações em um editor de texto segue a lógica de pilha (último a entrar, primeiro a sair)."
 },
-"explanation": "A pilha segue o princípio LIFO, ideal para histórico de desfazer ações. A fila segue o princípio FIFO, garantindo atendimento por ordem de chegada. A tabela hash mapeia chaves diretamente a posições de memória, oferecendo busca média em tempo constante O(1) por identificador. O grafo modela entidades (vértices) e suas conexões (arestas), como pré-requisitos entre disciplinas.",
+"explanation": "A pilha segue o princípio LIFO, ideal para histórico de desfazer ações. A fila segue o princípio FIFO, garantindo atendimento por ordem de chegada. A tabela hash usa uma função de dispersão para localizar a entrada pela chave. Com boa distribuição das chaves e fator de carga controlado, a busca leva O(1) em média. O grafo modela entidades (vértices) e suas conexões (arestas), como pré-requisitos entre disciplinas.",
 "sources": [
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+"type": "official-reference",
+"description": "NIST, Dictionary of Algorithms and Data Structures, stack, queue, hash table e graph",
+"url": "https://xlinux.nist.gov/dads/"
 }
 ],
-"sourceVerificationNeeded": false,
+"sourceVerificationNeeded": true,
 "traceability": {
 "title": "Estruturas de Dados no Cotidiano de Software (AED-STR-01)",
 "objective": "Associar pilha, fila, tabela hash e grafo aos problemas computacionais compatíveis com suas propriedades.",
@@ -863,7 +888,7 @@
 "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-"referencias-enade-2026.md"
+"NIST, Dictionary of Algorithms and Data Structures, stack, queue, hash table e graph"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -918,12 +943,14 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "OMG UML 2.5.1, classes, interações e casos de uso",
+"url": "https://www.omg.org/spec/UML/2.5.1"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -934,7 +961,7 @@
 "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"OMG UML 2.5.1, classes, interações e casos de uso"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -979,17 +1006,19 @@
 "concept": "Sistemas OLTP otimizam inserções e atualizações rápidas e íntegras; sistemas OLAP otimizam leitura multidimensional e agregações históricas.",
 "example": "Registrar um pagamento no caixa é OLTP; comparar vendas trimestrais dos últimos 5 anos é OLAP."
 },
-"explanation": "Registrar matrícula em tempo real, atualizar saldo de biblioteca e cancelar reserva pontual são transações curtas, frequentes e altamente concorrentes típicas de OLTP. Já consolidar taxas de aprovação dos últimos cinco anos por campus e cruzar indicadores multidimensionais de evasão são consultas de leitura massiva e agregação próprias de OLAP.",
+"explanation": "Confirmar uma matrícula, atualizar as vagas e registrar um pagamento são transações individuais do ambiente OLTP. Comparar cinco anos de evasão e agregar históricos de frequência são análises do ambiente OLAP.",
 "sources": [
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+"type": "official-reference",
+"description": "Oracle Database Concepts 19c, Data Warehousing and OLTP",
+"url": "https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/topics-for-database-administrators-and-developers.html"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -1000,7 +1029,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"referencias-enade-2026.md"
+"Oracle Database Concepts 19c, Data Warehousing and OLTP"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -1069,17 +1098,19 @@
 "concept": "A tríade CID (Confidencialidade, Integridade e Disponibilidade) orienta a proteção de ativos de informação.",
 "example": "Alterar notas no banco sem permissão viola a integridade; tirar o portal do ar por sobrecarga viola a disponibilidade."
 },
-"explanation": "A leitura de relatórios sigilosos por usuários sem permissão viola a confidencialidade. A modificação indevida de notas lançadas e a adulteração de um arquivo de ata durante a transferência violam a integridade. A paralisação do portal de matrículas por ataque de negação de serviço e a falha sem redundância que impede acesso ao sistema violam a disponibilidade.",
+"explanation": "A leitura de relatórios restritos e a exposição da planilha bancária comprometem a confidencialidade. A alteração de notas e a adulteração da ata comprometem a integridade. O portal inacessível e a queda do servidor comprometem a disponibilidade.",
 "sources": [
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, XIII.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+"type": "official-reference",
+"description": "NIST FIPS 199, §2, objetivos de segurança",
+"url": "https://csrc.nist.gov/pubs/fips/199/final"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -1091,7 +1122,8 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"referencias-enade-2026.md"
+"Portaria Inep nº 172/2026 (TRC), art. 6º, XIII",
+"NIST FIPS 199, §2, objetivos de segurança"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -1168,17 +1200,19 @@
 "concept": "Em uma pilha baseada em vetor onde topo indica o índice do elemento mais recente, pop lê dados[topo] antes de decrementar topo (pós-decremento).",
 "example": "Se topo == 2 e dados[2] == 30, *saida = dados[topo--] atribui 30 a *saida e atualiza topo para 1."
 },
-    "explanation": "Como topo armazena o índice válido do elemento atualmente no topo (topo = 2 para {10, 20, 30}), a expressão *saida = p->dados[p->topo--]; lê primeiro p->dados[2] (30) e em seguida decrementa p->topo para 1. O pré-decremento (--p->topo) leria dados[1] (20), perdendo o topo real. Usar topo + 1 acessa posição fora dos elementos válidos (lixo de memória), e atribuir sem decrementar não remove o item da pilha.",
+"explanation": "Como topo armazena o índice válido do elemento atualmente no topo (topo = 2 para {10, 20, 30}), a expressão *saida = p->dados[p->topo--]; lê primeiro p->dados[2] (30) e em seguida decrementa p->topo para 1. O pré-decremento (--p->topo) leria dados[1] (20), perdendo o topo real. Usar topo + 1 acessa uma posição acima do topo, cujo conteúdo não faz parte da pilha, e atribuir sem decrementar não remove o item da pilha.",
 "sources": [
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
 "type": "official-reference",
-"description": "ISO/IEC 9899 — Programming languages — C."
+"description": "WG14 N1570, minuta pública de C11 (ISO/IEC 9899), §6.5.2.4, operadores pós-fixados",
+"url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -1189,7 +1223,7 @@
 "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-"ISO/IEC 9899 — Programming languages — C"
+"WG14 N1570, minuta pública de C11 (ISO/IEC 9899), §6.5.2.4, operadores pós-fixados"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -1212,7 +1246,7 @@
 {
 "id": "tok-3",
           "text": "*saida = p->dados[p->topo + 1];",
-"feedback": "Incorreto. Acessa uma posição acima do topo válido (lixo de memória) e não altera o índice p->topo."
+"feedback": "Incorreto. Com topo = 2, dados[3] fica dentro do vetor, mas acima do topo da pilha. Além disso, o índice topo permanece igual."
 },
 {
 "id": "tok-4",
@@ -1225,7 +1259,7 @@
 },
 {
 "id": "N9-COM-037",
-"title": "Estudantes sem Empréstimo Ativo em SQL",
+"title": "Estudantes sem Empréstimo Registrado em SQL",
 "mechanic": "fill-slot",
 "courses": [
 "CC",
@@ -1248,23 +1282,32 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
 "type": "official-reference",
-"description": "ISO/IEC 9075 — Information technology — Database languages — SQL."
+"description": "ISO/IEC 9075-2:2023, SQL/Foundation",
+"url": "https://www.iso.org/standard/76584.html"
+},
+{
+"role": "technical",
+"type": "official-reference",
+"description": "MySQL 8.0 Reference Manual, JOIN Clause, busca de linhas sem correspondência",
+"url": "https://dev.mysql.com/doc/refman/8.0/en/join.html"
 }
 ],
 "sourceVerificationNeeded": false,
 "traceability": {
-"title": "Estudantes sem Empréstimo Ativo em SQL (DB-JOIN-01)",
+"title": "Estudantes sem Empréstimo Registrado em SQL (DB-JOIN-01)",
 "objective": "Construir consulta SQL com LEFT JOIN e predicado IS NULL para identificar ausência de correspondência referencial.",
 "locators": [
 "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-"ISO/IEC 9075 — Database languages — SQL"
+"ISO/IEC 9075-2:2023, SQL/Foundation",
+"MySQL 8.0, §15.2.13.2 JOIN Clause"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -1318,17 +1361,19 @@
 "concept": "A chave estrangeira fica na tabela do lado 'muitos' (N) referenciando a chave primária da tabela do lado 'um' (1).",
 "example": "Em Departamento (1) para Funcionário (N), a coluna id_departamento fica na tabela Funcionário."
 },
-"explanation": "Como um curso possui várias turmas (1:N), a chave estrangeira COD_CURSO deve ser armazenada na entidade TURMA (lado N), apontando para a chave primária COD_CURSO da entidade CURSO (lado 1). Colocar uma lista de turmas dentro de CURSO violaria a primeira forma normal e impediria integridade referencial.",
+"explanation": "Como um curso possui várias turmas (1:N), a chave estrangeira COD_CURSO deve ser armazenada na entidade TURMA (lado N), apontando para a chave primária COD_CURSO da entidade CURSO (lado 1). A restrição de chave estrangeira garante que o curso referenciado exista, e NOT NULL torna essa referência obrigatória para cada turma.",
 "sources": [
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "PostgreSQL, Constraints, seção Foreign Keys",
+"url": "https://www.postgresql.org/docs/current/ddl-constraints.html"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -1339,7 +1384,7 @@
 "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"PostgreSQL, Constraints, seção Foreign Keys"
 ]
 },
 "validationStatus": "under-ai-review",
@@ -1397,12 +1442,14 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+"description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "OMG UML 2.5.1, multiplicidades e agregação composta",
+"url": "https://www.omg.org/spec/UML/2.5.1"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -1413,14 +1460,15 @@
 "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"OMG UML 2.5.1, multiplicidades e agregação composta"
 ]
 },
 "validationStatus": "under-ai-review",
 "payload": {
 "type": "visual-hotspot",
-"visualDescription": "Diagrama de classes UML mostrando a superclasse DocumentoAcademico ligada por triângulo vazio a PedidoMatricula; PedidoMatricula conecta-se por losango preenchido (1) a ItemMatricula (1..) e por losango vazio (0..) a AnexoOpcional.",
-"accessibleDescription": "Elementos do diagrama UML: [node-heranca] Seta com triângulo vazio de PedidoMatricula para DocumentoAcademico (herança); [node-composicao] Losango preenchido junto a PedidoMatricula ligado a ItemMatricula com multiplicidade 1 para 1.. (composição); [node-agregacao] Losango vazio junto a PedidoMatricula ligado a AnexoOpcional com multiplicidade 0.. (agregação); [node-classe-item] Caixa da classe ItemMatricula com atributos codigoDisciplina e turno.",
+"visualKind": "uml-composition",
+"visualDescription": "Diagrama de classes UML mostrando a superclasse DocumentoAcademico ligada por triângulo vazio a PedidoMatricula; PedidoMatricula conecta-se por losango preenchido (1) a ItemMatricula (1..*) e por losango vazio (0..*) a AnexoOpcional.",
+"accessibleDescription": "Elementos do diagrama UML: [node-heranca] Seta com triângulo vazio de PedidoMatricula para DocumentoAcademico (herança); [node-composicao] Losango preenchido junto a PedidoMatricula ligado a ItemMatricula com multiplicidade 1 para 1..* (composição); [node-agregacao] Losango vazio junto a PedidoMatricula ligado a AnexoOpcional com multiplicidade 0..* (agregação); [node-classe-item] Caixa da classe ItemMatricula com atributos codigoDisciplina e turno.",
 "nodes": [
 {
 "id": "node-heranca",
@@ -1429,12 +1477,12 @@
 },
 {
 "id": "node-composicao",
-"label": "Losango preenchido -> ItemMatricula (1..)",
+"label": "Losango preenchido -> ItemMatricula (1..*)",
 "detail": "Relação de composição todo-parte com ciclo de vida dependente."
 },
 {
 "id": "node-agregacao",
-"label": "Losango vazio -> AnexoOpcional (0..)",
+"label": "Losango vazio -> AnexoOpcional (0..*)",
 "detail": "Relação de agregação fraca onde o anexo pode existir independentemente."
 },
 {
@@ -1471,12 +1519,14 @@
 {
 "role": "primary",
 "type": "official-reference",
-"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+"description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+"url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
 },
 {
 "role": "technical",
-"type": "institutional",
-"description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+"type": "official-reference",
+"description": "Schwaber e Sutherland, The Scrum Guide, inspeção, adaptação e incrementos",
+"url": "https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-US.pdf"
 }
 ],
 "sourceVerificationNeeded": false,
@@ -1487,7 +1537,7 @@
 "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
 "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
 "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-"mapeamento-questoes-cursos-disciplinas.md"
+"Schwaber e Sutherland, The Scrum Guide, inspeção, adaptação e incrementos"
 ]
 },
 "validationStatus": "under-ai-review",

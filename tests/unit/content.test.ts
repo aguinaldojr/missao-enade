@@ -15,6 +15,16 @@ describe('catálogo local de exemplos', () => {
     }
   });
 
+  it('mantém um único exemplar de cada recurso visual por questão', () => {
+    expect(() => validateContent(provisionalCatalog)).not.toThrow();
+    const data: unknown = structuredClone(provisionalCatalog);
+    const questions = (data as { questions: Array<{ id: string; presentation?: { blocks: unknown[] } }> }).questions;
+    const question = questions.find((item) => item.presentation?.blocks.length);
+    expect(question?.presentation).toBeDefined();
+    question!.presentation!.blocks.push(structuredClone(question!.presentation!.blocks[0]!));
+    expect(() => validateContent(data)).toThrow('Recurso de apresentação duplicado: ' + question!.id);
+  });
+
   it('carrega dez exemplos distintos por curso, com nove compartilhados e um específico', () => {
     const repository = new JsonContentRepository(catalog);
     for (const course of COURSE_IDS) {

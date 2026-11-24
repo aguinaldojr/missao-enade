@@ -13,7 +13,7 @@ async function expectReflow(page: Page): Promise<void> {
 }
 
 async function startWithPlayer(page: Page, nickname: string): Promise<void> {
-  await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  await page.getByRole('button', { name: 'Jogar Jornada N9' }).click();
   if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
     await page.getByLabel('Apelido').fill(nickname);
     await page.getByRole('button', { name: 'Criar jogador' }).click();
@@ -27,7 +27,8 @@ for (const [id, name] of courses) {
     const external: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     page.on('request', (request) => {
-      if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('data:')) external.push(request.url());
+      if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('data:') &&
+          !request.url().startsWith('blob:http://127.0.0.1:4173')) external.push(request.url());
     });
     await page.goto('./');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Conhecimento que conecta.');
@@ -54,7 +55,7 @@ for (const [id, name] of courses) {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Base N9');
     await expect(page.locator('.selected-name')).toHaveText(name);
     await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
-    await expect(page.getByText('COLEÇÃO PROVISÓRIA', { exact: true })).toBeVisible();
+    await expect(page.getByText('MISSÃO ATIVA', { exact: true })).toBeVisible();
     await expectReflow(page);
     if (id === 'CC') await page.screenshot({ path: info.outputPath('central.png'), fullPage: true });
     await page.getByRole('button', { name: 'Trocar curso' }).click();
@@ -87,7 +88,7 @@ test('navegação completa por teclado e foco entre telas', async ({ page }) => 
   await page.goto('./');
   await page.getByRole('heading', { level: 1 }).focus();
   await page.keyboard.press('Tab');
-  await expect(page.getByRole('button', { name: 'Iniciar missão' })).toBeFocused();
+  await expect(page.getByRole('button', { name: 'Jogar Jornada N9' })).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'Qual é o seu curso?' })).toBeFocused();
   await page.keyboard.press('Tab');

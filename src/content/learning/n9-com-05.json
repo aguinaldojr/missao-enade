@@ -27,12 +27,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "2.6 De Morgan’s Laws - Contemporary Mathematics | OpenStax",
+          "url": "https://openstax.org/books/contemporary-mathematics/pages/2-6-de-morgans-laws"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -43,7 +45,7 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "2.6 De Morgan’s Laws - Contemporary Mathematics | OpenStax"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -51,14 +53,14 @@
         "type": "single-choice",
         "options": [
           {
-            "id": "opt-a",
-            "text": "Não possui matrícula ativa OU possui multa pendente.",
-            "feedback": "Correto. A negação de (P ∧ Q) resulta na disjunção das negações: (¬P ∨ ¬Q)."
-          },
-          {
             "id": "opt-b",
             "text": "Não possui matrícula ativa E possui multa pendente.",
             "feedback": "Incorreto. Exigir ambas as falhas simultaneamente deixaria passar quem tem matrícula inativa sem multa."
+          },
+          {
+            "id": "opt-a",
+            "text": "Não possui matrícula ativa OU possui multa pendente.",
+            "feedback": "Correto. A negação de (P ∧ Q) resulta na disjunção das negações: (¬P ∨ ¬Q)."
           },
           {
             "id": "opt-c",
@@ -104,12 +106,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "OpenStax · Measures of the center of the data",
+          "url": "https://openstax.org/books/introductory-statistics-2e/pages/2-5-measures-of-the-center-of-the-data"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -120,7 +124,7 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "OpenStax · Measures of the center of the data"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -133,14 +137,14 @@
             "feedback": "Correto. A mediana preserva a posição central dos dados ordenados e permanece estável diante de ocorrências atípicas."
           },
           {
-            "id": "opt-b",
-            "text": "A média aritmética (20 minutos), pois distribui igualmente o impacto do chamado atípico entre todos os atendimentos.",
-            "feedback": "Incorreto. Justamente por absorver o valor extremo, a média (20 minutos) fica acima de quatro dos cinco valores observados."
-          },
-          {
             "id": "opt-c",
             "text": "A média aritmética (5 minutos), pois desconsidera automaticamente o maior e o menor valor da lista.",
             "feedback": "Incorreto. A média aritmética simples considera todos os valores e vale 20 minutos, não 5."
+          },
+          {
+            "id": "opt-b",
+            "text": "A média aritmética (20 minutos), pois distribui igualmente o impacto do chamado atípico entre todos os atendimentos.",
+            "feedback": "Incorreto. Justamente por absorver o valor extremo, a média (20 minutos) fica acima de quatro dos cinco valores observados."
           },
           {
             "id": "opt-d",
@@ -179,12 +183,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 168/2026 (SI), arts. 4º–6º."
+          "description": "Portaria Inep nº 168/2026 (SI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "Google OR-Tools · Linear optimization example",
+          "url": "https://developers.google.com/optimization/lp/lp_example"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -193,18 +199,13 @@
         "objective": "Interpretar coeficientes tecnológicos e limite de disponibilidade em restrições lineares de capacidade.",
         "locators": [
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "Google OR-Tools · Linear optimization example"
         ]
       },
       "validationStatus": "under-ai-review",
       "payload": {
         "type": "single-choice",
         "options": [
-          {
-            "id": "opt-a",
-            "text": "Cada oficina presencial consome 2 unidades do recurso e cada remota consome 1 unidade, com limite total de até 40 unidades disponíveis.",
-            "feedback": "Correto. A combinação linear dos consumos unitários deve permanecer menor ou igual à disponibilidade máxima de 40."
-          },
           {
             "id": "opt-b",
             "text": "Devem ser realizadas obrigatoriamente 2 oficinas presenciais e 1 oficina remota por semana, somando exatamente 40 participantes.",
@@ -219,6 +220,11 @@
             "id": "opt-d",
             "text": "A soma de oficinas realizadas precisa atingir no mínimo 40 sessões para que o plano seja viável.",
             "feedback": "Incorreto. O operador ≤ indica teto máximo de capacidade disponível, não meta mínima de produção."
+          },
+          {
+            "id": "opt-a",
+            "text": "Cada oficina presencial consome 2 unidades do recurso e cada remota consome 1 unidade, com limite total de até 40 unidades disponíveis.",
+            "feedback": "Correto. A combinação linear dos consumos unitários deve permanecer menor ou igual à disponibilidade máxima de 40."
           },
           {
             "id": "opt-e",
@@ -254,12 +260,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "Martin Fowler · Dependency Injection",
+          "url": "https://martinfowler.com/articles/injection.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -270,18 +278,13 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "Martin Fowler · Dependency Injection"
         ]
       },
       "validationStatus": "under-ai-review",
       "payload": {
         "type": "single-choice",
         "options": [
-          {
-            "id": "opt-a",
-            "text": "Definir uma interface NotificadorEstudante e injetar suas implementações concretas em ServicoMatricula.",
-            "feedback": "Correto. Tanto a regra de negócio quanto os canais concretos passam a depender da abstração NotificadorEstudante."
-          },
           {
             "id": "opt-b",
             "text": "Copiar o código de ServicoMatricula para uma nova classe ServicoMatriculaMobile ligada ao novo canal.",
@@ -291,6 +294,11 @@
             "id": "opt-c",
             "text": "Tornar todos os métodos de ClienteSmtpLegado estáticos para evitar o uso do operador de instanciação.",
             "feedback": "Incorreto. Chamadas estáticas mantêm a dependência direta na classe concreta e dificultam substituição e testes."
+          },
+          {
+            "id": "opt-a",
+            "text": "Definir uma interface NotificadorEstudante e injetar suas implementações concretas em ServicoMatricula.",
+            "feedback": "Correto. Tanto a regra de negócio quanto os canais concretos passam a depender da abstração NotificadorEstudante."
           },
           {
             "id": "opt-d",
@@ -333,15 +341,17 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "5.5 Memory Hierarchy - Introduction to Computer Science | OpenStax",
+          "url": "https://openstax.org/books/introduction-computer-science/pages/5-5-memory-hierarchy"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Localidade de Referência e Efeito da Memória Cache (ARQ-CCH-01)",
         "objective": "Relacionar localidade temporal e espacial à redução do tempo médio de acesso proporcionada pela memória cache.",
@@ -350,7 +360,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º (enquadramento indireto, conferir PPC)",
+          "5.5 Memory Hierarchy - Introduction to Computer Science | OpenStax"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -388,12 +399,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "The Kanban Guide · Controle do WIP",
+          "url": "https://kanbanguides.org/the-kanban-guide/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -405,13 +418,13 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "The Kanban Guide · Controle do WIP"
         ]
       },
       "validationStatus": "under-ai-review",
       "payload": {
         "type": "binary-choice",
-        "statement": "Estabelecer limites de trabalho em progresso (WIP — Work In Progress) no Kanban favorece a conclusão contínua de demandas e evidencia gargalos no fluxo, pois impede o acúmulo de tarefas iniciadas e não finalizadas.",
+        "statement": "Estabelecer limites de trabalho em progresso (WIP — Work In Progress) no Kanban favorece a conclusão contínua de demandas e evidencia gargalos no fluxo, pois limita a quantidade de tarefas simultâneas na etapa de revisão.",
         "correctValue": true,
         "feedbackTrue": "Correto. Ao restringir itens simultâneos por etapa, o fluxo ganha previsibilidade e qualquer retenção destaca o gargalo ativo.",
         "feedbackFalse": "Incorreto. Limites de WIP não existem para reduzir a entrega, mas para evitar filas internas, retrabalho e sobrecarga simultânea."
@@ -442,12 +455,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO 9241-110 — Ergonomics of human-system interaction — Part 110: Interaction principles."
+          "description": "ISO 9241-110:2020 · Interaction principles",
+          "url": "https://www.iso.org/standard/75258.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Nielsen Norman Group · Ten usability heuristics",
+          "url": "https://www.nngroup.com/articles/ten-usability-heuristics/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -458,7 +479,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "ISO 9241-110 — Interaction principles"
+          "ISO 9241-110:2020 · Interaction principles",
+          "Nielsen Norman Group · Ten usability heuristics"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -523,23 +545,25 @@
       "xp": 80,
       "help": {
         "hint": "Considere códigos adequados para criação (201) e erro de validação (400/422), além da garantia de que repetir PUT ou DELETE não gera efeitos duplicados.",
-        "concept": "Em APIs HTTP bem projetadas, operações idempotentes (GET, PUT, DELETE) produzem o mesmo estado final se repetidas, e os códigos de status refletem semanticamente o resultado.",
-        "example": "Enviar duas vezes DELETE /inscricoes/42 resulta na ausência do recurso 42 sem duplicar efeitos colaterais."
+        "concept": "A idempotência descreve o efeito pretendido de requisições idênticas sobre o recurso. O código de resposta e os registros de acesso podem variar entre tentativas.",
+        "example": "Um DELETE pode retornar 204 na primeira chamada e 404 na repetição. Em ambos os casos o recurso termina ausente."
       },
-      "explanation": "O desenho coerente de APIs HTTP exige: retornar código 400 (Bad Request) ou 422 (Unprocessable Entity) com detalhes objetivos quando a entrada falha na validação do servidor; assegurar idempotência em métodos como PUT e DELETE para que retentativas de rede não corrompam o estado; e responder com 201 (Created) ao criar um recurso via POST, informando sua localização ou identificador.",
+      "explanation": "O desenho coerente de APIs HTTP exige: retornar código 400 (Bad Request) ou 422 (Unprocessable Content) com detalhes objetivos quando a entrada falha na validação do servidor; assegurar idempotência em métodos como PUT e DELETE para que retentativas de rede não corrompam o estado; e responder com 201 (Created) ao criar um recurso via POST, informando sua localização ou identificador.",
       "sources": [
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 6º, X.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "RFC 9110 — HTTP Semantics (IETF)."
+          "description": "RFC 9110 · HTTP Semantics, §§9 e 15",
+          "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Semântica e Idempotência em API HTTP (API-HTP-01)",
         "objective": "Aplicar códigos de status HTTP, validação no servidor e idempotência em contratos de serviços web.",
@@ -547,7 +571,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "RFC 9110 — HTTP Semantics"
+          "Portaria Inep nº 172/2026 (TRC), art. 6º, X (enquadramento indireto, conferir PPC)",
+          "RFC 9110 · HTTP Semantics, §§9 e 15"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -557,13 +582,13 @@
         "options": [
           {
             "id": "opt-1",
-            "text": "Retornar código 400 (Bad Request) ou 422 (Unprocessable Entity) com descrição dos campos inválidos quando a entrada violar regras de domínio.",
+            "text": "Retornar código 400 (Bad Request) ou 422 (Unprocessable Content) com descrição dos campos inválidos quando a entrada violar regras de domínio.",
             "feedback": "Correto. Códigos da família 4xx indicam erro na requisição do cliente e orientam a correção dos dados.",
             "correct": true
           },
           {
             "id": "opt-2",
-            "text": "Garantir que requisições PUT e DELETE repetidas para o mesmo identificador produzam o mesmo estado final no servidor (idempotência).",
+            "text": "Garantir que requisições PUT e DELETE repetidas para o mesmo identificador produzam o mesmo efeito pretendido sobre o recurso que uma única requisição idêntica (idempotência).",
             "feedback": "Correto. A idempotência permite retentativas seguras em caso de falha momentânea de rede.",
             "correct": true
           },
@@ -617,12 +642,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "LLVM · Frontend tutorial",
+          "url": "https://llvm.org/docs/tutorial/MyFirstLanguageFrontend/index.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -631,7 +658,7 @@
         "objective": "Sequenciar análise léxica, sintática, semântica, otimização e geração de código em um compilador.",
         "locators": [
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "LLVM · Frontend tutorial"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -694,12 +721,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 5º, I.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 20000-1 — Information technology — Service management — Part 1: Service management system requirements."
+          "description": "ISO/IEC 20000-1:2018 - Information technology — Service management — Part 1: Service management system requirements",
+          "url": "https://www.iso.org/standard/70636.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -710,7 +739,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "ISO/IEC 20000-1 — Service management"
+          "Portaria Inep nº 172/2026 (TRC), art. 5º, I",
+          "ISO/IEC 20000-1:2018 - Information technology — Service management — Part 1: Service management system requirements"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -772,12 +802,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Referências oficiais do ENADE 2026 — CC, SI, TADS, TGTI e TRC (referencias-enade-2026.md)."
+          "description": "7.1 Programming Language Foundations - Introduction to Computer Science | OpenStax",
+          "url": "https://openstax.org/books/introduction-computer-science/pages/7-1-programming-language-foundations"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "General Information about Writing Event Listeners (The Java™ Tutorials > Creating a GUI With Swing > Writing Event Listeners)",
+          "url": "https://docs.oracle.com/javase/tutorial/uiswing/events/generalrules.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -788,7 +826,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "referencias-enade-2026.md"
+          "7.1 Programming Language Foundations - Introduction to Computer Science | OpenStax",
+          "General Information about Writing Event Listeners (The Java™ Tutorials > Creating a GUI With Swing > Writing Event Listeners)"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -813,7 +852,7 @@
           {
             "id": "pair-4",
             "left": "Paradigma Orientado a Eventos",
-            "right": "Disparar rotinas tratadoras (handlers) em resposta assíncrona a ações do usuário, mensagens ou notificações do ambiente."
+            "right": "Executar tratadores (handlers) em resposta a eventos como cliques, mensagens ou notificações do ambiente."
           }
         ]
       }
@@ -843,12 +882,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC/IEEE 29119-4 — Software and systems engineering — Software testing — Part 4: Test techniques."
+          "description": "ISO/IEC/IEEE 29119-4:2021 - Software and systems engineering — Software testing — Part 4: Test techniques",
+          "url": "https://www.iso.org/standard/79430.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "ISTQB · CTFL v4.0.1",
+          "url": "https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -859,7 +906,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "ISO/IEC/IEEE 29119-4 — Test techniques"
+          "ISO/IEC/IEEE 29119-4:2021 - Software and systems engineering — Software testing — Part 4: Test techniques",
+          "ISTQB · CTFL v4.0.1"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -916,15 +964,17 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "5.5 Memory Hierarchy - Introduction to Computer Science | OpenStax",
+          "url": "https://openstax.org/books/introduction-computer-science/pages/5-5-memory-hierarchy"
         }
       ],
-      "sourceVerificationNeeded": false,
+      "sourceVerificationNeeded": true,
       "traceability": {
         "title": "Hierarquia de Memória nos Computadores (ARQ-MEM-01)",
         "objective": "Correlacionar registradores, cache, memória principal e armazenamento secundário a velocidade, capacidade e finalidade.",
@@ -933,7 +983,8 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "Portaria Inep nº 172/2026 (TRC), arts. 5º e 6º (enquadramento indireto, conferir PPC)",
+          "5.5 Memory Hierarchy - Introduction to Computer Science | OpenStax"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -988,12 +1039,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "IBM Redbooks · Modernizing IBM i Applications, modularização",
+          "url": "https://www.redbooks.ibm.com/redbooks/pdfs/sg248185.pdf"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1004,7 +1057,7 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "IBM Redbooks · Modernizing IBM i Applications, modularização"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1087,12 +1140,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "OpenStax · Introductory Statistics 2e, §1.2, tipos de dados",
+          "url": "https://openstax.org/books/introductory-statistics-2e/pages/1-2-data-sampling-and-variation-in-data-and-sampling"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1104,7 +1159,7 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "OpenStax · Introductory Statistics 2e, §1.2, tipos de dados"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1181,12 +1236,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 9899 — Information technology — Programming languages — C."
+          "description": "ISO/IEC 9899:2024 - Information technology — Programming languages — C",
+          "url": "https://www.iso.org/standard/82075.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "WG14 N1570 · Linguagem C, ponteiros e expressões",
+          "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1197,7 +1260,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "ISO/IEC 9899 — Programming languages — C"
+          "ISO/IEC 9899:2024 - Information technology — Programming languages — C",
+          "WG14 N1570 · Linguagem C, ponteiros e expressões"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1207,11 +1271,6 @@
         "contentBefore": "#include <stdio.h>\n\nint main(void) {\n    int notas[4] = {10, 20, 30, 40};\n    int *ptr = notas;\n    int soma = 0;\n\n    for (int i = 0; i < 4; i++) {\n        soma += ",
         "contentAfter": ";\n    }\n\n    printf(\"%d\\n\", soma);\n    return 0;\n}",
         "tokens": [
-          {
-            "id": "tok-1",
-            "text": "*(ptr + i)",
-            "feedback": "Correto. Desreferencia cada elemento de notas[0] a notas[3], acumulando 10 + 20 + 30 + 40 = 100 com segurança."
-          },
           {
             "id": "tok-2",
             "text": "*ptr + i",
@@ -1226,6 +1285,11 @@
             "id": "tok-4",
             "text": "*(ptr + i + 1)",
             "feedback": "Incorreto. Ignora notas[0] e acessa notas[4] na última iteração, provocando leitura fora dos limites do vetor."
+          },
+          {
+            "id": "tok-1",
+            "text": "*(ptr + i)",
+            "feedback": "Correto. Desreferencia cada elemento de notas[0] a notas[3], acumulando 10 + 20 + 30 + 40 = 100 com segurança."
           }
         ],
         "correctTokenId": "tok-1"
@@ -1256,12 +1320,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
-          "type": "official-reference",
-          "description": "Python 3 Language Reference — Compound statements (while / if)."
+          "type": "institutional",
+          "description": "Sedgewick e Wayne · Algorithms and Data Structures Cheatsheet",
+          "url": "https://algs4.cs.princeton.edu/cheatsheet/"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Python · More Control Flow Tools",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1272,7 +1344,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "Python 3 Language Reference"
+          "Sedgewick e Wayne · Algorithms and Data Structures Cheatsheet",
+          "Python · More Control Flow Tools"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1283,24 +1356,24 @@
         "contentAfter": "\n    else:\n        fim = meio - 1\n\nprint(indice_encontrado)",
         "tokens": [
           {
-            "id": "tok-1",
-            "text": "inicio = meio + 1",
-            "feedback": "Correto. Descarta a metade esquerda incluindo meio, converge para o índice 4 e garante término mesmo se o alvo não existir."
-          },
-          {
             "id": "tok-2",
             "text": "inicio = meio",
             "feedback": "Incorreto. Quando inicio e fim são consecutivos e numeros[inicio] < alvo, meio permanece igual a inicio e o laço nunca termina."
           },
           {
-            "id": "tok-3",
-            "text": "fim = meio - 1",
-            "feedback": "Incorreto. Descarta a metade direita onde valores maiores que numeros[meio] estão armazenados, impedindo localizar 44."
+            "id": "tok-1",
+            "text": "inicio = meio + 1",
+            "feedback": "Correto. Descarta a metade esquerda incluindo meio, converge para o índice 4 e garante término mesmo se o alvo não existir."
           },
           {
             "id": "tok-4",
             "text": "inicio = meio - 1",
             "feedback": "Incorreto. Move inicio para trás, expandindo o intervalo de busca e causando loop infinito."
+          },
+          {
+            "id": "tok-3",
+            "text": "fim = meio - 1",
+            "feedback": "Incorreto. Descarta a metade direita onde valores maiores que numeros[meio] estão armazenados, impedindo localizar 44."
           }
         ],
         "correctTokenId": "tok-1"
@@ -1331,12 +1404,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI) e Portaria Inep nº 169/2026 (TADS), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 19505-2 — Information technology — Object Management Group Unified Modeling Language (OMG UML) — Part 2: Superstructure."
+          "description": "ISO/IEC 19505-2:2012 · UML Superstructure",
+          "url": "https://www.iso.org/standard/52854.html"
+        },
+        {
+          "role": "technical",
+          "type": "official-reference",
+          "description": "OMG · UML 2.5.1",
+          "url": "https://www.omg.org/spec/UML/2.5.1"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1347,7 +1428,8 @@
           "Portaria Inep nº 157/2026 (CC), arts. 4º–6º",
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
-          "ISO/IEC 19505-2 — OMG UML"
+          "ISO/IEC 19505-2:2012 · UML Superstructure",
+          "OMG · UML 2.5.1"
         ]
       },
       "validationStatus": "under-ai-review",
@@ -1406,12 +1488,14 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 157/2026 (CC), Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "institutional",
-          "description": "Mapeamento das questões por área, curso, disciplina e conteúdo (mapeamento-questoes-cursos-disciplinas.md)."
+          "description": "Office for National Statistics · Axes and gridlines",
+          "url": "https://service-manual.ons.gov.uk/data-visualisation/guidance/axes-and-gridlines"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1423,12 +1507,13 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "mapeamento-questoes-cursos-disciplinas.md"
+          "Office for National Statistics · Axes and gridlines"
         ]
       },
       "validationStatus": "under-ai-review",
       "payload": {
         "type": "visual-hotspot",
+        "visualKind": "truncated-bar-chart",
         "visualDescription": "Gráfico de colunas verticais intitulado Taxa de Retenção Semestral, com eixo horizontal mostrando 2025.2 e 2026.1, rótulos numéricos 92% e 95% acima das barras e eixo vertical marcado de 91% a 96%.",
         "accessibleDescription": "Componentes do painel gráfico: (1) Eixo Vertical com Origem em 91%: escala vertical graduada de 91% até 96% omitindo o intervalo de 0% a 91%; (2) Eixo Horizontal de Semestres: categorias discretas 2025.2 e 2026.1; (3) Rótulos Numéricos das Colunas: valores exatos 92% e 95% exibidos acima de cada barra; (4) Título do Painel: texto descritivo Taxa de Retenção Semestral.",
         "nodes": [
@@ -1482,12 +1567,20 @@
         {
           "role": "primary",
           "type": "official-reference",
-          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º."
+          "description": "Portaria Inep nº 168/2026 (SI), Portaria Inep nº 169/2026 (TADS) e Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º. Portaria Inep nº 172/2026 (TRC), art. 5º, I.",
+          "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enade/2026"
         },
         {
           "role": "technical",
           "type": "official-reference",
-          "description": "ISO/IEC 20000-1 — Information technology — Service management — Part 1: Service management system requirements."
+          "description": "ISO/IEC 20000-1:2018 - Information technology — Service management — Part 1: Service management system requirements",
+          "url": "https://www.iso.org/standard/70636.html"
+        },
+        {
+          "role": "technical",
+          "type": "institutional",
+          "description": "Google SRE · Service Level Objectives",
+          "url": "https://sre.google/sre-book/service-level-objectives/"
         }
       ],
       "sourceVerificationNeeded": false,
@@ -1498,7 +1591,9 @@
           "Portaria Inep nº 168/2026 (SI), arts. 4º–6º",
           "Portaria Inep nº 169/2026 (TADS), arts. 4º–6º",
           "Portaria Inep nº 171/2026 (TGTI), arts. 4º–6º",
-          "ISO/IEC 20000-1 — Service management"
+          "Portaria Inep nº 172/2026 (TRC), art. 5º, I",
+          "ISO/IEC 20000-1:2018 - Information technology — Service management — Part 1: Service management system requirements",
+          "Google SRE · Service Level Objectives"
         ]
       },
       "validationStatus": "under-ai-review",

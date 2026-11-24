@@ -1,0 +1,3 @@
+academicId,fullName,email,course,modality,role,active
+12345678,Aluno Exemplo,aluno@example.com,SI,EAD,student,TRUE
+PROFCC01,Professor Teste CC,professor.cc@example.com,CC,PRESENCIAL,teacher,TRUE

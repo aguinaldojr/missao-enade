@@ -1,8 +1,9 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { GameSession, type Command } from '../../src/app/GameSession';
 import { LocalStoragePlayerProfileRepository,
   PLAYER_PROFILE_KEY } from '../../src/infrastructure/storage/LocalStoragePlayerProfileRepository';
 import { AppShell } from '../../src/ui/AppShell';
+import { playerProfileView } from '../../src/ui/views/PlayerProfileView';
 
 let shell: AppShell;
 afterEach(() => { shell?.destroy(); document.body.replaceChildren(); });
@@ -31,5 +32,42 @@ describe('perfil local e acesso ao ranking online', () => {
     expect(root.querySelector('#ranking-size')).toBeNull();
     expect(root.textContent).toContain('CLASSIFICAÇÃO ONLINE');
     expect(root.textContent).not.toContain('Resultados neste dispositivo');
+  });
+
+  it('valida RA e e-mail e cria o perfil com curso e modalidade do cadastro', async () => {
+    const values = new Map<string, string>();
+    const adapter = { getItem: (key: string) => values.get(key) ?? null,
+      setItem: (key: string, value: string) => { values.set(key, value); } };
+    const game = new GameSession(undefined, undefined, () => '2026-11-20T12:00:00.000Z', () => '1',
+      undefined, undefined, undefined, undefined, new LocalStoragePlayerProfileRepository(() => adapter));
+    game.dispatch({ type: 'start' });
+    const registry = { verify: vi.fn(async () => ({ academicId: '12345678', fullName: 'Ana Silva',
+      nickname: 'Ana-5678', course: 'TADS' as const, modality: 'EAD' as const, role: 'student' as const,
+      publicCode: 'N9-ABC12345', verificationToken: 'token-verificado-com-mais-de-vinte', rankingEligible: true })) };
+    const controller = new AbortController();
+    const view = playerProfileView(game.snapshot, (command) => { game.dispatch(command); }, controller.signal, registry);
+    document.body.append(view);
+    const fields = view.querySelectorAll<HTMLInputElement>('input');
+    fields[0]!.value = '12.345.678';
+    fields[1]!.value = 'ana@example.com';
+    view.querySelector('form')!.requestSubmit();
+    await vi.waitFor(() => expect(game.currentPlayer?.course).toBe('TADS'));
+    expect(registry.verify).toHaveBeenCalledWith('12.345.678', 'ana@example.com');
+    expect(game.currentPlayer).toMatchObject({ nickname: 'Ana-5678', modality: 'EAD', rankingEligible: true });
+    game.dispatch({ type: 'continue-profile' });
+    expect(game.snapshot).toMatchObject({ screen: 'course-select', selectedCourse: 'TADS' });
+    expect(() => game.dispatch({ type: 'select-course', course: 'SI' })).toThrow('somente ao curso cadastrado');
+    controller.abort();
+  });
+
+  it('exige nova validação quando o serviço está ativo e o perfil salvo é antigo', () => {
+    const legacy = { schemaVersion: 1 as const, activePlayerId: 'legacy', players: [{ id: 'legacy',
+      nickname: 'Perfil antigo', createdAt: '2026-11-20T12:00:00.000Z', lastUsedAt: '2026-11-20T12:00:00.000Z' }] };
+    const adapter = { getItem: () => JSON.stringify(legacy), setItem: vi.fn() };
+    const game = new GameSession(undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+      undefined, new LocalStoragePlayerProfileRepository(() => adapter), undefined, undefined, true);
+    expect(game.currentPlayer).toBeNull();
+    game.dispatch({ type: 'start' });
+    expect(game.snapshot.screen).toBe('profile');
   });
 });

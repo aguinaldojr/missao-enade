@@ -1,3 +1,4 @@
+import { enterEvaluationStation } from './evaluation-station';
 import { expect, test, type Page, type TestInfo } from '@playwright/test';
 import catalog from '../../src/content/questions/enade-2026-provisional.json' with { type: 'json' };
 import routes from '../../src/content/mission-routes.json' with { type: 'json' };
@@ -9,10 +10,11 @@ async function press(page: Page, name: string, info: TestInfo) {
   const control = page.getByRole('button', { name, exact: true });
   if (info.project.name === 'mobile') await control.tap();
   else await control.click();
+  if (name === 'Iniciar missão selecionada' || name === 'Próximo desafio') await enterEvaluationStation(page);
 }
 
 async function startPhase(page: Page, course: string, info: TestInfo, mission = 'journey-25') {
-  await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  await page.getByRole('button', { name: 'Jogar Jornada N9' }).click();
   if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
     await page.getByLabel('Apelido').fill('Jogador ' + course);
     await page.getByRole('button', { name: 'Criar jogador' }).click();
@@ -30,6 +32,7 @@ async function reflow(page: Page) {
 
 for (const course of courseIds) {
   test('missão padrão filtrada e resultado persistido: ' + course, async ({ page }, info) => {
+    test.setTimeout(150_000);
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('./');
@@ -58,7 +61,7 @@ for (const course of courseIds) {
       }
       expect(await page.locator('body').innerText()).not.toMatch(/\bENADE\b|simulado|preparação para prova/i);
       await expect(page).toHaveTitle(/N9 — Jornada Digital/);
-      await expect(page.locator('.example-warning')).toContainText('CONTEÚDO EXPERIMENTAL EM REVISÃO EDITORIAL');
+      await expect(page.locator('.example-warning')).toHaveCount(0);
       await expect(page.locator('.feedback')).toHaveCount(0);
       await expect(page.getByRole('button', { name: 'Confirmar resposta' })).toBeDisabled();
       if (index === 0) {
@@ -86,22 +89,17 @@ for (const course of courseIds) {
       expect(await page.evaluate((key) => localStorage.getItem(key), RESULT_KEY)).toBeNull();
       await press(page, index === 24 ? 'Ver relatório da missão' : 'Próximo desafio', info);
     }
-    await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Missão concluída!' })).toBeVisible();
     await expect(page.locator('.result-numbers')).toContainText(expectedCorrect * 100 + ' de 2500');
     await expect(page.getByRole('status').filter({ hasText: 'Relatório da missão salvo neste navegador.' })).toBeVisible();
     const stored = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), RESULT_KEY);
     expect(stored).toMatchObject({ schemaVersion: 1, mode: 'provisional', missionId: 'journey-25', course, total: 25,
       score: expectedCorrect * 100, correctCount: expectedCorrect });
     if (course === 'CC') await page.screenshot({ path: info.outputPath('resultado.png'), fullPage: true });
-    await press(page, 'Voltar à Base N9', info);
-    await expect(page.getByRole('heading', { name: 'Base N9', exact: true })).toBeVisible();
-    await expect(page.locator('.world-position')).toHaveAttribute('data-x', '160');
-    await expect(page.locator('.world-position')).toHaveAttribute('data-y', '184');
-    await expect(page.locator('.world-door')).toHaveText('Porta: liberada');
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('n9:exploration:v1')!))).toMatchObject({
-      missionStatus: 'completed', doorUnlocked: true, position: { x: 160, y: 184 },
-    });
-    await press(page, 'Voltar ao menu', info);
+    await expect(page.locator('.journey-benefit-card')).toHaveCount(3);
+    await expect(page.getByRole('button', { name: 'Jogar novamente' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Ver ranking' })).toBeVisible();
+    await press(page, 'Voltar ao início', info);
     await expect(page.locator('.last-result')).toContainText(expectedCorrect * 100 + ' pontos');
     await page.reload();
     await expect(page.locator('.last-result')).toContainText(expectedCorrect + ' de 25 acertos');
@@ -183,11 +181,14 @@ test('fluxo de resposta e avanço por teclado', async ({ page }, info) => {
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Próximo desafio' })).toBeFocused();
   await page.keyboard.press('Enter');
+  await enterEvaluationStation(page);
   await expect(page.getByText('Desafio 2 de 25', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
   await press(page, 'Voltar ao menu', info);
   await page.reload();
   await expect(page.locator('.last-result')).toHaveCount(0);
+  await startPhase(page, 'CC', info);
+  await expect(page.getByText('Desafio 2 de 25', { exact: true })).toBeVisible();
 });
 
 test('LocalStorage bloqueado não impede conclusão', async ({ page }, info) => {
@@ -199,11 +200,11 @@ test('LocalStorage bloqueado não impede conclusão', async ({ page }, info) => 
     await press(page, 'Confirmar resposta', info);
     await press(page, index === 24 ? 'Ver relatório da missão' : 'Próximo desafio', info);
   }
-  await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Missão concluída!' })).toBeVisible();
   await expect(page.locator('.save-message')).toContainText('Relatório da missão não salvo');
   await press(page, 'Tentar salvar novamente', info);
   await expect(page.locator('.save-message')).toContainText('Relatório da missão não salvo');
-  await press(page, 'Voltar ao menu', info);
+  await press(page, 'Voltar ao início', info);
 });
 
 test('resultado corrompido é ignorado sem travar a navegação', async ({ page }, info) => {
@@ -269,5 +270,5 @@ test('as questões ajustadas exibem seus artefatos visuais na jornada de SI', as
     await press(page, 'Confirmar resposta', info);
     await press(page, index === 24 ? 'Ver relatório da missão' : 'Próximo desafio', info);
   }
-  await expect(page.getByRole('heading', { name: 'Relatório da missão' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Missão concluída!' })).toBeVisible();
 });

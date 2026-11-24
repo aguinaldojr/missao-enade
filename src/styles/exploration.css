@@ -39,24 +39,51 @@
 }
 
 /* Base N9: painel superior tecnológico e controles táteis. */
-.exploration-view .section-title { padding-left: 18px; border-left: 8px solid var(--accent); }
-.exploration-grid { padding: 16px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: rgb(255 253 247 / .74); box-shadow: var(--shadow-md); }
-.world-slot { position: relative; border: 3px solid #345e64; border-radius: var(--radius-md); background: var(--canvas); box-shadow: inset 0 0 0 1px #78a19d, var(--shadow-md); }
-.world-slot::before { content: "BASE N9 · SETOR 01"; position: absolute; z-index: 2; top: 10px; left: 12px; padding: 5px 8px; border: 1px solid #5f817c; border-radius: 99px; color: #d9eee4; background: rgb(7 31 43 / .86); font-size: 9px; font-weight: 800; letter-spacing: .11em; pointer-events: none; }
-.world-instructions { padding: 10px 12px; border-left: 4px solid var(--cyan); border-radius: var(--radius-sm); background: #e5f3f5; }
+.exploration-view .section-title { padding-left: 18px; border-left: 8px solid var(--brand-red); color: white; }
+.exploration-view > .helper, .exploration-view > .selected-name, .exploration-view > .selected-mission { color: #c9def3; }
+.exploration-grid { padding: 16px; border: 1px solid rgb(148 200 255 / .42); border-radius: var(--radius-lg); background: linear-gradient(155deg, #ffffff, #edf6ff); box-shadow: var(--shadow-panel); }
+.world-slot { position: relative; border: 3px solid #168dcc; border-radius: var(--radius-md); background: var(--canvas); box-shadow: inset 0 0 0 1px #78bde6, var(--shadow-md); }
+.world-slot::before { content: "BASE N9 · SETOR 01"; position: absolute; z-index: 2; top: 10px; left: 12px; padding: 5px 8px; border: 1px solid #62bce8; border-radius: 99px; color: #e8f6ff; background: rgb(4 21 45 / .88); font-size: 9px; font-weight: 800; letter-spacing: .11em; pointer-events: none; }
+.exploration-view[data-map-id^="avaliacao-"] .world-slot::before { content: "JORNADA N9 · SALA DE QUESTÕES"; }
+.exploration-view[data-map-id="avaliacao-rota"] .world-slot::before { content: "JORNADA N9 · ROTA DE AVALIAÇÃO"; }
+.world-instructions { padding: 10px 12px; border-left: 4px solid var(--cyan); border-radius: var(--radius-sm); background: #e4f3fc; }
 .world-legend { padding-inline: 12px; }
 .exploration-panel { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow-sm); }
 .exploration-panel .tag { width: max-content; padding: 5px 8px; border-radius: 99px; color: var(--accent-strong); background: var(--accent-soft); }
 .world-door { padding: 10px 12px; border-radius: var(--radius-sm); background: var(--warning-soft); color: #68410c; font-weight: 650; }
-.world-nearby { min-height: 58px; padding: 14px 16px 14px 44px; border: 1px solid #b0d0c2; border-radius: var(--radius-md); background: var(--accent-soft); color: var(--ink); position: relative; }
+.world-nearby { min-height: 58px; padding: 14px 16px 14px 44px; border: 1px solid #a9c8e5; border-radius: var(--radius-md); background: var(--accent-soft); color: var(--ink); position: relative; }
 .world-nearby::before { content: "E"; position: absolute; left: 12px; top: 13px; display: grid; width: 24px; height: 24px; place-items: center; border: 2px solid var(--ink); border-radius: 6px; background: var(--surface); font-size: 12px; font-weight: 800; box-shadow: 0 2px 0 var(--ink); }
-.world-interact { background: var(--accent-strong); border-color: var(--accent-strong); }
+.world-interact { background: var(--brand-red); border-color: var(--brand-red); }
 .direction-pad { gap: 9px; }
 .direction-pad button { border-radius: 14px; border-color: var(--line-strong); background: var(--surface); color: var(--ink); box-shadow: 0 4px 0 #aebcb8; }
 .direction-pad button:hover:not(:disabled) { color: white; background: var(--accent); }
 .direction-pad button:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #aebcb8; }
-.world-dialog { border: 2px solid var(--violet); border-radius: var(--radius-md); padding: 18px; background: #f0edff; box-shadow: var(--shadow-md); }
-.world-dialog h2 { padding-left: 12px; border-left: 6px solid var(--violet); }
+.world-dialog { border: 2px solid #75bdea; border-top: 8px solid var(--brand-red); border-radius: var(--radius-lg); padding: 0; overflow: hidden; background: linear-gradient(155deg, #ffffff, #eaf4ff); box-shadow: var(--shadow-md); }
+.world-dialog-scene { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: end; gap: 16px; padding: 18px 18px 0; }
+.world-dialog-character { display: block; width: 100%; max-height: 170px; object-fit: contain; object-position: center bottom; }
+.world-dialog-copy { align-self: center; padding-bottom: 18px; }
+.world-dialog h2 { padding-left: 12px; border-left: 6px solid var(--brand-red); color: var(--accent-strong); }
+.world-dialog .button { min-height: 44px; }
+.journey-phase-progress { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; padding: 10px; border: 1px solid #b7d5eb; border-radius: var(--radius-md); background: #edf7ff; }
+.journey-phase-progress[hidden] { display: none; }
+.journey-phase-step { display: grid; justify-items: center; gap: 3px; min-width: 0; padding: 8px 3px; border-radius: 9px; color: #77879a; background: #dce9f3; text-align: center; }
+.journey-phase-number { display: grid; width: 26px; height: 26px; place-items: center; border: 2px solid currentColor; border-radius: 50%; font-size: 12px; font-weight: 900; }
+.journey-phase-step strong { font-size: 11px; }
+.journey-phase-step small { font-size: 8px; line-height: 1.2; }
+.journey-phase-step[data-state="active"] { color: #074a88; background: #ccecff; box-shadow: inset 0 -3px 0 #18a9d5; }
+.journey-phase-step[data-state="complete"] { color: #076a4b; background: #d6f8e9; }
+.journey-guide { display: grid; grid-template-columns: 92px minmax(0, 1fr); align-items: end; gap: 12px; min-height: 150px; overflow: hidden; border: 1px solid #74bde9; border-radius: var(--radius-md); color: #eef8ff; background: radial-gradient(circle at 15% 35%, rgb(48 219 216 / .2), transparent 34%), linear-gradient(145deg, #071f50, #0b4773); }
+.journey-guide[hidden] { display: none; }
+.journey-guide-character { align-self: end; display: block; width: 100%; max-height: 142px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 10px 13px rgb(0 0 0 / .28)); }
+.journey-guide-copy { align-self: center; padding: 16px 14px 16px 0; }
+.journey-guide-label { color: #61e4eb; font-size: 10px; font-weight: 850; letter-spacing: .09em; }
+.journey-guide h2 { margin: 5px 0 7px; color: #fff; font-size: 19px; line-height: 1.15; }
+.journey-guide p { margin: 0; color: #d8eaff; font-size: 13px; line-height: 1.5; }
+.journey-room-progress { display: flex; gap: 7px; margin-top: 13px; }
+.journey-room-progress[hidden] { display: none; }
+.journey-room-step { display: grid; width: 27px; height: 27px; place-items: center; border: 2px solid #7e9fbe; border-radius: 50%; color: #b7cadc; background: #092c58; font-size: 11px; font-weight: 900; }
+.journey-room-step[data-state="active"] { border-color: #ffd05c; color: #07224c; background: #ffd05c; box-shadow: 0 0 0 4px rgb(255 208 92 / .18); }
+.journey-room-step[data-state="complete"] { border-color: #52e0ad; color: #072f38; background: #52e0ad; }
 
 @media (max-width: 599px) {
   .exploration-view .section-title { padding-left: 12px; border-left-width: 6px; }
@@ -64,6 +91,17 @@
   .world-slot::before { top: 7px; left: 7px; }
   .direction-pad { grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(2, 54px); margin-block: 12px 16px; }
   .exploration-panel { padding: 16px; }
+  .world-dialog-scene { grid-template-columns: 78px minmax(0, 1fr); gap: 10px; padding: 14px 14px 0; }
+  .world-dialog-character { max-height: 126px; }
+  .journey-phase-progress { gap: 3px; padding: 7px 4px; }
+  .journey-phase-step { padding-inline: 1px; }
+  .journey-phase-step strong { font-size: 9px; }
+  .journey-phase-step small { display: none; }
+  .journey-guide { grid-template-columns: 78px minmax(0, 1fr); min-height: 138px; }
+  .journey-guide-character { max-height: 126px; transform: scale(1.12); transform-origin: center bottom; }
+  .journey-guide-copy { padding: 13px 10px 13px 0; }
+  .journey-guide h2 { font-size: 17px; }
+  .journey-guide p { font-size: 12px; }
 }
 
 @media (forced-colors: active) {

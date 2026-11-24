@@ -3,6 +3,7 @@ import { puzzleCopy } from '../../config/puzzles';
 import { totalPuzzleXp, type SequencePuzzle } from '../../domain/puzzles/SequencePuzzle';
 import { button, element } from '../components/elements';
 import { puzzleFamilyFromId, puzzleFamilyVisuals } from '../../config/visual';
+import { learningLabVisualAssets } from '../../config/visualAssets';
 
 export class SequencePuzzleView {
   readonly element = element('section', 'view puzzle-view');
@@ -24,6 +25,9 @@ export class SequencePuzzleView {
   private readonly movement = element('p', 'sr-only');
   private readonly commonTerminal: HTMLElement | undefined;
   private readonly commonPublicStatus: HTMLElement | undefined;
+  private readonly evaluationGuide: HTMLImageElement | undefined;
+  private readonly evaluationGuideState: HTMLElement | undefined;
+  private readonly evaluationGuideMessage: HTMLElement | undefined;
   private previousOrder = '';
   private lastTouchMove = -Infinity;
   private wasSolved = false;
@@ -38,11 +42,14 @@ export class SequencePuzzleView {
     const isSiReplacement = this.puzzle.id === 'E26-P-SI-01';
     const isCodePuzzle = ['E26-P-SI-02', 'E26-P-SI-03'].includes(this.puzzle.id);
     const hasOperationalCards = isCommon || isSiReplacement || isCodePuzzle;
+    const evaluationGate = state.evaluationGate;
     this.element.dataset.puzzleFamily = familyVisual.className;
+    if (evaluationGate) this.element.dataset.evaluationGate = evaluationGate;
     if (isCodePuzzle) this.element.dataset.puzzleMode = 'code';
-    const heading = element('h1', 'section-title', puzzleCopy.title);
+    const heading = element('h1', 'section-title', evaluationGate ? 'Desafio de ativação' : puzzleCopy.title);
     heading.tabIndex = -1;
     const choices = element('div', 'puzzle-choices');
+    choices.hidden = !!state.evaluationGate;
     choices.setAttribute('role', 'group');
     choices.setAttribute('aria-label', 'Exercícios de Sequência Lógica');
     for (const puzzle of state.puzzles) {
@@ -67,8 +74,46 @@ export class SequencePuzzleView {
       briefing.append(briefingHeader, narrative);
       narrativeContent = briefing;
     }
-    this.element.append(element('p', 'eyebrow', 'TERMINAL TECNOLÓGICO'), familyBadge, heading,
-      element('p', 'example-warning', puzzleCopy.provisional), element('p', 'intro intro--small', puzzleCopy.intro),
+    if (evaluationGate) {
+      const gateCopy = evaluationGate === 'entrada'
+        ? { label: 'PORTAL DE ENTRADA', title: 'Robô N9 em modo de espera',
+          message: 'Organize os comandos para despertar o Robô N9. Ele projetará a rota e abrirá a primeira sala.',
+          impact: 'Libera a Fase 1', step: 'Tutorial obrigatório' }
+        : evaluationGate === 'intervalo'
+          ? { label: 'PARADA TÉCNICA', title: 'Nó de rede interrompido',
+            message: 'A rota perdeu comunicação depois da Fase 2. Reordene o protocolo para restabelecer o próximo trecho.',
+            impact: 'Libera a Fase 3', step: 'Após 10 questões' }
+          : { label: 'ÚLTIMO BLOQUEIO', title: 'Núcleo de energia instável',
+            message: 'Estabilize o núcleo e sincronize a ponte. A última sala ficará disponível quando a sequência estiver segura.',
+            impact: 'Libera a Fase 5', step: 'Após 20 questões' };
+      const guide = element('section', 'evaluation-gate-hero');
+      guide.setAttribute('aria-label', 'Orientação do Robô N9');
+      const portrait = element('div', 'evaluation-gate-portrait');
+      this.evaluationGuide = document.createElement('img');
+      this.evaluationGuide.className = 'evaluation-gate-character';
+      this.evaluationGuide.src = learningLabVisualAssets.moods.thinking.robot;
+      this.evaluationGuide.alt = 'Robô N9 orientando o desafio';
+      portrait.append(this.evaluationGuide, element('span', 'evaluation-gate-signal', 'SINAL ATIVO'));
+      const copy = element('div', 'evaluation-gate-copy');
+      copy.append(element('p', 'eyebrow', gateCopy.label), element('h2', '', gateCopy.title));
+      this.evaluationGuideMessage = element('p', '', gateCopy.message);
+      const status = element('div', 'evaluation-gate-status');
+      const statusItem = (label: string, value: string) => {
+        const item = element('div', 'evaluation-gate-status-item');
+        item.append(element('span', '', label), element('strong', '', value));
+        return item;
+      };
+      this.evaluationGuideState = element('strong', 'evaluation-gate-state', 'PASSAGEM BLOQUEADA');
+      const stateItem = element('div', 'evaluation-gate-status-item evaluation-gate-status-item--state');
+      stateItem.append(element('span', '', 'Estado'), this.evaluationGuideState);
+      status.append(statusItem('Momento', gateCopy.step), statusItem('Objetivo', gateCopy.impact), stateItem);
+      copy.append(this.evaluationGuideMessage, status);
+      guide.append(portrait, copy);
+      this.element.append(guide);
+    }
+    this.element.append(element('p', 'eyebrow', evaluationGate ? 'TERMINAL DA JORNADA' : 'TERMINAL TECNOLÓGICO'), familyBadge, heading);
+    if (evaluationGate) this.element.append(element('p', 'example-warning', 'DESAFIO DE NAVEGAÇÃO · NÃO ALTERA A NOTA DA AVALIAÇÃO'));
+    this.element.append(element('p', 'intro intro--small', evaluationGate ? 'Coloque as etapas na ordem correta para liberar a passagem.' : puzzleCopy.intro),
       choices, element('h2', 'puzzle-title', this.puzzle.title), narrativeContent,
       this.xp, this.replayNotice, element('p', 'helper', puzzleCopy.controls));
     if (isCommon) {
@@ -279,14 +324,16 @@ export class SequencePuzzleView {
     actions.append(this.validateButton, this.hintsButton);
     const successHeading = element('h2', '', puzzleCopy.success);
     successHeading.tabIndex = -1;
-    const returnMap = button(puzzleCopy.returnMap);
+    const returnMap = button(evaluationGate ? 'Voltar à rota liberada' : puzzleCopy.returnMap);
     returnMap.addEventListener('click', () => dispatch({ type: 'exit-puzzle' }), { signal });
     const replay = button(puzzleCopy.replay, true);
     replay.addEventListener('click', () => dispatch({ type: 'replay-puzzle', puzzleId: this.puzzleId }), { signal });
+    replay.hidden = !!state.evaluationGate;
     this.success.append(successHeading, this.explanation, this.earned, returnMap, replay);
     this.saved.setAttribute('role', 'status');
     this.retry.addEventListener('click', () => dispatch({ type: 'save-puzzles' }), { signal });
     const exit = button(puzzleCopy.exit, true);
+    exit.hidden = !!state.evaluationGate;
     exit.addEventListener('click', () => dispatch({ type: 'exit-puzzle' }), { signal });
     if (isCommon) {
       const console = element('section', 'puzzle-sequence-console');
@@ -300,6 +347,11 @@ export class SequencePuzzleView {
     }
     this.element.append(this.movement, actions, this.feedback,
       this.hintList, this.success, this.saved, this.retry, exit);
+    if (state.evaluationGate) {
+      const pause = button('Voltar ao menu', true);
+      pause.addEventListener('click', () => dispatch({ type: 'home' }), { signal });
+      this.element.append(pause);
+    }
     this.update(state);
   }
 
@@ -338,6 +390,14 @@ export class SequencePuzzleView {
     this.hintsButton.textContent = entry.hintsUsed === this.puzzle.hints.length ? puzzleCopy.noMoreHints : puzzleCopy.hint;
     this.validateButton.disabled = attempt.solved;
     this.list.classList.toggle('sequence-complete', attempt.solved);
+    if (this.evaluationGuide && this.evaluationGuideState && this.evaluationGuideMessage) {
+      this.element.dataset.gateState = attempt.solved ? 'released' : 'blocked';
+      this.evaluationGuide.src = attempt.solved
+        ? learningLabVisualAssets.moods.result.robot : learningLabVisualAssets.moods.thinking.robot;
+      this.evaluationGuide.alt = attempt.solved ? 'Robô N9 comemorando a passagem liberada' : 'Robô N9 orientando o desafio';
+      this.evaluationGuideState.textContent = attempt.solved ? 'PASSAGEM LIBERADA' : 'PASSAGEM BLOQUEADA';
+      if (attempt.solved) this.evaluationGuideMessage.textContent = 'Sequência confirmada! O Robô N9 liberou a passagem. Continue pela rota para a próxima etapa.';
+    }
     if (this.commonTerminal && this.commonPublicStatus) {
       this.commonTerminal.dataset.state = attempt.solved ? 'recovered' : 'recovering';
       this.commonPublicStatus.textContent = attempt.solved ? 'LIBERADA' : 'DESLIGADA';

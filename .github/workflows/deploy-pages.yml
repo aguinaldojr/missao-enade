@@ -41,6 +41,7 @@ jobs:
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
           VITE_RANKING_API_URL: ${{ vars.VITE_RANKING_API_URL }}
+          VITE_STUDENT_REGISTRY_API_URL: ${{ vars.VITE_STUDENT_REGISTRY_API_URL }}
         run: npm run build
 
       - name: Enviar artefato estático

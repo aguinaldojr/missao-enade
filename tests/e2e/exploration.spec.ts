@@ -1,8 +1,9 @@
+import { enterEvaluationStation } from './evaluation-station';
 import { expect, test, type Page } from '@playwright/test';
 
 const KEY = 'n9:exploration:v1';
 async function startWithPlayer(page: Page) {
-  await page.getByRole('button', { name: 'Iniciar missão' }).click();
+  await page.getByRole('button', { name: 'Jogar Jornada N9' }).click();
   if (await page.getByRole('heading', { name: 'Quem está jogando?' }).isVisible().catch(() => false)) {
     await page.getByLabel('Apelido').fill('Explorador');
     await page.getByRole('button', { name: 'Criar jogador' }).click();
@@ -112,6 +113,7 @@ test('controle virtual responde ao toque e para ao soltar', async ({ page }, inf
   await walk(page, 'ArrowLeft', 250);
   const interact = page.locator('.world-interact');
   if (info.project.name === 'mobile') await interact.tap(); else await interact.click();
+  await enterEvaluationStation(page);
   await expect(page.getByText('Desafio 1 de 25', { exact: true })).toBeVisible();
 });
 

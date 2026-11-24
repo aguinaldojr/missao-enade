@@ -79,6 +79,7 @@ export interface CompleteCodeActivity extends ActivityBase {
 
 export interface HotspotActivity extends ActivityBase {
   readonly type: 'hotspot';
+  readonly visualKind?: 'component-grid' | 'cloud-architecture' | 'truncated-bar-chart' | 'uml-composition';
   readonly visualDescription: string;
   readonly accessibleDescription: string;
   readonly nodes: readonly { readonly id: string; readonly label: string; readonly detail: string }[];
@@ -132,7 +133,8 @@ function toLearningActivity(activity: CatalogLearningActivity): LearningActivity
     case 'fill-slot': return { ...shared, type: 'complete-code', language: payload.language,
       codeBefore: payload.contentBefore, codeAfter: payload.contentAfter, tokens: payload.tokens,
       correctTokenId: payload.correctTokenId };
-    case 'visual-hotspot': return { ...shared, type: 'hotspot', visualDescription: payload.visualDescription,
+    case 'visual-hotspot': return { ...shared, type: 'hotspot', visualKind: payload.visualKind,
+      visualDescription: payload.visualDescription,
       accessibleDescription: payload.accessibleDescription, nodes: payload.nodes, correctNodeId: payload.correctNodeId };
     case 'decision-dialogue': return { ...shared, type: 'decision-dialogue', steps: payload.steps };
   }

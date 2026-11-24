@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createPlayer, emptyPlayerProfiles, normalizeNickname, selectPlayer,
+import { createPlayer, createVerifiedPlayer, emptyPlayerProfiles, normalizeNickname, selectPlayer,
   validateNickname } from '../../src/domain/models/PlayerProfile';
 import { LocalStoragePlayerProfileRepository,
   PLAYER_PROFILE_KEY } from '../../src/infrastructure/storage/LocalStoragePlayerProfileRepository';
@@ -36,5 +36,15 @@ describe('perfil local', () => {
     expect(repository.load().profiles).toEqual(selected);
     expect(values.has(PLAYER_PROFILE_KEY)).toBe(true);
     expect(values.get('existing-key')).toBe('preservar');
+  });
+
+  it('cria perfil validado com curso, modalidade e participação no ranking', () => {
+    const profile = createVerifiedPlayer(emptyPlayerProfiles(), { academicId: '12345678',
+      fullName: 'Ana Maria Silva', nickname: 'Ana-5678', course: 'SI', modality: 'EAD', role: 'student',
+      publicCode: 'N9-ABC_2345', verificationToken: 'token-verificado-com-mais-de-vinte',
+      rankingEligible: true }, time);
+    expect(profile.players[0]).toMatchObject({ nickname: 'Ana-5678', academicId: '12345678',
+      course: 'SI', modality: 'EAD', rankingEligible: true });
+    expect(new LocalStoragePlayerProfileRepository(() => storage().adapter).save(profile)).toBe(true);
   });
 });

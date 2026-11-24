@@ -26,7 +26,7 @@ export const PROVISIONAL_PLAYABLE_COLLECTION: PlayableCollectionConfig = Object.
   phaseId: 'N9-COLLECTION-PROVISIONAL',
   missions: QUESTION_MISSION_LIST,
   defaultMissionId: QUESTION_MISSIONS.journey25.id,
-  validationNotice: 'Conteúdo experimental em revisão editorial.',
+  validationNotice: '',
 });
 
 /** Configuração padrão dos testes e consumidores antigos. */
@@ -38,5 +38,5 @@ export const LEGACY_PLAYABLE_COLLECTION: PlayableCollectionConfig = Object.freez
   phaseId: 'FASE-EXEMPLO-01',
   missions: Object.freeze([LEGACY_EXAMPLE_MISSION]),
   defaultMissionId: LEGACY_EXAMPLE_MISSION.id,
-  validationNotice: 'Conteúdo demonstrativo.',
+  validationNotice: '',
 });

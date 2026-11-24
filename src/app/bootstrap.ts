@@ -1,8 +1,10 @@
 import { GameSession, type Command } from './GameSession';
+import { EvaluationCheckpoints } from '../infrastructure/storage/EvaluationCheckpoints';
 import { AppShell } from '../ui/AppShell';
 import { ExplorationControls } from '../ui/ExplorationControls';
 import legacyPuzzleCatalog from '../content/puzzles/sequences.json';
 import provisionalPuzzleCatalog from '../content/puzzles/enade-2026-provisional-sequences.json';
+import { EVALUATION_JOURNEY_PUZZLES } from '../content/puzzles/evaluation-journey';
 import { JsonPuzzleRepository } from '../infrastructure/content/JsonPuzzleRepository';
 import { LocalStoragePuzzleRepository } from '../infrastructure/storage/LocalStoragePuzzleRepository';
 import legacyQuestionCatalog from '../content/questions/central-nexo.json';
@@ -13,14 +15,17 @@ import { LocalStorageExplorationRepository } from '../infrastructure/storage/Loc
 import { PROVISIONAL_PLAYABLE_COLLECTION } from '../config/collections';
 import { LocalStoragePlayerProfileRepository } from '../infrastructure/storage/LocalStoragePlayerProfileRepository';
 import { LocalStorageMissionRouteRepository } from '../infrastructure/storage/LocalStorageMissionRouteRepository';
+import { configuredStudentRegistry } from '../infrastructure/online/AppsScriptStudentRegistryRepository';
 
 export function bootstrap(root: HTMLElement): () => void {
-  const puzzles = new JsonPuzzleRepository([...legacyPuzzleCatalog, ...provisionalPuzzleCatalog]);
+  const registry = configuredStudentRegistry();
+  const puzzles = new JsonPuzzleRepository([...legacyPuzzleCatalog, ...provisionalPuzzleCatalog, ...EVALUATION_JOURNEY_PUZZLES]);
   const questions = { ...provisionalQuestionCatalog,
     questions: [...legacyQuestionCatalog.questions, ...provisionalQuestionCatalog.questions] };
   const session = new GameSession(new JsonContentRepository(questions), new LocalStorageProgressRepository(),
     undefined, undefined, new LocalStorageExplorationRepository(), new LocalStoragePuzzleRepository(puzzles), puzzles,
-    PROVISIONAL_PLAYABLE_COLLECTION, new LocalStoragePlayerProfileRepository(), new LocalStorageMissionRouteRepository());
+    PROVISIONAL_PLAYABLE_COLLECTION, new LocalStoragePlayerProfileRepository(), new LocalStorageMissionRouteRepository(),
+    new EvaluationCheckpoints(), registry !== null);
   let sceneDriver: { sync: () => void; destroy: () => void } | undefined;
   let disposed = false;
   const dispatch = (command: Command): void => {

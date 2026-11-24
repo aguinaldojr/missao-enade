@@ -74,7 +74,7 @@ describe('contrato de atividades do modo aprender', () => {
     });
     expect(validated.activities.every((activity) => activity.sources.filter((source) => source.role === 'primary').length === 1)).toBe(true);
     expect(validated.activities.filter((activity) => activity.sourceVerificationNeeded).map((activity) => activity.id))
-      .toEqual(['N9-TRC-013', 'N9-TRC-017']);
+      .toEqual(['N9-TRC-005', 'N9-TRC-010', 'N9-TRC-017', 'N9-TRC-018', 'N9-TRC-020']);
   });
 
   it('valida IDs, cotas e elegibilidade ampliada do segundo lote de TRC', () => {
@@ -90,7 +90,7 @@ describe('contrato de atividades do modo aprender', () => {
     });
     expect(validated.activities.every((activity) => activity.sources.filter((source) => source.role === 'primary').length === 1)).toBe(true);
     expect(validated.activities.filter((activity) => activity.sourceVerificationNeeded).map((activity) => activity.id))
-      .toEqual(['N9-TRC-035', 'N9-TRC-038']);
+      .toEqual(['N9-TRC-025', 'N9-TRC-030', 'N9-TRC-034', 'N9-TRC-036', 'N9-TRC-037', 'N9-TRC-040']);
   });
 
   it('aceita as nove mecânicas e oferece filtros imutáveis', () => {

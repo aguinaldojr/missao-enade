@@ -21,9 +21,15 @@ function setup() {
 }
 
 describe('controles HTML e foco', () => {
+  it('leva ao perfil antes do modo rápido quando não há cadastro validado', () => {
+    const { session, click } = setup();
+    click('Entrar para jogar');
+    expect(session.snapshot.screen).toBe('profile');
+  });
+
   it('só habilita a entrada após escolher um curso e preserva o foco do radio', () => {
     const { root, session, click } = setup();
-    click('Iniciar missão');
+    click('Jogar Jornada N9');
     expect(document.activeElement).toBe(root.querySelector('h1'));
     const confirm = root.querySelector<HTMLButtonElement>('[data-action="confirm-course"]')!;
     expect(confirm.disabled).toBe(true);
@@ -36,13 +42,13 @@ describe('controles HTML e foco', () => {
     expect(session.snapshot.screen).toBe('map');
     expect(root.querySelector('.selected-name')?.textContent).toBe('Tecnologia em Análise e Desenvolvimento de Sistemas');
     expect(document.activeElement).toBe(root.querySelector('h1'));
-    expect(root.textContent).toContain('COLEÇÃO PROVISÓRIA');
+    expect(root.textContent).toContain('MISSÃO ATIVA');
   });
 
   it('limpa listeners de telas desmontadas, permite trocar curso e mantém o fluxo sem canvas', () => {
     const { root, session, click } = setup();
     const oldStart = root.querySelector<HTMLButtonElement>('button')!;
-    click('Iniciar missão');
+    click('Jogar Jornada N9');
     root.querySelector<HTMLInputElement>('input[value="CC"]')!.click();
     click('Entrar na Central Nexo');
     oldStart.click();

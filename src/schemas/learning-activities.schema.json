@@ -187,6 +187,7 @@
       "required": ["type", "visualDescription", "accessibleDescription", "nodes", "correctNodeId"],
       "properties": {
         "type": { "const": "visual-hotspot" },
+        "visualKind": { "enum": ["component-grid", "cloud-architecture", "truncated-bar-chart", "uml-composition"] },
         "visualDescription": { "$ref": "#/definitions/nonBlank" },
         "accessibleDescription": { "$ref": "#/definitions/nonBlank" },
         "nodes": { "type": "array", "minItems": 2, "maxItems": 8, "items": { "$ref": "#/definitions/hotspotNode" } },

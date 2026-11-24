@@ -1,6 +1,6 @@
 export const puzzleCopy = {
   title: 'Sequência Lógica',
-  provisional: 'CONTEÚDO EXPERIMENTAL · EM REVISÃO EDITORIAL',
+  provisional: '',
   intro: 'O terminal perdeu sua sequência de inicialização. Escolha um exercício para recuperar o sistema e liberar a passagem.',
   controls: 'Arraste pela alça, use os botões Subir/Descer ou foque a alça e pressione ↑/↓. Sem cronômetro e sem perda de XP por erro.',
   validate: 'Validar sequência',

@@ -1,3 +1,4 @@
+import { enterEvaluationStation } from './evaluation-station';
 import { expect, test, type Page, type TestInfo } from '@playwright/test';
 import catalog from '../../src/content/questions/enade-2026-provisional.json' with { type: 'json' };
 import routes from '../../src/content/mission-routes.json' with { type: 'json' };
@@ -8,6 +9,7 @@ const RANKING_KEY = 'n9:leaderboard:v1';
 async function press(page: Page, name: string, info: TestInfo) {
   const control = page.getByRole('button', { name });
   if (info.project.name === 'mobile') await control.tap(); else await control.click();
+  if (name === 'Iniciar missão selecionada' || name === 'Próximo desafio') await enterEvaluationStation(page);
 }
 
 async function finishMission(page: Page, info: TestInfo) {
@@ -27,7 +29,7 @@ test('perfil permanece local e o ranking apresentado é somente online', async (
     if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('data:')) external.push(request.url());
   });
   await page.goto('./');
-  await press(page, 'Iniciar missão', info);
+  await press(page, 'Jogar Jornada N9', info);
   await expect(page.getByRole('heading', { name: 'Quem está jogando?' })).toBeFocused();
   await expect(page.getByText('Os dados deste perfil ficam somente neste navegador.')).toBeVisible();
   const nickname = page.getByLabel('Apelido');
@@ -46,7 +48,7 @@ test('perfil permanece local e o ranking apresentado é somente online', async (
   expect(await page.evaluate((key) => localStorage.getItem(key), RANKING_KEY)).toBeNull();
   await finishMission(page, info);
   await expect(page.getByRole('heading', { name: 'Ranking online · CC' })).toBeVisible();
-  await expect(page.getByLabel('RA para identificação pseudônima')).toBeVisible();
+  await expect(page.getByText('Valide seu cadastro acadêmico no perfil para enviar resultados ao ranking.')).toBeVisible();
   expect(await page.evaluate((key) => localStorage.getItem(key), RANKING_KEY)).toBeNull();
 
   await press(page, 'Voltar ao menu', info);
@@ -73,7 +75,7 @@ test('criação e início funcionam somente com teclado e semântica nativa', as
   await page.goto('./');
   await page.getByRole('heading', { level: 1 }).focus();
   await page.keyboard.press('Tab');
-  await expect(page.getByRole('button', { name: 'Iniciar missão' })).toBeFocused();
+  await expect(page.getByRole('button', { name: 'Jogar Jornada N9' })).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'Quem está jogando?' })).toBeFocused();
   await page.keyboard.press('Tab');

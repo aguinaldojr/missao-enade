@@ -3,6 +3,7 @@ import legacyQuestions from '../../src/content/questions/central-nexo.json';
 import provisionalQuestions from '../../src/content/questions/enade-2026-provisional.json';
 import legacyPuzzles from '../../src/content/puzzles/sequences.json';
 import provisionalPuzzles from '../../src/content/puzzles/enade-2026-provisional-sequences.json';
+import { EVALUATION_JOURNEY_PUZZLES } from '../../src/content/puzzles/evaluation-journey';
 import { GameSession } from '../../src/app/GameSession';
 import { COURSE_IDS } from '../../src/domain/models/Course';
 import { currentQuestion } from '../../src/domain/progression';
@@ -15,7 +16,7 @@ import { LocalStoragePuzzleRepository, PUZZLE_KEY } from '../../src/infrastructu
 
 const content = new JsonContentRepository({ ...provisionalQuestions,
   questions: [...legacyQuestions.questions, ...provisionalQuestions.questions] });
-const puzzles = new JsonPuzzleRepository([...legacyPuzzles, ...provisionalPuzzles]);
+const puzzles = new JsonPuzzleRepository([...legacyPuzzles, ...provisionalPuzzles, ...EVALUATION_JOURNEY_PUZZLES]);
 
 function session(progress?: LocalStorageProgressRepository, puzzleStorage?: LocalStoragePuzzleRepository): GameSession {
   return new GameSession(content, progress, () => '2026-11-14T12:00:00.000Z', () => 'integration-attempt',
@@ -36,7 +37,7 @@ describe('coleção provisória integrada', () => {
     expect(provisionalPuzzles).toHaveLength(8);
     expect(provisionalQuestions.questions.filter((question) => question.courses.includes('SI')).length).toBeGreaterThanOrEqual(100);
     expect(content.questionsForCourse('CC').length).toBeGreaterThanOrEqual(75);
-    expect(puzzles.all()).toHaveLength(11);
+    expect(puzzles.all()).toHaveLength(13);
   });
 
   it.each(COURSE_IDS.flatMap((course) => QUESTION_MISSION_LIST.map((mission) => [course, mission] as const)))(
@@ -57,7 +58,7 @@ describe('coleção provisória integrada', () => {
     const game = session();
     game.dispatch({ type: 'start' });
     game.dispatch({ type: 'select-course', course });
-    const expected = ['E26-P-COM-01', 'E26-P-' + course + '-01'];
+    const expected = ['E26-P-COM-01', 'E26-P-COM-TUTORIAL', 'E26-P-COM-CORE', 'E26-P-' + course + '-01'];
     if (course === 'SI') expected.push('E26-P-SI-02', 'E26-P-SI-03');
     expect(game.snapshot.puzzles.map((puzzle) => puzzle.id).sort()).toEqual(expected.sort());
   });
@@ -75,7 +76,39 @@ describe('coleção provisória integrada', () => {
     expect(game.snapshot.lastResult).toEqual(legacyResult);
     expect(game.snapshot.puzzleProgress.entries[legacyPuzzles[0]!.id]?.completed).toBe(true);
     startMission(game, 'CC', 'journey-25');
+    const walk = (axis: 'x' | 'y', goal: number) => {
+      for (let step = 0; step < 100; step++) {
+        const delta = goal - game.snapshot.exploration.position[axis];
+        if (Math.abs(delta) < 5) return;
+        game.dispatch({ type: 'move-player', x: 0, y: 0, [axis]: Math.sign(delta), seconds: 0.05 });
+      }
+      throw Error('Destino inacessível');
+    };
+    const walkTo = (x: number, y: number) => { walk('y', y); walk('x', x); };
+    const solvePuzzle = (puzzleId: string) => {
+      game.dispatch({ type: 'interact' });
+      expect(game.snapshot.puzzleAttempt?.puzzleId).toBe(puzzleId);
+      puzzles.get(puzzleId)!.correctOrder.forEach((blockId, to) => game.dispatch({ type: 'reorder-puzzle', puzzleId, blockId, to }));
+      game.dispatch({ type: 'validate-puzzle', puzzleId }); game.dispatch({ type: 'exit-puzzle' });
+    };
     for (let index = 0; index < 25; index++) {
+      if (index % 5 === 0) {
+        expect(game.snapshot.exploration.mapId).toBe('avaliacao-rota');
+        if (index === 0) solvePuzzle('E26-P-COM-TUTORIAL');
+        if (index === 10) { walkTo(384, 176); solvePuzzle('E26-P-CC-01'); }
+        if (index === 20) { walkTo(384, 220); solvePuzzle('E26-P-COM-CORE'); }
+        const routeTargets = [[188, 176], [284, 176], [484, 176], [484, 220], [284, 220]] as const;
+        const [routeX, routeY] = routeTargets[index / 5]!;
+        walkTo(routeX, routeY); game.dispatch({ type: 'interact' });
+      }
+      const phase = Math.floor(index / 5);
+      expect(game.snapshot.exploration.mapId).toBe('avaliacao-' + (phase + 1));
+      const station = index % 5;
+      walk('y', 197);
+      walk('x', 90 + station * 112);
+      walk('y', (station + phase) % 2 === 0 ? 173 : 216);
+      game.dispatch({ type: 'interact' });
+      expect(game.snapshot.screen).toBe('question');
       const question = currentQuestion(game.snapshot.attempt!);
       game.dispatch({ type: 'select-option', questionId: question.id, option: question.correctOptionId });
       game.dispatch({ type: 'confirm-answer', questionId: question.id });
@@ -84,6 +117,6 @@ describe('coleção provisória integrada', () => {
     }
     expect(JSON.parse(values.get(MISSION_RESULT_KEY)!)).toMatchObject({ missionId: 'journey-25', course: 'CC', total: 25, score: 2500 });
     expect(JSON.parse(values.get(RESULT_KEY)!)).toEqual(legacyResult);
-    expect(JSON.parse(values.get(PUZZLE_KEY)!)).toEqual(legacyReceipt);
+    expect(JSON.parse(values.get(PUZZLE_KEY)!)).toMatchObject(legacyReceipt);
   });
 });

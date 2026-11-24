@@ -21,6 +21,6 @@ test('documento e recursos respeitam o base path e recarregam sem 404', async ({
 
   await page.reload();
   await expect(page).toHaveURL((url) => url.pathname === expectedBase);
-  await expect(page.getByRole('button', { name: 'Iniciar missão' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Jogar Jornada N9' })).toBeVisible();
   expect(notFound).toEqual([]);
 });

@@ -35,6 +35,11 @@ export class AppShell {
     skip.href = '#conteudo';
     this.content.id = 'conteudo';
     this.content.tabIndex = -1;
+    skip.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.content.focus();
+      this.content.scrollIntoView({ block: 'start' });
+    });
     this.status.setAttribute('role', 'status');
     this.status.setAttribute('aria-live', 'polite');
     this.graphicStatus.setAttribute('role', 'status');
@@ -58,7 +63,9 @@ export class AppShell {
     visual.append(panelHeader, this.canvasHost, caption, this.graphicStatus);
     stage.append(this.content, visual);
     const footer = element('footer', 'site-footer');
-    footer.append(element('p', '', gameConfig.copy.footerPurpose), element('p', '', gameConfig.copy.footerDemo));
+    const regulationLink = element('a', 'footer-link', 'Regulamento de pontos, bônus e horas');
+    regulationLink.href = '#/regulamento';
+    footer.append(element('p', '', gameConfig.copy.footerPurpose), regulationLink);
     const frame = element('div', 'app-frame');
     frame.append(header, stage, footer, this.status);
     root.replaceChildren(skip, frame);
@@ -114,7 +121,7 @@ export class AppShell {
           confirm: () => dispatch({ type: 'enter-central' }),
           back: () => dispatch({ type: 'home' }),
           changePlayer: () => dispatch({ type: 'open-profile' }),
-        }, signal);
+        }, signal, activePlayer(state.profiles));
         break;
       case 'map':
         view = mapView(state, dispatch, signal, this.controls);
@@ -130,7 +137,7 @@ export class AppShell {
         break;
       case 'result':
         if (!state.lastResult) throw new Error('Resultado necessário.');
-        view = resultView(state.lastResult, state.saveStatus, dispatch, signal);
+        view = resultView(state.lastResult, state.saveStatus, dispatch, signal, activePlayer(state.profiles));
         break;
     }
     const player = activePlayer(state.profiles);
@@ -155,6 +162,11 @@ export class AppShell {
       this.canvasHost.removeAttribute('aria-label');
     }
     this.content.closest('.stage')?.classList.toggle('stage--playing', state.screen === 'question' || state.screen === 'result');
+    this.content.closest('.stage')?.classList.toggle('stage--question', state.screen === 'question');
+    this.canvasHome.toggleAttribute('hidden', state.screen === 'question');
+    this.content.closest('.stage')?.classList.toggle('stage--leaderboard', state.screen === 'leaderboard');
+    this.content.closest('.stage')?.classList.toggle('stage--profile', state.screen === 'profile');
+    this.content.closest('.stage')?.classList.toggle('stage--briefing', state.screen === 'course-select');
     const confirmation = this.content.querySelector<HTMLElement>('[role="alertdialog"] h2');
     const feedback = this.content.querySelector<HTMLElement>('.feedback-heading');
     if (confirmation) {

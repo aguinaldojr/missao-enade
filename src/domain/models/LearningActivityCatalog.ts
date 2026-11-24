@@ -53,7 +53,9 @@ export type LearningPayload =
   | { readonly type: 'fill-slot'; readonly language?: 'c' | 'python' | 'javascript' | 'sql' | 'text';
       readonly contentBefore: string; readonly contentAfter: string; readonly tokens: readonly { readonly id: string;
       readonly text: string; readonly feedback: string }[]; readonly correctTokenId: string }
-  | { readonly type: 'visual-hotspot'; readonly visualDescription: string; readonly accessibleDescription: string;
+  | { readonly type: 'visual-hotspot'; readonly visualKind?: 'component-grid' | 'cloud-architecture' |
+      'truncated-bar-chart' | 'uml-composition';
+      readonly visualDescription: string; readonly accessibleDescription: string;
       readonly nodes: readonly { readonly id: string; readonly label: string; readonly detail: string }[];
       readonly correctNodeId: string }
   | { readonly type: 'decision-dialogue'; readonly steps: readonly { readonly id: string; readonly speaker: string;

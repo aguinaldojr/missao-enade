@@ -14,12 +14,14 @@ O conteúdo permanece em governança editorial assistida por IA. O aviso **Conte
 - três roteiros-base para CC, TADS, TGTI e TRC e quatro para SI;
 - sorteio determinístico por área depois dos roteiros-base, evitando a partida anterior;
 - cinco cursos: CC, SI, TADS, TGTI e TRC;
-- perfil por apelido e ranking separado por curso e tamanho;
+- perfil acadêmico validado por RA e e-mail, com curso e modalidade vinculados ao cadastro;
+- perfis de professor para teste, sem participação no ranking;
+- ranking online separado por curso;
 - controles por teclado, mouse e toque;
 - interface responsiva para desktop e celular;
-- funcionamento inteiramente no navegador, sem servidor de aplicação ou banco de dados online.
+- jogo executado no navegador e integração opcional com Google Apps Script e planilha privada para cadastro e ranking.
 
-Os JSON, metadados e gabaritos fazem parte da aplicação cliente e podem ser inspecionados por quem acessar uma versão publicada. Perfis, progresso, resultados e ranking permanecem no LocalStorage do navegador e não são enviados pela rede.
+Os JSON, metadados e gabaritos fazem parte da aplicação cliente e podem ser inspecionados por quem acessar uma versão publicada. Progresso e último resultado permanecem no LocalStorage. Quando o serviço está configurado, RA e e-mail são enviados por HTTPS para validação, e resultados autorizados são enviados ao ranking.
 
 ## Requisitos
 
@@ -72,16 +74,18 @@ Remove-Item Env:VITE_BASE_PATH
 
 O nome acima é apenas um exemplo local. O workflow manual calcula o caminho a partir do nome real do futuro repositório, sem fixar conta ou repositório no código.
 
+O cadastro acadêmico é ativado no build com `VITE_STUDENT_REGISTRY_API_URL`. Use a mesma URL do Google Apps Script configurada para `VITE_RANKING_API_URL` depois de publicar a versão atualizada do serviço.
+
 ## Armazenamento e privacidade
 
 As chaves versionadas do jogo armazenam somente dados locais, incluindo:
 
-- perfil por apelido;
+- perfil validado com nome, RA, curso, modalidade, tipo de acesso e comprovante assinado;
 - progresso de exploração e puzzles;
 - último relatório de missão;
-- ranking online dos 15 melhores resultados por curso.
+- comprovante local usado para enviar resultados ao ranking online.
 
-Não são solicitados nome completo, RA, e-mail, CPF ou telefone. Não há autenticação, telemetria, sincronização entre dispositivos ou envio de resultados. Limpar os dados do site no navegador remove os dados locais.
+O e-mail é usado somente durante a conferência com a planilha privada e não é salvo no navegador. O nome, RA, curso e modalidade do perfil validado ficam armazenados neste navegador. O ranking publica apenas um código pseudônimo. Limpar os dados do site remove o perfil e o progresso locais. Consulte [docs/ranking-online-google-sheets.md](docs/ranking-online-google-sheets.md) para configurar a planilha e a política de privacidade do piloto.
 
 ## Organização
 

@@ -18,16 +18,21 @@ import { accessFeedback, canAdvance, confirmAnswer, createAttempt, currentQuesti
 import { calculateScore } from '../domain/scoring';
 import type { ContentRepository } from '../ports/ContentRepository';
 import type { ProgressRepository, SaveStatus } from '../ports/ProgressRepository';
-import { activePlayer, createPlayer, emptyPlayerProfiles, selectPlayer,
+import { activePlayer, createPlayer, createVerifiedPlayer, emptyPlayerProfiles, selectPlayer,
   type PlayerProfile, type PlayerProfiles } from '../domain/models/PlayerProfile';
 import type { PlayerProfileRepository } from '../ports/PlayerProfileRepository';
 import type { MissionRouteRepository } from '../ports/MissionRouteRepository';
+import type { VerifiedStudentIdentity } from '../domain/models/StudentIdentity';
 import { missionRouteForAttempt, routeOrdering } from '../config/missionRoutes';
+
+import { EVALUATION_ROUTE, evaluationRoom, ROOM_SIZE } from '../config/evaluationRooms';
+import type { EvaluationCheckpoints, Gate } from '../infrastructure/storage/EvaluationCheckpoints';
 
 export type Screen = 'home' | 'profile' | 'leaderboard' | 'course-select' | 'map' | 'question' | 'result' | 'puzzle';
 
 export interface SessionState {
   readonly screen: Screen;
+  readonly evaluationGate?: Gate;
   readonly selectedCourse: CourseId | null;
   readonly selectedMissionId: string;
   readonly missions: readonly QuestionMissionConfig[];
@@ -56,6 +61,7 @@ export type Command =
   | { type: 'start' }
   | { type: 'open-profile' }
   | { type: 'create-player'; nickname: string }
+  | { type: 'create-verified-player'; identity: VerifiedStudentIdentity }
   | { type: 'select-player'; playerId: string }
   | { type: 'continue-profile' }
   | { type: 'open-ranking' }
@@ -87,6 +93,8 @@ export type Command =
 
 export class GameSession {
   private state: SessionState;
+  private baseExploration: ExplorationState;
+  private readonly tutorials = new Set<string>();
   private missionStartedAtMs: number | null = null;
 
   constructor(
@@ -102,6 +110,8 @@ export class GameSession {
     private readonly playableCollection: PlayableCollectionConfig = LEGACY_PLAYABLE_COLLECTION,
     private readonly profileStorage?: PlayerProfileRepository,
     private readonly missionRouteStorage?: MissionRouteRepository,
+    private readonly checkpoints?: EvaluationCheckpoints,
+    private readonly requireVerifiedProfile = false,
   ) {
     const world = explorationProgress?.load() ?? { state: null, status: 'none' as const };
     const puzzleSave = puzzleStorage?.load() ?? { progress: null, status: 'none' as const };
@@ -111,12 +121,16 @@ export class GameSession {
         puzzle.unlocks.mapId === exploration.mapId && puzzle.unlocks.objectId === 'door')) {
       exploration = Object.freeze({ ...exploration, doorUnlocked: true });
     }
+    this.baseExploration = exploration;
     const loaded = progress?.loadResult() ?? { result: null, status: 'none' as const };
     const profileLoad = profileStorage?.load() ?? { profiles: null, status: 'none' as const };
     let profiles = profileLoad.profiles ?? emptyPlayerProfiles();
     let profileSaveStatus = profileLoad.status;
     const loadedPlayer = activePlayer(profiles);
-    if (loadedPlayer && profileStorage) {
+    if (loadedPlayer && this.requireVerifiedProfile && !loadedPlayer.academicId) {
+      profiles = Object.freeze({ ...profiles, activePlayerId: null });
+    }
+    if (loadedPlayer && profileStorage && (!this.requireVerifiedProfile || !!loadedPlayer.academicId)) {
       profiles = selectPlayer(profiles, loadedPlayer.id, this.now());
       profileSaveStatus = profileStorage.save(profiles) ? 'saved' : 'failed';
     }
@@ -145,7 +159,8 @@ export class GameSession {
         if (this.profileStorage && !activePlayer(current.profiles)) {
           this.update({ screen: 'profile', profileNextScreen: 'course-select', profileError: null });
         } else {
-          this.update({ screen: 'course-select', attempt: null, contentError: null, worldDialog: null });
+          this.update({ screen: 'course-select', selectedCourse: this.currentPlayer?.course ?? current.selectedCourse,
+            attempt: null, contentError: null, worldDialog: null });
         }
         break;
       case 'change-course':
@@ -165,9 +180,22 @@ export class GameSession {
           this.update({ profileError: error instanceof Error ? error.message : 'Não foi possível criar o jogador.' });
         }
         break;
+      case 'create-verified-player':
+        if (current.screen !== 'profile') return current;
+        try {
+          const profiles = createVerifiedPlayer(current.profiles, command.identity, this.now());
+          this.update({ profiles, selectedCourse: command.identity.course, profileError: null,
+            profileSaveStatus: this.profileStorage?.save(profiles) ? 'saved' : 'failed' });
+        } catch (error) {
+          this.update({ profileError: error instanceof Error ? error.message : 'Não foi possível criar o perfil validado.' });
+        }
+        break;
       case 'select-player':
         if (current.screen !== 'profile') return current;
         try {
+          if (this.requireVerifiedProfile && !current.profiles.players.find((player) => player.id === command.playerId)?.academicId) {
+            throw new Error('Valide o cadastro acadêmico para continuar.');
+          }
           const profiles = selectPlayer(current.profiles, command.playerId, this.now());
           this.update({ profiles, profileError: null,
             profileSaveStatus: this.profileStorage?.save(profiles) ? 'saved' : 'failed' });
@@ -177,7 +205,8 @@ export class GameSession {
         break;
       case 'continue-profile':
         if (current.screen === 'profile' && activePlayer(current.profiles)) {
-          this.update({ screen: current.profileNextScreen, profileError: null });
+          this.update({ screen: current.profileNextScreen, selectedCourse: this.currentPlayer?.course ?? current.selectedCourse,
+            profileError: null });
         }
         break;
       case 'open-ranking': {
@@ -197,6 +226,9 @@ export class GameSession {
         if (current.screen !== 'course-select' || !isCourseId(command.course)) {
           throw new Error('Selecione um dos cinco cursos disponíveis.');
         }
+        if (this.currentPlayer?.course && command.course !== this.currentPlayer.course) {
+          throw new Error('Este perfil tem acesso somente ao curso cadastrado.');
+        }
         this.update({ selectedCourse: command.course, puzzles: Object.freeze(this.puzzleContent.forCourse(command.course)
           .filter((puzzle) => this.playableCollection.mode === 'example' ||
             puzzle.collectionId === this.playableCollection.collectionId)) });
@@ -212,16 +244,30 @@ export class GameSession {
         if (current.screen !== 'course-select' || current.selectedCourse === null) {
           throw new Error('Escolha seu curso antes de entrar na central.');
         }
-        this.update({ screen: 'map', contentError: null });
+        this.update({ screen: 'map', exploration: this.baseExploration, evaluationGate: null, contentError: null });
         break;
       case 'start-phase':
         if (current.screen !== 'map' || !current.selectedCourse || current.worldDialog ||
             nearbyObject(current.exploration, MAPS[current.exploration.mapId]!)?.kind !== 'computer') return current;
+        if (current.evaluationGate) return current;
+        if (attempt && current.exploration.mapId !== BASE_N9.id) {
+          const target = nearbyObject(current.exploration, MAPS[current.exploration.mapId]!);
+          if (target?.id === 'posto-' + (attempt.index % ROOM_SIZE + 1)) this.update({ screen: 'question', contentError: null });
+          else this.update({ contentError: 'Siga para o posto ' + (attempt.index % ROOM_SIZE + 1) + '.' });
+          break;
+        }
         try {
           if (!this.content) throw new Error('Catálogo ausente.');
           const mission = current.missions.find((candidate) => candidate.id === current.selectedMissionId);
           if (!mission) throw new Error('Configuração de missão ausente.');
           const bank = this.content.questionsForCourse(current.selectedCourse);
+          const restored = mission.id === 'journey-25' && this.checkpoints?.load(this.playerKey, current.selectedCourse, mission, bank);
+          if (restored && restored.attempt.id !== current.lastResult?.attemptId) {
+            this.missionStartedAtMs = restored.start;
+            if (restored.gate || restored.attempt.index % ROOM_SIZE === 0) this.enterRoute(restored.attempt, restored.gate);
+            else this.enterRoom(restored.attempt);
+            break;
+          }
           const completedCount = this.missionRouteStorage?.completedCount(current.selectedCourse) ?? 0;
           const ordering = mission.id === 'journey-25'
             ? routeOrdering(missionRouteForAttempt(current.selectedCourse, completedCount, bank,
@@ -229,8 +275,13 @@ export class GameSession {
           const questions = selectMissionQuestions(bank, { course: current.selectedCourse,
             collectionId: this.playableCollection.collectionId, mission }, ordering);
           this.missionStartedAtMs = Date.parse(this.now());
+          const started = createAttempt(this.createId(), current.selectedCourse, questions, mission);
+          if (mission.id === 'journey-25') {
+            this.enterRoute(started, this.tutorials.has(this.playerKey) || this.checkpoints?.tutorialDone(this.playerKey) ? null : 'entrada');
+            break;
+          }
           this.update({ screen: 'question', contentError: null,
-            attempt: createAttempt(this.createId(), current.selectedCourse, questions, mission),
+            attempt: started,
             exploration: Object.freeze({ ...current.exploration, missionStatus: current.exploration.missionStatus === 'completed' ? 'completed' : 'active' }) });
           this.persistExploration();
         } catch (error) {
@@ -256,7 +307,13 @@ export class GameSession {
       case 'next-question':
         if (current.screen !== 'question' || !attempt || !canAdvance(attempt, command.questionId)) return current;
         if (attempt.index < attempt.questions.length - 1) {
-          this.update({ attempt: Object.freeze({ ...attempt, index: attempt.index + 1, selectedOptionId: null }) });
+          const next = Object.freeze({ ...attempt, index: attempt.index + 1, selectedOptionId: null });
+          if (attempt.mission.id === 'journey-25') {
+            if (next.index % ROOM_SIZE === 0) {
+              this.enterRoute(next, next.index === 10 ? 'intervalo' : next.index === 20 ? 'final' : null);
+            } else this.enterRoom(next);
+          }
+          else this.update({ attempt: next });
         } else if (isComplete(attempt)) {
           const score = calculateScore(attempt.answers);
           const completedAt = this.now();
@@ -280,6 +337,8 @@ export class GameSession {
             rankingCourse: result.course,
             exploration: Object.freeze({ ...current.exploration, missionStatus: 'completed', doorUnlocked: true }) });
           if (result.mode === 'provisional' && attempt.mission.id === 'journey-25') {
+            this.checkpoints?.clear(this.playerKey, result.course);
+            this.update({ exploration: { ...this.baseExploration, missionStatus: 'completed', doorUnlocked: true } });
             this.missionRouteStorage?.recordCompletion(result.course, attempt.questions.map((question) => question.id));
           }
           this.persistExploration();
@@ -302,6 +361,23 @@ export class GameSession {
         if (current.screen !== 'map' || current.worldDialog) return current;
         const target = nearbyObject(current.exploration, MAPS[current.exploration.mapId]!);
         if (!target) return current;
+        if (current.exploration.mapId === EVALUATION_ROUTE.id && attempt) {
+          const phaseId = 'fase-' + (Math.floor(attempt.index / ROOM_SIZE) + 1);
+          const gateTarget = current.evaluationGate === 'entrada' ? 'portal-entrada'
+            : current.evaluationGate === 'intervalo' ? 'portal-intervalo'
+              : current.evaluationGate === 'final' ? 'portal-final' : null;
+          if (gateTarget && target.id === gateTarget) {
+            this.beginPuzzle(this.gatePuzzleId(current.evaluationGate!, attempt.courseAtStart));
+          } else if (!current.evaluationGate && target.id === phaseId) {
+            this.enterRoom(attempt);
+          } else {
+            this.update({ worldDialog: Object.freeze({ title: target.name,
+              message: current.evaluationGate
+                ? 'Conclua primeiro o desafio destacado para liberar o próximo trecho da rota.'
+                : 'Esta estação ainda não é o próximo destino. Siga o trecho iluminado da rota.' }) });
+          }
+          return this.state;
+        }
         if (target.kind === 'computer') return this.dispatch({ type: 'start-phase' });
         if (target.kind === 'npc') {
           this.update({
@@ -323,10 +399,10 @@ export class GameSession {
         break;
       }
       case 'select-puzzle':
-        if (current.screen === 'puzzle') this.beginPuzzle(command.id);
+        if (current.screen === 'puzzle' && !current.evaluationGate) this.beginPuzzle(command.id);
         break;
       case 'replay-puzzle':
-        if (current.screen === 'puzzle' && current.puzzleAttempt?.puzzleId === command.puzzleId && current.puzzleAttempt.solved) {
+        if (!current.evaluationGate && current.screen === 'puzzle' && current.puzzleAttempt?.puzzleId === command.puzzleId && current.puzzleAttempt.solved) {
           this.beginPuzzle(command.puzzleId);
         }
         break;
@@ -358,6 +434,13 @@ export class GameSession {
         this.update({ puzzleAttempt: { puzzleId: active.puzzle.id, solved: correct,
           feedback: correct ? 'correct' : 'incorrect', earnedXp: correct && !active.entry.completed ? active.puzzle.reward.xp : 0 } });
         this.persistPuzzles();
+        if (correct && current.evaluationGate) {
+          if (current.evaluationGate === 'entrada') {
+            this.tutorials.add(this.playerKey);
+            this.checkpoints?.finishTutorial(this.playerKey);
+          }
+          this.saveCheckpoint(null);
+        }
         if (correct && active.puzzle.unlocks.mapId === current.exploration.mapId && active.puzzle.unlocks.objectId === 'door') {
           this.update({ exploration: Object.freeze({ ...current.exploration, doorUnlocked: true }) });
           this.persistExploration();
@@ -366,8 +449,9 @@ export class GameSession {
       }
       case 'exit-puzzle':
         if (current.screen === 'puzzle') {
+          if (current.evaluationGate && !current.puzzleAttempt?.solved) return current;
           this.persistPuzzles();
-          this.update({ screen: 'map', puzzleAttempt: null, worldDialog: null });
+          this.update({ evaluationGate: null, screen: 'map', puzzleAttempt: null, worldDialog: null });
         }
         break;
       case 'save-puzzles':
@@ -380,15 +464,44 @@ export class GameSession {
         if (current.screen === 'result' && current.selectedCourse) this.update({ screen: 'map', attempt: null, worldDialog: null });
         break;
       case 'save-exploration':
+        if (current.explorationSaveStatus === 'failed' && current.attempt && current.exploration.mapId !== BASE_N9.id) this.saveCheckpoint();
         this.persistExploration();
         break;
       case 'home':
-        // Não há retomada de partida nesta entrega; o último resumo permanece.
         this.persistExploration();
         this.update({ screen: 'home', attempt: null, contentError: null, worldDialog: null });
         break;
     }
+    if (this.state.attempt?.mission.id === 'journey-25' &&
+      (this.state.attempt !== attempt || current.evaluationGate !== this.state.evaluationGate) &&
+      this.state.screen !== 'result') this.saveCheckpoint();
     return this.state;
+  }
+
+  private get playerKey(): string { return this.currentPlayer?.id ?? 'local'; }
+
+  private saveCheckpoint(gate: Gate = this.state.evaluationGate ?? null): void {
+    if (this.checkpoints && this.state.attempt && !this.checkpoints.save(this.playerKey,
+      this.state.attempt, gate, this.missionStartedAtMs)) {
+      this.update({ explorationSaveStatus: 'failed' });
+    }
+  }
+
+  private enterRoom(attempt: Attempt): void {
+    const room = evaluationRoom(attempt.index);
+    const exploration = this.state.exploration.mapId === room.id ? this.state.exploration : createExploration(room);
+    this.update({ screen: 'map', attempt, exploration, evaluationGate: null, contentError: null });
+  }
+
+  private enterRoute(attempt: Attempt, gate: Gate): void {
+    this.update({ screen: 'map', attempt, exploration: createExploration(EVALUATION_ROUTE),
+      evaluationGate: gate, contentError: null, worldDialog: null });
+  }
+
+  private gatePuzzleId(gate: Exclude<Gate, null>, course: CourseId): string {
+    if (gate === 'entrada') return 'E26-P-COM-TUTORIAL';
+    if (gate === 'final') return 'E26-P-COM-CORE';
+    return 'E26-P-' + course + '-01';
   }
 
   private activePuzzle(id: string): { puzzle: SequencePuzzle; entry: SequenceProgress } | null {
@@ -425,6 +538,8 @@ export class GameSession {
   get currentPlayer(): PlayerProfile | null { return activePlayer(this.state.profiles); }
 
   private persistExploration(): void {
+    if (this.state.exploration.mapId !== BASE_N9.id) return;
+    this.baseExploration = this.state.exploration;
     if (!this.explorationProgress) return;
     this.update({ explorationSaveStatus: this.explorationProgress.save(this.state.exploration) ? 'saved' : 'failed' });
   }

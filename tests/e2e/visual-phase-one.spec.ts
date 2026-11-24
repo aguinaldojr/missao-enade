@@ -27,7 +27,7 @@ test('movimento reduzido desativa transições perceptíveis', async ({ page }) 
 test('layout permanece utilizável em equivalente a zoom de 200%', async ({ page }) => {
   await page.setViewportSize({ width: 683, height: 450 });
   await page.reload();
-  await expect(page.getByRole('button', { name: /^Iniciar missão/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Jogar Jornada N9' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
 });
 
