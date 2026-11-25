@@ -61,6 +61,6 @@ describe('painel do ranking online', () => {
     [...panel.querySelectorAll<HTMLButtonElement>('.ranking-tabs button')]
       .find((item) => item.textContent === 'Diário')!.click();
     await vi.waitFor(() => expect(operationalRanking).toHaveBeenCalledWith('daily', 'SI', 'EAD'));
-    expect(panel.textContent).toContain('dois primeiros fechamentos');
+    expect(panel.textContent).toContain('Top 10 do dia, separado por curso e modalidade.');
   });
 });

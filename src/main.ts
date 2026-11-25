@@ -7,7 +7,6 @@ import './styles/exploration.css';
 import './styles/puzzles.css';
 import './styles/learning-lab.css';
 import { bootstrapLearningLab } from './ui/learning/LearningLab';
-import { bootstrapRegulation } from './ui/views/RegulationView';
 
 const root = document.querySelector<HTMLElement>('#app');
 if (!root) throw new Error('Elemento principal ausente.');
@@ -18,9 +17,7 @@ const mount = (): void => {
   root.replaceChildren();
   dispose = window.location.hash === '#/laboratorio'
     ? bootstrapLearningLab(root, () => { window.location.hash = ''; })
-    : window.location.hash === '#/regulamento'
-      ? bootstrapRegulation(root, () => { window.location.hash = ''; })
-      : bootstrap(root);
+    : bootstrap(root);
 };
 window.addEventListener('hashchange', mount);
 mount();

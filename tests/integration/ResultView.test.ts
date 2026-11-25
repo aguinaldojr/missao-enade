@@ -11,7 +11,7 @@ const result: MissionResult = {
 };
 
 describe('encerramento da jornada de avaliação', () => {
-  it('resume os 25 desafios, benefícios e oferece os três destinos finais', () => {
+  it('resume os 25 desafios, confirma o ranking e oferece os três destinos finais', () => {
     const dispatch = vi.fn();
     const view = resultView(result, 'saved', dispatch, new AbortController().signal, {
       id: 'verified-1', nickname: 'Aluno-0001', course: 'SI', modality: 'PRESENCIAL', role: 'student',
@@ -24,10 +24,9 @@ describe('encerramento da jornada de avaliação', () => {
     expect(view.textContent).toContain('25 de 25');
     expect(view.textContent).toContain('18 de 25');
     expect(view.textContent).toContain('72%');
-    expect(view.textContent).toContain('Bônus acadêmico');
-    expect(view.textContent).toContain('Atividades complementares');
-    expect(view.textContent).toContain('Envio automático');
-    expect(view.querySelectorAll('.journey-benefit-card')).toHaveLength(3);
+    expect(view.textContent).toContain('Envio automático ao ranking');
+    expect(view.textContent).not.toMatch(/bônus|complementares/i);
+    expect(view.querySelectorAll('.journey-benefit-card')).toHaveLength(1);
 
     const controls = [...view.querySelectorAll<HTMLButtonElement>('button')];
     controls.find((item) => item.textContent === 'Jogar novamente')!.click();

@@ -112,7 +112,7 @@ export class SequencePuzzleView {
       this.element.append(guide);
     }
     this.element.append(element('p', 'eyebrow', evaluationGate ? 'TERMINAL DA JORNADA' : 'TERMINAL TECNOLÓGICO'), familyBadge, heading);
-    if (evaluationGate) this.element.append(element('p', 'example-warning', 'DESAFIO DE NAVEGAÇÃO · NÃO ALTERA A NOTA DA AVALIAÇÃO'));
+    if (evaluationGate) this.element.append(element('p', 'example-warning', 'DESAFIO DE NAVEGAÇÃO · LIBERA O AVANÇO NA ROTA'));
     this.element.append(element('p', 'intro intro--small', evaluationGate ? 'Coloque as etapas na ordem correta para liberar a passagem.' : puzzleCopy.intro),
       choices, element('h2', 'puzzle-title', this.puzzle.title), narrativeContent,
       this.xp, this.replayNotice, element('p', 'helper', puzzleCopy.controls));

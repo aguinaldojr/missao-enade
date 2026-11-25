@@ -63,9 +63,7 @@ export class AppShell {
     visual.append(panelHeader, this.canvasHost, caption, this.graphicStatus);
     stage.append(this.content, visual);
     const footer = element('footer', 'site-footer');
-    const regulationLink = element('a', 'footer-link', 'Regulamento de pontos, bônus e horas');
-    regulationLink.href = '#/regulamento';
-    footer.append(element('p', '', gameConfig.copy.footerPurpose), regulationLink);
+    footer.append(element('p', '', gameConfig.copy.footerPurpose));
     const frame = element('div', 'app-frame');
     frame.append(header, stage, footer, this.status);
     root.replaceChildren(skip, frame);

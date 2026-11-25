@@ -15,7 +15,7 @@ function resultNumber(label: string, value: string): HTMLElement {
   return group;
 }
 
-function benefitCard(title: string, text: string, className: string): { card: HTMLElement; text: HTMLElement } {
+function resultCard(title: string, text: string, className: string): { card: HTMLElement; text: HTMLElement } {
   const card = element('article', 'journey-benefit-card ' + className);
   const copy = element('p', '', text);
   card.append(element('h3', '', title), copy);
@@ -28,7 +28,6 @@ export function resultView(result: SavedResult, status: SaveStatus,
   const isJourney = result.mode === 'provisional' && result.total === 25;
   if (isJourney) view.classList.add('journey-result-view');
   const percentage = Math.round(result.correctCount / result.total * 100);
-  const qualified = percentage >= 60;
   const hero = element(isJourney ? 'header' : 'div', isJourney ? 'journey-result-hero' : '');
   const heroCopy = element('div', isJourney ? 'journey-result-hero-copy' : '');
   heroCopy.append(element('p', 'eyebrow', isJourney ? 'ROTA COMPLETA · CINCO FASES CONCLUÍDAS' : gameConfig.copy.reportEyebrow));
@@ -58,33 +57,20 @@ export function resultView(result: SavedResult, status: SaveStatus,
     resultNumber(gameConfig.copy.scoreLabel, result.score + ' de ' + result.total * 100));
   view.append(scores);
 
-  let bonusText: HTMLElement | undefined;
-  let hoursText: HTMLElement | undefined;
   let submissionText: HTMLElement | undefined;
   if (isJourney) {
     const benefits = element('section', 'journey-benefits');
     benefits.setAttribute('aria-labelledby', 'journey-benefits-title');
-    const benefitTitle = element('h2', 'subsection-title', 'Conquistas desta partida');
+    const benefitTitle = element('h2', 'subsection-title', 'Registro da partida');
     benefitTitle.id = 'journey-benefits-title';
-    const target = player?.modality === 'EAD' ? 'nas duas disciplinas com menores notas'
-      : player?.modality === 'PRESENCIAL' ? 'na Avaliação Integrada AV2' : 'conforme sua modalidade';
-    const bonus = benefitCard('Bônus acadêmico', player?.role === 'teacher'
-      ? 'Perfil de professor: esta partida não gera bônus.'
-      : qualified ? 'Meta de 60% atingida. Confirmando o registro de 0,5 ponto ' + target + '…'
-        : 'Meta ainda não atingida: são necessários pelo menos 15 acertos para conquistar 0,5 ponto.', 'is-bonus');
-    const hours = benefitCard('Atividades complementares', player?.role === 'teacher'
-      ? 'Perfil de professor: esta partida não gera horas complementares.'
-      : qualified ? 'Meta atingida. Confirmando o registro de 1 hora complementar…'
-        : 'Esta partida não gera hora complementar porque ficou abaixo de 60% de acertos.', 'is-hours');
-    const submission = benefitCard('Envio automático', player?.rankingEligible === false
+    const submission = resultCard('Envio automático ao ranking', player?.rankingEligible === false
       ? 'Resultado de teste não enviado ao ranking.'
       : 'Preparando o envio automático ao ranking da avaliação…', 'is-ranking');
-    bonusText = bonus.text; hoursText = hours.text; submissionText = submission.text;
+    submissionText = submission.text;
     const cards = element('div', 'journey-benefit-grid');
-    cards.append(bonus.card, hours.card, submission.card);
-    benefits.append(benefitTitle, element('p', 'journey-benefits-intro', qualified
-      ? 'Você alcançou o mínimo de 60% nesta partida.'
-      : 'Continue treinando: uma nova partida pode liberar os benefícios acadêmicos.'), cards);
+    cards.append(submission.card);
+    benefits.append(benefitTitle, element('p', 'journey-benefits-intro',
+      'Seu resultado e desempenho ficam disponíveis para consulta no ranking.'), cards);
     view.append(benefits);
   }
   const saved = element('p', 'save-message', status === 'saved'
@@ -101,30 +87,6 @@ export function resultView(result: SavedResult, status: SaveStatus,
     const updateBenefits = (update: RankingSubmissionUpdate): void => {
       if (!submissionText) return;
       submissionText.textContent = update.message;
-      if (update.state === 'failed' && qualified && bonusText && hoursText) {
-        bonusText.textContent = 'Meta de 60% atingida. O bônus será registrado quando o envio automático for concluído.';
-        hoursText.textContent = 'Meta de 60% atingida. A hora complementar será registrada quando o envio for concluído.';
-        return;
-      }
-      if (update.state !== 'sent' || !qualified || !bonusText || !hoursText) return;
-      const benefit = update.receipt.benefit;
-      if (!benefit) {
-        bonusText.textContent = 'Resultado elegível enviado. O registro do bônus será confirmado na apuração institucional.';
-        hoursText.textContent = 'Resultado elegível enviado. O registro da hora será confirmado na apuração institucional.';
-        return;
-      }
-      if (benefit.bonusEarned > 0) {
-        bonusText.textContent = benefit.qualifyingBonusAttempts >= 2
-          ? 'Mais 0,5 ponto conquistado. Você completou 1,0 ponto por duas partidas válidas neste ciclo.'
-          : '0,5 ponto conquistado. Progresso: 1 de 2 partidas válidas; outra partida com pelo menos 60% completa 1,0 ponto.';
-      } else {
-        bonusText.textContent = benefit.evaluationBonusTotal >= 1
-          ? 'Você já alcançou o limite de 1,0 ponto por partidas válidas neste ciclo.'
-          : 'Partida registrada sem novo bônus nesta categoria.';
-      }
-      hoursText.textContent = benefit.hoursEarned > 0
-        ? '1 hora complementar registrada. Total acumulado: ' + benefit.totalHours + ' de 10 horas.'
-        : 'Partida registrada. Você já alcançou o limite de 10 horas complementares.';
     };
     view.append(onlineLeaderboardPanel(result.course, result, undefined, player, updateBenefits));
   }

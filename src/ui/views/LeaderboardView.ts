@@ -70,8 +70,5 @@ export function leaderboardView(state: SessionState, dispatch: (command: Command
   );
   achievements.append(achievementTitle, achievementIntro, achievementGrid);
   view.append(filters, achievements, onlineLeaderboardPanel(state.rankingCourse, undefined, undefined, player));
-  const regulation = element('a', 'footer-link', 'Consultar regulamento de pontos, bônus e horas');
-  regulation.href = '#/regulamento';
-  view.append(regulation);
   return view;
 }

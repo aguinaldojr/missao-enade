@@ -111,9 +111,7 @@ export class LearningLab {
     sound.addEventListener('click', () => { this.sound.toggle(); this.render(); });
     const exit = action('Voltar ao jogo', 'lab-icon-button');
     exit.addEventListener('click', this.onExit);
-    const regulation = el('a', 'lab-icon-button', 'Regulamento');
-    regulation.href = '#/regulamento';
-    controls.append(sound, regulation, exit);
+    controls.append(sound, exit);
     header.append(brand, controls);
     return header;
   }

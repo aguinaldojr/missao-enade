@@ -96,7 +96,7 @@ for (const course of courseIds) {
     expect(stored).toMatchObject({ schemaVersion: 1, mode: 'provisional', missionId: 'journey-25', course, total: 25,
       score: expectedCorrect * 100, correctCount: expectedCorrect });
     if (course === 'CC') await page.screenshot({ path: info.outputPath('resultado.png'), fullPage: true });
-    await expect(page.locator('.journey-benefit-card')).toHaveCount(3);
+    await expect(page.locator('.journey-benefit-card')).toHaveCount(1);
     await expect(page.getByRole('button', { name: 'Jogar novamente' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Ver ranking' })).toBeVisible();
     await press(page, 'Voltar ao início', info);

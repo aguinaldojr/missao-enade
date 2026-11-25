@@ -94,9 +94,9 @@ function generalTable(entries: readonly OnlineGeneralLeaderboardEntry[], publicC
 }
 
 const rankingHelp: Record<OnlineRankingType, string> = {
-  daily: 'Top 10 do dia. Cada um dos dois primeiros fechamentos no top 10 vale 0,5 ponto.',
-  evaluation: 'Top 15 dos melhores resultados de 25 questões. Duas partidas com pelo menos 60% valem até 1,0 ponto.',
-  general: 'Top 15 do ciclo semanal. A classificação final de sábado vale 1,0 ponto.',
+  daily: 'Top 10 do dia, separado por curso e modalidade.',
+  evaluation: 'Top 15 dos melhores resultados de 25 questões no ciclo.',
+  general: 'Top 15 do ciclo semanal, calculado a partir das participações diárias.',
 };
 
 export function onlineLeaderboardPanel(course: CourseId, result?: MissionResult,

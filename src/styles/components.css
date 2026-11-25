@@ -629,8 +629,6 @@
 .journey-benefits-intro { color: #4f6c87; font-size: 13px; line-height: 1.55; }
 .journey-benefit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .journey-benefit-card { min-width: 0; display: grid; align-content: start; gap: 8px; padding: 18px; border: 1px solid #b3cce3; border-top: 5px solid #1680c5; border-radius: 13px; background: white; box-shadow: var(--shadow-sm); }
-.journey-benefit-card.is-bonus { border-top-color: #f0ad25; }
-.journey-benefit-card.is-hours { border-top-color: #16a47a; }
 .journey-benefit-card h3 { color: #063b7a; font-size: 16px; }
 .journey-benefit-card p { color: #4d657c; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
 .journey-result-view > .save-message { margin: 0; color: #d9eaff; }

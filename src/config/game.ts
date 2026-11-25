@@ -31,7 +31,7 @@ export const gameConfig = {
   "profileSaveFailed": "Não foi possível salvar o perfil neste navegador.",
   "rankingEyebrow": "CLASSIFICAÇÃO ONLINE",
   "rankingTitle": "Ranking",
-  "rankingPrivacy": "Os rankings são separados por curso e modalidade. O RA é convertido em um código pseudônimo e não aparece na classificação. Consulte o regulamento para conhecer os bônus e critérios de fechamento.",
+  "rankingPrivacy": "Os rankings são separados por curso e modalidade. O RA é convertido em um código pseudônimo e não aparece na classificação.",
   "homeEyebrow": "UMA CIDADE. CINCO PERCURSOS.",
   "heroStart": "Conhecimento que ",
   "heroAccent": "conecta.",

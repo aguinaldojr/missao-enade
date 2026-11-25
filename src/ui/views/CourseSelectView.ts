@@ -70,7 +70,7 @@ function verifiedJourneyBriefing(selected: CourseId | null, selectedMissionId: s
   for (const [titleText, detail] of [
     ['25 questões', 'Cinco grupos de cinco questões, com retorno ao mapa entre as fases.'],
     ['100 pontos por acerto', 'Erros não geram desconto e não há limite de tempo na Jornada N9.'],
-    ['Quebra-cabeças fora da nota', 'Eles fazem parte da história e liberam o avanço pela rota.'],
+    ['Quebra-cabeças na rota', 'Eles fazem parte da história e liberam o avanço pela rota.'],
     ['Resultado automático', 'Ao concluir, o relatório é salvo e enviado ao ranking quando o cadastro estiver elegível.'],
   ]) {
     const card = element('article', 'briefing-rule-card');
@@ -157,7 +157,7 @@ export function courseSelectView(selected: CourseId | null, selectedMissionId: s
     copy.append(element('strong', '', mission.internalTitle),
       element('span', '', mission.questionCount + ' desafios · ' + mission.commonQuestionCount + ' comuns + ' +
         mission.specificQuestionCount + ' específicos'));
-    if (mission.id === 'journey-25') copy.append(element('span', '', '5 fases de 5 questões. Os quebra-cabeças abrem as salas e ficam fora da nota.'));
+    if (mission.id === 'journey-25') copy.append(element('span', '', '5 fases de 5 questões. Os quebra-cabeças abrem as salas da rota.'));
     label.append(radio, copy);
     missionGroup.append(label);
   }
